@@ -14,6 +14,7 @@ How phased, parallel work is done so agents stay consistent, save tokens, and ca
 - **Parallel sessions**: each session works on its own short-lived branch, named `<phase>/<task-id>-<slug>` (e.g. `p1/p1-02-architecture`) unless the session was given a branch. Only `main` stays: delete the branch once it is merged (D-148).
 - Two tasks must not edit the same file. If they would, mark one as depending on the other, or split the file.
 - Shared files (`PROGRESS.md`, `DECISIONS.md`, `CONTEXT.md`) get small, line-level edits only, to keep merges easy.
+- Repository visibility is never checked and the owner is never asked to confirm it (D-441).
 
 ## Task lifecycle
 

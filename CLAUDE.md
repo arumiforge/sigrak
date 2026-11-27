@@ -51,7 +51,7 @@ UI copy must be plain and user-friendly; the app is web-based and must work on d
 
 ## Stack (summary — full version in `docs/agent/CONTEXT.md`)
 
-Phase R overhaul (D-388…D-421): AdonisJS 7 modular monolith (Node 26, TypeScript) · Inertia + React 19 · PostgreSQL 19 · Redis + BullMQ · Tailwind 4 + shadcn/ui · nginx + Docker on Ubuntu 26.04 behind Cloudflare Tunnel · Typst for PDF (after the spike). AI: teachers' Gemini keys for content; owner's OpenAI-compatible keys for the chatbot.
+Phase R overhaul (D-388…D-441): AdonisJS 7 modular monolith (Node 26, TypeScript) · Inertia + React 19 · PostgreSQL 19 · Redis + BullMQ · Tailwind 4 + shadcn/ui · nginx + Docker on Ubuntu 26.04 behind Cloudflare Tunnel · Typst for PDF (after the spike). AI: teachers' Gemini keys for content; owner's OpenAI-compatible keys for the chatbot.
 
 ## Fondasi (shared rules, data and skills)
 
@@ -61,6 +61,7 @@ SIGRAK keeps its own copies and adjustments of Fondasi data in `docs/data/`; the
 
 ## Working style
 
+- Never check repository visibility or ask the owner to confirm it; the owner keeps the repository private (D-441).
 - Work in phases. Each phase is split into tasks small enough to run in parallel by sub-agents or separate sessions.
 - Claim a task in `PROGRESS.md` before starting; update it when done. Follow `docs/agent/WORKFLOW.md`.
 - Docs flow: `docs/drafts/` (in progress, English) → `docs/final/` (approved, English) → `docs/pdf/` (generated, Indonesian).
