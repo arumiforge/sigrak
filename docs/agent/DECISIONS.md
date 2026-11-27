@@ -2256,3 +2256,11 @@ Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · RS-15 flags 1
 - **Matematika Fase C:** the "Rasio" topic moves to the Aljabar element, following CP 046/2025; the team checks whether Aljabar needs more topics (patterns, unknown values) during curation (P4-29).
 - **CP umum start year:** the CP of Kepka BSKAP 046/H/KR/2025 applies from school year 2025/2026 (`applies_from_school_year`).
 Reason: follow 13/2025 and the official CP where SIGRAK's data deviated; muatan lokal JP is a school matter.
+
+### D-459 — Marketing site: sign-up, trial, contact, public wording
+Accepted · 2026-11-28 · RS-06 · owner's choice (interview 2026-11-28) · answers Q1–Q6, Q8–Q10 of `docs/drafts/marketing-site/README.md`; refines D-435
+- **Sign-up and trial:** the public CTA goes to `app.sigrak.com/daftar`; a teacher signs up alone (Sigrak Guru). When the school's operator later invites the same email, the account joins the school without losing documents. The trial length is not fixed at 7 days: it is a setting, can be extended when it ends, and can be changed per user or per school (applies to all of the school's teachers). Buttons say "Coba gratis", not "Coba 7 hari".
+- **Contact and events:** WhatsApp plus on-site forms (contact for principals and pengawas, Acara registration), protected by Turnstile and rate limits; the privacy policy lists the form data.
+- **Public wording:** keep "tanpa menulis prompt" (D-017) on the public site; name Google Gemini so teachers know which key they need; BOS is not mentioned on public pages or in the terms (D-025); the site stays region-neutral (Kudus is not named as the pilot).
+- **Panduan** lives on `sigrak.com/panduan`; the Fondasi §12 visitor counter is on and shown in the footer.
+Reason: owner's choices for the public site.
