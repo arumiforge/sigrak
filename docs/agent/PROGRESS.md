@@ -13,7 +13,7 @@ Owner = branch name or session label of whoever claimed the task.
 
 ## Open decisions blocking work
 
-- Owner: previous SIGRAK repository and `arumiforge/fondasi` are private (D-409); after the move, replace the transition setup-script line in the cloud environment with the plain `sigrak` line from `docs/agent/cloud-environment.md` (R0-13); may parents use the school chatbot (D-394); lawyer check on encrypted backups abroad (`docs/drafts/fondasi-uptake.md`). Questions with a default in use: `docs/drafts/open-questions.md` (2026-11-11 sections).
+- Owner (the previous SIGRAK repository and `arumiforge/fondasi` are already private, D-409): after the move, replace the transition setup-script line in the cloud environment with the plain `sigrak` line from `docs/agent/cloud-environment.md` (R0-13); may parents use the school chatbot (D-394); lawyer check on encrypted backups abroad (`docs/drafts/fondasi-uptake.md`). Questions with a default in use: `docs/drafts/open-questions.md` (2026-11-11 sections).
 
 ## Phases
 
