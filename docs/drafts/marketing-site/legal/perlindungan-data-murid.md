@@ -43,7 +43,7 @@ Perjanjian ini mengatur cara [Nama PT] memproses data pribadi murid, orang tua a
 Sebagai pengendali data, Sekolah:
 
 1. memastikan ada dasar yang sah untuk memproses data murid, termasuk persetujuan orang tua atau wali untuk data anak bila diwajibkan UU PDP.
-2. memberi tahu orang tua atau wali data apa yang dicatat, untuk apa, siapa yang melihatnya, dan berapa lama disimpan. [Templat pemberitahuan atau kesepakatan sekolah dengan orang tua disediakan kami].
+2. memberi tahu orang tua atau wali data apa yang dicatat, untuk apa, siapa yang melihatnya, dan berapa lama disimpan. [Bila kami menyediakan templat pemberitahuan atau kesepakatan sekolah dengan orang tua, sebutkan di sini].
 3. memasukkan data yang benar dan secukupnya untuk tujuan dalam Lampiran A.
 4. mengatur siapa di sekolah yang mendapat akun dan peran apa.
 5. menerima dan menjawab permintaan orang tua atau wali tentang data anaknya, dengan bantuan kami bila perlu.
