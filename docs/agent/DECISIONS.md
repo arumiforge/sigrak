@@ -1929,7 +1929,7 @@ Reason: shared rules for server, storage, UI, feedback and AI across Arumi Studi
 
 ### D-409 — Repositories private; the SK sample anonymised in place
 Accepted · 2026-11-27 · R0 · owner's choice
-The owner makes `arumiforge/sinaubareng` and `arumiforge/fondasi` private on GitHub. `docs/sources/Contoh_SK_Pembagian_Tugas_SD_Semester_Genap_2025_2026.pdf` is replaced by an anonymised copy: names become "Nama Kepala Sekolah" / "Nama Pegawai N", NIPs "(disamarkan)", signature and stamp removed, metadata cleared. Git history is not rewritten. Owner-supplied sources may be edited to remove personal data (extends D-360).
+The owner makes the SIGRAK repository (now `arumiforge/sigrak`) and `arumiforge/fondasi` private on GitHub. `docs/sources/Contoh_SK_Pembagian_Tugas_SD_Semester_Genap_2025_2026.pdf` is replaced by an anonymised copy: names become "Nama Kepala Sekolah" / "Nama Pegawai N", NIPs "(disamarkan)", signature and stamp removed, metadata cleared. Git history is not rewritten. Owner-supplied sources may be edited to remove personal data (extends D-360).
 Reason: no personal data in the repository; history rewrite judged not worth it once private.
 
 ### D-410 — SD/MI Bahasa Inggris follows Fondasi F-031

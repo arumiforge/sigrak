@@ -24,7 +24,7 @@ Beri label `sigrak-2` untuk VPS cadangan. Jangan pernah memasang fail2ban di VPS
 
 ## B. Lapisan SIGRAK (R3)
 
-1. **Repo di server**: deploy key read-only dengan alias `github-sinaubareng`, checkout di `/opt/apps/sigrak/src` (hanya skrip dan file compose; aplikasinya berjalan dari image).
+1. **Repo di server**: deploy key read-only dengan alias `github-sigrak`, checkout di `/opt/apps/sigrak/src` (hanya skrip dan file compose; aplikasinya berjalan dari image).
 2. **`sudo bash /opt/apps/sigrak/src/deploy/server/sigrak-setup.sh`** (idempoten):
    - membuat `/opt/apps/sigrak/{staging,production}` beserta folder `backups/` (`0700`);
    - menambah baris `PORTS`: `8199 sigrak-production app.sigrak.com`, `8198 sigrak-staging <hostname staging>` (port kosong diambil dari atas, sesuai kontrak aplikasi);

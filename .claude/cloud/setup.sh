@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Cloud environment setup for SIGRAK sessions (docs/agent/cloud-environment.md).
-# Runs as root from the folder that holds the checkouts. Idempotent; an optional tool that fails
+# Runs as root; finds the repository root from its own path (SIGRAK_DIR overrides it). Idempotent; an optional tool that fails
 # to install prints a line and never fails the session start.
 set -uo pipefail
 export DEBIAN_FRONTEND=noninteractive
-APP_DIR="${SIGRAK_DIR:-sinaubareng}"
+APP_DIR="${SIGRAK_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 NODE_MAJOR="${SIGRAK_NODE_MAJOR:-26}"
 PG_MAJOR="${SIGRAK_PG_MAJOR:-19}"
 log() { echo "setup: $*"; }

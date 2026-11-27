@@ -5,10 +5,10 @@ Settings the owner applies once per Claude account (claude.ai â†’ Claude Code â†
 | Setting | Value |
 |---|---|
 | Name | `SIGRAK` |
-| Repositories | `arumiforge/sinaubareng`, plus `arumiforge/fondasi` (read-only use, `docs/agent/fondasi-check.md`) |
+| Repositories | `arumiforge/sigrak`, plus `arumiforge/fondasi` (read-only use, `docs/agent/fondasi-check.md`) |
 | Network access | Limited with "Allow package managers", plus the hosts below (or Full) |
 | Environment variables | below |
-| Setup script | `if [ -f sinaubareng/.claude/cloud/setup.sh ]; then bash sinaubareng/.claude/cloud/setup.sh; fi` |
+| Setup script | `if [ -f sigrak/.claude/cloud/setup.sh ]; then bash sigrak/.claude/cloud/setup.sh; fi` |
 
 ## What the setup script installs
 
@@ -21,7 +21,7 @@ Settings the owner applies once per Claude account (claude.ai â†’ Claude Code â†
 - pandoc, Liberation and Noto fonts, for the docs PDF build.
 - Git identity `Arumi Studios <arumiforge@gmail.com>`, `core.hooksPath .githooks`, and, when `pnpm-lock.yaml` exists, pnpm at the version pinned in `package.json` plus `pnpm install --frozen-lockfile` (D-422).
 
-Only the new stack is installed; nothing from the old stack is needed (D-407, D-411).
+The script finds the repository root from its own path, so it works whatever the checkout folder is called; set `SIGRAK_DIR` to override. Only the new stack is installed; nothing from the old stack is needed (D-407, D-411).
 
 ## Environment variables (no secrets)
 
@@ -57,7 +57,7 @@ SIGRAK
 **Repositories** (add both)
 
 ```
-arumiforge/sinaubareng
+arumiforge/sigrak
 arumiforge/fondasi
 ```
 
@@ -91,8 +91,8 @@ Change `ARUMI_ACCOUNT` per Claude account (`akun-1`, `akun-2`, â€¦); never an e-
 
 ```bash
 #!/bin/bash
-if [ -f sinaubareng/.claude/cloud/setup.sh ]; then
-  SIGRAK_NODE_MAJOR=26 SIGRAK_PG_MAJOR=19 bash sinaubareng/.claude/cloud/setup.sh
+if [ -f sigrak/.claude/cloud/setup.sh ]; then
+  SIGRAK_NODE_MAJOR=26 SIGRAK_PG_MAJOR=19 bash sigrak/.claude/cloud/setup.sh
 fi
 ```
 

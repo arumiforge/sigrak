@@ -13,7 +13,7 @@ Owner = branch name or session label of whoever claimed the task.
 
 ## Open decisions blocking work
 
-- Owner: make `arumiforge/sinaubareng` and `arumiforge/fondasi` private (D-409); upload Hugeicons Pro files after that (D-402); may parents use the school chatbot (D-394); lawyer check on encrypted backups abroad (`docs/drafts/fondasi-uptake.md`). Questions with a default in use: `docs/drafts/open-questions.md` (2026-11-11 sections).
+- Owner: archive or make private the previous SIGRAK repository, and make `arumiforge/fondasi` private (D-409); `arumiforge/sigrak` is private; upload Hugeicons Pro files after that (D-402); may parents use the school chatbot (D-394); lawyer check on encrypted backups abroad (`docs/drafts/fondasi-uptake.md`). Questions with a default in use: `docs/drafts/open-questions.md` (2026-11-11 sections).
 
 ## Phases
 
@@ -166,8 +166,8 @@ Order confirmed by D-162. P5-01 and P5-02 run in parallel. Each slice gets its t
 
 Short notes for the next agent (newest first, max ~10 lines; delete stale ones). Older notes: `archive/handoff-notes-2026-10-30-to-11-01.md`, `archive/handoff-notes-2026-11-03-to-11-11.md`.
 
-- 2026-11-27 — PR #91 (R0-11) merged. R0-12: pnpm 12.23 replaces npm (D-422); `pnpm-workspace.yaml` denies `@swc/core`'s install script and holds new versions for one day. ProUI adaptation waits for the owner's e-mail scope and a private repo.
+- 2026-11-27 — PR #91 (R0-11) merged. R0-12: pnpm 12.23 replaces npm (D-422); `pnpm-workspace.yaml` denies `@swc/core`'s install script and holds new versions for one day. ProUI is dropped: shadcn/studio Pro replaces it.
 - 2026-11-27 — PRs #86 (R0-10) and #87 (R0-05) merged. R0-11: owner confirmed the relayed proposals ("setuju semua"); D-412…D-421 recorded, app moved to Node 26 + PostgreSQL 19 (tests, lint, typecheck, build pass locally), handbook v3. `rekomendasi-tambahan.md` stays proposals until the owner fills the Keputusan boxes.
 - 2026-11-27 — R0-10: owner clarified "legacy" = the Laravel build. D-411: nothing ported from it, tag `laravel-final` no longer a reference, Laravel-era technical decisions marked superseded; SIGRAK content (incl. D-252…D-328) stays for step-by-step review. P5-01/P5-02 task files removed. R0-05 branch received, PR next.
-- 2026-11-27 — R0-02, R0-03, R0-04 merged (PRs #80…#84; PR body footers removed). R0-09: cloud environment setup script and settings doc for the owner (`docs/agent/cloud-environment.md`). R0-05 still running. Owner: delete merged remote branches (the session proxy cannot), sinaubareng still showed public at 02:55 UTC.
+- 2026-11-27 — R0-02, R0-03, R0-04 merged (PRs #80…#84; PR body footers removed). R0-09: cloud environment setup script and settings doc for the owner (`docs/agent/cloud-environment.md`). R0-05 still running. Owner: delete merged remote branches (the session proxy cannot), the repository still showed public at 02:55 UTC.
 - 2026-11-27 — R0-01 (branch `r0/r0-01-overhaul-decisions-plan`): owner interview recorded as D-388…D-410; Laravel app and stack docs removed (tag `laravel-final`); SK sample anonymised; `docs/fondasi-audit.md`, `docs/drafts/fondasi-uptake.md`, `docs/agent/fondasi-check.md`; phase R tasks R0-02…R0-08. Next: owner merges and makes both repos private; then R0-02…R0-05 and R0-07 can run in parallel.
