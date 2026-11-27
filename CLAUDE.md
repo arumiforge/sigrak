@@ -64,6 +64,7 @@ SIGRAK keeps its own copies and adjustments of Fondasi data in `docs/data/`; the
 
 - Never check repository visibility or ask the owner to confirm it; the owner keeps the repository private (D-441).
 - Work in phases. Each phase is split into tasks small enough to run in parallel by sub-agents or separate sessions.
+- Cloud sessions: use the container's spare CPU and memory. Run independent commands in parallel or in the background and independent parts of a task as parallel sub-agents (D-442).
 - Claim a task in `PROGRESS.md` before starting; update it when done. Follow `docs/agent/WORKFLOW.md`.
 - Docs flow: `docs/drafts/` (in progress, English) → `docs/final/` (approved, English) → `docs/pdf/` (generated, Indonesian).
 - Save tokens: read only what the task needs, keep agent files concise, link instead of repeating.

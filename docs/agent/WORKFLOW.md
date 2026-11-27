@@ -16,6 +16,7 @@ How phased, parallel work is done so agents stay consistent, save tokens, and ca
 - Shared files (`PROGRESS.md`, `DECISIONS.md`, `CONTEXT.md`) get small, line-level edits only, to keep merges easy.
 - After opening a PR, set its body again without any tool-added AI footer and read the saved body back; `commit-policy` fails the PR until it is clean (`CLAUDE.md`).
 - Repository visibility is never checked and the owner is never asked to confirm it (D-441).
+- In Claude cloud sessions, use the container's full capacity: independent commands as parallel tool calls or in the background, independent parts of a task as parallel sub-agents started in one message (D-442, limits there).
 
 ## Task lifecycle
 

@@ -42,6 +42,10 @@ The script finds the repository root from its own path, so it works whatever the
 | `apt.postgresql.org`, `www.postgresql.org` | PostgreSQL 19 packages and key |
 | `dl.k6.io` | k6 packages |
 
+## Resources (D-442)
+
+Measured 2026-11-27: 4 vCPU, about 15 GB RAM, about 59 GB free disk (a fixed allowance per session, so `df` can mislead). Most of it sits idle, so agents run independent commands side by side and split independent work across parallel sub-agents; `nproc` gives the core count for `xargs -P` and similar options. Only one test run at a time uses `sigrak_test`.
+
 Docker has no daemon in cloud sessions, so `compose.yaml` is for laptops and servers; cloud sessions use the PostgreSQL and Redis the script starts.
 
 ## Ready to paste (Claude account → environment settings)

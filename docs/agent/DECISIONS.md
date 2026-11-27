@@ -2132,3 +2132,12 @@ Reason: the D-439 flow needs a board; self-hosting keeps the data with us and th
 Accepted · 2026-11-27 · R0-14 · owner's choice ("buat juga aturan ini diterapkan … biar tidak dobel kerja")
 `arumiforge/sigrak` is private, set and kept by the owner. Agents never check repository visibility (no GitHub API visibility calls, no anonymous clone or `ls-remote` tests) and never ask the owner to confirm it, unless the owner asks for a check. Licensed files follow their own rules (Hugeicons Pro and shadcn/studio Pro, D-402, D-434).
 Reason: the check was repeated in every session and only cost time.
+
+### D-442 — Cloud sessions use the container's full capacity
+Accepted · 2026-11-27 · owner's choice ("maksimalkan resource dan worker di cloudsesion claude, karena biasanya resource sangat lega dan hampir banyak tidak terpakai")
+A Claude cloud session container (measured 2026-11-27: 4 vCPU, about 15 GB RAM, about 59 GB free disk) mostly sits idle. Agents in cloud sessions use it fully:
+- Independent commands run at the same time: lint, typecheck, format check and tests as parallel tool calls in one message; long installs, builds and PDF renders in the background while other work goes on.
+- Work that splits into independent parts (separate files, separate checks, separate research questions) runs as parallel sub-agents started in one message, not one after another. Each sub-agent still gets only its task file or a narrow brief (D-006, `WORKFLOW.md`).
+- Tools get their parallel options where they are safe (`tsc` projects side by side, `pnpm -r --parallel`, `xargs -P "$(nproc)"`, Japa/Vite defaults left on).
+Limits: two agents never edit the same file; one test run at a time against `sigrak_test` (the runner migrates and truncates it); sub-agents cost tokens, so they are used for real independent work, not for single lookups; a session started outside the cloud (a laptop) keeps to its machine's limits.
+Reason: CPU, memory and disk in the cloud container are already paid for and mostly unused; running work side by side shortens sessions.

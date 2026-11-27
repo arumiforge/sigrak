@@ -25,6 +25,8 @@ Follows Fondasi `docs/agent-workflow.md`, adapted to SIGRAK's own layout in `doc
 - Task list for multi-step work; decisions recorded in `DECISIONS.md` as they happen (and `CONTEXT.md` if the stack or a
   convention changes); ask the owner for choices that are theirs.
 - Two tasks never edit the same file; shared agent files get small line-level edits.
+- Cloud session: run independent commands as parallel tool calls or in the background, and independent parts of the
+  task as parallel sub-agents in one message; one test run at a time against `sigrak_test` (D-442).
 - Conventional Commits, small and often, pushed often; no AI attribution anywhere. Verify (tests, lint, build,
   screenshots at 360 and 1280 px for UI) before claiming done. PRs into `main`; never merge unless the owner asks.
 - Right after opening a PR, set its body again without the tool-added AI footer and read it back (`CLAUDE.md`).
