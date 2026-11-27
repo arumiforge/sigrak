@@ -364,7 +364,7 @@ The owner answered the eight open questions. Where an answer differs from the pr
 
 | #   | Answer |
 | --- | --- |
-| Q1  | Send kabupaten/kota and kecamatan, always (not limited to kecamatan with at least 5 schools). |
+| Q1  | Send kabupaten/kota and kecamatan, always, and the school name; text masking is a lighter pass (D-453, D-454). |
 | Q2  | Yes: add the tenth column "Tidak dilanjutkan", and tell the reporter, with a reason. |
 | Q3  | Triage staff press "Kirim ke papan" after the masked preview. |
 | Q4  | Add "Kirim Masukan" for ideas next to Minta Bantuan, from the pilot on. |

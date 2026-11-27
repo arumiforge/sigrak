@@ -2219,3 +2219,9 @@ Accepted · 2026-11-28 · RS-07 · owner's choice (interview 2026-11-28) · refi
 - The integration is off on staging by default.
 - Nothing from Plane comments comes back into SIGRAK; release notes are written in the SIGRAK console.
 Reason: the owner wants fuller regional detail for the teams, an explicit send step, a separate channel for ideas, and steady updates for reporters.
+
+### D-454 — School names may go to Plane; lighter text masking
+Accepted · 2026-11-28 · RS-07 · owner's choice ("sudah ada kesepakatan di luar repo, nama sekolah bisa dikirim, dan penyamaran teks bisa longgar") · amends the first point of D-453 and narrows D-393 masking for the Plane integration only; agreement held outside the repository (D-444, D-446)
+- A problem sent to Plane may carry the school name, besides kabupaten/kota and kecamatan.
+- Text masking before sending to Plane is a lighter pass. Default until the owner says otherwise: pupils' direct identifiers (NIK, NISN, phone numbers, pupil full names) are still removed; other text goes as written.
+Reason: the teams work better with the school named, and the agreement covering this exists offline.
