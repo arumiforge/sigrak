@@ -2296,3 +2296,12 @@ Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · follows D-458
 - The existing Seni Musik and Seni Rupa topics keep their JP for now, marked "JP belum disesuaikan"; P4-30 rescales JP, weeks and fokus estimates to the 54 JP semester tracks.
 - Seni Tari and Seni Teater tracks are imported and a school may choose them although they have no topics yet; teachers then write their own topics until SIGRAK adds them.
 Reason: rescaling belongs to curation; schools that teach dance or theatre should not wait for SIGRAK's topics.
+
+### D-465 — Operations guides: maintenance window, logs, status page, incident levels
+Accepted · 2026-11-28 · RS-09 · owner's choice (interview 2026-11-28) · fills owner placeholders in `docs/server/jadwal-perawatan.md`, `runbook-insiden.md`, `halaman-status.md`; follows D-432
+- **Maintenance window:** Saturday 21.00–23.00 WIB, announced on the status page two days ahead.
+- **Maintenance log and incident notes:** one "Ops" project in `sigrak-plane` (D-440), one card per maintenance or incident, never with secrets or personal data.
+- **Status page:** outage texts link only to `/bantuan`; no email subscription on the status page.
+- **Incident levels:** the proposed levels become the rule: Berat at once at any hour; Sedang within 1 hour during school days and hours; Ringan the next working day.
+- The list of Better Stack accounts allowed to post reports is kept by the owner outside the repository (no names or emails here).
+Reason: owner's choices for the RS-09 placeholders.
