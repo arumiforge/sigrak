@@ -2305,3 +2305,13 @@ Accepted · 2026-11-28 · RS-09 · owner's choice (interview 2026-11-28) · fill
 - **Incident levels:** the proposed levels become the rule: Berat at once at any hour; Sedang within 1 hour during school days and hours; Ringan the next working day.
 - The list of Better Stack accounts allowed to post reports is kept by the owner outside the repository (no names or emails here).
 Reason: owner's choices for the RS-09 placeholders.
+
+### D-466 — Layer model details from the RS-18 draft
+Accepted · 2026-11-28 · RS-18 · owner's choice (interview 2026-11-28) · accepts all 14 defaults of `docs/drafts/regional-layers.md`; refines D-456; supersedes D-256 (copy model for region calendars) and the cross-region opt-in of D-327
+- **Calendars:** official regional changes apply directly; the operator gets an impact notice and teachers get the D-274 shift preview (replaces the D-256 copy). Official regional calendar dates are mandatory for the region's schools, except the school's own STS/SAS. A school may hide only non-mandatory items of an official provincial or kabupaten package. The Jawa Tengah calendar also applies to MI (line `all`) until a Kanwil Kemenag calendar exists; a Kemenag package then wins for MI.
+- **Regions:** keyed by Kemendagri codes, with the Kemendikdasmen/Dapodik codes stored alongside, starting with Jawa Tengah. A region change from a directory re-import applies after staff accept it, from the next day or the next school year (staff choose).
+- **Kecamatan** has only local agreements, never official rules. A local agreement needs a document (photo or PDF) checked by the approver.
+- **Labels:** SIGRAK's own defaults are labelled "Bawaan SIGRAK", not "Nasional".
+- **Muatan lokal and Kudus material:** Bahasa Jawa is a default per kabupaten (Kudus, Jepara, Pati) until a provincial rule is registered. The Kudus supervision instruments and the Format Kudus Berkas are local agreements (opt-in) until a Dinas document is supplied. No cross-region opt-in: the team proposes a variant per region with evidence.
+- **Who chooses:** the operator chooses the school's local agreements and the principal is notified. School users do not propose kecamatan or kabupaten items; they use Kirim Masukan and the team proposes.
+Reason: the owner accepted the draft's defaults.
