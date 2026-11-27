@@ -2176,3 +2176,12 @@ Reason: the same visual-asset path as the rest of the app.
 Accepted · 2026-11-27 · R0 · owner's choice · closes two product-concept questions
 The five-tab click-prototype test with teachers and the short presentation to principals and supervisors are dropped. Teacher and school feedback is gathered during the pilot through the feedback channels (D-439).
 Reason: the owner prefers feedback from real use.
+
+### D-450 — Typst is the PDF engine, with three conditions
+Accepted · 2026-11-27 · R0-07 · owner's choice ("setuju D-399, pakai Typst dengan syarat itu") · settles D-399 (spike passed, `docs/drafts/typst-spike.md`)
+Typst produces SIGRAK's PDFs: the CLI on `worker-exports` for final files, the WASM compiler (typst.ts) for browser previews. Gotenberg stays only as the fallback, including for any document that must carry copyable or searchable Arabic text, which Typst does not produce yet. Conditions:
+- Font files are pinned in the image and the preview bundle (Liberation 2.1.5, Noto Naskh Arabic 2.021, New Computer Modern Math from typst-assets); system fonts are never used, because Ubuntu's Noto Naskh 2.004 draws the end-of-ayah sign wrongly.
+- Formulas are stored as LaTeX and converted to Typst (tex2typst plus the spike's fixes); column arithmetic gets its own block, not a LaTeX array.
+- The WASM compiler (about 10 MB compressed plus fonts) loads only on preview pages and is cached; previews show a short loading state on the first visit.
+Every printable keeps A4 as default and F4 (F-020).
+Reason: the spike met the D-399 tests (Arabic shaping and harakat, low-end render times, math, letterhead) with server renders of 50–120 ms.
