@@ -25,8 +25,8 @@ Provenance: converted on 2026-11-09 by [`scripts/curriculum/convert_legacy_topic
 | File                           | Topics | TP    | Fokus | sha256                                                             |
 | ------------------------------ | ------ | ----- | ----- | ------------------------------------------------------------------ |
 | `sigrak-sd-2026-r1-umum.json`  | 432    | 1,372 | 2,021 | `7a8b136dc4d3d1005753e64bba7dbdcdea6a084bd30774e7f3d0ea8d74075e57` |
-| `sigrak-sd-2026-r1-agama.json` | 300    | 765   | 1,060 | `4e339ca4734fa0aeb9e59e4ead0b9cdb62e915c309c86339ef2902596cc391fe` |
-| `sigrak-mi-2026-r1.json`       | 224    | 558   | 988   | `46351a397be2d36fadbe61e61222ba2f9d3b9eefdedeb525119e204134d53ec0` |
+| `sigrak-sd-2026-r1-agama.json` | 300    | 765   | 1,060 | `08dae829104e7ef2b9b5a431d75b51453ea95fdeb5fc2042e0b207e1a1a6141b` |
+| `sigrak-mi-2026-r1.json`       | 224    | 558   | 988   | `4d6371c40c557300cca66c689211223deb49fcb759067b83171f9d627f787408` |
 | `crosswalk-legacy-2026.json`   | 956    | 2,695 | 4,069 | `3bd23ab67bba5fde511fa77cef6c74b590dd21d92535bccaca82d3028ccbf4eb` |
 
 ## Official CP and the general-subject topics (D-452)
