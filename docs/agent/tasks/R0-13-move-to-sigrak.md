@@ -16,4 +16,4 @@ Move SIGRAK into the private repository `arumiforge/sigrak` without the old git 
 
 ## Result
 
-A case-insensitive grep for the old name and a byte search of all PDFs find nothing. Owner: change the cloud environment's repository list and setup-script line (`docs/agent/cloud-environment.md`), then archive or make private the previous repository.
+A case-insensitive grep for the old name and a byte search of all PDFs find nothing. The owner made the previous repository and Fondasi private; the cloud environment uses a transition setup-script line until the move is finished, then the plain `sigrak` line in `docs/agent/cloud-environment.md`.
