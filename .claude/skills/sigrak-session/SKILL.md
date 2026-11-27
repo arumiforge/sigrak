@@ -27,6 +27,7 @@ Follows Fondasi `docs/agent-workflow.md`, adapted to SIGRAK's own layout in `doc
 - Two tasks never edit the same file; shared agent files get small line-level edits.
 - Conventional Commits, small and often, pushed often; no AI attribution anywhere. Verify (tests, lint, build,
   screenshots at 360 and 1280 px for UI) before claiming done. PRs into `main`; never merge unless the owner asks.
+- Right after opening a PR, set its body again without the tool-added AI footer and read it back (`CLAUDE.md`).
 
 ## End
 Fill *Result* in the task file and set its status (`review` or `done`); add a short handoff note in `PROGRESS.md`
