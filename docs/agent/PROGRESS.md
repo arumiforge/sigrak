@@ -143,17 +143,17 @@ Each runs in its own session; none started. The phase R line (R0-06…R0-08, R1�
 | RS-03 | Decision-log pruning, D-331…D-440 (D-433) | todo | — | RS-01 (tag) | `DECISIONS.md` |
 | RS-04 | Fix references to removed IDs in `docs/final/`, task files and the handbook; move the Phase 0–5 tables of this file to `docs/agent/archive/` (keep open tasks reachable) (D-433) | todo | — | RS-01…RS-03 | `docs/final/`, `docs/agent/` |
 | RS-05 | Notes site `note.sigrak.com` (temporarily `*.workers.dev`): Workers static assets in the existing Worker `sigrak-note` (wrangler `name = "sigrak-note"`) with handbook, `docs/server/` guides, runbook; GitHub Action with wrangler on changes to `main`; Actions pinned to SHAs. The owner reports Access on `workers.dev` and preview URLs and both secrets are in place; check before the first deploy (D-436) | todo | — | — | `.github/workflows/`, notes site source |
-| RS-06 | Marketing site: sitemap, page drafts and legal drafts (`/syarat-penggunaan`, `/kebijakan-privasi`, `/perlindungan-data-murid` under UU PDP; versioned, "berlaku sejak"); lawyer review before launch, offline by the developer (D-435, D-444) | todo | — | — | `docs/drafts/marketing-site.md`, legal drafts |
-| RS-07 | Plane integration design: masked worker calls, signed internal webhook endpoint, status back to SIGRAK and the reporter, switch-off and export (D-439, D-440) | todo | — | — | `docs/drafts/plane-integration.md` |
+| RS-06 | Marketing site: sitemap, page drafts and legal drafts (`/syarat-penggunaan`, `/kebijakan-privasi`, `/perlindungan-data-murid` under UU PDP; versioned, "berlaku sejak"); lawyer review before launch, offline by the developer (D-435, D-444) | in-progress | igi/dazzling-franklin-5i1w8n | — | `docs/drafts/marketing-site.md`, legal drafts |
+| RS-07 | Plane integration design: masked worker calls, signed internal webhook endpoint, status back to SIGRAK and the reporter, switch-off and export (D-439, D-440) | in-progress | igi/dazzling-franklin-5i1w8n | — | `docs/drafts/plane-integration.md` |
 | RS-08 | Impeccable (pbakaus/impeccable) review: move useful checks into SIGRAK's UI rules; Fondasi gaps to `docs/drafts/fondasi-uptake.md` (D-434, D-421) | todo | — | — | UI rules, uptake notes |
-| RS-09 | Incident runbook, routine maintenance schedule and status-page guide, in Indonesian in `docs/server/` (D-432) | todo | — | — | `docs/server/` |
+| RS-09 | Incident runbook, routine maintenance schedule and status-page guide, in Indonesian in `docs/server/` (D-432) | in-progress | igi/dazzling-franklin-5i1w8n | — | `docs/server/` |
 | RS-10 | Market and competitor research, part 1: continue `docs/final/research-digest.md` §11 (app benchmarks), SD/MI first | todo | — | — | research digest |
 | RS-11 | Market research, part 2: differentiation, innovation areas, market gaps; how good practice, research and seminars (Bank Praktik Baik, D-439) become features | todo | — | RS-10 | research digest, draft |
 | RS-12 | HaKI materials: philosophy, history (without the legacy brand, D-360), background, guidebook; needs an owner interview on the history; filed after the PT exists (D-438) | todo | — | owner interview | `docs/drafts/haki/` |
 | RS-13 | Fundamentals handbook for the owner (several sessions), published on the notes site (D-436) | todo | — | RS-05 for publishing | handbook source |
 | RS-14 | Maps spike: MapLibre + PMTiles on R2, desa/kecamatan levels, "<5" rule (D-437) | blocked (boundary data lands in Fondasi first) | — | Fondasi boundary data | spike report |
 | RS-15 | Agent pre-check of draft data against official sources: CP, taxonomy and regulation registry, regulation extracts, calendars; flag doubtful items with reason and source location (D-447) | in-progress | igi/dazzling-franklin-5i1w8n | — | flag list per data set |
-| RS-16 | Logo brief for Codex in `ai/`: full colour, single colour, negative, 16 px (D-448) | todo | — | — | `ai/` brief |
+| RS-16 | Logo brief for Codex in `ai/`: full colour, single colour, negative, 16 px (D-448) | in-progress | igi/dazzling-franklin-5i1w8n | — | `ai/` brief |
 
 ### Phase 5 — v1 build · paused (D-406; rebuilt as R5)
 
