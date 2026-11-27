@@ -70,4 +70,4 @@ Hostname publik (`app.`, `ujian.`) tidak dimasukkan ke Access.
 
 - Masuk: tambahkan emailnya ke Access group yang sesuai; untuk akses server tambahkan juga public key-nya ([bitvise.md](bitvise.md) bagian E).
 - Keluar: hapus dari Access group, hapus kuncinya dari `authorized_keys` di setiap server, dan cabut sesi aktifnya (Access → Users).
-- Periksa grup tiap tiga bulan, bersamaan dengan daftar kunci.
+- Periksa grup tiap bulan, bersamaan dengan daftar kunci (D-432, `jadwal-perawatan.md`).
