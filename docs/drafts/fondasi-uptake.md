@@ -50,9 +50,9 @@ What SIGRAK takes from `arumiforge/fondasi` and what the owner decides. SIGRAK k
 | Reference data delivery | F-003 `fondasi-sync` pinned in `fondasi.lock` | Own copies, check on request | decided: exception D-401 |
 | Icons | F-010 Lucide | Hugeicons Pro | decided: exception D-402 |
 | Local backup retention | 14 days | 7 days local + 30 off-site | decided: exception D-404 |
-| AI assistant scope | F-019 app content only | School chatbot on school data under agreement | decided: exception D-394; open: may parents use it? |
+| AI assistant scope | F-019 app content only | School chatbot on school data under agreement | decided: exception D-394; parents use the public chatbot without AI (D-443) |
 | Bahasa Inggris SD/MI | F-031 transition (compulsory from 2027/2028) | was D-387 | decided: follow Fondasi, D-410 |
-| Encrypted backups outside Indonesia | F-006 personal data in Indonesia | Encrypted backups on R2 and a second provider (D-404) | open: confirm with a lawyer that encrypted backups abroad are acceptable for public-sector schools |
+| Encrypted backups outside Indonesia | F-006 personal data in Indonesia | Encrypted backups on R2 and a second provider (D-404) | handled offline by the developer with the relevant parties (D-444) |
 | Fondasi repository visibility | `CLAUDE.md`: stays private | was public on 2026-11-27 | owner's action (D-409) |
 | School chatbot data processors | F-013 / F-023: nothing sensitive to AI without terms | D-394 sends school data to the owner's OpenAI-compatible providers | open: which providers may receive it, under which data-processing terms, masking of names first |
 | Ubuntu 26.04 on the servers (D-413) | `server/setup.sh` warns and `check.sh` fails on versions other than 24.04 | Ubuntu 26.04 LTS on production and standby | owner's own Fondasi work (D-421); SIGRAK's server notes cover 26.04 meanwhile |

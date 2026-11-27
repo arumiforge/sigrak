@@ -2141,3 +2141,13 @@ A Claude cloud session container (measured 2026-11-27: 4 vCPU, about 15 GB RAM, 
 - Tools get their parallel options where they are safe (`tsc` projects side by side, `pnpm -r --parallel`, `xargs -P "$(nproc)"`, Japa/Vite defaults left on).
 Limits: two agents never edit the same file; one test run at a time against `sigrak_test` (the runner migrates and truncates it); sub-agents cost tokens, so they are used for real independent work, not for single lookups; a session started outside the cloud (a laptop) keeps to its machine's limits.
 Reason: CPU, memory and disk in the cloud container are already paid for and mostly unused; running work side by side shortens sessions.
+
+### D-443 — Parents use the public chatbot, which has no AI model
+Accepted · 2026-11-27 · R0 · owner's choice ("orang tua masuk chatbot umum … tidak ada lapisan api model untuk menjawab itu") · closes the open point of D-394, narrows D-393
+Parents use the same **public chatbot** as visitors to the public pages. It only points people to the right place: quick choices, guide pages (Panduan) and the frequently asked questions, matched without an AI model. No provider is called, so no question or personal data leaves SIGRAK and nothing counts against an AI budget. Parents get no school chatbot (D-394) and no answers from school data. The AI modes of D-393 (system Q&A with RAG, the school chatbot) stay for signed-in staff only.
+Reason: parents need directions, not generated answers; no AI cost and no data sent to providers for people outside the school's staff.
+
+### D-444 — Legal checks are handled offline by the developer
+Accepted · 2026-11-27 · R0 · owner's choice ("urusan legal ditangani pengembang dengan pihak terkait secara offline")
+Legal checks (for example encrypted backups stored abroad, the legal pages and data-processing agreement before launch, HaKI filing) are handled by the developer with the relevant parties outside the repository. Agents do not list them as open decisions or wait on them; they keep drafts ready and record an outcome only when the owner reports one.
+Reason: these talks happen offline; tracking them in the repository only repeats an open item that agents cannot move.

@@ -1,8 +1,8 @@
 # R0-07 — Spike: Typst PDF (two weeks)
 
 - **Phase:** R0
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** igi/dazzling-franklin-5i1w8n
 - **Depends on:** R0-01
 - **Can run in parallel with:** R0-05, R0-06
 
