@@ -2185,3 +2185,13 @@ Typst produces SIGRAK's PDFs: the CLI on `worker-exports` for final files, the W
 - The WASM compiler (about 10 MB compressed plus fonts) loads only on preview pages and is cached; previews show a short loading state on the first visit.
 Every printable keeps A4 as default and F4 (F-020).
 Reason: the spike met the D-399 tests (Arabic shaping and harakat, low-end render times, math, letterhead) with server renders of 50–120 ms.
+
+### D-451 — AI job runtime from the R0-06 spike
+Accepted · 2026-11-27 · R0-06 · team decision from the spike (`docs/agent/tasks/R0-06-spike-ai-job-sse.md`) · refines D-388
+- Worker process roles run as `node ace queue:work <ai|exports|default>` (`worker-ai`, `worker-exports`, `worker-default`). A generation runs one step per job and queues the next.
+- The `ai` worker uses a 15 s lock and a 5 s stalled check, so a crashed worker's step resumes in about 17 s. On SIGTERM a worker finishes running steps for up to 8 s, then returns them to the queue; containers get a stop grace period of at least 10 s.
+- Generation progress goes over Transmit on `users/<token>/generations`, where the token is an HMAC of the user id with the app key (users have no public id); only that user may subscribe.
+- New provider error class `empty_reply` (a reply without text, for example a thinking model that used up its output budget) fails over to the next key, as Fondasi `ai-assistant.md` describes; `docs/final/ai-provider-engine.md` gets this row when it is next edited.
+- Data model: `generations.runs` (run number, part of the queue job id) and `generations.error_meta`; `template_key` has no foreign key until `template_versions` exists.
+- pnpm `allowBuilds` keeps `msgpackr-extract` off; BullMQ uses msgpackr's JavaScript fallback.
+Reason: measured in the spike: progress reaches the page in a median 6 ms (p95 12 ms), and neither a graceful nor a hard worker restart lost or repeated a step.
