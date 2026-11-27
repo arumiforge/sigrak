@@ -2280,3 +2280,19 @@ Accepted · 2026-11-28 · RS-07 · owner's choice (interview 2026-11-28) · refi
 - **Kirim Masukan limits:** idea 20–2,000 characters, benefit up to 1,000, as drafted.
 - **Deleted accounts:** when a reporter's account is deleted, the user link is cleared but the school name stays on the Plane card and in later pushes (it belongs to the school, not to the person).
 Reason: owner's choices on the points left open after D-453.
+
+### D-462 — Logo wordmark in two cases
+Accepted · 2026-11-28 · RS-16 · owner's choice (interview 2026-11-28) · refines D-448
+The Codex logo brief asks for both wordmarks, lower case "sigrak" and upper case "SIGRAK", in every required variant (full colour, single colour, negative, 16 px). The owner picks one from the results. The product name in text stays as written in the docs.
+Reason: the owner wants to compare both before choosing.
+
+### D-463 — CPU-heavy work runs in a worker_threads pool
+Accepted · 2026-11-28 · RS-19 · owner's choice (interview 2026-11-28) · refines D-388, D-415, D-451
+CPU-heavy jobs on `worker-exports` (large Excel builds and imports, image processing, leger and similar) run in a `worker_threads` pool inside the worker process, sized to the container's CPU limit minus one (at least one thread), so the event loop stays free for queue locks and heartbeats. Child processes are not used for this. Replica counts per role and `UV_THREADPOOL_SIZE` are proposed from the R0-08 numbers in `docs/drafts/r0-gate.md` and set in R3.
+Reason: keeps the BullMQ lock renewals and progress events on time while heavy work runs, with lower start-up and memory cost than child processes.
+
+### D-464 — Seni dan Budaya tracks: JP rescaling in P4-30, Tari and Teater selectable without topics
+Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · follows D-458
+- The existing Seni Musik and Seni Rupa topics keep their JP for now, marked "JP belum disesuaikan"; P4-30 rescales JP, weeks and fokus estimates to the 54 JP semester tracks.
+- Seni Tari and Seni Teater tracks are imported and a school may choose them although they have no topics yet; teachers then write their own topics until SIGRAK adds them.
+Reason: rescaling belongs to curation; schools that teach dance or theatre should not wait for SIGRAK's topics.
