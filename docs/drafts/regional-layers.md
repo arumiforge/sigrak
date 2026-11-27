@@ -1,6 +1,6 @@
 # Regional Layers: National, Province, Kabupaten/Kota, Kecamatan, School
 
-- **Status:** draft for owner review (§12); implements D-456
+- **Status:** owner answers accepted 2026-11-28 (§12, D-466); implements D-456
 - **Task:** RS-18
 - **Last updated:** 2026-11-28
 - **Builds on:** D-456 (layer model), D-354, D-355, D-378 (versioned rule sets, policy-profile resolver), D-380 (operator approves school proposals), D-253…D-257, D-323, D-377, D-379 (calendar), D-367, D-452 (catalogs, kepanduan), D-231, D-232 (muatan lokal), D-221, D-324, D-327 (supervision variants), D-278, D-283 (Berkas Administrasi, print), D-338, D-339 (staff roles and scopes), D-169, D-170, D-319 (NPSN directory, kecamatan), D-157, D-158, D-161 (Dapodik add-on, held), D-447 (agent pre-check)
@@ -154,7 +154,7 @@ Because lower layers hold no copies, a new revision of a higher item reaches eve
 | Item becomes `mandatory` | Every hide on it becomes `void` (`became_mandatory`); §3.4 |
 | Package retired | Its items disappear; for a `local_agreement`, choices end with `end_reason = package_retired` |
 
-For the calendar this **replaces the copy model of D-256** ("Salin dari kalender wilayah" and "Terapkan perubahan wilayah"): the school calendar is the resolved region calendar plus the school's own events and hides. The impact preview (D-261) and the shift preview with Batalkan (D-274) still run; see Q1.
+For the calendar this **replaces the copy model of D-256** (superseded by D-466; "Salin dari kalender wilayah" and "Terapkan perubahan wilayah"): the school calendar is the resolved region calendar plus the school's own events and hides. The impact preview (D-261) and the shift preview with Batalkan (D-274) still run (Q1, D-466).
 
 ### 3.3 `setting` items
 
@@ -185,8 +185,8 @@ Some values are one per key, not a list: the school-year frame (`starts_on`, `ev
 | Official CP text per subject, phase, element | (not layered) | Kepka BSKAP 046/H/KR/2025, BKPDM 020/2026, SK Dirjen Pendis 9941/2025 (D-452) | Not a layered domain at all: lower layers may only add local items (muatan lokal), never hide CP |
 | Compulsory subjects and their JP | (rule set) | Permendikdasmen 13/2025, KMA 1503/2025 (D-230) | Stays in the structure rule set; not hideable. Muatan lokal cap stays a `maximum` warning (D-232) |
 | 8 DPL, 7 KAIH habit list | (taxonomy) | 10/2025; Panduan Kokurikuler 2025 | Closed vocabularies, not layered |
-| Observation frame: pra-observasi, observasi, pasca-observasi | `supervision_instrument` | Perdirjen GTK 7607/2023 | Default: the step is `mandatory` (cannot be hidden), its template is a `setting` a region may vary (D-324) |
-| Official regional calendar dates for the region's schools | `calendar` | e.g. Peraturan Kepala Dinas 400.3/23862/2026 | Default: `mandatory` below the issuing layer (Q5) |
+| Observation frame: pra-observasi, observasi, pasca-observasi | `supervision_instrument` | Perdirjen GTK 7607/2023 | Decided: the step is `mandatory` (cannot be hidden), its template is a `setting` a region may vary (D-324) |
+| Official regional calendar dates for the region's schools | `calendar` | e.g. Peraturan Kepala Dinas 400.3/23862/2026 | Decided (D-466): `mandatory` below the issuing layer (Q5) |
 
 **Enforcement, three walls:**
 
@@ -331,7 +331,7 @@ Every value comes with its source (`layer`, area name, `line`, package code and 
 | Target layer | Proposes | Approves | Evidence |
 |---|---|---|---|
 | School | Wali kelas/guru kelas, guru mapel, principal (D-380); the operator acts directly | Operator, optional note | None |
-| Kecamatan, kabupaten/kota, province | Tim SIGRAK staff whose scope covers the area (D-338): `content`, `regional_lead`, `sales`, `support`, `curriculum` | `regional_lead` (Koordinator Wilayah) or `validator` with that area in scope; `owner` | Required for `official`: decree registered with source file + sha256 or URL and check date (D-254 pattern). For `local_agreement`: the agreement document or minutes (default, Q7) |
+| Kecamatan, kabupaten/kota, province | Tim SIGRAK staff whose scope covers the area (D-338): `content`, `regional_lead`, `sales`, `support`, `curriculum` | `regional_lead` (Koordinator Wilayah) or `validator` with that area in scope; `owner` | Required for `official`: decree registered with source file + sha256 or URL and check date (D-254 pattern). For `local_agreement`: the agreement document or minutes (decided, Q7, D-466) |
 | National | Not proposed through this flow; rule-set console and Tim Validasi (D-317, D-113) | — | — |
 
 Separation of duty: a proposer never approves their own proposal (D-339). An area proposal is pre-checked by an agent against its source before a person decides (D-447).
@@ -376,7 +376,7 @@ draft ──send──▶ submitted ──approve──▶ approved ──(publi
 |---|---|---|
 | Examples | Province or kabupaten kaldik, Perda/Pergub on muatan lokal, a Dinas instrument | Kecamatan agreement on joint events, a KKKS format, a shared mulok choice |
 | Applies to | Every school of the area and line, automatically | Only schools whose operator chooses it ("Ikuti paket") |
-| Evidence | Required, registered regulation | Agreement document (default, Q7) |
+| Evidence | Required, registered regulation | Agreement document (D-466, Q7) |
 | School may hide its items | Only non-mandatory items (Q5) | Yes, or leave the package |
 | Layers | Province, kabupaten/kota; kecamatan only with an issuing authority (Q6) | Kecamatan by default; kabupaten/kota and province allowed |
 
@@ -440,7 +440,7 @@ All files stay `draft` until reviewed (D-113, D-447). The migration converts dat
 | `docs/data/taxonomy/facet-a-policy.json` (layers L0–L6), `facet-g-context.json` (`WILAYAH`, `KALENDER-DAERAH`) | Later data task: add nodes for the D-456 layers and lines, mapped to L1–L4 as in §2.1, and `WILAYAH.KECAMATAN` | — | — |
 | `docs/data/profiles/sd.json`, `mi.json` (`calendar_source`, `region_province`) | `calendar_source` stays as a hint; the `region_province` entry of a rule set becomes a province package when such a rule set appears | — | — |
 
-**Superseded or refined by this draft** (to record as decisions after the owner answers): D-256 copy model and `calendars.source_calendar_id`/`source_version`/`version` (§3.2, Q1); D-377 two-column `regions` (§2.2); the single-region D-324 variant choice (now `setting` items); `offer_groups` and `mandatory_to_offer` in the catalog file (now `layer_group_rules`).
+**Superseded or refined by this draft** (recorded in D-466): D-256 copy model and `calendars.source_calendar_id`/`source_version`/`version` (§3.2, Q1); D-377 two-column `regions` (§2.2); the cross-region opt-in of D-327 (Q11, superseded by D-466); the single-region D-324 variant choice (now `setting` items); `offer_groups` and `mandatory_to_offer` in the catalog file (now `layer_group_rules`).
 
 ## 11. Gaps, risks and testing
 
@@ -458,7 +458,7 @@ All files stay `draft` until reviewed (D-113, D-447). The migration converts dat
 |---|---|
 | Name clash: the staff role "Koordinator Wilayah" vs the government's kecamatan korwil | UI says "Koordinator Wilayah SIGRAK" in staff screens; schools never see the role name |
 | Silent changes to schools when an area package changes | Stamps in documents, impact report, notices; closed years frozen |
-| Auto-applied calendar changes moving RPM meetings without the operator's say (D-256 vs D-456) | Q1; impact notice and D-274 Batalkan for teachers |
+| Auto-applied calendar changes moving RPM meetings without the operator's say (D-256 vs D-456, settled by D-466) | Q1; impact notice and D-274 Batalkan for teachers |
 | Resolution cost on hot paths (effective days, readiness) | Stamp-keyed cache and shared regional part (§5.4) |
 | Wrong region from directory data | Region changes queue for staff; never automatic |
 | Too many small packages to maintain | One official package per (domain, area, line, school year); agreements only on request |
@@ -489,19 +489,33 @@ All files stay `draft` until reviewed (D-113, D-447). The migration converts dat
 
 **RLS and tenancy:** `layer_hides`, `school_package_choices` and school-layer `layer_proposals` and packages are school-owned with RLS; tests assert school A cannot read or write school B's rows through the resolver (IDOR test per resource). National and area packages are readable by all schools in scope but writable only by the console role. The resolver runs inside the request transaction after `SET LOCAL` of the tenant (D-429); cached values carry `school_id` in the key.
 
-## 12. Open questions for the owner
+## 12. Owner answers (2026-11-28, D-466)
 
-1. **Calendar copy model.** D-456 says lower layers store only differences, D-256 says schools copy the region calendar and choose to apply changes. Does D-456 replace the copy model? *Default: yes; official area changes apply automatically, the operator gets a notice with the impact, and teachers get the D-274 shift preview.*
-2. **Hiding official regional items.** May a school hide an item of an official provincial or kabupaten package (for example a Dinas event)? *Default: only items the package marks as not mandatory; kaldik dates are mandatory for the region's schools.*
-3. **Region codes.** Key regions by Kemendagri codes and keep the Kemendikdasmen/Dapodik codes alongside? *Default: yes; Tim SIGRAK adds the official list as data, starting with Jawa Tengah.*
-4. **Jawa Tengah calendar for MI.** The Dinas guide covers SD and MI. Apply it to MI too until a Kanwil Kemenag calendar is added? *Default: yes, line `all`; a later Kemenag package wins for MI.*
-5. **Strength of regional calendar dates.** Are official regional calendar dates mandatory for the region's schools (except their own STS/SAS, D-379)? *Default: yes.*
-6. **Official rules at kecamatan.** Can a kecamatan have official rules (for example from a UPTD or korwil decree), or only local agreements? *Default: only local agreements.*
-7. **Evidence for local agreements.** Must a local agreement have a document (minutes or signed agreement)? *Default: yes, a photo or PDF of the agreement, checked by the approver.*
-8. **Label for SIGRAK defaults.** Show SIGRAK's own national defaults as "Bawaan SIGRAK" rather than "Nasional"? *Default: yes, so "Nasional" means a government rule.*
-9. **Bahasa Jawa.** Is Bahasa Jawa a Jawa Tengah province rule (needs the provincial regulation) or a default per kabupaten? *Default: per kabupaten (Kudus, Jepara, Pati) until the provincial rule is registered.*
-10. **Kudus formats.** Are the Kudus supervision instruments and Format Kudus Berkas an official Dinas format (automatic for Kudus schools) or a local agreement (opt-in)? *Default: local agreement, opt-in, until a Dinas document is supplied.*
-11. **Other regions using Kudus formats.** D-327 lets other regions choose the Kudus variant. Keep that across areas? *Default: no cross-area opt-in; the team proposes the same package for another area with its own evidence.*
-12. **Who chooses local agreements for a school.** *Default: the operator; the principal is notified.*
-13. **School users proposing for an area.** May a school user propose a kecamatan or kabupaten item? *Default: no; they send it through "Kirim Masukan" and the team proposes it.*
-14. **Region changes from the directory.** When a re-import shows a new kecamatan or kabupaten, when does it take effect? *Default: after staff accept it, from the next day; staff may choose the next school year.*
+The owner accepted all 14 defaults. Recorded in D-466.
+
+| # | Question | Answer |
+|---|---|---|
+| 1 | Calendar copy model | Yes. D-456 replaces the D-256 copy model; official area changes apply automatically, the operator gets an impact notice, teachers get the D-274 shift preview. |
+| 2 | Hiding official regional items | Only items the package marks as not mandatory; kaldik dates are mandatory for the region's schools. |
+| 3 | Region codes | Yes. Kemendagri codes as keys, Kemendikdasmen/Dapodik codes alongside; Tim SIGRAK adds the list as data, starting with Jawa Tengah. |
+| 4 | Jawa Tengah calendar for MI | Yes, line `all`, until a Kanwil Kemenag calendar exists; a Kemenag package then wins for MI. |
+| 5 | Strength of regional calendar dates | Mandatory for the region's schools, except their own STS/SAS (D-379). |
+| 6 | Official rules at kecamatan | No; only local agreements. |
+| 7 | Evidence for local agreements | Yes; a photo or PDF of the agreement, checked by the approver. |
+| 8 | Label for SIGRAK defaults | "Bawaan SIGRAK", so "Nasional" means a government rule. |
+| 9 | Bahasa Jawa | Default per kabupaten (Kudus, Jepara, Pati) until a provincial rule is registered. |
+| 10 | Kudus formats | Local agreement, opt-in, until a Dinas document is supplied. |
+| 11 | Other regions using Kudus formats | No cross-area opt-in (supersedes that part of D-327); the team proposes the package for another area with its own evidence. |
+| 12 | Who chooses local agreements | The operator; the principal is notified. |
+| 13 | School users proposing for an area | No; they use "Kirim Masukan" and the team proposes. |
+| 14 | Region changes from the directory | Apply after staff accept, from the next day; staff may choose the next school year. |
+
+## 13. Follow-ups for final docs
+
+Not changed here; to update when this draft is promoted. These still state D-256 (copy model) or D-327 (cross-region choice) as current:
+
+- `docs/final/data-model.md` line 134 (`calendars`: `source_calendar_id`, `source_version`, `version`, "copied", "Terapkan perubahan wilayah") and line 135 (`calendar_events.source_event_uid`, D-256).
+- `docs/final/developer-handbook.md` line 373 (operator copies with "Salin dari kalender wilayah", D-256) and line 641 (status row citing D-256).
+- `docs/data/calendar/README.md` line 13 ("schools copy it", D-256).
+- `docs/final/product-concept.md` lines 175 and 291 cite D-327 for Supervisi; check that no cross-region variant choice is implied.
+- `docs/final/research-digest.md` line 316 cites D-256 as a source for region calendars (still valid as a source; no change needed unless reworded).
