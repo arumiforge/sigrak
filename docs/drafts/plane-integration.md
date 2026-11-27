@@ -358,15 +358,17 @@ Permissions (permission-based checks, F-013): `problems.view` (all Tim SIGRAK ro
 | K. Export                               | Indonesian headings and values (D-150); no reporter identities                                                                                                                                                                                                                                                                                                   |
 | L. Contract (manual and nightly CI job) | Against the pinned Plane CE image: auth header, work item create/update/get paths, `external_id` filter and 409, states and labels endpoints, rate-limit headers, webhook headers, signature and payload shape, private-URL acceptance (§6.1)                                                                                                                    |
 
-## 14. Open questions for the owner
+## 14. Owner answers (2026-11-28, D-453)
 
-| #   | Question                                                                                                                   | Proposal                                                                               |
-| --- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Q1  | D-440 says "district". Send kabupaten/kota only, or also kecamatan?                                                        | Kabupaten/kota; kecamatan only where at least 5 active schools use SIGRAK              |
-| Q2  | Add a tenth column "Tidak dilanjutkan" (cancelled) to the nine of D-440, and tell reporters when a problem is not pursued? | Yes to both, with a reason chosen from a short list                                    |
-| Q3  | Does a triaged problem go to the board automatically, or does someone press "Kirim ke papan"?                              | Triage staff press it after the masked preview                                         |
-| Q4  | Keep only Minta Bantuan as the entry, or add a separate "Kirim Masukan" for ideas?                                         | Minta Bantuan only for the pilot; add later if ideas get lost among help requests      |
-| Q5  | Which stages notify the reporter?                                                                                          | Dicatat, Dipelajari, Direncanakan, Sudah tersedia, Tidak dilanjutkan; not every column |
-| Q6  | If Plane CE refuses webhook URLs on the internal network, accept polling every 2 minutes with no inbound endpoint at all?  | Yes; it is simpler and has no inbound surface                                          |
-| Q7  | Staging: its own Plane project, or the integration off on staging?                                                         | Off by default; a separate project only when the integration itself is being changed   |
-| Q8  | Should anything from Plane comments ever come back into SIGRAK (for example the release note)?                             | No; the release note is written in the console, Plane comments stay in Plane           |
+The owner answered the eight open questions. Where an answer differs from the proposal, the sections above still describe the proposal and must be read with this table until the draft is revised.
+
+| #   | Answer |
+| --- | --- |
+| Q1  | Send kabupaten/kota and kecamatan, always (not limited to kecamatan with at least 5 schools). |
+| Q2  | Yes: add the tenth column "Tidak dilanjutkan", and tell the reporter, with a reason. |
+| Q3  | Triage staff press "Kirim ke papan" after the masked preview. |
+| Q4  | Add "Kirim Masukan" for ideas next to Minta Bantuan, from the pilot on. |
+| Q5  | Not limited to five key stages: the reporter is told at each stage change they can see. |
+| Q6  | Yes: if Plane CE refuses internal webhook URLs, poll every 2 minutes with no inbound endpoint. |
+| Q7  | Integration off on staging by default. |
+| Q8  | No: nothing from Plane comments comes back; the release note is written in the console. |

@@ -2207,3 +2207,15 @@ Accepted · 2026-11-28 · RS-15 · owner's choice (interview 2026-11-28) · supe
 - **Content outside the decrees** (PAI tajwid items, Bahasa Inggris topics for grades 1–2, older PJOK element names, content in a later phase): left in the data unchanged but marked "di luar CP" with the reason, for later review.
 - Smaller corrections listed in the reports (quote wording, article references, stale notes, fokus→TP links, unannotated harakat changes) are fixed; every set stays `draft` until the owner signs it off (D-447).
 Reason: align the data with the 2025–2026 rules where the pre-check found SIGRAK deviating, while keeping teacher-friendly summaries.
+
+### D-453 — Plane integration choices
+Accepted · 2026-11-28 · RS-07 · owner's choice (interview 2026-11-28) · refines D-439, D-440; design in `docs/drafts/plane-integration.md`
+- Problems sent to Plane carry kabupaten/kota and kecamatan, always, besides the masked text, role and admin link (D-393 masking still applies to the text).
+- The board gets a tenth column "Tidak dilanjutkan"; the reporter is told when a problem is not pursued, with a reason.
+- Triage staff send a problem to the board with "Kirim ke papan" after seeing the masked preview; nothing goes automatically.
+- Users have two entries: Minta Bantuan and a separate "Kirim Masukan" for ideas.
+- The reporter is told at each stage change they can see, not only at a few key stages.
+- If Plane CE refuses webhook URLs on the internal network, SIGRAK polls Plane every 2 minutes and has no inbound endpoint.
+- The integration is off on staging by default.
+- Nothing from Plane comments comes back into SIGRAK; release notes are written in the SIGRAK console.
+Reason: the owner wants fuller regional detail for the teams, an explicit send step, a separate channel for ideas, and steady updates for reporters.
