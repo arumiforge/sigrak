@@ -2230,3 +2230,21 @@ Reason: the teams work better with the school named, and the agreement covering 
 Accepted · 2026-11-28 · RS-07 · owner's choice ("yang tidak dikirim NIK, nomor telepon; NISN dan nama lengkap bisa") · settles the default left open in D-454
 Before a problem is sent to Plane, NIK and phone numbers are removed. Pupils' full names and NISN may be sent, as may the school name (D-454). The agreement covering this is held outside the repository (D-444, D-446). Other channels keep the D-393 masking.
 Reason: the teams need to identify the pupil and school to follow up; NIK and phone numbers are not needed for that.
+
+### D-456 — One layer model for national, regional and school rules
+Accepted · 2026-11-28 · owner's choice (discussion 2026-11-28) · extends D-354, D-378, D-380
+- **One model for every kind of data** that varies in the field: calendars, extracurricular and kokurikuler catalogs, muatan lokal, supervision instruments, document formats, and later domains the same way.
+- **Layers:** national → province → kabupaten/kota → kecamatan → school. Kecamatan is the only layer between kabupaten/kota and the school (no separate gugus/KKG layer). Every item records its line (Kemendikdasmen or Kemenag) next to its layer.
+- **National stays:** what is set nationally is never changed or removed by a lower layer, and nobody proposes removing it. A lower layer may add its own items and may choose not to use a national item that is not mandatory (hide it for its region or school). Mandatory national items (for example the official CP text, national holidays, TKA and AN dates, at least one kepanduan) always apply.
+- **Lower layers store only their differences** (additions and items not used), so changes in a higher layer flow down.
+- **Official regional rules** (a province or kabupaten calendar, a regional decree) apply automatically to the schools in that region. **Local agreements** (for example a kecamatan agreement) are opt-in per school.
+- **Proposals:** school users propose for their school (the operator approves, D-380). The team proposes additions or changes for kecamatan, kabupaten/kota and province; the regional lead (Koordinator Wilayah) or a validator approves, with evidence attached for official rules.
+- A school's region comes from its NPSN/Dapodik data; users do not pick a region freely, they pick the optional local packages they follow.
+- Every value shown names its source and layer.
+Reason: rules in the field differ by province, kabupaten/kota, kecamatan and school; national rules must stay intact while regions and schools add what they need.
+
+### D-457 — Plane masking also removes KK and NUPTK; UU PDP handling stays offline
+Accepted · 2026-11-28 · RS-07 · owner's choice · refines D-455, extends D-444
+- KK and NUPTK numbers are removed before sending to Plane, like NIK; NIP is enough to identify staff. This matches the 16-digit rule in the draft.
+- UU PDP handling for the Plane board and its data (retention limits, backups, exports, notices) is set by the developer outside the repository under the existing agreement and rules; the repository does not track it.
+Reason: the teams do not need KK or NUPTK; data-protection terms are already agreed offline.
