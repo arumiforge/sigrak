@@ -2315,3 +2315,11 @@ Accepted · 2026-11-28 · RS-18 · owner's choice (interview 2026-11-28) · acce
 - **Muatan lokal and Kudus material:** Bahasa Jawa is a default per kabupaten (Kudus, Jepara, Pati) until a provincial rule is registered. The Kudus supervision instruments and the Format Kudus Berkas are local agreements (opt-in) until a Dinas document is supplied. No cross-region opt-in: the team proposes a variant per region with evidence.
 - **Who chooses:** the operator chooses the school's local agreements and the principal is notified. School users do not propose kecamatan or kabupaten items; they use Kirim Masukan and the team proposes.
 Reason: the owner accepted the draft's defaults.
+
+### D-467 — R0-08 load results: AI concurrency, starting sizes, measuring again
+Accepted · 2026-11-28 · R0-08 · owner's choice (interview 2026-11-28) · results in `docs/drafts/r0-gate.md`; refines D-415, D-451, D-463
+- `worker-ai` concurrency is a per-environment setting, starting at 50 jobs per process with two processes (restarts never stop all AI work), plus an alert when jobs wait too long in the queue. Replaces the "about 20" of D-415.
+- The sizing proposals in `docs/drafts/r0-gate.md` §6 (`UV_THREADPOOL_SIZE` 4 for web, heap limits, replicas per role) are the starting values for R3.
+- Load is measured again twice: with the first real R1 content page and row-level security, and on the VPS behind nginx and the tunnel in R3.
+- The R1 gate waits for the owner's review of R0-06; the gate report is ready.
+Reason: the spike met every target except AI queue wait, which is a setting.

@@ -161,6 +161,8 @@ One web process handled about 350 req/s at one full core, which is about 175 pag
 
 ## Owner decisions needed for the gate
 
+Answered 2026-11-28 (D-463, D-467): items 3, 4 and 5 accepted as written; RS-19 runs CPU-heavy work in a `worker_threads` pool (D-463). Still open: 1 (R0-06 review) and then 2 (R1 go), which waits for it.
+
 1. **R0-06:** review the AI job spike (`docs/agent/tasks/R0-06-spike-ai-job-sse.md`, `/coba-ai`) and accept it or ask for changes; D-451 records the runtime as a team decision until then.
 2. **R1 go:** approve starting R1 on this stack with the caveats in §4 (record as a decision).
 3. **`worker-ai` concurrency:** approve making it a per-environment setting in R1, starting at 50 slots in one process (two processes for restarts), with a queue-wait metric and alert, instead of the fixed 4. This also settles the "concurrency about 20" of D-415.
