@@ -2248,3 +2248,11 @@ Accepted · 2026-11-28 · RS-07 · owner's choice · refines D-455, extends D-44
 - KK and NUPTK numbers are removed before sending to Plane, like NIK; NIP is enough to identify staff. This matches the 16-digit rule in the draft.
 - UU PDP handling for the Plane board and its data (retention limits, backups, exports, notices) is set by the developer outside the repository under the existing agreement and rules; the repository does not track it.
 Reason: the teams do not need KK or NUPTK; data-protection terms are already agreed offline.
+
+### D-458 — Curriculum data choices: Tata Boga, Seni dan Budaya, MTK Fase C, CP start year
+Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · RS-15 flags 16 and 17, open curriculum points of the 2026-11-28 handoff; refines D-234, D-452
+- **Keterampilan Tata Boga (muatan lokal):** SIGRAK sets no JP target. The school sets the JP for this muatan lokal; the data keeps the topic order and TP/ATP, and the existing JP numbers stay only as a marked SIGRAK suggestion ("perkiraan SIGRAK"), never as a target.
+- **Seni dan Budaya:** one art branch per pupil, as in Permendikdasmen 13/2025: each branch (Seni Musik, Seni Rupa, Seni Tari, Seni Teater) gets its own full allocation track (108 JP a year, 96 in grade 6); the school picks the branch per class. Tari and Teater have no topics yet and are recorded as a data gap.
+- **Matematika Fase C:** the "Rasio" topic moves to the Aljabar element, following CP 046/2025; the team checks whether Aljabar needs more topics (patterns, unknown values) during curation (P4-29).
+- **CP umum start year:** the CP of Kepka BSKAP 046/H/KR/2025 applies from school year 2025/2026 (`applies_from_school_year`).
+Reason: follow 13/2025 and the official CP where SIGRAK's data deviated; muatan lokal JP is a school matter.
