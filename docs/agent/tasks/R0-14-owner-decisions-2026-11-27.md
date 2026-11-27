@@ -1,7 +1,7 @@
 # R0-14 — Record the 2026-11-27 owner interview
 
 - **Phase:** R0
-- **Status:** review (PR #2, stacked on PR #1)
+- **Status:** done (PR #2, merged 2026-11-27)
 - **Owner:** r0/r0-14-owner-decisions
 - **Depends on:** R0-13
 

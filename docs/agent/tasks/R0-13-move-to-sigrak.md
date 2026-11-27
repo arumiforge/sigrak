@@ -1,7 +1,7 @@
 # R0-13 — Move to `arumiforge/sigrak` with a clean history
 
 - **Phase:** R0
-- **Status:** review (PR #1)
+- **Status:** done (PR #1, merged 2026-11-27)
 - **Owner:** r0/r0-13-rename-sigrak
 - **Depends on:** —
 
