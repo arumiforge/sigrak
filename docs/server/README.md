@@ -16,6 +16,9 @@ Bahasa: panduan di folder ini memakai bahasa Indonesia (permintaan pemilik). Per
 | [terminal-safety.md](terminal-safety.md) | Bekerja di terminal server: tmux, riwayat perintah, logout otomatis |
 | [terminal-zsh-neovim.md](terminal-zsh-neovim.md) | Terminal nyaman untuk kerja harian: zsh dan Neovim di akun admin, root tetap bash |
 | [rekomendasi-tambahan.md](rekomendasi-tambahan.md) | Usulan peningkatan dan alat tambahan untuk diputuskan pemilik (keamanan, database, pemantauan, backup, email, alat terminal) |
+| [runbook-insiden.md](runbook-insiden.md) | Ada gangguan: situs mati, disk penuh, database lambat, kunci atau rahasia bocor, backup atau WAL terlambat |
+| [jadwal-perawatan.md](jadwal-perawatan.md) | Perawatan rutin harian, mingguan, bulanan, tiga bulanan, dan tahunan: update, backup dan latihan pemulihan, sertifikat, disk, log, pemantauan, tinjauan akses |
+| [halaman-status.md](halaman-status.md) | Memberi tahu sekolah lewat halaman status `status.sigrak.com`: kapan menulis laporan, caranya, dan contoh teks |
 
 Urutan untuk server baru: ssh-key → first-ssh-access → (bitvise) → server-setup-flow (dengan `ADMIN_USER`, lihat akun-admin), yang mengarahkan ke cloudflare-access di langkah tunnel → terminal-zsh-neovim.
 
