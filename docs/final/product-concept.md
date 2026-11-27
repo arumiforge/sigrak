@@ -355,11 +355,11 @@ Before slice 2 (P5-04), the minimal rule versioning and the Profil Jenjang exist
 ## Open questions
 
 - [x] Prices: 1-week trial (D-160), Sigrak Guru Rp60.000, Sigrak Sekolah Rp100.000, add-ons Rp50.000 each (D-157, D-158).
-- [ ] Final name: check "Sigrak" (and backup "Kapur") in [PDKI](https://pdki-indonesia.dgip.go.id) classes 9, 41, 42, then register the .id and .com domains together. The name risk is higher now that the market is nationwide.
-- [ ] Logo: brief a designer (colour, single-colour, negative, minimum 16 px).
+- [x] Final name: handled offline by the developer (D-446); was: check "Sigrak" (and backup "Kapur") in [PDKI](https://pdki-indonesia.dgip.go.id) classes 9, 41, 42, then register the .id and .com domains together. The name risk is higher now that the market is nationwide.
+- [x] Logo: made by Codex from a brief in `ai/` (colour, single-colour, negative, minimum 16 px) (D-448).
 - [x] The kokurikuler module ships in v1 as an RPM template variant (D-014).
-- [ ] Test the five-tab menu with 5 class teachers and 2 subject teachers on a click prototype (no real data).
-- [ ] Present the short version to principals and supervisors, and record their objections.
+- [x] Test the five-tab menu with teachers on a click prototype: dropped; feedback comes from the pilot (D-449).
+- [x] Present the short version to principals and supervisors: dropped; feedback comes from the pilot (D-449).
 - [x] Gemini's under-18 clause: students only receive finished, teacher-checked AI content and never trigger the AI (D-124).
 - [ ] TKA 2028 schedule for SD/MI, once published, to time the TKA release (D-162).
 - [ ] Console plan mapping (D-211): whether the leger lock and weights sit in core Asesmen or the Rapor add-on, and whether sumbangan and savings sit in the Keuangan add-on.

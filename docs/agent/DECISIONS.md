@@ -2151,3 +2151,28 @@ Reason: parents need directions, not generated answers; no AI cost and no data s
 Accepted · 2026-11-27 · R0 · owner's choice ("urusan legal ditangani pengembang dengan pihak terkait secara offline")
 Legal checks (for example encrypted backups stored abroad, the legal pages and data-processing agreement before launch, HaKI filing) are handled by the developer with the relevant parties outside the repository. Agents do not list them as open decisions or wait on them; they keep drafts ready and record an outcome only when the owner reports one.
 Reason: these talks happen offline; tracking them in the repository only repeats an open item that agents cannot move.
+
+### D-445 — Later decisions win; design-system defaults confirmed
+Accepted · 2026-11-27 · R0 · owner's choice (interview 2026-11-27) · closes two P4-24 questions
+The docs' reading stands: D-339 wins over D-314 (eleven staff roles, not three) and over D-315 (the owner, not an admin, sets AI models); D-216 wins over D-161 (ekstrakurikuler in v1). The design-system values are confirmed as written: Pengingat Terkirim (grey), Dibaca (info), Ditindaklanjuti (ok); help requests Baru (grey), Diproses (info), Selesai (ok); "Disahkan" (ok) and "Berubah setelah disahkan" (warn); margin profiles of D-283 by template: Buku administrasi for book-type documents and Berkas, Dokumen ajar for RPM, LKPD and question sets, Lembar tunggal for letters and single sheets.
+Reason: the owner accepted the defaults the final docs already use.
+
+### D-446 — AI providers, data agreements and brand checks come from the developer
+Accepted · 2026-11-27 · R0 · owner's choice ("MoU data dan model sudah ditangani pengembang di luar repo") · extends D-444, closes the "school chatbot data processors" point of `docs/drafts/fondasi-uptake.md`
+Which AI providers and models may receive school data for the school chatbot (D-394), and under which data-processing agreements, is settled by the developer outside the repository. The system uses the providers and models the developer configures; masking personal data before sending stays (D-393). The trademark check of "Sigrak" in PDKI and any backup name are handled offline the same way and are no longer tracked here.
+Reason: agreements with providers and the trademark office are offline work; the code only needs the configured providers.
+
+### D-447 — Agents pre-check draft data before human validation
+Accepted · 2026-11-27 · R0 · owner's choice · refines D-113
+Draft data sets (CP, taxonomy and regulation registry, regulation extracts, calendars) are first checked by agents against their official sources: every item is compared, and doubtful items are flagged with the reason and the source location. People (the owner, later a validation team) review only the flagged items, then the set moves from `draft` to `active`. Calendar defaults listed in `docs/drafts/open-questions.md` stay in use until that review.
+Reason: shortens human review to the items that need judgement.
+
+### D-448 — Logo made by Codex from a brief
+Accepted · 2026-11-27 · R0 · owner's choice · follows D-390 and Fondasi `visual-assets.md`
+The SIGRAK logo (full colour, single colour, negative, readable at 16 px) is made by Codex from a brief in `ai/`; the owner picks from the results.
+Reason: the same visual-asset path as the rest of the app.
+
+### D-449 — No separate teacher click test or principal presentation
+Accepted · 2026-11-27 · R0 · owner's choice · closes two product-concept questions
+The five-tab click-prototype test with teachers and the short presentation to principals and supervisors are dropped. Teacher and school feedback is gathered during the pilot through the feedback channels (D-439).
+Reason: the owner prefers feedback from real use.

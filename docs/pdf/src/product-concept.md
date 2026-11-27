@@ -359,11 +359,11 @@ Sebelum irisan 2 (P5-04), pemversian aturan minimum dan Profil Jenjang sudah ada
 ## Pertanyaan terbuka
 
 - [x] Harga: uji coba 1 minggu (D-160), Sigrak Guru Rp60.000, Sigrak Sekolah Rp100.000, fitur tambahan Rp50.000 per fitur (D-157, D-158).
-- [ ] Nama akhir: periksa "Sigrak" (dan cadangan "Kapur") di [PDKI](https://pdki-indonesia.dgip.go.id) kelas 9, 41, 42, lalu daftarkan domain .id dan .com bersamaan. Risiko nama lebih tinggi sekarang karena pasarnya nasional.
-- [ ] Logo: brief untuk desainer (berwarna, satu warna, negatif, minimal 16 px).
+- [x] Nama akhir: ditangani pengembang di luar repositori (D-446); semula: periksa "Sigrak" (dan cadangan "Kapur") di [PDKI](https://pdki-indonesia.dgip.go.id) kelas 9, 41, 42, lalu daftarkan domain .id dan .com bersamaan. Risiko nama lebih tinggi sekarang karena pasarnya nasional.
+- [x] Logo: dibuat Codex dari brief di `ai/` (berwarna, satu warna, negatif, minimal 16 px) (D-448).
 - [x] Modul kokurikuler masuk v1 sebagai varian templat RPM (D-014).
-- [ ] Uji menu lima tab dengan 5 guru kelas dan 2 guru mapel memakai prototipe klik (tanpa data sungguhan).
-- [ ] Presentasikan versi singkat ke kepala sekolah dan pengawas, lalu catat keberatan mereka.
+- [x] Uji menu lima tab dengan guru memakai prototipe klik: dibatalkan; masukan datang dari uji coba (D-449).
+- [x] Presentasi versi singkat ke kepala sekolah dan pengawas: dibatalkan; masukan datang dari uji coba (D-449).
 - [x] Klausul batas usia di bawah 18 tahun dari Gemini: siswa hanya menerima konten AI yang sudah jadi dan diperiksa guru, dan tidak pernah memicu AI (D-124).
 - [ ] Jadwal TKA 2028 untuk SD/MI, begitu diumumkan, untuk menentukan waktu rilis fitur TKA (D-162).
 - [ ] Pemetaan paket di konsol (D-211): apakah kunci leger dan bobot nilai masuk Asesmen inti atau fitur tambahan Rapor, dan apakah sumbangan dan tabungan masuk fitur tambahan Keuangan.

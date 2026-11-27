@@ -54,6 +54,6 @@ What SIGRAK takes from `arumiforge/fondasi` and what the owner decides. SIGRAK k
 | Bahasa Inggris SD/MI | F-031 transition (compulsory from 2027/2028) | was D-387 | decided: follow Fondasi, D-410 |
 | Encrypted backups outside Indonesia | F-006 personal data in Indonesia | Encrypted backups on R2 and a second provider (D-404) | handled offline by the developer with the relevant parties (D-444) |
 | Fondasi repository visibility | `CLAUDE.md`: stays private | was public on 2026-11-27 | owner's action (D-409) |
-| School chatbot data processors | F-013 / F-023: nothing sensitive to AI without terms | D-394 sends school data to the owner's OpenAI-compatible providers | open: which providers may receive it, under which data-processing terms, masking of names first |
+| School chatbot data processors | F-013 / F-023: nothing sensitive to AI without terms | D-394 sends school data to the owner's OpenAI-compatible providers | decided: providers and agreements come from the developer, offline; masking stays (D-446) |
 | Ubuntu 26.04 on the servers (D-413) | `server/setup.sh` warns and `check.sh` fails on versions other than 24.04 | Ubuntu 26.04 LTS on production and standby | owner's own Fondasi work (D-421); SIGRAK's server notes cover 26.04 meanwhile |
 | Staff console host and agent file layout | Fondasi templates: `/admin` path, `docs/progress.md`, `docs/decisions.md` | `admin.` hostname (D-010, D-388), `docs/agent/` files | open: record as exceptions (proposed) or move |
