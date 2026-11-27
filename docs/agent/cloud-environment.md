@@ -14,12 +14,13 @@ Settings the owner applies once per Claude account (claude.ai â†’ Claude Code â†
 
 `.claude/cloud/setup.sh` is idempotent and never fails the session start:
 
-- Node.js 26 LTS (D-412) in `/opt/node26`, next to the image's Node 22. If `node -v` still shows 22, run `export PATH=/opt/node26/bin:$PATH` first.
+- Node.js 26 LTS (D-412) in `/opt/node26`, next to the image's Node 22. The image puts `/opt/node22/bin` early on `PATH`, so the script links `node`, `npm`, `npx`, `corepack` and `pnpm` into `~/.local/bin` (which comes before it) and `/usr/local/bin`, and adds `/etc/profile.d/zz-node26.sh` for login shells. `node -v` shows 26 in the session; Node is downloaded only when `/opt/node26/bin/node` is missing.
 - PostgreSQL 19 with pgvector (D-398, D-412), started on port 5432; other clusters in the image (such as 16) are stopped and set to manual start. Local role `sigrak` (password `sigrak`, local only), databases `sigrak` and `sigrak_test`.
 - Redis, started.
 - Typst CLI (D-399 spike) and k6 (R0-08).
 - pandoc, Liberation and Noto fonts, for the docs PDF build.
-- Git identity `Arumi Studios <arumiforge@gmail.com>`, `core.hooksPath .githooks`, and, when `pnpm-lock.yaml` exists, pnpm at the version pinned in `package.json` plus `pnpm install --frozen-lockfile` (D-422).
+- Git identity `Arumi Studios <arumiforge@gmail.com>`, `core.hooksPath .githooks`, and, when `pnpm-lock.yaml` exists, pnpm at the version pinned in `package.json` (installed under Node 26) plus `pnpm install --frozen-lockfile` (D-422).
+- A local `.env` when none exists, the same step CI runs: `cp .env.example .env && node ace generate:key`. An existing `.env` is never touched. `pnpm test` works right after setup.
 
 The script finds the repository root from its own path, so it works whatever the checkout folder is called; set `SIGRAK_DIR` to override. Only the new stack is installed; nothing from the old stack is needed (D-407, D-411).
 
@@ -100,4 +101,4 @@ if [ -f sigrak/.claude/cloud/setup.sh ]; then
 fi
 ```
 
-After saving, start a **new** session in this environment; existing sessions keep the old settings. Check the first lines of the session log for `setup:` messages (Node 26, PostgreSQL 19, pnpm). If one says "could not install", the session still starts; tell the agent which line failed.
+After saving, start a **new** session in this environment; existing sessions keep the old settings. Check the first lines of the session log for `setup:` messages (Node 26, PostgreSQL 19, pnpm, `.env`); the log may not keep them, and running `bash .claude/cloud/setup.sh` again is safe and prints them. If one says "could not install", the session still starts; tell the agent which line failed.

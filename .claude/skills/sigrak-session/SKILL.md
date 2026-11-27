@@ -12,7 +12,7 @@ Follows Fondasi `docs/agent-workflow.md`, adapted to SIGRAK's own layout in `doc
 2. Git identity and hooks (`.claude/hooks/session-start.sh` does this; check before the first commit):
    `git config --local user.name "Arumi Studios"`, `git config --local user.email "arumiforge@gmail.com"`,
    `git config --local core.hooksPath .githooks`
-3. Environment: Node 24 for the app at the repository root (set up in R0-05; commands in `CLAUDE.md` once they exist);
+3. Environment: Node 26 for the app at the repository root (cloud sessions: `.claude/cloud/setup.sh`, `docs/agent/cloud-environment.md`);
    `scripts/docs-pdf/` only for developer PDFs. Fondasi only when the work needs it (`docs/agent/fondasi-check.md` §1).
 4. Read `CLAUDE.md` → `docs/agent/CONTEXT.md` → `docs/agent/PROGRESS.md` → your task file in `docs/agent/tasks/`.
    Read `docs/agent/DECISIONS.md` only when a choice touches an earlier decision.
