@@ -2264,3 +2264,10 @@ Accepted · 2026-11-28 · RS-06 · owner's choice (interview 2026-11-28) · answ
 - **Public wording:** keep "tanpa menulis prompt" (D-017) on the public site; name Google Gemini so teachers know which key they need; BOS is not mentioned on public pages or in the terms (D-025); the site stays region-neutral (Kudus is not named as the pilot).
 - **Panduan** lives on `sigrak.com/panduan`; the Fondasi §12 visitor counter is on and shown in the footer.
 Reason: owner's choices for the public site.
+
+### D-460 — Marketing site: legal points offline, parent notice template, chatbot log retention
+Accepted · 2026-11-28 · RS-06 · owner's choice (interview 2026-11-28) · answers Q7, Q11–Q16 of `docs/drafts/marketing-site/README.md`; extends D-444, D-443
+- **Handled offline by the developer (D-444):** the operator named before the PT exists (Q7), the controller for teacher-only schools (Q11), mid-year purchases, refunds and tax (Q13), consent for Cerita Sekolah and Praktik Baik (Q15) and the breach-notice hours (Q16). Their placeholders stay in the legal drafts; agents do not track them.
+- **Parent notice template:** SIGRAK gives schools a template notice and agreement for parents for the school chatbot (F-023, D-394).
+- **Public chatbot log:** visitors' typed questions are kept for 30 days to improve answers, then deleted; numbers such as NIK and phone numbers are masked before storage (default until the owner says otherwise).
+Reason: legal and commercial terms are settled offline; the template and a short log serve schools and answer quality.
