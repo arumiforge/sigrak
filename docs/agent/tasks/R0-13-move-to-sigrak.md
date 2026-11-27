@@ -7,7 +7,7 @@
 
 ## Goal
 
-Move SIGRAK into the private repository `arumiforge/sigrak` without the old git history (D-423) and remove every "sinaubareng" reference.
+Move SIGRAK into the private repository `arumiforge/sigrak` without the old git history (D-423) and remove every reference to the old repository name.
 
 ## Output
 
@@ -16,4 +16,4 @@ Move SIGRAK into the private repository `arumiforge/sigrak` without the old git 
 
 ## Result
 
-`grep -rniI sinaubareng` and a byte search of all PDFs find nothing. Owner: change the cloud environment's repository list and setup-script line (`docs/agent/cloud-environment.md`), then archive or make private the previous repository.
+A case-insensitive grep for the old name and a byte search of all PDFs find nothing. Owner: change the cloud environment's repository list and setup-script line (`docs/agent/cloud-environment.md`), then archive or make private the previous repository.
