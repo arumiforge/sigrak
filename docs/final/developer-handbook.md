@@ -1,7 +1,7 @@
 # SIGRAK Developer Handbook
 
 - **Status:** final (owner request 2026-11-09, D-361)
-- **Last updated:** 2026-11-27 (R0-03: old stack removed, new stack D-388…D-409; Bahasa Inggris transition D-410)
+- **Last updated:** 2026-11-27 (shadcn/studio Pro and Hugeicons Pro styles, D-434; R0-03: old stack removed, new stack D-388…D-409; Bahasa Inggris transition D-410)
 - **Audience:** every new developer or agent who joins SIGRAK, before they read any other document. The Indonesian PDF of this handbook, `docs/pdf/developer-handbook.pdf`, is the one complete reading for a new developer (D-361).
 - **Indonesian PDF:** [`docs/pdf/developer-handbook.pdf`](../pdf/developer-handbook.pdf), translated in [`docs/pdf/src/developer-handbook.md`](../pdf/src/developer-handbook.md)
 
@@ -672,7 +672,7 @@ SIGRAK is rebuilt in phase R (D-388…D-421). The product rules in this handbook
 | Queues, realtime | BullMQ on Redis; server-sent events through Transmit for AI progress and chatbot streaming | D-388 |
 | Database | PostgreSQL 19 with pgvector and JSONB; row-level security as a second tenancy wall | D-398, D-412 |
 | Frontend | React 19 + Inertia, React Compiler; no SSR for the app, public pages server-rendered | D-389 |
-| UI | Tailwind 4 + shadcn/ui (Radix), Motion, Sonner, Vaul, cmdk, TanStack Table + Virtual; Hugeicons Pro | D-390, D-402 |
+| UI | Tailwind 4 + shadcn/ui (Radix), Motion, Sonner, Vaul, cmdk, TanStack Table + Virtual; shadcn/studio Pro blocks (`radix` variants, only those the app uses, restyled); Hugeicons Pro (Rounded Stroke and Rounded Solid) | D-390, D-402, D-434 |
 | PDF | Typst after a two-week spike; A4 default and F4 | D-399 |
 | Tests | Japa, run by GitHub Actions on every PR to `main` | D-084, D-388 |
 | Server | nginx, Docker and `cloudflared` on Ubuntu 26.04; staging on the same VPS; cold standby; guides in `docs/server/` | D-391, D-413…D-419 |
@@ -686,7 +686,7 @@ The app serves three front ends on three hostnames, each with its own guard ([se
 - **Exam client:** its own entry on `ujian.`, its own guard, sharing no bundle with the school app; answer autosave and the heartbeat go through one small JSON endpoint (D-094). It is a low-priority add-on (D-392).
 - **Staff console:** on `admin.`, rebuilt in R2 with the eleven roles and scopes (D-338…D-343), in the brand colour (design system).
 - **Game runtime:** vanilla JS and CSS per game template, typed with JSDoc and `// @ts-check`, playable standalone and offline (D-011, D-075).
-- **Libraries:** three.js, KaTeX, ApexCharts, Hugeicons Pro, Plus Jakarta Sans, and an Arabic font, all pinned to exact versions and bundled, never from a CDN; heavy ones are lazy-loaded (D-033, D-083, D-402, SV-11).
+- **Libraries:** three.js, KaTeX, ApexCharts, Hugeicons Pro, Plus Jakarta Sans, and an Arabic font, all pinned to exact versions and bundled, never from a CDN; heavy ones are lazy-loaded (D-033, D-083, D-402, SV-11). shadcn/studio Pro blocks are added through their CLI registry only when the app uses them, with the licence in env or a CI secret, and each is listed in `THIRD_PARTY_NOTICES.md`; icons come only through `inertia/components/icon.tsx` (D-434, [design system](design-system.md#stack-mapping)).
 
 ### 5.3 Module boundaries
 

@@ -3,7 +3,7 @@
 <p class="source-note">Diterjemahkan dari <code>docs/final/developer-handbook.md</code> pada 27 November 2026.</p>
 
 - **Status:** final (permintaan pemilik 2026-11-09, D-361)
-- **Terakhir diperbarui:** 2026-11-27 (R0-03: stack lama dihapus, stack baru D-388…D-409; transisi Bahasa Inggris D-410)
+- **Terakhir diperbarui:** 2026-11-27 (shadcn/studio Pro dan gaya Hugeicons Pro, D-434; R0-03: stack lama dihapus, stack baru D-388…D-409; transisi Bahasa Inggris D-410)
 - **Pembaca:** setiap pengembang atau agen baru yang bergabung dengan SIGRAK, sebelum membaca dokumen lain. PDF berbahasa Indonesia ini, `docs/pdf/developer-handbook.pdf`, adalah satu bacaan lengkap untuk pengembang baru (D-361).
 - **PDF berbahasa Indonesia:** `docs/pdf/developer-handbook.pdf`, diterjemahkan di `docs/pdf/src/developer-handbook.md`
 
@@ -680,7 +680,7 @@ SIGRAK dibangun ulang di fase R (D-388…D-421). Aturan produk di buku panduan i
 | Antrean, realtime | BullMQ di Redis; server-sent events lewat Transmit untuk progres AI dan streaming chatbot | D-388 |
 | Database | PostgreSQL 19 dengan pgvector dan JSONB; row-level security sebagai dinding tenancy kedua | D-398, D-412 |
 | Front end | React 19 + Inertia, React Compiler; tanpa SSR untuk aplikasi, halaman publik dirender di server | D-389 |
-| UI | Tailwind 4 + shadcn/ui (Radix), Motion, Sonner, Vaul, cmdk, TanStack Table + Virtual; Hugeicons Pro | D-390, D-402 |
+| UI | Tailwind 4 + shadcn/ui (Radix), Motion, Sonner, Vaul, cmdk, TanStack Table + Virtual; blok shadcn/studio Pro (varian `radix`, hanya yang dipakai aplikasi, diubah gayanya); Hugeicons Pro (Rounded Stroke dan Rounded Solid) | D-390, D-402, D-434 |
 | PDF | Typst setelah spike dua minggu; A4 bawaan dan F4 | D-399 |
 | Tes | Japa, dijalankan GitHub Actions di setiap PR ke `main` | D-084, D-388 |
 | Server | nginx, Docker dan `cloudflared` di Ubuntu 26.04; staging di VPS yang sama; cadangan dingin; panduan di `docs/server/` | D-391, D-413…D-419 |
@@ -694,7 +694,7 @@ Aplikasi melayani tiga front end di tiga hostname, masing-masing dengan guard se
 - **Klien ujian:** entry sendiri di `ujian.`, guard sendiri, tidak berbagi bundle dengan aplikasi sekolah; penyimpanan otomatis jawaban dan heartbeat lewat satu endpoint JSON kecil (D-094). Ini fitur tambahan berprioritas rendah (D-392).
 - **Konsol staf:** di `admin.`, dibangun ulang di R2 dengan sebelas peran dan cakupannya (D-338…D-343), dengan warna merek (sistem desain).
 - **Runtime game:** JS vanilla dan CSS per templat game, bertipe dengan JSDoc dan `// @ts-check`, bisa dimainkan mandiri dan luring (D-011, D-075).
-- **Pustaka:** three.js, KaTeX, ApexCharts, Hugeicons Pro, Plus Jakarta Sans, dan fon Arab, semuanya disematkan ke versi persis dan dibundel, tidak pernah dari CDN; pustaka berat dimuat saat dibutuhkan (D-033, D-083, D-402, SV-11).
+- **Pustaka:** three.js, KaTeX, ApexCharts, Hugeicons Pro, Plus Jakarta Sans, dan fon Arab, semuanya disematkan ke versi persis dan dibundel, tidak pernah dari CDN; pustaka berat dimuat saat dibutuhkan (D-033, D-083, D-402, SV-11). Blok shadcn/studio Pro ditambahkan lewat registry CLI mereka hanya bila aplikasi memakainya, dengan lisensi di env atau CI secret, dan masing-masing dicatat di `THIRD_PARTY_NOTICES.md`; ikon hanya diambil lewat `inertia/components/icon.tsx` (D-434, lihat dokumen sistem desain).
 
 ### 5.3 Batas modul
 
