@@ -18,13 +18,13 @@ Perawatan yang terlihat oleh pengguna diumumkan dulu di halaman status ([halaman
 
 ## Ringkasan
 
-| Kapan          | Yang dikerjakan                                                                                       | Kira-kira  |
-| -------------- | ----------------------------------------------------------------------------------------------------- | ---------- |
-| Setiap hari    | baca peringatan, heartbeat hijau, error baru di GlitchTip                                             | 5 menit    |
-| Setiap minggu  | `check.sh` dan `check-app`, disk, update sistem, PR Renovate, query lambat, CrowdSec                  | 30 menit   |
-| Setiap bulan   | hasil latihan pemulihan, salinan backup bulanan, tinjau kunci SSH dan grup Access, update terjadwal, sertifikat, uji peringatan | 2 jam      |
-| Tiga bulan     | Lynis, latihan pindah ke VPS cadangan, tinjau aturan WAF, kapasitas, dan akun di GitHub/Cloudflare     | setengah hari |
-| Setiap tahun   | tinjau versi besar, perpanjangan domain, target pemulihan, jadwal ini sendiri                          | 1 hari     |
+| Kapan         | Yang dikerjakan                                                                                                                 | Kira-kira     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Setiap hari   | baca peringatan, heartbeat hijau, error baru di GlitchTip                                                                       | 5 menit       |
+| Setiap minggu | `check.sh` dan `check-app`, disk, update sistem, PR Renovate, query lambat, CrowdSec                                            | 30 menit      |
+| Setiap bulan  | hasil latihan pemulihan, salinan backup bulanan, tinjau kunci SSH dan grup Access, update terjadwal, sertifikat, uji peringatan | 2 jam         |
+| Tiga bulan    | Lynis, latihan pindah ke VPS cadangan, tinjau aturan WAF, kapasitas, dan akun di GitHub/Cloudflare                              | setengah hari |
+| Setiap tahun  | tinjau versi besar, perpanjangan domain, target pemulihan, jadwal ini sendiri                                                   | 1 hari        |
 
 Catat setiap pemeriksaan bulanan, tiga bulanan, dan tahunan di `<tempat log perawatan>`: tanggal, siapa, hasil, tindak lanjut.
 
@@ -84,9 +84,9 @@ sudo pro status
 ### Backup dan latihan pemulihan
 
 1. **Latihan pemulihan otomatis** (D-430) berjalan sekali sebulan: backup terbaru dipulihkan ke kontainer PostgreSQL sementara (atau ke `sigrak-2` setelah VPS cadangan siap), datanya diperiksa, lalu kontainer dihapus. Periksa:
-   - heartbeat latihan pemulihan di Better Stack hijau;
-   - `check-app` menampilkan tanggal latihan terakhir bulan ini;
-   - laporan latihan di `<tempat laporan latihan pemulihan>`: lama pemulihan dan hasil pemeriksaan data.
+    - heartbeat latihan pemulihan di Better Stack hijau;
+    - `check-app` menampilkan tanggal latihan terakhir bulan ini;
+    - laporan latihan di `<tempat laporan latihan pemulihan>`: lama pemulihan dan hasil pemeriksaan data.
 2. **Pulihkan satu file unggahan** dari restic lewat Backrest ke folder sementara, buka file-nya, lalu hapus salinan sementara itu. Ini membuktikan backup file, bukan hanya database.
 3. **Salinan bulanan di luar Cloudflare** (D-404): salinan terenkripsi ke disk milik pemilik dan ke penyedia kedua dengan `<cara membuat salinan bulanan>`. Pastikan keduanya bisa dibaca dan tanggalnya bulan ini.
 4. **Kunci bucket** (D-430): di dasbor R2 dan penyedia kedua, aturan kunci dan masa simpan masih sesuai (7 hari lokal, 30 hari di R2). Prune restic dan expire pgBackRest bulan ini tidak gagal.
@@ -114,12 +114,13 @@ Dikerjakan di jendela perawatan, staging dulu lalu produksi dengan image yang sa
 1. **Patch aplikasi dan image** dari PR Renovate yang terkumpul bulan ini (D-412): gabungkan, deploy ke staging, periksa, lalu produksi.
 2. **Paket dari repositori pihak ketiga** (Docker, cloudflared, PostgreSQL client) tidak selalu ikut update otomatis:
 
-   ```bash
-   sudo apt update
-   apt list --upgradable
-   ```
+    ```bash
+    sudo apt update
+    apt list --upgradable
+    ```
 
-   Upgrade Docker Engine hanya di jendela perawatan. `live-restore` (dari `setup.sh`) menjaga kontainer tetap jalan, tetapi tetap jalankan `check-app` sesudahnya.
+    Upgrade Docker Engine hanya di jendela perawatan. `live-restore` (dari `setup.sh`) menjaga kontainer tetap jalan, tetapi tetap jalankan `check-app` sesudahnya.
+
 3. **Layanan ops** di proyek `sigrak-ops` dan Portainer: pasang versi stabil terbaru lewat PR Renovate bila file compose-nya di repo. Portainer selalu terbaru karena dia memegang Docker socket (D-425).
 4. Ulangi `check.sh` sampai `S9`.
 
@@ -151,18 +152,19 @@ sudo ausearch -k <kunci aturan auditd> --start this-month | tail -50
 
 1. **Lynis** (D-427): jalankan, simpan hasilnya dengan tanggal, bandingkan skor dan peringatan dengan hasil sebelumnya.
 
-   ```bash
-   sudo lynis audit system --quiet
-   sudo grep hardening_index /var/log/lynis-report.dat
-   sudo cp /var/log/lynis-report.dat <folder hasil Lynis>/lynis-$(hostname)-$(date +%F).dat
-   ```
+    ```bash
+    sudo lynis audit system --quiet
+    sudo grep hardening_index /var/log/lynis-report.dat
+    sudo cp /var/log/lynis-report.dat <folder hasil Lynis>/lynis-$(hostname)-$(date +%F).dat
+    ```
 
-   Jalankan di `sigrak-1` dan `sigrak-2`. Peringatan baru dibuatkan tugas.
+    Jalankan di `sigrak-1` dan `sigrak-2`. Peringatan baru dibuatkan tugas.
+
 2. **Latihan pindah ke VPS cadangan** (D-405): pulihkan produksi ke `sigrak-2` mengikuti `<runbook pemulihan darurat>`, ukur waktunya (target di bawah 1 jam), periksa aplikasi lewat hostname staging, lalu kembalikan. Hostname produksi tidak dipindah saat latihan kecuali pemilik memutuskannya dan sekolah diberi tahu.
 3. **Akun dan token di layanan luar**:
-   - GitHub: kolaborator repo, deploy key (`github-sigrak`, `github-fondasi`), Actions secrets, token GHCR dan tanggal kedaluwarsanya;
-   - Cloudflare: anggota akun dan token API (termasuk token situs catatan, D-436);
-   - Better Stack, Slack, Telegram, penyedia AI, penyedia VPS: siapa saja yang punya akses.
+    - GitHub: kolaborator repo, deploy key (`github-sigrak`, `github-fondasi`), Actions secrets, token GHCR dan tanggal kedaluwarsanya;
+    - Cloudflare: anggota akun dan token API (termasuk token situs catatan, D-436);
+    - Better Stack, Slack, Telegram, penyedia AI, penyedia VPS: siapa saja yang punya akses.
 4. **Kapasitas**: bandingkan CPU, RAM, dan disk tiga bulan terakhir di Netdata dengan pembagian di [compose-and-processes.md](compose-and-processes.md). Jumlah salinan atau penyetelan PostgreSQL (pgtune, D-429) diubah lewat PR.
 5. **Aturan WAF dan CrowdSec**: masih sesuai dengan serangan yang terlihat; aturan yang tidak pernah terpakai di paket Free dipertimbangkan untuk diganti.
 6. **Panduan ini**: perintah di runbook dan jadwal ini masih benar. Perbaiki yang sudah berubah.
@@ -177,13 +179,13 @@ sudo ausearch -k <kunci aturan auditd> --start this-month | tail -50
 
 ## Nilai yang belum ditentukan
 
-| Tanda                                      | Diisi oleh                              |
-| ------------------------------------------ | --------------------------------------- |
-| `<jendela perawatan resmi>` (hari dan jam WIB) | pemilik (usulan: Sabtu atau Minggu, 21.00–23.00 WIB) |
-| `<tempat log perawatan>`                   | pemilik                                 |
-| `<tempat laporan latihan pemulihan>`       | pengembang (R3, skrip latihan)          |
-| `<cara membuat salinan bulanan>` ke disk pemilik dan penyedia kedua | pengembang (R3) dan pemilik (memilih penyedia kedua) |
-| `<kunci aturan auditd>`                    | pengembang (R3, aturan auditd)          |
-| `<folder hasil Lynis>`                     | pengembang (R3)                         |
-| `<runbook pemulihan darurat>`              | pengembang (R3)                         |
-| letak CrowdSec (host atau kontainer); bila di kontainer, `cscli` dijalankan lewat `docker exec` | pengembang (R3) |
+| Tanda                                                                                           | Diisi oleh                                           |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `<jendela perawatan resmi>` (hari dan jam WIB)                                                  | pemilik (usulan: Sabtu atau Minggu, 21.00–23.00 WIB) |
+| `<tempat log perawatan>`                                                                        | pemilik                                              |
+| `<tempat laporan latihan pemulihan>`                                                            | pengembang (R3, skrip latihan)                       |
+| `<cara membuat salinan bulanan>` ke disk pemilik dan penyedia kedua                             | pengembang (R3) dan pemilik (memilih penyedia kedua) |
+| `<kunci aturan auditd>`                                                                         | pengembang (R3, aturan auditd)                       |
+| `<folder hasil Lynis>`                                                                          | pengembang (R3)                                      |
+| `<runbook pemulihan darurat>`                                                                   | pengembang (R3)                                      |
+| letak CrowdSec (host atau kontainer); bila di kontainer, `cscli` dijalankan lewat `docker exec` | pengembang (R3)                                      |

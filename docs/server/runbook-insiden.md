@@ -30,22 +30,22 @@ Dalam panduan ini:
 
 ### Tingkat insiden (usulan awal)
 
-| Tingkat | Contoh                                                                                                                          | Mulai ditangani                       |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| Tingkat | Contoh                                                                                                                              | Mulai ditangani                       |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | Berat   | `app.` atau `ujian.` mati untuk semua orang, data terancam, kunci bocor dan sudah dipakai orang lain, ujian terganggu saat berjalan | segera, jam berapa pun                |
-| Sedang  | sebagian fitur mati (AI, ekspor PDF), aplikasi sangat lambat, backup atau WAL terlambat, disk tersisa kurang dari 10%            | dalam 1 jam pada hari dan jam sekolah |
-| Ringan  | staging mati, satu panel ops mati, peringatan disk di bawah 25%                                                                 | hari kerja berikutnya                 |
+| Sedang  | sebagian fitur mati (AI, ekspor PDF), aplikasi sangat lambat, backup atau WAL terlambat, disk tersisa kurang dari 10%               | dalam 1 jam pada hari dan jam sekolah |
+| Ringan  | staging mati, satu panel ops mati, peringatan disk di bawah 25%                                                                     | hari kerja berikutnya                 |
 
 Batas waktu di tabel ini usulan; pemilik menetapkan angka akhirnya.
 
 ### Ke mana peringatan datang
 
-| Sumber                     | Isi                                                                          | Dikirim ke |
-| -------------------------- | ---------------------------------------------------------------------------- | ---------- |
-| Better Stack               | `app.`/`ujian.` tidak menjawab dari luar; heartbeat backup, WAL, latihan pemulihan, `check-app` | Slack      |
-| Uptime Kuma (di VPS)       | pemeriksaan internal: kontainer, port lokal, layanan ops                     | Telegram   |
-| Netdata (di VPS)           | CPU, RAM, disk, kontainer                                                    | Telegram   |
-| GlitchTip (di VPS)         | error aplikasi                                                               | Slack      |
+| Sumber               | Isi                                                                                             | Dikirim ke |
+| -------------------- | ----------------------------------------------------------------------------------------------- | ---------- |
+| Better Stack         | `app.`/`ujian.` tidak menjawab dari luar; heartbeat backup, WAL, latihan pemulihan, `check-app` | Slack      |
+| Uptime Kuma (di VPS) | pemeriksaan internal: kontainer, port lokal, layanan ops                                        | Telegram   |
+| Netdata (di VPS)     | CPU, RAM, disk, kontainer                                                                       | Telegram   |
+| GlitchTip (di VPS)   | error aplikasi                                                                                  | Slack      |
 
 Bila Better Stack berbunyi tetapi Uptime Kuma dan Netdata diam, kemungkinan besar VPS atau tunnelnya sendiri yang mati.
 
@@ -100,8 +100,8 @@ Gejala: Better Stack melaporkan `app.sigrak.com` atau `ujian.sigrak.com` tidak m
 
 | Yang terlihat                                         | Artinya                                                     | Lanjut ke |
 | ----------------------------------------------------- | ----------------------------------------------------------- | --------- |
-| Halaman error Cloudflare **1033** atau "Tunnel error" | `cloudflared` di VPS tidak terhubung, atau VPS mati          | langkah 2 |
-| Halaman error Cloudflare **502** atau **504**          | tunnel hidup, tetapi nginx tidak menjawab atau terlalu lama | langkah 3 |
+| Halaman error Cloudflare **1033** atau "Tunnel error" | `cloudflared` di VPS tidak terhubung, atau VPS mati         | langkah 2 |
+| Halaman error Cloudflare **502** atau **504**         | tunnel hidup, tetapi nginx tidak menjawab atau terlalu lama | langkah 3 |
 | Halaman error milik nginx atau aplikasi (500, 503)    | nginx hidup, aplikasi di belakangnya bermasalah             | langkah 4 |
 | Semua situs lain di Cloudflare juga error             | gangguan di Cloudflare sendiri                              | langkah 6 |
 | Tidak bisa SSH, Cockpit, dan Portainer sama sekali    | VPS mati atau jaringannya putus                             | langkah 5 |
@@ -174,14 +174,14 @@ journalctl --disk-usage
 
 ### 2. Penyebab yang paling sering, dari yang paling aman
 
-| Penyebab                                     | Cara memeriksa                                                     | Cara membereskan                                                                                                                                                         |
-| -------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Image dan build cache lama                   | `docker system df`                                                 | `docker image prune` (hanya image tanpa tag) dan `docker builder prune`. Jangan `docker image prune -a` tanpa memeriksa: image sebelumnya disimpan untuk rollback.        |
-| Backup lokal menumpuk                        | `du -sh /opt/apps/sigrak/*/backups`                                | Backup lokal disimpan 7 hari (D-404). Bila lebih tua dari itu masih ada, pembersihannya gagal: catat untuk perbaikan. Hapus hanya yang lebih tua dari 7 hari, dan hanya setelah memastikan salinan di R2 ada. |
-| WAL menumpuk karena kiriman ke R2 gagal      | lihat [Backup atau WAL terlambat](#backup-atau-wal-terlambat)      | Perbaiki pengirimannya. PostgreSQL menghapus WAL lama sendiri setelah terkirim. **Jangan pernah menghapus file di `pg_wal` dengan tangan.**                           |
-| Log journald                                 | `journalctl --disk-usage`                                          | `sudo journalctl --vacuum-size=500M`                                                                                                                                      |
-| Staging memakan tempat                       | `docker system df -v`                                              | Matikan staging sementara: `docker compose -p sigrak-staging stop`. Datanya tetap ada.                                                                                   |
-| File unggahan atau database memang tumbuh    | `ncdu`, Netdata (tren disk)                                        | Bukan sesuatu untuk dihapus. Rencanakan tambah disk dengan pemilik.                                                                                                       |
+| Penyebab                                  | Cara memeriksa                                                | Cara membereskan                                                                                                                                                                                              |
+| ----------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Image dan build cache lama                | `docker system df`                                            | `docker image prune` (hanya image tanpa tag) dan `docker builder prune`. Jangan `docker image prune -a` tanpa memeriksa: image sebelumnya disimpan untuk rollback.                                            |
+| Backup lokal menumpuk                     | `du -sh /opt/apps/sigrak/*/backups`                           | Backup lokal disimpan 7 hari (D-404). Bila lebih tua dari itu masih ada, pembersihannya gagal: catat untuk perbaikan. Hapus hanya yang lebih tua dari 7 hari, dan hanya setelah memastikan salinan di R2 ada. |
+| WAL menumpuk karena kiriman ke R2 gagal   | lihat [Backup atau WAL terlambat](#backup-atau-wal-terlambat) | Perbaiki pengirimannya. PostgreSQL menghapus WAL lama sendiri setelah terkirim. **Jangan pernah menghapus file di `pg_wal` dengan tangan.**                                                                   |
+| Log journald                              | `journalctl --disk-usage`                                     | `sudo journalctl --vacuum-size=500M`                                                                                                                                                                          |
+| Staging memakan tempat                    | `docker system df -v`                                         | Matikan staging sementara: `docker compose -p sigrak-staging stop`. Datanya tetap ada.                                                                                                                        |
+| File unggahan atau database memang tumbuh | `ncdu`, Netdata (tren disk)                                   | Bukan sesuatu untuk dihapus. Rencanakan tambah disk dengan pemilik.                                                                                                                                           |
 
 Log kontainer sudah dibatasi 10 MB × 5 per layanan, jadi jarang menjadi penyebab.
 
@@ -276,23 +276,23 @@ Kunci, token, password, atau rahasia lain dianggap bocor bila pernah muncul di t
 
 Simpan setiap kunci baru di password manager lebih dulu, baru di server. Setelah `stack.env` diubah, jalankan `dc up -d --wait` supaya kontainer membaca nilai baru.
 
-| Kunci                                              | Tempatnya                         | Cara mengganti                                                                                                                                                                                                                       |
-| -------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Private key SSH seseorang                          | laptop orang itu                  | Hapus public key-nya dari `authorized_keys` root dan akun admin di **setiap** server, cabut sesi Access-nya (Access → Users), lalu orang itu membuat kunci baru ([ssh-key.md](ssh-key.md)). Perbarui daftar kunci di password manager. |
-| Password database                                  | `stack.env`                       | `ALTER ROLE <user aplikasi> PASSWORD '<baru>';` di `psql` (awali baris dengan spasi supaya tidak tersimpan), ubah di `stack.env`, perbarui `<file auth PgBouncer>`, lalu `dc up -d --wait`.                                           |
-| `APP_KEY` aplikasi                                 | `stack.env`                       | **Jangan diganti sendiri.** Nilai di panel admin (SMTP, kunci integrasi) dienkripsi dengan kunci ini (D-431). Hubungi pengembang dan ikuti `<prosedur rotasi APP_KEY>`. Mengganti kunci ini juga mengeluarkan semua pengguna.          |
-| Kunci API R2 (backup atau file)                    | `stack.env`, konfigurasi pgBackRest dan restic | Dasbor Cloudflare → **R2 → Manage API tokens**: buat token baru dengan izin yang sama, pasang di server, jalankan backup uji, lalu hapus token lama. Bucket backup dikunci (D-430), jadi backup lama tidak bisa dihapus dengan kunci bocor. |
-| Kunci enkripsi backup (restic, pgBackRest)         | `stack.env`, password manager     | Kunci saja yang bocor (bucket aman): ganti kata sandi restic dengan `restic key add` lalu `restic key remove <id lama>`. Kunci dan akses bucket sama-sama bocor: buat repositori backup baru dengan kunci baru, jalankan backup penuh, dan biarkan yang lama sampai masa kuncinya habis. Kerjakan bersama pengembang. |
-| Kunci penyedia AI untuk chatbot                    | panel admin atau `stack.env`      | Cabut di dasbor penyedia, buat yang baru, simpan di panel admin (atau `stack.env`). Kunci Gemini milik guru diganti oleh guru itu sendiri; beri tahu dia.                                                                             |
-| App password Gmail (SMTP)                          | panel admin                       | Akun Google → **Keamanan → App passwords**: hapus yang lama, buat yang baru, simpan di panel admin, kirim email uji.                                                                                                                  |
-| Token Cloudflare Tunnel                            | systemd service `cloudflared`     | Dasbor Cloudflare → **Networks → Tunnels** → `sigrak-1`: putar (refresh) token bila tersedia, lalu `sudo cloudflared service uninstall` dan `sudo cloudflared service install <token baru>`. Bila tidak tersedia, buat tunnel baru dan pindahkan hostname. |
-| Service token Access untuk CI                      | GitHub Actions secrets            | Access → **Service auth**: buat token baru, ganti di policy `Server sigrak` dan di GitHub secrets, lalu hapus token lama.                                                                                                              |
-| Token GitHub (GHCR di server, token pribadi)       | `~/.docker/config.json` di server, laptop | Cabut di GitHub → **Settings → Developer settings**, buat token read-only baru, lalu `docker login ghcr.io` lagi di server.                                                                                                          |
-| Deploy key repo (`github-sigrak`, `github-fondasi`) | `/root/.ssh/` di server           | Hapus di GitHub → repo → **Settings → Deploy keys**, buat kunci baru di server, daftarkan sebagai read-only.                                                                                                                         |
-| Token API Cloudflare (situs catatan)               | GitHub Actions secrets            | Cloudflare → **My Profile → API Tokens** → **Roll**, lalu perbarui `CLOUDFLARE_API_TOKEN` di GitHub secrets.                                                                                                                         |
-| Token bot Telegram, webhook Slack                  | Uptime Kuma, Netdata, GlitchTip, Better Stack | Telegram: `/revoke` di BotFather. Slack: buat ulang webhook. Pasang yang baru di setiap alat, kirim notifikasi uji.                                                                                                          |
-| Token Ubuntu Pro                                   | password manager                  | Atur ulang token di dasbor Ubuntu Pro, lalu `sudo pro detach` dan `sudo pro attach` di setiap VPS.                                                                                                                                   |
-| Password akun admin atau staf aplikasi             | aplikasi                          | Paksa ganti password dan keluarkan semua sesinya dari panel admin. Periksa catatan audit akun itu.                                                                                                                                   |
+| Kunci                                               | Tempatnya                                      | Cara mengganti                                                                                                                                                                                                                                                                                                        |
+| --------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Private key SSH seseorang                           | laptop orang itu                               | Hapus public key-nya dari `authorized_keys` root dan akun admin di **setiap** server, cabut sesi Access-nya (Access → Users), lalu orang itu membuat kunci baru ([ssh-key.md](ssh-key.md)). Perbarui daftar kunci di password manager.                                                                                |
+| Password database                                   | `stack.env`                                    | `ALTER ROLE <user aplikasi> PASSWORD '<baru>';` di `psql` (awali baris dengan spasi supaya tidak tersimpan), ubah di `stack.env`, perbarui `<file auth PgBouncer>`, lalu `dc up -d --wait`.                                                                                                                           |
+| `APP_KEY` aplikasi                                  | `stack.env`                                    | **Jangan diganti sendiri.** Nilai di panel admin (SMTP, kunci integrasi) dienkripsi dengan kunci ini (D-431). Hubungi pengembang dan ikuti `<prosedur rotasi APP_KEY>`. Mengganti kunci ini juga mengeluarkan semua pengguna.                                                                                         |
+| Kunci API R2 (backup atau file)                     | `stack.env`, konfigurasi pgBackRest dan restic | Dasbor Cloudflare → **R2 → Manage API tokens**: buat token baru dengan izin yang sama, pasang di server, jalankan backup uji, lalu hapus token lama. Bucket backup dikunci (D-430), jadi backup lama tidak bisa dihapus dengan kunci bocor.                                                                           |
+| Kunci enkripsi backup (restic, pgBackRest)          | `stack.env`, password manager                  | Kunci saja yang bocor (bucket aman): ganti kata sandi restic dengan `restic key add` lalu `restic key remove <id lama>`. Kunci dan akses bucket sama-sama bocor: buat repositori backup baru dengan kunci baru, jalankan backup penuh, dan biarkan yang lama sampai masa kuncinya habis. Kerjakan bersama pengembang. |
+| Kunci penyedia AI untuk chatbot                     | panel admin atau `stack.env`                   | Cabut di dasbor penyedia, buat yang baru, simpan di panel admin (atau `stack.env`). Kunci Gemini milik guru diganti oleh guru itu sendiri; beri tahu dia.                                                                                                                                                             |
+| App password Gmail (SMTP)                           | panel admin                                    | Akun Google → **Keamanan → App passwords**: hapus yang lama, buat yang baru, simpan di panel admin, kirim email uji.                                                                                                                                                                                                  |
+| Token Cloudflare Tunnel                             | systemd service `cloudflared`                  | Dasbor Cloudflare → **Networks → Tunnels** → `sigrak-1`: putar (refresh) token bila tersedia, lalu `sudo cloudflared service uninstall` dan `sudo cloudflared service install <token baru>`. Bila tidak tersedia, buat tunnel baru dan pindahkan hostname.                                                            |
+| Service token Access untuk CI                       | GitHub Actions secrets                         | Access → **Service auth**: buat token baru, ganti di policy `Server sigrak` dan di GitHub secrets, lalu hapus token lama.                                                                                                                                                                                             |
+| Token GitHub (GHCR di server, token pribadi)        | `~/.docker/config.json` di server, laptop      | Cabut di GitHub → **Settings → Developer settings**, buat token read-only baru, lalu `docker login ghcr.io` lagi di server.                                                                                                                                                                                           |
+| Deploy key repo (`github-sigrak`, `github-fondasi`) | `/root/.ssh/` di server                        | Hapus di GitHub → repo → **Settings → Deploy keys**, buat kunci baru di server, daftarkan sebagai read-only.                                                                                                                                                                                                          |
+| Token API Cloudflare (situs catatan)                | GitHub Actions secrets                         | Cloudflare → **My Profile → API Tokens** → **Roll**, lalu perbarui `CLOUDFLARE_API_TOKEN` di GitHub secrets.                                                                                                                                                                                                          |
+| Token bot Telegram, webhook Slack                   | Uptime Kuma, Netdata, GlitchTip, Better Stack  | Telegram: `/revoke` di BotFather. Slack: buat ulang webhook. Pasang yang baru di setiap alat, kirim notifikasi uji.                                                                                                                                                                                                   |
+| Token Ubuntu Pro                                    | password manager                               | Atur ulang token di dasbor Ubuntu Pro, lalu `sudo pro detach` dan `sudo pro attach` di setiap VPS.                                                                                                                                                                                                                    |
+| Password akun admin atau staf aplikasi              | aplikasi                                       | Paksa ganti password dan keluarkan semua sesinya dari panel admin. Periksa catatan audit akun itu.                                                                                                                                                                                                                    |
 
 ### 3. Bila server diduga dibobol
 
@@ -347,17 +347,17 @@ Dalam 2 hari kerja, pemegang insiden dan pemilik membaca catatan ini bersama. Tu
 
 Ditandai `<…>` di atas. Diisi saat R3 membangun skrip dan konfigurasinya.
 
-| Tanda                                    | Diisi oleh                            |
-| ---------------------------------------- | ------------------------------------- |
-| `<domain>`                               | hostname SSH dan Cockpit dari [cloudflare-access.md](cloudflare-access.md) |
-| susunan perintah `dc` (file compose, `--env-file`) | pengembang (R3)               |
-| `<perintah rollback>`                    | pengembang (R3, skrip deploy)         |
-| `<cara menyalakan halaman perbaikan>`    | pengembang (R3, konfigurasi nginx)    |
-| `<layanan pgbouncer>`, `<perintah konsol admin PgBouncer>`, `<file auth PgBouncer>` | pengembang (R3) |
-| `<user aplikasi>` (role database)        | pengembang (R1/R3)                    |
-| `<stanza pgBackRest>`, `<perintah backup manual>` | pengembang (R3)              |
-| `<prosedur rotasi APP_KEY>`              | pengembang                            |
-| `<runbook pemulihan darurat>`            | pengembang (R3)                       |
-| `<batas menit sebelum pindah>` ke VPS cadangan | pemilik (usulan: 15 menit, supaya target 1 jam tercapai) |
-| `<tempat catatan insiden>`               | pemilik                               |
-| batas waktu di tabel tingkat insiden     | pemilik                               |
+| Tanda                                                                               | Diisi oleh                                                                 |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `<domain>`                                                                          | hostname SSH dan Cockpit dari [cloudflare-access.md](cloudflare-access.md) |
+| susunan perintah `dc` (file compose, `--env-file`)                                  | pengembang (R3)                                                            |
+| `<perintah rollback>`                                                               | pengembang (R3, skrip deploy)                                              |
+| `<cara menyalakan halaman perbaikan>`                                               | pengembang (R3, konfigurasi nginx)                                         |
+| `<layanan pgbouncer>`, `<perintah konsol admin PgBouncer>`, `<file auth PgBouncer>` | pengembang (R3)                                                            |
+| `<user aplikasi>` (role database)                                                   | pengembang (R1/R3)                                                         |
+| `<stanza pgBackRest>`, `<perintah backup manual>`                                   | pengembang (R3)                                                            |
+| `<prosedur rotasi APP_KEY>`                                                         | pengembang                                                                 |
+| `<runbook pemulihan darurat>`                                                       | pengembang (R3)                                                            |
+| `<batas menit sebelum pindah>` ke VPS cadangan                                      | pemilik (usulan: 15 menit, supaya target 1 jam tercapai)                   |
+| `<tempat catatan insiden>`                                                          | pemilik                                                                    |
+| batas waktu di tabel tingkat insiden                                                | pemilik                                                                    |

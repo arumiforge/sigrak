@@ -17,12 +17,12 @@ Yang **tidak** tampil di halaman status: staging, `admin.`, panel ops (Portainer
 
 1. Better Stack → **Uptime → Monitors**: buat monitor untuk setiap situs publik di tabel komponen di bawah. Pakai alamat `<alamat cek kesehatan>`, interval 3 menit, peringatan ke Slack.
 2. Better Stack → **Status pages → Create status page**:
-   - nama: `SIGRAK`;
-   - subdomain sendiri: `status.sigrak.com`;
-   - zona waktu: `Asia/Jakarta` (WIB);
-   - bahasa halaman: bahasa Indonesia bila pilihan itu tersedia;
-   - logo SIGRAK, tautan kembali ke `https://sigrak.com`;
-   - riwayat insiden ditampilkan (sekolah bisa melihat gangguan sebelumnya).
+    - nama: `SIGRAK`;
+    - subdomain sendiri: `status.sigrak.com`;
+    - zona waktu: `Asia/Jakarta` (WIB);
+    - bahasa halaman: bahasa Indonesia bila pilihan itu tersedia;
+    - logo SIGRAK, tautan kembali ke `https://sigrak.com`;
+    - riwayat insiden ditampilkan (sekolah bisa melihat gangguan sebelumnya).
 3. Dasbor Cloudflare → **DNS** untuk `sigrak.com`: tambahkan record CNAME `status` dengan nilai yang ditunjukkan Better Stack. Set **DNS only** (awan abu-abu) kecuali Better Stack menyebut lain, supaya Better Stack bisa membuat sertifikatnya.
 4. Tambahkan komponen di bawah, dengan nama bahasa Indonesia, dan hubungkan masing-masing ke monitornya.
 5. Bila paket mengizinkan, nyalakan **langganan email** supaya operator sekolah bisa menerima kabar tanpa membuka halaman.
@@ -30,36 +30,36 @@ Yang **tidak** tampil di halaman status: staging, `admin.`, panel ops (Portainer
 
 ### Komponen
 
-| Komponen di halaman status    | Isinya                                              | Diperiksa otomatis?                         |
-| ----------------------------- | --------------------------------------------------- | ------------------------------------------- |
-| Aplikasi SIGRAK               | `app.sigrak.com`: login, modul ajar, Bank Soal, LKPD, rapor | ya                                          |
-| Ujian                         | `ujian.sigrak.com`                                  | ya                                          |
-| Situs sigrak.com              | `sigrak.com`: halaman informasi                     | ya                                          |
-| Bantuan AI                    | pembuatan konten dengan AI dan chatbot              | tidak, diubah manual saat ada laporan       |
-| Unduhan PDF dan Excel         | ekspor dan cetak dokumen                            | tidak, diubah manual saat ada laporan       |
-| Email dari SIGRAK             | undangan, atur ulang kata sandi                     | tidak, diubah manual saat ada laporan       |
+| Komponen di halaman status | Isinya                                                      | Diperiksa otomatis?                   |
+| -------------------------- | ----------------------------------------------------------- | ------------------------------------- |
+| Aplikasi SIGRAK            | `app.sigrak.com`: login, modul ajar, Bank Soal, LKPD, rapor | ya                                    |
+| Ujian                      | `ujian.sigrak.com`                                          | ya                                    |
+| Situs sigrak.com           | `sigrak.com`: halaman informasi                             | ya                                    |
+| Bantuan AI                 | pembuatan konten dengan AI dan chatbot                      | tidak, diubah manual saat ada laporan |
+| Unduhan PDF dan Excel      | ekspor dan cetak dokumen                                    | tidak, diubah manual saat ada laporan |
+| Email dari SIGRAK          | undangan, atur ulang kata sandi                             | tidak, diubah manual saat ada laporan |
 
 ### Arti status
 
-| Status di halaman               | Kapan dipakai                                                         |
-| ------------------------------- | --------------------------------------------------------------------- |
-| Berjalan normal                 | tidak ada masalah yang dirasakan pengguna                             |
-| Gangguan sebagian (degraded)    | bisa dipakai tetapi lambat, atau satu fitur tidak jalan                |
-| Gangguan besar (downtime)       | tidak bisa dipakai sama sekali oleh sebagian besar sekolah            |
-| Perawatan (maintenance)         | sengaja dimatikan atau dibatasi untuk perawatan yang sudah diumumkan  |
+| Status di halaman            | Kapan dipakai                                                        |
+| ---------------------------- | -------------------------------------------------------------------- |
+| Berjalan normal              | tidak ada masalah yang dirasakan pengguna                            |
+| Gangguan sebagian (degraded) | bisa dipakai tetapi lambat, atau satu fitur tidak jalan              |
+| Gangguan besar (downtime)    | tidak bisa dipakai sama sekali oleh sebagian besar sekolah           |
+| Perawatan (maintenance)      | sengaja dimatikan atau dibatasi untuk perawatan yang sudah diumumkan |
 
 ## Kapan menulis laporan
 
-| Keadaan                                                                     | Yang dilakukan                                                      |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Gangguan terlihat oleh pengguna dan sudah dipastikan nyata                  | laporan pertama paling lambat **15 menit** sejak diketahui           |
-| Monitor merah sebentar lalu hijau lagi dalam satu kali pemeriksaan, tanpa laporan dari sekolah | tidak perlu laporan; catat saja di catatan internal |
-| Satu fitur mati (AI, ekspor, email) dan banyak sekolah memakainya           | laporan dengan status "Gangguan sebagian"                            |
-| Aplikasi jauh lebih lambat dari biasa selama lebih dari 10 menit            | laporan dengan status "Gangguan sebagian"                            |
-| Perawatan yang membuat aplikasi mati atau terbatas                          | umumkan **minimal 3 hari sebelumnya**, ingatkan lagi 1 jam sebelum mulai |
-| Perbaikan darurat kecil yang tidak terasa oleh pengguna                     | tidak perlu laporan                                                 |
-| Masalah satu sekolah atau satu akun saja                                    | tidak di halaman status; dibantu lewat jalur bantuan biasa          |
-| Staging, panel ops, backup atau WAL terlambat                               | tidak di halaman status; tangani lewat [runbook-insiden.md](runbook-insiden.md) |
+| Keadaan                                                                                        | Yang dilakukan                                                                  |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Gangguan terlihat oleh pengguna dan sudah dipastikan nyata                                     | laporan pertama paling lambat **15 menit** sejak diketahui                      |
+| Monitor merah sebentar lalu hijau lagi dalam satu kali pemeriksaan, tanpa laporan dari sekolah | tidak perlu laporan; catat saja di catatan internal                             |
+| Satu fitur mati (AI, ekspor, email) dan banyak sekolah memakainya                              | laporan dengan status "Gangguan sebagian"                                       |
+| Aplikasi jauh lebih lambat dari biasa selama lebih dari 10 menit                               | laporan dengan status "Gangguan sebagian"                                       |
+| Perawatan yang membuat aplikasi mati atau terbatas                                             | umumkan **minimal 3 hari sebelumnya**, ingatkan lagi 1 jam sebelum mulai        |
+| Perbaikan darurat kecil yang tidak terasa oleh pengguna                                        | tidak perlu laporan                                                             |
+| Masalah satu sekolah atau satu akun saja                                                       | tidak di halaman status; dibantu lewat jalur bantuan biasa                      |
+| Staging, panel ops, backup atau WAL terlambat                                                  | tidak di halaman status; tangani lewat [runbook-insiden.md](runbook-insiden.md) |
 
 ### Siapa yang menulis
 
@@ -199,10 +199,10 @@ Dipakai bila pemilik memutuskan mengabari lewat grup WhatsApp atau saluran lain.
 
 ## Nilai yang belum ditentukan
 
-| Tanda                        | Diisi oleh                                                              |
-| ---------------------------- | ----------------------------------------------------------------------- |
+| Tanda                                                                                           | Diisi oleh      |
+| ----------------------------------------------------------------------------------------------- | --------------- |
 | `<alamat cek kesehatan>` untuk monitor Better Stack (misalnya `https://app.sigrak.com/healthz`) | pengembang (R3) |
-| `<daftar akun Better Stack>` yang boleh menulis laporan | pemilik                                      |
-| `[jalur bantuan]` di contoh teks (halaman `/bantuan`, WhatsApp, atau email) | pemilik                  |
-| langganan email di halaman status (tergantung paket Better Stack) | pemilik                            |
-| banner gangguan di dalam aplikasi yang menautkan ke halaman status | pengembang (R3)                   |
+| `<daftar akun Better Stack>` yang boleh menulis laporan                                         | pemilik         |
+| `[jalur bantuan]` di contoh teks (halaman `/bantuan`, WhatsApp, atau email)                     | pemilik         |
+| langganan email di halaman status (tergantung paket Better Stack)                               | pemilik         |
+| banner gangguan di dalam aplikasi yang menautkan ke halaman status                              | pengembang (R3) |
