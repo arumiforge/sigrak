@@ -4,7 +4,7 @@
 
 - **Status:** final (disetujui 2026-10-31, D-123)
 - **Tugas:** P1-06
-- **Terakhir diperbarui:** 2026-11-27 (pemetaan stack dipindah ke stack baru, D-389, D-390, D-402, D-407; sebelumnya: absensi dilarang, guru kelas / wali kelas, D-382, D-383; istilah, label status, dan aturan suara dari D-210, D-263…D-311, D-322, D-353, D-358, D-371)
+- **Terakhir diperbarui:** 2026-11-27 (shadcn/studio Pro dan gaya Hugeicons Pro, D-434; warna status dan profil margin dikukuhkan, D-445; pemetaan stack dipindah ke stack baru, D-389, D-390, D-402, D-407; sebelumnya: absensi dilarang, guru kelas / wali kelas, D-382, D-383; istilah, label status, dan aturan suara dari D-210, D-263…D-311, D-322, D-353, D-358, D-371)
 - **Sumber:** `Rebranding_dan_Perombakan_Fitur_Aplikasi_Lama.md`, `Catatan_Pengembang_Aplikasi_Lama_Design_System_Data_dan_AI.md`, `Parafrase_Teks_UI_Sigrak.xlsx` (semuanya di `docs/sources/`)
 
 ## Tujuan
@@ -29,8 +29,9 @@ Aplikasi harus terlihat seperti buku kerja guru yang rapi: latar polos, satu war
 
 - **Token berupa CSS custom property**, ditetapkan sekali di satu stylesheet token untuk terang dan gelap, lalu dipetakan ke tema Tailwind (`@theme` di Tailwind v4) sehingga kelas seperti `bg-surface`, `text-muted`, dan `border-line` memakainya.
 - **shadcn/ui (Radix) adalah dasar komponen, bukan rujukan tampilan** (D-390). Pola tata letaknya (sidebar, header, tabel, formulir, modal) dipakai sebagai komponen React dengan tema dari token di bawah. Gaya dekoratif (gradien, kartu statistik warna-warni, bayangan tebal) tidak dipakai.
+- **shadcn/studio Pro menggantikan ProUI** sebagai sumber blok dan komponen siap pakai (D-434). Yang dipakai hanya varian `radix`, tidak pernah `base`. Blok atau komponen hanya ditambahkan bila aplikasi memakainya, lewat registry CLI mereka, yang membaca email akun dan kunci lisensi dari env (`.env` di lokal, CI secret di CI), tidak pernah dari git. Setiap blok yang ditambahkan diubah gayanya mengikuti identitas SIGRAK: token dari `inertia/css/tokens.css`, `ui.md` Fondasi, teks dari `lang/id`, ikon lewat `inertia/components/icon.tsx`, sehingga tidak tersisa tampilan templat generik. Setiap blok dicatat di `THIRD_PARTY_NOTICES.md` (komponen, tempat dipakai). Temanya hanya menjadi rujukan. Nama-nama yang tersedia tercantum di `docs/drafts/shadcn-studio-catalog.md`.
 - **Konsol internal (`admin.`)** boleh memakai temanya sendiri dengan warna brand diatur ke `--brand`. Konsol ini khusus staf, jadi tidak harus sama persis dengan aplikasi sekolah.
-- **Ikon:** Hugeicons Pro (D-402), versi dikunci, dibundel dan di-host sendiri, garis 1,5 px, 20 px (24 px di navigasi bawah).
+- **Ikon:** Hugeicons Pro (D-402, D-434) dari file berlisensi milik pemilik, dibundel dan di-host sendiri, garis 1,5 px, 20 px (24 px di navigasi bawah). Hanya dua gaya yang disertakan: Rounded Stroke untuk ikon UI biasa (`inertia/icons/hugeicons/rounded-stroke/`) dan Rounded Solid untuk keadaan aktif dan terpilih (`inertia/icons/hugeicons/rounded-solid/`). Komponen tidak pernah mengimpor file SVG secara langsung; setiap ikon diambil lewat `inertia/components/icon.tsx`.
 - **Font:** Plus Jakarta Sans, di-host sendiri lewat build (tanpa CDN saat berjalan), dengan `font-variant-numeric: tabular-nums` di tabel.
 
 ## Token warna
@@ -77,6 +78,8 @@ Aturan:
 | Cetak | Unggah kop dengan pratinjau A4/F4 dan peringatan resolusi, "Buat kop otomatis" (D-284), formulir pengaturan cetak dengan profil margin (D-283) |
 | Kebijakan (mulai P5-04, D-358) | Panel Dasar Kebijakan (CP, TP, DPL, prinsip, versi rule set); baris Cek Keselarasan: **blokir** (`--danger`, tidak bisa disimpan), **peringatan** (`--warn`), **saran** (`--info`), masing-masing dengan ikon dan label teks, tidak pernah hanya warna; tanda "Contoh" pada nilai bawaan yang berupa contoh (D-353) |
 
+Profil margin menurut templat (D-283, dikukuhkan oleh D-445): **Buku administrasi** untuk dokumen berbentuk buku dan Berkas, **Dokumen ajar** untuk RPM, LKPD, dan set soal, **Lembar tunggal** untuk surat dan lembar tunggal.
+
 ## Label status
 
 Status selalu berupa label teks plus warna, tidak pernah hanya warna (D-263). Warnanya mengikuti token status; abu-abu adalah `--text-muted` di atas `--surface`.
@@ -88,6 +91,8 @@ Status selalu berupa label teks plus warna, tidak pernah hanya warna (D-263). Wa
 | Pengingat | Terkirim (abu-abu), Dibaca (info), Ditindaklanjuti (ok) | D-311 |
 | Permintaan bantuan | Baru (abu-abu), Diproses (info), Selesai (ok) | D-320 |
 | Pengesahan dokumen | Disahkan (ok), Berubah setelah disahkan (warn) | D-281 |
+
+Pemilik mengukuhkan warna status ini sesuai yang tertulis (D-445).
 
 ## Suara dan notifikasi
 

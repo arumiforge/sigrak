@@ -1,9 +1,9 @@
 # Ringkasan Riset
 
-<p class="source-note">Diterjemahkan dari <code>docs/final/research-digest.md</code> pada 27 November 2026.</p>
+<p class="source-note">Diterjemahkan dari <code>docs/final/research-digest.md</code> pada 28 November 2026.</p>
 
 - **Status:** final (permintaan pemilik 2026-11-09, D-362)
-- **Terakhir diperbarui:** 2026-11-27 (aturan Bahasa Inggris D-410; temuan yang hanya menyangkut stack sebelumnya dihapus, D-407)
+- **Terakhir diperbarui:** 2026-11-28 (KKA dan kepanduan, D-452; sebelumnya: aturan Bahasa Inggris D-410; temuan yang hanya menyangkut stack sebelumnya dihapus, D-407)
 - **Tujuan:** satu tempat yang merangkum semua riset yang sudah dilakukan untuk SIGRAK sejauh ini: regulasi resmi, studi jurnal dan lapangan, pembanding aplikasi, dan riset teknis. Dokumen ini berisi ringkasan dan penunjuk, bukan salinan. Rinciannya tetap ada di dokumen repo yang ditautkan.
 - **PDF Indonesia:** `docs/pdf/research-digest.pdf`
 
@@ -28,7 +28,7 @@ Dicek 2026-10-30 sampai 2026-11-11. Pada 2026-11-08 dan 2026-11-09 situs JDIH re
 
 | Instrumen | Penerbit, tanggal | Yang diatur (sudut pandang SD/MI) | Tingkat | Rincian di repo |
 |---|---|---|---|---|
-| Permendikdasmen 13/2025 (mengubah Permendikbudristek 12/2024) | Kemendikdasmen, berlaku 15 Jul 2025 | Kurikulum: pembelajaran mendalam di kerangka dasar, 8 dimensi profil lulusan, intra/ko/ekstrakurikuler, tabel JP SD/MI (Lampiran II B, Tabel 1–5), KKA pilihan, Pramuka kembali wajib (Pasal 22) | resmi | `docs/data/regulations/`, `docs/drafts/dokumen-resmi-sd-mi.md` |
+| Permendikdasmen 13/2025 (mengubah Permendikbudristek 12/2024) | Kemendikdasmen, berlaku 15 Jul 2025 | Kurikulum: pembelajaran mendalam di kerangka dasar, 8 dimensi profil lulusan, intra/ko/ekstrakurikuler, tabel JP SD/MI (Lampiran II B, Tabel 1–5), KKA pilihan, kepanduan kembali wajib: Pramuka atau kepanduan lain (Pasal 22 ayat (2), D-452) | resmi | `docs/data/regulations/`, `docs/drafts/dokumen-resmi-sd-mi.md` |
 | Permendikbudristek 12/2024 (teks dasar) | ditetapkan 25 Mar, berlaku 26 Mar 2024 (BN 2024/172); diubah oleh 13/2025 | Masih berlaku pada bagian yang tidak diubah 13/2025: Fase A–C = kelas I–II, III–IV, V–VI (Pasal 9); CP ditetapkan pusat (Pasal 11); muatan SD "dalam bentuk mata pelajaran" (Pasal 13); KSP "paling sedikit memuat" karakteristik, visi-misi-tujuan, pengorganisasian dan perencanaan pembelajaran, dengan prinsip diversifikasi, ditetapkan kepala sekolah (Pasal 29–30); Kurikulum 2013 hanya sampai 2025/2026 (Pasal 31); **Bahasa Inggris di SD/MI pilihan sampai 2026/2027, wajib mulai 2027/2028 (Pasal 33, tidak diubah)**, padahal tabel 13/2025 sudah mencantumkannya sebagai mata pelajaran wajib di kelas III–VI; SIGRAK mengikuti Pasal 33 (D-410) | resmi | `curriculum-base-permendikbudristek-12-2024.json` (P4-32), `docs/drafts/policy-innovation-layers.md` §3 |
 | Kepmendikdasmen 126/P/2025 | 4 Sep 2025 | Pedoman Pembelajaran Mendalam: prinsip, pengalaman belajar, kerangka, peran | resmi | `deep-learning-kepmendikdasmen-126-p-2025.json` |
 | Kepmendikdasmen 127/P/2025 | 4 Sep 2025 | Pedoman Koding dan Kecerdasan Artifisial: status, cara pelaksanaan, risiko; tanpa kelas atau JP SD | resmi | `coding-ai-kepmendikdasmen-127-p-2025.json` |
@@ -61,10 +61,10 @@ Panduan dari BSKAP (semuanya **resmi**, PDF-nya di `docs/sources/`, diekstrak ke
 
 | Panduan | Temuan yang penting bagi SIGRAK | Keputusan |
 |---|---|---|
-| Panduan Pembelajaran dan Asesmen, Edisi Revisi Ke-3, Jul 2025 | Rapor punya **12 komponen minimum** (termasuk deskripsi kokurikuler, ekstrakurikuler, ketidakhadiran, catatan wali kelas, tanggapan orang tua). Asesmen formatif tidak pernah dipakai untuk rapor, kenaikan kelas, atau kelulusan. Fase A boleh dilaporkan tanpa angka. Ada 4 pendekatan KKTP; format ATP bebas ("Tidak ada format komponen yang ditetapkan oleh Pemerintah"). Kerangka rencana pembelajaran mirip RPM, dengan Memahami → Mengaplikasi → Merefleksi | D-205, D-206, D-208 |
-| Panduan Kokurikuler 2025 | Bentuknya lintas disiplin, Gerakan 7 KAIH, cara lainnya ("Projek" tidak termasuk). Kokurikuler SD = 36 JP per mata pelajaran per tahun (32 di kelas 6) | D-207, D-208 |
+| Panduan Pembelajaran dan Asesmen, Edisi Revisi Ke-3, Jul 2025 | Rapor punya **12 komponen minimum** (termasuk deskripsi kokurikuler, ekstrakurikuler, ketidakhadiran, catatan wali kelas, tanggapan orang tua). Asesmen formatif tidak pernah dipakai untuk rapor, kenaikan kelas, atau kelulusan. Fase A boleh dilaporkan tanpa angka. Ada 4 pendekatan KKTP; format ATP bebas ("Tidak ada format komponen yang ditetapkan oleh Pemerintah"). Kerangka rencana pembelajaran mirip RPM, dengan Memahami → Mengaplikasi → Merefleksi | D-205, D-206, D-452 |
+| Panduan Kokurikuler 2025 | Bentuknya lintas disiplin, Gerakan 7 KAIH, cara lainnya ("Projek" tidak termasuk). Kokurikuler SD = 36 JP per mata pelajaran per tahun (32 di kelas 6) | D-207, D-452 |
 | Panduan Pengembangan KSP, Edisi Revisi Ke-3, Jul 2025 | Sekolah memilih "bentuk dan sistematika"; administrasinya tidak diseragamkan | D-209 |
-| Pembelajaran KKA (BSKAP, Feb 2025) | KKA untuk SD: kelas 5–6, 2 JP per minggu, pilihan, isi hanya Fase C, sebagai rujukan, bukan CP resmi | D-208 |
+| Pembelajaran KKA (BSKAP, Feb 2025) | KKA untuk SD: kelas 5–6, 2 JP per minggu, pilihan, isi hanya Fase C, sebagai rujukan, bukan CP resmi | D-452 (menggantikan D-208) |
 | Paparan Pembelajaran Mendalam (slide tanpa tanggal) | Kolom templat rencana pembelajaran, wajib dan opsional | — |
 
 **Dampak.** Standar-standar ini mengunci capaian, struktur, isi minimum dokumen, prinsip, dan perlindungan, tetapi **tidak mengunci metode mengajar** (Standar Proses Pasal 4(2); format ATP dan KSP bebas; indikator KBC hanya contoh). SIGRAK memberi label "Wajib", "Disarankan", "Contoh", atau "Bebas" pada setiap bawaan dan menyimpan aturan sebagai data berversi (D-352…D-358, `docs/drafts/policy-innovation-layers.md`). Pernyataan kementerian menyebut 13/2025 bukan kurikulum baru ([metrotvnews](https://www.metrotvnews.com/read/NLMCJ6Vj-mendikdasmen-tegaskan-tidak-ada-perubahan-kurikulum), sekunder).
@@ -80,7 +80,7 @@ Panduan dari BSKAP (semuanya **resmi**, PDF-nya di `docs/sources/`, diekstrak ke
 | 8 dimensi profil lulusan: keimanan dan ketakwaan, kewargaan, penalaran kritis, kreativitas, kolaborasi, kemandirian, kesehatan, komunikasi | 13/2025 Pasal 17, resmi | Daftar tetap DPL1–DPL8 di RPM dan kokurikuler | `content-engine.md` |
 | Pembelajaran mendalam: prinsip berkesadaran, bermakna, menggembirakan; pengalaman memahami, mengaplikasi, merefleksi; empat bagian kerangka | 126/P/2025, resmi | Langkah inti RPM mengikuti tiga pengalaman dengan tanda prinsip | `content-engine.md` |
 | "Deep learning" di artikel Indonesia berarti pendekatan 2025, bukan AI | Penelusuran literatur LKPD, 2026-11-09 | Perhatikan istilah di UI dan kutipan | `lkpd-exploration.md` §8.3 |
-| Berkas kurikulum aplikasi lama (diunduh 2026-11-08): 432 topik, 2.021 fokus, 1.372 TP, 58 baris alokasi, 12 mata pelajaran (baru: Seni Suara Daerah) | Portal publik aplikasi lama, dikelola pemilik; SHA-256 dicatat | Dikonversi ke dataset SIGRAK R1 pada 2026-11-09 lalu dihapus; kode lama di crosswalk (D-363, D-365); impor menerapkan D-204 dan D-208 | `docs/drafts/curriculum-source-check-2026.md`, `docs/data/curriculum/README.md` |
+| Berkas kurikulum aplikasi lama (diunduh 2026-11-08): 432 topik, 2.021 fokus, 1.372 TP, 58 baris alokasi, 12 mata pelajaran (baru: Seni Suara Daerah) | Portal publik aplikasi lama, dikelola pemilik; SHA-256 dicatat | Dikonversi ke dataset SIGRAK R1 pada 2026-11-09 lalu dihapus; kode lama di crosswalk (D-363, D-365); impor menerapkan D-204; KKA mengikuti D-452 (menggantikan D-208) | `docs/drafts/curriculum-source-check-2026.md`, `docs/data/curriculum/README.md` |
 | KSP: disetujui kepala sekolah, format bebas | Panduan KSP hlm. 7, hlm. 10, resmi | Templat awal yang disesuaikan sekolah | D-209 |
 
 ## 4. Madrasah dan Kemenag

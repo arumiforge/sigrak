@@ -2,7 +2,7 @@
 
 - **Status:** final (approved 2026-10-31, D-123)
 - **Task:** P1-02; later decisions applied in P4-24 (D-210…D-371)
-- **Last updated:** 2026-11-27 (R0-03: old-stack details removed, D-407; earlier: guru kelas / wali kelas, menu placements, D-383, D-385, D-386)
+- **Last updated:** 2026-11-28 (RS-17: KKA and kepanduan, D-452; earlier: R0-03 old-stack details removed, D-407; guru kelas / wali kelas, menu placements, D-383, D-385, D-386)
 - **Sources:** [`Konsep_Awal_Produk_SIGRAK.md`](../sources/Konsep_Awal_Produk_SIGRAK.md), [`Rebranding_dan_Perombakan_Fitur_Aplikasi_Lama.md`](../sources/Rebranding_dan_Perombakan_Fitur_Aplikasi_Lama.md), [`Dokumentasi-Fungsionalitas-Aplikasi-Lama.pdf`](../sources/Dokumentasi-Fungsionalitas-Aplikasi-Lama.pdf)
 
 ## Purpose
@@ -55,7 +55,7 @@ Principles, in priority order:
 
 **Position: *Berpijak pada kebijakan, leluasa berinovasi*** (D-352). National standards fix the what and the limits: outcomes, structure, minimum document content, child protection. The school and the teacher choose the how. SIGRAK gives them tools for new ways of learning, and every innovation can show which national element it serves. Details: [`policy-innovation-layers.md`](../drafts/policy-innovation-layers.md).
 
-- **The 2025–2026 rules (D-210).** The rapor has the 12 minimum components (Fase A may report without numbers); kokurikuler is assessed on the 8 dimensi profil lulusan (DPL); ekstrakurikuler with Pramuka is offered; workload counts JTM; class agreements and positive discipline; teacher reflection at least once a semester; transfers follow Permendikdasmen 3/2025. UI copy says **murid**; "siswa" stays only in table names and legacy quotes.
+- **The 2025–2026 rules (D-210).** The rapor has the 12 minimum components (Fase A may report without numbers); kokurikuler is assessed on the 8 dimensi profil lulusan (DPL); ekstrakurikuler with a kepanduan is offered (Pramuka by default, D-452); workload counts JTM; class agreements and positive discipline; teacher reflection at least once a semester; transfers follow Permendikdasmen 3/2025. UI copy says **murid**; "siswa" stays only in table names and legacy quotes.
 - **Rule strength (D-353).** Every rule carries a strength: `mandatory`, `minimum`, `maximum`, `recommended`, `not_recommended`, `example`, `school_discretion`, `teacher_discretion`, `free`. The app blocks only clear national mandatory rules, warns below a minimum or above a maximum, shows a hint for recommended and not recommended, and leaves the rest free. Example defaults are labelled "Contoh". A guardrail, not a gate.
 - **Versioned rules (D-354, D-355).** Before P5-04, `curriculum_versions` gains `effective_on`, `applies_from_school_year`, and `supersedes_id`, and a policy-profile resolver (school year, level, region) replaces a fixed config pointer to the active allocation. A document stores the rule-set codes it was made under and never changes silently; rules published mid-year apply from the next school year. Target later (P5-09 or own slice): `regulations`, `regulation_relations`, `rule_sets`, `rules`, a console for every domain, and Kabar Regulasi.
 - **Profil Jenjang (D-356, D-368).** SD and MI share one core. A small versioned record per level (`sd`, `mi`) names the ministry, rule-set codes per domain, character frameworks (MI adds KBC; SD KBC fields are off by default and an admin can switch them on), RPM extra fields, the rapor export target (e-Rapor SD or RDM), wali kelas JTM defaults (D-212), and external assessments. Code reads the profile and never branches on the level.
@@ -255,7 +255,7 @@ This is the old 43 legacy app features plus new ones, revised for the new concep
 | Buat | Curriculum (CP, TP, ATP, Prota, Promes) | Merge | Buat > Kurikulum, with "restore defaults" and Promes plan vs actual (Promes Realisasi). Prota/Promes print effective weeks | Basis of planning and content (D-214, D-274, D-276) |
 | Buat | RPM generator | Keep | Buat > RPM template, 4 steps (Kapan, Apa, Cara, Periksa) on the template engine. Upgrades: automatic shifts with preview and undo, Neraca JP before SAS, early semester-2 drafts, parallel-class copy without AI | Most valuable feature (D-269, D-272, D-274, D-275) |
 | Buat | Modul mandiri (manual mode) | Merge | "RPM lepas jadwal" option in step 1, later placed with "Pasang ke jadwal" | One door for every RPM (D-273) |
-| Buat | Kokurikuler module (7 KAIH, projek, lintas disiplin) | Keep | Buat > Kokurikuler, a variant of the RPM template that reads the school plan. Forms follow Panduan Kokurikuler 2025: Lintas Disiplin, 7 KAIH, Cara Lainnya (projects fall here). Koding dan Kecerdasan Artifisial runs here (D-208). Assessed on the 8 DPL; automatic annual JP target | Existing feature (D-210, D-214, D-277) |
+| Buat | Kokurikuler module (7 KAIH, projek, lintas disiplin) | Keep | Buat > Kokurikuler, a variant of the RPM template that reads the school plan. Forms follow Panduan Kokurikuler 2025: Lintas Disiplin, 7 KAIH, Cara Lainnya (projects fall here). Koding dan Kecerdasan Artifisial runs here when the school chooses kokurikuler for it; a school may instead run it as a regular subject in grades 5–6 (D-452). Assessed on the 8 DPL; automatic annual JP target | Existing feature (D-210, D-214, D-277) |
 | Buat | Worksheet / LKPD | Merge | Buat > LKPD template, with blocks for grades 1–3 and a `pattern` field. Also an RPM attachment | LKPD is part of the plan (D-296, D-329) |
 | Buat | Bank Modul / RPM storage | Merge | Dokumen Saya | One archive for every document |
 | Buat | Download / import backup | Replace | Server autosave. Full data export in Akun | Manual backup makes teachers doubt their data is safe |
@@ -313,7 +313,7 @@ This is the old 43 legacy app features plus new ones, revised for the new concep
 | New | Teacher assessment and class features: diagnostic assessment, 7 KAIH tracker with home sheet, class agreement and positive-discipline notes, work portfolio with photos | Add | Asesmen, Di Kelas | D-214 |
 | New | Assessment instruments: Peta Asesmen dataset and tags, Rubrik Kinerja, Observasi DPL (phone entry, offline), Cek Kesiapan Awal, Akomodasi Murid, self and peer cards, misconception tags. Assessment AI never sees student data; sensitive results follow the health-data rule | Add | Buat > Galeri templat; Di Kelas | Wave A (D-344…D-351) |
 | New | Homeroom features: early absence warning, kenaikan meeting sheet, graduation, home visits and light health data (never to AI), parent messages through `wa.me` links | Add | Kelas Saya, Di Kelas | D-215, D-303 |
-| New | Ekstrakurikuler with Pramuka offered by default: activities, pembina, members, attendance, rapor description | Add | Kelas Saya > Ekstrakurikuler, early in v1 | Kepanduan must be offered (D-216) |
+| New | Ekstrakurikuler with Pramuka offered by default: activities, pembina, members, attendance, rapor description | Add | Kelas Saya > Ekstrakurikuler, early in v1 | Kepanduan must be offered; a school may replace Pramuka with another kepanduan (D-216, D-452) |
 | New | Tabungan murid: ledger per student that follows the student, recap per class and school, berita acara on leaving | Add | Kelas Saya > Keuangan | D-219, D-301 |
 | New | LKPD patterns (*Bentuk LKPD*) in waves: Wave 1 Detektif Teks, Peta Cerita, Data Kelasku, Etnomatematika, Misi Petualangan, Tiga Jalur, Tiket Keluar, Kotak Terkunci, Pikir Komputasional Tanpa Komputer; Konteks Daerah profile; school presets; QR to third-party URLs; licensed embeds; later a self-hosted H5P and 3D viewer | Later (waves after v1) | Buat > LKPD, all core | D-329…D-337 |
 | New | Buka di Canva | Add | Button on RPM, LKPD, soal previews (download + open canva.com) | |
@@ -355,11 +355,11 @@ Before slice 2 (P5-04), the minimal rule versioning and the Profil Jenjang exist
 ## Open questions
 
 - [x] Prices: 1-week trial (D-160), Sigrak Guru Rp60.000, Sigrak Sekolah Rp100.000, add-ons Rp50.000 each (D-157, D-158).
-- [ ] Final name: check "Sigrak" (and backup "Kapur") in [PDKI](https://pdki-indonesia.dgip.go.id) classes 9, 41, 42, then register the .id and .com domains together. The name risk is higher now that the market is nationwide.
-- [ ] Logo: brief a designer (colour, single-colour, negative, minimum 16 px).
+- [x] Final name: handled offline by the developer (D-446); was: check "Sigrak" (and backup "Kapur") in [PDKI](https://pdki-indonesia.dgip.go.id) classes 9, 41, 42, then register the .id and .com domains together. The name risk is higher now that the market is nationwide.
+- [x] Logo: made by Codex from a brief in `ai/` (colour, single-colour, negative, minimum 16 px) (D-448).
 - [x] The kokurikuler module ships in v1 as an RPM template variant (D-014).
-- [ ] Test the five-tab menu with 5 class teachers and 2 subject teachers on a click prototype (no real data).
-- [ ] Present the short version to principals and supervisors, and record their objections.
+- [x] Test the five-tab menu with teachers on a click prototype: dropped; feedback comes from the pilot (D-449).
+- [x] Present the short version to principals and supervisors: dropped; feedback comes from the pilot (D-449).
 - [x] Gemini's under-18 clause: students only receive finished, teacher-checked AI content and never trigger the AI (D-124).
 - [ ] TKA 2028 schedule for SD/MI, once published, to time the TKA release (D-162).
 - [ ] Console plan mapping (D-211): whether the leger lock and weights sit in core Asesmen or the Rapor add-on, and whether sumbangan and savings sit in the Keuangan add-on.

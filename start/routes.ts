@@ -19,6 +19,7 @@ import { hosts } from '#config/hosts'
 
 const SchoolSessionController = () => import('#controllers/school/session_controller')
 const CalendarController = () => import('#controllers/school/calendar_controller')
+const AiDemoController = () => import('#controllers/school/ai_demo_controller')
 const StaffSessionController = () => import('#controllers/staff/session_controller')
 const StaffHomeController = () => import('#controllers/staff/home_controller')
 const ExamSessionController = () => import('#controllers/exam/session_controller')
@@ -48,9 +49,25 @@ router
           .get('/kalender', [CalendarController, 'index'])
           .as('calendar.index')
           .use(middleware.translations(['calendar']))
+        router
+          .group(() => {
+            router.get('/coba-ai', [AiDemoController, 'index']).as('index')
+            router.post('/coba-ai', [AiDemoController, 'store']).as('store')
+            router
+              .post('/coba-ai/:generation/batal', [AiDemoController, 'cancel'])
+              .as('cancel')
+              .where('generation', router.matchers.uuid())
+            router
+              .post('/coba-ai/:generation/coba-lagi', [AiDemoController, 'retry'])
+              .as('retry')
+              .where('generation', router.matchers.uuid())
+          })
+          .as('ai_demo')
+          .use(middleware.translations(['ai_demo']))
         router.post('/keluar', [SchoolSessionController, 'destroy']).as('logout')
       })
       .use(middleware.auth({ guard: 'web' }))
+    // The SSE endpoints (/__transmit/*) are registered in start/transmit.ts.
   })
   .domain(hosts.app)
   .as('app')

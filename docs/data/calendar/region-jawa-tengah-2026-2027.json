@@ -110,7 +110,7 @@
     },
     {
       "date": "2027-03-15",
-      "title": "Cuti Bersama Hari Raya Idulfitri 1448 H",
+      "title": "Cuti Bersama Idul Fitri 1448 Hijriah",
       "source_ref": "Lampiran I p. 23 lists 9 and 12-13 Maret only; Lampiran XIII p. 49 Maret 2027: 20 hari efektif"
     },
     {
@@ -120,7 +120,7 @@
     },
     {
       "date": "2027-05-18",
-      "title": "Cuti Bersama Hari Raya Iduladha 1448 H",
+      "title": "Cuti Bersama Idul Adha 1448 Hijriah",
       "source_ref": "Lampiran I p. 23 and Lampiran X p. 41 do not list it; Lampiran XIII p. 49 Mei 2027: libur umum 4"
     },
     {
@@ -144,7 +144,8 @@
       "starts_on": "2027-05-24",
       "ends_on": "2027-06-05",
       "source_ref": "Pasal 19 ayat (2) p. 16: minggu ke-4 Mei s.d. minggu ke-1 Juni 2027",
-      "counts_as_effective": true
+      "counts_as_effective": true,
+      "note": "exam_type sas also covers Sumatif Akhir Tahun; the app has no end-of-year type (D-269)."
     }
   ],
   "milestones": [
@@ -222,16 +223,17 @@
   },
   "notes": [
     "Only the 6-day school week dates are used (D-323). The 5-day dates in the guide are not imported.",
-    "National holidays and cuti bersama are not events here; they come from the national table (docs/sources/usulan-01/data/libur-nasional-cuti-bersama.json). Cuti bersama dates that the guide treats as school days are listed in joint_leave_school_days and must be switched off for this calendar.",
+    "National holidays and cuti bersama are not events here; they come from the checked national dataset (docs/data/calendar/national-holidays-2026-2027.json, D-253, D-254). Cuti bersama dates that the guide treats as school days are listed in joint_leave_school_days and must be switched off for this calendar.",
     "Maulid Nabi Muhammad SAW is 25 August 2026, as in the national list and in Lampiran XIII (Agustus 2026: libur umum 2). Lampiran I no. 4 says 5 September 2026; that line is not used (D-323).",
     "The semester-1 break ends on 1 January 2027 (Pasal 23 ayat (1), Lampiran XIII Januari 2027 = 24). Lampiran I no. 11 and the Lampiran X calendar end it on 2 January 2027 (Januari = 23); not used. 2 January 2027 (Saturday) is the first day of semester 2.",
     "How the guide counts: Lampiran XIII 'Hari Belajar Efektif' leaves out days used for other activities (Hari Pertama Masuk, TKA, Mengikuti Upacara, Penyerahan Rapor/Pengumuman Kelulusan), but it does so unevenly. To reproduce its totals with the app rule (Mon-Sat minus Sundays, national holidays, active cuti bersama and every event), only the days it actually subtracts are events: 13 Jul 2026 (Hari Pertama Masuk), 10 Nov 2026 (Upacara Hari Pahlawan), the 8 TKA days 19-20, 22-23 and 26-29 Apr 2027 plus 21 Apr 2027 (Upacara Hari Kartini, inside the TKA week; Saturday 24 Apr stays a school day as in Lampiran X), and 7 Jun 2027 (Pengumuman Kelulusan).",
     "Other upacara days (1 and 28 Oct 2026) and the report-card days (19 Dec 2026, 19 Jun 2027) are counted as effective in Lampiran XIII, so they are milestones, not events. MPLS (13-17 Jul 2026) is a school day except the first day.",
     "Assessment periods: the guide marks no STS dates, and the SAS / Sumatif Akhir Tahun windows of Pasal 19 are counted as effective days in Lampiran XIII (there is no column for them). They are kept in assessment_windows (approximate weeks, each school sets its own dates under Pasal 19 ayat (4)) and must NOT be imported as events of kind exam, or the count drops below 254. TKA is the only exam event, because Lampiran XIII subtracts it.",
-    "Lampiran XIII puts one 'Penyerahan Rapor dan Pengumuman Kelulusan' day in Mei 2027 (Hari Belajar Efektif 21) although no such day falls in May for SD/MI (kelulusan is the first Monday of June, 7 Jun 2027, Pasal 22 ayat (1)); it looks carried over from the SMA table, where kelulusan is 3 May 2027. This file places that day on 7 Jun 2027, which matches the Lampiran X headers (Mei 22, Juni 15). Result: totals 254/134/120 match, but May is 22 instead of 21 and June 15 instead of 16.",
+    "Lampiran XIII puts one 'Penyerahan Rapor dan Pengumuman Kelulusan' day in Mei 2027 (Hari Belajar Efektif 21) although no such day falls in May for SD/MI (kelulusan is the first Monday of June, 7 Jun 2027, Pasal 22 ayat (1)); it looks carried over from the SMA table, where kelulusan is 3 May 2027. This file places that day on 7 Jun 2027; the basis is Pasal 22 ayat (1). The Lampiran X month headers only partly support it: June shows 15, which subtracts the kelulusan day, but the same headers count the first school day, upacara and TKA days as effective (Jul 17, Nov 25, Apr 26), unlike Lampiran XIII 'Hari Belajar Efektif'. Result: totals 254/134/120 match, but May is 22 instead of 21 and June 15 instead of 16.",
     "Holidays the guide adds beyond the national list: 10 Feb 2027 (perkiraan awal puasa) and 13 Mar 2027 (Saturday after Idul Fitri). The guide's 9 and 12 Mar 2027 are cuti bersama in the national list and stay holidays.",
     "Differences between the guide and the national list: Nyepi is 9 Mar 2027 in Pasal 26 but 8 Mar in Lampiran I and in the national list (8 Mar used; the March count is the same either way). The national list's cuti bersama 5 Feb, 15 Mar, 25 Mar, 18 May and 19 May 2027 are school days in the guide. Easter Sunday 28 Mar and 1 Muharam 6 Jun 2027 fall on Sundays. 24 Dec 2026 cuti bersama falls inside the semester break.",
     "2027 holiday dates in the guide are estimates (Pasal 26-27). When newer official dates are published an admin updates them in the console (D-253).",
-    "Lampiran XIII inner inconsistencies kept as found: Juni 2027 counts 3 Sundays and 8 break days (there are 4 and 9), Desember 2026 counts 7 break days (21-31 Dec has 8 Mon-Sat days besides 24-25 Dec), and Oktober 2026 shows an upacara without subtracting it."
+    "Lampiran XIII inner inconsistencies kept as found: Juni 2027 counts 3 Sundays and 8 break days (there are 4 and 9), Desember 2026 counts 7 break days (21-31 Dec has 8 Mon-Sat days besides 24-25 Dec), and Oktober 2026 shows an upacara without subtracting it.",
+    "Both assessment_windows use exam_type sas: the app's exam types are sts, sas and other (calendar_events.exam_type, D-269), with no separate end-of-year type, so sas covers both the semester-1 SAS and the Sumatif Akhir Tahun."
   ]
 }

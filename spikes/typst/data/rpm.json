@@ -1,0 +1,230 @@
+{
+  "kind": "rpm",
+  "title": "Rencana Pembelajaran Mendalam (RPM)",
+  "short_title": "RPM Matematika Kelas 4 · Pecahan Senilai",
+  "school": "MI Contoh Nurul Ilmi",
+  "identity": [
+    ["Satuan Pendidikan", "MI Contoh Nurul Ilmi"],
+    ["Mata Pelajaran", "Matematika"],
+    ["Kelas / Semester", "4 / 1"],
+    ["Fase", "B"],
+    ["Elemen", "Bilangan"],
+    ["Materi Pokok", "Pecahan"],
+    ["Fokus", "Pecahan senilai (SIGRAK-SD-2026-R1-MTK-K4-02-FM03)"],
+    ["Alokasi Waktu", "2 pertemuan × 2 JP × 35 menit"],
+    ["Tahun Ajaran", "2026/2027"],
+    ["Guru", "Budi Contoh, S.Pd."]
+  ],
+  "identifikasi": {
+    "kesiapan": "Sebagian besar murid sudah mengenal pecahan dengan pembilang satu dan dapat membandingkan pecahan berpenyebut sama. Lima murid masih perlu bimbingan membaca gambar pecahan (data Kelompok belajar: 5 perlu bimbingan, 18 cukup, 4 siap pengayaan).",
+    "karakteristik_materi": [
+      {
+        "t": "Pecahan senilai adalah pecahan yang nilainya sama walaupun pembilang dan penyebutnya berbeda, misalnya "
+      },
+      { "tex": "\\frac{1}{2} = \\frac{2}{4} = \\frac{4}{8}" },
+      {
+        "t": ". Materi ini konkret bila diawali dengan benda nyata (roti, kertas lipat) lalu gambar, lalu simbol."
+      }
+    ],
+    "dpl": [
+      ["DPL3", "Penalaran kritis"],
+      ["DPL5", "Kolaborasi"],
+      ["DPL6", "Kemandirian"]
+    ],
+    "kbc": {
+      "tema": "Cinta Ilmu; Cinta Diri dan Sesama",
+      "insersi": [
+        { "t": "Berbagi makanan dengan adil kepada teman. Pesan adil dalam QS. Al-Mā’idah: 8, " },
+        { "ar": "اعْدِلُوا هُوَ أَقْرَبُ لِلتَّقْوَىٰ" },
+        { "t": " (berlaku adillah, karena adil itu lebih dekat kepada takwa)." }
+      ]
+    }
+  },
+  "desain": {
+    "cp": "Peserta didik membandingkan dan mengurutkan pecahan, mengenali pecahan senilai, serta menghubungkan pecahan desimal dengan persen.",
+    "tp": [
+      [
+        "SIGRAK-SD-2026-R1-MTK-K4-02-TP03",
+        "Mengenali pecahan senilai menggunakan gambar dan simbol matematika."
+      ]
+    ],
+    "praktik_pedagogis": "Model Problem Solving dengan sintaks: orientasi masalah, mengorganisasi murid, penyelidikan kelompok, menyajikan hasil, refleksi.",
+    "kemitraan": "Orang tua membantu murid membagi makanan di rumah menjadi bagian yang sama dan menceritakannya pada pertemuan berikutnya.",
+    "lingkungan": "Ruang kelas dengan meja kelompok berempat; pojok matematika berisi kertas lipat dan pita pecahan; budaya kelas saling menghargai jawaban teman.",
+    "digital": "Guru menayangkan pita pecahan interaktif dari aplikasi SIGRAK di layar kelas; murid tidak memakai gawai.",
+    "media": "Kertas lipat persegi, pita pecahan, roti tawar (atau gambar roti), LKPD Pecahan Senilai."
+  },
+  "pertemuan": [
+    {
+      "judul": "Pertemuan 1: Menemukan pecahan senilai dengan kertas lipat",
+      "langkah": [
+        {
+          "tahap": "Awal",
+          "kegiatan": [
+            { "t": "Salam, doa belajar bersama " },
+            { "ar": "رَبِّ زِدْنِي عِلْمًا" },
+            {
+              "t": ", presensi, dan apersepsi: \"Kalau satu roti dibagi dua sama besar, tiap anak mendapat berapa?\""
+            }
+          ],
+          "prinsip": "Berkesadaran",
+          "waktu": "10 menit"
+        },
+        {
+          "tahap": "Memahami",
+          "kegiatan": [
+            {
+              "t": "Murid melipat kertas menjadi 2, 4, dan 8 bagian, mewarnai separuhnya, lalu menulis pecahannya: "
+            },
+            { "tex": "\\frac{1}{2}, \\frac{2}{4}, \\frac{4}{8}" },
+            { "t": "." }
+          ],
+          "prinsip": "Bermakna",
+          "waktu": "20 menit"
+        },
+        {
+          "tahap": "Mengaplikasi",
+          "kegiatan": [
+            {
+              "t": "Kelompok mencari pecahan senilai dengan mengalikan pembilang dan penyebut dengan bilangan yang sama: "
+            },
+            { "tex": "\\frac{2}{3} = \\frac{2 \\times 2}{3 \\times 2} = \\frac{4}{6}" },
+            { "t": ". Hasil ditempel di papan." }
+          ],
+          "prinsip": "Menggembirakan",
+          "waktu": "25 menit"
+        },
+        {
+          "tahap": "Merefleksi",
+          "kegiatan": "Murid menuliskan satu hal yang mereka temukan hari ini dan satu pertanyaan yang masih membingungkan.",
+          "prinsip": "Berkesadaran",
+          "waktu": "10 menit"
+        },
+        {
+          "tahap": "Penutup",
+          "kegiatan": "Kesimpulan bersama, tugas berbagi makanan di rumah, doa penutup.",
+          "prinsip": "Bermakna",
+          "waktu": "5 menit"
+        }
+      ]
+    },
+    {
+      "judul": "Pertemuan 2: Pecahan senilai pada garis bilangan dan soal cerita",
+      "langkah": [
+        {
+          "tahap": "Awal",
+          "kegiatan": "Murid menceritakan pengalaman berbagi makanan di rumah; guru menghubungkannya dengan pecahan.",
+          "prinsip": "Bermakna",
+          "waktu": "10 menit"
+        },
+        {
+          "tahap": "Memahami",
+          "kegiatan": [
+            {
+              "t": "Guru memperlihatkan garis bilangan 0 sampai 1 yang dibagi 3 dan 6 bagian; murid menemukan bahwa "
+            },
+            { "tex": "\\frac{1}{3}" },
+            { "t": " dan " },
+            { "tex": "\\frac{2}{6}" },
+            { "t": " berada di titik yang sama." }
+          ],
+          "prinsip": "Berkesadaran",
+          "waktu": "15 menit"
+        },
+        {
+          "tahap": "Mengaplikasi",
+          "kegiatan": [
+            { "t": "Soal cerita: \"Ibu membeli kue seharga " },
+            { "tex": "\\text{Rp}12.500" },
+            { "t": " dan memotongnya menjadi 8 bagian. Aisyah mendapat " },
+            { "tex": "\\frac{2}{8}" },
+            {
+              "t": " bagian. Tuliskan pecahan senilai yang lebih sederhana.\" Murid mengerjakan LKPD secara berpasangan."
+            }
+          ],
+          "prinsip": "Menggembirakan",
+          "waktu": "30 menit"
+        },
+        {
+          "tahap": "Merefleksi",
+          "kegiatan": "Tiket keluar: murid menulis dua pecahan yang senilai dengan 3/4 dan alasannya.",
+          "prinsip": "Berkesadaran",
+          "waktu": "10 menit"
+        },
+        {
+          "tahap": "Penutup",
+          "kegiatan": "Umpan balik, penguatan nilai adil saat berbagi, doa penutup.",
+          "prinsip": "Bermakna",
+          "waktu": "5 menit"
+        }
+      ]
+    }
+  ],
+  "asesmen": {
+    "teknik": [
+      ["Awal pembelajaran", "Tanya jawab lisan: membaca gambar pecahan", "Daftar periksa"],
+      ["Proses pembelajaran", "Observasi kerja kelompok dengan kertas lipat", "Lembar observasi"],
+      ["Akhir pembelajaran", "Tiket keluar dan LKPD", "Rubrik 4 tingkat"]
+    ],
+    "rubrik": {
+      "kriteria": [
+        [
+          "Menemukan pecahan senilai",
+          "Menemukan tiga atau lebih pecahan senilai dengan benar dan menjelaskan caranya.",
+          "Menemukan dua pecahan senilai dengan benar.",
+          "Menemukan satu pecahan senilai dengan bantuan gambar.",
+          "Belum dapat menemukan pecahan senilai walau dengan bantuan."
+        ],
+        [
+          "Menggunakan simbol",
+          "Menulis pecahan senilai dengan simbol dan perkalian yang tepat.",
+          "Menulis simbol dengan benar, perkalian sesekali keliru.",
+          "Menulis simbol dengan bantuan guru.",
+          "Belum dapat menulis simbol pecahan."
+        ],
+        [
+          "Kolaborasi",
+          "Aktif berbagi tugas dan membantu teman.",
+          "Ikut bekerja dan mendengarkan teman.",
+          "Ikut bekerja bila diingatkan.",
+          "Belum ikut bekerja dalam kelompok."
+        ]
+      ]
+    },
+    "soal": [
+      [
+        { "t": "Tuliskan dua pecahan yang senilai dengan " },
+        { "tex": "\\frac{3}{4}" },
+        { "t": "." }
+      ],
+      [
+        { "t": "Isilah kotak kosong: " },
+        { "tex": "\\frac{2}{5} = \\frac{\\square}{10}" },
+        { "t": "." }
+      ],
+      [
+        { "t": "Benarkah " },
+        { "tex": "\\frac{6}{8} = \\frac{3}{4}" },
+        { "t": "? Jelaskan dengan gambar atau perkalian." }
+      ],
+      [
+        { "t": "Kue seharga " },
+        { "tex": "\\text{Rp}12.500" },
+        { "t": " dibagi 5 sama besar. Berapa harga satu bagian? (" },
+        { "tex": "\\text{Rp}12.500 : 5" },
+        { "t": ")" }
+      ]
+    ],
+    "tindak_lanjut": "Murid yang belum mencapai tingkat Berkembang mendapat bimbingan dengan pita pecahan; murid yang siap pengayaan mengerjakan pecahan senilai dengan penyebut sampai 100."
+  },
+  "lampiran": "LKPD Pecahan Senilai (terlampir); kartu pecahan; langkah melipat kertas.",
+  "tanda_tangan": {
+    "tempat_tanggal": "Kudus, 27 November 2026",
+    "kiri": {
+      "role": "Kepala Madrasah",
+      "name": "Siti Contoh, S.Pd.I.",
+      "nip": "198001012005012001"
+    },
+    "kanan": { "role": "Guru Kelas 4", "name": "Budi Contoh, S.Pd.", "nip": "199002022019031002" }
+  }
+}

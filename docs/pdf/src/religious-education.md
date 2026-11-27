@@ -1,10 +1,10 @@
 # Kurikulum Pendidikan Agama (SD dan MI)
 
-<p class="source-note">Diterjemahkan dari <code>docs/final/religious-education.md</code> pada 10 November 2026.</p>
+<p class="source-note">Diterjemahkan dari <code>docs/final/religious-education.md</code> pada 28 November 2026.</p>
 
 - **Status:** final (disetujui 2026-10-31, D-123)
 - **Tugas:** P1-07
-- **Terakhir diperbarui:** 2026-11-10 (KBC untuk SD bawaannya mati, D-368; Profil Jenjang, D-356)
+- **Terakhir diperbarui:** 2026-11-28 (KKA, D-452; sebelumnya: KBC untuk SD bawaannya mati, D-368; Profil Jenjang, D-356)
 - **Sumber:** `KMA_No_1503_Tahun_2025_….pdf`, `Salinan_Kepka_BKPDM_No._020_Tahun_2026_….pdf`, `SK_Dirjen_Pendis_No_9941_Tahun_2025_….pdf`, `KMA_No_512_Tahun_2026_….pdf`, `SK_Dirjen_Pendis_No_6077_Tahun_2025_….pdf` (semuanya di `docs/sources/`)
 
 ## Tujuan
@@ -64,7 +64,7 @@ MI tidak mengajarkan satu mata pelajaran PAI. MI mengikuti struktur Kementerian 
 
 - **MI tetap memakai tabel KMA 1503/2025.** Permendikdasmen 13/2025 menyebut MI dalam tabel SD-nya, tetapi madrasah mengikuti KMA 1503/2025 (D-038). Di sana, JP kokurikuler diambil dari sebagian mata pelajaran per kelas, bukan dari setiap mata pelajaran seperti di SD.
 - **36 minggu per tahun, 32 di kelas 6. 1 JP = 35 menit.** Madrasah boleh menambah sampai 6 JP per minggu (KMA 1503/2025, hlm. 32). JP "koku" dialihkan ke program kokurikuler. Penjadwalan RPM hanya menghitung JP intrakurikuler, dan JP kokurikuler milik modul Kokurikuler.
-- **Mata pelajaran MI lainnya** (Pendidikan Pancasila, Bahasa Indonesia, Matematika, IPAS mulai kelas 3, PJOK, Seni dan Budaya, Bahasa Inggris mulai kelas 3, Koding dan KA (mata pelajaran pilihan di kelas 5–6 menurut KMA 1503/2025; di SIGRAK berjalan lewat kokurikuler, D-208), Muatan Lokal) memakai CP nasional, tetapi dengan tabel alokasi MI sendiri dari KMA 1503/2025 (`mi-allocation-kma-1503-2025.json`). Muatan Lokal mengambil 72–216 JP per tahun (64–192 di kelas 6), dan murid memilih satu seni (Seni Musik, Rupa, Teater, atau Tari).
+- **Mata pelajaran MI lainnya** (Pendidikan Pancasila, Bahasa Indonesia, Matematika, IPAS mulai kelas 3, PJOK, Seni dan Budaya, Bahasa Inggris mulai kelas 3, Koding dan KA (mata pelajaran pilihan di kelas 5–6 menurut KMA 1503/2025; tiap sekolah menjalankannya sebagai mata pelajaran biasa atau lewat kokurikuler, D-452), Muatan Lokal) memakai CP nasional, tetapi dengan tabel alokasi MI sendiri dari KMA 1503/2025 (`mi-allocation-kma-1503-2025.json`). Muatan Lokal mengambil 72–216 JP per tahun (64–192 di kelas 6), dan murid memilih satu seni (Seni Musik, Rupa, Teater, atau Tari).
 - **Data CP:** `cp-pai-bahasa-arab-mi-sk-dirjen-9941-2025.json` berisi teks Fase A–C untuk kelima mata pelajaran, diambil dari lapisan teks PDF dan disusun menjadi baris elemen dan subelemen di P2-02 (D-039). Enam bacaan Bahasa Arab diketik ulang dari gambar halaman. Teks ditampilkan sesuai cetakan, dan sembilan baris yang mungkin memuat kesalahan sumber diberi `review_notes` (D-127). Tim Validasi SIGRAK masih harus meninjau dan menyetujui data sebelum diimpor (D-113).
 - **Bahan ajar:** Kemenag menerbitkan Buku Teks Utama (BTU) gratis untuk mata pelajaran ini yang selaras dengan KMA 1503/2025. Buku ini sumber rujukan yang wajar untuk RPM, seperti buku Parijatha untuk Bahasa Jawa.
 - **Guru:** kelima mata pelajaran diajar **guru mapel** (D-037). Secara bawaan statusnya `subject_teacher`, dan operator tetap bisa menugaskan ulang per kelas.

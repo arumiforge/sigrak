@@ -2141,3 +2141,110 @@ A Claude cloud session container (measured 2026-11-27: 4 vCPU, about 15 GB RAM, 
 - Tools get their parallel options where they are safe (`tsc` projects side by side, `pnpm -r --parallel`, `xargs -P "$(nproc)"`, Japa/Vite defaults left on).
 Limits: two agents never edit the same file; one test run at a time against `sigrak_test` (the runner migrates and truncates it); sub-agents cost tokens, so they are used for real independent work, not for single lookups; a session started outside the cloud (a laptop) keeps to its machine's limits.
 Reason: CPU, memory and disk in the cloud container are already paid for and mostly unused; running work side by side shortens sessions.
+
+### D-443 — Parents use the public chatbot, which has no AI model
+Accepted · 2026-11-27 · R0 · owner's choice ("orang tua masuk chatbot umum … tidak ada lapisan api model untuk menjawab itu") · closes the open point of D-394, narrows D-393
+Parents use the same **public chatbot** as visitors to the public pages. It only points people to the right place: quick choices, guide pages (Panduan) and the frequently asked questions, matched without an AI model. No provider is called, so no question or personal data leaves SIGRAK and nothing counts against an AI budget. Parents get no school chatbot (D-394) and no answers from school data. The AI modes of D-393 (system Q&A with RAG, the school chatbot) stay for signed-in staff only.
+Reason: parents need directions, not generated answers; no AI cost and no data sent to providers for people outside the school's staff.
+
+### D-444 — Legal checks are handled offline by the developer
+Accepted · 2026-11-27 · R0 · owner's choice ("urusan legal ditangani pengembang dengan pihak terkait secara offline")
+Legal checks (for example encrypted backups stored abroad, the legal pages and data-processing agreement before launch, HaKI filing) are handled by the developer with the relevant parties outside the repository. Agents do not list them as open decisions or wait on them; they keep drafts ready and record an outcome only when the owner reports one.
+Reason: these talks happen offline; tracking them in the repository only repeats an open item that agents cannot move.
+
+### D-445 — Later decisions win; design-system defaults confirmed
+Accepted · 2026-11-27 · R0 · owner's choice (interview 2026-11-27) · closes two P4-24 questions
+The docs' reading stands: D-339 wins over D-314 (eleven staff roles, not three) and over D-315 (the owner, not an admin, sets AI models); D-216 wins over D-161 (ekstrakurikuler in v1). The design-system values are confirmed as written: Pengingat Terkirim (grey), Dibaca (info), Ditindaklanjuti (ok); help requests Baru (grey), Diproses (info), Selesai (ok); "Disahkan" (ok) and "Berubah setelah disahkan" (warn); margin profiles of D-283 by template: Buku administrasi for book-type documents and Berkas, Dokumen ajar for RPM, LKPD and question sets, Lembar tunggal for letters and single sheets.
+Reason: the owner accepted the defaults the final docs already use.
+
+### D-446 — AI providers, data agreements and brand checks come from the developer
+Accepted · 2026-11-27 · R0 · owner's choice ("MoU data dan model sudah ditangani pengembang di luar repo") · extends D-444, closes the "school chatbot data processors" point of `docs/drafts/fondasi-uptake.md`
+Which AI providers and models may receive school data for the school chatbot (D-394), and under which data-processing agreements, is settled by the developer outside the repository. The system uses the providers and models the developer configures; masking personal data before sending stays (D-393). The trademark check of "Sigrak" in PDKI and any backup name are handled offline the same way and are no longer tracked here.
+Reason: agreements with providers and the trademark office are offline work; the code only needs the configured providers.
+
+### D-447 — Agents pre-check draft data before human validation
+Accepted · 2026-11-27 · R0 · owner's choice · refines D-113
+Draft data sets (CP, taxonomy and regulation registry, regulation extracts, calendars) are first checked by agents against their official sources: every item is compared, and doubtful items are flagged with the reason and the source location. People (the owner, later a validation team) review only the flagged items, then the set moves from `draft` to `active`. Calendar defaults listed in `docs/drafts/open-questions.md` stay in use until that review.
+Reason: shortens human review to the items that need judgement.
+
+### D-448 — Logo made by Codex from a brief
+Accepted · 2026-11-27 · R0 · owner's choice · follows D-390 and Fondasi `visual-assets.md`
+The SIGRAK logo (full colour, single colour, negative, readable at 16 px) is made by Codex from a brief in `ai/`; the owner picks from the results.
+Reason: the same visual-asset path as the rest of the app.
+
+### D-449 — No separate teacher click test or principal presentation
+Accepted · 2026-11-27 · R0 · owner's choice · closes two product-concept questions
+The five-tab click-prototype test with teachers and the short presentation to principals and supervisors are dropped. Teacher and school feedback is gathered during the pilot through the feedback channels (D-439).
+Reason: the owner prefers feedback from real use.
+
+### D-450 — Typst is the PDF engine, with three conditions
+Accepted · 2026-11-27 · R0-07 · owner's choice ("setuju D-399, pakai Typst dengan syarat itu") · settles D-399 (spike passed, `docs/drafts/typst-spike.md`)
+Typst produces SIGRAK's PDFs: the CLI on `worker-exports` for final files, the WASM compiler (typst.ts) for browser previews. Gotenberg stays only as the fallback, including for any document that must carry copyable or searchable Arabic text, which Typst does not produce yet. Conditions:
+- Font files are pinned in the image and the preview bundle (Liberation 2.1.5, Noto Naskh Arabic 2.021, New Computer Modern Math from typst-assets); system fonts are never used, because Ubuntu's Noto Naskh 2.004 draws the end-of-ayah sign wrongly.
+- Formulas are stored as LaTeX and converted to Typst (tex2typst plus the spike's fixes); column arithmetic gets its own block, not a LaTeX array.
+- The WASM compiler (about 10 MB compressed plus fonts) loads only on preview pages and is cached; previews show a short loading state on the first visit.
+Every printable keeps A4 as default and F4 (F-020).
+Reason: the spike met the D-399 tests (Arabic shaping and harakat, low-end render times, math, letterhead) with server renders of 50–120 ms.
+
+### D-451 — AI job runtime from the R0-06 spike
+Accepted · 2026-11-27 · R0-06 · team decision from the spike (`docs/agent/tasks/R0-06-spike-ai-job-sse.md`) · refines D-388
+- Worker process roles run as `node ace queue:work <ai|exports|default>` (`worker-ai`, `worker-exports`, `worker-default`). A generation runs one step per job and queues the next.
+- The `ai` worker uses a 15 s lock and a 5 s stalled check, so a crashed worker's step resumes in about 17 s. On SIGTERM a worker finishes running steps for up to 8 s, then returns them to the queue; containers get a stop grace period of at least 10 s.
+- Generation progress goes over Transmit on `users/<token>/generations`, where the token is an HMAC of the user id with the app key (users have no public id); only that user may subscribe.
+- New provider error class `empty_reply` (a reply without text, for example a thinking model that used up its output budget) fails over to the next key, as Fondasi `ai-assistant.md` describes; `docs/final/ai-provider-engine.md` gets this row when it is next edited.
+- Data model: `generations.runs` (run number, part of the queue job id) and `generations.error_meta`; `template_key` has no foreign key until `template_versions` exists.
+- pnpm `allowBuilds` keeps `msgpackr-extract` off; BullMQ uses msgpackr's JavaScript fallback.
+Reason: measured in the spike: progress reaches the page in a median 6 ms (p95 12 ms), and neither a graceful nor a hard worker restart lost or repeated a step.
+
+### D-452 — Data decisions from the RS-15 pre-check
+Accepted · 2026-11-28 · RS-15 · owner's choice (interview 2026-11-28) · supersedes D-208; refines D-210, D-216; reports in `docs/drafts/data-precheck/`
+- **CP text:** the official CP text of Kepka BSKAP 046/2025 (and its amendments) is stored per subject, phase and element and is the reference. Each topic links to its element; the existing per-topic text stays as a teacher-friendly explanation labelled "ringkasan SIGRAK", never shown as the official CP.
+- **KKA:** Koding dan Kecerdasan Artifisial follows Permendikdasmen 13/2025: an optional subject in grades 5–6 (72 and 64 JP a year). Each school chooses to run it as a regular subject or through kokurikuler (Kepmendikdasmen 127/P/2025). Supersedes D-208.
+- **Kepanduan:** Pramuka is set up by default; a school may replace it with another kepanduan, but one must stay (Permendikdasmen 13/2025 Pasal 22 ayat (2)).
+- **Kokurikuler themes:** "Gaya Hidup Berkelanjutan" is offered again, as in Panduan Kokurikuler 2025.
+- **Supervision:** the two "telaah" instruments (administrasi, perencanaan) are optional SIGRAK instruments, sourced to the regional sample and SIGRAK's own set, not to Perdirjen GTK 7607/2023.
+- **MI profile:** includes Asesmen Nasional for final-year pupils (Permendikdasmen 9/2026 Pasal 5–6), next to TKA and AKMI.
+- **Content outside the decrees** (PAI tajwid items, Bahasa Inggris topics for grades 1–2, older PJOK element names, content in a later phase): left in the data unchanged but marked "di luar CP" with the reason, for later review.
+- Smaller corrections listed in the reports (quote wording, article references, stale notes, fokus→TP links, unannotated harakat changes) are fixed; every set stays `draft` until the owner signs it off (D-447).
+Reason: align the data with the 2025–2026 rules where the pre-check found SIGRAK deviating, while keeping teacher-friendly summaries.
+
+### D-453 — Plane integration choices
+Accepted · 2026-11-28 · RS-07 · owner's choice (interview 2026-11-28) · refines D-439, D-440; design in `docs/drafts/plane-integration.md`
+- Problems sent to Plane carry kabupaten/kota and kecamatan, always, besides the masked text, role and admin link (D-393 masking still applies to the text).
+- The board gets a tenth column "Tidak dilanjutkan"; the reporter is told when a problem is not pursued, with a reason.
+- Triage staff send a problem to the board with "Kirim ke papan" after seeing the masked preview; nothing goes automatically.
+- Users have two entries: Minta Bantuan and a separate "Kirim Masukan" for ideas.
+- The reporter is told at each stage change they can see, not only at a few key stages.
+- If Plane CE refuses webhook URLs on the internal network, SIGRAK polls Plane every 2 minutes and has no inbound endpoint.
+- The integration is off on staging by default.
+- Nothing from Plane comments comes back into SIGRAK; release notes are written in the SIGRAK console.
+Reason: the owner wants fuller regional detail for the teams, an explicit send step, a separate channel for ideas, and steady updates for reporters.
+
+### D-454 — School names may go to Plane; lighter text masking
+Accepted · 2026-11-28 · RS-07 · owner's choice ("sudah ada kesepakatan di luar repo, nama sekolah bisa dikirim, dan penyamaran teks bisa longgar") · amends the first point of D-453 and narrows D-393 masking for the Plane integration only; agreement held outside the repository (D-444, D-446)
+- A problem sent to Plane may carry the school name, besides kabupaten/kota and kecamatan.
+- Text masking before sending to Plane is a lighter pass. Default until the owner says otherwise: pupils' direct identifiers (NIK, NISN, phone numbers, pupil full names) are still removed; other text goes as written.
+Reason: the teams work better with the school named, and the agreement covering this exists offline.
+
+### D-455 — Plane masking: only NIK and phone numbers are removed
+Accepted · 2026-11-28 · RS-07 · owner's choice ("yang tidak dikirim NIK, nomor telepon; NISN dan nama lengkap bisa") · settles the default left open in D-454
+Before a problem is sent to Plane, NIK and phone numbers are removed. Pupils' full names and NISN may be sent, as may the school name (D-454). The agreement covering this is held outside the repository (D-444, D-446). Other channels keep the D-393 masking.
+Reason: the teams need to identify the pupil and school to follow up; NIK and phone numbers are not needed for that.
+
+### D-456 — One layer model for national, regional and school rules
+Accepted · 2026-11-28 · owner's choice (discussion 2026-11-28) · extends D-354, D-378, D-380
+- **One model for every kind of data** that varies in the field: calendars, extracurricular and kokurikuler catalogs, muatan lokal, supervision instruments, document formats, and later domains the same way.
+- **Layers:** national → province → kabupaten/kota → kecamatan → school. Kecamatan is the only layer between kabupaten/kota and the school (no separate gugus/KKG layer). Every item records its line (Kemendikdasmen or Kemenag) next to its layer.
+- **National stays:** what is set nationally is never changed or removed by a lower layer, and nobody proposes removing it. A lower layer may add its own items and may choose not to use a national item that is not mandatory (hide it for its region or school). Mandatory national items (for example the official CP text, national holidays, TKA and AN dates, at least one kepanduan) always apply.
+- **Lower layers store only their differences** (additions and items not used), so changes in a higher layer flow down.
+- **Official regional rules** (a province or kabupaten calendar, a regional decree) apply automatically to the schools in that region. **Local agreements** (for example a kecamatan agreement) are opt-in per school.
+- **Proposals:** school users propose for their school (the operator approves, D-380). The team proposes additions or changes for kecamatan, kabupaten/kota and province; the regional lead (Koordinator Wilayah) or a validator approves, with evidence attached for official rules.
+- A school's region comes from its NPSN/Dapodik data; users do not pick a region freely, they pick the optional local packages they follow.
+- Every value shown names its source and layer.
+Reason: rules in the field differ by province, kabupaten/kota, kecamatan and school; national rules must stay intact while regions and schools add what they need.
+
+### D-457 — Plane masking also removes KK and NUPTK; UU PDP handling stays offline
+Accepted · 2026-11-28 · RS-07 · owner's choice · refines D-455, extends D-444
+- KK and NUPTK numbers are removed before sending to Plane, like NIK; NIP is enough to identify staff. This matches the 16-digit rule in the draft.
+- UU PDP handling for the Plane board and its data (retention limits, backups, exports, notices) is set by the developer outside the repository under the existing agreement and rules; the repository does not track it.
+Reason: the teams do not need KK or NUPTK; data-protection terms are already agreed offline.

@@ -27,3 +27,4 @@ Work in the GitHub repository arumiforge/sigrak, starting from the latest main. 
 | 001 | [masuk-kkg](prompts/001-masuk-kkg.md) — login page painting: SD and MI teachers at a KKG meeting | pages-login | requested |
 | 002 | [kosong](prompts/002-kosong.md) — six empty-state paintings (pupils, documents, question bank, timetable, search, notifications) | states-empty | requested |
 | 003 | [memuat](prompts/003-memuat.md) — small loader, page loader and skeleton shimmer (SVG + CSS) | loaders | requested |
+| 004 | [logo](prompts/004-logo.md) — SIGRAK logo: mark and wordmark, 3–5 directions, then the final set (own starter prompt in the brief) | brand-logo | requested |

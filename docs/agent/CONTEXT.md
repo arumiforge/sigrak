@@ -32,7 +32,7 @@ Everything is built fresh on this stack at the repository root (R0-05 onwards); 
 - **Frontend:** React 19 + Inertia (AdonisJS adapter), React Compiler; no SSR for the app, public pages server-rendered; SPA feel (persistent layouts, prefetch, deferred props + skeletons, optimistic updates with undo, view transitions) (D-389).
 - **UI:** Tailwind 4 + shadcn/ui (Radix) + Motion, Sonner, Vaul, cmdk, TanStack Table + Virtual (Query only for chatbot/search). Hugeicons Pro, Rounded Stroke and Rounded Solid only (D-402, D-434); shadcn/studio Pro blocks (`radix` variants only, restyled), no ProUI, no Aceternity (D-434). Rich identity with Codex-made assets in `ai/` (D-390, F-011, F-022). Fondasi `ui.md` and `feedback.md` apply.
 - **AI:** content generation on teachers' own Gemini free-tier keys (D-023, `docs/final/ai-provider-engine.md`); chatbot on the owner's OpenAI-compatible keys, two modes: system Q&A and the school chatbot under the school–parent agreement (D-393, D-394).
-- **Documents:** PDF with Typst if the R0-07 spike passes (Gotenberg fallback), A4 default + F4 (D-399, F-020). Excel/CSV/Word exports keep Indonesian labels (D-150, F-012).
+- **Documents:** PDF with Typst: CLI on `worker-exports`, WASM previews in the browser, pinned fonts, formulas stored as LaTeX; Gotenberg fallback, also for searchable Arabic (D-450); A4 default + F4 (D-399, F-020). Excel/CSV/Word exports keep Indonesian labels (D-150, F-012).
 - **Exam site:** `ujian.` with its own guard, low-priority add-on (D-392).
 - **Python:** only when needed (data processing), in its own folder with pinned dependencies.
 

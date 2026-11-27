@@ -1,0 +1,4 @@
+node_modules/
+fonts/
+build/
+results/wasm-node-*.pdf

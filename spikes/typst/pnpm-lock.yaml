@@ -1,0 +1,30 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@myriaddreamin/typst-ts-web-compiler':
+        specifier: 0.8.0-rc4
+        version: 0.8.0-rc4
+      tex2typst:
+        specifier: 0.6.2
+        version: 0.6.2
+
+packages:
+
+  '@myriaddreamin/typst-ts-web-compiler@0.8.0-rc4':
+    resolution: {integrity: sha512-iHjdc7z2G2jhi2A9DAOZEL40kEbJb1xkayFQFguaCuirhjxGK61t6agQ55NCdHiwaGykQx2+LGxLhdVLgRYcvg==}
+
+  tex2typst@0.6.2:
+    resolution: {integrity: sha512-KQwpKUZ3kWI/cBEChFhVPJJV5/61R2Eb0epL6AGlQTKdto4OZer9wX4F2mbTsThVJPeLP4Ax0CkUk23IdcgnGQ==}
+
+snapshots:
+
+  '@myriaddreamin/typst-ts-web-compiler@0.8.0-rc4': {}
+
+  tex2typst@0.6.2: {}

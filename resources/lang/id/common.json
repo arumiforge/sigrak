@@ -10,7 +10,8 @@
     "calendar": "Kalender",
     "home": "Ringkasan",
     "sign_out": "Keluar",
-    "skip_to_content": "Langsung ke isi halaman"
+    "skip_to_content": "Langsung ke isi halaman",
+    "ai_demo": "Coba AI"
   },
   "actions": {
     "retry": "Coba lagi",

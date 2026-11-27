@@ -13,7 +13,8 @@
     },
     "decisions": [
       "D-353",
-      "D-357"
+      "D-357",
+      "D-452"
     ],
     "created_on": "2026-11-10",
     "conventions": "docs/data/taxonomy/README.md"
@@ -28,7 +29,7 @@
       "force": "free",
       "source_ref": {
         "source": "sigrak",
-        "decision": null,
+        "decision": "D-357",
         "note": "Province and kabupaten/kota use the official region codes; the dataset is not in the repo yet."
       },
       "status": "draft",
@@ -46,7 +47,7 @@
       "force": "free",
       "source_ref": {
         "source": "sigrak",
-        "decision": null
+        "decision": "D-357"
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -63,7 +64,7 @@
       "force": "free",
       "source_ref": {
         "source": "sigrak",
-        "decision": null
+        "decision": "D-357"
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -79,10 +80,36 @@
       "level_scope": "both",
       "force": "maximum",
       "source_ref": {
-        "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": "Pasal 26",
-        "pages": null,
-        "note": "SD cap 72 JP per year warns (D-232). Local subjects are the local_content rows of subjects.json."
+        "regulation": "PERMENDIKDASMEN-13-2025",
+        "article": "Lampiran II Tabel 1–5, keterangan Muatan Lokal",
+        "pages": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        "note": "SD: at most 2 JP a week, 72 JP a year (64 in kelas VI); above it SIGRAK warns (D-232). MI: KMA 1503/2025 sets at least 72 and at most 216 JP a year in kelas I–V and 64–192 in kelas VI, so MI warns below the minimum and above the maximum. Regional governments set muatan lokal (12/2024 Pasal 26). Local subjects are the local_content rows of subjects.json.",
+        "also": [
+          {
+            "regulation": "PERMENDIKBUDRISTEK-12-2024",
+            "article": "Pasal 26",
+            "pages": [
+              9
+            ]
+          },
+          {
+            "regulation": "KMA-1503-2025",
+            "article": "Lampiran II BAB III huruf B, Tabel 1–5",
+            "pages": [
+              28,
+              29,
+              30,
+              31
+            ]
+          }
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -95,6 +122,18 @@
         ],
         "path": "subjects[kind=local_content]",
         "code_field": "code"
+      },
+      "jp_limits": {
+        "sd": {
+          "max": 72,
+          "max_grade_6": 64
+        },
+        "mi": {
+          "min": 72,
+          "max": 216,
+          "min_grade_6": 64,
+          "max_grade_6": 192
+        }
       }
     },
     {

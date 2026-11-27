@@ -9,6 +9,7 @@ export const controllers = {
     Session: () => import('#controllers/exam/session_controller'),
   },
   school: {
+    AiDemo: () => import('#controllers/school/ai_demo_controller'),
     Calendar: () => import('#controllers/school/calendar_controller'),
     Session: () => import('#controllers/school/session_controller'),
   },

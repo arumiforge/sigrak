@@ -16,6 +16,8 @@ public/assets/
 tmp/*
 !tmp/.gitkeep
 coverage/
+# Redis snapshot when redis-server was started from the repository (cloud sessions)
+dump.rdb
 
 # Editors and agents
 /.codex

@@ -20,7 +20,7 @@
     "legal_basis_cited": [
       {"text": "Peraturan Menteri Pendidikan Dasar dan Menengah Nomor 10 Tahun 2025 tentang Standar Kompetensi Lulusan …", "pages": [11]},
       {"text": "Peraturan Menteri Pendidikan Dasar dan Menengah Nomor 12 Tahun 2025 tentang Standar Isi …", "pages": [11]},
-      {"text": "Peraturan Menteri Pendidikan, Kebudayaan, Riset, dan Teknologi Nomor 16 Tahun 2022 tentang Standar Proses …", "pages": [11]},
+      {"text": "Peraturan Menteri Pendidikan, Kebudayaan, Riset, dan Teknologi Nomor 16 Tahun 2022 tentang Standar Proses …", "note": "Revoked by Permendikdasmen 1/2026 Pasal 20 huruf b, in force 5 Jan 2026 (process-standard-permendikdasmen-1-2026.json). See open_points.", "pages": [11]},
       {"text": "Peraturan Menteri Pendidikan, Kebudayaan, Riset, dan Teknologi Nomor 21 Tahun 2022 tentang Standar Penilaian …", "pages": [11]},
       {"text": "Peraturan Menteri Pendidikan Dasar dan Menengah Nomor 13 Tahun 2025 tentang Perubahan atas Permendikbudristek Nomor 12 Tahun 2024 tentang Kurikulum …", "pages": [11]},
       {"text": "Keputusan Kepala BSKAP Nomor 046/H/Kr/2025 tentang Capaian Pembelajaran …", "pages": [11]}
@@ -1422,6 +1422,7 @@
     {"topic": "Ekstrakurikuler example mismatch", "text": "Fase A rapor example lists 'Silat' with the description 'menguasai teknik dasar dribbling dan passing' (football text); the Fase A-C example uses 'Sepak Bola' with the same text.", "pages": [142, 145]},
     {"topic": "Paket A rapor example", "text": "Descriptions in the Paket A rapor example do not match their subjects (e.g. PJOK described with planets, Bahasa Inggris with dance). Not used.", "pages": [154, 155]},
     {"topic": "Kokurikuler in rapor for SD", "text": "The SD format has one 'Kokurikuler' free-text box naming strengthened and still-to-strengthen dimensions; the guide gives no grade/scale for kokurikuler and defers kokurikuler planning to a separate guide.", "pages": [10, 70, 71]},
-    {"topic": "Merefleksi characteristics heading", "text": "The characteristics box for 'Pengalaman Belajar Merefleksi' on p.18 is headed 'Karakteristik Pengalaman Belajar Memahami' (misprint); content clearly belongs to merefleksi.", "pages": [18]}
+    {"topic": "Merefleksi characteristics heading", "text": "The characteristics box for 'Pengalaman Belajar Merefleksi' on p.18 is headed 'Karakteristik Pengalaman Belajar Memahami' (misprint); content clearly belongs to merefleksi.", "pages": [18]},
+    {"topic": "Standar Proses cited is revoked", "text": "The guide (Juli 2025) cites Permendikbudristek 16/2022 tentang Standar Proses as legal basis (p.11). Permendikdasmen 1/2026 Pasal 20 huruf b revoked it, in force on promulgation, 5 Jan 2026. The guide's lesson-plan rules may differ from the new planning minimum (Pasal 5: tujuan, langkah, asesmen); check them against Pasal 5 before SIGRAK relies on them. See process-standard-permendikdasmen-1-2026.json.", "pages": [11]}
   ]
 }

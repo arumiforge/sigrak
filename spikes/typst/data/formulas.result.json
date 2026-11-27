@@ -1,0 +1,564 @@
+[
+  {
+    "id": 1,
+    "topic": "Penjumlahan pecahan",
+    "latex": "\\frac{3}{4} + \\frac{1}{4} = 1",
+    "manual": "3/4 + 1/4 = 1",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "3/4 + 1/4 = 1",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "3/4 + 1/4 = 1",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 2,
+    "topic": "Pecahan campuran",
+    "latex": "2\\frac{1}{2} = \\frac{5}{2}",
+    "manual": "2 thin 1/2 = 5/2",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "2 1/2 = 5/2",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "2 1/2 = 5/2",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 3,
+    "topic": "Pecahan senilai",
+    "latex": "\\frac{2}{3} = \\frac{2 \\times 2}{3 \\times 2} = \\frac{4}{6}",
+    "manual": "2/3 = (2 times 2)/(3 times 2) = 4/6",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "2/3 = (2 times 2)/(3 times 2) = 4/6",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "2/3 = (2 times 2)/(3 times 2) = 4/6",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 4,
+    "topic": "Perkalian dan pembagian",
+    "latex": "12 \\times 5 = 60, \\quad 48 \\div 6 = 8",
+    "manual": "12 times 5 = 60, quad 48 div 6 = 8",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "12 times 5 = 60, quad 48 div 6 = 8",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "12 times 5 = 60, quad 48 div 6 = 8",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 5,
+    "topic": "Desimal dan persen",
+    "latex": "0{,}75 = \\frac{75}{100} = 75\\%",
+    "manual": "\"0,75\" = 75/100 = 75%",
+    "review": {
+      "plain": "salah",
+      "fixed": "lulus",
+      "mitex": "salah",
+      "note": "Koma desimal 0{,}75 menjadi \"0, 75\" (ada spasi) di tex2typst dan mitex."
+    },
+    "plain": {
+      "typst": "0, 75 = 75/100 = 75 %",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "\"0,75\" = 75/100 = 75 %",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 6,
+    "topic": "Luas persegi panjang",
+    "latex": "L = p \\times l",
+    "manual": "L = p times l",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "L = p times l",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "L = p times l",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 7,
+    "topic": "Keliling persegi panjang",
+    "latex": "K = 2 \\times (p + l)",
+    "manual": "K = 2 times (p + l)",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "K = 2 times(p + l)",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "K = 2 times(p + l)",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 8,
+    "topic": "Luas lingkaran",
+    "latex": "L = \\pi r^2, \\quad \\pi \\approx \\frac{22}{7}",
+    "manual": "L = pi r^2, quad pi approx 22/7",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "L = pi r^2 , quad pi approx 22/7",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "L = pi r^2 , quad pi approx 22/7",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 9,
+    "topic": "Volume kubus",
+    "latex": "V = s^3 = 5^3 = 125\\ \\text{cm}^3",
+    "manual": "V = s^3 = 5^3 = 125 \"cm\"^3",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "V = s^3 = 5^3 = 125 med \"cm\"^3",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "V = s^3 = 5^3 = 125 med \"cm\"^3",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 10,
+    "topic": "Akar kuadrat",
+    "latex": "\\sqrt{144} = 12",
+    "manual": "sqrt(144) = 12",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "sqrt(144) = 12",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "sqrt(144) = 12",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 11,
+    "topic": "Akar pangkat tiga",
+    "latex": "\\sqrt[3]{27} = 3",
+    "manual": "root(3, 27) = 3",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "root(3, 27) = 3",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "root(3, 27) = 3",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 12,
+    "topic": "Satuan panjang (titik ribuan)",
+    "latex": "1\\ \\text{km} = 1.000\\ \\text{m}",
+    "manual": "1 \"km\" = \"1.000\" \"m\"",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "1 med \"km\" = 1.000 med \"m\"",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "1 med \"km\" = 1.000 med \"m\"",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 13,
+    "topic": "Besar sudut",
+    "latex": "\\angle ABC = 90^\\circ",
+    "manual": "angle A B C = 90 degree",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": "tex2typst memakai lingkaran kecil, bukan tanda derajat; perbaikan memakai degree."
+    },
+    "plain": {
+      "typst": "angle A B C = 90^circle.small",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "angle A B C = 90 degree",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 14,
+    "topic": "Garis sejajar",
+    "latex": "\\overline{AB} \\parallel \\overline{CD}",
+    "manual": "overline(A B) parallel overline(C D)",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "overline(A B) parallel overline(C D)",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "overline(A B) parallel overline(C D)",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 15,
+    "topic": "KPK",
+    "latex": "\\text{KPK}(4, 6) = 12",
+    "manual": "\"KPK\"(4, 6) = 12",
+    "review": {
+      "plain": "kecil",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": "tex2typst memberi spasi antara KPK dan kurung."
+    },
+    "plain": {
+      "typst": "\"KPK\" (4, 6) = 12",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "\"KPK\"(4, 6) = 12",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 16,
+    "topic": "Bilangan bulat negatif",
+    "latex": "(-2) \\times 3 = -6",
+    "manual": "(-2) times 3 = -6",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "(- 2) times 3 = - 6",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "(- 2) times 3 = - 6",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 17,
+    "topic": "Rata-rata",
+    "latex": "\\bar{x} = \\dfrac{x_1 + x_2 + \\cdots + x_n}{n}",
+    "manual": "macron(x) = display((x_1 + x_2 + dots.c + x_n)/n)",
+    "review": {
+      "plain": "kecil",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": "\\dfrac kehilangan ukuran tampilan di tex2typst; {\\displaystyle ...} bahkan menghapus isi."
+    },
+    "plain": {
+      "typst": "macron(x) = frac(x_1 + x_2 + dots.c + x_n, n)",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "macron(x) = display(frac(x_1 + x_2 + dots.c + x_n, n))",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 18,
+    "topic": "Kotak isian",
+    "latex": "\\square + 7 = 15",
+    "manual": "square.stroked + 7 = 15",
+    "review": {
+      "plain": "lulus",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": ""
+    },
+    "plain": {
+      "typst": "square + 7 = 15",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "square + 7 = 15",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 19,
+    "topic": "Uang dan pembagian (titik dua)",
+    "latex": "\\text{Rp}12.500 : 5 = \\text{Rp}2.500",
+    "manual": "\"Rp12.500\" : 5 = \"Rp2.500\"",
+    "review": {
+      "plain": "kecil",
+      "fixed": "lulus",
+      "mitex": "lulus",
+      "note": "tex2typst memberi spasi antara Rp dan angka."
+    },
+    "plain": {
+      "typst": "\"Rp\" 12.500 : 5 = \"Rp\" 2.500",
+      "ok": true,
+      "safe": true
+    },
+    "fixed": {
+      "typst": "\"Rp\"12.500 : 5 = \"Rp\"2.500",
+      "ok": true,
+      "safe": true
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  },
+  {
+    "id": 20,
+    "topic": "Penjumlahan bersusun",
+    "latex": "\\begin{array}{r} 125 \\\\ +\\ 378 \\\\ \\hline 503 \\end{array}",
+    "manual": "#grid(columns: 2, align: right, inset: (x: 1.5pt, y: 2.5pt), [], $125$, $+$, $378$, grid.hline(stroke: 0.6pt), [], $503$)",
+    "review": {
+      "plain": "galat",
+      "fixed": "galat",
+      "mitex": "salah",
+      "note": "\\hline di array tidak didukung tex2typst; mitex menghilangkan garisnya tanpa pesan. Perlu blok bersusun SIGRAK sendiri."
+    },
+    "plain": {
+      "typst": "mat(delim: #none, align: #right, 125; +med 378; hline 503)",
+      "ok": false,
+      "error": "unknown variable: hline",
+      "safe": false
+    },
+    "fixed": {
+      "typst": "mat(delim: #none, align: #right, 125; +med 378; hline 503)",
+      "ok": false,
+      "error": "unknown variable: hline",
+      "safe": false
+    },
+    "manualCheck": {
+      "ok": true
+    },
+    "mitex": {
+      "ok": true
+    }
+  }
+]

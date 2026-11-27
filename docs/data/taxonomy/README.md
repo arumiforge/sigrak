@@ -14,7 +14,7 @@ Seed data for the master taxonomy (D-357) and the regulation registry (D-354), t
 | `facet-f-content.json` | F Konten | Content types, LKPD Wave 1 patterns, Game kelas templates; links to item types and difficulty | 36 |
 | `facet-g-context.json` | G Konteks | Region levels, muatan lokal, local languages, Konteks Daerah kinds, regional calendar | 13 |
 | `facet-h-administration.json` | H Administrasi | School roles, teacher duties, staff roles, people (murid), school documents, supervision instruments; link to Berkas Administrasi | 41 |
-| `regulations.json` | — | `regulations` (38) and `regulation_relations` (28) | — |
+| `regulations.json` | — | `regulations` (40) and `regulation_relations` (30) | — |
 
 Structure was checked by a data test in the removed first build; the new app gets a Japa data test that runs in CI (D-388).
 
@@ -30,12 +30,12 @@ Each facet file has a `meta` block and `nodes`. A node follows §9.2:
 | `parent` | Code of the parent node in the same facet, or `null` for a top-level list |
 | `level_scope` | `sd`, `mi`, or `both` |
 | `force` | Strength of the rule behind the concept, one of the `FORCE` keys in facet A (D-353). SIGRAK's own lists are `free` |
-| `source_ref` | `{regulation, article, pages, note?, also?}` with a code from `regulations.json`, or `{source: "sigrak", decision}` |
+| `source_ref` | `{regulation, article, pages, note?, also?}` with a code from `regulations.json`, or `{source: "sigrak", decision, note?, also?}`. An `also` entry names a `regulation`, or a `source_file` in `docs/sources/` that is not a regulation (an owner sample), with `pages` or `decision` |
 | `status` | `draft` until Tim Validasi signs off |
 | `since` / `retired_in` | Taxonomy version that added or retired the node |
 | `crosswalk` | Older concepts this node replaces: `{from, type, note?}`, type `renamed`, `approximate`, `replaced`, `merged`, or `split` |
 
-Optional keys: `vocabulary` (`closed` or `open`, required on every active top-level node), `key` (English snake_case value code reads), `members_from` (see below), `data_files`, `maps_to` and `links_to` (another node code), `note`, and a few facet-specific values (`grades`, `app_behaviour`, `category`, `feeds_report`, `sensitive`, `wave`, `build_status`, `ministry`).
+Optional keys: `vocabulary` (`closed` or `open`, required on every active top-level node), `key` (English snake_case value code reads), `members_from` (see below), `data_files`, `maps_to` and `links_to` (another node code), `note`, and a few facet-specific values (`grades`, `app_behaviour`, `category`, `feeds_report`, `sensitive`, `wave`, `build_status`, `ministry`, and `jp_limits` on `MULOK`: JP a year per level, `max` for SD, `min` and `max` for MI, with `_grade_6` variants).
 
 ## Rules
 
@@ -43,7 +43,9 @@ Optional keys: `vocabulary` (`closed` or `open`, required on every active top-le
 2. **Old terms are retired nodes.** Profil Pelajar Pancasila (`P3`, `P3.*`), `P5`, `P5RA`, `RPP`, `MODUL-AJAR`, and `PESERTA-DIDIK` are nodes with `retired_in: TAX-2026-R1`, kept only so older documents and guides can be read. A node whose `retired_in` equals its `since` was never offered for tagging. The current node points to them in `crosswalk`: P3 → 8 DPL, P5/P5RA → kokurikuler (`JENIS-PEMBELAJARAN.KOK`), RPP/Modul Ajar → RPM (`KONTEN.RPM`), peserta didik → murid (`PIHAK.MURID`). Two DPL links (`approximate`) are SIGRAK's reading, not an official mapping.
 3. **Link, never copy.** Lists that already live in `docs/data/catalogs/` (D-367) or `docs/data/curriculum/` get one taxonomy node with `members_from: {files, path, code_field}`. Their items keep their own codes (`SIGRAK-KAT-KOK-KAIH-01`, `PP`, `SIGRAK-SD-2026-R1-PP-K1-01-TP01`); a tag stores the node code and the member code. Path syntax: `a[]` iterates a list, `a[key=value]` iterates a filtered list. Catalog lists without codes (`movement_forms_7kaih`, `outputs`, ekstrakurikuler `formats` and `days`) are not linked yet.
 4. **Facet E is the core of Peta Asesmen.** P4-19 builds `docs/data/assessment/` (D-344) on these codes and does not redefine them: `ASES-TUJUAN.*` for `purposes.json`, `ASES-TEKNIK.*`, `ASES-INSTRUMEN.*`, `ASES-RESPONS.*` and `MEDIA.*` (facet D) for `methods.json`, `ASES-SKOR.*` for `scoring.json`, `ASES-TL.*` for `uses.json`, and `ASES-RANAH.*` as the top of `domains.json`. Subdomains and indicators are children with dotted codes (`ASES-RANAH.LIT.BACA`, then `ASES-RANAH.LIT.BACA.EVAL`). P4-19 may add new core codes here; it never renames one. `sensitive: true` domains follow D-350.
-5. **New codes** take the parent's code plus a new part. A retired code keeps its node with `retired_in` set.
+5. **New codes** take the parent's code plus a new part. The rule is for codes added from now on: some seed codes do not extend their parent's code (for example `KELAS.1` under `FASE.A`, `KOK-BENTUK`, `TOPIK`, `FOKUS`, `WILAYAH.KABKOTA`, `JENIS-MAPEL.KOKURIKULER` under `JENIS-MAPEL.PILIHAN`) and keep it, because codes never change. A retired code keeps its node with `retired_in` set.
+6. **Subject kinds and KKA (D-452, supersedes D-208).** Koding dan Kecerdasan Artifisial is the optional subject (`JENIS-MAPEL.PILIHAN`) of grades 5–6 (Permendikdasmen 13/2025 Lampiran II Tabel 4–5: 72 and 64 JP a year). A school that offers it runs it as a regular subject or through kokurikuler; `JENIS-MAPEL.KOKURIKULER` (code kept, now a child of `JENIS-MAPEL.PILIHAN`, force `school_discretion`) is that second choice, set per school. Both are `school_discretion`, so the app never requires KKA.
+7. **Supervision.** `SUPERVISI.OBSERVASI` and `SUPERVISI.PASCA-OBSERVASI` follow Perdirjen GTK 7607/2023. The two telaah instruments (`SUPERVISI.TELAAH-ADMINISTRASI`, `SUPERVISI.TELAAH-PERENCANAAN`) are optional SIGRAK instruments (`school_discretion`, D-452), sourced to the owner's regional sample and SIGRAK's own set; 7607 has no telaah instrument.
 
 ## Regulation registry
 
@@ -57,7 +59,9 @@ Codes: `<KIND-OR-ISSUER>-<NUMBER>-<YEAR>` in uppercase, `/` and `.` become `-`: 
 
 `regulation_relations`: `{from, to, type, articles, note}` with type `amends`, `revokes`, `implements`, or `references`. Where the legal basis is not yet checked, the relation is `references` with a note.
 
-`pending_p4_23: true` marks a regulation whose PDF is not yet in `docs/sources/` (`source_file` and `sha256` null). P4-23 filled six such entries and P4-32 the last four (Permendikdasmen 1/2026 and 9/2026, Kepmendikdasmen 17/2026, base Permendikbudristek 12/2024), so every entry is now `false`. The test checks every non-null `sha256` against its file.
+`pending_p4_23: true` marks a regulation whose PDF is not yet in `docs/sources/` (`source_file` and `sha256` null). P4-23 filled six such entries and P4-32 the last four (Permendikdasmen 1/2026 and 9/2026, Kepmendikdasmen 17/2026, base Permendikbudristek 12/2024). RS-17 added one pending entry, the base Asesmen Nasional regulation `PERMENDIKBUDRISTEK-17-2021` (amended by 9/2026), so it is the only `true` entry. The test checks every non-null `sha256` against its file.
+
+Only regulations that SIGRAK data cites, or that amend or implement a cited one, are entries. Older regulations named in `notes` only as revoked by a registered one (Permendikbudristek 5/2022, 8/2024 and 47/2023, Permendiknas 3/2008, Kepka BSKAP 32/H/KR/2024, KMA 890/2019) are not registered; Permendikbudristek 16/2022 and 46/2023 are, because older documents cite them.
 
 ## Open points for Tim Validasi
 

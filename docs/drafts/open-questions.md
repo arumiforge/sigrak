@@ -2,32 +2,15 @@
 
 - **Status:** draft (owner review)
 - **Task:** P1-08 (started); kept up to date by every task
-- **Last updated:** 2026-11-11 (questions from P4-22, P4-23, P4-24, and P5-03i…l added; D-379…D-386 answered)
+- **Last updated:** 2026-11-27 (owner interview: D-443…D-449 answered)
 
 ## Purpose
 
 One list of every unresolved open question from the drafts, task files, and PRs, so the owner can answer them in one pass. Each draft keeps its own *Open questions* list; this file only collects them. When a question is answered, record the decision in `DECISIONS.md`, tick it in the source draft, and remove it here.
 
+**Tim Validasi** rows: agents pre-check each data set against its official source first and flag doubtful items; people review only the flagged items (D-447, task RS-15).
+
 **Who answers:** *owner* = a product or business choice only the owner can make · *team* = the development team finds out (testing, research, checking a service) · *owner + team* = the team prepares, the owner decides.
-
-## Business
-
-| Question | Source | Who answers |
-|---|---|---|
-| Present the short version to principals and supervisors, and record their objections | [product-concept.md](../final/product-concept.md#open-questions) | owner |
-
-## Brand
-
-| Question | Source | Who answers |
-|---|---|---|
-| Final name: check "Sigrak" (and backup "Kapur") in PDKI classes 9, 41, 42, then register the .id and .com domains together | [product-concept.md](../final/product-concept.md#open-questions) | owner + team |
-| Logo: brief a designer (colour, single-colour, negative, minimum 16 px) | [product-concept.md](../final/product-concept.md#open-questions) | owner |
-
-## Product and navigation
-
-| Question | Source | Who answers |
-|---|---|---|
-| Test the five-tab menu with 5 class teachers and 2 subject teachers on a click prototype (no real data) | [product-concept.md](../final/product-concept.md#open-questions) | team (owner recruits the teachers) |
 
 ## Content engine
 
@@ -73,8 +56,6 @@ The MI allocation question (official copy of KMA 1503/2025) is closed by D-038.
 
 | Question | Source | Who answers |
 |---|---|---|
-| Design-system choices without a decision: status colours for Pengingat and help requests, the "Disahkan" label, which template uses which margin profile | [design-system.md](../final/design-system.md) | owner |
-| Confirm that the later decisions win where they contradict earlier ones, as the docs now assume: D-339 over D-314 (eleven staff roles, not three), D-339 over D-315 (the owner, not an admin, sets AI models), D-216 over D-161 (ekstrakurikuler in v1) | [P4-24 task](../agent/tasks/P4-24-final-docs-sync.md) | owner |
 | Column names for tables described only in words (support sessions, Berkas jobs, school and user settings, leger state, observation results, Konteks Daerah, console tables) | [data-model.md](../final/data-model.md) | team (in each build slice) |
 
 ## Calendar and timetable (P5-03i, P5-03j, 2026-11-11)
@@ -100,6 +81,10 @@ Defaults in use until answered; details in [the P5-03 task file](../agent/tasks/
 | Two Profil Pelajar Pancasila → 8 DPL links are `approximate`: berkebinekaan global → kewargaan, bergotong royong → kolaborasi | [P4-22 task](../agent/tasks/P4-22-taxonomy-seed.md) | Tim Validasi |
 | DPL sub-dimensions, CP element codes, the region code list, and articles missing where only a mirror or summary was read | [P4-22 task](../agent/tasks/P4-22-taxonomy-seed.md) | team, after P4-32 |
 | Review the new SD/MI extracts in `docs/data/regulations/` (10/2025, 12/2025, 26/2025, 21/2022, 6/2026, CP decree index) and the calendar data in `docs/data/calendar/` | [regulations README](../data/regulations/README.md), [calendar README](../data/calendar/README.md) | Tim Validasi |
+
+## Answered on 2026-11-27
+
+Parents use the public chatbot without AI (D-443); legal checks handled offline by the developer (D-444); later decisions win and design-system defaults confirmed (D-445); AI providers, data agreements and the PDKI name check come from the developer, offline (D-446); agents pre-check draft data (D-447); logo by Codex from a brief (D-448); no separate teacher click test or principal presentation (D-449).
 
 ## Answered on 2026-11-11
 

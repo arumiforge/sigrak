@@ -21,7 +21,7 @@
     "effective_on": "2026-01-09",
     "gazette": "Berita Negara Republik Indonesia Tahun 2026 Nomor 11",
     "revokes": "Permendikbudristek Nomor 46 Tahun 2023 tentang Pencegahan dan Penanganan Kekerasan di Lingkungan Satuan Pendidikan (Berita Negara Republik Indonesia Tahun 2023 Nomor 595)",
-    "implemented_by": "Kepmendikdasmen Nomor 17 Tahun 2026 tentang Pedoman Penyelenggaraan Budaya Sekolah Aman dan Nyaman (not yet in docs/sources/)",
+    "implemented_by": "Kepmendikdasmen Nomor 17 Tahun 2026 tentang Pedoman Penyelenggaraan Budaya Sekolah Aman dan Nyaman (extract: safe-school-culture-guide-kepmendikdasmen-17-2026.json)",
     "downloaded_from": "https://www.kemendikdasmen.go.id/download/file/1585 (\"Salinan Permendikdasmen Nomor 6 Tahun 2026 - BSAN (JDIH).pdf\"; same file as /download/file/1599)",
     "downloaded_on": "2026-11-11",
     "copy_type": "SALINAN certified by Kepala Biro Hukum",
@@ -335,7 +335,7 @@
       "pages": [
         8
       ],
-      "text": "Implementing guide Kepmendikdasmen 17/2026 is not in docs/sources/ yet (official channel unreachable). Its forms (complaint channel, kesepakatan kelas, monev) are not extracted."
+      "text": "Implementing guide Kepmendikdasmen 17/2026 is now in docs/sources/ (mirror copy; the official channel was unreachable) and extracted in safe-school-culture-guide-kepmendikdasmen-17-2026.json, including the complaint channel, kesepakatan kelas and monev."
     }
   ]
 }

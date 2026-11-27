@@ -81,7 +81,7 @@
       {
         "key": "mindful",
         "name": "Berkesadaran",
-        "text": "Guru lebih dapat membangun kesadaran peserta didik untuk menjadi pembelajar yang aktif dan termotivasi secara intrinsik untuk belajar, serta aktif mengembangkan strategi belajar untuk mencapai tujuan."
+        "text": "Guru lebih dapat membangun kesadaran peserta didik untuk menjadi pembelajar yang aktif termotivasi secara intrinsik untuk belajar, serta aktif mengembangkan strategi belajar untuk mencapai tujuan."
       },
       {
         "key": "honouring",
@@ -1096,7 +1096,7 @@
         "subject": "Matematika",
         "focus": "Pembelajaran yang mengembangkan pola pikir logis, pemecahan masalah, dan keterampilan analitis dan komputatif",
         "model": "Pembelajaran Berbasis Masalah",
-        "example": "Pembelajaran Berbasis Masalah yang memberikan peluang peserta didik untuk memecahkan masalah nyata seperti komposisi dan nilai kalori makanan bergizi dengan menggunakan konsep proporsi, persentase dan pengukuran untuk mencari makanan sehat dan bergizi.",
+        "example": "Pembelajaran Berbasis Masalah yang memberikan peluang peserta didik untuk memecahkan masalah nyata seperti komposisi dan nilai kalori makanan bergizi dengan menggunakan konsep proporsi, persentase dan pengukuran untuk makanan sehat dan bergizi.",
         "pages": [
           42
         ]
@@ -1126,7 +1126,7 @@
         "subject": "Ilmu Sosial",
         "focus": "Pembelajaran yang menekankan pada kehidupan sosial, interaksi manusia, dan dinamika masyarakat untuk membentuk wawasan kebangsaan serta keterampilan berpikir kritis",
         "model": "Pembelajaran Kontekstual",
-        "example": "Pembelajaran Kontekstual dengan membandingkan nilai-nilai dan permasalahan pasar modern dan pasar tradisional pada sudut pandang sosial dan ekonomi dan memberikan solusi untuk mengatasi permasalahan tersebut.",
+        "example": "Pembelajaran Kontekstual dengan membandingkan nilai-nilai dan permasalahan pasar modern dan pasar tradisional pada sudut pandang sosial dan ekonomi dan memberikan solusi permasalahan tersebut.",
         "pages": [
           43
         ]
@@ -1417,7 +1417,7 @@
             ],
             "steps": [
               "Peserta didik melakukan uji coba proyek dan atau mempresentasikan hasil proyeknya",
-              "Peserta didik mendapatkan umpan balik dari teman, guru, dan narasumber dari Komunitas Peduli Ciliwung dan Pengelola Bank Sampah",
+              "Peserta didik mendapatkan umpan balik dari teman, guru, dan salah satu narasumber dari Komunitas Peduli Ciliwung dan Pengelola Bank Sampah",
               "Peserta didik membuat jurnal refleksi individu terhadap proyek yang telah dilakukan",
               "Peserta didik melakukan evaluasi diri terhadap pencapaian tujuan pembelajaran",
               "Peserta didik menemukan solusi dan atau peran lanjutan mereka setelah belajar"
@@ -1434,7 +1434,7 @@
             ],
             "steps": [
               "Guru dan Peserta didik menyimpulkan pembelajaran",
-              "Guru mengajak peserta didik merencanakan pembelajaran selanjutnya dan strategi belajar yang akan digunakan (contoh: topik yang akan dipelajari, mitra yang akan diundang, eksperimen yang akan dilakukan, salah satu sumber/media pembelajaran yang digunakan)",
+              "Guru mengajak peserta didik merencanakan pembelajaran selanjutnya dan strategi belajar yang akan digunakan (contoh: topik yang akan dipelajari, mitra yang akan diundang, eksperimen yang akan dilakukan, sumber/media pembelajaran yang digunakan)",
               "Guru memuliakan peserta didik dengan menghargai pencapaian proyeknya"
             ],
             "pages": [

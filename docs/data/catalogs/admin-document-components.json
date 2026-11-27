@@ -25,7 +25,7 @@
       "No identifier from the legacy app is carried over. Where a decision keeps an old label for reference (D-305), it sits in legacy_label and is never shown in the UI.",
       "review_notes are Indonesian notes for Tim Validasi SIGRAK; they are not shown to teachers.",
       "components is the union of both Format Kudus lists (24 for guru kelas plus 1 found only for guru mapel). label is the SIGRAK label shown in the app.",
-      "profiles list the components in the Format Kudus order. format_label is the component name as written in the Format Kudus instrument (scale 1–5 in that instrument), used only when printing that profile. label on a profile entry overrides the component label for that profile.",
+      "profiles list the components in the Format Kudus order. format_label is the component name as written in the Format Kudus instrument (scale 1–5 in that instrument). label on a profile entry overrides the component label for that profile, on screen and in print; format_label is printed only for entries without their own label, so retired terms in the instrument wording (Modul Ajar, P5) never reach print.",
       "instrument_items name the SIGRAK supervision checklist items (S-01, S-15; docs/drafts/teacher-supervision-instruments.md, 0–2 scale) the component serves as evidence for. The mapping is a proposal.",
       "data_source says where SIGRAK takes the component from (table names from docs/final/data-model.md, feature IDs from docs/drafts/administration-features.md)."
     ]

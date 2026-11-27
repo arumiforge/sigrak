@@ -1,7 +1,7 @@
 # SIGRAK Developer Handbook
 
 - **Status:** final (owner request 2026-11-09, D-361)
-- **Last updated:** 2026-11-27 (R0-03: old stack removed, new stack D-388…D-409; Bahasa Inggris transition D-410)
+- **Last updated:** 2026-11-28 (D-452: CP per element, KKA, kepanduan, AN for MI; earlier: shadcn/studio Pro and Hugeicons Pro styles, D-434; R0-03: old stack removed, new stack D-388…D-409; Bahasa Inggris transition D-410)
 - **Audience:** every new developer or agent who joins SIGRAK, before they read any other document. The Indonesian PDF of this handbook, `docs/pdf/developer-handbook.pdf`, is the one complete reading for a new developer (D-361).
 - **Indonesian PDF:** [`docs/pdf/developer-handbook.pdf`](../pdf/developer-handbook.pdf), translated in [`docs/pdf/src/developer-handbook.md`](../pdf/src/developer-handbook.md)
 
@@ -249,7 +249,7 @@ SD and MI follow the same national standards and differ in a few domains. SIGRAK
 | Wali kelas JTM default | 2 | 6 (D-212) |
 | RPM extra fields | — | Tema KBC, Materi Insersi (D-126) |
 | Rapor export target | e-Rapor SD | RDM (D-218) |
-| External assessment | AN, TKA | TKA; AKMI to be verified |
+| External assessment | AN, TKA | AN, TKA, AKMI (D-452) |
 | Data of record | Dapodik | EMIS |
 
 Code reads the profile; it **never** branches on `level == mi`. A new level (SDLB, or later SMP/MTs) becomes a new profile, not a new code branch. Today the level lives in `schools.level` ∈ {`sd`, `mi`} and decides the subject set and allocation (Built); the profile record itself is Designed and due before P5-04.
@@ -399,9 +399,9 @@ Portals: principal and pengawas see the same data, validate, supervise
 | `sigrak-mi-2026-r1.json` | SIGRAK MI topics for the five Kemenag subjects: 224 topics |
 | `crosswalk-legacy-2026.json` | Team only, never imported: old codes to SIGRAK codes (D-365) |
 
-**The shape.** A subject has topics (materi pokok, the ATP rows) per grade and semester, with JP, weeks, and references. Each topic has fokus items and learning objectives (TP). `focus_item_objectives` links fokus to TP and is filled by a data task. CP-only versions store CP rows in `learning_outcomes` (D-226). `subject_allocations` holds JP per subject, grade, and learning type (intrakurikuler or kokurikuler).
+**The shape.** A subject has topics (materi pokok, the ATP rows) per grade and semester, with JP, weeks, and references. Each topic has fokus items and learning objectives (TP). `focus_item_objectives` links fokus to TP and is filled by a data task. CP-only versions store the official CP text per subject, phase and element in `learning_outcomes` (D-226); it is the reference and, from D-452, covers the general subjects too (Kepka BSKAP 046/2025 and its amendments). Each topic links to its element; the topic's own CP text is a teacher-friendly summary labelled "ringkasan SIGRAK", never shown as the official CP. Content outside the decrees stays in the data with an `outside_cp` mark and the reason, for later review (D-452). `subject_allocations` holds JP per subject, grade, and learning type (intrakurikuler or kokurikuler).
 
-**The import.** With no file named, the curriculum import loads the configured list of files in order. Rules (D-229): each file is one transaction; rows are matched by `code` and never deleted; a new version is `draft` and an import never changes an existing version's status; mismatches (JP sums against each subject's semester targets, phase vs grade, fokus–TP links outside the topic) are reported and do not stop the import unless `--strict` is given. Topics come only from SIGRAK files (D-363); the legacy app format is refused, and old codes stay in the crosswalk (D-365). Files that share a version each answer for their own subjects. The D-234 Tata Boga trim is in the data; the source-overrides list is empty but kept for a future owner-approved fix (D-366). KKA rows for grades 5–6 are not imported as intrakurikuler; KKA runs through kokurikuler (D-208).
+**The import.** With no file named, the curriculum import loads the configured list of files in order. Rules (D-229): each file is one transaction; rows are matched by `code` and never deleted; a new version is `draft` and an import never changes an existing version's status; mismatches (JP sums against each subject's semester targets, phase vs grade, fokus–TP links outside the topic) are reported and do not stop the import unless `--strict` is given. Topics come only from SIGRAK files (D-363); the legacy app format is refused, and old codes stay in the crosswalk (D-365). Files that share a version each answer for their own subjects. The D-234 Tata Boga trim is in the data; the source-overrides list is empty but kept for a future owner-approved fix (D-366). KKA (grades 5–6) is an optional subject that each school runs as a regular subject or through kokurikuler (D-452, superseding D-208).
 
 **Versions in v1.** `SIGRAK-SD-2026-R1`, `SIGRAK-MI-2026-R1` (topics, one version per level and year, D-363), `CP-PABP-BKPDM-020-2026`, `CP-PAI-BA-MADRASAH-9941-2025`, `STRUKTUR-SD-PERMENDIKDASMEN-13-2025`, `ALOKASI-MI-KMA-1503-2025` (data model). The SD allocation comes only from the official structure (D-366).
 
@@ -419,7 +419,7 @@ Portals: principal and pengawas see the same data, validate, supervise
 
 **Status:** **Built** (P5-03c, P5-03g, P4-28): curriculum tables, `learning_outcomes`, the import command, the subject catalogue, `SubjectsForGrade`, the SIGRAK R1 dataset with per-subject curation status. **Designed:** versioning columns and resolver (D-355), school topic changes and validation (P5-09), the curriculum console (D-317), Kabar Regulasi. **Data still draft:** every curriculum and regulation file awaits Tim Validasi review.
 
-Read more: [`data-model.md`](data-model.md#curriculum), [`religious-education.md`](religious-education.md), [`docs/data/curriculum/README.md`](../data/curriculum/README.md), [`docs/drafts/curriculum-source-check-2026.md`](../drafts/curriculum-source-check-2026.md), D-019, D-020, D-113, D-204, D-208, D-226…D-234, D-276, D-317, D-363…D-366.
+Read more: [`data-model.md`](data-model.md#curriculum), [`religious-education.md`](religious-education.md), [`docs/data/curriculum/README.md`](../data/curriculum/README.md), [`docs/drafts/curriculum-source-check-2026.md`](../drafts/curriculum-source-check-2026.md), D-019, D-020, D-113, D-204, D-226…D-234, D-276, D-317, D-363…D-366, D-452.
 
 ### 4.4 AI content creation: keys, templates, wizards, documents, exports
 
@@ -446,7 +446,7 @@ Data fields (identity, CP, TP codes, meetings, minutes, references) are merged f
 
 **Editing.** The preview is a structured editor per section, never raw JSON, and AI text is always escaped. "Perbaiki bagian ini" revises one section (*sederhanakan*, *buat diferensiasi*, *sesuaikan untuk siswa berkebutuhan khusus*, *perpanjang*, *perpendek*) and shows old and new side by side. Each save or revision keeps the previous content; the last 5 revisions are kept (D-153), and a revision linked to an approval is never pruned (D-282).
 
-**RPM.** The wizard steps are *Kapan* (start date, or "RPM lepas jadwal"), *Apa* (materi pokok and fokus; JP and meetings are computed and locked), *Cara* (learning model per meeting, or automatic), *Periksa*. Sections follow the official deep-learning frame: Identifikasi, Desain Pembelajaran, Pengalaman Belajar (per meeting, with Memahami, Mengaplikasi, Merefleksi and the principles berkesadaran, bermakna, menggembirakan), Asesmen, plus attachments and continuity. The 8 dimensi profil lulusan (DPL1…DPL8) are a fixed set. MI adds the optional KBC fields ([section 3.7](#37-kurikulum-berbasis-cinta-kbc-and-kma-5122026)). A **kokurikuler variant** has its own schema following Panduan Kokurikuler 2025, with the forms Lintas Disiplin, Gerakan 7 KAIH (the seventh habit is "Tidur Cepat", D-207), and Cara Lainnya; KKA runs here (D-208). The annual kokurikuler JP target comes from `subject_allocations` (D-277).
+**RPM.** The wizard steps are *Kapan* (start date, or "RPM lepas jadwal"), *Apa* (materi pokok and fokus; JP and meetings are computed and locked), *Cara* (learning model per meeting, or automatic), *Periksa*. Sections follow the official deep-learning frame: Identifikasi, Desain Pembelajaran, Pengalaman Belajar (per meeting, with Memahami, Mengaplikasi, Merefleksi and the principles berkesadaran, bermakna, menggembirakan), Asesmen, plus attachments and continuity. The 8 dimensi profil lulusan (DPL1…DPL8) are a fixed set. MI adds the optional KBC fields ([section 3.7](#37-kurikulum-berbasis-cinta-kbc-and-kma-5122026)). A **kokurikuler variant** has its own schema following Panduan Kokurikuler 2025, with the forms Lintas Disiplin, Gerakan 7 KAIH (the seventh habit is "Tidur Cepat", D-207), and Cara Lainnya; KKA runs here when the school chooses kokurikuler for it, or as a regular subject in grades 5–6 (D-452). The annual kokurikuler JP target comes from `subject_allocations` (D-277).
 
 **RPM scheduling (P5-04, designed in detail by D-267…D-275).** Meetings are placed on the class timetable from the start date. A journal outcome drives the schedule: `not_done` shifts later meetings; `partial` does not shift but carries the unfinished experiences into a "Lanjutan" block of the next meeting (D-267). Every shift is applied automatically, shown ("2 pertemuan bergeser…"), and undoable with Batalkan, and the Promes print gains a Realisasi view (D-274). Semester-2 RPMs can be drafted early and are placed from the even-semester start (D-272). An RPM lepas jadwal can later be placed with "Pasang ke jadwal" (D-273). "Pakai untuk kelas lain" copies an RPM to a parallel class with no AI call (D-275). One JP balance per class and subject before SAS (*Neraca JP*: Pas, Kurang n JP, Ada n JP cadangan) replaces several warnings (D-269). RPM readiness per subject (Siap, Segera habis, Perlu RPM) uses defaults of 10 and 3 effective days set in the console (D-270), with a Monday summary Kabar to teachers only (D-271).
 
@@ -552,7 +552,7 @@ Read more: [`content-engine.md`](content-engine.md), [`ifp-classroom.md`](ifp-cl
 
 **Descriptions.** The competency description per subject is drafted from the highest and lowest TP achievement in the formative results (D-205). The AI draft sends only per-TP mastery levels for an anonymous "Murid A"; the real name is merged in after generation on the server (`ai-provider-engine.md`, privacy rule 2). The catatan wali kelas may also be drafted by AI from attendance counts, note types, and per-TP results, never names or personal data, and the homeroom teacher edits and approves it (D-213).
 
-**Kokurikuler and ekstrakurikuler.** Kokurikuler is assessed on the 8 DPL; the rapor gets a description of dimensions strengthened and still developing (D-210, D-214 A5). Ekstrakurikuler records (activities, pembina, members, attendance, rapor description), with Pramuka offered by default, are built early in v1 (D-216); `report_extracurriculars` holds the rapor rows (D-205).
+**Kokurikuler and ekstrakurikuler.** Kokurikuler is assessed on the 8 DPL; the rapor gets a description of dimensions strengthened and still developing (D-210, D-214 A5). Ekstrakurikuler records (activities, pembina, members, attendance, rapor description), with Pramuka offered by default (a school may replace it with another kepanduan, but one must stay, D-452), are built early in v1 (D-216); `report_extracurriculars` holds the rapor rows (D-205).
 
 **Leger and sign-off.** Each guru mapel confirms their subject's grades, the wali kelas confirms the class leger, then the principal signs off and the leger locks. Rapor prints and exports always come from the locked version. Only the principal can unlock, with a logged reason. "Cek kesiapan rapor" checks the 12 components per student and warns but does not block (D-292).
 
@@ -672,7 +672,7 @@ SIGRAK is rebuilt in phase R (D-388…D-421). The product rules in this handbook
 | Queues, realtime | BullMQ on Redis; server-sent events through Transmit for AI progress and chatbot streaming | D-388 |
 | Database | PostgreSQL 19 with pgvector and JSONB; row-level security as a second tenancy wall | D-398, D-412 |
 | Frontend | React 19 + Inertia, React Compiler; no SSR for the app, public pages server-rendered | D-389 |
-| UI | Tailwind 4 + shadcn/ui (Radix), Motion, Sonner, Vaul, cmdk, TanStack Table + Virtual; Hugeicons Pro | D-390, D-402 |
+| UI | Tailwind 4 + shadcn/ui (Radix), Motion, Sonner, Vaul, cmdk, TanStack Table + Virtual; shadcn/studio Pro blocks (`radix` variants, only those the app uses, restyled); Hugeicons Pro (Rounded Stroke and Rounded Solid) | D-390, D-402, D-434 |
 | PDF | Typst after a two-week spike; A4 default and F4 | D-399 |
 | Tests | Japa, run by GitHub Actions on every PR to `main` | D-084, D-388 |
 | Server | nginx, Docker and `cloudflared` on Ubuntu 26.04; staging on the same VPS; cold standby; guides in `docs/server/` | D-391, D-413…D-419 |
@@ -686,7 +686,7 @@ The app serves three front ends on three hostnames, each with its own guard ([se
 - **Exam client:** its own entry on `ujian.`, its own guard, sharing no bundle with the school app; answer autosave and the heartbeat go through one small JSON endpoint (D-094). It is a low-priority add-on (D-392).
 - **Staff console:** on `admin.`, rebuilt in R2 with the eleven roles and scopes (D-338…D-343), in the brand colour (design system).
 - **Game runtime:** vanilla JS and CSS per game template, typed with JSDoc and `// @ts-check`, playable standalone and offline (D-011, D-075).
-- **Libraries:** three.js, KaTeX, ApexCharts, Hugeicons Pro, Plus Jakarta Sans, and an Arabic font, all pinned to exact versions and bundled, never from a CDN; heavy ones are lazy-loaded (D-033, D-083, D-402, SV-11).
+- **Libraries:** three.js, KaTeX, ApexCharts, Hugeicons Pro, Plus Jakarta Sans, and an Arabic font, all pinned to exact versions and bundled, never from a CDN; heavy ones are lazy-loaded (D-033, D-083, D-402, SV-11). shadcn/studio Pro blocks are added through their CLI registry only when the app uses them, with the licence in env or a CI secret, and each is listed in `THIRD_PARTY_NOTICES.md`; icons come only through `inertia/components/icon.tsx` (D-434, [design system](design-system.md#stack-mapping)).
 
 ### 5.3 Module boundaries
 
@@ -1166,7 +1166,7 @@ Indonesian education and product terms used in this handbook and in the code com
 | KAIH | Gerakan 7 Kebiasaan Anak Indonesia Hebat: seven habits, the seventh "Tidur Cepat" |
 | KBC | Kurikulum Berbasis Cinta (KMA 512/2026), value education in madrasah |
 | Kenaikan | Promotion to the next grade, decided by the school |
-| KKA | Koding dan Kecerdasan Artifisial; in SIGRAK through kokurikuler (D-208) |
+| KKA | Koding dan Kecerdasan Artifisial; an optional subject in grades 5–6, run as a regular subject or through kokurikuler (D-452) |
 | KKG / KKM | Teacher working groups (Kelompok Kerja Guru / Madrasah) |
 | KKTP | Kriteria Ketercapaian Tujuan Pembelajaran: criteria for reaching a TP |
 | Kokurikuler | Co-curricular learning that strengthens the DPL; replaced P5 |

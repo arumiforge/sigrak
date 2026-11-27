@@ -3,11 +3,12 @@
   "status": "draft",
   "note": "Subject catalogue for curriculum:import (D-227). Every other curriculum file names its subjects by code, name, or one of the aliases; matching ignores case, punctuation, and spaces. Codes follow the topic codes of the SIGRAK curriculum files (P5-03g, D-363); Seni dan Budaya keeps one subject for the five codes its topic IDs use (MUS, SM, SMU, SR, SRP). Seni Suara Daerah (SSD) came new with the legacy data and waits for the owner's decision (C5 in docs/drafts/curriculum-source-check-2026.md); until then it is school-optional muatan lokal, like Tata Boga.",
   "conventions": [
-    "kind: compulsory (intrakurikuler subject of the national or Kemenag structure), local_content (muatan lokal), cocurricular (delivered through kokurikuler only; Koding dan KA, D-208).",
+    "kind: compulsory (intrakurikuler subject of the national or Kemenag structure), elective (mata pelajaran pilihan a school may offer; Koding dan KA in grades 5-6, D-452), local_content (muatan lokal), cocurricular (delivered through kokurikuler only; no subject uses it since D-452 superseded D-208).",
     "default_teacher follows D-032: Pendidikan Agama (SD six religions, and the MI Kemenag subjects that replace it), PJOK, Bahasa Inggris, and muatan lokal go to a guru mapel; the rest to the guru kelas. D-228 adds the MI subjects and Tata Boga.",
     "religion is set only for the six SD religion subjects, which students take according to their religion (D-034, D-036). The MI Kemenag subjects are taken by every MI student, so religion stays null.",
     "school_level: sd, mi, or both.",
-    "transition (optional): a subject's status by school year where a regulation phases it in. Each period has until_school_year or from_school_year and a status (elective or compulsory); levels and grades say where it applies. Grades it does not list follow the structure tables and D-204."
+    "transition (optional): a subject's status by school year where a regulation phases it in. Each period has until_school_year or from_school_year and a status (elective or compulsory); levels and grades say where it applies. Grades it does not list follow the structure tables and D-204.",
+    "grades (optional): the only grades a subject is offered in. delivery (optional, electives): options a school chooses from, subject (a regular subject with its own allocation) or cocurricular (through kokurikuler); chosen_by school (D-452)."
   ],
   "subjects": [
     {
@@ -247,7 +248,7 @@
     {
       "code": "KKA",
       "name": "Koding dan Kecerdasan Artifisial",
-      "kind": "cocurricular",
+      "kind": "elective",
       "default_teacher": "class_teacher",
       "religion": null,
       "school_level": "both",
@@ -255,7 +256,19 @@
         "koding_ka",
         "koding_kecerdasan_artifisial",
         "Koding dan KA"
-      ]
+      ],
+      "grades": [
+        5,
+        6
+      ],
+      "delivery": {
+        "options": [
+          "subject",
+          "cocurricular"
+        ],
+        "chosen_by": "school",
+        "source": "Permendikdasmen 13/2025 Pasal 32A and Lampiran Tabel 4-5 (72 JP in grade 5, 64 JP in grade 6, 2 JP a week, mata pelajaran pilihan); Kepmendikdasmen 127/P/2025, implementation strategies p. 6 (intrakurikuler pilihan, kokurikuler); D-452 supersedes D-208."
+      }
     },
     {
       "code": "BJW",

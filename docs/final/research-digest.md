@@ -1,7 +1,7 @@
 # Research Digest
 
 - **Status:** final (owner request 2026-11-09, D-362)
-- **Last updated:** 2026-11-27 (Bahasa Inggris rule D-410; findings that only concerned the previous stack removed, D-407)
+- **Last updated:** 2026-11-28 (KKA and kepanduan, D-452; earlier: Bahasa Inggris rule D-410; findings that only concerned the previous stack removed, D-407)
 - **Purpose:** one place that summarises every piece of research done for SIGRAK so far: official regulations, journal and field studies, app benchmarks, and technical research. It is a digest with pointers, not a copy. Details stay in the linked repo documents.
 - **Indonesian PDF:** `docs/pdf/research-digest.pdf`
 
@@ -26,7 +26,7 @@ Checked 2026-10-30 to 2026-11-11. On 2026-11-08 and 2026-11-09 the official JDIH
 
 | Instrument | Issuer, date | What it governs (SD/MI view) | Level | Detail in repo |
 |---|---|---|---|---|
-| Permendikdasmen 13/2025 (amends Permendikbudristek 12/2024) | Kemendikdasmen, in force 15 Jul 2025 | Curriculum: pembelajaran mendalam in the kerangka dasar, 8 dimensi profil lulusan, intra/ko/ekstrakurikuler, SD/MI JP tables (Lampiran II B, Tabel 1–5), KKA elective, Pramuka required again (Pasal 22) | official | [`docs/data/regulations/`](../data/regulations/README.md), [`dokumen-resmi-sd-mi.md`](../drafts/dokumen-resmi-sd-mi.md) |
+| Permendikdasmen 13/2025 (amends Permendikbudristek 12/2024) | Kemendikdasmen, in force 15 Jul 2025 | Curriculum: pembelajaran mendalam in the kerangka dasar, 8 dimensi profil lulusan, intra/ko/ekstrakurikuler, SD/MI JP tables (Lampiran II B, Tabel 1–5), KKA elective, kepanduan required again: Pramuka or another kepanduan (Pasal 22 ayat (2), D-452) | official | [`docs/data/regulations/`](../data/regulations/README.md), [`dokumen-resmi-sd-mi.md`](../drafts/dokumen-resmi-sd-mi.md) |
 | Permendikbudristek 12/2024 (base text) | set 25 Mar, in force 26 Mar 2024 (BN 2024/172); amended by 13/2025 | Still in force where 13/2025 did not amend: Fase A–C = kelas I–II, III–IV, V–VI (Pasal 9); CP set centrally (Pasal 11); SD content "dalam bentuk mata pelajaran" (Pasal 13); KSP "paling sedikit memuat" karakteristik, visi-misi-tujuan, pengorganisasian and perencanaan pembelajaran, diversification, set by the principal (Pasal 29–30); Kurikulum 2013 only until 2025/2026 (Pasal 31); **Bahasa Inggris in SD/MI elective until 2026/2027, compulsory from 2027/2028 (Pasal 33, not amended)**, while the 13/2025 tables already list it as required in kelas III–VI; SIGRAK follows Pasal 33 (D-410) | official | `curriculum-base-permendikbudristek-12-2024.json` (P4-32), [`policy-innovation-layers.md`](../drafts/policy-innovation-layers.md) §3 |
 | Kepmendikdasmen 126/P/2025 | 4 Sep 2025 | Pedoman Pembelajaran Mendalam: principles, learning experiences, framework, roles | official | `deep-learning-kepmendikdasmen-126-p-2025.json` |
 | Kepmendikdasmen 127/P/2025 | 4 Sep 2025 | Pedoman Koding dan Kecerdasan Artifisial: status, delivery modes, risks; no SD grades or JP | official | `coding-ai-kepmendikdasmen-127-p-2025.json` |
@@ -59,10 +59,10 @@ Guides from BSKAP (all **official**, PDFs in `docs/sources/`, extracted to `docs
 
 | Guide | Finding that matters for SIGRAK | Decisions |
 |---|---|---|
-| Panduan Pembelajaran dan Asesmen, Edisi Revisi Ke-3, Jul 2025 | Rapor has **12 minimum components** (incl. kokurikuler description, ekstrakurikuler, absences, catatan wali kelas, tanggapan orang tua). Formative never feeds rapor, promotion, or graduation. Fase A may report without numbers. 4 KKTP approaches; ATP format is free ("Tidak ada format komponen yang ditetapkan oleh Pemerintah"). Lesson-plan frame close to the RPM, with Memahami → Mengaplikasi → Merefleksi | D-205, D-206, D-208 |
-| Panduan Kokurikuler 2025 | Forms: lintas disiplin, Gerakan 7 KAIH, cara lainnya ("Projek" is not one). SD kokurikuler = 36 JP per subject per year (32 in grade 6) | D-207, D-208 |
+| Panduan Pembelajaran dan Asesmen, Edisi Revisi Ke-3, Jul 2025 | Rapor has **12 minimum components** (incl. kokurikuler description, ekstrakurikuler, absences, catatan wali kelas, tanggapan orang tua). Formative never feeds rapor, promotion, or graduation. Fase A may report without numbers. 4 KKTP approaches; ATP format is free ("Tidak ada format komponen yang ditetapkan oleh Pemerintah"). Lesson-plan frame close to the RPM, with Memahami → Mengaplikasi → Merefleksi | D-205, D-206, D-452 |
+| Panduan Kokurikuler 2025 | Forms: lintas disiplin, Gerakan 7 KAIH, cara lainnya ("Projek" is not one). SD kokurikuler = 36 JP per subject per year (32 in grade 6) | D-207, D-452 |
 | Panduan Pengembangan KSP, Edisi Revisi Ke-3, Jul 2025 | Schools choose "bentuk dan sistematika"; not uniform administration | D-209 |
-| Pembelajaran KKA (BSKAP, Feb 2025) | KKA for SD: grades 5–6, 2 JP per week, elective, Fase C content only, as a reference not a formal CP | D-208 |
+| Pembelajaran KKA (BSKAP, Feb 2025) | KKA for SD: grades 5–6, 2 JP per week, elective, Fase C content only, as a reference not a formal CP | D-452 (supersedes D-208) |
 | Paparan Pembelajaran Mendalam (undated slides) | Lesson-plan template fields, required vs optional | — |
 
 **Implication.** The standards fix outcomes, structure, minimum document content, principles, and protection, but **not the teaching method** (Standar Proses Pasal 4(2); ATP and KSP formats free; KBC indicators are examples). SIGRAK labels each default as "Wajib", "Disarankan", "Contoh", or "Bebas" and keeps rules as versioned data (D-352…D-358, [`policy-innovation-layers.md`](../drafts/policy-innovation-layers.md)). A ministry statement says 13/2025 is not a new curriculum ([metrotvnews](https://www.metrotvnews.com/read/NLMCJ6Vj-mendikdasmen-tegaskan-tidak-ada-perubahan-kurikulum), secondary).
@@ -78,7 +78,7 @@ Guides from BSKAP (all **official**, PDFs in `docs/sources/`, extracted to `docs
 | 8 dimensi profil lulusan: keimanan dan ketakwaan, kewargaan, penalaran kritis, kreativitas, kolaborasi, kemandirian, kesehatan, komunikasi | 13/2025 Pasal 17, official | Fixed list DPL1–DPL8 in RPM and kokurikuler | `content-engine.md` |
 | Pembelajaran mendalam: principles berkesadaran, bermakna, menggembirakan; experiences memahami, mengaplikasi, merefleksi; four framework parts | 126/P/2025, official | RPM core steps follow the three experiences with principle tags | `content-engine.md` |
 | "Deep learning" in Indonesian papers means the 2025 approach, not AI | LKPD literature scan, 2026-11-09 | Watch wording in UI and citations | `lkpd-exploration.md` §8.3 |
-| Legacy curriculum files (downloaded 2026-11-08): 432 topics, 2,021 fokus, 1,372 TP, 58 allocation rows, 12 subjects (new: Seni Suara Daerah) | Legacy app public portal, owner-run; SHA-256 recorded | Converted to the SIGRAK R1 dataset on 2026-11-09 and removed; old codes in the crosswalk (D-363, D-365); import applies D-204 and D-208 | [`curriculum-source-check-2026.md`](../drafts/curriculum-source-check-2026.md), `docs/data/curriculum/README.md` |
+| Legacy curriculum files (downloaded 2026-11-08): 432 topics, 2,021 fokus, 1,372 TP, 58 allocation rows, 12 subjects (new: Seni Suara Daerah) | Legacy app public portal, owner-run; SHA-256 recorded | Converted to the SIGRAK R1 dataset on 2026-11-09 and removed; old codes in the crosswalk (D-363, D-365); import applies D-204; KKA follows D-452 (supersedes D-208) | [`curriculum-source-check-2026.md`](../drafts/curriculum-source-check-2026.md), `docs/data/curriculum/README.md` |
 | KSP: principal approves, format free | KSP guide p. 7, p. 10, official | Starter template that schools adapt | D-209 |
 
 ## 4. Madrasah and Kemenag

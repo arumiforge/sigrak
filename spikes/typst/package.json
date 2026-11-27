@@ -1,0 +1,18 @@
+{
+  "name": "sigrak-typst-spike",
+  "private": true,
+  "description": "R0-07 spike: Typst for SIGRAK PDFs. Standalone, not part of the root workspace.",
+  "type": "module",
+  "scripts": {
+    "fonts": "bash scripts/fonts.sh",
+    "formulas": "node scripts/formulas.mjs",
+    "build": "node scripts/build.mjs",
+    "bench:server": "node scripts/build.mjs --bench 15",
+    "smoke:wasm": "node browser/smoke-node.mjs",
+    "bench:browser": "node browser/bench.mjs 3"
+  },
+  "dependencies": {
+    "@myriaddreamin/typst-ts-web-compiler": "0.8.0-rc4",
+    "tex2typst": "0.6.2"
+  }
+}

@@ -2,7 +2,7 @@
 
 - **Status:** final (approved 2026-10-31, D-123)
 - **Task:** P1-06
-- **Last updated:** 2026-11-27 (stack mapping moved to the new stack, D-389, D-390, D-402, D-407; earlier: absensi banned, guru kelas / wali kelas, D-382, D-383; terms, status labels, and sound rules from D-210, D-263…D-311, D-322, D-353, D-358, D-371)
+- **Last updated:** 2026-11-27 (shadcn/studio Pro and Hugeicons Pro styles, D-434; status colours and margin profiles confirmed, D-445; stack mapping moved to the new stack, D-389, D-390, D-402, D-407; earlier: absensi banned, guru kelas / wali kelas, D-382, D-383; terms, status labels, and sound rules from D-210, D-263…D-311, D-322, D-353, D-358, D-371)
 - **Sources:** [`Rebranding_dan_Perombakan_Fitur_Aplikasi_Lama.md`](../sources/Rebranding_dan_Perombakan_Fitur_Aplikasi_Lama.md), [`Catatan_Pengembang_Aplikasi_Lama_Design_System_Data_dan_AI.md`](../sources/Catatan_Pengembang_Aplikasi_Lama_Design_System_Data_dan_AI.md), [`Parafrase_Teks_UI_Sigrak.xlsx`](../sources/Parafrase_Teks_UI_Sigrak.xlsx)
 
 ## Purpose
@@ -27,8 +27,9 @@ The app should look like a tidy teacher's workbook: plain background, one brand 
 
 - **Tokens are CSS custom properties**, defined once in one tokens stylesheet for light and dark, and mapped into Tailwind's theme (`@theme` in Tailwind v4) so classes like `bg-surface`, `text-muted`, and `border-line` use them.
 - **shadcn/ui (Radix) is the component base, not the look** (D-390). Its layout patterns (sidebar, header, tables, forms, modals) are used as React components themed with the tokens below. Decorative styles (gradients, multi-colour stat cards, heavy shadows) are not used.
+- **shadcn/studio Pro replaces ProUI** as the source of ready-made blocks and components (D-434). Only its `radix` variants are used, never `base`. A block or component is added only when the app uses it, through their CLI registry, which reads the account email and licence key from env (`.env` locally, a CI secret in CI), never from git. Every added block is restyled to SIGRAK's identity: tokens from `inertia/css/tokens.css`, Fondasi `ui.md`, copy from `lang/id`, icons through `inertia/components/icon.tsx`, so no generic template look remains. Each one is recorded in `THIRD_PARTY_NOTICES.md` (component, where it is used). Its themes are references only. The names on offer are listed in [`shadcn-studio-catalog.md`](../drafts/shadcn-studio-catalog.md).
 - **Internal console (`admin.`)** may use its own theme with the brand colour set to `--brand`. It is staff-only, so it does not have to match the school app pixel for pixel.
-- **Icons:** Hugeicons Pro (D-402), version pinned, bundled and self-hosted, 1.5 px stroke, 20 px (24 px in the bottom nav).
+- **Icons:** Hugeicons Pro (D-402, D-434) from the owner's licensed files, bundled and self-hosted, 1.5 px stroke, 20 px (24 px in the bottom nav). Only two styles ship: Rounded Stroke for default UI icons (`inertia/icons/hugeicons/rounded-stroke/`) and Rounded Solid for active and selected states (`inertia/icons/hugeicons/rounded-solid/`). Components never import the SVG files directly; every icon comes through `inertia/components/icon.tsx`.
 - **Font:** Plus Jakarta Sans, self-hosted through the build (no runtime CDN), with `font-variant-numeric: tabular-nums` in tables.
 
 ## Colour tokens
@@ -75,6 +76,8 @@ Rules:
 | Print | Letterhead upload with A4/F4 preview and resolution warning, "Buat kop otomatis" (D-284), print settings form with margin profiles (D-283) |
 | Policy (from P5-04, D-358) | Dasar Kebijakan panel (CP, TP, DPL, principles, rule-set version); Cek Keselarasan lines: **block** (`--danger`, cannot save), **warning** (`--warn`), **hint** (`--info`), each with an icon and a text label, never colour alone; "Contoh" tag on example defaults (D-353) |
 
+Margin profiles by template (D-283, confirmed by D-445): **Buku administrasi** for book-type documents and Berkas, **Dokumen ajar** for RPM, LKPD and question sets, **Lembar tunggal** for letters and single sheets.
+
 ## Status labels
 
 A status is always a text label plus a colour, never colour alone (D-263). The colour follows the status tokens; grey is `--text-muted` on `--surface`.
@@ -86,6 +89,8 @@ A status is always a text label plus a colour, never colour alone (D-263). The c
 | Pengingat | Terkirim (grey), Dibaca (info), Ditindaklanjuti (ok) | D-311 |
 | Help request | Baru (grey), Diproses (info), Selesai (ok) | D-320 |
 | Pengesahan dokumen | Disahkan (ok), Berubah setelah disahkan (warn) | D-281 |
+
+The owner confirmed these status colours as written (D-445).
 
 ## Sound and notifications
 

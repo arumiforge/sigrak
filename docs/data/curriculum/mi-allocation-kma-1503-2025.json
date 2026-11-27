@@ -35,7 +35,7 @@
   },
   "notes": {
     "art_choice": "Madrasah menyediakan minimal 1 (satu) jenis seni (seni musik, seni rupa, seni teater, dan/atau seni tari). Peserta Didik memilih 1 (satu) jenis seni (seni musik, seni rupa, seni teater, atau seni tari). [all tables, note a]",
-    "muatan_lokal_I_V": "Paling sedikit 72 JP per tahun dan paling banyak 216 JP sebagai mata pelajaran pilihan. [Tabel 1-3, note b; Tabel 4, note c]",
+    "muatan_lokal_I_V": "Paling sedikit 72 (tujuh puluh dua) JP per tahun dan paling banyak 216 (dua ratus enam belas) sebagai mata pelajaran pilihan. [Tabel 1-3, note b; Tabel 4, note c prints the same sentence without 'sebagai mata pelajaran pilihan']",
     "muatan_lokal_VI": "Paling sedikit 64 JP per tahun dan paling banyak 192 JP. [Tabel 5, note c]",
     "koding_ka": "Paling banyak 2 (dua) JP per minggu atau 72 JP per tahun (64 JP in grade VI) sebagai mata pelajaran pilihan. [Tabel 4-5, note b]"
   },
@@ -43,12 +43,26 @@
     {
       "no": 2,
       "page": 31,
-      "text": "Muatan lokal sesuai kekhasan Madrasah, tipologi Madrasah, potensi dan keunikan lokal berupa: keagamaan; seni budaya; prakarya; pendidikan jasmani, olahraga, dan kesehatan; bahasa; teknologi; dan/atau riset."
+      "text": "Muatan lokal merupakan muatan pembelajaran yang sesuai dengan kekhasan Madrasah, tipologi Madrasah, potensi dan keunikan lokal berupa: a. keagamaan; b. seni budaya; c. prakarya; d. pendidikan jasmani, olahraga, dan kesehatan; e. bahasa; f. teknologi; dan/atau g. riset.",
+      "items": [
+        "a. keagamaan;",
+        "b. seni budaya;",
+        "c. prakarya;",
+        "d. pendidikan jasmani, olahraga, dan kesehatan;",
+        "e. bahasa;",
+        "f. teknologi; dan/atau",
+        "g. riset."
+      ]
     },
     {
       "no": 3,
       "page": 32,
-      "text": "Muatan lokal dapat dilaksanakan melalui pengintegrasian ke dalam mata pelajaran lain, pengintegrasian ke dalam tema Kokurikuler, dan/atau mata pelajaran yang berdiri sendiri."
+      "text": "Muatan lokal dapat dilaksanakan pada Madrasah melalui: a. pengintegrasian ke dalam mata pelajaran lain; b. pengintegrasian ke dalam tema Kokurikuler; dan/atau c. mata pelajaran yang berdiri sendiri.",
+      "items": [
+        "a. pengintegrasian ke dalam mata pelajaran lain;",
+        "b. pengintegrasian ke dalam tema Kokurikuler; dan/atau",
+        "c. mata pelajaran yang berdiri sendiri."
+      ]
     },
     {
       "no": 6,
@@ -64,7 +78,12 @@
     {
       "no": 8,
       "page": 32,
-      "text": "Tim Kokurikuler terdiri dari koordinator dan fasilitator. Guru mata pelajaran yang alokasi waktu Kokurikuler dialihkan dapat menjadi fasilitator setara dengan 1 JP per rombongan. Beban koordinator Kokurikuler setara 2 jam tatap muka per rombongan belajar setiap tahun, paling banyak 3 rombongan belajar."
+      "text": "Tim Kokurikuler di Madrasah terdiri dari koordinator dan fasilitator, dengan ketentuan sebagai berikut: a. Guru mata pelajaran yang alokasi waktu Kokurikuler dialihkan, dapat menjadi fasilitator setara dengan 1 JP per rombongan b. Beban belajar sebagai koordinator Kokurikuler setara dengan 2 (dua) jam tatap muka per 1 (satu) rombongan belajar setiap tahun untuk pemenuhan jam tatap muka paling sedikit 24 (dua puluh empat) jam tatap muka per-minggu dan paling banyak mengampu 3 (tiga) rombongan belajar.",
+      "items": [
+        "a. Guru mata pelajaran yang alokasi waktu Kokurikuler dialihkan, dapat menjadi fasilitator setara dengan 1 JP per rombongan",
+        "b. Beban belajar sebagai koordinator Kokurikuler setara dengan 2 (dua) jam tatap muka per 1 (satu) rombongan belajar setiap tahun untuk pemenuhan jam tatap muka paling sedikit 24 (dua puluh empat) jam tatap muka per-minggu dan paling banyak mengampu 3 (tiga) rombongan belajar."
+      ],
+      "note": "As printed: item a ends with 'per rombongan' and no full stop."
     }
   ],
   "source_quirks": [

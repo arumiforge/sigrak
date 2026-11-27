@@ -1,0 +1,102 @@
+{
+  "title": "Coba AI",
+  "intro": "Di halaman ini Anda bisa melihat cara SIGRAK membuat bahan di latar belakang. Setiap langkah tampil langsung, dan Anda boleh meninggalkan halaman ini.",
+  "fake_notice": "Mode contoh: jawaban AI disimulasikan dan tidak ada kunci AI sungguhan yang dipakai.",
+  "start": {
+    "heading": "Mulai pembuatan contoh",
+    "scenario_label": "Situasi yang ingin dicoba",
+    "submit": "Mulai buat",
+    "submitting": "Memulai…"
+  },
+  "scenarios": {
+    "smooth": "Lancar",
+    "rate_limited": "Kunci pertama kena batas kuota",
+    "timeout": "AI lambat menjawab",
+    "empty_reply": "AI menjawab kosong",
+    "fails_then_recovers": "Gagal dulu, berhasil saat dicoba lagi"
+  },
+  "keys": {
+    "heading": "Kunci AI Anda",
+    "active": "Aktif",
+    "invalid": "Tidak bisa dipakai",
+    "disabled": "Dimatikan"
+  },
+  "progress": {
+    "heading": "Pembuatan terakhir",
+    "step_of": "Langkah {current} dari {total}",
+    "steps_label": "Langkah pembuatan",
+    "kept_note": "Langkah yang sudah selesai disimpan. Coba lagi akan melanjutkan dari langkah yang belum selesai.",
+    "empty": "Belum ada pembuatan. Pilih situasi, lalu tekan Mulai buat."
+  },
+  "status": {
+    "queued": "Menunggu giliran",
+    "running": "Sedang dibuat",
+    "succeeded": "Selesai",
+    "failed": "Belum berhasil",
+    "cancelled": "Dihentikan"
+  },
+  "step_status": {
+    "pending": "Belum mulai",
+    "running": "Sedang dikerjakan",
+    "succeeded": "Selesai",
+    "failed": "Belum berhasil"
+  },
+  "steps": {
+    "outline": "Menyusun kerangka",
+    "content": "Menulis isi",
+    "review": "Memeriksa hasil"
+  },
+  "actions": {
+    "cancel": "Hentikan",
+    "retry": "Coba lagi"
+  },
+  "live": {
+    "connecting": "Menyambungkan…",
+    "live": "Kemajuan tampil langsung",
+    "reconnecting": "Koneksi terputus. Menyambung lagi…",
+    "failed": "Kemajuan belum bisa tampil langsung. Muat ulang halaman untuk melihat keadaan terbaru."
+  },
+  "details": {
+    "toggle": "Lihat detail",
+    "caption": "Setiap permintaan ke AI untuk pembuatan ini",
+    "step": "Langkah",
+    "attempt": "Percobaan",
+    "key": "Kunci",
+    "outcome": "Hasil",
+    "duration": "Lama",
+    "duration_value": "{seconds} detik"
+  },
+  "outcomes": {
+    "success": "Berhasil",
+    "rate_limited": "Kena batas per menit",
+    "rate_limited_daily": "Kuota harian habis",
+    "timeout": "Terlalu lama",
+    "transient": "Layanan sibuk",
+    "empty_reply": "Jawaban kosong",
+    "cancelled": "Dihentikan",
+    "unknown": "Terputus",
+    "key_invalid": "Kunci ditolak",
+    "project_unavailable": "Project tidak bisa dipakai",
+    "model_unavailable": "Model tidak tersedia",
+    "bad_request": "Permintaan ditolak",
+    "blocked": "Diblokir",
+    "malformed_output": "Jawaban tidak lengkap"
+  },
+  "failures": {
+    "no_usable_key": "Semua kunci AI Anda sedang mencapai batas. Coba lagi pukul {time} WIB.",
+    "busy": "Layanan AI sedang sibuk. Coba lagi beberapa saat lagi.",
+    "no_keys": "Anda belum punya kunci AI. Tambahkan kunci dulu, lalu coba lagi.",
+    "key_invalid": "Kunci AI Anda tidak bisa dipakai lagi. Periksa kunci Anda, lalu coba lagi.",
+    "blocked": "Isi yang diminta tidak bisa dibuat. Ubah topik atau catatan, lalu coba lagi.",
+    "incomplete": "Jawaban AI tidak lengkap. Coba lagi.",
+    "general": "Belum berhasil dibuat. Tim SIGRAK sudah diberi tahu."
+  },
+  "toasts": {
+    "cancelled": "Pembuatan dihentikan. Tekan Coba lagi untuk melanjutkan."
+  },
+  "errors": {
+    "too_many_active": "Masih ada 2 pembuatan yang berjalan. Tunggu salah satunya selesai, lalu mulai lagi.",
+    "not_running": "Pembuatan ini sudah tidak berjalan.",
+    "not_retryable": "Pembuatan ini tidak bisa dicoba lagi."
+  }
+}

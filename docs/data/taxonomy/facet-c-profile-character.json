@@ -13,7 +13,8 @@
     },
     "decisions": [
       "D-353",
-      "D-357"
+      "D-357",
+      "D-452"
     ],
     "created_on": "2026-11-10",
     "conventions": "docs/data/taxonomy/README.md"
@@ -28,8 +29,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1)",
+        "pages": [
+          3
+        ],
         "note": "Binding source is the SKL; the same list is in 13/2025.",
         "also": [
           {
@@ -64,8 +67,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf a, ayat (2)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -101,8 +107,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf b, ayat (3)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -139,8 +148,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf c, ayat (4)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -176,8 +188,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf d, ayat (5)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -213,8 +228,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf e, ayat (6)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -251,8 +269,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf f, ayat (7)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -288,8 +309,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf g, ayat (8)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -320,8 +344,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-10-2025",
-        "article": null,
-        "pages": null,
+        "article": "Pasal 4 ayat (1) huruf h, ayat (9)",
+        "pages": [
+          3,
+          4
+        ],
         "also": [
           {
             "regulation": "PERMENDIKDASMEN-13-2025",
@@ -352,9 +379,11 @@
       "force": "free",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null,
-        "note": "Term of the original 12/2024 text, before 13/2025. Article to be cited after P4-23."
+        "article": "Pasal 17 ayat (1)",
+        "pages": [
+          7
+        ],
+        "note": "Term of the original 12/2024 text (projek penguatan profil pelajar Pancasila); 13/2025 replaced the list with the 8 DPL in the same article."
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -370,8 +399,10 @@
       "force": "free",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 17 ayat (1) huruf a",
+        "pages": [
+          7
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -387,8 +418,10 @@
       "force": "free",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 17 ayat (1) huruf d",
+        "pages": [
+          7
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -404,8 +437,10 @@
       "force": "free",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 17 ayat (1) huruf b",
+        "pages": [
+          7
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -421,8 +456,10 @@
       "force": "free",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 17 ayat (1) huruf e",
+        "pages": [
+          7
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -438,8 +475,10 @@
       "force": "free",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 17 ayat (1) huruf c",
+        "pages": [
+          7
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -455,8 +494,10 @@
       "force": "free",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 17 ayat (1) huruf f",
+        "pages": [
+          7
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -472,10 +513,9 @@
       "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": "Pasal 17",
+        "article": "Pasal 16 ayat (2)",
         "pages": [
-          3,
-          4
+          3
         ],
         "note": "Gerakan 7 KAIH is a kokurikuler form; the seven habits live in the catalog (D-207 label 'Tidur Cepat')."
       },
@@ -501,11 +541,12 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "KMA-512-2026",
-        "article": null,
+        "article": "Diktum KESATU",
         "pages": [
+          2,
           9
         ],
-        "note": "Mandatory to implement in madrasah; for SD religion teachers the fields are off by default and an admin can switch them on (D-368)."
+        "note": "Diktum KESATU: schools under the Ministry of Religious Affairs and religion teachers in general schools implement KBC; the five values are on p. 9. For SD religion teachers the fields are off by default and an admin can switch them on (D-368), which narrows Diktum KESATU."
       },
       "status": "draft",
       "since": "TAX-2026-R1",

@@ -7,6 +7,84 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class AiCredentialSchema extends BaseModel {
+  static $columns = ['accountLabel', 'circuitOpenUntil', 'consecutiveFailures', 'createdAt', 'id', 'invalidReason', 'isBackup', 'label', 'lastSuccessAt', 'lastTestedAt', 'multiKeyConsentAt', 'projectLabel', 'publicId', 'secret', 'secretFingerprint', 'secretLast4', 'status', 'updatedAt', 'userId'] as const
+  $columns = AiCredentialSchema.$columns
+  @column()
+  declare accountLabel: string | null
+  @column.dateTime()
+  declare circuitOpenUntil: DateTime | null
+  @column()
+  declare consecutiveFailures: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare invalidReason: string | null
+  @column()
+  declare isBackup: boolean
+  @column()
+  declare label: string
+  @column.dateTime()
+  declare lastSuccessAt: DateTime | null
+  @column.dateTime()
+  declare lastTestedAt: DateTime | null
+  @column.dateTime()
+  declare multiKeyConsentAt: DateTime | null
+  @column()
+  declare projectLabel: string
+  @column()
+  declare publicId: string
+  @column({ serializeAs: null })
+  declare secret: string
+  @column()
+  declare secretFingerprint: string
+  @column({ columnName: 'secret_last4' })
+  declare secretLast4: string
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+}
+
+export class AiUsageLogSchema extends BaseModel {
+  static $columns = ['aiCredentialId', 'attempt', 'createdAt', 'generationId', 'httpStatus', 'id', 'inputTokens', 'latencyMs', 'model', 'outcome', 'outputTokens', 'purpose', 'schoolId', 'stepKey', 'userId'] as const
+  $columns = AiUsageLogSchema.$columns
+  @column()
+  declare aiCredentialId: number | null
+  @column()
+  declare attempt: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare generationId: number | null
+  @column()
+  declare httpStatus: number | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare inputTokens: number
+  @column()
+  declare latencyMs: number
+  @column()
+  declare model: string
+  @column()
+  declare outcome: string
+  @column()
+  declare outputTokens: number
+  @column()
+  declare purpose: string
+  @column()
+  declare schoolId: number | null
+  @column()
+  declare stepKey: string | null
+  @column()
+  declare userId: number
+}
+
 export class CalendarEventSchema extends BaseModel {
   static $columns = ['calendarId', 'createdAt', 'endsOn', 'examType', 'id', 'kind', 'publicId', 'sourceEventUid', 'startsOn', 'title', 'updatedAt'] as const
   $columns = CalendarEventSchema.$columns
@@ -119,6 +197,74 @@ export class ExamSessionSchema extends BaseModel {
   declare title: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+}
+
+export class GenerationStepSchema extends BaseModel {
+  static $columns = ['attempts', 'createdAt', 'finishedAt', 'generationId', 'id', 'output', 'position', 'startedAt', 'status', 'stepKey', 'updatedAt'] as const
+  $columns = GenerationStepSchema.$columns
+  @column()
+  declare attempts: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare finishedAt: DateTime | null
+  @column()
+  declare generationId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare output: Record<string, unknown> | null
+  @column()
+  declare position: number
+  @column.dateTime()
+  declare startedAt: DateTime | null
+  @column()
+  declare status: string
+  @column()
+  declare stepKey: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class GenerationSchema extends BaseModel {
+  static $columns = ['clientToken', 'createdAt', 'errorClass', 'errorMeta', 'finishedAt', 'id', 'kind', 'pinnedCredentialId', 'publicId', 'runs', 'schoolId', 'specification', 'startedAt', 'status', 'templateKey', 'templateVersion', 'updatedAt', 'userId'] as const
+  $columns = GenerationSchema.$columns
+  @column()
+  declare clientToken: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare errorClass: string | null
+  @column()
+  declare errorMeta: Record<string, unknown> | null
+  @column.dateTime()
+  declare finishedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare kind: string
+  @column()
+  declare pinnedCredentialId: number | null
+  @column()
+  declare publicId: string
+  @column()
+  declare runs: number
+  @column()
+  declare schoolId: number | null
+  @column()
+  declare specification: Record<string, unknown>
+  @column.dateTime()
+  declare startedAt: DateTime | null
+  @column()
+  declare status: string
+  @column()
+  declare templateKey: string
+  @column()
+  declare templateVersion: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
 }
 
 export class NationalHolidaySchema extends BaseModel {

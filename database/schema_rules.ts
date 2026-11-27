@@ -22,5 +22,9 @@ export default {
     password: { tsType: 'string', decorators: [{ name: '@column', args: { serializeAs: null } }] },
     joint_leave_school_days: { tsType: 'string[]', decorators: [{ name: '@column' }] },
     meta: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
+    specification: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
+    error_meta: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
+    output: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
+    secret: { tsType: 'string', decorators: [{ name: '@column', args: { serializeAs: null } }] },
   },
 } satisfies SchemaRules

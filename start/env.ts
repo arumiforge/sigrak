@@ -46,6 +46,28 @@ export default await Env.create(new URL('../', import.meta.url), {
   REDIS_HOST: Env.schema.string({ format: 'host' }),
   REDIS_PORT: Env.schema.number(),
   REDIS_PASSWORD: Env.schema.secret.optional(),
+  /**
+   * Separate Redis databases for BullMQ queues and AI key state, so
+   * clearing one never wipes sessions, jobs or key cooldowns (D-053).
+   */
+  REDIS_QUEUE_DB: Env.schema.number.optional(),
+  REDIS_AI_DB: Env.schema.number.optional(),
+
+  // AI (docs/final/ai-provider-engine.md)
+  /**
+   * "fake" runs every generation on the scripted fake provider (no key,
+   * no network); "gemini" calls Google with the teachers' keys.
+   */
+  AI_PROVIDER: Env.schema.enum.optional(['fake', 'gemini'] as const),
+  AI_GEMINI_BASE_URL: Env.schema.string.optional({ format: 'url', tld: false }),
+
+  // Transmit (SSE)
+  /**
+   * "redis" relays broadcasts between processes (a worker broadcasts,
+   * the web process holds the browser's stream); "none" keeps them in
+   * one process.
+   */
+  TRANSMIT_TRANSPORT: Env.schema.enum.optional(['redis', 'none'] as const),
 
   // Rate limiter
   LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const),
