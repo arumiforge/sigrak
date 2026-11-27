@@ -56,5 +56,6 @@ Layout: two columns, "Anda lihat" and "Tetap di sekolah".
 - H2: "Ingin sekolah binaan Anda mencoba Sigrak?"
 - Body: "Hubungi kami. Kami bisa membantu lewat KKG, KKM, atau pertemuan kepala sekolah di wilayah Anda."
 - Button: "Hubungi kami lewat WhatsApp"
+- Link: "Atau isi formulir kontak" → `/kontak#formulir`
 
 Note: the KKG/KKM line relies on the partner programme (D-342); drop it if no partner activity exists at launch.

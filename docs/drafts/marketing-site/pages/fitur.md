@@ -109,5 +109,5 @@ Only items the product concept says are shown as upcoming (D-161, D-220). No dat
 
 ## Penutup
 
-- H2: "Coba semua fitur guru selama 7 hari"
-- Button: "Coba 7 hari"
+- H2: "Coba semua fitur guru tanpa biaya"
+- Button: "Coba gratis" → `https://app.sigrak.com/daftar`

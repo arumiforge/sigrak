@@ -39,7 +39,7 @@ Sigrak dikelola oleh [Nama PT], beralamat di [Alamat PT] ("kami"). Anda dapat me
 
 1. Aplikasi Sigrak hanya untuk orang dewasa yang bekerja di sekolah atau mengawasi sekolah: guru, kepala sekolah, operator sekolah, dan pengawas.
 2. Murid tidak membuat akun dan tidak memakai aplikasi guru. Murid hanya boleh masuk ke situs Simulasi TKA dengan kartu login yang berlaku untuk satu sesi, di bawah pengawasan guru.
-3. Akun sekolah dibuat lewat undangan dari operator atau kepala sekolah. Anda tidak boleh bergabung ke sekolah tanpa undangan.
+3. Guru boleh mendaftar sendiri di `app.sigrak.com/daftar`. Bergabung ke sekolah hanya lewat undangan dari operator atau kepala sekolah. Bila operator mengundang alamat email yang sama dengan akun yang sudah Anda daftarkan, akun Anda bergabung ke sekolah itu dan Konten Anda tetap ada. Anda tidak boleh bergabung ke sekolah tanpa undangan.
 4. Pengawas mengajukan sekolah binaan, dan pengajuan itu berlaku setelah disetujui Tim Sigrak.
 
 ## 4. Akun dan keamanan
@@ -51,14 +51,13 @@ Sigrak dikelola oleh [Nama PT], beralamat di [Alamat PT] ("kami"). Anda dapat me
 
 ## 5. Uji coba, paket, dan pembayaran
 
-1. Guru bisa mencoba semua fitur guru selama 7 hari tanpa biaya. Uji coba hanya sekali untuk setiap guru.
+1. Guru bisa mencoba semua fitur guru tanpa biaya. Lama uji coba tertera di aplikasi saat Anda mendaftar. Kami dapat memperpanjang atau mengubah lama uji coba, untuk satu guru atau untuk semua guru di satu sekolah. Uji coba hanya sekali untuk setiap guru, kecuali kami memperpanjangnya.
 2. Guru bisa mencoba Game kelas selama 7 hari, satu kali, walaupun sekolahnya belum menyalakan fitur tambahan itu.
 3. Paket berlaku per tahun ajaran, dari 1 Juli sampai 30 Juni. Harga yang berlaku tercantum di halaman Harga saat Anda membayar. [Ketentuan bila paket dibeli di tengah tahun ajaran].
 4. Pembayaran dilakukan lewat cara yang tercantum di aplikasi. Paket aktif setelah kami memeriksa dan menerima pembayaran Anda.
-5. Langganan sekolah dibayar dari dana di luar BOS.
-6. Bila paket berakhir atau uji coba selesai tanpa langganan, Anda masih bisa melihat dan mengunduh data Anda. Membuat dan mengubah data perlu paket aktif.
-7. [Ketentuan pengembalian dana].
-8. Daftar fitur dasar dan fitur tambahan dapat berubah. Perubahan yang mengurangi isi paket berlaku mulai tahun ajaran berikutnya, dan kami mengumumkannya paling lambat [jumlah] hari sebelumnya.
+5. Bila paket berakhir atau uji coba selesai tanpa langganan, Anda masih bisa melihat dan mengunduh data Anda. Membuat dan mengubah data perlu paket aktif.
+6. [Ketentuan pengembalian dana].
+7. Daftar fitur dasar dan fitur tambahan dapat berubah. Perubahan yang mengurangi isi paket berlaku mulai tahun ajaran berikutnya, dan kami mengumumkannya paling lambat [jumlah] hari sebelumnya.
 
 ## 6. Kunci AI dan hasil buatan AI
 
