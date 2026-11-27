@@ -14,16 +14,39 @@ apt_install() {
     apt-get install -y -q "$@" >/dev/null 2>&1
 }
 
-# Node.js LTS (D-412)
-if ! node -v 2>/dev/null | grep -q "^v${NODE_MAJOR}\."; then
+# Node.js LTS (D-412). Cloud images put /opt/node22/bin early on PATH, so check the install folder itself, not
+# whatever `node` PATH finds, and link the binaries into a folder that comes before it (~/.local/bin).
+NODE_BIN="/opt/node${NODE_MAJOR}/bin"
+if ! "$NODE_BIN/node" -v 2>/dev/null | grep -q "^v${NODE_MAJOR}\."; then
     ver=$(curl -fsSL https://nodejs.org/dist/index.json 2>/dev/null \
         | python3 -c "import json,sys;print(next(x['version'] for x in json.load(sys.stdin) if x['version'].startswith('v${NODE_MAJOR}.')))" 2>/dev/null)
     if [ -n "$ver" ] && curl -fsSL "https://nodejs.org/dist/${ver}/node-${ver}-linux-x64.tar.xz" -o /tmp/node.tar.xz; then
-        mkdir -p /opt/node${NODE_MAJOR} && tar -xJf /tmp/node.tar.xz -C /opt/node${NODE_MAJOR} --strip-components=1
-        ln -sf /opt/node${NODE_MAJOR}/bin/{node,npm,npx,corepack} /usr/local/bin/ && log "node $ver installed"
+        mkdir -p "/opt/node${NODE_MAJOR}" && tar -xJf /tmp/node.tar.xz -C "/opt/node${NODE_MAJOR}" --strip-components=1
+        rm -f /tmp/node.tar.xz
+        log "node $ver installed"
     else
         log "could not install Node.js ${NODE_MAJOR} (optional; found $(node -v 2>/dev/null || echo none))"
     fi
+fi
+link_node_bins() {
+    local dir
+    for dir in /usr/local/bin "${HOME:-/root}/.local/bin"; do
+        mkdir -p "$dir"
+        for b in node npm npx corepack pnpm pnpx; do
+            if [ -x "$NODE_BIN/$b" ]; then
+                ln -sf "$NODE_BIN/$b" "$dir/$b"
+            elif [ -L "$dir/$b" ] && [ ! -e "$dir/$b" ]; then
+                rm -f "$dir/$b"   # dangling, e.g. corepack, which Node 25+ no longer ships
+            fi
+        done
+    done
+    return 0
+}
+if [ -x "$NODE_BIN/node" ]; then
+    link_node_bins
+    # Login shells read /etc/profile.d/ in name order; this file sorts after the image's nodejs.sh.
+    echo "export PATH=$NODE_BIN:\$PATH" > "/etc/profile.d/zz-node${NODE_MAJOR}.sh"
+    export PATH="$NODE_BIN:$PATH"
 fi
 
 # PostgreSQL with pgvector (D-398, D-412) and Redis
@@ -79,16 +102,25 @@ if [ -d "$APP_DIR/.git" ]; then
     git -C "$APP_DIR" config commit.gpgsign false
     [ -d "$APP_DIR/.githooks" ] && git -C "$APP_DIR" config core.hooksPath .githooks
     if [ -f "$APP_DIR/pnpm-lock.yaml" ]; then
-        # pnpm version pinned in package.json "packageManager" (D-422)
+        # pnpm version pinned in package.json "packageManager" (D-422), installed under the Node above
         pm=$(python3 -c "import json;print(json.load(open('$APP_DIR/package.json')).get('packageManager',''))" 2>/dev/null)
         pnpm_ver="${pm#pnpm@}"
-        if [ -n "$pnpm_ver" ] && ! pnpm -v 2>/dev/null | grep -qx "$pnpm_ver"; then
-            npm i -g "pnpm@${pnpm_ver}" --no-fund --no-audit >/dev/null 2>&1 \
-                && ln -sf "/opt/node${NODE_MAJOR}/bin/pnpm" /usr/local/bin/pnpm && log "pnpm $pnpm_ver installed" \
+        if [ -n "$pnpm_ver" ] && ! "$NODE_BIN/pnpm" -v 2>/dev/null | grep -qx "$pnpm_ver"; then
+            "$NODE_BIN/npm" i -g "pnpm@${pnpm_ver}" --no-fund --no-audit >/dev/null 2>&1 \
+                && link_node_bins && log "pnpm $pnpm_ver installed" \
                 || log "could not install pnpm $pnpm_ver (optional)"
         fi
         (cd "$APP_DIR" && pnpm install --frozen-lockfile >/dev/null 2>&1) && log "pnpm install done" \
             || log "pnpm install failed (run it in the session)"
+    fi
+    # Local .env for `pnpm test` and `pnpm dev`, the same step CI runs; never overwrites an existing one.
+    if [ ! -f "$APP_DIR/.env" ] && [ -f "$APP_DIR/.env.example" ] && [ -d "$APP_DIR/node_modules" ]; then
+        if cp "$APP_DIR/.env.example" "$APP_DIR/.env" && (cd "$APP_DIR" && node ace generate:key >/dev/null 2>&1); then
+            log ".env created from .env.example"
+        else
+            rm -f "$APP_DIR/.env"   # created by this run only; retried next run
+            log "could not create .env (run: cp .env.example .env && node ace generate:key)"
+        fi
     fi
 fi
 exit 0
