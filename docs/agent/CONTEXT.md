@@ -9,7 +9,7 @@ Compact reference for agents. Update when the stack or a convention changes; rec
 - Product: `docs/final/product-concept.md`
 - Content engine: `docs/final/content-engine.md` · AI layer: `docs/final/ai-provider-engine.md`
 - Data model: `docs/final/data-model.md` · Design and UI copy: `docs/final/design-system.md`
-- Overhaul (phase R): decisions D-388…D-440 (repository and ops decisions of 2026-11-27: D-423…D-440); Fondasi audit `docs/fondasi-audit.md`, uptake `docs/drafts/fondasi-uptake.md`, update check `docs/agent/fondasi-check.md`. Stack docs (architecture, server setup, coding standards, export and localization, monitoring) are rewritten in R4.
+- Overhaul (phase R): decisions D-388…D-441 (repository and ops decisions of 2026-11-27: D-423…D-441); Fondasi audit `docs/fondasi-audit.md`, uptake `docs/drafts/fondasi-uptake.md`, update check `docs/agent/fondasi-check.md`. Stack docs (architecture, server setup, coding standards, export and localization, monitoring) are rewritten in R4.
 - Religious education (SD six religions, MI Kemenag subjects): `docs/final/religious-education.md` · prepared data: `docs/data/`
 - Official rules and guides, SD/MI extract: `docs/data/regulations/` (draft, D-203): 2025 curriculum (structure and JP, deep learning, KKA, kokurikuler, KSP, assessment) and the national standards (SKL 10/2025, Isi 12/2025, Pengelolaan 26/2025, Penilaian 21/2022, Budaya Sekolah Aman 6/2026, CP decree index BSKAP 046/H/KR/2025)
 - Master taxonomy (facets A–H) and the regulation registry with relations: `docs/data/taxonomy/` (draft, D-357; Peta Asesmen in P4-19 reuses facet E codes)

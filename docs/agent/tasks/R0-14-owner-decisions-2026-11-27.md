@@ -11,8 +11,8 @@ Record the decisions the owner accepted in the 2026-11-27 interview ("selebihnya
 
 ## Output
 
-- `DECISIONS.md`: D-423…D-440 (repository, Ubuntu Pro, ops panels and hostnames, monitoring, hardening, supply chain, database, backups, mail and integration settings, ops docs, log pruning, UI kits, marketing site, notes site, maps, HaKI, problem-to-solution teams, Plane); markers on D-396 and D-409; header notes the pruning rule (D-433).
-- `CONTEXT.md`, `CLAUDE.md` stack line, `PROGRESS.md` (R0-13…R0-15, R1/R2/R3 scope, side tasks RS-01…RS-14, handoff note).
+- `DECISIONS.md`: D-423…D-441 (repository, Ubuntu Pro, ops panels and hostnames, monitoring, hardening, supply chain, database, backups, mail and integration settings, ops docs, log pruning, UI kits, marketing site, notes site, maps, HaKI, problem-to-solution teams, Plane, no visibility checks); markers on D-396 and D-409; header notes the pruning rule (D-433).
+- `CONTEXT.md`, `CLAUDE.md` stack line and D-441 rule, `WORKFLOW.md`, `sigrak-session` skill, `PROGRESS.md` (R0-13…R0-15, R1/R2/R3 scope, side tasks RS-01…RS-14, handoff note).
 - `docs/server/rekomendasi-tambahan.md`: "Keputusan" column filled.
 - `docs/handbook/index.html`: v5.
 

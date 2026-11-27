@@ -1999,7 +1999,7 @@ Reason: a strict, disk-efficient install and control over install scripts and br
 
 ### D-423 — Repository moves to `arumiforge/sigrak` with a clean history
 Accepted · 2026-11-27 · R0-13 · owner's choice (interview 2026-11-27, "selebihnya semua usulan saya terima") · refines D-409 and D-407
-SIGRAK lives in the private repository `arumiforge/sigrak`. Its first commit is an exact copy of the previous repository's `main` at `4bce398`, without the old git history, so the non-anonymised SK sample that D-409 left in history is not carried over. Every reference uses the name "sigrak": cloud setup script (finds its own repository root), deploy key alias `github-sigrak`, image `ghcr.io/arumiforge/sigrak`, and CI keeps `owner/repo` in one variable. The old history, including tag `laravel-final` (D-407), stays only in the previous repository, which the owner archives or makes private. ProUI is dropped (D-434). Work keeps the D-148 flow: short-lived branch, PR into `main`, branch deleted after merge.
+SIGRAK lives in the private repository `arumiforge/sigrak`. Its first commit is an exact copy of the previous repository's `main` at `4bce398`, without the old git history, so the non-anonymised SK sample that D-409 left in history is not carried over. Every reference uses the name "sigrak": cloud setup script (finds its own repository root), deploy key alias `github-sigrak`, image `ghcr.io/arumiforge/sigrak`, and CI keeps `owner/repo` in one variable. The old history, including tag `laravel-final` (D-407), stays only in the previous repository, which the owner has made private. ProUI is dropped (D-434). Work keeps the D-148 flow: short-lived branch, PR into `main`, branch deleted after merge.
 Reason: a private repository with no personal data anywhere in its history.
 
 ### D-424 — Ubuntu Pro (free personal) on production and standby
@@ -2127,3 +2127,8 @@ Accepted · 2026-11-27 · R0-14 · owner's choice · follows D-393 masking, D-43
 - Integration: SIGRAK has no public API and gets none. A SIGRAK worker calls the Plane API with masked text and no personal data (the chatbot's masker, D-393): role, district and a link to the admin record. Plane webhooks go to one signed endpoint on the internal network only, which updates the status in SIGRAK and notifies the reporter (D-439).
 - Columns: Masuk → Ditelaah → Akar masalah → Antre prioritas → Dirancang → Dibangun → Uji coba → Rilis → Dievaluasi.
 Reason: the D-439 flow needs a board; self-hosting keeps the data with us and the off switch keeps the trial cheap.
+
+### D-441 — Agents never check repository visibility
+Accepted · 2026-11-27 · R0-14 · owner's choice ("buat juga aturan ini diterapkan … biar tidak dobel kerja")
+`arumiforge/sigrak` is private, set and kept by the owner. Agents never check repository visibility (no GitHub API visibility calls, no anonymous clone or `ls-remote` tests) and never ask the owner to confirm it, unless the owner asks for a check. Licensed files follow their own rules (Hugeicons Pro and shadcn/studio Pro, D-402, D-434).
+Reason: the check was repeated in every session and only cost time.

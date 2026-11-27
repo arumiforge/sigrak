@@ -6,7 +6,7 @@ Rows about the removed Laravel code say only "old stack removed"; the new build 
 
 | Area | Rule | Status | Evidence | Fix | Effort |
 | --- | --- | --- | --- | --- | --- |
-| Conventions | Repository private, proprietary `LICENSE` | missing | repo public on GitHub (owner closing it, D-409); no `LICENSE` | R0: make private; add `LICENSE` (© Arumi Studios); `"private": true`, `"license": "UNLICENSED"` in the new `package.json` | S |
+| Conventions | Repository private, proprietary `LICENSE` | done | private `arumiforge/sigrak`, kept by the owner (D-423, D-441); `LICENSE` added | R0: add `LICENSE` (© Arumi Studios); `"private": true`, `"license": "UNLICENSED"` in the new `package.json` | S |
 | Conventions | No personal data in the repository | partial | `docs/sources/Contoh_SK_Pembagian_Tugas_SD_Semester_Genap_2025_2026.pdf` (anonymised copy uncommitted, D-409; history kept) | R0: commit D-409; check `docs/sources/Instrumen_Supervisi_Kudus_Pra_Observasi_Pasca.docx` and `Contoh_Instrumen_Supervisi_Guru_SD_2026.pdf` for names too | S |
 | Conventions | `THIRD_PARTY_NOTICES.md`, licence check | missing | no file; Hugeicons Pro (D-402), fonts, KaTeX, three.js, shadcn/ui and Radix (D-390) planned | R1: notices for every runtime dependency and font; licence check in CI | S |
 | Conventions | Docs, code, commits in English | ok | `CLAUDE.md` language table | keep | S |

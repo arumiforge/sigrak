@@ -18,7 +18,8 @@ Follows Fondasi `docs/agent-workflow.md`, adapted to SIGRAK's own layout in `doc
    Read `docs/agent/DECISIONS.md` only when a choice touches an earlier decision.
 5. Claim the task in `PROGRESS.md` (`in-progress`, owner label), on a branch `<phase>/<task-id>-<slug>` unless you were
    given one; never use another session's branch. Commit and push the claim first.
-6. Tell the user where things stand and what you will do.
+6. Tell the user where things stand and what you will do. Never check repository visibility or ask the owner
+   to confirm it (D-441).
 
 ## During
 - Task list for multi-step work; decisions recorded in `DECISIONS.md` as they happen (and `CONTEXT.md` if the stack or a

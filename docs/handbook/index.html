@@ -304,7 +304,7 @@ label.step{cursor:pointer}
       <tr><td><strong>Pembekuan fitur</strong></td><td>±8–12 minggu sejak 27 Nov 2026</td><td>D-406. Kurasi data tetap jalan</td></tr>
       <tr><td><strong>Cakupan</strong></td><td>SD/MI dulu; SMP/MTs diputuskan setelah SD/MI selesai</td><td>D-396</td></tr>
       <tr><td><strong>Laravel</strong></td><td>Tidak ada yang dipindahkan dari build Laravel; semua dibangun baru di stack baru</td><td>D-411 (R0-10). Konten SIGRAK, termasuk keputusan aplikasi lama D-252…D-328, tetap dan ditinjau bertahap</td></tr>
-      <tr><td><strong>Repo</strong></td><td><code>arumiforge/sigrak</code>, privat, riwayat bersih</td><td>D-423. Repo lama diarsipkan atau diprivatkan pemilik</td></tr>
+      <tr><td><strong>Repo</strong></td><td><code>arumiforge/sigrak</code>, privat, riwayat bersih</td><td>D-423. Repo lama sudah privat. Agen tidak pernah mengecek visibilitas repo (D-441)</td></tr>
       <tr><td><strong>Situs pemasaran</strong></td><td><code>sigrak.com</code> dilayani aplikasi yang sama di VPS, dirender server</td><td>D-435. Menggantikan Framer. Grafana hanya acuan struktur, bukan desain</td></tr>
       <tr><td><strong>Situs catatan</strong></td><td><code>note.sigrak.com</code> di Cloudflare Workers, di belakang Access</td><td>D-436. Satu-satunya pengecualian "semua di VPS": runbook harus terbaca saat VPS mati</td></tr>
       <tr><td><strong>Email</strong></td><td>Gmail SMTP dulu; pengaturan integrasi di panel admin bila env kosong</td><td>D-431. Rahasia inti (database, <code>APP_KEY</code>, kunci backup) tetap di env</td></tr>
@@ -516,7 +516,7 @@ BullMQ     → worker-ai · worker-exports · worker-default · scheduler (1)</p
 <section class="sec" id="riwayat"><div class="in">
   <div class="sec-head"><div><div class="eb">16</div><h2>Riwayat handbook</h2></div></div>
   <ul class="clean small">
-    <li><strong>v5 · 27 Nov 2026:</strong> pindah ke repo privat <code>arumiforge/sigrak</code> (D-423); keputusan D-424…D-440: Ubuntu Pro, Portainer, pemantauan, keamanan, database, backup, email, situs pemasaran di VPS, situs catatan, peta, HaKI, alur masalah→solusi, Plane; bagian 12 berisi keputusan, bagian 14 baru.</li>
+    <li><strong>v5 · 27 Nov 2026:</strong> pindah ke repo privat <code>arumiforge/sigrak</code> (D-423); keputusan D-424…D-441: Ubuntu Pro, Portainer, pemantauan, keamanan, database, backup, email, situs pemasaran di VPS, situs catatan, peta, HaKI, alur masalah→solusi, Plane; bagian 12 berisi keputusan, bagian 14 baru.</li>
     <li><strong>v4 · 27 Nov 2026:</strong> pnpm menggantikan npm (D-422): versi dikunci, skrip instalasi hanya untuk paket yang diizinkan, versi baru menunggu satu hari.</li>
     <li><strong>v3 · 27 Nov 2026:</strong> keputusan D-412…D-421 dicatat (versi, Ubuntu 26.04, nginx, Compose, akses server, tmux, bahasa panduan, Fondasi); versi aplikasi diputuskan CalVer; kerangka R0-05 selesai.</li>
     <li><strong>v2 · 27 Nov 2026:</strong> R0-10 diluruskan: yang dihapus hanya sisa Laravel (D-411); konten SIGRAK dan keputusan aplikasi lama tetap.</li>
