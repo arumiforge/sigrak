@@ -3,6 +3,7 @@
 - **Audience:** teachers comparing tools; principals checking what the school gets.
 - **Goal:** the complete v1 feature list, grouped the way the app is organised (five teacher menus, then the portals), so nothing on this page surprises a user after sign-in.
 - **Source:** `docs/final/product-concept.md` (Navigation, Feature status, v1 scope). Items marked *Later* or *Remove* there never appear here, except in the "Segera hadir" section, and only those the product concept says are shown as upcoming (D-161, D-220).
+- **Add-ons:** features in the D-158 add-on list carry a small text tag "Fitur tambahan" that links to `/harga#fitur-tambahan` (text, not colour alone). The tags are read from the console plan mapping when built (D-211).
 - **Layout:** a sticky in-page index on desktop (left column, the five menus + Portal + Dokumen dan cetak + Kunci AI), a "Lompat ke" select on phones. Each group: H2, one-line lead, then a definition list (feature name + one sentence). One screen crop per group (Codex-made mock screens with abstract text, never real data).
 
 ## Share preview
@@ -26,8 +27,8 @@ Visual: Codex brief needed — the template gallery as a shelf of labelled folde
 - Kokurikuler — "Rencana kokurikuler sesuai Panduan Kokurikuler 2025, dinilai pada delapan dimensi profil lulusan."
 - Bank Soal — "Soal per tujuan pembelajaran, dengan kisi-kisi, kartu soal, dan cetakan untuk penilaian harian, STS, SAS, dan ujian sekolah."
 - LKPD — "Lembar kerja murid, dengan blok khusus untuk kelas 1 sampai 3."
-- Quiz Battle — "Kuis kelas dari soal yang sudah Anda simpan. Tayangkan di proyektor, atau unduh sebagai satu berkas yang bisa dimainkan tanpa internet."
-- Paket Soal TKA — "30 soal Bahasa Indonesia atau Matematika dalam bentuk soal TKA, untuk Simulasi TKA."
+- Quiz Battle [Fitur tambahan: Game kelas] — "Kuis kelas dari soal yang sudah Anda simpan. Tayangkan di proyektor, atau unduh sebagai satu berkas yang bisa dimainkan tanpa internet."
+- Paket Soal TKA [Fitur tambahan: Simulasi TKA] — "30 soal Bahasa Indonesia atau Matematika dalam bentuk soal TKA, untuk Simulasi TKA."
 - Instrumen asesmen — "Rubrik kinerja, observasi dimensi profil lulusan, cek kesiapan awal, serta kartu penilaian diri dan teman."
 - Kurikulum — "CP, TP, ATP, Prota, dan Promes bawaan yang bisa diubah sekolah. Perubahan sekolah disahkan kepala sekolah dan pengawas."
 - Perbaiki bagian ini — "Ubah satu bagian dengan bantuan AI tanpa membuat ulang seluruh dokumen."
@@ -52,8 +53,8 @@ Visual: Codex brief needed — a teacher in a classroom doorway tapping a phone 
 - Nilai — "Isi nilai per tujuan pembelajaran."
 - Pindai LJK — "Pindai lembar jawaban dengan kamera ponsel. Foto tidak diunggah; hanya jawaban yang terkirim."
 - Analisis — "Daya serap per tujuan pembelajaran, kelompok belajar, analisis butir soal, remedial, dan pengayaan."
-- Rapor — "Leger, draf deskripsi capaian, dan draf catatan wali kelas tanpa data pribadi murid. Ekspor ke format impor e-Rapor SD dan RDM."
-- Simulasi TKA — "Sesi ujian latihan untuk kelas 6 dengan kartu login dan token dari pengawas. Murid mengerjakan di situs ujian terpisah. Hasil dalam empat tingkat: Istimewa, Baik, Memadai, Kurang."
+- Rapor [Fitur tambahan: Rapor] — "Leger, draf deskripsi capaian, dan draf catatan wali kelas tanpa data pribadi murid. Ekspor ke format impor e-Rapor SD dan RDM."
+- Simulasi TKA [Fitur tambahan: Simulasi TKA] — "Sesi ujian latihan untuk kelas 6 dengan kartu login dan token dari pengawas. Murid mengerjakan di situs ujian terpisah. Hasil dalam empat tingkat: Istimewa, Baik, Memadai, Kurang."
 - Note line under Simulasi TKA: "Hasil Simulasi TKA adalah hasil latihan, bukan hasil TKA resmi."
 
 ## Kelas Saya (`#kelas-saya`)
@@ -63,8 +64,8 @@ Visual: Codex brief needed — a teacher in a classroom doorway tapping a phone 
 - Jadwal — "Jadwal pelajaran dan kalender pendidikan sekolah, dengan pemeriksa bentrok."
 - Piket — "Kelompok piket bergilir beserta tugasnya."
 - Ekstrakurikuler — "Kegiatan, pembina, anggota, kehadiran, dan deskripsi untuk rapor. Pramuka tersedia sejak awal."
-- Keuangan dan Tabungan — "Sumbangan sukarela kelas dan buku tabungan murid. Sekolah bisa mematikan menu ini."
-- Inventaris — "Barang di ruang kelas, bagian dari inventaris sekolah."
+- Keuangan dan Tabungan [Fitur tambahan: Keuangan dan Inventaris kelas] — "Sumbangan sukarela kelas dan buku tabungan murid. Sekolah bisa mematikan menu ini."
+- Inventaris [Fitur tambahan: Keuangan dan Inventaris kelas] — "Barang di ruang kelas, bagian dari inventaris sekolah."
 - Pesan ke orang tua — "Teks siap kirim yang dibuka di WhatsApp Anda sendiri."
 
 ## Hari Ini (`#hari-ini`)

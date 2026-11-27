@@ -39,7 +39,7 @@ Visual: Codex brief needed — a phone showing a wizard question with large radi
   - "memperbaiki satu bagian tanpa mengulang semuanya."
   - "mengunduh PDF atau Word dengan kop sekolah."
   - "membukanya di Canva untuk dihias."
-  - "menayangkan Quiz Battle di kelas atau mengunduhnya untuk dimainkan tanpa internet."
+  - "menayangkan Quiz Battle di kelas atau mengunduhnya untuk dimainkan tanpa internet (fitur tambahan Game kelas; guru boleh mencobanya 7 hari)."
 
 ## 4. Di kelas, cukup satu tangan
 
@@ -53,14 +53,14 @@ Visual: Codex brief needed — a teacher holding a phone in one hand at the fron
 
 - H2: "Nilai dan rapor tanpa menyalin ulang"
 - Body: "Nilai per tujuan pembelajaran langsung menjadi analisis daya serap, kelompok belajar, dan bahan remedial. Lembar jawaban pilihan ganda bisa dipindai dengan kamera ponsel; fotonya tidak diunggah."
-- Body 2: "Untuk rapor, Sigrak menyiapkan draf deskripsi capaian dan draf catatan wali kelas. Draf dibuat tanpa nama atau data pribadi murid, dan Anda yang memutuskan isinya."
+- Body 2 (Rapor is an add-on in the D-158 starting configuration; add the "Fitur tambahan" tag): "Untuk rapor, Sigrak menyiapkan draf deskripsi capaian dan draf catatan wali kelas. Draf dibuat tanpa nama atau data pribadi murid, dan Anda yang memutuskan isinya."
 
 ## 6. Soal kunci AI, dengan jujur
 
 Layout: a plain bordered note box (neutral border, no side stripe), because this is a condition the teacher must know before signing up.
 
 - H2: "Yang perlu Anda siapkan: kunci AI"
-- Body: "Untuk membuat bahan ajar, Sigrak memakai kunci AI Gemini dari akun Google Anda sendiri, versi gratis. Membuatnya hanya perlu beberapa menit, dan Panduan kami menunjukkan caranya langkah demi langkah."
+- Body: "Untuk membuat bahan ajar, Sigrak memakai kunci AI Gemini dari akun Google Anda sendiri, versi gratis. Panduan kami menunjukkan cara membuatnya, langkah demi langkah."
 - List intro: "Yang perlu Anda tahu:"
   - "biaya AI tidak ditagih Sigrak."
   - "versi gratis punya batas pemakaian harian dari Google. Bila semua kunci Anda sedang di batas, Sigrak memberi tahu kapan bisa dicoba lagi."
