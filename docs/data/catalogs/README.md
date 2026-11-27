@@ -36,8 +36,8 @@ These usulan-01 files stay in `docs/sources/` and are not converted here:
 
 | File | sha256 |
 |---|---|
-| `admin-document-components.json` | `51fe882e4e82a163c89d964c1a05b10145c8a420b79cea1f83c0d31c51cece59` |
+| `admin-document-components.json` | `d5150db712e88c69e0294ebb855fd15c6418fd9f165ec9c868995fa9ebc605e6` |
 | `class-inventory.json` | `a906fe6f8977b79f4d2afe03454d57337215aadaa30d57891467df55ad25354d` |
-| `cocurricular-themes.json` | `fe04e575842010c3ede27568c7e0d7a44d1cc6acc7fcb80b4ecec8b4f380f7e9` |
-| `extracurriculars.json` | `531e1defc3c0c4a61d7475c213da06adc1be5467312c24ccfadb06da83aabeb7` |
+| `cocurricular-themes.json` | `c6591a1f4b671923a142cfe2d55b1f710b778f14088e064be8d29fc8bf96a4ef` |
+| `extracurriculars.json` | `bc2a4fda966a768b70baab3e42da6a87da0115b8d9d7d63e32df4e50fc5cba0e` |
 | `form-options.json` | `34144cfd1a5f1ad6da4d1cfa32a7c2ca6c9bb3fbc1c5c92193745850d6f93c2f` |
