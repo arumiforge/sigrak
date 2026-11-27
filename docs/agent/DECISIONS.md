@@ -2195,3 +2195,15 @@ Accepted · 2026-11-27 · R0-06 · team decision from the spike (`docs/agent/tas
 - Data model: `generations.runs` (run number, part of the queue job id) and `generations.error_meta`; `template_key` has no foreign key until `template_versions` exists.
 - pnpm `allowBuilds` keeps `msgpackr-extract` off; BullMQ uses msgpackr's JavaScript fallback.
 Reason: measured in the spike: progress reaches the page in a median 6 ms (p95 12 ms), and neither a graceful nor a hard worker restart lost or repeated a step.
+
+### D-452 — Data decisions from the RS-15 pre-check
+Accepted · 2026-11-28 · RS-15 · owner's choice (interview 2026-11-28) · supersedes D-208; refines D-210, D-216; reports in `docs/drafts/data-precheck/`
+- **CP text:** the official CP text of Kepka BSKAP 046/2025 (and its amendments) is stored per subject, phase and element and is the reference. Each topic links to its element; the existing per-topic text stays as a teacher-friendly explanation labelled "ringkasan SIGRAK", never shown as the official CP.
+- **KKA:** Koding dan Kecerdasan Artifisial follows Permendikdasmen 13/2025: an optional subject in grades 5–6 (72 and 64 JP a year). Each school chooses to run it as a regular subject or through kokurikuler (Kepmendikdasmen 127/P/2025). Supersedes D-208.
+- **Kepanduan:** Pramuka is set up by default; a school may replace it with another kepanduan, but one must stay (Permendikdasmen 13/2025 Pasal 22 ayat (2)).
+- **Kokurikuler themes:** "Gaya Hidup Berkelanjutan" is offered again, as in Panduan Kokurikuler 2025.
+- **Supervision:** the two "telaah" instruments (administrasi, perencanaan) are optional SIGRAK instruments, sourced to the regional sample and SIGRAK's own set, not to Perdirjen GTK 7607/2023.
+- **MI profile:** includes Asesmen Nasional for final-year pupils (Permendikdasmen 9/2026 Pasal 5–6), next to TKA and AKMI.
+- **Content outside the decrees** (PAI tajwid items, Bahasa Inggris topics for grades 1–2, older PJOK element names, content in a later phase): left in the data unchanged but marked "di luar CP" with the reason, for later review.
+- Smaller corrections listed in the reports (quote wording, article references, stale notes, fokus→TP links, unannotated harakat changes) are fixed; every set stays `draft` until the owner signs it off (D-447).
+Reason: align the data with the 2025–2026 rules where the pre-check found SIGRAK deviating, while keeping teacher-friendly summaries.
