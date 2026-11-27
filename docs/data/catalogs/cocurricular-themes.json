@@ -14,18 +14,19 @@
     "converted_on": "2026-11-09",
     "decisions": {
       "D-207": "The seventh 7 KAIH habit is labelled 'Tidur Cepat'; 'Tidur tepat waktu' is only its explanation.",
-      "D-208": "KKA runs through kokurikuler.",
+      "D-208": "Superseded by D-452.",
       "D-210": "Kokurikuler is assessed on the 8 dimensi profil lulusan.",
       "D-277": "The annual kokurikuler JP target comes from subject_allocations (cocurricular), not from this catalog; activities here carry no JP.",
       "D-305": "Catalog copied from usulan-01 for one Tim Validasi review.",
-      "D-367": "Curated with SIGRAK names, keys, and codes."
+      "D-367": "Curated with SIGRAK names, keys, and codes.",
+      "D-452": "KKA is an optional subject in grades 5–6 (Permendikdasmen 13/2025 Lampiran II Tabel 4–5); a school runs it as a regular subject or through kokurikuler (Kepmendikdasmen 127/P/2025). 'Gaya Hidup Berkelanjutan' is offered again (Panduan Kokurikuler 2025, p. 28)."
     },
     "conventions": [
       "Keys are English snake_case and never change once seeded; labels and other text shown to users are Indonesian.",
       "Codes follow SIGRAK-KAT-<AREA>-NN for the main items of a file and SIGRAK-KAT-<AREA>-<LIST>-NN for its secondary lists (see README.md). Codes are stable: a retired item keeps its code, and new items take the next free number.",
       "No identifier from the legacy app is carried over. Where a decision keeps an old label for reference (D-305), it sits in legacy_label and is never shown in the UI.",
       "review_notes are Indonesian notes for Tim Validasi SIGRAK; they are not shown to teachers.",
-      "Themes are local sample themes, not official ones: Panduan Kokurikuler 2025 leaves themes to each school, so a school may add its own. offered = false keeps an old theme readable but hides it from new activities.",
+      "Themes are sample themes, not a fixed list: themes are developed by each school (Permendikdasmen 13/2025 Pasal 18 ayat (3)), so a school may add its own. guide_reference = true marks the reference themes of Panduan Kokurikuler 2025 (p. 28, 'Referensi tema sebagai inspirasi'). offered = false keeps an old theme readable but hides it from new activities.",
       "form uses the keys of docs/data/regulations/cocurricular-guide-bskap.json (forms.items): cross_disciplinary_collaborative (minimum 2 subjects), g7kaih, other_ways.",
       "dimensions use the keys of docs/data/regulations/cocurricular-guide-bskap.json (graduate_profile_dimensions.items).",
       "related_subjects use subject codes from docs/data/curriculum/subjects.json. An empty list means the subjects still have to be chosen (see review_notes).",
@@ -39,6 +40,7 @@
       "key": "body_and_soul",
       "label": "Bangunlah Jiwa Raganya",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -46,6 +48,7 @@
       "key": "religious_character",
       "label": "Generasi Anak Sholeh dan Sholihah",
       "offered": true,
+      "guide_reference": false,
       "review_notes": [
         "Label bernuansa Islam. Untuk SD dengan murid beragam agama, pertimbangkan label netral (mis. 'Generasi Berakhlak Mulia') atau batasi ke MI."
       ]
@@ -55,6 +58,7 @@
       "key": "global_generation",
       "label": "Generasi Cerdas di Era Global",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -62,6 +66,7 @@
       "key": "engineering_technology",
       "label": "Rekayasa & Teknologi",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -69,6 +74,7 @@
       "key": "literacy_numeracy",
       "label": "Literasi & Numerasi",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -76,6 +82,7 @@
       "key": "local_wisdom",
       "label": "Kearifan Lokal",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -83,6 +90,7 @@
       "key": "unity_in_diversity",
       "label": "Bhinneka Tunggal Ika",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -90,6 +98,7 @@
       "key": "healthy_life",
       "label": "Budaya Kerja / Hidup Sehat",
       "offered": true,
+      "guide_reference": false,
       "review_notes": [
         "Label menggabungkan dua gagasan; 'Budaya Kerja' kurang cocok untuk SD. Periksa apakah cukup 'Hidup Sehat'."
       ]
@@ -99,6 +108,7 @@
       "key": "entrepreneurship",
       "label": "Kewirausahaan",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -106,6 +116,7 @@
       "key": "arts_expression",
       "label": "Seni & Ekspresi Budaya",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
@@ -113,15 +124,17 @@
       "key": "learning_by_practice",
       "label": "Belajar Lewat Praktik",
       "offered": true,
+      "guide_reference": false,
       "review_notes": []
     },
     {
       "code": "SIGRAK-KAT-KOK-12",
       "key": "sustainable_lifestyle",
       "label": "Gaya Hidup Berkelanjutan",
-      "offered": false,
+      "offered": true,
+      "guide_reference": true,
       "review_notes": [
-        "Tema projek kurikulum sebelumnya (P5). Disimpan agar data lama tetap terbaca, tidak ditawarkan untuk kegiatan baru."
+        "Tema referensi Panduan Kokurikuler 2025 (hlm. 28, butir f), jadi ditawarkan lagi untuk kegiatan baru (D-452). Tema ini juga dipakai di projek P5 kurikulum sebelumnya."
       ]
     },
     {
@@ -129,8 +142,59 @@
       "key": "democracy",
       "label": "Suara Demokrasi",
       "offered": false,
+      "guide_reference": false,
       "review_notes": [
-        "Tema projek kurikulum sebelumnya (P5). Disimpan agar data lama tetap terbaca, tidak ditawarkan untuk kegiatan baru."
+        "Tema projek kurikulum sebelumnya (P5), tidak ada di daftar referensi Panduan Kokurikuler 2025 (hlm. 28). Disimpan agar data lama tetap terbaca, tidak ditawarkan untuk kegiatan baru."
+      ]
+    },
+    {
+      "code": "SIGRAK-KAT-KOK-15",
+      "key": "healthy_fit_generation",
+      "label": "Generasi Sehat dan Bugar",
+      "offered": true,
+      "guide_reference": true,
+      "review_notes": [
+        "Tema referensi Panduan Kokurikuler 2025 (hlm. 28, butir a). Belum ada contoh kegiatan. Dekat dengan 'Bangunlah Jiwa Raganya' dan 'Budaya Kerja / Hidup Sehat'; periksa apakah perlu digabung."
+      ]
+    },
+    {
+      "code": "SIGRAK-KAT-KOK-16",
+      "key": "caring_sharing",
+      "label": "Peduli dan Berbagi",
+      "offered": true,
+      "guide_reference": true,
+      "review_notes": [
+        "Tema referensi Panduan Kokurikuler 2025 (hlm. 28, butir b). Belum ada contoh kegiatan."
+      ]
+    },
+    {
+      "code": "SIGRAK-KAT-KOK-17",
+      "key": "love_for_indonesia",
+      "label": "Aku Cinta Indonesia",
+      "offered": true,
+      "guide_reference": true,
+      "review_notes": [
+        "Tema referensi Panduan Kokurikuler 2025 (hlm. 28, butir c). Belum ada contoh kegiatan."
+      ]
+    },
+    {
+      "code": "SIGRAK-KAT-KOK-18",
+      "key": "thrifty_productive",
+      "label": "Hidup Hemat dan Produktif",
+      "offered": true,
+      "guide_reference": true,
+      "review_notes": [
+        "Tema referensi Panduan Kokurikuler 2025 (hlm. 28, butir d). Belum ada contoh kegiatan."
+      ]
+    },
+    {
+      "code": "SIGRAK-KAT-KOK-19",
+      "key": "work_for_others_and_nation",
+      "label": "Berkarya untuk Sesama dan Bangsa",
+      "offered": true,
+      "guide_reference": true,
+      "review_notes": [
+        "Tema referensi Panduan Kokurikuler 2025 (hlm. 28, butir e). Belum ada contoh kegiatan."
       ]
     },
     {
@@ -138,6 +202,7 @@
       "key": "other",
       "label": "Lainnya",
       "offered": true,
+      "guide_reference": false,
       "free_text": true,
       "review_notes": []
     }
@@ -297,7 +362,9 @@
         "worship"
       ],
       "movement_form_7kaih": "routine_habit",
-      "review_notes": []
+      "review_notes": [
+        "Kegiatan khusus murid beragama Islam. Untuk SD dengan murid beragam agama, tawarkan sebagai pilihan bagi murid Muslim saja, atau batasi ke MI. Mapel PAI di subjects.json hanya untuk SD; untuk MI hubungkan ke mapel madrasah (mis. Al-Qur'an Hadis)."
+      ]
     },
     {
       "code": "SIGRAK-KAT-KOK-KEG-05",
@@ -319,7 +386,9 @@
         "worship"
       ],
       "movement_form_7kaih": "routine_habit",
-      "review_notes": []
+      "review_notes": [
+        "Kegiatan khusus murid beragama Islam. Untuk SD dengan murid beragam agama, tawarkan sebagai pilihan bagi murid Muslim saja, atau batasi ke MI. Mapel PAI di subjects.json hanya untuk SD; untuk MI hubungkan ke mapel madrasah (mis. Al-Qur'an Hadis)."
+      ]
     },
     {
       "code": "SIGRAK-KAT-KOK-KEG-06",
@@ -359,7 +428,7 @@
       "habits_7kaih": [],
       "movement_form_7kaih": null,
       "review_notes": [
-        "Untuk kelas 5–6, kegiatan ini bisa menjadi wadah Koding dan Kecerdasan Artifisial (KKA, D-208). Periksa mapel terkaitnya."
+        "Untuk kelas 5–6, sekolah yang menjalankan Koding dan Kecerdasan Artifisial (KKA) lewat kokurikuler bisa memakai kegiatan ini; sekolah lain menjalankan KKA sebagai mata pelajaran pilihan (D-452). Periksa mapel terkaitnya."
       ]
     },
     {

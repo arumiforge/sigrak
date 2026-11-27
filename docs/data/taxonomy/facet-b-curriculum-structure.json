@@ -13,7 +13,8 @@
     },
     "decisions": [
       "D-353",
-      "D-357"
+      "D-357",
+      "D-452"
     ],
     "created_on": "2026-11-10",
     "conventions": "docs/data/taxonomy/README.md"
@@ -82,9 +83,11 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null,
-        "note": "Fase A–C for SD/MI. Article to be cited after P4-23."
+        "article": "Pasal 9 ayat (2)",
+        "pages": [
+          5
+        ],
+        "note": "Fase A–C for SD/MI: Fase A kelas I–II (huruf b), Fase B kelas III–IV (huruf c), Fase C kelas V–VI (huruf d)."
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -101,8 +104,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf b",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -123,8 +128,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf b",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -142,8 +149,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf b",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -161,8 +170,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf c",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -183,8 +194,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf c",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -202,8 +215,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf c",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -221,8 +236,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf d",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -243,8 +260,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf d",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -262,8 +281,10 @@
       "force": "mandatory",
       "source_ref": {
         "regulation": "PERMENDIKBUDRISTEK-12-2024",
-        "article": null,
-        "pages": null
+        "article": "Pasal 9 ayat (2) huruf d",
+        "pages": [
+          5
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -281,7 +302,7 @@
       "force": "mandatory",
       "source_ref": {
         "source": "sigrak",
-        "decision": null,
+        "decision": "D-253",
         "note": "Two semesters per school year, as in the kalender pendidikan (D-253)."
       },
       "status": "draft",
@@ -299,7 +320,7 @@
       "force": "mandatory",
       "source_ref": {
         "source": "sigrak",
-        "decision": null
+        "decision": "D-253"
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -316,7 +337,7 @@
       "force": "mandatory",
       "source_ref": {
         "source": "sigrak",
-        "decision": null
+        "decision": "D-253"
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -422,10 +443,9 @@
       "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": "Pasal 17",
+        "article": "Pasal 16 ayat (2)",
         "pages": [
-          3,
-          4
+          3
         ],
         "note": "Forms joined by 'dan/atau'; the school chooses one or more.",
         "also": [
@@ -454,10 +474,9 @@
       "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": "Pasal 17",
+        "article": "Pasal 16 ayat (2)",
         "pages": [
-          3,
-          4
+          3
         ]
       },
       "status": "draft",
@@ -475,10 +494,9 @@
       "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": "Pasal 17",
+        "article": "Pasal 16 ayat (2)",
         "pages": [
-          3,
-          4
+          3
         ]
       },
       "status": "draft",
@@ -496,10 +514,9 @@
       "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": "Pasal 17",
+        "article": "Pasal 16 ayat (2)",
         "pages": [
-          3,
-          4
+          3
         ]
       },
       "status": "draft",
@@ -517,12 +534,20 @@
       "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": "Pasal 17",
+        "article": "Pasal 18",
         "pages": [
-          3,
           4
         ],
-        "note": "Themes are developed by the school; SIGRAK offers catalog examples."
+        "note": "Themes are developed by the school (Pasal 18 ayat (3)); SIGRAK offers catalog examples, including the reference themes of Panduan Kokurikuler 2025 (p. 28).",
+        "also": [
+          {
+            "regulation": "PANDUAN-KOKURIKULER-BSKAP-2025",
+            "pages": [
+              27,
+              28
+            ]
+          }
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -594,11 +619,11 @@
       "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": "Pasal 22",
+        "article": "Pasal 22 ayat (2)",
         "pages": [
           4
         ],
-        "note": "Pramuka or another kepanduan must be offered (D-210, D-216); the list itself is the school's."
+        "note": "At least one kepramukaan or other kepanduan must be offered (D-210, D-216, D-452). Pramuka is on by default and may be replaced by another kepanduan, but one must stay: catalog offer_groups[key=scouting] (min 1). The rest of the list is the school's."
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -699,11 +724,32 @@
       "label_id": "Mata pelajaran pilihan",
       "parent": "JENIS-MAPEL",
       "level_scope": "both",
-      "force": "mandatory",
+      "force": "school_discretion",
       "source_ref": {
         "regulation": "PERMENDIKDASMEN-13-2025",
-        "article": null,
-        "pages": null
+        "article": "Lampiran II Tabel 4–5",
+        "pages": [
+          19,
+          20,
+          21
+        ],
+        "note": "Koding dan Kecerdasan Artifisial (KKA) is the Mata Pelajaran Pilihan of SD/MI kelas V and VI: 72 JP (kelas V) and 64 JP (kelas VI) a year, intrakurikuler, no kokurikuler JP. Offering it is the school's choice (127/P/2025 BAB II huruf B angka 1); a school that offers it runs it as a regular subject or through kokurikuler (JENIS-MAPEL.KOKURIKULER). D-452, superseding D-208.",
+        "also": [
+          {
+            "regulation": "PERMENDIKDASMEN-13-2025",
+            "article": "Pasal 32A",
+            "pages": [
+              5
+            ]
+          },
+          {
+            "regulation": "KEPMENDIKDASMEN-127-P-2025",
+            "article": "BAB II huruf B",
+            "pages": [
+              6
+            ]
+          }
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -714,20 +760,38 @@
     {
       "code": "JENIS-MAPEL.KOKURIKULER",
       "facet": "B",
-      "label_id": "Dilaksanakan melalui kokurikuler",
-      "parent": "JENIS-MAPEL",
+      "label_id": "Mapel pilihan yang dijalankan lewat kokurikuler",
+      "parent": "JENIS-MAPEL.PILIHAN",
       "level_scope": "both",
-      "force": "mandatory",
+      "force": "school_discretion",
       "source_ref": {
         "regulation": "KEPMENDIKDASMEN-127-P-2025",
-        "article": null,
-        "pages": null
+        "article": "BAB II huruf B angka 3",
+        "pages": [
+          6
+        ],
+        "note": "D-452 (supersedes D-208): KKA is an optional subject in kelas V–VI, not kokurikuler-only. A school that offers it chooses a regular subject slot (JENIS-MAPEL.PILIHAN) or kokurikuler; this node is the second choice and is set per school, not per subject. 127/P/2025 also allows integration into other subjects and ekstrakurikuler (angka 2 and 4).",
+        "also": [
+          {
+            "regulation": "PERMENDIKDASMEN-13-2025",
+            "article": "Lampiran II Tabel 4–5",
+            "pages": [
+              19,
+              20,
+              21
+            ]
+          }
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
       "retired_in": null,
       "crosswalk": [],
-      "key": "cocurricular"
+      "key": "cocurricular",
+      "grades": [
+        5,
+        6
+      ]
     },
     {
       "code": "MAPEL",

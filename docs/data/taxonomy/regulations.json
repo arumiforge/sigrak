@@ -11,11 +11,12 @@
     },
     "decisions": [
       "D-354",
-      "D-355"
+      "D-355",
+      "D-452"
     ],
     "created_on": "2026-11-10",
     "conventions": "docs/data/taxonomy/README.md",
-    "pending_p4_23": "Entries with pending_p4_23: true are regulations whose PDF is not yet in docs/sources/. Since P4-32 (2026-11-11) every entry is false."
+    "pending_p4_23": "Entries with pending_p4_23: true are regulations whose PDF is not yet in docs/sources/. P4-32 (2026-11-11) cleared the last of them; RS-17 added PERMENDIKBUDRISTEK-17-2021, the base AN regulation, as pending."
   },
   "regulations": [
     {
@@ -353,6 +354,27 @@
       "notes": "Implements Permendikdasmen 6/2026 (Pasal 27). For PAUD and SD the class role is \"Guru Kelas atau Wali Kelas\" (Tabel 3.5, PDF p. 33); kesepakatan kelas has three minimum contents; tata tertib, kode etik and POS are reviewed at least once a year. In force on setting. Mirror: the JDIH salinan (certified by the Biro Hukum) re-saved by a non-government site with hidden watermark text, supplied by the owner in P4-32; replace with the JDIH copy and re-hash when it can be fetched."
     },
     {
+      "code": "PERMENDIKBUDRISTEK-17-2021",
+      "kind": "permen",
+      "number": "17 Tahun 2021",
+      "title": "Asesmen Nasional",
+      "issuer": "Menteri Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "ministry": "kemendikdasmen",
+      "layer": "L1",
+      "year": 2021,
+      "issued_on": null,
+      "promulgated_on": null,
+      "effective_on": null,
+      "status": "amended",
+      "source_file": null,
+      "sha256": null,
+      "source_url": null,
+      "verification": "unverified",
+      "data_files": [],
+      "pending_p4_23": true,
+      "notes": "Base text of Asesmen Nasional; amended by Permendikdasmen 9/2026 (Pasal 3, 5, 6, 9A, 12; title and Menimbang of 9/2026, PDF p. 1). No copy in docs/sources/ yet. Short title; take the full title from the official copy."
+    },
+    {
       "code": "PERMENDIKDASMEN-9-2026",
       "kind": "permen",
       "number": "9 Tahun 2026",
@@ -391,10 +413,10 @@
       "source_file": null,
       "sha256": null,
       "source_url": null,
-      "verification": "mirror",
+      "verification": "secondary",
       "data_files": [],
       "pending_p4_23": false,
-      "notes": "TKA optional for grade 6. Short title; take the full title from the official copy."
+      "notes": "TKA optional for grade 6. Berita Negara 2025 Nomor 384 (cited in Perka BSKAP 047/H/AN/2025, Mengingat no. 7). Read earlier in a mirror copy that was not kept, so verification is secondary until a copy is stored. Short title; take the full title from the official copy."
     },
     {
       "code": "PERMENDIKDASMEN-11-2025",
@@ -428,7 +450,7 @@
       "year": 2025,
       "issued_on": "2025-09-04",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2025-09-04",
       "status": "in_force",
       "source_file": "docs/sources/Kepmendikdasmen_No_126_P_2025_Pedoman_Implementasi_Pembelajaran_Mendalam.pdf",
       "sha256": "20706793bca33c17062d72cfc0fe0c362e31f867f42656287b5c05be4fab2da3",
@@ -438,7 +460,7 @@
         "docs/data/regulations/deep-learning-kepmendikdasmen-126-p-2025.json"
       ],
       "pending_p4_23": false,
-      "notes": null
+      "notes": "In force from 2025-09-04 (Diktum KETIGA)."
     },
     {
       "code": "KEPMENDIKDASMEN-127-P-2025",
@@ -451,7 +473,7 @@
       "year": 2025,
       "issued_on": "2025-09-04",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2025-09-04",
       "status": "in_force",
       "source_file": "docs/sources/Kepmendikdasmen_No_127_P_2025_Pedoman_Implementasi_Koding_dan_Kecerdasan_Artifisial.pdf",
       "sha256": "8441abc021bbb4598b34fbdc1300ceb26b34394fd343a0e74c73ca6369a480a2",
@@ -461,7 +483,7 @@
         "docs/data/regulations/coding-ai-kepmendikdasmen-127-p-2025.json"
       ],
       "pending_p4_23": false,
-      "notes": null
+      "notes": "In force from 2025-09-04 (Diktum KETIGA)."
     },
     {
       "code": "KEPMENDIKDASMEN-56-2026",
@@ -474,7 +496,7 @@
       "year": 2026,
       "issued_on": "2026-03-06",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2026-03-06",
       "status": "in_force",
       "source_file": "docs/sources/Kepmendikdasmen_No_56_Tahun_2026_Pedoman_Penyelenggaraan_TKA_dan_AN.pdf",
       "sha256": "1d1f8d037ac849e29a320d7f247981f816387f7d92e1c4b67140ee75b9b0585a",
@@ -484,7 +506,7 @@
         "docs/data/tka/kerangka-tka-sd.json"
       ],
       "pending_p4_23": false,
-      "notes": "Short title; take the full title from the official copy."
+      "notes": "Short title; take the full title from the official copy. In force from 2026-03-06 (Diktum KELIMA)."
     },
     {
       "code": "BSKAP-046-H-KR-2025",
@@ -520,7 +542,7 @@
       "year": 2026,
       "issued_on": "2026-06-11",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2026-06-11",
       "status": "in_force",
       "source_file": "docs/sources/Salinan_Kepka_BKPDM_No._020_Tahun_2026_tentang_Perubahan_atas_Keputusan_Kepala_BSKAP_Kemendikdasmen_No._046_H_KR_2025.pdf",
       "sha256": "598278746b0f62333fdcab520d5dd4c1a9650c94bd3906acff4254100976552b",
@@ -530,7 +552,7 @@
         "docs/data/curriculum/cp-pendidikan-agama-sd-bkpdm-020-2026.json"
       ],
       "pending_p4_23": false,
-      "notes": "Scan, no text layer. CP Pendidikan Agama dan Budi Pekerti."
+      "notes": "Scan, no text layer. Amends the CP Pendidikan Agama dan Budi Pekerti in Lampiran II and Lampiran V of 046/H/KR/2025 (Diktum KESATU). In force from 2026-06-11 (Diktum KEDUA)."
     },
     {
       "code": "PERKA-047-H-AN-2025",
@@ -543,7 +565,7 @@
       "year": 2025,
       "issued_on": "2025-07-24",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2025-07-24",
       "status": "in_force",
       "source_file": "docs/sources/Perka_BSKAP_No_047_H_AN_2025_Kerangka_Asesmen_TKA_SD_MI_dan_SMP_MTs.pdf",
       "sha256": "25f2dd0e292108893298a9684004dcaf3c003fe8ee6b2e1ecff243ceccd8d04b",
@@ -553,7 +575,7 @@
         "docs/data/tka/kerangka-tka-sd.json"
       ],
       "pending_p4_23": false,
-      "notes": "Short title; take the full title from the official copy."
+      "notes": "Short title; take the full title from the official copy. In force from 2025-07-24 (Pasal 4)."
     },
     {
       "code": "PANDUAN-PEMBELAJARAN-ASESMEN-BSKAP-2025",
@@ -702,7 +724,7 @@
       "year": 2025,
       "issued_on": "2025-09-22",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2025-09-22",
       "status": "in_force",
       "source_file": "docs/sources/KMA_No_1503_Tahun_2025_Pedoman_Implementasi_Kurikulum_Madrasah.pdf",
       "sha256": "3d523b12ed975efefe3c9b90fd9a9765bc58c2d1996ae7318fbc009544d25527",
@@ -712,7 +734,7 @@
         "docs/data/curriculum/mi-allocation-kma-1503-2025.json"
       ],
       "pending_p4_23": false,
-      "notes": "Scan. MI structure: BAB III B, Tabel 1–5, pp. 28–31. Short title; take the full title from the official copy."
+      "notes": "Scan. MI structure: BAB III B, Tabel 1–5, pp. 28–31. Short title; take the full title from the official copy. In force from 2025-09-22 (Diktum KEDELAPAN)."
     },
     {
       "code": "KMA-512-2026",
@@ -747,14 +769,14 @@
       "issued_on": null,
       "promulgated_on": null,
       "effective_on": null,
-      "status": "in_force",
+      "status": "amended",
       "source_file": null,
       "sha256": null,
       "source_url": null,
       "verification": "secondary",
       "data_files": [],
       "pending_p4_23": false,
-      "notes": "Wali kelas 6 JTM (D-212). Revokes KMA 890/2019. Short title; take the full title from the official copy."
+      "notes": "Wali kelas 6 JTM (D-212). Revokes KMA 890/2019. Amended by KMA 943/2026 (Lampiran). Short title; take the full title from the official copy."
     },
     {
       "code": "KMA-943-2026",
@@ -788,7 +810,7 @@
       "year": 2025,
       "issued_on": "2025-11-28",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2025-11-28",
       "status": "in_force",
       "source_file": "docs/sources/SK_Dirjen_Pendis_No_9941_Tahun_2025_CP_PAI_dan_Bahasa_Arab_pada_Madrasah.pdf",
       "sha256": "63ecce28af6c02b9fefde85f9594e7432b2575a69a263a46882ace6e87ffb757",
@@ -798,7 +820,7 @@
         "docs/data/curriculum/cp-pai-bahasa-arab-mi-sk-dirjen-9941-2025.json"
       ],
       "pending_p4_23": false,
-      "notes": "Two mirror copies with identical text; no kemenag.go.id copy found."
+      "notes": "Two mirror copies with identical text; no kemenag.go.id copy found. In force from 2025-11-28 (Diktum KETIGA)."
     },
     {
       "code": "SK-DIRJEN-PENDIS-6077-2025",
@@ -832,7 +854,7 @@
       "year": 2023,
       "issued_on": "2023-12-15",
       "promulgated_on": null,
-      "effective_on": null,
+      "effective_on": "2024-01-02",
       "status": "in_force",
       "source_file": "docs/sources/Perdirjen_GTK_7607_B.B1_HK.03_2023_Juknis_Pengelolaan_Kinerja_Guru_dan_Kepala_Sekolah.pdf",
       "sha256": "39602ecda644f6a273f72816073eb0ea015200cbbaaea753d169d93f7d75ef3a",
@@ -840,7 +862,28 @@
       "verification": "official_copy",
       "data_files": [],
       "pending_p4_23": false,
-      "notes": null
+      "notes": "In force from 2024-01-02 (Pasal 32)."
+    },
+    {
+      "code": "PANDUAN-PENGELOLAAN-KINERJA-GTK-2023",
+      "kind": "panduan",
+      "number": null,
+      "title": "Panduan Substansi Pengelolaan Kinerja Guru dan Kepala Sekolah",
+      "issuer": "Direktorat Jenderal Guru dan Tenaga Kependidikan",
+      "ministry": "kemendikdasmen",
+      "layer": "L2",
+      "year": 2023,
+      "issued_on": null,
+      "promulgated_on": null,
+      "effective_on": null,
+      "status": "in_force",
+      "source_file": "docs/sources/Panduan_Substansi_Pengelolaan_Kinerja_Guru_dan_Kepala_Sekolah_2023.pdf",
+      "sha256": "6c02bbbcf615616989e22f7d2fcb7f1739532a590b9b0b5a0e21a052e0d2ab27",
+      "source_url": null,
+      "verification": "official_copy",
+      "data_files": [],
+      "pending_p4_23": false,
+      "notes": "Seri Panduan Platform Merdeka Mengajar (now Ruang GTK), Desember 2023, versi 1.0; companion to Perdirjen GTK 7607/2023. Supplied by the owner. Used in docs/drafts/teacher-supervision-instruments.md."
     },
     {
       "code": "PERKADIS-JATENG-400-3-23862-2026",
@@ -890,7 +933,7 @@
       "from": "PERMENDIKDASMEN-6-2026",
       "to": "PERMENDIKBUDRISTEK-46-2023",
       "type": "revokes",
-      "articles": null,
+      "articles": "Pasal 45",
       "note": null
     },
     {
@@ -922,25 +965,32 @@
       "note": "Kepmendikdasmen 56/2026 cites Pasal 12 of 9/2026 in its konsiderans (checked in P4-32)."
     },
     {
+      "from": "PERMENDIKDASMEN-9-2026",
+      "to": "PERMENDIKBUDRISTEK-17-2021",
+      "type": "amends",
+      "articles": "Pasal 3, 5, 6, 9A, 12",
+      "note": null
+    },
+    {
       "from": "KEPMENDIKDASMEN-56-2026",
       "to": "PERMENDIKDASMEN-9-2025",
-      "type": "references",
-      "articles": null,
-      "note": "Guideline for TKA together with AN; change to implements once the legal basis is checked."
+      "type": "implements",
+      "articles": "Pasal 24",
+      "note": "Menimbang of 56/2026 (PDF p. 1): implements Pasal 24 of 9/2025 and Pasal 12 of 9/2026."
     },
     {
       "from": "PERKA-047-H-AN-2025",
       "to": "PERMENDIKDASMEN-9-2025",
-      "type": "references",
+      "type": "implements",
       "articles": null,
-      "note": "TKA framework; record the legal basis (implements) after checking the official copy."
+      "note": "Legal basis: 9/2025 is Mengingat no. 7 of Perka 047 (PDF p. 3); no article named."
     },
     {
       "from": "BKPDM-020-2026",
       "to": "BSKAP-046-H-KR-2025",
       "type": "amends",
-      "articles": "Lampiran I (CP Pendidikan Agama dan Budi Pekerti), Lampiran II (pendidikan khusus)",
-      "note": null
+      "articles": "046 Lampiran II and Lampiran V (CP Pendidikan Agama dan Budi Pekerti; Pendidikan Khusus Pendidikan Agama dan Budi Pekerti)",
+      "note": "Diktum KESATU, PDF p. 3: the amended CP is set out in BKPDM's own Lampiran I (PABP) and Lampiran II (pendidikan khusus)."
     },
     {
       "from": "BSKAP-046-H-KR-2025",
@@ -1060,6 +1110,13 @@
       "type": "implements",
       "articles": "Pasal 37 ayat (1)",
       "note": null
+    },
+    {
+      "from": "PANDUAN-PENGELOLAAN-KINERJA-GTK-2023",
+      "to": "PERDIRJEN-GTK-7607-2023",
+      "type": "references",
+      "articles": null,
+      "note": "The guide lists the Perdirjen as further reading (PDF p. 2)."
     }
   ]
 }

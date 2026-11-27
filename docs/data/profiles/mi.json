@@ -3,7 +3,7 @@
   "level": "mi",
   "status": "draft",
   "verify_by": "Tim Validasi SIGRAK (D-113)",
-  "decisions": ["D-126", "D-354", "D-355", "D-356", "D-359"],
+  "decisions": ["D-126", "D-354", "D-355", "D-356", "D-359", "D-452"],
   "versions": [
     {
       "code": "PROFIL-MI-2026",
@@ -17,17 +17,17 @@
         "structure_jp": [
           {
             "code": "ALOKASI-MI-KMA-1503-2025",
-            "effective_on": null,
+            "effective_on": "2025-09-22",
             "applies_from_school_year": "2026/2027",
-            "source": "KMA 1503/2025, ditetapkan 22 September 2025, di tengah tahun ajaran, jadi berlaku dari tahun ajaran berikutnya (D-354); tanggal berlaku belum diperiksa"
+            "source": "KMA 1503/2025 Diktum KEDELAPAN: berlaku sejak ditetapkan, 22 September 2025, di tengah tahun ajaran, jadi dipakai mulai tahun ajaran berikutnya (D-354)"
           }
         ],
         "cp": [
           {
             "code": "CP-PAI-BA-MADRASAH-9941-2025",
-            "effective_on": null,
+            "effective_on": "2025-11-28",
             "applies_from_school_year": "2026/2027",
-            "source": "SK Dirjen Pendis 9941/2025, ditetapkan 28 November 2025, di tengah tahun ajaran (D-354); tanggal berlaku belum diperiksa"
+            "source": "SK Dirjen Pendis 9941/2025 Diktum KETIGA: berlaku sejak ditetapkan, 28 November 2025, di tengah tahun ajaran, jadi dipakai mulai tahun ajaran berikutnya (D-354)"
           }
         ],
         "tp_atp_defaults": [
@@ -54,6 +54,7 @@
       "homeroom_teacher_term": "Wali kelas",
       "homeroom_jtm_default": 6,
       "external_assessments": [
+        { "code": "an", "status": "confirmed" },
         { "code": "tka", "status": "confirmed" },
         { "code": "akmi", "status": "to_verify" }
       ],

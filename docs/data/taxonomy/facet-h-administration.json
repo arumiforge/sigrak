@@ -13,7 +13,8 @@
     },
     "decisions": [
       "D-353",
-      "D-357"
+      "D-357",
+      "D-452"
     ],
     "created_on": "2026-11-10",
     "conventions": "docs/data/taxonomy/README.md"
@@ -173,7 +174,8 @@
           {
             "regulation": "KMA-736-2026"
           }
-        ]
+        ],
+        "note": "In SD the class role belongs to the guru kelas (Permendikdasmen 6/2026 Pasal 18 ayat (3) huruf a, p. 9; D-383); the UI term comes from the Profil Jenjang. Whether 11/2025 names a wali kelas for SD is still to be read."
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -505,7 +507,7 @@
       "force": "free",
       "source_ref": {
         "source": "sigrak",
-        "decision": null,
+        "decision": "D-357",
         "note": "Berkas Administrasi components are in the catalog (DOKUMEN-BERKAS)."
       },
       "status": "draft",
@@ -681,7 +683,7 @@
         "regulation": "PERDIRJEN-GTK-7607-2023",
         "article": null,
         "pages": null,
-        "note": "Regional variants per D-324, D-327; detail in docs/drafts/teacher-supervision-instruments.md."
+        "note": "Observation and post-observation follow Perdirjen GTK 7607/2023; the two telaah instruments are optional SIGRAK instruments (D-452). Regional variants per D-324, D-327; detail in docs/drafts/teacher-supervision-instruments.md."
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -695,11 +697,23 @@
       "label_id": "Telaah administrasi pembelajaran",
       "parent": "SUPERVISI",
       "level_scope": "both",
-      "force": "mandatory",
+      "force": "school_discretion",
       "source_ref": {
-        "regulation": "PERDIRJEN-GTK-7607-2023",
-        "article": null,
-        "pages": null
+        "source": "sigrak",
+        "decision": "D-452",
+        "note": "Optional SIGRAK instrument: S-01 Kelengkapan perangkat pembelajaran (S-15 for the wali kelas) in docs/drafts/teacher-supervision-instruments.md. Based on the owner's regional sample (Instrumen Kelengkapan Administrasi Pembelajaran) and the Kudus set (D-327). Perdirjen GTK 7607/2023 has no telaah instrument.",
+        "also": [
+          {
+            "source_file": "docs/sources/Contoh_Instrumen_Supervisi_Guru_SD_2026.pdf",
+            "pages": [
+              1
+            ]
+          },
+          {
+            "source_file": "docs/sources/Instrumen_Supervisi_Kudus_Pra_Observasi_Pasca.docx",
+            "decision": "D-327"
+          }
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -713,11 +727,27 @@
       "label_id": "Telaah perencanaan pembelajaran",
       "parent": "SUPERVISI",
       "level_scope": "both",
-      "force": "mandatory",
+      "force": "school_discretion",
       "source_ref": {
-        "regulation": "PERDIRJEN-GTK-7607-2023",
-        "article": null,
-        "pages": null
+        "source": "sigrak",
+        "decision": "D-452",
+        "note": "Optional SIGRAK instrument: S-02 to S-04 (telaah CP–TP–ATP, Prota dan Promes, RPM) in docs/drafts/teacher-supervision-instruments.md. Based on the owner's regional sample (Penelaahan ATP, Telaah Modul Ajar) and the Kudus set (telaah RPP/modul ajar pra-observasi, D-327). Perdirjen GTK 7607/2023 has no telaah instrument.",
+        "also": [
+          {
+            "source_file": "docs/sources/Contoh_Instrumen_Supervisi_Guru_SD_2026.pdf",
+            "pages": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "source_file": "docs/sources/Instrumen_Supervisi_Kudus_Pra_Observasi_Pasca.docx",
+            "decision": "D-327"
+          }
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",

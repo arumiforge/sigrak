@@ -23,7 +23,7 @@
     "Codes: topic SIGRAK-SD-2026-R1-<subject>-K<grade>-<nn>; TP <topic>-TP<mm>; fokus <topic>-FM<mm>; ATP ATP-<subject>-K<grade>-BAB-<nn> (D-363).",
     "Subject codes: PAKR Kristen, PAKT Katolik, PAH Hindu, PAB Buddha, PAKH Khonghucu.",
     "Each fokus is one week of 3 JP. The JP of the fokus always add up to the topic jp_total, and the topics of a semester fill its effective weeks exactly.",
-    "focus_items[].objective_codes links each fokus to the TP it serves (drafted by order; the reviewer may change it).",
+    "focus_items[].objective_codes links each fokus to the TP it serves (drafted by order, then re-linked by content where the order gave the wrong TP, RS-17; the reviewer may change it).",
     "cp_text is copied from the CP dataset for the topic's element (Kristen: sub-element). Spelling of names and terms follows that dataset.",
     "references.book names the Kemendikbudristek student book for the grade as a reference; book_pages stays null until a reviewer checks the edition."
   ],
@@ -238,7 +238,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K1-02-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K1-02-TP02"
               ]
             },
             {
@@ -248,7 +248,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K1-02-TP02"
+                "SIGRAK-SD-2026-R1-PAKR-K1-02-TP01"
               ]
             },
             {
@@ -404,7 +404,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K1-04-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K1-04-TP02"
               ]
             },
             {
@@ -540,7 +540,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K1-06-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K1-06-TP02"
               ]
             },
             {
@@ -636,7 +636,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K1-07-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K1-07-TP02"
               ]
             },
             {
@@ -722,7 +722,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K1-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K1-08-TP02"
               ]
             },
             {
@@ -802,7 +802,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K1-09-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K1-09-TP02"
               ]
             },
             {
@@ -1034,7 +1034,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K2-02-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K2-02-TP02"
               ]
             },
             {
@@ -1508,7 +1508,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP02"
               ]
             },
             {
@@ -1518,7 +1518,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP03"
               ]
             },
             {
@@ -1528,7 +1528,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP02"
+                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP01"
               ]
             },
             {
@@ -1538,7 +1538,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP03"
+                "SIGRAK-SD-2026-R1-PAKR-K2-08-TP01"
               ]
             }
           ],
@@ -1598,7 +1598,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K2-09-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K2-09-TP02"
               ]
             },
             {
@@ -1830,7 +1830,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K3-02-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K3-02-TP02"
               ]
             },
             {
@@ -2066,7 +2066,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K3-05-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K3-05-TP02"
               ]
             },
             {
@@ -2540,7 +2540,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K4-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K4-01-TP02"
               ]
             },
             {
@@ -2626,7 +2626,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K4-02-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K4-02-TP02"
               ]
             },
             {
@@ -2722,7 +2722,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K4-03-TP02"
+                "SIGRAK-SD-2026-R1-PAKR-K4-03-TP03"
               ]
             },
             {
@@ -2732,7 +2732,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K4-03-TP03"
+                "SIGRAK-SD-2026-R1-PAKR-K4-03-TP02"
               ]
             }
           ],
@@ -3336,7 +3336,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K5-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K5-01-TP02"
               ]
             },
             {
@@ -3508,7 +3508,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K5-03-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K5-03-TP02"
               ]
             },
             {
@@ -3588,7 +3588,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K5-04-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K5-04-TP02"
               ]
             },
             {
@@ -3820,7 +3820,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K5-07-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K5-07-TP02"
               ]
             },
             {
@@ -3906,7 +3906,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K5-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K5-08-TP02"
               ]
             },
             {
@@ -4132,7 +4132,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKR-K6-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKR-K6-01-TP02"
               ]
             },
             {
@@ -4939,7 +4939,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K1-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K1-01-TP02"
               ]
             },
             {
@@ -4949,7 +4949,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K1-01-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K1-01-TP01"
               ]
             },
             {
@@ -5111,7 +5111,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K1-03-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K1-03-TP02"
               ]
             },
             {
@@ -5191,7 +5191,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K1-04-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K1-04-TP02"
               ]
             },
             {
@@ -5261,7 +5261,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K1-05-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K1-05-TP02"
               ]
             },
             {
@@ -5509,7 +5509,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K1-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K1-08-TP02"
               ]
             },
             {
@@ -5519,7 +5519,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K1-08-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K1-08-TP03"
               ]
             },
             {
@@ -6375,7 +6375,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K2-09-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K2-09-TP02"
               ]
             },
             {
@@ -6395,7 +6395,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K2-09-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K2-09-TP01"
               ]
             }
           ],
@@ -6455,7 +6455,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K2-10-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K2-10-TP02"
               ]
             },
             {
@@ -6783,7 +6783,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K3-04-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K3-04-TP02"
               ]
             },
             {
@@ -6793,7 +6793,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K3-04-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K3-04-TP01"
               ]
             }
           ],
@@ -7327,7 +7327,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K4-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K4-01-TP02"
               ]
             },
             {
@@ -7423,7 +7423,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K4-02-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K4-02-TP03"
               ]
             },
             {
@@ -7433,7 +7433,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K4-02-TP03"
+                "SIGRAK-SD-2026-R1-PAKT-K4-02-TP02"
               ]
             }
           ],
@@ -7725,7 +7725,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K4-06-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K4-06-TP02"
               ]
             },
             {
@@ -8123,7 +8123,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K5-01-TP02"
               ]
             },
             {
@@ -8209,7 +8209,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-02-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K5-02-TP02"
               ]
             },
             {
@@ -8219,7 +8219,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-02-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K5-02-TP03"
               ]
             },
             {
@@ -8295,7 +8295,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-03-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K5-03-TP02"
               ]
             },
             {
@@ -8521,7 +8521,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-06-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K5-06-TP02"
               ]
             },
             {
@@ -8531,7 +8531,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-06-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K5-06-TP03"
               ]
             },
             {
@@ -8703,7 +8703,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-08-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K5-08-TP03"
               ]
             },
             {
@@ -8713,7 +8713,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-08-TP03"
+                "SIGRAK-SD-2026-R1-PAKT-K5-08-TP02"
               ]
             }
           ],
@@ -8843,7 +8843,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-10-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K5-10-TP02"
               ]
             },
             {
@@ -8853,7 +8853,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K5-10-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K5-10-TP01"
               ]
             }
           ],
@@ -8919,7 +8919,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K6-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K6-01-TP02"
               ]
             },
             {
@@ -8929,7 +8929,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K6-01-TP02"
+                "SIGRAK-SD-2026-R1-PAKT-K6-01-TP03"
               ]
             },
             {
@@ -9091,7 +9091,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K6-03-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K6-03-TP02"
               ]
             },
             {
@@ -9381,7 +9381,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKT-K6-07-TP01"
+                "SIGRAK-SD-2026-R1-PAKT-K6-07-TP02"
               ]
             },
             {
@@ -9726,7 +9726,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-01-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K1-01-TP02"
               ]
             },
             {
@@ -9736,7 +9736,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-01-TP02"
+                "SIGRAK-SD-2026-R1-PAH-K1-01-TP03"
               ]
             },
             {
@@ -9812,7 +9812,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-02-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K1-02-TP02"
               ]
             },
             {
@@ -9898,7 +9898,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-03-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K1-03-TP02"
               ]
             },
             {
@@ -9978,7 +9978,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-04-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K1-04-TP02"
               ]
             },
             {
@@ -10124,7 +10124,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-06-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K1-06-TP02"
               ]
             },
             {
@@ -10134,7 +10134,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-06-TP02"
+                "SIGRAK-SD-2026-R1-PAH-K1-06-TP03"
               ]
             },
             {
@@ -10210,7 +10210,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-07-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K1-07-TP02"
               ]
             },
             {
@@ -10376,7 +10376,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K1-09-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K1-09-TP02"
               ]
             },
             {
@@ -10844,7 +10844,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K2-05-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K2-05-TP02"
               ]
             },
             {
@@ -11318,7 +11318,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K3-01-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K3-01-TP02"
               ]
             },
             {
@@ -11888,7 +11888,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K3-08-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K3-08-TP02"
               ]
             },
             {
@@ -11898,7 +11898,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K3-08-TP02"
+                "SIGRAK-SD-2026-R1-PAH-K3-08-TP03"
               ]
             },
             {
@@ -12200,7 +12200,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K4-02-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K4-02-TP02"
               ]
             },
             {
@@ -12210,7 +12210,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K4-02-TP02"
+                "SIGRAK-SD-2026-R1-PAH-K4-02-TP03"
               ]
             },
             {
@@ -12436,7 +12436,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K4-05-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K4-05-TP02"
               ]
             },
             {
@@ -12996,7 +12996,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K5-02-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K5-02-TP02"
               ]
             },
             {
@@ -13792,7 +13792,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K6-02-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K6-02-TP03"
               ]
             },
             {
@@ -13812,7 +13812,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K6-02-TP03"
+                "SIGRAK-SD-2026-R1-PAH-K6-02-TP02"
               ]
             }
           ],
@@ -13878,7 +13878,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K6-03-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K6-03-TP02"
               ]
             },
             {
@@ -14028,7 +14028,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K6-05-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K6-05-TP02"
               ]
             },
             {
@@ -14038,7 +14038,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K6-05-TP02"
+                "SIGRAK-SD-2026-R1-PAH-K6-05-TP01"
               ]
             }
           ],
@@ -14238,7 +14238,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAH-K6-08-TP01"
+                "SIGRAK-SD-2026-R1-PAH-K6-08-TP02"
               ]
             },
             {
@@ -14685,7 +14685,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K1-03-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K1-03-TP02"
               ]
             },
             {
@@ -15083,7 +15083,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K1-08-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K1-08-TP02"
               ]
             },
             {
@@ -15163,7 +15163,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K1-09-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K1-09-TP02"
               ]
             },
             {
@@ -15309,7 +15309,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K2-01-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K2-01-TP02"
               ]
             },
             {
@@ -15319,7 +15319,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K2-01-TP02"
+                "SIGRAK-SD-2026-R1-PAB-K2-01-TP03"
               ]
             },
             {
@@ -15481,7 +15481,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K2-03-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K2-03-TP02"
               ]
             },
             {
@@ -15707,7 +15707,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K2-06-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K2-06-TP02"
               ]
             },
             {
@@ -15793,7 +15793,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K2-07-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K2-07-TP02"
               ]
             },
             {
@@ -15879,7 +15879,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K2-08-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K2-08-TP02"
               ]
             },
             {
@@ -15959,7 +15959,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K2-09-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K2-09-TP02"
               ]
             },
             {
@@ -16357,7 +16357,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K3-04-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K3-04-TP02"
               ]
             },
             {
@@ -16427,7 +16427,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K3-05-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K3-05-TP02"
               ]
             },
             {
@@ -16493,7 +16493,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K3-06-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K3-06-TP02"
               ]
             },
             {
@@ -16675,7 +16675,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K3-08-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K3-08-TP02"
               ]
             },
             {
@@ -16755,7 +16755,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K3-09-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K3-09-TP02"
               ]
             },
             {
@@ -16977,7 +16977,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K4-02-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K4-02-TP02"
               ]
             },
             {
@@ -16997,7 +16997,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K4-02-TP02"
+                "SIGRAK-SD-2026-R1-PAB-K4-02-TP03"
               ]
             },
             {
@@ -17783,7 +17783,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K5-02-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K5-02-TP02"
               ]
             },
             {
@@ -17793,7 +17793,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K5-02-TP02"
+                "SIGRAK-SD-2026-R1-PAB-K5-02-TP03"
               ]
             },
             {
@@ -17949,7 +17949,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K5-04-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K5-04-TP02"
               ]
             },
             {
@@ -18105,7 +18105,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K5-06-TP02"
+                "SIGRAK-SD-2026-R1-PAB-K5-06-TP03"
               ]
             },
             {
@@ -18115,7 +18115,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K5-06-TP03"
+                "SIGRAK-SD-2026-R1-PAB-K5-06-TP02"
               ]
             }
           ],
@@ -18579,7 +18579,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K6-02-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K6-02-TP02"
               ]
             },
             {
@@ -18665,7 +18665,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K6-03-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K6-03-TP02"
               ]
             },
             {
@@ -18675,7 +18675,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K6-03-TP02"
+                "SIGRAK-SD-2026-R1-PAB-K6-03-TP03"
               ]
             },
             {
@@ -19025,7 +19025,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAB-K6-08-TP01"
+                "SIGRAK-SD-2026-R1-PAB-K6-08-TP02"
               ]
             },
             {
@@ -19300,7 +19300,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K1-01-TP02"
               ]
             },
             {
@@ -19310,7 +19310,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-01-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K1-01-TP03"
               ]
             },
             {
@@ -19386,7 +19386,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-02-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K1-02-TP02"
               ]
             },
             {
@@ -19472,7 +19472,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-03-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K1-03-TP02"
               ]
             },
             {
@@ -19552,7 +19552,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-04-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K1-04-TP02"
               ]
             },
             {
@@ -19562,7 +19562,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-04-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K1-04-TP01"
               ]
             }
           ],
@@ -19622,7 +19622,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-05-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K1-05-TP02"
               ]
             },
             {
@@ -19632,7 +19632,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-05-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K1-05-TP01"
               ]
             }
           ],
@@ -19784,7 +19784,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K1-07-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K1-07-TP02"
               ]
             },
             {
@@ -20494,7 +20494,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K2-06-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K2-06-TP02"
               ]
             },
             {
@@ -20666,7 +20666,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K2-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K2-08-TP02"
               ]
             },
             {
@@ -20676,7 +20676,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K2-08-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K2-08-TP01"
               ]
             },
             {
@@ -21214,7 +21214,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K3-05-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K3-05-TP02"
               ]
             },
             {
@@ -21290,7 +21290,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K3-06-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K3-06-TP02"
               ]
             },
             {
@@ -21612,7 +21612,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K3-10-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K3-10-TP02"
               ]
             },
             {
@@ -21688,7 +21688,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K4-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K4-01-TP02"
               ]
             },
             {
@@ -21698,7 +21698,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K4-01-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K4-01-TP03"
               ]
             },
             {
@@ -21708,7 +21708,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K4-01-TP03"
+                "SIGRAK-SD-2026-R1-PAKH-K4-01-TP01"
               ]
             }
           ],
@@ -22258,7 +22258,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K4-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K4-08-TP02"
               ]
             },
             {
@@ -22268,7 +22268,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K4-08-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K4-08-TP03"
               ]
             },
             {
@@ -22408,7 +22408,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K4-10-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K4-10-TP02"
               ]
             },
             {
@@ -22570,7 +22570,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K5-02-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K5-02-TP02"
               ]
             },
             {
@@ -22580,7 +22580,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K5-02-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K5-02-TP03"
               ]
             },
             {
@@ -22656,7 +22656,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K5-03-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K5-03-TP02"
               ]
             },
             {
@@ -22666,7 +22666,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K5-03-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K5-03-TP03"
               ]
             },
             {
@@ -23054,7 +23054,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K5-08-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K5-08-TP02"
               ]
             },
             {
@@ -23064,7 +23064,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K5-08-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K5-08-TP03"
               ]
             },
             {
@@ -23204,7 +23204,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K5-10-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K5-10-TP02"
               ]
             },
             {
@@ -23280,7 +23280,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K6-01-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K6-01-TP02"
               ]
             },
             {
@@ -23290,7 +23290,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K6-01-TP02"
+                "SIGRAK-SD-2026-R1-PAKH-K6-01-TP03"
               ]
             },
             {
@@ -23742,7 +23742,7 @@
               "estimated_jp": 3,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-SD-2026-R1-PAKH-K6-07-TP01"
+                "SIGRAK-SD-2026-R1-PAKH-K6-07-TP02"
               ]
             },
             {

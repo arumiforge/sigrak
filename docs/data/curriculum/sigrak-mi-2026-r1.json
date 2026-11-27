@@ -23,11 +23,12 @@
   },
   "conventions": [
     "Codes: topic SIGRAK-MI-2026-R1-<subject>-K<grade>-<nn>; TP <topic>-TP<mm>; fokus <topic>-FM<mm>; ATP ATP-<subject>-K<grade>-BAB-<nn> (D-363).",
-    "Same shape as tp-atp-pendidikan-agama-sd-2026.json: data model tables topics, learning_objectives (TP), focus_items, and focus_item_objectives (docs/final/data-model.md#curriculum).",
+    "Same shape as sigrak-sd-2026-r1-agama.json: data model tables topics, learning_objectives (TP), focus_items, and focus_item_objectives (docs/final/data-model.md#curriculum).",
     "Subject codes: QH Al-Qur'an Hadis, AA Akidah Akhlak, FIK Fikih, SKI Sejarah Kebudayaan Islam, BAR Bahasa Arab.",
     "Each fokus is one week of 2 JP. The JP of the fokus add up to the topic jp_total, and the topics of a semester fill its effective weeks exactly.",
-    "focus_items[].objective_codes links each fokus to the TP it serves (drafted by order; the reviewer may change it).",
+    "focus_items[].objective_codes links each fokus to the TP it serves (drafted by order, then re-linked by content where the order gave the wrong TP, RS-17; the reviewer may change it).",
     "cp_text is copied from the CP dataset (printed text, D-127). Surah and hadith themes stay within the CP; exact verse numbers and hadith texts are left to the teacher's book.",
+    "Fokus titles are SIGRAK wording, not CP quotes: an Arabic pattern in a fokus title takes the grammatical harakat where the CP prints a likely source error (BAR-K6-03-FM01 has 'اللُّغَةَ الْعَرَبِيَّةَ'; the CP and cp_text keep the printed 'اللُّغَةِ الْعَرَبِيَّةِ', see the CP dataset's review_notes).",
     "references.book names the Kemenag Buku Teks Utama for the grade; book_pages stays null until a reviewer checks the edition."
   ],
   "subjects": [
@@ -40,7 +41,7 @@
         "since": "2026-11-09",
         "reviewed_by": null,
         "reviewed_on": null,
-        "note": "SIGRAK draft from the verified CP, waiting for Tim Validasi review (D-113, D-364)."
+        "note": "SIGRAK draft from the structured CP (CP sign-off by Tim Validasi still pending), waiting for Tim Validasi review (D-113, D-364)."
       },
       "allocations": [
         {
@@ -178,7 +179,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-01-TP02"
+                "SIGRAK-MI-2026-R1-QH-K1-01-TP01"
               ]
             },
             {
@@ -265,7 +266,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-02-TP01"
+                "SIGRAK-MI-2026-R1-QH-K1-02-TP02"
               ]
             },
             {
@@ -285,7 +286,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-02-TP02"
+                "SIGRAK-MI-2026-R1-QH-K1-02-TP03"
               ]
             },
             {
@@ -295,7 +296,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-02-TP03"
+                "SIGRAK-MI-2026-R1-QH-K1-02-TP01"
               ]
             }
           ],
@@ -452,7 +453,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-04-TP02"
+                "SIGRAK-MI-2026-R1-QH-K1-04-TP01"
               ]
             },
             {
@@ -539,7 +540,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-05-TP02"
+                "SIGRAK-MI-2026-R1-QH-K1-05-TP01"
               ]
             },
             {
@@ -803,7 +804,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-08-TP01"
+                "SIGRAK-MI-2026-R1-QH-K1-08-TP02"
               ]
             },
             {
@@ -813,7 +814,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K1-08-TP02"
+                "SIGRAK-MI-2026-R1-QH-K1-08-TP01"
               ]
             },
             {
@@ -890,7 +891,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-01-TP01"
+                "SIGRAK-MI-2026-R1-QH-K2-01-TP02"
               ]
             },
             {
@@ -900,7 +901,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-01-TP02"
+                "SIGRAK-MI-2026-R1-QH-K2-01-TP01"
               ]
             },
             {
@@ -987,7 +988,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-02-TP01"
+                "SIGRAK-MI-2026-R1-QH-K2-02-TP02"
               ]
             },
             {
@@ -997,7 +998,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-02-TP02"
+                "SIGRAK-MI-2026-R1-QH-K2-02-TP01"
               ]
             },
             {
@@ -1007,7 +1008,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-02-TP02"
+                "SIGRAK-MI-2026-R1-QH-K2-02-TP01"
               ]
             },
             {
@@ -1348,7 +1349,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-06-TP01"
+                "SIGRAK-MI-2026-R1-QH-K2-06-TP02"
               ]
             },
             {
@@ -1358,7 +1359,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-06-TP02"
+                "SIGRAK-MI-2026-R1-QH-K2-06-TP01"
               ]
             },
             {
@@ -1368,7 +1369,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-06-TP02"
+                "SIGRAK-MI-2026-R1-QH-K2-06-TP01"
               ]
             },
             {
@@ -1530,7 +1531,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K2-08-TP02"
+                "SIGRAK-MI-2026-R1-QH-K2-08-TP01"
               ]
             },
             {
@@ -1607,7 +1608,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K3-01-TP01"
+                "SIGRAK-MI-2026-R1-QH-K3-01-TP02"
               ]
             },
             {
@@ -1704,7 +1705,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K3-02-TP01"
+                "SIGRAK-MI-2026-R1-QH-K3-02-TP02"
               ]
             },
             {
@@ -1714,7 +1715,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K3-02-TP02"
+                "SIGRAK-MI-2026-R1-QH-K3-02-TP01"
               ]
             },
             {
@@ -2065,7 +2066,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K3-06-TP01"
+                "SIGRAK-MI-2026-R1-QH-K3-06-TP02"
               ]
             },
             {
@@ -2075,7 +2076,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K3-06-TP02"
+                "SIGRAK-MI-2026-R1-QH-K3-06-TP01"
               ]
             },
             {
@@ -2085,7 +2086,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K3-06-TP02"
+                "SIGRAK-MI-2026-R1-QH-K3-06-TP03"
               ]
             },
             {
@@ -2095,7 +2096,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K3-06-TP03"
+                "SIGRAK-MI-2026-R1-QH-K3-06-TP01"
               ]
             }
           ],
@@ -2329,7 +2330,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-01-TP01"
+                "SIGRAK-MI-2026-R1-QH-K4-01-TP02"
               ]
             },
             {
@@ -2339,7 +2340,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-01-TP02"
+                "SIGRAK-MI-2026-R1-QH-K4-01-TP03"
               ]
             },
             {
@@ -2426,7 +2427,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-02-TP01"
+                "SIGRAK-MI-2026-R1-QH-K4-02-TP03"
               ]
             },
             {
@@ -2436,7 +2437,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-02-TP02"
+                "SIGRAK-MI-2026-R1-QH-K4-02-TP01"
               ]
             },
             {
@@ -2456,7 +2457,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-02-TP03"
+                "SIGRAK-MI-2026-R1-QH-K4-02-TP01"
               ]
             }
           ],
@@ -2787,7 +2788,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-06-TP01"
+                "SIGRAK-MI-2026-R1-QH-K4-06-TP03"
               ]
             },
             {
@@ -2797,7 +2798,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-06-TP02"
+                "SIGRAK-MI-2026-R1-QH-K4-06-TP01"
               ]
             },
             {
@@ -2817,7 +2818,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K4-06-TP03"
+                "SIGRAK-MI-2026-R1-QH-K4-06-TP01"
               ]
             }
           ],
@@ -3046,7 +3047,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K5-01-TP01"
+                "SIGRAK-MI-2026-R1-QH-K5-01-TP02"
               ]
             },
             {
@@ -3153,7 +3154,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K5-02-TP02"
+                "SIGRAK-MI-2026-R1-QH-K5-02-TP01"
               ]
             },
             {
@@ -3407,7 +3408,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K5-05-TP01"
+                "SIGRAK-MI-2026-R1-QH-K5-05-TP02"
               ]
             },
             {
@@ -3427,7 +3428,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K5-05-TP02"
+                "SIGRAK-MI-2026-R1-QH-K5-05-TP03"
               ]
             },
             {
@@ -3514,7 +3515,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K5-06-TP02"
+                "SIGRAK-MI-2026-R1-QH-K5-06-TP01"
               ]
             },
             {
@@ -3870,7 +3871,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K6-02-TP02"
+                "SIGRAK-MI-2026-R1-QH-K6-02-TP01"
               ]
             },
             {
@@ -4118,7 +4119,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K6-05-TP01"
+                "SIGRAK-MI-2026-R1-QH-K6-05-TP02"
               ]
             },
             {
@@ -4128,7 +4129,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K6-05-TP02"
+                "SIGRAK-MI-2026-R1-QH-K6-05-TP01"
               ]
             },
             {
@@ -4349,7 +4350,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-QH-K6-08-TP01"
+                "SIGRAK-MI-2026-R1-QH-K6-08-TP02"
               ]
             },
             {
@@ -4380,7 +4381,7 @@
         "since": "2026-11-09",
         "reviewed_by": null,
         "reviewed_on": null,
-        "note": "SIGRAK draft from the verified CP, waiting for Tim Validasi review (D-113, D-364)."
+        "note": "SIGRAK draft from the structured CP (CP sign-off by Tim Validasi still pending), waiting for Tim Validasi review (D-113, D-364)."
       },
       "allocations": [
         {
@@ -4528,7 +4529,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K1-01-TP02"
+                "SIGRAK-MI-2026-R1-AA-K1-01-TP01"
               ]
             },
             {
@@ -4787,7 +4788,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K1-04-TP02"
+                "SIGRAK-MI-2026-R1-AA-K1-04-TP01"
               ]
             },
             {
@@ -4951,7 +4952,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K1-06-TP01"
+                "SIGRAK-MI-2026-R1-AA-K1-06-TP03"
               ]
             },
             {
@@ -4991,7 +4992,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K1-06-TP03"
+                "SIGRAK-MI-2026-R1-AA-K1-06-TP02"
               ]
             }
           ],
@@ -5337,7 +5338,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K2-02-TP02"
+                "SIGRAK-MI-2026-R1-AA-K2-02-TP03"
               ]
             },
             {
@@ -5764,7 +5765,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K2-07-TP01"
+                "SIGRAK-MI-2026-R1-AA-K2-07-TP02"
               ]
             },
             {
@@ -6039,7 +6040,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K3-02-TP02"
+                "SIGRAK-MI-2026-R1-AA-K3-02-TP01"
               ]
             },
             {
@@ -6385,7 +6386,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K3-06-TP01"
+                "SIGRAK-MI-2026-R1-AA-K3-06-TP02"
               ]
             },
             {
@@ -6395,7 +6396,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K3-06-TP02"
+                "SIGRAK-MI-2026-R1-AA-K3-06-TP01"
               ]
             },
             {
@@ -6405,7 +6406,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K3-06-TP02"
+                "SIGRAK-MI-2026-R1-AA-K3-06-TP03"
               ]
             },
             {
@@ -6415,7 +6416,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K3-06-TP03"
+                "SIGRAK-MI-2026-R1-AA-K3-06-TP02"
               ]
             }
           ],
@@ -6751,7 +6752,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K4-02-TP02"
+                "SIGRAK-MI-2026-R1-AA-K4-02-TP01"
               ]
             },
             {
@@ -6761,7 +6762,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K4-02-TP02"
+                "SIGRAK-MI-2026-R1-AA-K4-02-TP03"
               ]
             },
             {
@@ -6771,7 +6772,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K4-02-TP03"
+                "SIGRAK-MI-2026-R1-AA-K4-02-TP02"
               ]
             }
           ],
@@ -7020,7 +7021,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K4-05-TP02"
+                "SIGRAK-MI-2026-R1-AA-K4-05-TP03"
               ]
             },
             {
@@ -7107,7 +7108,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K4-06-TP02"
+                "SIGRAK-MI-2026-R1-AA-K4-06-TP01"
               ]
             },
             {
@@ -7453,7 +7454,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K5-02-TP01"
+                "SIGRAK-MI-2026-R1-AA-K5-02-TP02"
               ]
             },
             {
@@ -7463,7 +7464,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K5-02-TP02"
+                "SIGRAK-MI-2026-R1-AA-K5-02-TP01"
               ]
             },
             {
@@ -7554,7 +7555,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K5-03-TP02"
+                "SIGRAK-MI-2026-R1-AA-K5-03-TP01"
               ]
             },
             {
@@ -7819,7 +7820,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K5-06-TP02"
+                "SIGRAK-MI-2026-R1-AA-K5-06-TP01"
               ]
             },
             {
@@ -8509,7 +8510,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K6-06-TP02"
+                "SIGRAK-MI-2026-R1-AA-K6-06-TP01"
               ]
             },
             {
@@ -8649,7 +8650,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-AA-K6-08-TP01"
+                "SIGRAK-MI-2026-R1-AA-K6-08-TP02"
               ]
             },
             {
@@ -8680,7 +8681,7 @@
         "since": "2026-11-09",
         "reviewed_by": null,
         "reviewed_on": null,
-        "note": "SIGRAK draft from the verified CP, waiting for Tim Validasi review (D-113, D-364)."
+        "note": "SIGRAK draft from the structured CP (CP sign-off by Tim Validasi still pending), waiting for Tim Validasi review (D-113, D-364)."
       },
       "allocations": [
         {
@@ -8925,7 +8926,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K1-02-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K1-02-TP03"
               ]
             },
             {
@@ -9184,7 +9185,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K1-05-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K1-05-TP03"
               ]
             },
             {
@@ -9510,7 +9511,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-01-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K2-01-TP02"
               ]
             },
             {
@@ -9520,7 +9521,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-01-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K2-01-TP02"
               ]
             },
             {
@@ -9530,7 +9531,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-01-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-01-TP01"
               ]
             },
             {
@@ -9540,7 +9541,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-01-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-01-TP03"
               ]
             },
             {
@@ -9607,7 +9608,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-02-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K2-02-TP02"
               ]
             },
             {
@@ -9627,7 +9628,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-02-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-02-TP01"
               ]
             },
             {
@@ -9637,7 +9638,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-02-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-02-TP03"
               ]
             },
             {
@@ -9896,7 +9897,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-05-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-05-TP03"
               ]
             },
             {
@@ -9906,7 +9907,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-05-TP03"
+                "SIGRAK-MI-2026-R1-FIK-K2-05-TP02"
               ]
             }
           ],
@@ -9993,7 +9994,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-06-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-06-TP03"
               ]
             },
             {
@@ -10074,7 +10075,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-07-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-07-TP01"
               ]
             },
             {
@@ -10155,7 +10156,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K2-08-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K2-08-TP01"
               ]
             },
             {
@@ -10232,7 +10233,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K3-01-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K3-01-TP02"
               ]
             },
             {
@@ -10252,7 +10253,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K3-01-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K3-01-TP03"
               ]
             },
             {
@@ -10329,7 +10330,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K3-02-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K3-02-TP02"
               ]
             },
             {
@@ -10588,7 +10589,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K3-05-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K3-05-TP02"
               ]
             },
             {
@@ -10608,7 +10609,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K3-05-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K3-05-TP03"
               ]
             },
             {
@@ -10685,7 +10686,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K3-06-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K3-06-TP02"
               ]
             },
             {
@@ -10705,7 +10706,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K3-06-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K3-06-TP03"
               ]
             },
             {
@@ -10934,7 +10935,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-01-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K4-01-TP03"
               ]
             },
             {
@@ -10944,7 +10945,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-01-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K4-01-TP02"
               ]
             },
             {
@@ -10964,7 +10965,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-01-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K4-01-TP01"
               ]
             },
             {
@@ -10974,7 +10975,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-01-TP03"
+                "SIGRAK-MI-2026-R1-FIK-K4-01-TP02"
               ]
             }
           ],
@@ -11041,7 +11042,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-02-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K4-02-TP02"
               ]
             },
             {
@@ -11061,7 +11062,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-02-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K4-02-TP03"
               ]
             },
             {
@@ -11142,7 +11143,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-03-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K4-03-TP01"
               ]
             },
             {
@@ -11213,7 +11214,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-04-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K4-04-TP02"
               ]
             },
             {
@@ -11300,7 +11301,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-05-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K4-05-TP03"
               ]
             },
             {
@@ -11397,7 +11398,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-06-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K4-06-TP02"
               ]
             },
             {
@@ -11407,7 +11408,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-06-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K4-06-TP03"
               ]
             },
             {
@@ -11569,7 +11570,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-08-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K4-08-TP02"
               ]
             },
             {
@@ -11579,7 +11580,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K4-08-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K4-08-TP01"
               ]
             },
             {
@@ -11656,7 +11657,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K5-01-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K5-01-TP02"
               ]
             },
             {
@@ -11676,7 +11677,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K5-01-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K5-01-TP03"
               ]
             },
             {
@@ -11925,7 +11926,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K5-04-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K5-04-TP02"
               ]
             },
             {
@@ -12012,7 +12013,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K5-05-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K5-05-TP02"
               ]
             },
             {
@@ -12022,7 +12023,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K5-05-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K5-05-TP01"
               ]
             },
             {
@@ -12032,7 +12033,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K5-05-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K5-05-TP03"
               ]
             },
             {
@@ -12291,7 +12292,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K5-08-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K5-08-TP01"
               ]
             },
             {
@@ -12485,7 +12486,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K6-02-TP02"
+                "SIGRAK-MI-2026-R1-FIK-K6-02-TP03"
               ]
             },
             {
@@ -12637,7 +12638,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-FIK-K6-04-TP01"
+                "SIGRAK-MI-2026-R1-FIK-K6-04-TP02"
               ]
             },
             {
@@ -12980,7 +12981,7 @@
         "since": "2026-11-09",
         "reviewed_by": null,
         "reviewed_on": null,
-        "note": "SIGRAK draft from the verified CP, waiting for Tim Validasi review (D-113, D-364)."
+        "note": "SIGRAK draft from the structured CP (CP sign-off by Tim Validasi still pending), waiting for Tim Validasi review (D-113, D-364)."
       },
       "allocations": [
         {
@@ -13086,7 +13087,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-01-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K3-01-TP02"
               ]
             },
             {
@@ -13096,7 +13097,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-01-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-01-TP03"
               ]
             },
             {
@@ -13106,7 +13107,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-01-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-01-TP03"
               ]
             },
             {
@@ -13274,7 +13275,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-03-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K3-03-TP02"
               ]
             },
             {
@@ -13284,7 +13285,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-03-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-03-TP01"
               ]
             },
             {
@@ -13294,7 +13295,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-03-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-03-TP01"
               ]
             }
           ],
@@ -13432,7 +13433,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-05-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K3-05-TP02"
               ]
             },
             {
@@ -13442,7 +13443,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-05-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K3-05-TP02"
               ]
             },
             {
@@ -13452,7 +13453,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-05-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-05-TP01"
               ]
             },
             {
@@ -13462,7 +13463,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-05-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-05-TP01"
               ]
             },
             {
@@ -13539,7 +13540,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-06-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K3-06-TP02"
               ]
             },
             {
@@ -13549,7 +13550,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-06-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-06-TP01"
               ]
             },
             {
@@ -13711,7 +13712,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-08-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K3-08-TP02"
               ]
             },
             {
@@ -13721,7 +13722,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-08-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-08-TP01"
               ]
             },
             {
@@ -13731,7 +13732,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K3-08-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K3-08-TP01"
               ]
             }
           ],
@@ -13798,7 +13799,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K4-01-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K4-01-TP02"
               ]
             },
             {
@@ -13808,7 +13809,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K4-01-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K4-01-TP01"
               ]
             },
             {
@@ -13818,7 +13819,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K4-01-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K4-01-TP03"
               ]
             },
             {
@@ -13895,7 +13896,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K4-02-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K4-02-TP02"
               ]
             },
             {
@@ -13905,7 +13906,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K4-02-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K4-02-TP03"
               ]
             },
             {
@@ -14261,7 +14262,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K4-06-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K4-06-TP01"
               ]
             },
             {
@@ -14510,7 +14511,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K5-01-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K5-01-TP02"
               ]
             },
             {
@@ -14520,7 +14521,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K5-01-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K5-01-TP01"
               ]
             },
             {
@@ -14530,7 +14531,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K5-01-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K5-01-TP01"
               ]
             },
             {
@@ -14627,7 +14628,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K5-02-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K5-02-TP03"
               ]
             },
             {
@@ -14637,7 +14638,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K5-02-TP03"
+                "SIGRAK-MI-2026-R1-SKI-K5-02-TP02"
               ]
             }
           ],
@@ -14876,7 +14877,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K5-05-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K5-05-TP01"
               ]
             },
             {
@@ -15339,7 +15340,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K6-02-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K6-02-TP03"
               ]
             },
             {
@@ -15420,7 +15421,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K6-03-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K6-03-TP01"
               ]
             },
             {
@@ -15663,7 +15664,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K6-06-TP02"
+                "SIGRAK-MI-2026-R1-SKI-K6-06-TP01"
               ]
             },
             {
@@ -15733,7 +15734,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-SKI-K6-07-TP01"
+                "SIGRAK-MI-2026-R1-SKI-K6-07-TP02"
               ]
             },
             {
@@ -15834,7 +15835,7 @@
         "since": "2026-11-09",
         "reviewed_by": null,
         "reviewed_on": null,
-        "note": "SIGRAK draft from the verified CP, waiting for Tim Validasi review (D-113, D-364)."
+        "note": "SIGRAK draft from the structured CP (CP sign-off by Tim Validasi still pending), waiting for Tim Validasi review (D-113, D-364)."
       },
       "allocations": [
         {
@@ -16338,7 +16339,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K1-05-TP02"
+                "SIGRAK-MI-2026-R1-BAR-K1-05-TP03"
               ]
             },
             {
@@ -16348,7 +16349,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K1-05-TP03"
+                "SIGRAK-MI-2026-R1-BAR-K1-05-TP02"
               ]
             }
           ],
@@ -17218,7 +17219,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K2-07-TP01"
+                "SIGRAK-MI-2026-R1-BAR-K2-07-TP02"
               ]
             },
             {
@@ -17228,7 +17229,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K2-07-TP02"
+                "SIGRAK-MI-2026-R1-BAR-K2-07-TP01"
               ]
             },
             {
@@ -18762,7 +18763,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Anggota Tubuh",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-01",
           "jp_total": 10,
           "jp_per_week": 2,
@@ -18810,7 +18811,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K5-01-TP01"
+                "SIGRAK-MI-2026-R1-BAR-K5-01-TP02"
               ]
             },
             {
@@ -18830,7 +18831,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K5-01-TP02"
+                "SIGRAK-MI-2026-R1-BAR-K5-01-TP03"
               ]
             },
             {
@@ -18859,7 +18860,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Kebun Binatang",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-02",
           "jp_total": 10,
           "jp_per_week": 2,
@@ -18956,7 +18957,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Panca Indra",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-03",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19037,7 +19038,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Berkunjung ke Kebun Binatang",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-04",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19118,7 +19119,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Di Ruang Tamu",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-05",
           "jp_total": 10,
           "jp_per_week": 2,
@@ -19166,7 +19167,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K5-05-TP01"
+                "SIGRAK-MI-2026-R1-BAR-K5-05-TP02"
               ]
             },
             {
@@ -19186,7 +19187,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K5-05-TP02"
+                "SIGRAK-MI-2026-R1-BAR-K5-05-TP03"
               ]
             },
             {
@@ -19215,7 +19216,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Di Ruang Belajar",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-06",
           "jp_total": 10,
           "jp_per_week": 2,
@@ -19263,7 +19264,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K5-06-TP01"
+                "SIGRAK-MI-2026-R1-BAR-K5-06-TP02"
               ]
             },
             {
@@ -19283,7 +19284,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K5-06-TP02"
+                "SIGRAK-MI-2026-R1-BAR-K5-06-TP03"
               ]
             },
             {
@@ -19312,7 +19313,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Di Perpustakaan",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-07",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19354,7 +19355,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K5-07-TP01"
+                "SIGRAK-MI-2026-R1-BAR-K5-07-TP02"
               ]
             },
             {
@@ -19393,7 +19394,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Di Kantin",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K5-BAB-08",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19474,7 +19475,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Jam",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-01",
           "jp_total": 10,
           "jp_per_week": 2,
@@ -19571,7 +19572,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Kegiatan Harianku",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-02",
           "jp_total": 10,
           "jp_per_week": 2,
@@ -19639,7 +19640,7 @@
               "estimated_jp": 2,
               "allocation_status": "sesuai",
               "objective_codes": [
-                "SIGRAK-MI-2026-R1-BAR-K6-02-TP02"
+                "SIGRAK-MI-2026-R1-BAR-K6-02-TP03"
               ]
             },
             {
@@ -19668,7 +19669,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Aku Suka Bahasa Arab",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-03",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19749,7 +19750,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Belajar Bahasa Arab",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-04",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19830,7 +19831,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Kegiatan Liburan",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-05",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19911,7 +19912,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Piknik",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-06",
           "jp_total": 8,
           "jp_per_week": 2,
@@ -19992,7 +19993,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Rencana Liburanku",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-07",
           "jp_total": 6,
           "jp_per_week": 2,
@@ -20062,7 +20063,7 @@
           "element": "Komponen Bahasa",
           "sub_element": null,
           "title": "Bercerita tentang Piknik",
-          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
+          "cp_text": "Mengidentifikasi informasi dan bacaan sederhana tentang anggota tubuh, kebun binatang, di ruang tamu dan di ruang belajar, di perpustakaan, di kantin, dengan pola kalimat di antaranya: هٰذَا أُذُنٌ، أَنَا أَسْمَعُ بِالْأُذُنِ; تِلْكَ فَرَاشَةٌ جَمِيْلَةٌ; مَاذَا فِي غُرْفَةِ الْاِسْتِقْبَالِ؟; الْجَدْوَلُ الدِّرَاسِيُّ فِي غُرْفَةِ الْمُذَاكَرَةِ; فِي الْمَدْرَسَةِ مَكْتَبَةٌ كَبِيْرَةٌ وَنَظِيْفَةٌ; هَلْ أَنْتَ جَوْعَانُ؟ نَعَمْ، أَنَا جَوْعَانُ serta mengidentifikasi informasi dan bacaan sederhana tentang jam, saya suka bahasa Arab, saya suka kegiatan liburan, piknik, dengan pola kalimat di antaranya: كَمْ السَّاعَةُ الْآن؟; أَنَا أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَادِسَةِ وَالرُّبُعِ صَبَاحًا; هَلْ أَنْتَ تُحِبُّ اللُّغَةِ الْعَرَبِيَّةِ؟ نَعَمْ، أُحِبُّهَا; هُوَ يَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْمَدْرَسَةِ; كَيْفَ قَضَيْتِ الْعُطْلَةَ يَا أُخْتِي؟ قَضَيْتُ الْعُطْلَةَ بِزِيَارَةِ بَيْتِ جَدِّيْ; إِلَى أَيْنَ ذَهَبْتِ؟ ذَهَبْتُ إِلَى شَاطِئِ الْبَحْرِ",
           "atp_code": "ATP-BAR-K6-BAB-08",
           "jp_total": 6,
           "jp_per_week": 2,

@@ -13,7 +13,8 @@
     },
     "decisions": [
       "D-353",
-      "D-357"
+      "D-357",
+      "D-452"
     ],
     "created_on": "2026-11-10",
     "conventions": "docs/data/taxonomy/README.md"
@@ -34,7 +35,17 @@
           14,
           28
         ],
-        "note": "'Memuliakan' is the overarching value; the three principles sit under it."
+        "note": "'Memuliakan' is the overarching value; the three principles sit under it.",
+        "also": [
+          {
+            "regulation": "PERMENDIKDASMEN-13-2025",
+            "article": "Lampiran I huruf F",
+            "pages": [
+              12,
+              13
+            ]
+          }
+        ]
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -121,10 +132,18 @@
         "pages": [
           12
         ],
-        "note": "Labels follow the slides and the RPM layout; the decree says memahami, menerapkan, melakukan refleksi.",
+        "note": "Labels follow 13/2025 Lampiran I huruf F (memahami, mengaplikasi, merefleksi), the slides and the RPM layout; 126/P/2025 p. 12 says memahami, menerapkan, melakukan refleksi.",
         "also": [
           {
             "regulation": "PAPARAN-PEMBELAJARAN-MENDALAM"
+          },
+          {
+            "regulation": "PERMENDIKDASMEN-13-2025",
+            "article": "Lampiran I huruf F",
+            "pages": [
+              12,
+              13
+            ]
           }
         ]
       },
@@ -451,7 +470,7 @@
       "force": "teacher_discretion",
       "source_ref": {
         "source": "sigrak",
-        "decision": null,
+        "decision": "D-357",
         "note": "policy-innovation-layers.md §7"
       },
       "status": "draft",
@@ -469,7 +488,7 @@
       "force": "teacher_discretion",
       "source_ref": {
         "source": "sigrak",
-        "decision": null,
+        "decision": "D-357",
         "note": "policy-innovation-layers.md §7"
       },
       "status": "draft",
@@ -487,7 +506,7 @@
       "force": "teacher_discretion",
       "source_ref": {
         "source": "sigrak",
-        "decision": null,
+        "decision": "D-357",
         "note": "policy-innovation-layers.md §7"
       },
       "status": "draft",
@@ -505,7 +524,7 @@
       "force": "teacher_discretion",
       "source_ref": {
         "source": "sigrak",
-        "decision": null,
+        "decision": "D-357",
         "note": "policy-innovation-layers.md §7, §9.3"
       },
       "status": "draft",
@@ -523,7 +542,7 @@
       "force": "teacher_discretion",
       "source_ref": {
         "source": "sigrak",
-        "decision": null
+        "decision": "D-357"
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -540,7 +559,7 @@
       "force": "teacher_discretion",
       "source_ref": {
         "source": "sigrak",
-        "decision": null
+        "decision": "D-357"
       },
       "status": "draft",
       "since": "TAX-2026-R1",
@@ -574,7 +593,7 @@
       "force": "teacher_discretion",
       "source_ref": {
         "source": "sigrak",
-        "decision": null
+        "decision": "D-357"
       },
       "status": "draft",
       "since": "TAX-2026-R1",

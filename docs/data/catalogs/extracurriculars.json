@@ -16,7 +16,8 @@
       "D-210": "Ekstrakurikuler with Pramuka or another kepanduan is offered (Permendikdasmen 13/2025 Pasal 22).",
       "D-216": "Ekstrakurikuler records (activities, pembina, members, attendance, rapor description) are built early in v1, with Pramuka offered by default.",
       "D-305": "Catalog copied from usulan-01 for one Tim Validasi review.",
-      "D-367": "Curated with SIGRAK names, keys, and codes."
+      "D-367": "Curated with SIGRAK names, keys, and codes.",
+      "D-452": "Pramuka is set up by default; a school may replace it with another kepanduan, but one must stay (Permendikdasmen 13/2025 Pasal 22 ayat (2)). KKA is an optional subject in grades 5–6 that a school runs as a regular subject or through kokurikuler; it is not an ekstrakurikuler. Supersedes D-208."
     },
     "conventions": [
       "Keys are English snake_case and never change once seeded; labels and other text shown to users are Indonesian.",
@@ -24,7 +25,8 @@
       "No identifier from the legacy app is carried over. Where a decision keeps an old label for reference (D-305), it sits in legacy_label and is never shown in the UI.",
       "review_notes are Indonesian notes for Tim Validasi SIGRAK; they are not shown to teachers.",
       "items are the ekstrakurikuler a school can switch on; each belongs to one category. A school may add its own items.",
-      "mandatory_to_offer = true means the item cannot be removed from the school's list (Pramuka). offered_by_default = true means it is switched on for a new school.",
+      "mandatory_to_offer = true would mean the item alone can never be removed from the school's list; no item uses it now (D-452). offered_by_default = true means it is switched on for a new school.",
+      "offer_groups are minimum-offer rules over several items: at least min items whose offer_group equals the group key must stay switched on, and default names the item switched on for a new school. A school-added item joins a group by carrying its offer_group. Group scouting: Pramuka by default, replaceable by another kepanduan, one must stay (Permendikdasmen 13/2025 Pasal 22 ayat (2); D-452).",
       "formats lists the usual ways a category runs: group (Kelompok), individual (Individual), classical (Klasikal), in the source's order.",
       "days use ISO weekday numbers (1 = Monday); ekstrakurikuler may run on Saturday or Sunday, unlike timetable_slots (weekday 1–6)."
     ]
@@ -140,16 +142,40 @@
       ]
     }
   ],
+  "offer_groups": [
+    {
+      "key": "scouting",
+      "label": "Kepramukaan atau kepanduan lainnya",
+      "min": 1,
+      "default": "pramuka",
+      "source_ref": {
+        "regulation": "PERMENDIKDASMEN-13-2025",
+        "article": "Pasal 22 ayat (2)",
+        "pages": [
+          4
+        ]
+      },
+      "decisions": [
+        "D-210",
+        "D-216",
+        "D-452"
+      ],
+      "review_notes": [
+        "Sekolah wajib menyediakan paling sedikit satu ekstrakurikuler kepramukaan atau kepanduan lain. Pramuka menyala sejak awal; sekolah boleh menggantinya dengan kepanduan lain yang ditambahkan dengan offer_group scouting, asal satu tetap menyala."
+      ]
+    }
+  ],
   "items": [
     {
       "code": "SIGRAK-KAT-EKS-01",
       "key": "pramuka",
       "label": "Pramuka",
       "category": "scouting_leadership",
-      "mandatory_to_offer": true,
+      "offer_group": "scouting",
+      "mandatory_to_offer": false,
       "offered_by_default": true,
       "review_notes": [
-        "Wajib disediakan (Permendikdasmen 13/2025 Pasal 22; D-210, D-216). Tidak boleh dihapus dari daftar bawaan; sekolah boleh menambah kepanduan lain."
+        "Pilihan bawaan kelompok kepanduan (offer_groups scouting, paling sedikit 1; Permendikdasmen 13/2025 Pasal 22 ayat (2); D-210, D-216, D-452). Sekolah boleh mengganti Pramuka dengan kepanduan lain, asal satu kepanduan tetap disediakan."
       ]
     },
     {
@@ -327,7 +353,7 @@
       "offered_by_default": false,
       "review_notes": [
         "Label sumber 'Coding' diganti 'Koding'.",
-        "Bedakan dari KKA, yang berjalan lewat kokurikuler (D-208)."
+        "Bedakan dari mata pelajaran pilihan Koding dan Kecerdasan Artifisial (KKA) kelas 5–6, yang dijalankan sekolah sebagai mapel atau lewat kokurikuler (D-452). Ekstrakurikuler koding adalah salah satu pilihan dalam Kepmendikdasmen 127/P/2025 BAB II huruf B angka 4."
       ]
     },
     {
