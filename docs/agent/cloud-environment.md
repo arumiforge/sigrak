@@ -14,12 +14,13 @@ Settings the owner applies once per Claude account (claude.ai â†’ Claude Code â†
 
 `.claude/cloud/setup.sh` is idempotent and never fails the session start:
 
-- Node.js 26 LTS (D-412) in `/opt/node26`, next to the image's Node 22. If `node -v` still shows 22, run `export PATH=/opt/node26/bin:$PATH` first.
+- Node.js 26 LTS (D-412) in `/opt/node26`, next to the image's Node 22. The script checks `/opt/node26/bin/node -v` itself (the image puts `/opt/node22/bin` first on `PATH`), so it downloads Node only when that folder is missing or holds another major. It puts Node 26 first on `PATH` for new shells through `/etc/profile.d/zz-sigrak-node.sh`, which `~/.bashrc` also sources, and links `node`, `npm`, `npx` and pnpm into `/usr/local/bin`. A shell opened before the script ran still shows 22: run `export PATH=/opt/node26/bin:$PATH`.
 - PostgreSQL 19 with pgvector (D-398, D-412), started on port 5432; other clusters in the image (such as 16) are stopped and set to manual start. Local role `sigrak` (password `sigrak`, local only), databases `sigrak` and `sigrak_test`.
 - Redis, started.
 - Typst CLI (D-399 spike) and k6 (R0-08).
 - pandoc, Liberation and Noto fonts, for the docs PDF build.
-- Git identity `Arumi Studios <arumiforge@gmail.com>`, `core.hooksPath .githooks`, and, when `pnpm-lock.yaml` exists, pnpm at the version pinned in `package.json` plus `pnpm install --frozen-lockfile` (D-422).
+- Git identity `Arumi Studios <arumiforge@gmail.com>`, `core.hooksPath .githooks`, and, when `pnpm-lock.yaml` exists, pnpm at the version pinned in `package.json`, installed into `/opt/node26`, plus `pnpm install --frozen-lockfile` (D-422).
+- A local `.env`, only when it is missing: `cp .env.example .env && node ace generate:key` with Node 26, as in CI, so `pnpm test` runs right after setup. An existing `.env` is never touched (it is gitignored).
 
 The script finds the repository root from its own path, so it works whatever the checkout folder is called; set `SIGRAK_DIR` to override. Only the new stack is installed; nothing from the old stack is needed (D-407, D-411).
 

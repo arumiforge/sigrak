@@ -14,16 +14,38 @@ apt_install() {
     apt-get install -y -q "$@" >/dev/null 2>&1
 }
 
-# Node.js LTS (D-412)
-if ! node -v 2>/dev/null | grep -q "^v${NODE_MAJOR}\."; then
+# Node.js LTS (D-412) in /opt/node$NODE_MAJOR. Cloud images put /opt/node22/bin before /usr/local/bin on PATH,
+# so the check looks at the install folder itself, and a profile snippet puts that folder first for sessions.
+NODE_BIN="/opt/node${NODE_MAJOR}/bin"
+if ! "$NODE_BIN/node" -v 2>/dev/null | grep -q "^v${NODE_MAJOR}\."; then
     ver=$(curl -fsSL https://nodejs.org/dist/index.json 2>/dev/null \
         | python3 -c "import json,sys;print(next(x['version'] for x in json.load(sys.stdin) if x['version'].startswith('v${NODE_MAJOR}.')))" 2>/dev/null)
     if [ -n "$ver" ] && curl -fsSL "https://nodejs.org/dist/${ver}/node-${ver}-linux-x64.tar.xz" -o /tmp/node.tar.xz; then
-        mkdir -p /opt/node${NODE_MAJOR} && tar -xJf /tmp/node.tar.xz -C /opt/node${NODE_MAJOR} --strip-components=1
-        ln -sf /opt/node${NODE_MAJOR}/bin/{node,npm,npx,corepack} /usr/local/bin/ && log "node $ver installed"
+        if mkdir -p "/opt/node${NODE_MAJOR}" && tar -xJf /tmp/node.tar.xz -C "/opt/node${NODE_MAJOR}" --strip-components=1; then
+            log "node $ver installed"
+        else
+            log "could not unpack Node.js $ver (optional)"
+        fi
+        rm -f /tmp/node.tar.xz
     else
         log "could not install Node.js ${NODE_MAJOR} (optional; found $(node -v 2>/dev/null || echo none))"
     fi
+fi
+if [ -x "$NODE_BIN/node" ]; then
+    export PATH="$NODE_BIN:$PATH"
+    # Links for tools that only look in /usr/local/bin; drop links whose target is gone (Node 25+ has no corepack).
+    for tool in node npm npx corepack pnpm pnpx; do
+        if [ -e "$NODE_BIN/$tool" ]; then ln -sf "$NODE_BIN/$tool" "/usr/local/bin/$tool"
+        elif [ -L "/usr/local/bin/$tool" ] && [ ! -e "/usr/local/bin/$tool" ]; then rm -f "/usr/local/bin/$tool"; fi
+    done
+    # Login shells read /etc/profile.d (zz- sorts after the image's nodejs.sh); interactive shells and the
+    # agent's shell snapshot read ~/.bashrc, which sources the same snippet.
+    printf '%s\n' "# SIGRAK: Node.js ${NODE_MAJOR} first on PATH (.claude/cloud/setup.sh)" \
+        "case \"\$PATH\" in ${NODE_BIN}:*) ;; *) export PATH=\"${NODE_BIN}:\$PATH\" ;; esac" \
+        > /etc/profile.d/zz-sigrak-node.sh 2>/dev/null || true
+    bashrc="${HOME:-/root}/.bashrc"
+    grep -qs "zz-sigrak-node.sh" "$bashrc" \
+        || echo '[ -f /etc/profile.d/zz-sigrak-node.sh ] && . /etc/profile.d/zz-sigrak-node.sh' >> "$bashrc" 2>/dev/null || true
 fi
 
 # PostgreSQL with pgvector (D-398, D-412) and Redis
@@ -82,13 +104,24 @@ if [ -d "$APP_DIR/.git" ]; then
         # pnpm version pinned in package.json "packageManager" (D-422)
         pm=$(python3 -c "import json;print(json.load(open('$APP_DIR/package.json')).get('packageManager',''))" 2>/dev/null)
         pnpm_ver="${pm#pnpm@}"
-        if [ -n "$pnpm_ver" ] && ! pnpm -v 2>/dev/null | grep -qx "$pnpm_ver"; then
-            npm i -g "pnpm@${pnpm_ver}" --no-fund --no-audit >/dev/null 2>&1 \
-                && ln -sf "/opt/node${NODE_MAJOR}/bin/pnpm" /usr/local/bin/pnpm && log "pnpm $pnpm_ver installed" \
+        # Installed into Node ${NODE_MAJOR}'s own folder, so it runs next to that Node on PATH.
+        if [ -n "$pnpm_ver" ] && [ -x "$NODE_BIN/npm" ] && ! "$NODE_BIN/pnpm" -v 2>/dev/null | grep -qx "$pnpm_ver"; then
+            "$NODE_BIN/npm" i -g "pnpm@${pnpm_ver}" --no-fund --no-audit >/dev/null 2>&1 \
+                && ln -sf "$NODE_BIN/pnpm" /usr/local/bin/pnpm && log "pnpm $pnpm_ver installed" \
                 || log "could not install pnpm $pnpm_ver (optional)"
         fi
         (cd "$APP_DIR" && pnpm install --frozen-lockfile >/dev/null 2>&1) && log "pnpm install done" \
             || log "pnpm install failed (run it in the session)"
+    fi
+    # Local .env as in CI (.github/workflows/ci.yml), only when missing; .env is gitignored. Removed again if the
+    # key cannot be generated, so the next run tries again.
+    if [ ! -f "$APP_DIR/.env" ] && [ -f "$APP_DIR/.env.example" ] && [ -d "$APP_DIR/node_modules" ]; then
+        if cp "$APP_DIR/.env.example" "$APP_DIR/.env" && (cd "$APP_DIR" && node ace generate:key >/dev/null 2>&1); then
+            log ".env created from .env.example with a new APP_KEY"
+        else
+            rm -f "$APP_DIR/.env"
+            log "could not create .env (run: cp .env.example .env && node ace generate:key)"
+        fi
     fi
 fi
 exit 0
