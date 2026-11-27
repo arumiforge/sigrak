@@ -152,7 +152,7 @@ Each runs in its own session; none started. The phase R line (R0-06…R0-08, R1�
 | RS-12 | HaKI materials: philosophy, history (without the legacy brand, D-360), background, guidebook; needs an owner interview on the history; filed after the PT exists (D-438) | todo | — | owner interview | `docs/drafts/haki/` |
 | RS-13 | Fundamentals handbook for the owner (several sessions), published on the notes site (D-436) | todo | — | RS-05 for publishing | handbook source |
 | RS-14 | Maps spike: MapLibre + PMTiles on R2, desa/kecamatan levels, "<5" rule (D-437) | blocked (boundary data lands in Fondasi first) | — | Fondasi boundary data | spike report |
-| RS-15 | Agent pre-check of draft data against official sources: CP, taxonomy and regulation registry, regulation extracts, calendars; flag doubtful items with reason and source location (D-447) | todo | — | — | flag list per data set |
+| RS-15 | Agent pre-check of draft data against official sources: CP, taxonomy and regulation registry, regulation extracts, calendars; flag doubtful items with reason and source location (D-447) | in-progress | igi/dazzling-franklin-5i1w8n | — | flag list per data set |
 | RS-16 | Logo brief for Codex in `ai/`: full colour, single colour, negative, 16 px (D-448) | todo | — | — | `ai/` brief |
 
 ### Phase 5 — v1 build · paused (D-406; rebuilt as R5)
