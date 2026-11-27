@@ -12,7 +12,8 @@ SIGRAK is proprietary software of Arumi Studios ([`LICENSE`](LICENSE)). It inclu
 
 | Component | Licence | Where | Notes |
 |---|---|---|---|
-| Hugeicons Pro | Commercial licence held by the owner (D-402) | App icons, bundled and self-hosted once the owner uploads the licensed files | Not sublicensed by SIGRAK's `LICENSE`; may not be extracted, reused or redistributed. Any licence key lives in `stack.env` or a CI secret, never in git. |
+| Hugeicons Pro (Rounded Stroke and Rounded Solid only) | Commercial licence; licence holder: the owner of Arumi Studios (the licence certificate is kept in the password manager, not in git) (D-402, D-434) | `inertia/icons/hugeicons/` (bundled and self-hosted) | Not sublicensed by SIGRAK's `LICENSE`; may not be extracted, reused or redistributed. Any licence key lives in `stack.env` or a CI secret, never in git. |
+| shadcn/studio Pro (`radix` variants) | Commercial licence; licence holder: the owner of Arumi Studios (D-434) | None yet; blocks are added through the CLI registry only when the app uses them, and listed here then. Catalog of names: `docs/drafts/shadcn-studio-catalog.md` | Email and licence key for the registry live in env or a CI secret, never in git. Not sublicensed by SIGRAK's `LICENSE`. |
 
 ## Development tools (not shipped in the app)
 
