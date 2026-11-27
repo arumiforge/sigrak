@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import './tokens.css';
+
+/*
+ * Dark mode follows the device, or a `.dark` class on <html> once a
+ * setting exists (design system: dark mode is its own set).
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens mapped into Tailwind (design-system.md, Stack mapping):
+ * bg-surface, text-muted, border-line, … plus the shadcn/ui names, so
+ * shadcn components use the SIGRAK tokens.
+ */
+@theme inline {
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-tint: var(--brand-tint);
+  --color-page: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--border-line);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--text);
+  --color-primary: var(--brand);
+  --color-primary-foreground: var(--on-brand);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--text);
+  --color-muted-foreground: var(--text-muted);
+  --color-accent: var(--brand-tint);
+  --color-accent-foreground: var(--brand-strong);
+  --color-destructive: var(--danger);
+  --color-border: var(--border-line);
+  --color-input: var(--border-line);
+  --color-ring: var(--brand);
+
+  /* Type scale 13 / 15 / 17 / 20 / 24 / 30 px */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* Radius: 6 inputs, 10 cards */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-page text-text font-sans antialiased;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  table,
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

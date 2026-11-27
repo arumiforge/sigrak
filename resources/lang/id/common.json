@@ -1,0 +1,30 @@
+{
+  "app_name": "SIGRAK",
+  "areas": {
+    "app": "SIGRAK",
+    "admin": "Konsol Tim SIGRAK",
+    "exam": "Simulasi TKA"
+  },
+  "nav": {
+    "label": "Menu utama",
+    "calendar": "Kalender",
+    "home": "Ringkasan",
+    "sign_out": "Keluar",
+    "skip_to_content": "Langsung ke isi halaman"
+  },
+  "actions": {
+    "retry": "Coba lagi",
+    "back": "Kembali",
+    "close": "Tutup"
+  },
+  "empty": {
+    "page": "Halaman ini sedang disiapkan.",
+    "no_role": "Anda belum punya peran aktif di sekolah mana pun. Minta operator sekolah mengirim undangan."
+  },
+  "errors": {
+    "load_failed": "Data belum berhasil dimuat. Periksa koneksi Anda, lalu coba lagi."
+  },
+  "toasts": {
+    "signed_out": "Anda sudah keluar."
+  }
+}

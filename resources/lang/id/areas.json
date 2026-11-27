@@ -1,0 +1,13 @@
+{
+  "admin": {
+    "title": "Ringkasan",
+    "greeting": "Halo, {name}.",
+    "intro": "Konsol Tim SIGRAK sedang disiapkan. Daftar sekolah, kurikulum, dan kalender wilayah menyusul di sini."
+  },
+  "exam": {
+    "title": "Simulasi TKA",
+    "greeting": "Anda masuk sebagai {username}.",
+    "session": "Sesi: {title}",
+    "waiting": "Soal belum tersedia di versi ini. Tunggu arahan dari pengawas."
+  }
+}

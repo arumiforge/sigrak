@@ -1,0 +1,15 @@
+{
+  "not_found": {
+    "title": "Halaman tidak ditemukan",
+    "body": "Alamat ini tidak ada atau sudah dipindahkan. Periksa alamatnya, atau kembali ke halaman awal."
+  },
+  "server_error": {
+    "title": "Ada gangguan di server",
+    "body": "Permintaan Anda belum berhasil diproses. Coba lagi beberapa saat lagi."
+  },
+  "forbidden": {
+    "title": "Anda tidak punya akses",
+    "body": "Halaman ini tidak tersedia untuk akun Anda."
+  },
+  "home": "Kembali ke halaman awal"
+}

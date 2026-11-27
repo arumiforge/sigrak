@@ -1,0 +1,66 @@
+SIGRAK — Proprietary Software License
+
+Copyright (c) 2026 Arumi Studios. All rights reserved.
+
+SPDX-License-Identifier: LicenseRef-ArumiStudios-Proprietary
+
+1. Ownership
+
+   This software, including its source code, database schema, documentation,
+   designs, illustrations, prompts and other materials in this repository
+   (the "Software"), is the confidential property of Arumi Studios. It is
+   licensed, not sold.
+
+2. No licence without a written agreement
+
+   No right to use, copy, modify, merge, publish, distribute, sublicense,
+   sell, host for others, or create derivative works of the Software is
+   granted, except under a separate written agreement signed by Arumi Studios
+   (for example a licence or service agreement with a school). Such an
+   agreement sets the permitted installations, users and duration; anything
+   it does not expressly grant is reserved.
+
+3. Collaborators and contractors
+
+   People given access to this repository to work for Arumi Studios may use
+   the Software only to perform that work, must keep it confidential, and
+   may not copy it, or any part of it, to other projects or share it with
+   third parties. Ownership of contributions is governed by their written
+   agreement with Arumi Studios. Access ends when the work ends.
+
+4. Restrictions
+
+   Unless the written agreement allows it, you may not: remove or alter
+   copyright notices or this licence; reverse engineer, decompile or
+   disassemble any distributed form of the Software; rebrand or resell the
+   Software as your own product; or use it to build a competing product.
+
+5. Customer data
+
+   Data entered into an installation of the Software (for example pupil,
+   parent, teacher and staff data) belongs to the school or organisation that
+   operates that installation and is not covered by this licence.
+
+6. Third-party components
+
+   The Software includes or depends on third-party components that remain
+   under their own licences, listed in THIRD_PARTY_NOTICES.md. Commercial
+   components used by Arumi Studios under its own licence (such as Hugeicons
+   Pro) are not sublicensed by this licence and may not be extracted,
+   reused or redistributed.
+
+7. No warranty
+
+   Except as stated in a written agreement, the Software is provided "as is",
+   without warranty of any kind, express or implied, including fitness for
+   a particular purpose and non-infringement. To the extent permitted by
+   law, Arumi Studios is not liable for any claim, damage or other liability
+   arising from the use of the Software.
+
+8. Governing law
+
+   This licence is governed by the laws of the Republic of Indonesia.
+
+9. Contact
+
+   Licensing enquiries: Arumi Studios, arumiforge@gmail.com

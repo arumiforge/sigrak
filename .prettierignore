@@ -1,0 +1,14 @@
+.adonisjs
+node_modules
+build
+public/assets
+database/schema.ts
+pnpm-lock.yaml
+# Docs, data, workflows and tooling owned by other tasks
+docs
+scripts
+ai
+*.md
+.github
+.githooks
+.claude

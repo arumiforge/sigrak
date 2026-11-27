@@ -1,0 +1,67 @@
+import type { HttpContext } from '@adonisjs/core/http'
+import type { NextFn } from '@adonisjs/core/types/http'
+import BaseInertiaMiddleware from '@adonisjs/inertia/inertia_middleware'
+import { areaForHost } from '#config/hosts'
+import { messagesFor } from '#middleware/translations_middleware'
+import User from '#models/user'
+import StaffUser from '#models/staff_user'
+import ExamParticipant from '#models/exam_participant'
+
+/**
+ * Who is signed in, in the shape every layout needs. Only the guard of
+ * the current area is ever authenticated on a request.
+ */
+function viewerOf(user: unknown): { name: string } | null {
+  if (user instanceof User || user instanceof StaffUser) {
+    return { name: user.name }
+  }
+  if (user instanceof ExamParticipant) {
+    return { name: user.username }
+  }
+  return null
+}
+
+export default class InertiaMiddleware extends BaseInertiaMiddleware {
+  share(ctx: HttpContext) {
+    /**
+     * A page may render before the session or auth middleware ran (for
+     * example a 404), so the context may be partly hydrated.
+     */
+    const { auth, request, i18n } = ctx as Partial<HttpContext>
+    const locale = i18n?.locale ?? 'id'
+
+    return {
+      errors: ctx.inertia.always(this.getValidationErrors(ctx)),
+      area: ctx.inertia.always(areaForHost(request?.hostname()) ?? 'app'),
+      viewer: ctx.inertia.always(viewerOf(auth?.user)),
+      messages: messagesFor(locale, ['common', ...(ctx.translationNamespaces ?? [])]),
+    }
+  }
+
+  flash(ctx: HttpContext) {
+    /**
+     * Flash messages travel in the page's `flash` field and are shown
+     * as toasts (Fondasi feedback.md tier 1).
+     */
+    const { session } = ctx as Partial<HttpContext>
+
+    const success: string | undefined = session?.flashMessages.get('success')
+    const error: string | undefined = session?.flashMessages.get('error')
+
+    return { success, error }
+  }
+
+  async handle(ctx: HttpContext, next: NextFn) {
+    await this.init(ctx)
+
+    const output = await next()
+    this.dispose(ctx)
+
+    return output
+  }
+}
+
+declare module '@adonisjs/inertia/types' {
+  type MiddlewareSharedProps = InferSharedProps<InertiaMiddleware>
+  export interface SharedProps extends MiddlewareSharedProps {}
+}

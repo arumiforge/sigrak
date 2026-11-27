@@ -1,0 +1,39 @@
+{
+  "title": "Kalender",
+  "year": "Tahun ajaran {name}",
+  "source": "Disalin dari {name}.",
+  "no_calendar": "Sekolah belum punya kalender untuk tahun ajaran ini. Operator sekolah perlu membuatnya dulu.",
+  "empty_month": "Tidak ada acara atau libur di bulan ini.",
+  "empty_year": "Belum ada acara.",
+  "national_holiday": "Libur nasional",
+  "provisional": "sementara",
+  "joint_leave_school_day": "Masuk sekolah",
+  "whole_school": "Seluruh sekolah",
+  "today": "Hari ini",
+  "views": {
+    "label": "Tampilan",
+    "month": "Bulan",
+    "list": "Daftar"
+  },
+  "month_nav": {
+    "previous": "Bulan sebelumnya",
+    "next": "Bulan berikutnya",
+    "this_month": "Bulan ini"
+  },
+  "kinds": {
+    "holiday": "Libur sekolah",
+    "exam": "Asesmen",
+    "school_event": "Kegiatan sekolah",
+    "no_lessons": "Tidak ada pelajaran",
+    "national_holiday": "Libur nasional",
+    "joint_leave": "Cuti bersama"
+  },
+  "exam_types": {
+    "sts": "STS",
+    "sas": "SAS",
+    "other": "Asesmen lain"
+  },
+  "legend": "Keterangan",
+  "events_in_month": "Acara dan libur bulan {month}",
+  "date_range": "{start} sampai {end}"
+}

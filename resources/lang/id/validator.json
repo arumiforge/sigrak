@@ -1,0 +1,16 @@
+{
+  "shared": {
+    "fields": {
+      "email": "Email",
+      "password": "Kata sandi",
+      "username": "Nama pengguna"
+    },
+    "messages": {
+      "required": "{field} wajib diisi.",
+      "string": "{field} harus berupa teks.",
+      "email": "Tulis email yang lengkap, misalnya nama@sekolah.sch.id.",
+      "minLength": "{field} minimal {min} karakter.",
+      "maxLength": "{field} maksimal {max} karakter."
+    }
+  }
+}

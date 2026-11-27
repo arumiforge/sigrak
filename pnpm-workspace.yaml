@@ -1,0 +1,5 @@
+# pnpm settings (D-422). Only packages listed here as true may run install scripts;
+# new package versions must be published for 1 day (1440 minutes) before they are installed.
+allowBuilds:
+  '@swc/core': false
+minimumReleaseAge: 1440

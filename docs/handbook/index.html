@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Handbook SIGRAK</title>
+<meta name="description" content="Handbook pribadi pemilik: keputusan perombakan, stack, server, akses, backup, dan rencana SIGRAK.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+
+/* Layout: panel kendali cetak biru — pita hero gelap, tab lengket, setiap bagian berisi alat yang bisa digeser; satu warna merek (teal SIGRAK) + warna status. */
+:root{
+  --bg:#F5F7F6; --surface:#FFFFFF; --surface-2:#EDF2F0; --border:#DFE6E3; --border-strong:#C9D3CF;
+  --text:#14201C; --muted:#56645E; --faint:#8A9690;
+  --brand:#0F766E; --brand-strong:#0B5F58; --brand-tint:#E3F4F1; --on-brand:#FFFFFF;
+  --hero-bg:#0A2724; --hero-fg:#E8F3F0; --hero-muted:#9CC0B8; --hero-line:rgba(255,255,255,.10);
+  --ok:#15803D; --warn:#B45309; --danger:#B91C1C; --info:#1D4ED8;
+  --ok-tint:#E8F7EE; --warn-tint:#FDF3E7; --danger-tint:#FDECEC; --info-tint:#EAF1FD;
+  --c1:#0F766E; --c2:#0369A1; --c3:#7C3AED; --c4:#B45309; --c5:#BE123C; --c6:#475569; --c7:#4D7C0F; --c8:#A16207;
+  --shadow:0 1px 2px rgba(16,32,28,.06), 0 8px 24px rgba(16,32,28,.06);
+  --font-body:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1513; --surface:#161E1B; --surface-2:#1C2622; --border:#26312D; --border-strong:#34423D;
+  --text:#E4ECE8; --muted:#9AA9A2; --faint:#6E7C76;
+  --brand:#2DD4BF; --brand-strong:#5EEAD4; --brand-tint:#0F2E2A; --on-brand:#06201C;
+  --hero-bg:#081B19; --hero-fg:#E4F1EE; --hero-muted:#8DB3AA; --hero-line:rgba(255,255,255,.08);
+  --ok:#4ADE80; --warn:#FBBF24; --danger:#F87171; --info:#93C5FD;
+  --ok-tint:#10291B; --warn-tint:#2D220E; --danger-tint:#331616; --info-tint:#132038;
+  --c1:#2DD4BF; --c2:#38BDF8; --c3:#A78BFA; --c4:#FBBF24; --c5:#FB7185; --c6:#94A3B8; --c7:#A3E635; --c8:#FACC15;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1513; --surface:#161E1B; --surface-2:#1C2622; --border:#26312D; --border-strong:#34423D;
+  --text:#E4ECE8; --muted:#9AA9A2; --faint:#6E7C76;
+  --brand:#2DD4BF; --brand-strong:#5EEAD4; --brand-tint:#0F2E2A; --on-brand:#06201C;
+  --hero-bg:#081B19; --hero-fg:#E4F1EE; --hero-muted:#8DB3AA; --hero-line:rgba(255,255,255,.08);
+  --ok:#4ADE80; --warn:#FBBF24; --danger:#F87171; --info:#93C5FD;
+  --ok-tint:#10291B; --warn-tint:#2D220E; --danger-tint:#331616; --info-tint:#132038;
+  --c1:#2DD4BF; --c2:#38BDF8; --c3:#A78BFA; --c4:#FBBF24; --c5:#FB7185; --c6:#94A3B8; --c7:#A3E635; --c8:#FACC15;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+.in{max-width:1200px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+code,.mono{font-family:var(--font-mono);font-size:.86em}
+code{background:var(--surface-2);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.tw code{overflow-wrap:normal;white-space:nowrap}
+p{margin:0 0 10px}
+h2,h3,h4{text-wrap:balance;margin:0}
+.muted{color:var(--muted)} .small{font-size:13px}
+
+/* hero */
+.hero{background:var(--hero-bg);color:var(--hero-fg);margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 44px);padding-bottom:40px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--hero-line) 1px,transparent 1px),linear-gradient(90deg,var(--hero-line) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse at 80% 0%,#000 0%,transparent 65%);pointer-events:none}
+.hero .in{position:relative;z-index:1}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--hero-muted)}
+.kicker .dot{width:7px;height:7px;border-radius:50%;background:#2DD4BF}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.05;font-weight:800;letter-spacing:-.02em;margin:14px 0 14px;max-width:18ch}
+.hero .lede{font-size:17px;color:var(--hero-muted);max-width:64ch;margin:0}
+.specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.spec{font-family:var(--font-mono);font-size:12.5px;padding:6px 10px;border:1px solid var(--hero-line);border-radius:8px;background:rgba(255,255,255,.04);color:var(--hero-fg);white-space:nowrap}
+.spec b{color:#5EEAD4;font-weight:600}
+.verdicts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:28px}
+@media (max-width:980px){.verdicts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.verdicts{grid-template-columns:minmax(0,1fr)}}
+.vt{border:1px solid var(--hero-line);border-radius:12px;padding:14px 14px 12px;background:rgba(255,255,255,.035);min-width:0;text-decoration:none;color:inherit;display:block;transition:background .15s,border-color .15s}
+.vt:hover{background:rgba(255,255,255,.07);border-color:rgba(94,234,212,.4)}
+.vt .l{font-size:12.5px;color:var(--hero-muted);font-weight:600}
+.vt .v{font-size:17px;font-weight:700;margin-top:4px;line-height:1.3}
+.vt .s{font-size:12.5px;color:var(--hero-muted);margin-top:4px;line-height:1.45}
+.changes{margin-top:22px;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:12.5px;color:var(--hero-muted)}
+.changes .tag{border:1px dashed var(--hero-line);border-radius:999px;padding:3px 9px;color:var(--hero-fg)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--border)}
+.nav .in{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+.nav .in::-webkit-scrollbar{display:none}
+.nav a{flex:none;font-size:13.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{color:var(--text);background:var(--surface-2)}
+.nav a.on{color:var(--brand-strong);background:var(--brand-tint)}
+
+/* sections */
+section.sec{padding-block:44px 8px}
+.sec-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:end;justify-content:space-between;margin-bottom:18px}
+.sec-head .eb{font-family:var(--font-mono);font-size:12px;color:var(--brand);font-weight:600}
+.sec-head h2{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.01em;line-height:1.2;margin-top:2px}
+.sec-head p{max-width:62ch;color:var(--muted);margin:6px 0 0}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);min-width:0}
+.pad{padding:18px 20px}
+@media (max-width:520px){.pad{padding:14px}}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.sim{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:14px}
+@media (max-width:900px){.g2,.g3,.sim{grid-template-columns:minmax(0,1fr)}}
+.stack{display:grid;gap:14px}
+
+/* controls */
+.ctl{display:grid;gap:6px;margin-bottom:16px}
+.ctl:last-child{margin-bottom:0}
+.ctl label,.ctl .lab{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:600}
+.ctl output,.ctl .val{font-family:var(--font-mono);font-weight:600;color:var(--brand-strong);font-size:13px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--brand) var(--p,50%),var(--border-strong) var(--p,50%))}
+input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:var(--border-strong)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:6px;background:var(--brand)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--surface);border:3px solid var(--brand);margin-top:-6px;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--brand)}
+.seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:3px}
+.seg button{flex:1 1 auto;font:inherit;font-size:12.5px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:6px 9px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--brand-strong);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px var(--border)}
+.num-in{font:inherit;font-family:var(--font-mono);font-size:14px;width:100%;padding:8px 10px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface);color:var(--text)}
+.ctl label.sw,.sw{display:flex;justify-content:flex-start;align-items:center;gap:10px;font-size:13px;font-weight:600;cursor:pointer}
+.sw input{appearance:none;-webkit-appearance:none;width:38px;height:22px;border-radius:999px;background:var(--border-strong);position:relative;cursor:pointer;transition:background .15s;flex:none;margin:0}
+.sw input::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s}
+.sw input:checked{background:var(--brand)}
+.sw input:checked::after{transform:translateX(16px)}
+.btn{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);padding:8px 12px;border-radius:9px;cursor:pointer}
+.btn:hover{border-color:var(--brand);color:var(--brand-strong)}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.btn.pri:hover{filter:brightness(1.05);color:var(--on-brand)}
+
+/* stats */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:720px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--surface);min-width:0}
+.kpi .k{font-size:12.5px;color:var(--muted);font-weight:600}
+.kpi .v{font-family:var(--font-mono);font-size:24px;font-weight:600;line-height:1.2;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.chip.ok{color:var(--ok);background:var(--ok-tint)} .chip.warn{color:var(--warn);background:var(--warn-tint)} .chip.bad{color:var(--danger);background:var(--danger-tint)} .chip.info{color:var(--info);background:var(--info-tint)}
+.chip.plain::before{display:none}
+.chip.brand{color:var(--brand-strong);background:var(--brand-tint)}
+
+/* stacked bars */
+.sbar{display:flex;height:30px;border-radius:8px;overflow:hidden;background:var(--surface-2);border:1px solid var(--border);margin:8px 0 10px}
+.sbar span{height:100%;transition:width .35s ease;min-width:0;position:relative}
+.sbar span+span{box-shadow:inset 1px 0 0 var(--surface)}
+.sbar .free{background:repeating-linear-gradient(45deg,transparent 0 6px,var(--border) 6px 7px)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.legend b{font-family:var(--font-mono);font-weight:600}
+.meter-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.meter-head h4{font-size:14px}
+.meter-head .mono{font-size:13px}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:620px}
+th,td{padding:9px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{font-size:12.5px;color:var(--muted);background:var(--surface-2);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--font-mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.score{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;font-family:var(--font-mono);font-weight:600;font-size:13px}
+.s1{background:var(--danger-tint);color:var(--danger)} .s2{background:var(--warn-tint);color:var(--warn)} .s3{background:var(--surface-2);color:var(--muted)} .s4{background:var(--brand-tint);color:var(--brand-strong)} .s5{background:var(--ok-tint);color:var(--ok)}
+
+/* ranking */
+.rank{display:grid;gap:10px}
+.rk{display:grid;grid-template-columns:150px minmax(0,1fr) 56px;gap:12px;align-items:center}
+@media (max-width:520px){.rk{grid-template-columns:110px minmax(0,1fr) 48px}}
+.rk .nm{font-weight:700;font-size:14px}
+.rk .nm small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.rk .tr{height:14px;border-radius:7px;background:var(--surface-2);overflow:hidden}
+.rk .fl{height:100%;border-radius:7px;background:var(--border-strong);transition:width .35s ease}
+.rk.top .fl{background:var(--brand)}
+.rk .pc{font-family:var(--font-mono);font-weight:600;text-align:right}
+.wgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px}
+@media (max-width:620px){.wgrid{grid-template-columns:minmax(0,1fr)}}
+.wgrid .ctl{margin-bottom:6px}
+
+/* verdict cards */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.vc{border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--surface);min-width:0}
+.vc .top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.vc h4{font-size:14.5px}
+.vc p{font-size:13px;color:var(--muted);margin:0}
+
+/* tabs */
+.tabbar{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding:0 14px}
+.tabbar button{font:inherit;font-size:13px;font-weight:700;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:12px 8px 10px;cursor:pointer;margin-bottom:-1px}
+.tabbar button[aria-selected="true"]{color:var(--brand-strong);border-color:var(--brand)}
+.tabpane{padding:16px 20px}
+.qbubble{background:var(--surface-2);border:1px solid var(--border);border-radius:12px 12px 12px 4px;padding:10px 12px;font-size:14px;margin:4px 0 10px;max-width:520px}
+dl.kv{display:grid;grid-template-columns:140px minmax(0,1fr);gap:6px 14px;margin:0;font-size:13.5px}
+dl.kv dt{color:var(--muted);font-weight:600}
+dl.kv dd{margin:0}
+@media (max-width:520px){dl.kv{grid-template-columns:minmax(0,1fr)}dl.kv dt{margin-top:6px}}
+
+/* misc */
+.note{border:1px solid color-mix(in srgb,var(--warn) 28%,var(--border));background:var(--warn-tint);border-radius:10px;padding:10px 14px;font-size:13.5px}
+.note.i{border-color:color-mix(in srgb,var(--info) 28%,var(--border));background:var(--info-tint)}
+.note.o{border-color:color-mix(in srgb,var(--ok) 28%,var(--border));background:var(--ok-tint)}
+.note p:last-child{margin:0}
+ul.clean{margin:0;padding-left:18px} ul.clean li{margin-bottom:5px}
+pre.mermaid{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;overflow-x:auto;margin:0}
+pre.code{margin:0;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;overflow-x:auto;font-family:var(--font-mono);font-size:12.5px;line-height:1.6}
+.docpick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.docpick button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);border-radius:999px;padding:6px 12px;cursor:pointer}
+.docpick button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.tiers{grid-template-columns:minmax(0,1fr)}}
+.tier{border:1px solid var(--border);border-radius:12px;padding:12px 14px;transition:border-color .2s,background .2s,opacity .2s;opacity:.55}
+.tier.on{border-color:var(--brand);background:var(--brand-tint);opacity:1}
+.tier .t{font-family:var(--font-mono);font-size:11.5px;color:var(--brand);font-weight:600}
+.tier h4{font-size:14.5px;margin:2px 0 4px}
+.tier p{font-size:12.5px;color:var(--muted);margin:0}
+
+.steps{display:grid;gap:8px}
+.step{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;align-items:start;border:1px solid var(--border);border-radius:12px;padding:10px 12px;background:var(--surface);transition:background .15s,opacity .15s}
+.step input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--brand);cursor:pointer}
+.step h4{font-size:14px}
+.step p{font-size:12.5px;color:var(--muted);margin:2px 0 0}
+.step .t{font-family:var(--font-mono);font-size:12px;color:var(--muted);white-space:nowrap;padding-top:2px}
+.step.done{opacity:.55;background:var(--surface-2)}
+.step.done h4{text-decoration:line-through}
+.step.crit{border-color:var(--danger)}
+
+.road{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:900px){.road{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.road{grid-template-columns:minmax(0,1fr)}}
+.lane{border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--surface);min-width:0}
+.lane .h{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:8px}
+.lane h4{font-size:14px}
+.lane ul{margin:0;padding-left:16px;font-size:13px}
+.lane li{margin-bottom:4px}
+.lane.p4{border-style:dashed}
+
+.dec{display:grid;gap:10px}
+.dq{border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--surface)}
+.dq .h{display:flex;gap:10px;align-items:baseline;margin-bottom:8px;flex-wrap:wrap}
+.dq .k{font-family:var(--font-mono);font-size:12px;color:var(--brand);font-weight:600}
+.dq h4{font-size:14.5px}
+.dq .opts{display:flex;flex-wrap:wrap;gap:6px}
+.dq .opts button{font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);border-radius:999px;padding:6px 11px;cursor:pointer}
+.dq .opts button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.dq .opts button .rec{font-size:10.5px;font-weight:700;opacity:.75;margin-left:4px}
+.copybar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+#copy-out{flex:1 1 100%;font-family:var(--font-mono);font-size:12.5px;min-height:90px;width:100%;border:1px solid var(--border-strong);border-radius:10px;padding:10px;background:var(--surface-2);color:var(--text);resize:vertical}
+.toast{font-size:12.5px;font-weight:700;color:var(--ok)}
+.src{columns:2;column-gap:28px;font-size:13px;padding-left:18px}
+@media (max-width:720px){.src{columns:1}}
+.src li{break-inside:avoid;margin-bottom:6px}
+footer{padding-block:28px 40px;color:var(--muted);font-size:12.5px}
+
+body{margin:0}
+img{max-width:100%}
+label.step{cursor:pointer}
+.road .lane li{list-style:none;margin-left:-16px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="in">
+    <div class="kicker"><span class="dot"></span>Handbook pribadi pemilik · diperbarui 27 Nov 2026 · versi 4</div>
+    <h1>Handbook SIGRAK: stack dan server</h1>
+    <p class="lede">Ringkasan semua keputusan perombakan total: stack baru, server, akses, backup, AI, dan rencana kerja. Untuk dibaca dan diputuskan pemilik. Isi pendidikan SIGRAK (kurikulum, fitur guru) menyusul di bagian lain nanti.</p>
+    <div class="specs">
+      <span class="spec">AdonisJS <b>7</b></span><span class="spec">React <b>19</b> + Inertia</span><span class="spec">Node <b>26</b> LTS</span><span class="spec">PostgreSQL <b>19</b></span><span class="spec">Redis <b>8</b> · BullMQ</span><span class="spec">nginx <b>1.30</b></span><span class="spec">Ubuntu <b>26.04</b> LTS</span><span class="spec"><b>12</b> vCPU · <b>32</b> GB · SSD <b>200</b> GB</span>
+    </div>
+    <div class="verdicts">
+      <a class="vt" href="#keputusan"><div class="l">Arah</div><div class="v">Perombakan total</div><div class="s">Laravel dihapus. Dibangun ulang dengan stack baru, satu aplikasi untuk semua jenjang, mulai dari SD/MI.</div></a>
+      <a class="vt" href="#server"><div class="l">Server</div><div class="v">1 VPS + cadangan</div><div class="s">Produksi dan staging di satu VPS, VPS cadangan siap dipulihkan dari backup.</div></a>
+      <a class="vt" href="#backup"><div class="l">Pulih</div><div class="v">≤ 5 mnt data, ≤ 1 jam</div><div class="s">Backup WAL terus-menerus ke R2, salinan bulanan ke disk pribadi dan penyedia kedua.</div></a>
+      <a class="vt" href="#rencana"><div class="l">Tahap sekarang</div><div class="v">R0: fondasi dan uji coba</div><div class="s">Kerangka aplikasi jadi. Berikutnya: hapus aplikasi lama, uji AI, PDF Typst, uji beban, lalu gerbang R1.</div></a>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Bagian">
+  <div class="in" id="navlinks">
+    <a href="#keputusan">Keputusan</a><a href="#stack">Stack &amp; versi</a><a href="#arsitektur">Arsitektur</a><a href="#server">Server</a><a href="#docker">Docker &amp; core</a><a href="#akses">Akses aman</a><a href="#backup">Backup</a><a href="#ai">AI &amp; chatbot</a><a href="#bisnis">Bayar &amp; domain</a><a href="#fondasi">Fondasi</a><a href="#rencana">Rencana</a><a href="#rekomendasi">Rekomendasi</a><a href="#versi">Versi &amp; changelog</a><a href="#terbuka">Belum diputuskan</a><a href="#riwayat">Riwayat</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="sec" id="keputusan"><div class="in">
+  <div class="sec-head"><div><div class="eb">01</div><h2>Keputusan yang sudah diambil</h2><p>Semua dicatat di <code>docs/agent/DECISIONS.md</code>. Keputusan 27 November 2026 setelah D-410 dicatat sebagai D-411…D-421.</p></div></div>
+  <div class="tw"><table>
+    <thead><tr><th>Area</th><th>Keputusan</th><th>Catatan</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Backend</strong></td><td>AdonisJS 7, monolit modular, TypeScript strict</td><td>D-388. NestJS gugur (tidak ada aplikasi mobile atau API publik)</td></tr>
+      <tr><td><strong>Frontend</strong></td><td>React 19 + Inertia, tanpa SSR untuk aplikasi</td><td>D-389. Halaman publik (masuk, privasi, panduan) dirender server</td></tr>
+      <tr><td><strong>UI</strong></td><td>Tailwind 4 + shadcn/ui, desain kaya identitas, aset dari Codex</td><td>D-390. Ikon Hugeicons Pro (lisensi pemilik, D-402)</td></tr>
+      <tr><td><strong>Database</strong></td><td>PostgreSQL 19 + pgvector</td><td>D-398, versi 19 dari D-412. RLS sebagai dinding kedua antar sekolah</td></tr>
+      <tr><td><strong>PDF</strong></td><td>Typst setelah uji 2 minggu, Gotenberg cadangan</td><td>D-399. A4 bawaan + F4</td></tr>
+      <tr><td><strong>Server</strong></td><td>VPS 12 vCPU / 32 GB / 200 GB, Ubuntu 26.04, Docker, cloudflared</td><td>D-391, Ubuntu 26.04 dari D-413. Staging di VPS yang sama, VPS cadangan dingin</td></tr>
+      <tr><td><strong>Reverse proxy</strong></td><td>nginx 1.30 stable</td><td>D-414. Dipilih setelah dibandingkan dengan Caddy, Traefik, HAProxy</td></tr>
+      <tr><td><strong>Aturan versi</strong></td><td>Selalu LTS/stabil terbaru, dikunci persis, diperbarui lewat PR</td><td>D-412. Versi x.0 hanya untuk pengembangan; produksi minimal x.1</td></tr>
+      <tr><td><strong>File murid</strong></td><td>Di disk VPS Indonesia; R2 hanya file tanpa data pribadi dan backup terenkripsi</td><td>D-400</td></tr>
+      <tr><td><strong>Data referensi</strong></td><td>Salinan sendiri di repo, cek Fondasi bila diminta pengembang</td><td>D-401</td></tr>
+      <tr><td><strong>Error</strong></td><td>GlitchTip di VPS sendiri</td><td>D-403</td></tr>
+      <tr><td><strong>Backup</strong></td><td>7 hari lokal, 30 hari R2, bulanan ke disk pribadi + penyedia kedua</td><td>D-404, target pulih D-405</td></tr>
+      <tr><td><strong>Pembekuan fitur</strong></td><td>±8–12 minggu sejak 27 Nov 2026</td><td>D-406. Kurasi data tetap jalan</td></tr>
+      <tr><td><strong>Cakupan</strong></td><td>SD/MI dulu; SMP/MTs diputuskan setelah SD/MI selesai</td><td>D-396</td></tr>
+      <tr><td><strong>Laravel</strong></td><td>Tidak ada yang dipindahkan dari build Laravel; semua dibangun baru di stack baru</td><td>D-411 (R0-10). Konten SIGRAK, termasuk keputusan aplikasi lama D-252…D-328, tetap dan ditinjau bertahap</td></tr>
+      <tr><td><strong>Bahasa</strong></td><td>Panduan server bahasa Indonesia; perintah dan output bahasa Inggris</td><td>Dokumen teknis lain tetap bahasa Inggris</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="sec" id="stack"><div class="in">
+  <div class="sec-head"><div><div class="eb">02</div><h2>Stack dan versi</h2><p>Dicek 27 November 2026. Semua versi dikunci persis; pembaruan datang sebagai PR otomatis.</p></div></div>
+  <div class="tw"><table>
+    <thead><tr><th>Komponen</th><th>Versi</th><th>Peran</th></tr></thead>
+    <tbody>
+      <tr><td>Node.js</td><td class="n">26 LTS</td><td>Runtime aplikasi (image <code>node:26-slim</code>)</td></tr>
+      <tr><td>pnpm</td><td class="n">12.23</td><td>Pengelola paket; skrip instalasi hanya untuk paket yang diizinkan, versi baru menunggu satu hari (D-422)</td></tr>
+      <tr><td>AdonisJS</td><td class="n">7.7</td><td>Backend, auth tiga host, antrean, SSE (Transmit)</td></tr>
+      <tr><td>React + Inertia</td><td class="n">19.3 / 3</td><td>Tampilan aplikasi, terasa seperti SPA</td></tr>
+      <tr><td>Tailwind + shadcn/ui</td><td class="n">4.3</td><td>Komponen UI</td></tr>
+      <tr><td>PostgreSQL + pgvector</td><td class="n">19</td><td>Database, pencarian vektor chatbot</td></tr>
+      <tr><td>pgBackRest</td><td class="n">2.60</td><td>Backup WAL terus-menerus ke R2</td></tr>
+      <tr><td>Redis</td><td class="n">8.8</td><td>Antrean, sesi, cache</td></tr>
+      <tr><td>BullMQ</td><td class="n">6.7</td><td>Antrean kerja (AI, ekspor)</td></tr>
+      <tr><td>nginx</td><td class="n">1.30</td><td>Pintu masuk, file statis, pembagian host</td></tr>
+      <tr><td>Typst</td><td class="n">terbaru</td><td>PDF (setelah uji)</td></tr>
+      <tr><td>Ubuntu Server</td><td class="n">26.04 LTS</td><td>OS VPS (dukungan sampai 2031)</td></tr>
+      <tr><td>Docker + Compose v2</td><td class="n">terbaru</td><td>Semua layanan dalam kontainer</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="sec" id="arsitektur"><div class="in">
+  <div class="sec-head"><div><div class="eb">03</div><h2>Arsitektur: satu aplikasi, banyak peran</h2><p>Satu repo, satu image. Setiap peran berjalan sebagai proses sendiri supaya semua core terpakai dan satu bagian yang macet tidak menjatuhkan yang lain.</p></div></div>
+  <pre class="code">Pengguna → Cloudflare (DNS, WAF, Access) → cloudflared → nginx (127.0.0.1)
+                                                         ├─ app. / admin. → web (4 salinan)
+                                                         └─ ujian.        → exam (1–3 salinan)
+web / exam → PostgreSQL 19 + Redis 8
+BullMQ     → worker-ai · worker-exports · worker-default · scheduler (1)</pre>
+  <div class="road" style="margin-top:14px">
+    <div class="lane"><div class="h"><h4>app.sigrak.com</h4><span class="chip brand plain">publik</span></div><ul><li>Guru, kepsek, pengawas, operator</li><li>Semua jenjang, mulai SD/MI</li></ul></div>
+    <div class="lane"><div class="h"><h4>admin.sigrak.com</h4><span class="chip warn plain">Access</span></div><ul><li>Tim SIGRAK (konsol staf)</li><li>Login sendiri + 2FA</li></ul></div>
+    <div class="lane"><div class="h"><h4>ujian.sigrak.com</h4><span class="chip plain" style="color:var(--muted);background:var(--surface-2)">add-on</span></div><ul><li>Peserta TKA dengan kartu ujian</li><li>Bisa dimatikan</li></ul></div>
+    <div class="lane"><div class="h"><h4>sigrak.com</h4><span class="chip info plain">terpisah</span></div><ul><li>Situs pemasaran (Framer)</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="server"><div class="in">
+  <div class="sec-head"><div><div class="eb">04</div><h2>Server: dari VPS baru sampai siap</h2><p>Panduan lengkap di <code>docs/server/</code>. Centang langkah yang sudah dikerjakan; centang hanya tersimpan di browser ini.</p></div></div>
+  <div class="steps" data-store="hb-server">
+    <label class="step"><input type="checkbox"><div><h4>Buat SSH key</h4><p>PowerShell atau Bitvise, Ed25519 + passphrase · <code>ssh-key.md</code></p></div><span class="t">S</span></label>
+    <label class="step crit"><input type="checkbox"><div><h4>Login pertama dengan password, pasang kunci</h4><p>Satu sesi selalu terbuka sebagai tali pengaman · <code>first-ssh-access.md</code>, <code>bitvise.md</code></p></div><span class="t">S</span></label>
+    <label class="step"><input type="checkbox"><div><h4>check.sh → setup.sh Fondasi</h4><p>Docker, cloudflared, Cockpit, firewall. Uji di VPS cadangan dulu (skrip masih untuk 24.04) · <code>server-setup-flow.md</code></p></div><span class="t">M</span></label>
+    <label class="step"><input type="checkbox"><div><h4>Tunnel + Cloudflare Access</h4><p>ssh-, konsol-, admin., staging di belakang Access · <code>cloudflare-access.md</code></p></div><span class="t">S</span></label>
+    <label class="step crit"><input type="checkbox"><div><h4>SSH hanya kunci</h4><p>Matikan login password setelah kunci terbukti dari sesi baru</p></div><span class="t">S</span></label>
+    <label class="step"><input type="checkbox"><div><h4>sigrak-setup.sh</h4><p>Folder, PORTS, tmux, stack.env dengan rahasia acak (dibuat di R3)</p></div><span class="t">S</span></label>
+    <label class="step"><input type="checkbox"><div><h4>Deploy staging, lalu produksi</h4><p>Image yang sama; backup → migrasi → up --wait</p></div><span class="t">M</span></label>
+    <label class="step"><input type="checkbox"><div><h4>check.sh sampai S9</h4><p>check-app SIGRAK: kontainer, backup, WAL, disk, GlitchTip</p></div><span class="t">S</span></label>
+  </div>
+</div></section>
+
+<section class="sec" id="docker"><div class="in">
+  <div class="sec-head"><div><div class="eb">05</div><h2>Docker Compose dan pemakaian 12 core</h2><p>Satu file compose untuk produksi dan staging. Node memakai satu core per proses, jadi tenaga ditambah dengan menambah salinan kontainer, bukan PM2.</p></div></div>
+  <div class="g2">
+    <div class="tw"><table style="min-width:0">
+      <thead><tr><th>Layanan</th><th>Salinan</th><th>Catatan</th></tr></thead>
+      <tbody>
+        <tr><td>web</td><td class="n">4</td><td>app. + admin.</td></tr>
+        <tr><td>exam</td><td class="n">1–3</td><td>naik saat musim TKA</td></tr>
+        <tr><td>worker-ai</td><td class="n">1</td><td>±20 tugas sekaligus</td></tr>
+        <tr><td>worker-exports</td><td class="n">2</td><td>PDF/Excel berat CPU</td></tr>
+        <tr><td>worker-default + scheduler</td><td class="n">1 + 1</td><td>scheduler selalu satu</td></tr>
+        <tr><td>PostgreSQL</td><td class="n">—</td><td>sisakan ±4 core</td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel pad">
+      <div class="meter-head"><h4>Memori 32 GB (perkiraan awal)</h4><span class="mono muted">disetel setelah uji k6</span></div>
+      <div class="sbar" role="img" aria-label="Pembagian memori">
+        <span style="width:31%;background:var(--c1)"></span><span style="width:22%;background:var(--c2)"></span><span style="width:12.5%;background:var(--c3)"></span><span style="width:8%;background:var(--c4)"></span><span class="free" style="width:26.5%"></span>
+      </div>
+      <div class="legend"><span><i style="background:var(--c1)"></i>PostgreSQL <b>10 GB</b></span><span><i style="background:var(--c2)"></i>Aplikasi + worker + Redis <b>7–8 GB</b></span><span><i style="background:var(--c3)"></i>Staging <b>4 GB</b></span><span><i style="background:var(--c4)"></i>GlitchTip + pantau <b>2–3 GB</b></span><span><i style="background:var(--border)"></i>OS + cache</span></div>
+      <p class="small muted" style="margin-top:10px">Hanya nginx yang membuka port, dan hanya ke 127.0.0.1. Database dan Redis tertutup. Kontainer berjalan bukan sebagai root. Rahasia hanya di <code>stack.env</code> di server.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="akses"><div class="in">
+  <div class="sec-head"><div><div class="eb">06</div><h2>Akses yang aman</h2><p>Dua jalan masuk yang terpisah, satu kunci per orang, dan aturan terminal supaya pekerjaan tidak putus di tengah jalan.</p></div></div>
+  <div class="vgrid">
+    <div class="vc"><div class="top"><h4>SSH hanya kunci</h4><span class="chip ok">wajib</span></div><p>Ed25519 + passphrase. Satu orang satu kunci. Laptop hilang: hapus kuncinya hari itu juga.</p></div>
+    <div class="vc"><div class="top"><h4>Jalan masuk kedua</h4><span class="chip ok">wajib</span></div><p>SSH lewat tunnel dan Cockpit di browser sebagai pengganti konsol penyedia. Port SSH langsung tetap terbuka.</p></div>
+    <div class="vc"><div class="top"><h4>Cloudflare Access</h4><span class="chip ok">wajib</span></div><p>Login PIN email untuk ssh-, konsol-, admin., staging. Dikelola lewat grup.</p></div>
+    <div class="vc"><div class="top"><h4>tmux</h4><span class="chip ok">wajib</span></div><p>Migrasi, restore, pindah server selalu di sesi tmux bernama. Aplikasi tidak pernah di tmux.</p></div>
+    <div class="vc"><div class="top"><h4>Rahasia</h4><span class="chip ok">wajib</span></div><p>Tidak pernah di baris perintah, chat, atau git. Logout otomatis 15 menit.</p></div>
+    <div class="vc"><div class="top"><h4>Larangan</h4><span class="chip bad">jangan</span></div><p>fail2ban di VPS NAT, restart ssh saat menguji, mengubah firewall tanpa pembatal otomatis.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="backup"><div class="in">
+  <div class="sec-head"><div><div class="eb">07</div><h2>Backup dan pemulihan darurat</h2><p>Target: data hilang paling lama 5 menit, layanan kembali dalam 1 jam di VPS cadangan.</p></div></div>
+  <div class="kpis">
+    <div class="kpi"><div class="k">Data hilang maks.</div><div class="v">5 mnt</div><div class="d">WAL terus ke R2</div></div>
+    <div class="kpi"><div class="k">Pulih maks.</div><div class="v">1 jam</div><div class="d">di VPS cadangan</div></div>
+    <div class="kpi"><div class="k">Backup lokal</div><div class="v">7 hari</div><div class="d">SSD 200 GB</div></div>
+    <div class="kpi"><div class="k">Backup R2</div><div class="v">30 hari</div><div class="d">+ bulanan ke 2 tempat</div></div>
+  </div>
+  <p class="small muted" style="margin-top:12px">Pindah ke cadangan: pulihkan backup → nyalakan stack → pindahkan hostname dari tunnel utama ke tunnel cadangan. DNS tidak perlu diubah. Latihan pemulihan dijadwalkan rutin.</p>
+</div></section>
+
+<section class="sec" id="ai"><div class="in">
+  <div class="sec-head"><div><div class="eb">08</div><h2>AI dan chatbot</h2></div></div>
+  <div class="g2">
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Pembuatan konten</h3><p class="small">Memakai kunci Gemini milik guru (gratis, dirotasi). Guru tidak menulis prompt. Tidak ada data pribadi murid di prompt.</p></div>
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Chatbot (kunci pemilik)</h3><ul class="clean small"><li><strong>Tanya jawab sistem:</strong> cara pakai, kurikulum dan regulasi dengan sumber, saran singkat di halaman konten.</li><li><strong>Chatbot sekolah:</strong> data sekolah (kehadiran, nilai) untuk staf, kepsek, pengawas, sesuai persetujuan sekolah–orang tua.</li><li>Kuota per paket langganan + batas biaya bulanan.</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="bisnis"><div class="in">
+  <div class="sec-head"><div><div class="eb">09</div><h2>Pembayaran dan domain</h2></div></div>
+  <div class="g2">
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Pembayaran</h3><ul class="clean small"><li><strong>Tahap 1:</strong> QRIS statis usaha mikro dari bank, nominal + kode unik, konfirmasi manual.</li><li><strong>Tahap 2:</strong> QRIS dinamis lewat agregator yang menerima usaha perorangan (NIB).</li></ul></div>
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Domain</h3><ul class="clean small"><li><code>sigrak.com</code> pemasaran (Framer)</li><li><code>app.</code> satu aplikasi semua jenjang · <code>ujian.</code> · <code>admin.</code></li><li>Tanpa Firebase; notifikasi lewat Web Push (PWA)</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="fondasi"><div class="in">
+  <div class="sec-head"><div><div class="eb">10</div><h2>Fondasi Arumi</h2><p>SIGRAK mengikuti aturan bersama Fondasi, dengan penyesuaian sendiri. Pembaruan Fondasi dikerjakan pemilik nanti; repo ini hanya mencatat kekurangannya.</p></div></div>
+  <div class="tw"><table>
+    <thead><tr><th>Pengecualian SIGRAK</th><th>Aturan Fondasi</th><th>Pilihan SIGRAK</th></tr></thead>
+    <tbody>
+      <tr><td>Data referensi</td><td>fondasi-sync otomatis</td><td>Salinan sendiri, cek bila diminta (D-401)</td></tr>
+      <tr><td>Ikon</td><td>Lucide</td><td>Hugeicons Pro (D-402)</td></tr>
+      <tr><td>Backup lokal</td><td>14 hari</td><td>7 hari + 30 hari R2 (D-404)</td></tr>
+      <tr><td>Asisten AI</td><td>hanya konten aplikasi</td><td>Chatbot sekolah dengan data sekolah (D-394)</td></tr>
+      <tr><td>Skrip server</td><td>Ubuntu 24.04</td><td>Ubuntu 26.04: perlu pembaruan Fondasi nanti</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="sec" id="rencana"><div class="in">
+  <div class="sec-head"><div><div class="eb">11</div><h2>Rencana fase R</h2><p>Gerbang dengan pemilik setelah R0 sebelum R1 dimulai.</p></div></div>
+  <div class="road">
+    <div class="lane"><div class="h"><h4>R0 · fondasi</h4><span class="chip info plain">berjalan</span></div><ul>
+      <li>✓ Keputusan, audit Fondasi, hapus Laravel</li><li>✓ Dasar Fondasi, dokumen bersih</li><li>✓ Bahasa Inggris D-410, environment cloud</li><li>✓ Panduan server</li><li>✓ Kerangka AdonisJS (R0-05)</li><li>✓ Keputusan versi dan server (R0-11)</li><li>✓ Hapus sisa Laravel (R0-10)</li><li>○ Uji AI + SSE, Typst, k6</li></ul></div>
+    <div class="lane"><div class="h"><h4>R1 · inti</h4><span class="chip plain" style="color:var(--muted);background:var(--surface-2)">rencana</span></div><ul><li>Multi-sekolah + RLS</li><li>Login, undangan, peran</li><li>Tahun ajaran, kelas, kurikulum</li><li>Kalender, jadwal</li></ul></div>
+    <div class="lane"><div class="h"><h4>R2 · konsol staf</h4><span class="chip plain" style="color:var(--muted);background:var(--surface-2)">rencana</span></div><ul><li>Konsol baru di admin.</li><li>Peran dan cakupan staf</li></ul></div>
+    <div class="lane"><div class="h"><h4>R3–R5</h4><span class="chip plain" style="color:var(--muted);background:var(--surface-2)">rencana</span></div><ul><li>R3 infrastruktur dan pemulihan</li><li>R4 dokumen stack baru</li><li>R5 fitur guru, kepsek, pengawas; TKA terakhir</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="rekomendasi"><div class="in">
+  <div class="sec-head"><div><div class="eb">12</div><h2>Rekomendasi tambahan: sebelum peluncuran</h2><p>Daftar lengkap dengan kolom keputusan di <code>docs/server/rekomendasi-tambahan.md</code>. Ini yang paling penting. Centang = setuju (tersimpan di browser ini; keputusan resmi tetap ditulis ke repo).</p></div></div>
+  <div class="steps" data-store="hb-rekomendasi">
+    <label class="step"><input type="checkbox"><div><h4>Ubuntu Pro (gratis 5 mesin)</h4><p>Patch kernel tanpa reboot</p></div><span class="t">S</span></label>
+    <label class="step"><input type="checkbox"><div><h4>WAF + rate limit Cloudflare, branch protection</h4><p>Serangan berhenti di tepi; CI wajib hijau</p></div><span class="t">S</span></label>
+    <label class="step"><input type="checkbox"><div><h4>Renovate, Trivy, gitleaks</h4><p>Pembaruan otomatis, pindai celah, tolak rahasia di commit</p></div><span class="t">S</span></label>
+    <label class="step"><input type="checkbox"><div><h4>PgBouncer + penyetelan PostgreSQL + cache Cloudflare</h4><p>Database tetap ringan dengan banyak salinan aplikasi</p></div><span class="t">M</span></label>
+    <label class="step"><input type="checkbox"><div><h4>Pemantau luar, Healthchecks.io, peringatan Telegram</h4><p>Tahu bila situs mati atau backup tidak jalan</p></div><span class="t">S</span></label>
+    <label class="step"><input type="checkbox"><div><h4>Latihan pemulihan otomatis + Object Lock</h4><p>Backup terbukti bisa dipakai dan tidak bisa dihapus penyusup</p></div><span class="t">M</span></label>
+    <label class="step"><input type="checkbox"><div><h4>SPF/DKIM/DMARC, chrony, runbook insiden</h4><p>Email tidak masuk spam, jam server tepat, langkah darurat tertulis</p></div><span class="t">S</span></label>
+  </div>
+</div></section>
+
+<section class="sec" id="versi"><div class="in">
+  <div class="sec-head"><div><div class="eb">13</div><h2>Versi aplikasi dan changelog</h2><p><span class="chip ok">sudah diputuskan: CalVer (D-420)</span></p></div></div>
+  <div class="g2">
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Penomoran versi</h3><ul class="clean small">
+      <li><strong>CalVer</strong> <code>TAHUN.BULAN.PERBAIKAN</code>: <code>2027.1.0</code> untuk rilis pertama Januari 2027, <code>2027.1.1</code> untuk perbaikan, <code>2027.2.0</code> untuk rilis bulan berikutnya.</li>
+      <li>Rilis diberi tag git <code>v2027.1.0</code>; image Docker diberi tag versi + hash commit 12 karakter.</li>
+      <li>Versi tampil di kaki aplikasi dan di <code>/healthz</code>, supaya laporan bug jelas versinya.</li>
+      <li>Alat rilis kecil (GitHub Action) menghitung versi berikutnya dari tanggal dan tag terakhir, lalu membuka PR rilis. Dibangun di R3.</li></ul></div>
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Dua changelog</h3><ul class="clean small">
+      <li><code>CHANGELOG.md</code> (Inggris, teknis): dibuat dari Conventional Commits, per rilis, untuk pengembang.</li>
+      <li><strong>"Apa yang baru"</strong> di aplikasi (Indonesia, bahasa sederhana): untuk guru dan kepsek, hanya hal yang terasa bagi mereka.</li>
+      <li>Data kurikulum tetap punya versi sendiri (mis. <code>SIGRAK-SD-2026-R1</code>).</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="terbuka"><div class="in">
+  <div class="sec-head"><div><div class="eb">14</div><h2>Belum diputuskan</h2></div></div>
+  <div class="dec">
+    <div class="dq"><div class="h"><span class="k">T1</span><h4>Bolehkah orang tua memakai chatbot sekolah?</h4></div><p class="small muted">Saat ini murid dan orang tua belum menjadi pengguna.</p></div>
+    <div class="dq"><div class="h"><span class="k">T2</span><h4>Penyedia AI mana yang boleh menerima data sekolah, dengan syarat apa?</h4></div><p class="small muted">Apakah nama murid harus disamarkan dulu sebelum dikirim.</p></div>
+    <div class="dq"><div class="h"><span class="k">T3</span><h4>Backup terenkripsi di luar Indonesia (R2, penyedia kedua)</h4></div><p class="small muted">Perlu cek pengacara untuk klien sekolah negeri.</p></div>
+    <div class="dq"><div class="h"><span class="k">T5</span><h4>Rekomendasi tambahan mana yang dipakai?</h4></div><p class="small muted">Lihat bagian 12 dan <code>docs/server/rekomendasi-tambahan.md</code>.</p></div>
+    <div class="dq"><div class="h"><span class="k">T6</span><h4>Tindakan pemilik</h4></div><p class="small muted">Pastikan repo sinaubareng benar-benar privat · hapus branch yang sudah di-merge · cek image Ubuntu 26.04 di IDCloudHost · unggah Hugeicons Pro · konfirmasi brief 001 (rapat KKG).</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="riwayat"><div class="in">
+  <div class="sec-head"><div><div class="eb">15</div><h2>Riwayat handbook</h2></div></div>
+  <ul class="clean small">
+    <li><strong>v4 · 27 Nov 2026:</strong> pnpm menggantikan npm (D-422): versi dikunci, skrip instalasi hanya untuk paket yang diizinkan, versi baru menunggu satu hari.</li>
+    <li><strong>v3 · 27 Nov 2026:</strong> keputusan D-412…D-421 dicatat (versi, Ubuntu 26.04, nginx, Compose, akses server, tmux, bahasa panduan, Fondasi); versi aplikasi diputuskan CalVer; kerangka R0-05 selesai.</li>
+    <li><strong>v2 · 27 Nov 2026:</strong> R0-10 diluruskan: yang dihapus hanya sisa Laravel (D-411); konten SIGRAK dan keputusan aplikasi lama tetap.</li>
+    <li><strong>v1 · 27 Nov 2026:</strong> handbook dibuat: keputusan perombakan, stack dan versi, arsitektur, server, Docker dan core, akses, backup, AI, bisnis, Fondasi, rencana R, rekomendasi, usulan versi.</li>
+  </ul>
+</div></section>
+
+</main>
+
+<footer><div class="in">SIGRAK · handbook pribadi pemilik · sumber: <code>docs/handbook/index.html</code> di repo arumiforge/sinaubareng. Rincian teknis: <code>docs/agent/</code>, <code>docs/server/</code>.</div></footer>
+
+<script>
+(function(){
+  function get(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return {}}}
+  function set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  document.querySelectorAll('.steps[data-store]').forEach(function(box){
+    var key=box.getAttribute('data-store'), st=get(key);
+    box.querySelectorAll('.step').forEach(function(step,i){
+      var cb=step.querySelector('input');
+      cb.checked=!!st[i]; step.classList.toggle('done',cb.checked);
+      cb.addEventListener('change',function(){st[i]=cb.checked;set(key,st);step.classList.toggle('done',cb.checked);});
+    });
+  });
+  var links=[].slice.call(document.querySelectorAll('#navlinks a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)});}})},{rootMargin:'-40% 0px -55% 0px'});
+    secs.forEach(function(s){io.observe(s)});
+  }
+})();
+</script>
+</body>
+</html>

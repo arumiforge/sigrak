@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Rejects AI attribution in commit messages and any author or committer other than the owner.
+# Arumi Studios is the sole contributor (CLAUDE.md, D-148; Fondasi F-009).
+# Enabled by `git config --local core.hooksPath .githooks` (.claude/hooks/session-start.sh does this).
+msg_file="$1"
+forbidden='^(co-authored-by:|claude-session:)|generated (with|by) \[?(claude|codex|chatgpt|openai|copilot)|claude\.ai/code|chatgpt\.com/codex|noreply@anthropic\.com'
+if grep -qiE "$forbidden" "$msg_file"; then
+  echo "commit-msg: AI attribution lines are not allowed in this repository." >&2
+  echo "Remove Co-Authored-By / Claude-Session / 'Generated with' lines and commit again." >&2
+  exit 1
+fi
+# `git var` also sees --author and GIT_AUTHOR_* / GIT_COMMITTER_* overrides, not only user.name/user.email.
+for role in AUTHOR COMMITTER; do
+  ident="$(git var "GIT_${role}_IDENT" | sed -E 's/ [0-9]+ [+-][0-9]{4}$//')"
+  if [ "$ident" != "Arumi Studios <arumiforge@gmail.com>" ]; then
+    echo "commit-msg: ${role,,} must be 'Arumi Studios <arumiforge@gmail.com>' (got '$ident')." >&2
+    echo "Run: git config --local user.name \"Arumi Studios\" && git config --local user.email \"arumiforge@gmail.com\"" >&2
+    exit 1
+  fi
+done
+exit 0
