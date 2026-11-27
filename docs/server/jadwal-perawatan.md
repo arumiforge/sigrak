@@ -6,7 +6,7 @@ Bila sebuah pemeriksaan menemukan masalah, pindah ke [runbook-insiden.md](runboo
 
 ## Waktu yang aman untuk perawatan
 
-Sekolah memakai SIGRAK pada jam pelajaran. Pekerjaan yang bisa mengganggu (reboot, upgrade Docker atau PostgreSQL, deploy besar) dikerjakan di `<jendela perawatan resmi>`.
+Sekolah memakai SIGRAK pada jam pelajaran. Pekerjaan yang bisa mengganggu (reboot, upgrade Docker atau PostgreSQL, deploy besar) dikerjakan di jendela perawatan resmi: **Sabtu, 21.00–23.00 WIB** (D-465).
 
 Hindari juga:
 
@@ -14,7 +14,7 @@ Hindari juga:
 - minggu penyusunan dan pembagian rapor (biasanya Desember dan Juni);
 - minggu pertama tahun ajaran baru (Juli).
 
-Perawatan yang terlihat oleh pengguna diumumkan dulu di halaman status ([halaman-status.md](halaman-status.md)).
+Perawatan yang terlihat oleh pengguna diumumkan di halaman status **2 hari sebelumnya** ([halaman-status.md](halaman-status.md)).
 
 ## Ringkasan
 
@@ -26,7 +26,7 @@ Perawatan yang terlihat oleh pengguna diumumkan dulu di halaman status ([halaman
 | Tiga bulan    | Lynis, latihan pindah ke VPS cadangan, tinjau aturan WAF, kapasitas, dan akun di GitHub/Cloudflare                              | setengah hari |
 | Setiap tahun  | tinjau versi besar, perpanjangan domain, target pemulihan, jadwal ini sendiri                                                   | 1 hari        |
 
-Catat setiap pemeriksaan bulanan, tiga bulanan, dan tahunan di `<tempat log perawatan>`: tanggal, siapa, hasil, tindak lanjut.
+Catat setiap pemeriksaan bulanan, tiga bulanan, dan tahunan di proyek **"Ops"** di `sigrak-plane` (D-440, D-465), satu kartu per perawatan: tanggal, siapa, hasil, tindak lanjut. Kartu tidak boleh berisi rahasia (kunci, password, token, isi `stack.env`) atau data pribadi.
 
 ## Setiap hari
 
@@ -181,8 +181,6 @@ sudo ausearch -k <kunci aturan auditd> --start this-month | tail -50
 
 | Tanda                                                                                           | Diisi oleh                                           |
 | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `<jendela perawatan resmi>` (hari dan jam WIB)                                                  | pemilik (usulan: Sabtu atau Minggu, 21.00–23.00 WIB) |
-| `<tempat log perawatan>`                                                                        | pemilik                                              |
 | `<tempat laporan latihan pemulihan>`                                                            | pengembang (R3, skrip latihan)                       |
 | `<cara membuat salinan bulanan>` ke disk pemilik dan penyedia kedua                             | pengembang (R3) dan pemilik (memilih penyedia kedua) |
 | `<kunci aturan auditd>`                                                                         | pengembang (R3, aturan auditd)                       |
