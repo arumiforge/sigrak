@@ -2271,3 +2271,12 @@ Accepted · 2026-11-28 · RS-06 · owner's choice (interview 2026-11-28) · answ
 - **Parent notice template:** SIGRAK gives schools a template notice and agreement for parents for the school chatbot (F-023, D-394).
 - **Public chatbot log:** visitors' typed questions are kept for 30 days to improve answers, then deleted; numbers such as NIK and phone numbers are masked before storage (default until the owner says otherwise).
 Reason: legal and commercial terms are settled offline; the template and a short log serve schools and answer quality.
+
+### D-461 — Plane integration: remaining small choices
+Accepted · 2026-11-28 · RS-07 · owner's choice (interview 2026-11-28) · refines D-453…D-455; design in `docs/drafts/plane-integration.md`
+- **Pengawas reports:** the pengawas picks the related Sekolah Binaan (optional, one or more); the school name then goes to Plane with its kecamatan and kabupaten/kota. Without a pick, the kecamatan where most of their Sekolah Binaan are is sent, without a school name.
+- **Visible stages:** reporters see all eight stages, including "Menunggu giliran" and "Diuji coba", and are notified at each (D-453).
+- **Notifications:** the 10-minute settle window, the single "Kami pelajari lagi" notice when a card leaves Tidak dilanjutkan, and the held not-pursued notice with a daily "Perlu alasan" reminder to the team stay as drafted.
+- **Kirim Masukan limits:** idea 20–2,000 characters, benefit up to 1,000, as drafted.
+- **Deleted accounts:** when a reporter's account is deleted, the user link is cleared but the school name stays on the Plane card and in later pushes (it belongs to the school, not to the person).
+Reason: owner's choices on the points left open after D-453.
