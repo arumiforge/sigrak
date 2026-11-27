@@ -1,0 +1,4 @@
+# Own workspace root: pnpm stops at the nearest pnpm-workspace.yaml, so this
+# folder never joins the repository's root workspace or its lockfile.
+# Same supply-chain rule as the root (D-422).
+minimumReleaseAge: 1440

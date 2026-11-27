@@ -1,0 +1,58 @@
+{
+  "measured_at": "2026-11-27T14:47:23.336Z",
+  "typst": "typst 0.15.1 (9dfd3a08)",
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "cpu_count": 4,
+  "note": "Wall time of one `typst compile` process per render (process start, font scan, compile, PDF write).",
+  "results": [
+    {
+      "pdf": "rpm-a4.pdf",
+      "runs": 15,
+      "median_ms": 71,
+      "min_ms": 59,
+      "max_ms": 98
+    },
+    {
+      "pdf": "rpm-f4.pdf",
+      "runs": 15,
+      "median_ms": 67,
+      "min_ms": 55,
+      "max_ms": 84
+    },
+    {
+      "pdf": "rpm-a4-times.pdf",
+      "runs": 15,
+      "median_ms": 68,
+      "min_ms": 57,
+      "max_ms": 77
+    },
+    {
+      "pdf": "lkpd-a4.pdf",
+      "runs": 15,
+      "median_ms": 55,
+      "min_ms": 46,
+      "max_ms": 96
+    },
+    {
+      "pdf": "lkpd-f4.pdf",
+      "runs": 15,
+      "median_ms": 52,
+      "min_ms": 47,
+      "max_ms": 87
+    },
+    {
+      "pdf": "arab-a4.pdf",
+      "runs": 15,
+      "median_ms": 50,
+      "min_ms": 39,
+      "max_ms": 64
+    },
+    {
+      "pdf": "rumus-a4.pdf",
+      "runs": 15,
+      "median_ms": 122,
+      "min_ms": 106,
+      "max_ms": 139
+    }
+  ]
+}

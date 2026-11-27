@@ -1,0 +1,121 @@
+{
+  "measured_at": "2026-11-27T14:47:09.405Z",
+  "browser": "Chromium 158.0.8127.36",
+  "host_cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "note": "Emulated phone (CDP CPU throttling + phone viewport + throttled network), not a real device. Times are medians of the repeats.",
+  "sizes": {
+    "wasm_raw_mb": 28.8,
+    "wasm_gzip9_mb": 10.5,
+    "wasm_brotli9_mb": 8.3
+  },
+  "profiles": [
+    {
+      "profile": "desktop (no throttling)",
+      "cpu_throttling": 1,
+      "network": "local, no throttling",
+      "repeats": 3,
+      "first_visit_ready_ms": 276,
+      "returning_visit_ready_ms": 380,
+      "first_visit_wasm_init_ms": 132,
+      "returning_startup_ms": {
+        "wasm_init": 230,
+        "fonts": 52,
+        "project_and_latex": 17
+      },
+      "wasm_memory_mb": 36,
+      "rpm": {
+        "first_render_ms": 112,
+        "paper_switch_ms": 41,
+        "edit_render_median_ms": 9,
+        "edit_render_max_ms": 12
+      },
+      "lkpd": {
+        "first_render_ms": 24,
+        "paper_switch_ms": 21,
+        "edit_render_median_ms": 6,
+        "edit_render_max_ms": 12
+      }
+    },
+    {
+      "profile": "phone, CPU 4x slower",
+      "cpu_throttling": 4,
+      "network": "9 Mbit/s down, 150 ms latency",
+      "repeats": 3,
+      "first_visit_ready_ms": 15150,
+      "returning_visit_ready_ms": 1046,
+      "first_visit_wasm_init_ms": 10263,
+      "returning_startup_ms": {
+        "wasm_init": 581,
+        "fonts": 127,
+        "project_and_latex": 51
+      },
+      "wasm_memory_mb": 36,
+      "rpm": {
+        "first_render_ms": 441,
+        "paper_switch_ms": 187,
+        "edit_render_median_ms": 44,
+        "edit_render_max_ms": 67
+      },
+      "lkpd": {
+        "first_render_ms": 89,
+        "paper_switch_ms": 92,
+        "edit_render_median_ms": 30,
+        "edit_render_max_ms": 38
+      }
+    },
+    {
+      "profile": "phone, CPU 6x slower (low-end)",
+      "cpu_throttling": 6,
+      "network": "9 Mbit/s down, 150 ms latency",
+      "repeats": 3,
+      "first_visit_ready_ms": 15233,
+      "returning_visit_ready_ms": 1513,
+      "first_visit_wasm_init_ms": 10301,
+      "returning_startup_ms": {
+        "wasm_init": 839,
+        "fonts": 225,
+        "project_and_latex": 75
+      },
+      "wasm_memory_mb": 36,
+      "rpm": {
+        "first_render_ms": 592,
+        "paper_switch_ms": 250,
+        "edit_render_median_ms": 67,
+        "edit_render_max_ms": 88
+      },
+      "lkpd": {
+        "first_render_ms": 143,
+        "paper_switch_ms": 153,
+        "edit_render_median_ms": 42,
+        "edit_render_max_ms": 71
+      }
+    },
+    {
+      "profile": "phone, CPU 10x slower (worst case)",
+      "cpu_throttling": 10,
+      "network": "9 Mbit/s down, 150 ms latency",
+      "repeats": 3,
+      "first_visit_ready_ms": 15792,
+      "returning_visit_ready_ms": 2359,
+      "first_visit_wasm_init_ms": 10566,
+      "returning_startup_ms": {
+        "wasm_init": 1407,
+        "fonts": 350,
+        "project_and_latex": 106
+      },
+      "wasm_memory_mb": 36,
+      "rpm": {
+        "first_render_ms": 1114,
+        "paper_switch_ms": 479,
+        "edit_render_median_ms": 136,
+        "edit_render_max_ms": 206
+      },
+      "lkpd": {
+        "first_render_ms": 278,
+        "paper_switch_ms": 305,
+        "edit_render_median_ms": 82,
+        "edit_render_max_ms": 106
+      }
+    }
+  ]
+}

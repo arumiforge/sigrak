@@ -1,0 +1,60 @@
+{
+  "kind": "lkpd",
+  "title": "Lembar Kerja Peserta Didik (LKPD)",
+  "short_title": "LKPD Bahasa Arab Kelas 1 · Perkenalan",
+  "school": "MI Contoh Nurul Ilmi",
+  "subject": "Bahasa Arab",
+  "class": "1",
+  "topic": "Perkenalan",
+  "topic_ar": "التَّعَارُفُ",
+  "pattern": "fill_table",
+  "goal": {
+    "code": "SIGRAK-MI-2026-R1-BAR-K1-01-TP02",
+    "text": "Murid mampu menggunakan pola kalimat sederhana tentang perkenalan dalam percakapan."
+  },
+  "instructions": [
+    "Tulis nama dan kelasmu di kotak atas.",
+    "Kerjakan bagian A sampai D secara berurutan.",
+    "Baca kalimat bahasa Arab dengan suara pelan bersama teman sebangku."
+  ],
+  "blocks": [
+    {
+      "type": "trace",
+      "title": "A. Tebalkan huruf hijaiyah berikut.",
+      "letters": ["ا", "بَ", "تِ", "ثُ", "جَ", "حِ", "خُ"]
+    },
+    {
+      "type": "match_lines",
+      "title": "B. Tarik garis dari kalimat bahasa Arab ke artinya.",
+      "left": ["مَا اسْمُكَ؟", "اِسْمِيْ أَحْمَدُ", "هُوَ أَبِيْ", "هِيَ أُمِّيْ", "هٰذِهِ مَدْرَسَةٌ"],
+      "right": [
+        "Dia ayahku",
+        "Ini sekolah",
+        "Siapa namamu? (laki-laki)",
+        "Dia ibuku",
+        "Namaku Ahmad"
+      ]
+    },
+    {
+      "type": "fill_table",
+      "title": "C. Lengkapi percakapan berikut dengan kata di dalam kotak.",
+      "word_bank": ["اسْمُكِ", "اِسْمِيْ", "هِيَ", "أُمِّيْ"],
+      "rows": [
+        ["أَحْمَدُ", "مَا ......... ؟"],
+        ["فَاطِمَةُ", "......... فَاطِمَةُ"],
+        ["أَحْمَدُ", "مَنْ ......... ؟"],
+        ["فَاطِمَةُ", "هِيَ ........."]
+      ]
+    },
+    {
+      "type": "short_answer",
+      "title": "D. Jawablah pertanyaan berikut dalam bahasa Arab.",
+      "items": [{ "ar": "مَا اسْمُكَ؟" }, { "ar": "مَنْ هُوَ؟", "hint": "tunjuk gambar ayah" }]
+    }
+  ],
+  "reflection": [
+    "Saya bisa menanyakan nama teman dalam bahasa Arab.",
+    "Saya bisa menyebut nama saya dalam bahasa Arab.",
+    "Saya bisa mengenalkan ayah dan ibu dalam bahasa Arab."
+  ]
+}
