@@ -33,7 +33,11 @@ link_node_bins() {
     for dir in /usr/local/bin "${HOME:-/root}/.local/bin"; do
         mkdir -p "$dir"
         for b in node npm npx corepack pnpm pnpx; do
-            if [ -x "$NODE_BIN/$b" ]; then ln -sf "$NODE_BIN/$b" "$dir/$b"; fi
+            if [ -x "$NODE_BIN/$b" ]; then
+                ln -sf "$NODE_BIN/$b" "$dir/$b"
+            elif [ -L "$dir/$b" ] && [ ! -e "$dir/$b" ]; then
+                rm -f "$dir/$b"   # dangling, e.g. corepack, which Node 25+ no longer ships
+            fi
         done
     done
     return 0
