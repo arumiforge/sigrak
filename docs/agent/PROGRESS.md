@@ -118,7 +118,7 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). Gate wit
 | R0-05 | Spike: AdonisJS 7 + Inertia React skeleton, three guards on three hostnames, `/kalender`, CI | done (PR #87) | r0/r0-05-spike-skeleton | R0-01 | `tasks/R0-05-spike-skeleton.md` |
 | R0-06 | Spike: BullMQ AI job with SSE progress | review (D-451) | igi/dazzling-franklin-5i1w8n | R0-05 | `tasks/R0-06-spike-ai-job-sse.md` |
 | R0-07 | Spike: Typst PDF, two weeks (D-399) | done; Typst accepted (D-450) | igi/dazzling-franklin-5i1w8n | R0-01 | `tasks/R0-07-spike-typst-pdf.md` |
-| R0-08 | Spike: light k6 run and R1 gate report | todo | — | R0-05…R0-07 | `tasks/R0-08-spike-load-gate.md` |
+| R0-08 | Spike: light k6 run and R1 gate report | in-progress | rs/rs-18-layers-r0-08-gate | R0-05…R0-07 | `tasks/R0-08-spike-load-gate.md` |
 | R0-09 | Cloud environment for the new stack: setup script (Node 24, PostgreSQL 18 + pgvector, Redis, Typst, k6) and settings doc | done (PR #85) | r0/r0-09-cloud-environment | R0-01 | `.claude/cloud/setup.sh`, `docs/agent/cloud-environment.md` |
 | R0-10 | Remove the remaining Laravel material; everything starts on the new stack (D-411) | done (PR #86) | r0/r0-10-remove-laravel-remnants | R0-03 | `tasks/R0-10-remove-laravel-remnants.md` |
 | R0-11 | Version and server decisions D-412…D-421; Node 26 + PostgreSQL 19 in the app, CI, compose and cloud setup | done (PR #91) | r0/r0-11-version-and-server-decisions | R0-05 | `tasks/R0-11-version-and-server-decisions.md` |

@@ -1,8 +1,8 @@
 # R0-08 — Spike: light k6 run and gate report
 
 - **Phase:** R0
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** rs/rs-18-layers-r0-08-gate
 - **Depends on:** R0-05, R0-06, R0-07
 - **Can run in parallel with:** —
 
