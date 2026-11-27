@@ -261,7 +261,7 @@ label.step{cursor:pointer}
 <body>
 <header class="hero">
   <div class="in">
-    <div class="kicker"><span class="dot"></span>Handbook pribadi pemilik · diperbarui 27 Nov 2026 · versi 4</div>
+    <div class="kicker"><span class="dot"></span>Handbook pribadi pemilik · diperbarui 27 Nov 2026 · versi 5</div>
     <h1>Handbook SIGRAK: stack dan server</h1>
     <p class="lede">Ringkasan semua keputusan perombakan total: stack baru, server, akses, backup, AI, dan rencana kerja. Untuk dibaca dan diputuskan pemilik. Isi pendidikan SIGRAK (kurikulum, fitur guru) menyusul di bagian lain nanti.</p>
     <div class="specs">
@@ -271,27 +271,27 @@ label.step{cursor:pointer}
       <a class="vt" href="#keputusan"><div class="l">Arah</div><div class="v">Perombakan total</div><div class="s">Laravel dihapus. Dibangun ulang dengan stack baru, satu aplikasi untuk semua jenjang, mulai dari SD/MI.</div></a>
       <a class="vt" href="#server"><div class="l">Server</div><div class="v">1 VPS + cadangan</div><div class="s">Produksi dan staging di satu VPS, VPS cadangan siap dipulihkan dari backup.</div></a>
       <a class="vt" href="#backup"><div class="l">Pulih</div><div class="v">≤ 5 mnt data, ≤ 1 jam</div><div class="s">Backup WAL terus-menerus ke R2, salinan bulanan ke disk pribadi dan penyedia kedua.</div></a>
-      <a class="vt" href="#rencana"><div class="l">Tahap sekarang</div><div class="v">R0: fondasi dan uji coba</div><div class="s">Kerangka aplikasi jadi. Berikutnya: hapus aplikasi lama, uji AI, PDF Typst, uji beban, lalu gerbang R1.</div></a>
+      <a class="vt" href="#rencana"><div class="l">Tahap sekarang</div><div class="v">R0: fondasi dan uji coba</div><div class="s">Kerangka aplikasi jadi, repo pindah ke <code>arumiforge/sigrak</code>. Berikutnya: uji AI, PDF Typst, uji beban, lalu gerbang R1.</div></a>
     </div>
   </div>
 </header>
 
 <nav class="nav" aria-label="Bagian">
   <div class="in" id="navlinks">
-    <a href="#keputusan">Keputusan</a><a href="#stack">Stack &amp; versi</a><a href="#arsitektur">Arsitektur</a><a href="#server">Server</a><a href="#docker">Docker &amp; core</a><a href="#akses">Akses aman</a><a href="#backup">Backup</a><a href="#ai">AI &amp; chatbot</a><a href="#bisnis">Bayar &amp; domain</a><a href="#fondasi">Fondasi</a><a href="#rencana">Rencana</a><a href="#rekomendasi">Rekomendasi</a><a href="#versi">Versi &amp; changelog</a><a href="#terbuka">Belum diputuskan</a><a href="#riwayat">Riwayat</a>
+    <a href="#keputusan">Keputusan</a><a href="#stack">Stack &amp; versi</a><a href="#arsitektur">Arsitektur</a><a href="#server">Server</a><a href="#docker">Docker &amp; core</a><a href="#akses">Akses aman</a><a href="#backup">Backup</a><a href="#ai">AI &amp; chatbot</a><a href="#bisnis">Bayar &amp; domain</a><a href="#fondasi">Fondasi</a><a href="#rencana">Rencana</a><a href="#rekomendasi">Operasional</a><a href="#versi">Versi &amp; changelog</a><a href="#produk">Situs &amp; tim</a><a href="#terbuka">Belum diputuskan</a><a href="#riwayat">Riwayat</a>
   </div>
 </nav>
 
 <main>
 
 <section class="sec" id="keputusan"><div class="in">
-  <div class="sec-head"><div><div class="eb">01</div><h2>Keputusan yang sudah diambil</h2><p>Semua dicatat di <code>docs/agent/DECISIONS.md</code>. Keputusan 27 November 2026 setelah D-410 dicatat sebagai D-411…D-421.</p></div></div>
+  <div class="sec-head"><div><div class="eb">01</div><h2>Keputusan yang sudah diambil</h2><p>Semua dicatat di <code>docs/agent/DECISIONS.md</code>. Keputusan 27 November 2026 setelah D-410 dicatat sebagai D-411…D-440. Log ini dirampingkan sebelum rilis produksi pertama (D-433).</p></div></div>
   <div class="tw"><table>
     <thead><tr><th>Area</th><th>Keputusan</th><th>Catatan</th></tr></thead>
     <tbody>
       <tr><td><strong>Backend</strong></td><td>AdonisJS 7, monolit modular, TypeScript strict</td><td>D-388. NestJS gugur (tidak ada aplikasi mobile atau API publik)</td></tr>
       <tr><td><strong>Frontend</strong></td><td>React 19 + Inertia, tanpa SSR untuk aplikasi</td><td>D-389. Halaman publik (masuk, privasi, panduan) dirender server</td></tr>
-      <tr><td><strong>UI</strong></td><td>Tailwind 4 + shadcn/ui, desain kaya identitas, aset dari Codex</td><td>D-390. Ikon Hugeicons Pro (lisensi pemilik, D-402)</td></tr>
+      <tr><td><strong>UI</strong></td><td>Tailwind 4 + shadcn/ui, desain kaya identitas, aset dari Codex</td><td>D-390. Ikon Hugeicons Pro, hanya Rounded Stroke dan Rounded Solid (D-402, D-434). Blok shadcn/studio Pro varian <code>radix</code>, digaya ulang; ProUI dan Aceternity tidak dipakai (D-434)</td></tr>
       <tr><td><strong>Database</strong></td><td>PostgreSQL 19 + pgvector</td><td>D-398, versi 19 dari D-412. RLS sebagai dinding kedua antar sekolah</td></tr>
       <tr><td><strong>PDF</strong></td><td>Typst setelah uji 2 minggu, Gotenberg cadangan</td><td>D-399. A4 bawaan + F4</td></tr>
       <tr><td><strong>Server</strong></td><td>VPS 12 vCPU / 32 GB / 200 GB, Ubuntu 26.04, Docker, cloudflared</td><td>D-391, Ubuntu 26.04 dari D-413. Staging di VPS yang sama, VPS cadangan dingin</td></tr>
@@ -304,6 +304,14 @@ label.step{cursor:pointer}
       <tr><td><strong>Pembekuan fitur</strong></td><td>±8–12 minggu sejak 27 Nov 2026</td><td>D-406. Kurasi data tetap jalan</td></tr>
       <tr><td><strong>Cakupan</strong></td><td>SD/MI dulu; SMP/MTs diputuskan setelah SD/MI selesai</td><td>D-396</td></tr>
       <tr><td><strong>Laravel</strong></td><td>Tidak ada yang dipindahkan dari build Laravel; semua dibangun baru di stack baru</td><td>D-411 (R0-10). Konten SIGRAK, termasuk keputusan aplikasi lama D-252…D-328, tetap dan ditinjau bertahap</td></tr>
+      <tr><td><strong>Repo</strong></td><td><code>arumiforge/sigrak</code>, privat, riwayat bersih</td><td>D-423. Repo lama diarsipkan atau diprivatkan pemilik</td></tr>
+      <tr><td><strong>Situs pemasaran</strong></td><td><code>sigrak.com</code> dilayani aplikasi yang sama di VPS, dirender server</td><td>D-435. Menggantikan Framer. Grafana hanya acuan struktur, bukan desain</td></tr>
+      <tr><td><strong>Situs catatan</strong></td><td><code>note.sigrak.com</code> di Cloudflare Workers, di belakang Access</td><td>D-436. Satu-satunya pengecualian "semua di VPS": runbook harus terbaca saat VPS mati</td></tr>
+      <tr><td><strong>Email</strong></td><td>Gmail SMTP dulu; pengaturan integrasi di panel admin bila env kosong</td><td>D-431. Rahasia inti (database, <code>APP_KEY</code>, kunci backup) tetap di env</td></tr>
+      <tr><td><strong>Peta</strong></td><td>MapLibre + PMTiles; murid paling detail tingkat desa, angka di bawah 5 tampil "&lt;5"</td><td>D-437. Tanpa titik rumah. Menunggu data batas wilayah di Fondasi</td></tr>
+      <tr><td><strong>Masalah → solusi</strong></td><td>Tim Lapangan, Tim Kurikulum &amp; Riset (peran baru Peneliti), Tim Produk; forum dua mingguan</td><td>D-439. Pelapor diberi tahu saat masalahnya selesai</td></tr>
+      <tr><td><strong>Kanban</strong></td><td>Plane CE di VPS, bisa dimatikan total</td><td>D-440. Tanpa data pribadi; teks disamarkan sebelum dikirim</td></tr>
+      <tr><td><strong>HaKI</strong></td><td>Materi disiapkan sekarang, didaftarkan setelah PT berdiri</td><td>D-438. Merek SIGRAK sudah dicek bisa dipakai</td></tr>
       <tr><td><strong>Bahasa</strong></td><td>Panduan server bahasa Indonesia; perintah dan output bahasa Inggris</td><td>Dokumen teknis lain tetap bahasa Inggris</td></tr>
     </tbody>
   </table></div>
@@ -390,7 +398,7 @@ BullMQ     → worker-ai · worker-exports · worker-default · scheduler (1)</p
   <div class="vgrid">
     <div class="vc"><div class="top"><h4>SSH hanya kunci</h4><span class="chip ok">wajib</span></div><p>Ed25519 + passphrase. Satu orang satu kunci. Laptop hilang: hapus kuncinya hari itu juga.</p></div>
     <div class="vc"><div class="top"><h4>Jalan masuk kedua</h4><span class="chip ok">wajib</span></div><p>SSH lewat tunnel dan Cockpit di browser sebagai pengganti konsol penyedia. Port SSH langsung tetap terbuka.</p></div>
-    <div class="vc"><div class="top"><h4>Cloudflare Access</h4><span class="chip ok">wajib</span></div><p>Login PIN email untuk ssh-, konsol-, admin., staging. Dikelola lewat grup.</p></div>
+    <div class="vc"><div class="top"><h4>Cloudflare Access</h4><span class="chip ok">wajib</span></div><p>Login PIN email untuk ssh-, konsol-, admin., staging. Satu aplikasi "SIGRAK ops" untuk Portainer, Netdata, PgHero, Backrest, Uptime Kuma, GlitchTip, Plane (D-425). Dikelola lewat grup.</p></div>
     <div class="vc"><div class="top"><h4>tmux</h4><span class="chip ok">wajib</span></div><p>Migrasi, restore, pindah server selalu di sesi tmux bernama. Aplikasi tidak pernah di tmux.</p></div>
     <div class="vc"><div class="top"><h4>Rahasia</h4><span class="chip ok">wajib</span></div><p>Tidak pernah di baris perintah, chat, atau git. Logout otomatis 15 menit.</p></div>
     <div class="vc"><div class="top"><h4>Larangan</h4><span class="chip bad">jangan</span></div><p>fail2ban di VPS NAT, restart ssh saat menguji, mengubah firewall tanpa pembatal otomatis.</p></div>
@@ -405,7 +413,7 @@ BullMQ     → worker-ai · worker-exports · worker-default · scheduler (1)</p
     <div class="kpi"><div class="k">Backup lokal</div><div class="v">7 hari</div><div class="d">SSD 200 GB</div></div>
     <div class="kpi"><div class="k">Backup R2</div><div class="v">30 hari</div><div class="d">+ bulanan ke 2 tempat</div></div>
   </div>
-  <p class="small muted" style="margin-top:12px">Pindah ke cadangan: pulihkan backup → nyalakan stack → pindahkan hostname dari tunnel utama ke tunnel cadangan. DNS tidak perlu diubah. Latihan pemulihan dijadwalkan rutin.</p>
+  <p class="small muted" style="margin-top:12px">Pindah ke cadangan: pulihkan backup → nyalakan stack → pindahkan hostname dari tunnel utama ke tunnel cadangan. DNS tidak perlu diubah. Latihan pemulihan otomatis tiap bulan; sebelum VPS cadangan ada, backup dipulihkan ke kontainer PostgreSQL sementara di VPS yang sama lalu dihapus. Bucket backup dikunci (Object Lock) sesuai jadwal hapus backup. Backrest untuk melihat backup restic lewat browser (D-430).</p>
 </div></section>
 
 <section class="sec" id="ai"><div class="in">
@@ -420,7 +428,7 @@ BullMQ     → worker-ai · worker-exports · worker-default · scheduler (1)</p
   <div class="sec-head"><div><div class="eb">09</div><h2>Pembayaran dan domain</h2></div></div>
   <div class="g2">
     <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Pembayaran</h3><ul class="clean small"><li><strong>Tahap 1:</strong> QRIS statis usaha mikro dari bank, nominal + kode unik, konfirmasi manual.</li><li><strong>Tahap 2:</strong> QRIS dinamis lewat agregator yang menerima usaha perorangan (NIB).</li></ul></div>
-    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Domain</h3><ul class="clean small"><li><code>sigrak.com</code> pemasaran (Framer)</li><li><code>app.</code> satu aplikasi semua jenjang · <code>ujian.</code> · <code>admin.</code></li><li>Tanpa Firebase; notifikasi lewat Web Push (PWA)</li></ul></div>
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Domain</h3><ul class="clean small"><li><code>sigrak.com</code> pemasaran, dilayani aplikasi di VPS (D-435)</li><li><code>status.</code> halaman status Better Stack · <code>note.</code> catatan pribadi (D-436)</li><li><code>app.</code> satu aplikasi semua jenjang · <code>ujian.</code> · <code>admin.</code></li><li>Tanpa Firebase; notifikasi lewat Web Push (PWA)</li></ul></div>
   </div>
 </div></section>
 
@@ -450,15 +458,16 @@ BullMQ     → worker-ai · worker-exports · worker-default · scheduler (1)</p
 </div></section>
 
 <section class="sec" id="rekomendasi"><div class="in">
-  <div class="sec-head"><div><div class="eb">12</div><h2>Rekomendasi tambahan: sebelum peluncuran</h2><p>Daftar lengkap dengan kolom keputusan di <code>docs/server/rekomendasi-tambahan.md</code>. Ini yang paling penting. Centang = setuju (tersimpan di browser ini; keputusan resmi tetap ditulis ke repo).</p></div></div>
-  <div class="steps" data-store="hb-rekomendasi">
-    <label class="step"><input type="checkbox"><div><h4>Ubuntu Pro (gratis 5 mesin)</h4><p>Patch kernel tanpa reboot</p></div><span class="t">S</span></label>
-    <label class="step"><input type="checkbox"><div><h4>WAF + rate limit Cloudflare, branch protection</h4><p>Serangan berhenti di tepi; CI wajib hijau</p></div><span class="t">S</span></label>
-    <label class="step"><input type="checkbox"><div><h4>Renovate, Trivy, gitleaks</h4><p>Pembaruan otomatis, pindai celah, tolak rahasia di commit</p></div><span class="t">S</span></label>
-    <label class="step"><input type="checkbox"><div><h4>PgBouncer + penyetelan PostgreSQL + cache Cloudflare</h4><p>Database tetap ringan dengan banyak salinan aplikasi</p></div><span class="t">M</span></label>
-    <label class="step"><input type="checkbox"><div><h4>Pemantau luar, Healthchecks.io, peringatan Telegram</h4><p>Tahu bila situs mati atau backup tidak jalan</p></div><span class="t">S</span></label>
-    <label class="step"><input type="checkbox"><div><h4>Latihan pemulihan otomatis + Object Lock</h4><p>Backup terbukti bisa dipakai dan tidak bisa dihapus penyusup</p></div><span class="t">M</span></label>
-    <label class="step"><input type="checkbox"><div><h4>SPF/DKIM/DMARC, chrony, runbook insiden</h4><p>Email tidak masuk spam, jam server tepat, langkah darurat tertulis</p></div><span class="t">S</span></label>
+  <div class="sec-head"><div><div class="eb">12</div><h2>Operasional server: sudah diputuskan</h2><p>Hasil pembahasan 27 November 2026 (D-424…D-432). Rincian per usulan ada di kolom "Keputusan" <code>docs/server/rekomendasi-tambahan.md</code>; dikerjakan di R3.</p></div></div>
+  <div class="vgrid">
+    <div class="vc"><div class="top"><h4>Ubuntu Pro</h4><span class="chip ok">dipakai</span></div><p>Gratis untuk pribadi, di produksi dan cadangan: Livepatch + ESM. Token hanya di pengelola kata sandi, dipasang dengan <code>sudo pro attach</code> (D-424).</p></div>
+    <div class="vc"><div class="top"><h4>Portainer CE</h4><span class="chip ok">dipakai</span></div><p>Lihat kontainer, restart, baca log. Deploy tetap lewat Compose dan CI. Butuh socket Docker (setara root), jadi hanya grup pemilik (D-425).</p></div>
+    <div class="vc"><div class="top"><h4>Pemantauan</h4><span class="chip ok">dipakai</span></div><p>Better Stack gratis dari luar + halaman status <code>status.sigrak.com</code> + heartbeat backup. Uptime Kuma internal, Netdata lokal. Peringatan ke Telegram dan Slack (D-426).</p></div>
+    <div class="vc"><div class="top"><h4>Keamanan server</h4><span class="chip ok">dipakai</span></div><p>CrowdSec + bouncer Cloudflare, WAF dan rate limit (<code>/masuk</code> dulu), Lynis tiap 3 bulan, auditd, chrony; alat btop, ncdu, jq, zram (D-427).</p></div>
+    <div class="vc"><div class="top"><h4>Rantai pasok</h4><span class="chip ok">dipakai</span></div><p>Renovate, Trivy, gitleaks (CI + hook), GitHub Actions dikunci ke SHA. Branch protection ditunda: repo privat butuh paket berbayar (D-428).</p></div>
+    <div class="vc"><div class="top"><h4>Database</h4><span class="chip ok">dipakai</span></div><p>PgBouncer (konteks sekolah dengan <code>SET LOCAL</code> per transaksi), PgHero, pgtune, Cache Rules Cloudflare (D-429).</p></div>
+    <div class="vc"><div class="top"><h4>Email dan DNS</h4><span class="chip ok">dipakai</span></div><p>Gmail SMTP dulu. Selama belum ada email dari domain: SPF <code>v=spf1 -all</code> dan DMARC <code>p=reject</code> (D-431).</p></div>
+    <div class="vc"><div class="top"><h4>Tidak dipasang</h4><span class="chip bad">tidak</span></div><p>Dozzle dan lazydocker (diganti Portainer), Healthchecks.io (diganti heartbeat Better Stack). Prometheus + Grafana nanti bila perlu.</p></div>
   </div>
 </div></section>
 
@@ -477,20 +486,37 @@ BullMQ     → worker-ai · worker-exports · worker-default · scheduler (1)</p
   </div>
 </div></section>
 
+<section class="sec" id="produk"><div class="in">
+  <div class="sec-head"><div><div class="eb">14</div><h2>Situs publik, tim, dan alat kerja</h2><p>Keputusan 27 November 2026 (D-433…D-440). Masing-masing dikerjakan di sesi tersendiri (RS-01…RS-14 di <code>PROGRESS.md</code>).</p></div></div>
+  <div class="g2">
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Situs <code>sigrak.com</code></h3><ul class="clean small">
+      <li><strong>Produk:</strong> <code>/</code>, <code>/fitur</code>, <code>/untuk-guru</code>, <code>/untuk-kepala-sekolah</code>, <code>/untuk-operator</code>, <code>/untuk-pengawas</code>, <code>/sd</code>, <code>/madrasah</code>, <code>/harga</code>.</li>
+      <li><strong>Sumber:</strong> <code>/kabar</code>, <code>/acara</code>, <code>/cerita-sekolah</code>, <code>/praktik-baik</code>, <code>/apa-yang-baru</code>.</li>
+      <li><strong>Perusahaan:</strong> <code>/tentang</code>, <code>/mitra</code>, <code>/karier</code>, <code>/kontak</code>, <code>/bantuan</code>.</li>
+      <li><strong>Kepercayaan:</strong> <code>/keamanan</code>, <code>/kebijakan-ai</code>, tautan halaman status.</li>
+      <li><strong>Hukum:</strong> <code>/syarat-penggunaan</code>, <code>/kebijakan-privasi</code>, <code>/perlindungan-data-murid</code>; ada versi dan tanggal "berlaku sejak"; dicek pengacara sebelum peluncuran.</li></ul></div>
+    <div class="panel pad"><h3 style="font-size:16px;margin-bottom:6px">Alur masalah → solusi</h3><ul class="clean small">
+      <li><strong>Tim Lapangan</strong> mengumpulkan dan memilah masukan ke Bank Masalah.</li>
+      <li><strong>Tim Kurikulum &amp; Riset</strong> (termasuk peran baru Peneliti) mencari akar masalah, mengecek regulasi, dan mengisi Bank Praktik Baik.</li>
+      <li><strong>Tim Produk</strong> memprioritaskan, merancang, membangun, menguji, mengukur.</li>
+      <li>Forum Masalah→Solusi tiap dua minggu; pemilik memutuskan. Papan Plane: Masuk → Ditelaah → Akar masalah → Antre prioritas → Dirancang → Dibangun → Uji coba → Rilis → Dievaluasi.</li></ul></div>
+  </div>
+</div></section>
+
 <section class="sec" id="terbuka"><div class="in">
-  <div class="sec-head"><div><div class="eb">14</div><h2>Belum diputuskan</h2></div></div>
+  <div class="sec-head"><div><div class="eb">15</div><h2>Belum diputuskan</h2></div></div>
   <div class="dec">
     <div class="dq"><div class="h"><span class="k">T1</span><h4>Bolehkah orang tua memakai chatbot sekolah?</h4></div><p class="small muted">Saat ini murid dan orang tua belum menjadi pengguna.</p></div>
     <div class="dq"><div class="h"><span class="k">T2</span><h4>Penyedia AI mana yang boleh menerima data sekolah, dengan syarat apa?</h4></div><p class="small muted">Apakah nama murid harus disamarkan dulu sebelum dikirim.</p></div>
     <div class="dq"><div class="h"><span class="k">T3</span><h4>Backup terenkripsi di luar Indonesia (R2, penyedia kedua)</h4></div><p class="small muted">Perlu cek pengacara untuk klien sekolah negeri.</p></div>
-    <div class="dq"><div class="h"><span class="k">T5</span><h4>Rekomendasi tambahan mana yang dipakai?</h4></div><p class="small muted">Lihat bagian 12 dan <code>docs/server/rekomendasi-tambahan.md</code>.</p></div>
-    <div class="dq"><div class="h"><span class="k">T6</span><h4>Tindakan pemilik</h4></div><p class="small muted">Arsipkan atau privatkan repo SIGRAK yang lama; repo baru <code>arumiforge/sigrak</code> sudah privat · hapus branch yang sudah di-merge · cek image Ubuntu 26.04 di IDCloudHost · unggah Hugeicons Pro · konfirmasi brief 001 (rapat KKG).</p></div>
+        <div class="dq"><div class="h"><span class="k">T6</span><h4>Tindakan pemilik</h4></div><p class="small muted">Arsipkan atau privatkan repo SIGRAK yang lama dan privatkan Fondasi · ubah baris setup script environment cloud ke <code>sigrak/.claude/cloud/setup.sh</code> · isi secret GitHub <code>CLOUDFLARE_API_TOKEN</code> dan <code>CLOUDFLARE_ACCOUNT_ID</code> · nyalakan Access untuk <code>workers.dev</code> dan URL pratinjau sebelum deploy pertama situs catatan · unggah zip Hugeicons Pro dan shadcn/studio Pro ke sesi · atur Slack untuk Better Stack · hapus branch yang sudah di-merge · konfirmasi brief 001 (rapat KKG).</p></div>
   </div>
 </div></section>
 
 <section class="sec" id="riwayat"><div class="in">
-  <div class="sec-head"><div><div class="eb">15</div><h2>Riwayat handbook</h2></div></div>
+  <div class="sec-head"><div><div class="eb">16</div><h2>Riwayat handbook</h2></div></div>
   <ul class="clean small">
+    <li><strong>v5 · 27 Nov 2026:</strong> pindah ke repo privat <code>arumiforge/sigrak</code> (D-423); keputusan D-424…D-440: Ubuntu Pro, Portainer, pemantauan, keamanan, database, backup, email, situs pemasaran di VPS, situs catatan, peta, HaKI, alur masalah→solusi, Plane; bagian 12 berisi keputusan, bagian 14 baru.</li>
     <li><strong>v4 · 27 Nov 2026:</strong> pnpm menggantikan npm (D-422): versi dikunci, skrip instalasi hanya untuk paket yang diizinkan, versi baru menunggu satu hari.</li>
     <li><strong>v3 · 27 Nov 2026:</strong> keputusan D-412…D-421 dicatat (versi, Ubuntu 26.04, nginx, Compose, akses server, tmux, bahasa panduan, Fondasi); versi aplikasi diputuskan CalVer; kerangka R0-05 selesai.</li>
     <li><strong>v2 · 27 Nov 2026:</strong> R0-10 diluruskan: yang dihapus hanya sisa Laravel (D-411); konten SIGRAK dan keputusan aplikasi lama tetap.</li>

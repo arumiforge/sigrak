@@ -1,7 +1,7 @@
 # R0-12 — pnpm replaces npm
 
 - **Phase:** R0
-- **Status:** review
+- **Status:** done (merged in the previous repository)
 - **Owner:** r0/r0-12-pnpm
 - **Depends on:** R0-11
 

@@ -7,6 +7,6 @@ It covers stack and server topics for now. SIGRAK's education content (curriculu
 ## Keeping it up to date
 
 - Update it in the same PR as any decision that changes what it says: `DECISIONS.md` stays the source of truth, the handbook is the readable summary.
-- Bump the version and date in the hero line (`versi N · diperbarui …`) and add a line to section 15 "Riwayat handbook".
+- Bump the version and date in the hero line (`versi N · diperbarui …`) and add a line to section 16 "Riwayat handbook".
 - Keep it one self-contained file: styles inline, no build step, only Google Fonts loaded from outside. It must stay readable at 375 px (no horizontal scroll).
 - Never put IP addresses, ports, passwords, keys or personal data in it.

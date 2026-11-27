@@ -1,6 +1,6 @@
 # Decisions
 
-Append-only log. One entry per decision; newest at the bottom. Change a decision by adding a new entry that supersedes the old one.
+Append-only log. One entry per decision; newest at the bottom. Change a decision by adding a new entry that supersedes the old one. Until the first production release, superseded entries are pruned in separate sessions (D-433); removed IDs are never reused.
 
 Format: `D-NNN — Title` · Status (accepted / open / superseded by D-NNN) · Date · Decision · Reason.
 
@@ -1863,7 +1863,7 @@ Stage 1: a static UMI QRIS from the owner's bank, amount with a unique code, man
 Reason: the owner is an individual business; cheapest and simplest start.
 
 ### D-396 — Domains: one app for all levels; SMP/MTs later
-Accepted · 2026-11-27 · R0 · owner's choice · extends D-069
+Framer part superseded by D-435 (marketing site served by the app) · Accepted · 2026-11-27 · R0 · owner's choice · extends D-069
 `sigrak.com` is the marketing site (separate, Framer). `app.sigrak.com` is one app for all levels; `ujian.` and `admin.` stay; no per-level subdomains. The first development scope is **SD/MI only**. SMP/MTs comes later with many different features; its scope is decided only after the SD/MI work is finished (owner, relayed by the discussion session, 2026-11-27). The multi-level design through Profil Jenjang (D-356) stays, but phase R plans no SMP-specific work.
 Reason: one codebase and one login for every level.
 
@@ -1928,7 +1928,7 @@ SIGRAK adopts Fondasi through `fondasi-adopt`: audit in `docs/fondasi-audit.md`,
 Reason: shared rules for server, storage, UI, feedback and AI across Arumi Studios apps.
 
 ### D-409 — Repositories private; the SK sample anonymised in place
-Accepted · 2026-11-27 · R0 · owner's choice
+History part superseded by D-423 (clean history in `arumiforge/sigrak`) · Accepted · 2026-11-27 · R0 · owner's choice
 The owner makes the SIGRAK repository (now `arumiforge/sigrak`) and `arumiforge/fondasi` private on GitHub. `docs/sources/Contoh_SK_Pembagian_Tugas_SD_Semester_Genap_2025_2026.pdf` is replaced by an anonymised copy: names become "Nama Kepala Sekolah" / "Nama Pegawai N", NIPs "(disamarkan)", signature and stamp removed, metadata cleared. Git history is not rewritten. Owner-supplied sources may be edited to remove personal data (extends D-360).
 Reason: no personal data in the repository; history rewrite judged not worth it once private.
 
@@ -1996,3 +1996,134 @@ Reason: the owner maintains Fondasi separately.
 Accepted · 2026-11-27 · R0-12 · owner's choice ("setuju, pakai pnpm"; "pnpm ok") · refines D-412
 The app uses pnpm, pinned exactly through `"packageManager": "pnpm@12.23.0"` in `package.json`; `pnpm-lock.yaml` replaces `package-lock.json`. `pnpm-workspace.yaml` holds the supply-chain settings: `allowBuilds` lists every package with an install script and only those set to true may run it (none today; `@swc/core` is denied and works without its script), and `minimumReleaseAge: 1440` makes a new version wait one day after publication before it is installed (the owner allowed 1–3 days; one day keeps the current lock file valid and can be raised later). CI installs with `pnpm/action-setup` and `pnpm install --frozen-lockfile`; the R3 Dockerfile uses `pnpm fetch` plus an offline install for layer caching. The cloud setup script installs the pinned pnpm and runs `pnpm install --frozen-lockfile`.
 Reason: a strict, disk-efficient install and control over install scripts and brand-new releases.
+
+### D-423 — Repository moves to `arumiforge/sigrak` with a clean history
+Accepted · 2026-11-27 · R0-13 · owner's choice (interview 2026-11-27, "selebihnya semua usulan saya terima") · refines D-409 and D-407
+SIGRAK lives in the private repository `arumiforge/sigrak`. Its first commit is an exact copy of the previous repository's `main` at `4bce398`, without the old git history, so the non-anonymised SK sample that D-409 left in history is not carried over. Every reference uses the name "sigrak": cloud setup script (finds its own repository root), deploy key alias `github-sigrak`, image `ghcr.io/arumiforge/sigrak`, and CI keeps `owner/repo` in one variable. The old history, including tag `laravel-final` (D-407), stays only in the previous repository, which the owner archives or makes private. ProUI is dropped (D-434). Work keeps the D-148 flow: short-lived branch, PR into `main`, branch deleted after merge.
+Reason: a private repository with no personal data anywhere in its history.
+
+### D-424 — Ubuntu Pro (free personal) on production and standby
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-413
+Both VPS are attached to the free personal Ubuntu Pro subscription for Livepatch and ESM. The token lives only in the password manager and is used with `sudo pro attach` on each machine; it never goes into git or `stack.env`. The VPS provider offers Ubuntu 26.04 LTS, which closes the open check in D-413.
+Reason: kernel patches without reboots and security fixes for universe packages, at no cost.
+
+### D-425 — Ops panels: Portainer CE, one-level hostnames, one Access application
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-415, D-417
+- **Portainer CE** runs bound to `127.0.0.1` and is reached through the tunnel at `portainer.sigrak.com`, for the owner group only. It is used to view containers, restart them and read logs; deploys stay in Compose and CI. Dozzle and lazydocker are not installed. Risk accepted and recorded: Portainer needs the Docker socket, which is root-equivalent, so Access, the owner-only group and keeping Portainer up to date are the controls.
+- **Ops hostnames are one level deep** (`portainer.sigrak.com`, not `portainer.ops.sigrak.com`): Universal SSL covers `*.sigrak.com` only.
+- **One Access application, "SIGRAK ops"**, covers Portainer, Netdata, PgHero, Backrest, Uptime Kuma, GlitchTip and Plane. It sits next to `Server sigrak`, `SIGRAK admin` and `SIGRAK staging` (D-417).
+Reason: one place to see and restart containers without SSH; one policy to manage instead of seven.
+
+### D-426 — Monitoring and alerts
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-403
+- **Better Stack (free plan: 10 monitors, 10 heartbeats, 1 status page, 3-minute checks)** for external uptime, the status page for schools at `status.sigrak.com`, and heartbeats as the dead man's switch for backups, WAL archiving, restore drills and `check-app`. It replaces the Healthchecks.io proposal. Its alerts go to Slack (the owner sets that up).
+- **Uptime Kuma** on the VPS for internal checks only (no public status page).
+- **A Telegram bot** for Uptime Kuma and Netdata alerts. It needs no server process: only outgoing HTTPS when an alert fires.
+- **GlitchTip** has no native Telegram, so it alerts to Slack by webhook.
+- **Netdata now**: local only, telemetry off, retention capped. **Prometheus + Grafana later**, when needed (about 1.5–2.5 GB RAM and 0.5–1 core on one VPS).
+Reason: an outside monitor survives a dead VPS; a heartbeat catches jobs that silently stop; one light dashboard is enough for one VPS.
+
+### D-427 — Server hardening and terminal tools
+Accepted · 2026-11-27 · R0-14 · owner's choice
+- CrowdSec reading nginx logs, with the Cloudflare bouncer (blocks at Cloudflare by the real client IP; works behind NAT).
+- Cloudflare WAF custom rules and rate limits, `/masuk` first; the Free plan has few rules, so they are spent where attacks land.
+- Lynis audit every quarter, results compared with the last run.
+- auditd with focused rules: sudo, `/etc`, SSH keys, Docker socket use.
+- needrestart and chrony: R3 checks whether Ubuntu 26.04 ships them by default, then configures them.
+- Terminal tools from `sigrak-setup.sh`: btop, ncdu, jq, chrony, zram.
+AIDE, AppArmor profiles and rootless Docker are not adopted now.
+Reason: cheap layers that stop common attacks early and leave a trail when something happens.
+
+### D-428 — Supply chain: Renovate, Trivy, gitleaks, pinned Actions
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-412
+Renovate (not Dependabot) opens the version PRs of D-412. Trivy scans images and dependencies in CI. gitleaks runs in CI and as a local hook. GitHub Actions are pinned to commit SHAs (Renovate updates them). Branch protection is skipped for now: on a private repository it needs a paid GitHub plan.
+Reason: updates arrive as reviewable PRs, and secrets or known holes stop before they reach `main` or production.
+
+### D-429 — Database: PgBouncer, query insight, tuning; Cloudflare caching
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-398, D-415
+- **PgBouncer** in transaction pooling between the app containers and PostgreSQL. **R1 design constraint:** the RLS tenant context is set with `SET LOCAL` inside each transaction, never per session or connection, because pooled connections are shared.
+- **pg_stat_statements** with **PgHero** behind "SIGRAK ops" (D-425).
+- PostgreSQL is tuned with pgtune for its share of the VPS (about 4 cores and the RAM left after the app, D-415), not for the whole 32 GB.
+- Cloudflare Cache Rules and Tiered Cache for static assets.
+Reason: many replicas keep the connection count small; slow queries are found before teachers notice.
+
+### D-430 — Backups: Backrest, bucket locks, monthly restore drill
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-404, D-405
+- **Backrest** (restic UI) behind "SIGRAK ops".
+- **Object Lock or bucket locks** on the backup buckets, with lock periods matched to the restic prune and pgBackRest expiry schedules so that pruning never fails on a locked object.
+- **Monthly automated restore drill**; tooling and guide are built in R3. Until the standby VPS exists, the drill restores into a throwaway PostgreSQL container on the same VPS, checks the data, and removes the container. Each drill pings a Better Stack heartbeat (D-426).
+Reason: a backup that is never restored is not proven; locked backups survive a leaked key or ransomware.
+
+### D-431 — Mail and integration settings
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-110, follows Fondasi F-005
+- Mail goes through Gmail SMTP from an `@gmail.com` address for now; the mailer code is provider-neutral, so a transactional provider is a settings change.
+- Settings follow F-005: when `MAIL_*` in env is empty, the admin panel holds the values, stored encrypted and audited.
+- **General rule:** integrations are configured in the central admin panel, with as little env editing on the server as possible. Core secrets (database, `APP_KEY`, backup keys) stay in env.
+- DNS for `sigrak.com` while no mail is sent from the domain: SPF `v=spf1 -all` and DMARC `p=reject`. If Cloudflare Email Routing is turned on, its MX and SPF records must be reconciled with these.
+Reason: no cost now, easy change later; nobody can send mail that looks like it comes from `sigrak.com`.
+
+### D-432 — Operations docs in Indonesian
+Accepted · 2026-11-27 · R0-14 · owner's choice · follows D-419
+`docs/server/` gets three Indonesian guides: an incident runbook ("situs mati", "disk penuh", "database lambat", "kunci bocor"), a routine maintenance schedule (monthly: restore drill, SSH keys and Access groups; quarterly: Lynis; yearly: major versions), and how the status page for schools works. They are also published on the notes site (D-436).
+Reason: steps written down before they are needed.
+
+### D-433 — Decision log pruning until the first production release
+Accepted · 2026-11-27 · R0-14 · owner's choice · changes the append-only rule of this log until release
+Until the first production release (CalVer `2027.x.0`, D-420), this log is pruned in separate sessions: superseded entries are deleted, and partly superseded ones are rewritten to keep only what still applies. Before pruning, the repository is tagged (for example `decisions-before-prune`). Removed IDs are never reused. References in `docs/final/`, task files and the handbook are fixed in the same work. From the first production release the log is append-only again. `PROGRESS.md` is slimmed too: the Phase 0–5 tables move to `docs/agent/archive/`.
+Reason: agents read a short log of what applies now instead of 400 entries of history; the tag keeps the history.
+
+### D-434 — UI kits: shadcn/studio Pro, Hugeicons Pro styles, Impeccable review
+Accepted · 2026-11-27 · R0-14 · owner's choice · refines D-390, D-402; ProUI dropped
+- The D-390 stack stays (Tailwind 4, shadcn/ui on Radix, Motion, Sonner, Vaul, cmdk, TanStack Table/Virtual).
+- **shadcn/studio Pro replaces ProUI.** Only its `radix` variants, and only the blocks and components the app uses, restyled to SIGRAK's identity and Fondasi `ui.md` (no generic template look). Any licence key goes in env or a CI secret, never in git; their CLI registry reads an email and licence key from env.
+- **Hugeicons Pro** from the owner's files: only the Rounded Stroke and Rounded Solid styles; `.DS_Store` removed and file names normalised; the zip and the licence file never go into the repository; `THIRD_PARTY_NOTICES.md` names the licence holder.
+- No Aceternity.
+- **Impeccable** (pbakaus/impeccable) is not installed wholesale. A sub-session reviews it and moves useful checks into SIGRAK's UI rules; gaps in Fondasi go to `docs/drafts/fondasi-uptake.md` (D-421).
+Reason: licensed parts the owner already holds, kept small and made SIGRAK's own.
+
+### D-435 — Public marketing site on the VPS
+Accepted · 2026-11-27 · R0-14 · owner's choice · supersedes the Framer part of D-396; extends D-389 public pages
+`sigrak.com` is served by the same app, server-rendered (D-389). grafana.com is a **structure** reference only (mega menu, solution pages, resources, company and legal footer); its design is never copied. Sitemap, Indonesian paths (D-149):
+- product: `/`, `/fitur`, `/untuk-guru`, `/untuk-kepala-sekolah`, `/untuk-operator`, `/untuk-pengawas`, `/sd`, `/madrasah`, `/harga`;
+- resources: `/kabar`, `/acara`, `/cerita-sekolah`, `/praktik-baik`, `/apa-yang-baru`;
+- company: `/tentang`, `/mitra`, `/karier`, `/kontak`, `/bantuan`;
+- trust: `/keamanan`, `/kebijakan-ai`, and a link to the Better Stack status page (D-426);
+- legal: `/syarat-penggunaan`, `/kebijakan-privasi`, `/perlindungan-data-murid` (a data-processing agreement for schools under UU PDP).
+Kabar, Acara, Cerita Sekolah and the legal pages are edited from the admin panel; legal pages carry a version and a "berlaku sejak" date. Product pages live in code with Codex visuals (D-390). Legal drafts need a lawyer's review before launch.
+Reason: one codebase and one deploy; no extra vendor for the public site.
+
+### D-436 — Private notes site `note.sigrak.com`
+Accepted · 2026-11-27 · R0-14 · owner's choice · the one exception to "everything on the VPS"
+A private site at `note.sigrak.com` (temporarily on `*.workers.dev`) holds the owner's handbook, the `docs/server/` guides, the incident runbook and a new fundamentals handbook for the owner. It is Cloudflare Workers static assets, deployed by a GitHub Action with wrangler on changes to `main`, using the secrets `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit) and `CLOUDFLARE_ACCOUNT_ID`. Cloudflare Access must be on for `workers.dev` **and preview URLs** before the first deploy; without it the content is briefly public.
+Reason: the runbook must stay readable when the VPS is down.
+
+### D-437 — Maps with free tools, coarse locations only
+Accepted · 2026-11-27 · R0-14 · owner's choice
+- Free tools only: MapLibre with Protomaps PMTiles on R2, or a similar free option.
+- Pupils are shown at village (desa) level at most; schools at district (kecamatan) level at least. No home points unless formal consent is added later. Data is used under MoUs with schools, dinas and pengawas.
+- Outside the school's own view, counts under 5 show as "<5".
+- Uses: principals and pengawas see pupils' home villages; Tim SIGRAK sees usage by school location; SMP teachers' maps wait for the SMP scope (D-396).
+- Boundary data: the owner is adding it to Fondasi; a later session checks Fondasi before the maps spike.
+Reason: useful pictures for leaders without exposing where a child lives.
+
+### D-438 — HaKI: materials now, filing after the PT exists
+Accepted · 2026-11-27 · R0-14 · owner's choice · follows D-360
+A PT will be founded, and the SIGRAK trademark has been checked as usable. Creators are people; the PT holds the rights. The history is written without the legacy app's brand (D-360). Materials (philosophy, history, background, guidebook) are prepared now and filed after the PT exists.
+Reason: protect the name and the work under the company that will run it.
+
+### D-439 — Problem-to-solution system: three teams and a fortnightly forum
+Accepted · 2026-11-27 · R0-14 · owner's choice · extends the internal roles (D-338…D-343)
+Three teams for now, open to more:
+- **Tim Lapangan** (support, sales, regional lead, marketing) collects and triages feedback into a **Bank Masalah**.
+- **Tim Kurikulum & Riset** (validator, content, curriculum curator, plus a new console role **Peneliti**) does root-cause analysis, checks regulations, and keeps a **Bank Praktik Baik** of good practice, student research (PTK, skripsi), seminars and webinars. Researchers are credited (F-034).
+- **Tim Produk** (the owner plus the engineer role) prioritises, designs, builds, runs trials and measures.
+The teams meet every two weeks in a **Forum Masalah→Solusi**, where the owner decides. The reporter is told when their issue ships.
+Reason: every problem from the field has an owner, a cause and an answer back to the person who raised it.
+
+### D-440 — Kanban: Plane CE, self-hosted and switchable
+Accepted · 2026-11-27 · R0-14 · owner's choice · follows D-393 masking, D-439
+- Plane CE runs as its own Compose project `sigrak-plane`, capped at about 4 GB, at `plane.sigrak.com` behind "SIGRAK ops" (D-425), and is backed up.
+- It must be possible to switch it off completely (`docker compose down`, nothing left running, data kept or exported); the owner tries it first.
+- Integration: SIGRAK has no public API and gets none. A SIGRAK worker calls the Plane API with masked text and no personal data (the chatbot's masker, D-393): role, district and a link to the admin record. Plane webhooks go to one signed endpoint on the internal network only, which updates the status in SIGRAK and notifies the reporter (D-439).
+- Columns: Masuk → Ditelaah → Akar masalah → Antre prioritas → Dirancang → Dibangun → Uji coba → Rilis → Dievaluasi.
+Reason: the D-439 flow needs a board; self-hosting keeps the data with us and the off switch keeps the trial cheap.

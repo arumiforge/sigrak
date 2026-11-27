@@ -51,7 +51,7 @@ UI copy must be plain and user-friendly; the app is web-based and must work on d
 
 ## Stack (summary — full version in `docs/agent/CONTEXT.md`)
 
-Phase R overhaul (D-388…D-421): AdonisJS 7 modular monolith (Node 26, TypeScript) · Inertia + React 19 · PostgreSQL 19 · Redis + BullMQ · Tailwind 4 + shadcn/ui · nginx + Docker on Ubuntu 26.04 behind Cloudflare Tunnel · Typst for PDF (after the spike). AI: teachers' Gemini keys for content; owner's OpenAI-compatible keys for the chatbot.
+Phase R overhaul (D-388…D-440): AdonisJS 7 modular monolith (Node 26, TypeScript) · Inertia + React 19 · PostgreSQL 19 · Redis + BullMQ · Tailwind 4 + shadcn/ui · nginx + Docker on Ubuntu 26.04 behind Cloudflare Tunnel · Typst for PDF (after the spike). AI: teachers' Gemini keys for content; owner's OpenAI-compatible keys for the chatbot.
 
 ## Fondasi (shared rules, data and skills)
 
