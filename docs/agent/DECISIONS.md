@@ -2094,7 +2094,7 @@ Reason: one codebase and one deploy; no extra vendor for the public site.
 
 ### D-436 — Private notes site `note.sigrak.com`
 Accepted · 2026-11-27 · R0-14 · owner's choice · the one exception to "everything on the VPS"
-A private site at `note.sigrak.com` (temporarily on `*.workers.dev`) holds the owner's handbook, the `docs/server/` guides, the incident runbook and a new fundamentals handbook for the owner. It is Cloudflare Workers static assets, deployed by a GitHub Action with wrangler on changes to `main`, using the secrets `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit) and `CLOUDFLARE_ACCOUNT_ID`. Cloudflare Access must be on for `workers.dev` **and preview URLs** before the first deploy; without it the content is briefly public.
+A private site at `note.sigrak.com` (temporarily on `*.workers.dev`) holds the owner's handbook, the `docs/server/` guides, the incident runbook and a new fundamentals handbook for the owner. It is Cloudflare Workers static assets in the Worker `sigrak-note` (the owner created it by hand; the wrangler config uses exactly `name = "sigrak-note"`), deployed by a GitHub Action with wrangler on changes to `main`, using the secrets `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit) and `CLOUDFLARE_ACCOUNT_ID`. Cloudflare Access must be on for `workers.dev` **and preview URLs** before the first deploy; without it the content is briefly public.
 Reason: the runbook must stay readable when the VPS is down.
 
 ### D-437 — Maps with free tools, coarse locations only
