@@ -368,10 +368,10 @@
     "distribution_rules": [
       {"text": "Alokasi waktu total di atas adalah pelaksanaan kokurikuler dalam satu Tahun Pelajaran. Satuan pendidikan dapat membagi pelaksanaannya menjadi dua semester. Alokasi waktu untuk setiap kegiatan tidak harus sama, sehingga memberikan keleluasaan kepada satuan pendidikan untuk menyusun kegiatan kokurikulernya sendiri.", "pages": [37]},
       {"text": "Mengelola alokasi waktu secara fleksibel mengacu pada struktur kurikulum yang berlaku.", "pages": [11]},
-      {"text": "Kokurikuler tidak mengambil alokasi jam pelajaran muatan lokal (tanda “–” pada struktur kurikulum).", "pages": [37]},
+      {"text": "Pada struktur kurikulum tercantum bahwa alokasi waktu kokurikuler pada muatan lokal ditandai dengan tanda “–”. Hal ini bukan berarti muatan lokal tidak dapat diintegrasikan ke dalam kegiatan kokurikuler, melainkan menunjukkan bahwa kokurikuler tidak mengambil alokasi jam pelajaran muatan lokal.", "summary": "Kokurikuler takes no JP from muatan lokal (marked “–” in the curriculum structure); muatan lokal can still be part of kokurikuler.", "pages": [37]},
       {"text": "Dalam pengorganisasian kegiatan kokurikuler, guru memiliki alokasi waktu sesuai dengan ketentuan pada tabel di atas.", "pages": [37]},
       {"text": "Satuan pendidikan dapat menetapkan secara mandiri jumlah dan apa saja aktivitas yang akan dilakukan pada setiap tahapan, sesuai alokasi waktu yang disepakati.", "pages": [38]},
-      {"text": "7KAIH: perlu penyesuaian pelaksanaan dalam frekuensi yang lebih rutin (misalnya kebiasaan berolahraga setiap minggu atau beberapa hari dalam seminggu).", "pages": [61]}
+      {"text": "Pelaksanaan kokurikuler dalam bentuk 7 KAIH perlu mempertimbangkan alokasi waktu yang mendukung, mengingat hasil yang diharapkan juga berupa kebiasaan, sehingga perlu penyesuaian pelaksanaan dalam frekuensi yang lebih rutin. Misalnya kebiasaan berolahraga setiap minggu atau beberapa hari dalam seminggu dari hasil kesepakatan bersama dalam fokus tema berolahraga.", "summary": "7 KAIH: schedule the activities more often (for example weekly or several days a week) because the outcome is a habit.", "pages": [61]}
     ],
     "jp_counting_note": "The guide gives no per-subject breakdown of the kokurikuler JP and no block/period rules; it defers to the Peraturan Menteri on curriculum implementation (structure tables there mark each subject's kokurikuler share). Example SD activity sizes: 108 JP (Tabel 10, lintas disiplin) and 48 JP (kelas II, 7KAIH).",
     "pages": [11, 35, 36, 37, 38]

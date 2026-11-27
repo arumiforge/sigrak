@@ -1,9 +1,9 @@
 # Buku Panduan Pengembang SIGRAK
 
-<p class="source-note">Diterjemahkan dari <code>docs/final/developer-handbook.md</code> pada 27 November 2026.</p>
+<p class="source-note">Diterjemahkan dari <code>docs/final/developer-handbook.md</code> pada 28 November 2026.</p>
 
 - **Status:** final (permintaan pemilik 2026-11-09, D-361)
-- **Terakhir diperbarui:** 2026-11-27 (shadcn/studio Pro dan gaya Hugeicons Pro, D-434; R0-03: stack lama dihapus, stack baru D-388…D-409; transisi Bahasa Inggris D-410)
+- **Terakhir diperbarui:** 2026-11-28 (D-452: CP per elemen, KKA, kepanduan, AN untuk MI; sebelumnya: shadcn/studio Pro dan gaya Hugeicons Pro, D-434; R0-03: stack lama dihapus, stack baru D-388…D-409; transisi Bahasa Inggris D-410)
 - **Pembaca:** setiap pengembang atau agen baru yang bergabung dengan SIGRAK, sebelum membaca dokumen lain. PDF berbahasa Indonesia ini, `docs/pdf/developer-handbook.pdf`, adalah satu bacaan lengkap untuk pengembang baru (D-361).
 - **PDF berbahasa Indonesia:** `docs/pdf/developer-handbook.pdf`, diterjemahkan di `docs/pdf/src/developer-handbook.md`
 
@@ -251,7 +251,7 @@ SD dan MI mengikuti standar nasional yang sama dan berbeda di beberapa domain. S
 | JTM wali kelas bawaan | 2 | 6 (D-212) |
 | Kolom tambahan RPM | — | Tema KBC, Materi Insersi (D-126) |
 | Tujuan ekspor rapor | e-Rapor SD | RDM (D-218) |
-| Asesmen eksternal | AN, TKA | TKA; AKMI perlu diverifikasi |
+| Asesmen eksternal | AN, TKA | AN, TKA, AKMI (D-452) |
 | Data induk | Dapodik | EMIS |
 
 Kode membaca profil; kode **tidak pernah** bercabang dengan `level == mi`. Jenjang baru (SDLB, atau kelak SMP/MTs) menjadi profil baru, bukan cabang kode baru. Hari ini jenjang disimpan di `schools.level` ∈ {`sd`, `mi`} dan menentukan daftar mapel serta alokasi (Dibangun); catatan profilnya sendiri masih Didesain dan harus ada sebelum P5-04.
@@ -403,9 +403,9 @@ Ringkasan diagram: Tim SIGRAK membuat sekolah dan mengundang operator atau kepal
 | `sigrak-mi-2026-r1.json` | Topik SIGRAK MI untuk lima mapel Kemenag: 224 topik |
 | `crosswalk-legacy-2026.json` | Khusus tim, tidak pernah diimpor: kode lama ke kode SIGRAK (D-365) |
 
-**Bentuknya.** Sebuah mapel punya topik (materi pokok, baris ATP) per kelas dan semester, dengan JP, minggu, dan rujukan. Setiap topik punya butir fokus dan tujuan pembelajaran (TP). `focus_item_objectives` menghubungkan fokus ke TP dan diisi lewat tugas data. Versi yang hanya berisi CP menyimpan baris CP di `learning_outcomes` (D-226). `subject_allocations` menyimpan JP per mapel, kelas, dan jenis pembelajaran (intrakurikuler atau kokurikuler).
+**Bentuknya.** Sebuah mapel punya topik (materi pokok, baris ATP) per kelas dan semester, dengan JP, minggu, dan rujukan. Setiap topik punya butir fokus dan tujuan pembelajaran (TP). `focus_item_objectives` menghubungkan fokus ke TP dan diisi lewat tugas data. Versi yang hanya berisi CP menyimpan teks CP resmi per mapel, fase, dan elemen di `learning_outcomes` (D-226); teks itu menjadi acuan dan, sejak D-452, juga mencakup mapel umum (Kepka BSKAP 046/2025 beserta perubahannya). Setiap topik tertaut ke elemennya; teks CP milik topik adalah ringkasan yang ramah guru dengan label "ringkasan SIGRAK", tidak pernah ditampilkan sebagai CP resmi. Isi di luar keputusan resmi tetap ada di data dengan tanda `outside_cp` beserta alasannya, untuk ditinjau nanti (D-452). `subject_allocations` menyimpan JP per mapel, kelas, dan jenis pembelajaran (intrakurikuler atau kokurikuler).
 
-**Impor.** Tanpa nama file, impor kurikulum memuat daftar file yang dikonfigurasi secara berurutan. Aturannya (D-229): setiap file satu transaksi; baris dicocokkan menurut `code` dan tidak pernah dihapus; versi baru berstatus `draft` dan impor tidak pernah mengubah status versi yang sudah ada; ketidakcocokan (jumlah JP terhadap target semester tiap mapel, fase dan kelas, tautan fokus–TP di luar topiknya) dilaporkan dan tidak menghentikan impor kecuali `--strict` dipakai. Topik hanya datang dari berkas SIGRAK (D-363); format aplikasi lama ditolak, dan kode lama tetap di crosswalk (D-365). Berkas yang berbagi satu versi masing-masing bertanggung jawab atas mapelnya sendiri. Pemangkasan Tata Boga D-234 sudah ada di data; daftar koreksi sumber kosong tetapi dipertahankan untuk koreksi yang disetujui pemilik di kemudian hari (D-366). Baris KKA kelas 5–6 tidak diimpor sebagai intrakurikuler; KKA berjalan lewat kokurikuler (D-208).
+**Impor.** Tanpa nama file, impor kurikulum memuat daftar file yang dikonfigurasi secara berurutan. Aturannya (D-229): setiap file satu transaksi; baris dicocokkan menurut `code` dan tidak pernah dihapus; versi baru berstatus `draft` dan impor tidak pernah mengubah status versi yang sudah ada; ketidakcocokan (jumlah JP terhadap target semester tiap mapel, fase dan kelas, tautan fokus–TP di luar topiknya) dilaporkan dan tidak menghentikan impor kecuali `--strict` dipakai. Topik hanya datang dari berkas SIGRAK (D-363); format aplikasi lama ditolak, dan kode lama tetap di crosswalk (D-365). Berkas yang berbagi satu versi masing-masing bertanggung jawab atas mapelnya sendiri. Pemangkasan Tata Boga D-234 sudah ada di data; daftar koreksi sumber kosong tetapi dipertahankan untuk koreksi yang disetujui pemilik di kemudian hari (D-366). KKA (kelas 5–6) adalah mapel pilihan yang dijalankan tiap sekolah sebagai mapel biasa atau lewat kokurikuler (D-452, menggantikan D-208).
 
 **Versi di v1.** `SIGRAK-SD-2026-R1`, `SIGRAK-MI-2026-R1` (topik, satu versi per jenjang dan tahun, D-363), `CP-PABP-BKPDM-020-2026`, `CP-PAI-BA-MADRASAH-9941-2025`, `STRUKTUR-SD-PERMENDIKDASMEN-13-2025`, `ALOKASI-MI-KMA-1503-2025` (model data). Alokasi SD hanya berasal dari struktur resmi (D-366).
 
@@ -423,7 +423,7 @@ Ringkasan diagram: Tim SIGRAK membuat sekolah dan mengundang operator atau kepal
 
 **Status:** **Dibangun** (P5-03c, P5-03g, P4-28): tabel kurikulum, `learning_outcomes`, perintah impor, katalog mapel, `SubjectsForGrade`, dataset SIGRAK R1 dengan status kurasi per mapel. **Didesain:** kolom versi dan resolver (D-355), perubahan topik sekolah dan validasi (P5-09), konsol kurikulum (D-317), Kabar Regulasi. **Data masih draf:** setiap file kurikulum dan peraturan menunggu tinjauan Tim Validasi.
 
-Bacaan lanjutan: `data-model.md`, `religious-education.md`, `docs/data/curriculum/README.md`, `docs/drafts/curriculum-source-check-2026.md`, D-019, D-020, D-113, D-204, D-208, D-226…D-234, D-276, D-317, D-363…D-366.
+Bacaan lanjutan: `data-model.md`, `religious-education.md`, `docs/data/curriculum/README.md`, `docs/drafts/curriculum-source-check-2026.md`, D-019, D-020, D-113, D-204, D-226…D-234, D-276, D-317, D-363…D-366, D-452.
 
 ### 4.4 Pembuatan konten dengan AI: kunci, templat, wizard, dokumen, ekspor
 
@@ -452,7 +452,7 @@ Kolom data (identitas, CP, kode TP, pertemuan, menit, rujukan) digabungkan dari 
 
 **Mengedit.** Pratinjau berupa editor terstruktur per bagian, tidak pernah JSON mentah, dan teks AI selalu di-escape. "Perbaiki bagian ini" merevisi satu bagian (*sederhanakan*, *buat diferensiasi*, *sesuaikan untuk siswa berkebutuhan khusus*, *perpanjang*, *perpendek*) dan menampilkan versi lama dan baru berdampingan. Setiap simpan atau revisi menyimpan konten sebelumnya; 5 revisi terakhir disimpan (D-153), dan revisi yang terkait pengesahan tidak pernah dipangkas (D-282).
 
-**RPM.** Langkah wizard-nya *Kapan* (tanggal mulai, atau "RPM lepas jadwal"), *Apa* (materi pokok dan fokus; JP dan jumlah pertemuan dihitung dan dikunci), *Cara* (model pembelajaran per pertemuan, atau otomatis), *Periksa*. Bagian-bagiannya mengikuti kerangka resmi pembelajaran mendalam: Identifikasi, Desain Pembelajaran, Pengalaman Belajar (per pertemuan, dengan Memahami, Mengaplikasi, Merefleksi dan prinsip berkesadaran, bermakna, menggembirakan), Asesmen, ditambah lampiran dan kesinambungan. Delapan dimensi profil lulusan (DPL1…DPL8) adalah himpunan tetap. MI menambah kolom KBC yang opsional (bagian 3.7). **Varian kokurikuler** punya skemanya sendiri mengikuti Panduan Kokurikuler 2025, dengan bentuk Lintas Disiplin, Gerakan 7 KAIH (kebiasaan ketujuh "Tidur Cepat", D-207), dan Cara Lainnya; KKA berjalan di sini (D-208). Target JP kokurikuler tahunan diambil dari `subject_allocations` (D-277).
+**RPM.** Langkah wizard-nya *Kapan* (tanggal mulai, atau "RPM lepas jadwal"), *Apa* (materi pokok dan fokus; JP dan jumlah pertemuan dihitung dan dikunci), *Cara* (model pembelajaran per pertemuan, atau otomatis), *Periksa*. Bagian-bagiannya mengikuti kerangka resmi pembelajaran mendalam: Identifikasi, Desain Pembelajaran, Pengalaman Belajar (per pertemuan, dengan Memahami, Mengaplikasi, Merefleksi dan prinsip berkesadaran, bermakna, menggembirakan), Asesmen, ditambah lampiran dan kesinambungan. Delapan dimensi profil lulusan (DPL1…DPL8) adalah himpunan tetap. MI menambah kolom KBC yang opsional (bagian 3.7). **Varian kokurikuler** punya skemanya sendiri mengikuti Panduan Kokurikuler 2025, dengan bentuk Lintas Disiplin, Gerakan 7 KAIH (kebiasaan ketujuh "Tidur Cepat", D-207), dan Cara Lainnya; KKA berjalan di sini bila sekolah memilih jalur kokurikuler, atau sebagai mapel biasa di kelas 5–6 (D-452). Target JP kokurikuler tahunan diambil dari `subject_allocations` (D-277).
 
 **Penjadwalan RPM (P5-04, didesain rinci oleh D-267…D-275).** Pertemuan ditempatkan di jadwal kelas mulai tanggal awal. Hasil jurnal menggerakkan jadwal: `not_done` menggeser pertemuan berikutnya; `partial` tidak menggeser, tetapi pengalaman belajar yang belum selesai dibawa ke blok "Lanjutan" di pertemuan berikutnya (D-267). Setiap pergeseran diterapkan otomatis, ditampilkan ("2 pertemuan bergeser…"), dan bisa dibatalkan dengan Batalkan, dan cetakan Promes mendapat tampilan Realisasi (D-274). RPM semester 2 boleh disusun lebih awal dan ditempatkan mulai awal semester genap (D-272). RPM lepas jadwal nanti bisa ditempatkan dengan "Pasang ke jadwal" (D-273). "Pakai untuk kelas lain" menyalin RPM ke kelas paralel tanpa panggilan AI (D-275). Satu neraca JP per kelas dan mapel sebelum SAS (*Neraca JP*: Pas, Kurang n JP, Ada n JP cadangan) menggantikan beberapa peringatan (D-269). Kesiapan RPM per mapel (Siap, Segera habis, Perlu RPM) memakai nilai bawaan 10 dan 3 hari efektif yang diatur di konsol (D-270), dengan Kabar ringkasan setiap Senin hanya untuk guru (D-271).
 
@@ -560,7 +560,7 @@ Bacaan lanjutan: `content-engine.md`, `ifp-classroom.md`, `docs/drafts/lkpd-expl
 
 **Deskripsi.** Deskripsi capaian per mapel disusun dari capaian TP tertinggi dan terendah dalam hasil formatif (D-205). Draf AI hanya mengirim tingkat penguasaan per TP untuk "Murid A" yang anonim; nama aslinya digabungkan setelah pembuatan di server (`ai-provider-engine.md`, aturan privasi 2). Catatan wali kelas juga boleh disusun AI dari jumlah kehadiran, jenis catatan, dan hasil per TP, tidak pernah nama atau data pribadi, lalu wali kelas mengubah dan menyetujuinya (D-213).
 
-**Kokurikuler dan ekstrakurikuler.** Kokurikuler dinilai pada 8 DPL; rapor mendapat deskripsi dimensi yang sudah menguat dan yang masih berkembang (D-210, D-214 A5). Catatan ekstrakurikuler (kegiatan, pembina, anggota, kehadiran, deskripsi rapor), dengan Pramuka ditawarkan secara bawaan, dibangun sejak awal v1 (D-216); `report_extracurriculars` menyimpan baris rapornya (D-205).
+**Kokurikuler dan ekstrakurikuler.** Kokurikuler dinilai pada 8 DPL; rapor mendapat deskripsi dimensi yang sudah menguat dan yang masih berkembang (D-210, D-214 A5). Catatan ekstrakurikuler (kegiatan, pembina, anggota, kehadiran, deskripsi rapor), dengan Pramuka ditawarkan secara bawaan (sekolah boleh menggantinya dengan kepanduan lain, tetapi satu kepanduan harus tetap ada, D-452), dibangun sejak awal v1 (D-216); `report_extracurriculars` menyimpan baris rapornya (D-205).
 
 **Leger dan pengesahan.** Setiap guru mapel mengonfirmasi nilai mapelnya, wali kelas mengonfirmasi leger kelas, lalu kepala sekolah mengesahkan dan leger terkunci. Cetakan dan ekspor rapor selalu diambil dari versi yang terkunci. Hanya kepala sekolah yang bisa membuka kunci, dengan alasan yang dicatat. "Cek kesiapan rapor" memeriksa 12 komponen per murid dan memberi peringatan tanpa memblokir (D-292).
 
@@ -1180,7 +1180,7 @@ Istilah pendidikan Indonesia dan istilah produk yang dipakai di buku ini dan di 
 | KAIH | Gerakan 7 Kebiasaan Anak Indonesia Hebat: tujuh kebiasaan, yang ketujuh "Tidur Cepat" |
 | KBC | Kurikulum Berbasis Cinta (KMA 512/2026), pendidikan nilai di madrasah |
 | Kenaikan | Naik ke tingkat berikutnya, diputuskan sekolah |
-| KKA | Koding dan Kecerdasan Artifisial; di SIGRAK lewat kokurikuler (D-208) |
+| KKA | Koding dan Kecerdasan Artifisial; mapel pilihan di kelas 5–6, dijalankan sebagai mapel biasa atau lewat kokurikuler (D-452) |
 | KKG / KKM | Kelompok kerja guru (Kelompok Kerja Guru / Madrasah) |
 | KKTP | Kriteria Ketercapaian Tujuan Pembelajaran: kriteria tercapainya sebuah TP |
 | Kokurikuler | Pembelajaran kokurikuler yang menguatkan DPL; menggantikan P5 |

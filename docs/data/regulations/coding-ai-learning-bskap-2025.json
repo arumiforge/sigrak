@@ -817,9 +817,24 @@
     }
   },
   "monitoring_evaluation": {
-    "aims": "… (1) menilai proses implementasi kebijakan pembelajaran Koding dan KA; (2) memberikan umpan balik untuk memperbaiki kualitas implementasi kebijakan pembelajaran Koding dan KA; serta (3) menilai dampak dari kebijakan pembelajaran Koding dan KA terutama dalam menumbuhkan kemampuan berpikir kritis dan komputasional peserta didik, misalnya dengan melihat capaian mutu dan hasil belajar peserta didik.",
-    "impact_evaluation": "Evaluasi dampak dilakukan melalui uji statistik untuk membandingkan nilai perubahan mutu sekolah yang menerapkan kebijakan pembelajaran Koding dan KA dengan sekolah lain dengan kondisi yang relatif sama tetapi tidak menerapkan pembelajaran Koding dan KA.",
-    "executor": "Pelaksana pemantauan dan evaluasi kebijakan pembelajaran dan kecerdasan artifisial di tingkat pusat adalah Badan Standar, Kurikulum, dan Asesmen Pendidikan (BSKAP) melalui Pusat Standar dan Kebijakan Pendidikan.",
+    "aims": {
+      "text": "… (1) menilai proses implementasi kebijakan pembelajaran Koding dan KA; (2) memberikan umpan balik untuk memperbaiki kualitas implementasi kebijakan pembelajaran Koding dan KA; serta (3) menilai dampak dari kebijakan pembelajaran Koding dan KA terutama dalam menumbuhkan kemampuan berpikir kritis dan komputasional peserta didik, misalnya dengan melihat capaian mutu dan hasil belajar peserta didik.",
+      "pages": [
+        91
+      ]
+    },
+    "impact_evaluation": {
+      "text": "Evaluasi dampak dilakukan melalui uji statistik untuk membandingkan nilai perubahan sekolah yang menerapkan kebijakan pembelajaran Koding dan KA dengan sekolah lain dengan kondisi yang relatif sama tetapi tidak menerapkan pembelajaran Koding dan KA.",
+      "pages": [
+        91
+      ]
+    },
+    "executor": {
+      "text": "Pelaksana pemantauan dan evaluasi kebijakan pembelajaran dan kecerdasan artifisial di tingkat pusat adalah Badan Standar, Kurikulum, dan Asesmen Pendidikan (BSKAP) melalui Pusat Standar dan Kebijakan Pendidikan.",
+      "pages": [
+        92
+      ]
+    },
     "pages": [
       91,
       92
