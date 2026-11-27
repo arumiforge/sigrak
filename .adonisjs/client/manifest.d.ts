@@ -4,10 +4,13 @@
  */
 
 /// <reference path="../../adonisrc.ts" />
+/// <reference path="../../config/ai.ts" />
 /// <reference path="../../config/auth.ts" />
 /// <reference path="../../config/hash.ts" />
 /// <reference path="../../config/hosts.ts" />
 /// <reference path="../../config/i18n.ts" />
 /// <reference path="../../config/limiter.ts" />
 /// <reference path="../../config/logger.ts" />
+/// <reference path="../../config/queue.ts" />
 /// <reference path="../../config/redis.ts" />
+/// <reference path="../../config/transmit.ts" />

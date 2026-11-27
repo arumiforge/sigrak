@@ -61,6 +61,7 @@ export default defineConfig({
     () => import('@adonisjs/i18n/i18n_provider'),
     () => import('@adonisjs/redis/redis_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
+    () => import('#providers/transmit_provider'),
   ],
 
   /*
@@ -75,6 +76,10 @@ export default defineConfig({
     () => import('#start/routes'),
     () => import('#start/kernel'),
     () => import('#start/validator'),
+    {
+      file: () => import('#start/transmit'),
+      environment: ['web', 'test'],
+    },
   ],
 
   /*

@@ -1,5 +1,6 @@
 import type { ApiClient, ApiResponse } from '@japa/api-client'
 import { DateTime } from 'luxon'
+import app from '@adonisjs/core/services/app'
 import { hosts, type Area } from '#config/hosts'
 import { sessionCookieNames } from '#config/session'
 import Region from '#models/region'
@@ -11,6 +12,7 @@ import Calendar from '#models/calendar'
 import CalendarEvent from '#models/calendar_event'
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
+import AiCredential from '#models/ai_credential'
 
 export const PASSWORD = 'rahasia-uji-123'
 
@@ -102,6 +104,31 @@ export async function createCalendar(school: School, titles: string[]) {
 }
 
 /**
+ * AI keys for a user, labelled A, B, C… in id order; `backup` marks the
+ * given labels as backup keys (D-119).
+ */
+export async function createAiKeys(user: User, count = 3, backup: string[] = []) {
+  const keys: AiCredential[] = []
+  for (let index = 0; index < count; index++) {
+    const label = String.fromCharCode(65 + index)
+    const key = new AiCredential()
+    key.fill({
+      userId: user.id,
+      label: `Kunci ${label}`,
+      projectLabel: `Project ${label}`,
+      accountLabel: null,
+      status: 'active',
+      isBackup: backup.includes(label),
+      consecutiveFailures: 0,
+    })
+    key.setSecret(`test-key-${unique()}-${label}`)
+    await key.save()
+    keys.push(key)
+  }
+  return keys
+}
+
+/**
  * Cookies of a response, keyed by name (values decoded by the AdonisJS
  * cookie serializer).
  */
@@ -152,4 +179,38 @@ export function visit(
     request.withCookie(cookie.name, cookie.sessionId)
   }
   return request
+}
+
+/**
+ * Sets config values for one test; returns the function that restores
+ * them (use it as a Japa cleanup).
+ */
+export function overrideConfig(values: Record<string, unknown>) {
+  const previous = Object.entries(values).map(([key]) => [key, app.config.get(key)] as const)
+  for (const [key, value] of Object.entries(values)) {
+    app.config.set(key, value)
+  }
+  return () => {
+    for (const [key, value] of previous) {
+      app.config.set(key, value)
+    }
+  }
+}
+
+/**
+ * Polls until `check` returns a value other than undefined/false, or
+ * fails after `timeoutMs`.
+ */
+export async function eventually<T>(
+  check: () => Promise<T | undefined | false>,
+  timeoutMs = 10_000,
+  what = 'condition'
+): Promise<T> {
+  const deadline = Date.now() + timeoutMs
+  while (Date.now() < deadline) {
+    const value = await check()
+    if (value !== undefined && value !== false) return value
+    await new Promise((resolve) => setTimeout(resolve, 25))
+  }
+  throw new Error(`Timed out after ${timeoutMs} ms waiting for ${what}`)
 }

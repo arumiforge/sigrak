@@ -22,6 +22,7 @@ export const iconNames = [
   'close',
   'eye',
   'eye-off',
+  'lab',
 ] as const
 
 export type IconName = (typeof iconNames)[number]
@@ -49,6 +50,7 @@ const placeholderPaths: Partial<Record<IconName, string>> = {
   'error': 'M12 7v6M12 16.5v.5',
   'warning': 'M12 8v5M12 16.5v.5',
   'info': 'M12 11v6M12 7.5v.5',
+  'lab': 'M9.5 4h5M10.5 4v5.5L6 18.5h12l-4.5-9V4M8 14.5h8',
 }
 
 export function Icon({ name, size = 20, label, className, ...props }: IconProps) {
