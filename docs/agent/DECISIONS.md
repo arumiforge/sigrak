@@ -2225,3 +2225,8 @@ Accepted · 2026-11-28 · RS-07 · owner's choice ("sudah ada kesepakatan di lua
 - A problem sent to Plane may carry the school name, besides kabupaten/kota and kecamatan.
 - Text masking before sending to Plane is a lighter pass. Default until the owner says otherwise: pupils' direct identifiers (NIK, NISN, phone numbers, pupil full names) are still removed; other text goes as written.
 Reason: the teams work better with the school named, and the agreement covering this exists offline.
+
+### D-455 — Plane masking: only NIK and phone numbers are removed
+Accepted · 2026-11-28 · RS-07 · owner's choice ("yang tidak dikirim NIK, nomor telepon; NISN dan nama lengkap bisa") · settles the default left open in D-454
+Before a problem is sent to Plane, NIK and phone numbers are removed. Pupils' full names and NISN may be sent, as may the school name (D-454). The agreement covering this is held outside the repository (D-444, D-446). Other channels keep the D-393 masking.
+Reason: the teams need to identify the pupil and school to follow up; NIK and phone numbers are not needed for that.
