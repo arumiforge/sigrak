@@ -2,7 +2,7 @@
 
 - **Audience:** teachers comparing tools; principals checking what the school gets.
 - **Goal:** the complete v1 feature list, grouped the way the app is organised (five teacher menus, then the portals), so nothing on this page surprises a user after sign-in.
-- **Source:** `docs/final/product-concept.md` (Navigation, Feature status, v1 scope). Items marked *Later* or *Remove* there never appear here, except in the "Segera hadir" section, and only those the product concept says are shown as upcoming (D-161, D-220).
+- **Source:** `docs/final/product-concept.md` (Navigation, Feature status, v1 scope). Items marked _Later_ or _Remove_ there never appear here, except in the "Segera hadir" section, and only those the product concept says are shown as upcoming (D-161, D-220).
 - **Add-ons:** features in the D-158 add-on list carry a small text tag "Fitur tambahan" that links to `/harga#fitur-tambahan` (text, not colour alone). The tags are read from the console plan mapping when built (D-211).
 - **Layout:** a sticky in-page index on desktop (left column, the five menus + Portal + Dokumen dan cetak + Kunci AI), a "Lompat ke" select on phones. Each group: H2, one-line lead, then a definition list (feature name + one sentence). One screen crop per group (Codex-made mock screens with abstract text, never real data).
 

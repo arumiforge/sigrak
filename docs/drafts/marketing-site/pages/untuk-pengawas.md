@@ -22,10 +22,10 @@ Visual: Codex brief needed — a pengawas at a table with a principal reviewing 
 
 - H2: "Satu kunjungan, empat langkah"
 - Steps:
-  1. "Pilih sekolah binaan."
-  2. "Lihat kelengkapan dan rekap supervisi tingkat sekolah. Hanya bisa dibaca, tidak bisa diubah."
-  3. "Lakukan validasi akhir perubahan kurikulum sekolah dan PKKS kepala sekolah."
-  4. "Unduh laporan kepengawasan."
+    1. "Pilih sekolah binaan."
+    2. "Lihat kelengkapan dan rekap supervisi tingkat sekolah. Hanya bisa dibaca, tidak bisa diubah."
+    3. "Lakukan validasi akhir perubahan kurikulum sekolah dan PKKS kepala sekolah."
+    4. "Unduh laporan kepengawasan."
 
 ## 3. Yang Anda lihat dan yang tidak
 

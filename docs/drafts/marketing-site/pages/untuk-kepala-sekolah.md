@@ -26,9 +26,9 @@ Layout: three numbered steps with a mock screen per step.
 
 - H2: "Cukup beberapa menit setiap minggu"
 - Steps:
-  1. "Ringkasan — lihat kelengkapan setiap guru minggu ini: lengkap, belum lengkap, atau belum dimulai."
-  2. "Pantau Guru — lihat siapa yang perlu dibantu dan bahan ajar apa yang sudah dibuat. Kirim Pengingat bila perlu, lalu lihat apakah sudah dibaca dan ditindaklanjuti."
-  3. "Validasi — setujui atau kembalikan perubahan kurikulum sekolah, lengkap dengan catatan."
+    1. "Ringkasan — lihat kelengkapan setiap guru minggu ini: lengkap, belum lengkap, atau belum dimulai."
+    2. "Pantau Guru — lihat siapa yang perlu dibantu dan bahan ajar apa yang sudah dibuat. Kirim Pengingat bila perlu, lalu lihat apakah sudah dibaca dan ditindaklanjuti."
+    3. "Validasi — setujui atau kembalikan perubahan kurikulum sekolah, lengkap dengan catatan."
 - Note under the steps: "Bahan ajar yang dibuat guru langsung bisa dipakai. Hanya kurikulum yang diubah atau ditambah sekolah yang perlu disetujui."
 
 ## 3. Bagian lain portal kepala sekolah

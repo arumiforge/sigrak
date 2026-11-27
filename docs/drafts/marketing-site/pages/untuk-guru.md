@@ -35,11 +35,11 @@ Visual: Codex brief needed — a phone showing a wizard question with large radi
 - H2: "Bahan ajar tanpa mulai dari nol"
 - Body: "Pilih templat, lalu jawab pertanyaan yang biasa Anda pikirkan: topik, tujuan pembelajaran, kondisi murid, model pembelajaran, dan lama pelajaran. Setiap pertanyaan sudah punya jawaban contoh. Kelas, mapel, CP, dan JP diambil dari jadwal dan kurikulum, jadi Anda tidak mengetiknya lagi."
 - List intro: "Setelah hasilnya jadi, Anda bisa:"
-  - "mengubah teks di mana saja."
-  - "memperbaiki satu bagian tanpa mengulang semuanya."
-  - "mengunduh PDF atau Word dengan kop sekolah."
-  - "membukanya di Canva untuk dihias."
-  - "menayangkan Quiz Battle di kelas atau mengunduhnya untuk dimainkan tanpa internet (fitur tambahan Game kelas; guru boleh mencobanya 7 hari)."
+    - "mengubah teks di mana saja."
+    - "memperbaiki satu bagian tanpa mengulang semuanya."
+    - "mengunduh PDF atau Word dengan kop sekolah."
+    - "membukanya di Canva untuk dihias."
+    - "menayangkan Quiz Battle di kelas atau mengunduhnya untuk dimainkan tanpa internet (fitur tambahan Game kelas; guru boleh mencobanya 7 hari)."
 
 ## 4. Di kelas, cukup satu tangan
 
@@ -62,11 +62,11 @@ Layout: a plain bordered note box (neutral border, no side stripe), because this
 - H2: "Yang perlu Anda siapkan: kunci AI"
 - Body: "Untuk membuat bahan ajar, Sigrak memakai kunci AI Gemini dari akun Google Anda sendiri, versi gratis. Panduan kami menunjukkan cara membuatnya, langkah demi langkah."
 - List intro: "Yang perlu Anda tahu:"
-  - "biaya AI tidak ditagih Sigrak."
-  - "versi gratis punya batas pemakaian harian dari Google. Bila semua kunci Anda sedang di batas, Sigrak memberi tahu kapan bisa dicoba lagi."
-  - "Anda boleh menambah beberapa kunci, atas pilihan dan risiko Anda sendiri."
-  - "data pribadi murid tidak pernah dikirim ke AI."
-  - "Kehadiran, jurnal, nilai, dan fitur lain tetap bisa dipakai tanpa kunci AI."
+    - "biaya AI tidak ditagih Sigrak."
+    - "versi gratis punya batas pemakaian harian dari Google. Bila semua kunci Anda sedang di batas, Sigrak memberi tahu kapan bisa dicoba lagi."
+    - "Anda boleh menambah beberapa kunci, atas pilihan dan risiko Anda sendiri."
+    - "data pribadi murid tidak pernah dikirim ke AI."
+    - "Kehadiran, jurnal, nilai, dan fitur lain tetap bisa dipakai tanpa kunci AI."
 - Link: "Baca kebijakan AI" → `/kebijakan-ai`
 
 ## 7. Harga untuk guru

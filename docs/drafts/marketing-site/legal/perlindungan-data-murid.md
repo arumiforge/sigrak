@@ -155,23 +155,23 @@ Perjanjian ini tunduk pada hukum Republik Indonesia, termasuk UU PDP dan Peratur
 
 **Tujuan pemrosesan:**
 
-| Tujuan | Kategori data | Catatan |
-| --- | --- | --- |
-| Data kelas dan murid | Nama, NISN, jenis kelamin, tanggal lahir, kelas, nomor absen, status pindah atau keluar | [Sesuaikan dengan kolom akhir di aplikasi] |
-| Pengelompokan kelas agama | Agama murid | Hanya untuk mengelompokkan kelas agama; tidak dilihat pengawas, tidak dikirim ke AI |
-| Kehadiran harian | Tanggal, status hadir, alasan tidak hadir | |
-| Jurnal dan catatan murid | Catatan anekdot, bimbingan, prestasi | Catatan bimbingan tidak masuk Berkas Administrasi, tampilan pengawas, atau AI |
-| Asesmen dan rapor | Nilai per tujuan pembelajaran, hasil observasi dan rubrik, deskripsi capaian, catatan wali kelas, tanggapan orang tua | |
-| Hasil asesmen sensitif | Hasil sosial-emosional, kebutuhan khusus, minat dan bakat | Tidak dijadikan label tetap atau diagnosis |
-| Kenaikan dan kelulusan | Keputusan kenaikan, data SKL dan ijazah | |
-| Kunjungan rumah dan kesehatan ringan | Catatan kunjungan, keadaan kesehatan ringan | Data spesifik; hanya guru kelas, operator, kepala sekolah |
-| Hubungan dengan orang tua | Nama dan nomor WhatsApp orang tua atau wali, catatan kontak | Pesan dikirim dari WhatsApp guru |
-| Peta sebaran murid | Desa atau kelurahan tempat tinggal | Tidak ada titik rumah |
-| Ekstrakurikuler | Keanggotaan, kehadiran, deskripsi | |
-| Tabungan dan keuangan kelas | Setoran, penarikan, sumbangan sukarela | Hanya bila Sekolah menyalakan menu ini |
-| Simulasi TKA | Kartu login sekali pakai, jawaban, nilai | Kartu login berhenti berlaku saat sesi ditutup |
-| Akun staf sekolah | Nama, email, peran, NIP bila diisi | |
-| Bantuan kepada Sekolah | Tampilan baca saja | Lihat Pasal 7 angka 4 |
+| Tujuan                               | Kategori data                                                                                                         | Catatan                                                                             |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Data kelas dan murid                 | Nama, NISN, jenis kelamin, tanggal lahir, kelas, nomor absen, status pindah atau keluar                               | [Sesuaikan dengan kolom akhir di aplikasi]                                          |
+| Pengelompokan kelas agama            | Agama murid                                                                                                           | Hanya untuk mengelompokkan kelas agama; tidak dilihat pengawas, tidak dikirim ke AI |
+| Kehadiran harian                     | Tanggal, status hadir, alasan tidak hadir                                                                             |                                                                                     |
+| Jurnal dan catatan murid             | Catatan anekdot, bimbingan, prestasi                                                                                  | Catatan bimbingan tidak masuk Berkas Administrasi, tampilan pengawas, atau AI       |
+| Asesmen dan rapor                    | Nilai per tujuan pembelajaran, hasil observasi dan rubrik, deskripsi capaian, catatan wali kelas, tanggapan orang tua |                                                                                     |
+| Hasil asesmen sensitif               | Hasil sosial-emosional, kebutuhan khusus, minat dan bakat                                                             | Tidak dijadikan label tetap atau diagnosis                                          |
+| Kenaikan dan kelulusan               | Keputusan kenaikan, data SKL dan ijazah                                                                               |                                                                                     |
+| Kunjungan rumah dan kesehatan ringan | Catatan kunjungan, keadaan kesehatan ringan                                                                           | Data spesifik; hanya guru kelas, operator, kepala sekolah                           |
+| Hubungan dengan orang tua            | Nama dan nomor WhatsApp orang tua atau wali, catatan kontak                                                           | Pesan dikirim dari WhatsApp guru                                                    |
+| Peta sebaran murid                   | Desa atau kelurahan tempat tinggal                                                                                    | Tidak ada titik rumah                                                               |
+| Ekstrakurikuler                      | Keanggotaan, kehadiran, deskripsi                                                                                     |                                                                                     |
+| Tabungan dan keuangan kelas          | Setoran, penarikan, sumbangan sukarela                                                                                | Hanya bila Sekolah menyalakan menu ini                                              |
+| Simulasi TKA                         | Kartu login sekali pakai, jawaban, nilai                                                                              | Kartu login berhenti berlaku saat sesi ditutup                                      |
+| Akun staf sekolah                    | Nama, email, peran, NIP bila diisi                                                                                    |                                                                                     |
+| Bantuan kepada Sekolah               | Tampilan baca saja                                                                                                    | Lihat Pasal 7 angka 4                                                               |
 
 **Lama pemrosesan:** selama perjanjian berlaku, ditambah masa pada Pasal 13.
 
@@ -179,14 +179,14 @@ Perjanjian ini tunduk pada hukum Republik Indonesia, termasuk UU PDP dan Peratur
 
 ## Lampiran B: Daftar subprosesor
 
-| Layanan | Subprosesor | Data yang diproses | Lokasi |
-| --- | --- | --- | --- |
-| Server aplikasi, basis data, dan berkas | [Nama penyedia server] | Semua data Sekolah | Indonesia, [kota] |
-| Server cadangan siaga | [Nama penyedia server cadangan] | Dipulihkan dari cadangan saat gangguan besar | Indonesia, [kota] |
-| Jaringan, terowongan terenkripsi, dan perlindungan serangan | [Nama penyedia jaringan] | Lalu lintas terenkripsi menuju aplikasi | [Lokasi] |
-| Penyimpanan cadangan terenkripsi dan berkas tanpa data pribadi | [Nama penyedia penyimpanan cadangan] | Cadangan terenkripsi; berkas tanpa data pribadi | [Lokasi] |
-| Penyimpanan cadangan kedua | [Nama penyedia penyimpanan cadangan kedua] | Salinan bulanan terenkripsi | [Lokasi] |
-| Email layanan | [Penyedia email] | Nama dan email staf sekolah; tidak ada data murid | [Lokasi] |
-| Asisten sekolah (bila dinyalakan) | [Daftar penyedia AI asisten] | Pertanyaan dan potongan data yang sudah disamarkan | [Lokasi] |
+| Layanan                                                        | Subprosesor                                | Data yang diproses                                 | Lokasi            |
+| -------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------- | ----------------- |
+| Server aplikasi, basis data, dan berkas                        | [Nama penyedia server]                     | Semua data Sekolah                                 | Indonesia, [kota] |
+| Server cadangan siaga                                          | [Nama penyedia server cadangan]            | Dipulihkan dari cadangan saat gangguan besar       | Indonesia, [kota] |
+| Jaringan, terowongan terenkripsi, dan perlindungan serangan    | [Nama penyedia jaringan]                   | Lalu lintas terenkripsi menuju aplikasi            | [Lokasi]          |
+| Penyimpanan cadangan terenkripsi dan berkas tanpa data pribadi | [Nama penyedia penyimpanan cadangan]       | Cadangan terenkripsi; berkas tanpa data pribadi    | [Lokasi]          |
+| Penyimpanan cadangan kedua                                     | [Nama penyedia penyimpanan cadangan kedua] | Salinan bulanan terenkripsi                        | [Lokasi]          |
+| Email layanan                                                  | [Penyedia email]                           | Nama dan email staf sekolah; tidak ada data murid  | [Lokasi]          |
+| Asisten sekolah (bila dinyalakan)                              | [Daftar penyedia AI asisten]               | Pertanyaan dan potongan data yang sudah disamarkan | [Lokasi]          |
 
 Catatan: pembuatan bahan ajar memakai kunci AI Gemini milik guru sendiri, bukan milik kami. Data pribadi murid tidak dikirim ke layanan itu (Pasal 6). Halaman status layanan dan pemantauan dari luar tidak memproses data pribadi.

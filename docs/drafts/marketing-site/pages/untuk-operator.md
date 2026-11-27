@@ -2,7 +2,7 @@
 
 - **Audience:** operator sekolah (school admin staff), usually on a laptop.
 - **Goal:** show that the start of the school year is four clear steps and that daily school data has one owner; lead to contact (the operator account comes with Sigrak Sekolah).
-- **Claim limits:** Dapodik sync and Buku Induk are *not* v1 (D-161); this page mentions them only in the "Segera hadir" line. The 14-working-day reminder for transfers is v1 (D-304).
+- **Claim limits:** Dapodik sync and Buku Induk are _not_ v1 (D-161); this page mentions them only in the "Segera hadir" line. The 14-working-day reminder for transfers is v1 (D-304).
 
 ## Share preview
 
@@ -25,10 +25,10 @@ Layout: numbered steps, each with a short mock screen.
 
 - H2: "Empat langkah awal tahun"
 - Steps:
-  1. "Atur tahun ajaran dan kelas. Tahun ajaran yang sudah ditutup tersimpan di Arsip Tahun Ajaran dan tetap bisa dilihat serta diunduh."
-  2. "Undang guru. Setiap guru menerima tautan undangan dan membuat kata sandinya sendiri. Tidak ada kata sandi bersama."
-  3. "Isi jadwal pelajaran. Sigrak bisa menyusun draf jadwal dan memeriksa bentrok."
-  4. "Tetapkan kalender pendidikan. Salin kalender daerah Anda, tambahkan acara sekolah, lalu Sigrak menghitung hari dan minggu efektif."
+    1. "Atur tahun ajaran dan kelas. Tahun ajaran yang sudah ditutup tersimpan di Arsip Tahun Ajaran dan tetap bisa dilihat serta diunduh."
+    2. "Undang guru. Setiap guru menerima tautan undangan dan membuat kata sandinya sendiri. Tidak ada kata sandi bersama."
+    3. "Isi jadwal pelajaran. Sigrak bisa menyusun draf jadwal dan memeriksa bentrok."
+    4. "Tetapkan kalender pendidikan. Salin kalender daerah Anda, tambahkan acara sekolah, lalu Sigrak menghitung hari dan minggu efektif."
 
 ## 3. Data sekolah punya satu pemilik
 

@@ -47,15 +47,15 @@ Data yang dimasukkan sekolah tentang murid, orang tua atau wali, dan staf sekola
 
 ## 3. Untuk apa data dipakai
 
-| Tujuan | Data | Dasar pemrosesan |
-| --- | --- | --- |
-| Membuat dan menjalankan akun Anda | Data akun, profil, Konten Anda | Pelaksanaan perjanjian dengan Anda |
-| Membuat bahan ajar dengan kunci AI Anda | Kunci AI, jawaban templat, kurikulum, riwayat pemakaian AI | Pelaksanaan perjanjian dengan Anda |
-| Menerima dan memeriksa pembayaran | Data pembayaran | Pelaksanaan perjanjian; kewajiban hukum untuk pencatatan keuangan |
-| Membantu Anda dan menjawab pertanyaan | Permintaan bantuan, data kontak | Pelaksanaan perjanjian; kepentingan yang sah |
-| Menjaga keamanan layanan | Catatan keamanan | Kepentingan yang sah; kewajiban hukum |
-| Mengirim kabar layanan (perubahan syarat, gangguan, tagihan) | Email | Pelaksanaan perjanjian |
-| Mengirim kabar acara atau fitur baru | Email atau nomor WhatsApp | Persetujuan Anda, yang bisa ditarik kapan saja |
+| Tujuan                                                       | Data                                                       | Dasar pemrosesan                                                  |
+| ------------------------------------------------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------- |
+| Membuat dan menjalankan akun Anda                            | Data akun, profil, Konten Anda                             | Pelaksanaan perjanjian dengan Anda                                |
+| Membuat bahan ajar dengan kunci AI Anda                      | Kunci AI, jawaban templat, kurikulum, riwayat pemakaian AI | Pelaksanaan perjanjian dengan Anda                                |
+| Menerima dan memeriksa pembayaran                            | Data pembayaran                                            | Pelaksanaan perjanjian; kewajiban hukum untuk pencatatan keuangan |
+| Membantu Anda dan menjawab pertanyaan                        | Permintaan bantuan, data kontak                            | Pelaksanaan perjanjian; kepentingan yang sah                      |
+| Menjaga keamanan layanan                                     | Catatan keamanan                                           | Kepentingan yang sah; kewajiban hukum                             |
+| Mengirim kabar layanan (perubahan syarat, gangguan, tagihan) | Email                                                      | Pelaksanaan perjanjian                                            |
+| Mengirim kabar acara atau fitur baru                         | Email atau nomor WhatsApp                                  | Persetujuan Anda, yang bisa ditarik kapan saja                    |
 
 Kami tidak memakai data Anda untuk iklan, tidak menjualnya, dan tidak memakainya untuk melatih model AI.
 
@@ -84,15 +84,15 @@ Penjelasan lengkap ada di halaman [Kebijakan AI](/kebijakan-ai).
 
 ## 7. Berapa lama data disimpan
 
-| Data | Lama penyimpanan |
-| --- | --- |
-| Data akun dan Konten Anda | Selama akun aktif, lalu [jumlah] hari setelah akun ditutup supaya Anda sempat mengunduhnya |
-| Riwayat pemakaian AI | 1 bulan |
-| Data pembayaran | [Jumlah] tahun, sesuai kewajiban pencatatan keuangan |
-| Permintaan bantuan | [Jumlah] bulan setelah selesai |
-| Formulir kontak dan pendaftaran acara | [Jumlah] bulan |
-| Catatan keamanan | [Jumlah] hari |
-| Cadangan terenkripsi | 7 hari di server, 30 hari di penyimpanan cadangan, dan salinan bulanan selama [jumlah] bulan |
+| Data                                  | Lama penyimpanan                                                                             |
+| ------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Data akun dan Konten Anda             | Selama akun aktif, lalu [jumlah] hari setelah akun ditutup supaya Anda sempat mengunduhnya   |
+| Riwayat pemakaian AI                  | 1 bulan                                                                                      |
+| Data pembayaran                       | [Jumlah] tahun, sesuai kewajiban pencatatan keuangan                                         |
+| Permintaan bantuan                    | [Jumlah] bulan setelah selesai                                                               |
+| Formulir kontak dan pendaftaran acara | [Jumlah] bulan                                                                               |
+| Catatan keamanan                      | [Jumlah] hari                                                                                |
+| Cadangan terenkripsi                  | 7 hari di server, 30 hari di penyimpanan cadangan, dan salinan bulanan selama [jumlah] bulan |
 
 Setelah masa simpan berakhir, data dihapus atau dibuat anonim secara otomatis. Data yang sudah dihapus dari aplikasi ikut hilang dari cadangan setelah masa simpan cadangan berakhir.
 

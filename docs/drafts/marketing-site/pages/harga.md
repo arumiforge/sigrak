@@ -22,12 +22,12 @@
 
 Copy (table):
 
-| Paket | Untuk | Isi | Harga | Dibayar oleh |
-| --- | --- | --- | --- | --- |
-| Uji coba (`#uji-coba`) | Satu guru | Semua fitur guru selama 7 hari | Tanpa biaya | — |
-| Sigrak Guru (`#sigrak-guru`) | Satu guru | Semua fitur guru | Rp60.000 per tahun ajaran, atau Rp50.000 bila sekolah Anda berlangganan Sigrak Sekolah | Guru |
-| Sigrak Sekolah (`#sigrak-sekolah`) | Satu sekolah | Dua akun, kepala sekolah dan operator, lengkap dengan portalnya: validasi, pengaturan cetak sekolah, undangan guru, dan data sekolah | Rp100.000 per tahun ajaran | Sekolah |
-| Sigrak Binaan (`#sigrak-binaan`) | Satu pengawas atau gugus KKG | Portal pengawas | Tanpa biaya, terbuka setelah 5 atau lebih sekolah binaan berlangganan Sigrak Sekolah | — |
+| Paket                              | Untuk                        | Isi                                                                                                                                  | Harga                                                                                  | Dibayar oleh |
+| ---------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | ------------ |
+| Uji coba (`#uji-coba`)             | Satu guru                    | Semua fitur guru selama 7 hari                                                                                                       | Tanpa biaya                                                                            | —            |
+| Sigrak Guru (`#sigrak-guru`)       | Satu guru                    | Semua fitur guru                                                                                                                     | Rp60.000 per tahun ajaran, atau Rp50.000 bila sekolah Anda berlangganan Sigrak Sekolah | Guru         |
+| Sigrak Sekolah (`#sigrak-sekolah`) | Satu sekolah                 | Dua akun, kepala sekolah dan operator, lengkap dengan portalnya: validasi, pengaturan cetak sekolah, undangan guru, dan data sekolah | Rp100.000 per tahun ajaran                                                             | Sekolah      |
+| Sigrak Binaan (`#sigrak-binaan`)   | Satu pengawas atau gugus KKG | Portal pengawas                                                                                                                      | Tanpa biaya, terbuka setelah 5 atau lebih sekolah binaan berlangganan Sigrak Sekolah   | —            |
 
 Under the table:
 
@@ -39,12 +39,12 @@ Under the table:
 - H2: "Fitur tambahan untuk sekolah"
 - Lead: "Sekolah yang berlangganan Sigrak Sekolah bisa menyalakan fitur tambahan untuk semua akunnya. Setiap fitur Rp50.000 per tahun ajaran."
 - List:
-  - "Simulasi TKA — ujian latihan kelas 6 dengan kartu login, token dari pengawas, dan hasil per tingkat."
-  - "Game kelas — Quiz Battle, tayangkan di kelas, dan unduh game untuk dimainkan tanpa internet."
-  - "Rapor — leger, draf deskripsi capaian, dan ekspor rapor."
-  - "Keuangan dan Inventaris kelas — sumbangan sukarela, tabungan murid, dan barang di kelas."
-  - "Buku Sekolah — buku tamu, humas, dan notulen."
-  - "Buku Induk dan sinkron data Dapodik — segera hadir."
+    - "Simulasi TKA — ujian latihan kelas 6 dengan kartu login, token dari pengawas, dan hasil per tingkat."
+    - "Game kelas — Quiz Battle, tayangkan di kelas, dan unduh game untuk dimainkan tanpa internet."
+    - "Rapor — leger, draf deskripsi capaian, dan ekspor rapor."
+    - "Keuangan dan Inventaris kelas — sumbangan sukarela, tabungan murid, dan barang di kelas."
+    - "Buku Sekolah — buku tamu, humas, dan notulen."
+    - "Buku Induk dan sinkron data Dapodik — segera hadir."
 - Note line: "Daftar fitur tambahan bisa berubah. Perubahan diumumkan di halaman Apa yang baru sebelum tahun ajaran berikutnya."
 
 ## 4. Setelah uji coba
@@ -58,9 +58,9 @@ Under the table:
 
 - H2: "Cara membayar"
 - Steps:
-  1. "Pilih paket di menu Paket Saya (guru) atau Pengaturan Sekolah > Langganan (kepala sekolah)."
-  2. "Bayar lewat QRIS dengan nominal yang tertera, termasuk kode unik di belakangnya."
-  3. "Tim Sigrak memeriksa pembayaran Anda, lalu paket aktif. [Lama pemeriksaan, misalnya 1 hari kerja]."
+    1. "Pilih paket di menu Paket Saya (guru) atau Pengaturan Sekolah > Langganan (kepala sekolah)."
+    2. "Bayar lewat QRIS dengan nominal yang tertera, termasuk kode unik di belakangnya."
+    3. "Tim Sigrak memeriksa pembayaran Anda, lalu paket aktif. [Lama pemeriksaan, misalnya 1 hari kerja]."
 - Body: "Langganan sekolah dibayar dari dana di luar BOS."
 - Body 2: "Butuh kuitansi atau cara bayar lain? Hubungi kami lewat WhatsApp."
 

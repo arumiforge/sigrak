@@ -53,10 +53,10 @@ Copy:
 - H2: "Anda menjawab pertanyaan, bukan menulis perintah"
 - Lead: "Setiap templat dibuat Tim Sigrak. Anda cukup menjawab pertanyaan yang biasa Anda pikirkan saat menyiapkan pelajaran."
 - Steps:
-  1. "Pilih templat: RPM, Bank Soal, LKPD, Quiz Battle, atau yang lain."
-  2. "Jawab beberapa pertanyaan: topik, tujuan pembelajaran, kondisi murid, dan lama pelajaran. Kelas, mapel, CP, dan JP sudah diisi Sigrak."
-  3. "Sigrak menyusun isinya dengan kunci AI Anda. Anda boleh pindah ke halaman lain dan akan diberi tahu saat selesai."
-  4. "Periksa dan ubah sesuka Anda. Perbaiki satu bagian saja tanpa mengulang semuanya, lalu unduh PDF atau Word."
+    1. "Pilih templat: RPM, Bank Soal, LKPD, Quiz Battle, atau yang lain."
+    2. "Jawab beberapa pertanyaan: topik, tujuan pembelajaran, kondisi murid, dan lama pelajaran. Kelas, mapel, CP, dan JP sudah diisi Sigrak."
+    3. "Sigrak menyusun isinya dengan kunci AI Anda. Anda boleh pindah ke halaman lain dan akan diberi tahu saat selesai."
+    4. "Periksa dan ubah sesuka Anda. Perbaiki satu bagian saja tanpa mengulang semuanya, lalu unduh PDF atau Word."
 - Closing line: "Anda tetap penulisnya. Semua hasil bisa diubah sebelum dipakai."
 
 ## 4. Yang bisa Anda buat
@@ -98,10 +98,10 @@ Copy:
 
 - H2: "Data sekolah tetap milik sekolah"
 - List intro: "Kami menjaga data murid dengan aturan yang jelas:"
-  - "data pribadi murid tidak pernah dikirim ke AI."
-  - "murid bukan pengguna aplikasi guru. Mereka hanya masuk ke situs Simulasi TKA dengan kartu login sekali pakai."
-  - "berkas yang memuat data pribadi murid disimpan di server di Indonesia."
-  - "setiap peran hanya melihat data yang menjadi tugasnya."
+    - "data pribadi murid tidak pernah dikirim ke AI."
+    - "murid bukan pengguna aplikasi guru. Mereka hanya masuk ke situs Simulasi TKA dengan kartu login sekali pakai."
+    - "berkas yang memuat data pribadi murid disimpan di server di Indonesia."
+    - "setiap peran hanya melihat data yang menjadi tugasnya."
 - Links: "Baca perjanjian perlindungan data murid" → `/perlindungan-data-murid` · "Cara Sigrak memakai AI" → `/kebijakan-ai`
 
 ## 7. Untuk SD dan madrasah
