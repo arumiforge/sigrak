@@ -3,7 +3,7 @@
 - **Status:** usulan pemilik, siap diolah menjadi draft dan tugas
 - **Tanggal:** 9 November 2026
 - **Penyusun:** pemilik produk (disusun bersama Claude)
-- **Basis repo:** `arumiforge/sinaubareng` commit `64aff02` (8 Nov 2026). Keputusan terakhir yang dirujuk: D-251
+- **Basis repo:** `arumiforge/sigrak` commit `64aff02` (8 Nov 2026). Keputusan terakhir yang dirujuk: D-251
 - **Basis pembanding:** portal aplikasi lama versi 5.20.7xx–8xx (portal guru, portal kepala sekolah, portal pengawas, super admin), dibaca 8–9 November 2026
 - **Data pendukung:** folder [`data/`](data/README.md) di samping dokumen ini
 
@@ -561,7 +561,7 @@ Lihat `data/aturan-progres-aplikasi-lama.json`.
 
 ## 9. Rujukan
 
-**Repo `arumiforge/sinaubareng`.** `CLAUDE.md`, `docs/agent/DECISIONS.md` (D-010, D-016, D-019, D-029, D-031, D-036, D-153, D-158, D-205, D-210, D-213…D-219, D-221, D-224, D-240, D-247…D-251), `docs/final/product-concept.md`, `docs/final/data-model.md`, `docs/final/content-engine.md`, `docs/final/export-localization.md`, `docs/final/design-system.md`, `docs/drafts/administration-features.md`, `docs/drafts/teacher-supervision-instruments.md`, `docs/data/regulations/cocurricular-guide-bskap.json`, dan migrasi `academic_years`.
+**Repo `arumiforge/sigrak`.** `CLAUDE.md`, `docs/agent/DECISIONS.md` (D-010, D-016, D-019, D-029, D-031, D-036, D-153, D-158, D-205, D-210, D-213…D-219, D-221, D-224, D-240, D-247…D-251), `docs/final/product-concept.md`, `docs/final/data-model.md`, `docs/final/content-engine.md`, `docs/final/export-localization.md`, `docs/final/design-system.md`, `docs/drafts/administration-features.md`, `docs/drafts/teacher-supervision-instruments.md`, `docs/data/regulations/cocurricular-guide-bskap.json`, dan migrasi `academic_years`.
 
 **Aplikasi lama (aset statis, dibaca 8–9 November 2026).** `libur-nasional.js`, `shared-cocurricular-catalog.js`, `shared-cocurricular-autofill.js`, `aplikasi-lama-progres.js`, `aplikasi-lama-cover.js`, `aplikasi-lama-pengesahan.js`, `edx-bunyi.js`, `administrasi.html`, `sandi.html`, `rpm-generator.html`, `kepala-sekolah/principal-supervision.js`, `kepala-sekolah/principal-document-output.js`, `kepala-sekolah/principal-conflict-guard.js`, `pengawas/`, `superadmin.html`. Ukuran dan SHA-256 tercatat di `data/*.json`.
 

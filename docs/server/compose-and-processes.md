@@ -37,7 +37,7 @@ GlitchTip dan pemantauan berjalan sebagai proyek terpisah, `sigrak-ops`, satu pe
 
 ## Deploy
 
-1. CI membangun image dari commit yang pasti (label `org.opencontainers.image.revision`), tag = 12 karakter pertama commit, disimpan di GitHub Container Registry (privat).
+1. CI membangun image dari commit yang pasti (label `org.opencontainers.image.revision`), tag = 12 karakter pertama commit, disimpan di GitHub Container Registry (privat) sebagai `ghcr.io/arumiforge/sigrak`. Nama `owner/repo` hanya ditulis di satu variabel CI (`REPOSITORY`).
 2. Staging dulu; produksi menjalankan **image yang sama** yang sudah jalan di staging.
 3. Setiap deploy: backup → `migrate` → `docker compose up -d --wait`. Salinan web diganti satu per satu supaya aplikasi tetap menyala.
 4. Image sebelumnya disimpan untuk rollback satu perintah. Migrasi tidak di-rollback; pulihkan backup sebagai gantinya.

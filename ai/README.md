@@ -17,7 +17,7 @@ Statuses: `requested` → `generated` (delivered by Codex) → `done` (installed
 ## Codex starter prompt
 
 ```
-Work in the GitHub repository arumiforge/sinaubareng, starting from the latest main. Read AGENTS.md and ai/CODEX.md and follow them exactly; they point you to ai/style-guide.md and the briefs in ai/prompts/. Make the assets of ONE batch from the queue in ai/README.md (the first batch with status "requested"), check them with python3 ai/tools/check_assets.py, and deliver them only in ai/generated/ (plus the status lines) on a new branch art/codex-<YYYYMMDD>-<batch>, with one pull request into main. Commit as Arumi Studios <arumiforge@gmail.com>. Do not change anything else, do not merge, and add no AI attribution anywhere.
+Work in the GitHub repository arumiforge/sigrak, starting from the latest main. Read AGENTS.md and ai/CODEX.md and follow them exactly; they point you to ai/style-guide.md and the briefs in ai/prompts/. Make the assets of ONE batch from the queue in ai/README.md (the first batch with status "requested"), check them with python3 ai/tools/check_assets.py, and deliver them only in ai/generated/ (plus the status lines) on a new branch art/codex-<YYYYMMDD>-<batch>, with one pull request into main. Commit as Arumi Studios <arumiforge@gmail.com>. Do not change anything else, do not merge, and add no AI attribution anywhere.
 ```
 
 ## Queue

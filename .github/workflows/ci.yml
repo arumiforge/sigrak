@@ -9,6 +9,11 @@ on:
 permissions:
   contents: read
 
+# The repository (owner/repo) is named in one place only. The R3 image job pushes to
+# ghcr.io/${{ env.REPOSITORY }}, which is ghcr.io/arumiforge/sigrak.
+env:
+  REPOSITORY: ${{ github.repository }}
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
