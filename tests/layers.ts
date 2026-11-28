@@ -196,7 +196,7 @@ export async function layerFixtures() {
   registerDomainAdapter(testAdapter)
   await seedJawaTengah()
   await syncLayerDomains(db.connection())
-  LayerResolver.clearCache()
+  await LayerResolver.clearCache()
   const sdJati = await createSchoolIn('SD Uji Jati', '90000001', '33.19.03')
   const miJati = await createSchoolIn('MI Uji Jati', '90000002', '33.19.03')
   miJati.level = 'mi'
