@@ -6,6 +6,7 @@ import {
   type ResolveInput,
 } from './policy/policy_profile_resolver.js'
 import type { SubjectDelivery, SubjectTransition } from './models/subject.js'
+import { artBranches } from './types.js'
 import type {
   AllocationStatus,
   ArtBranch,
@@ -187,12 +188,15 @@ export class SubjectsForGrade {
           status = period.status
           condition = period.condition ?? null
         }
+      } else if (base.status === 'optional') {
+        // SIGRAK content a school switches on, off by default (Bahasa Inggris
+        // grades 1–2, Tata Boga; D-204). `kind` still says local_content.
+        status = 'optional'
       } else if (base.kind === 'local_content') {
         status = 'local_content'
       } else if (base.status === 'elective') {
         status = 'elective'
       } else {
-        // In the SIGRAK data but not in the structure (Bahasa Inggris grades 1–2, D-204).
         status = 'optional'
       }
 
@@ -205,6 +209,7 @@ export class SubjectsForGrade {
           s2Jp: row.s2_jp,
           hasTopics: (topicCounts.get(`${subjectId}|${row.art_branch}`) ?? 0) > 0,
         }))
+        .sort((a, b) => artBranches.indexOf(a.artBranch) - artBranches.indexOf(b.artBranch))
 
       subjects.push({
         subjectId,
