@@ -65,6 +65,7 @@ export function ConfirmAction({
   action,
   data,
   label,
+  ariaLabel,
   title,
   description,
   confirmLabel,
@@ -78,6 +79,8 @@ export function ConfirmAction({
   action: string
   data?: RequestPayload
   label: string
+  /** Fuller name when the visible label repeats on every row ("Hapus Matematika"). */
+  ariaLabel?: string
   title: string
   description?: ReactNode
   confirmLabel: string
@@ -98,6 +101,7 @@ export function ConfirmAction({
         variant={variant}
         size={size}
         className={className}
+        aria-label={ariaLabel}
         disabled={processing}
         onClick={() => setOpen(true)}
       >

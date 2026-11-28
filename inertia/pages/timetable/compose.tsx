@@ -1,7 +1,9 @@
-import { useState, type ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { useState } from 'react'
+import { Form, Link } from '@inertiajs/react'
 import { Section } from '~/components/section'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip, type StatusTone } from '~/components/patterns/status_chip'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
 import { Checkbox, Select } from '~/components/school_year/fields'
@@ -42,6 +44,14 @@ type Props = {
   drafts: DraftSummary[]
 }
 
+const DRAFT_TONE: Record<DraftSummary['status'], StatusTone> = {
+  queued: 'neutral',
+  running: 'info',
+  ready: 'brand',
+  failed: 'danger',
+  saved: 'ok',
+}
+
 /** Form field names of the switches. */
 const PREFERENCE_FIELDS: Record<PreferenceKey, string> = {
   maxConsecutive: 'max_consecutive',
@@ -68,15 +78,14 @@ export default function ComposeTimetable({
   const t = useT()
   return (
     <>
-      <Head title={t('timetable.compose.title')} />
-      <Link
-        href={year ? `/jadwal?tahun=${year.publicId}` : '/jadwal'}
-        className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong"
-      >
-        {t('timetable.compose.back')}
-      </Link>
-      <h1 className="text-2xl font-bold">{t('timetable.compose.title')}</h1>
-      <p className="mt-2 max-w-3xl text-muted">{t('timetable.compose.intro')}</p>
+      <PageHeader
+        title={t('timetable.compose.title')}
+        back={{
+          href: year ? `/jadwal?tahun=${year.publicId}` : '/jadwal',
+          label: t('timetable.compose.back'),
+        }}
+        description={t('timetable.compose.intro')}
+      />
       {year && (
         <YearChips
           years={years}
@@ -92,11 +101,13 @@ export default function ComposeTimetable({
         <div className="min-w-0 space-y-4 self-start">
           <Section title={t('timetable.compose.generate_title')}>
             {year === null ? (
-              <p className="text-muted">{t('timetable.no_year')}</p>
+              <EmptyState compact icon="school-years" description={t('timetable.no_year')} />
             ) : year.closed ? (
-              <p className="text-sm text-warn">{t('timetable.closed_note')}</p>
+              <p className="rounded-md border border-warn/35 bg-warn-tint p-3 text-sm">
+                {t('timetable.closed_note')}
+              </p>
             ) : classes.length === 0 ? (
-              <p className="text-muted">{t('timetable.compose.no_classes')}</p>
+              <EmptyState compact icon="classes" description={t('timetable.compose.no_classes')} />
             ) : (
               <Form action="/jadwal/susun-draf" method="post" className="space-y-4">
                 {({ errors, processing }) => (
@@ -116,7 +127,7 @@ export default function ComposeTimetable({
                       error={errors.target}
                       hint={t('timetable.compose.generate_hint')}
                     />
-                    <Button type="submit" disabled={processing}>
+                    <Button type="submit" disabled={processing} className="w-full sm:w-auto">
                       {t('timetable.compose.generate_action')}
                     </Button>
                   </>
@@ -127,20 +138,26 @@ export default function ComposeTimetable({
 
           <Section title={t('timetable.compose.drafts_title')}>
             {drafts.length === 0 ? (
-              <p className="text-muted">{t('timetable.compose.drafts_empty')}</p>
+              <EmptyState
+                compact
+                icon="timetable"
+                description={t('timetable.compose.drafts_empty')}
+              />
             ) : (
               <ul className="divide-y">
                 {drafts.map((draft) => (
                   <li key={draft.publicId} className="flex items-center justify-between gap-3 py-2">
                     <div className="min-w-0">
                       <p className="truncate font-semibold">{draft.classNames.join(', ')}</p>
-                      <p className="text-xs text-muted">
-                        {t(`timetable.draft.statuses.${draft.status}`)}
-                        {draft.createdAt ? ` · ${formatDateTime(draft.createdAt)}` : ''}
+                      <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted">
+                        <StatusChip tone={DRAFT_TONE[draft.status]}>
+                          {t(`timetable.draft.statuses.${draft.status}`)}
+                        </StatusChip>
+                        {draft.createdAt ? formatDateTime(draft.createdAt) : null}
                       </p>
                     </div>
                     <Button asChild variant="outline" size="sm">
-                      <Link href={`/jadwal/draf/${draft.publicId}`}>
+                      <Link href={`/jadwal/draf/${draft.publicId}`} prefetch>
                         {t('timetable.compose.open_draft_action')}
                       </Link>
                     </Button>
@@ -257,7 +274,7 @@ function SettingsForm({
             </Section>
 
             {error('days') && <p className="text-sm text-danger">{error('days')}</p>}
-            <Button type="submit" disabled={processing}>
+            <Button type="submit" disabled={processing} className="w-full sm:w-auto">
               {processing ? t('common.status.saving') : t('timetable.compose.settings_action')}
             </Button>
           </>
@@ -341,5 +358,3 @@ function DayFields({
     </fieldset>
   )
 }
-
-ComposeTimetable.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

@@ -1,9 +1,11 @@
-import { useEffect, useState, type ReactNode } from 'react'
-import { Form, Head, Link, usePoll } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { useEffect, useState } from 'react'
+import { Form, usePoll } from '@inertiajs/react'
 import { Section } from '~/components/section'
 import { Button } from '~/components/ui/button'
-import { Skeleton } from '~/components/ui/skeleton'
+import { ConfirmAction } from '~/components/patterns/confirm_dialog'
+import { PageHeader } from '~/components/patterns/page_header'
+import { SkeletonText } from '~/components/patterns/skeletons'
+import { StatusChip, type StatusTone } from '~/components/patterns/status_chip'
 import { Select } from '~/components/school_year/fields'
 import { DayGroups, StatusLine, type Row } from '~/components/timetable/parts'
 import { useT } from '~/lib/i18n'
@@ -33,6 +35,14 @@ type Props = {
 
 const POLL_MS = 1500
 
+const STATUS_TONE: Record<Props['draft']['status'], StatusTone> = {
+  queued: 'neutral',
+  running: 'info',
+  ready: 'brand',
+  failed: 'danger',
+  saved: 'ok',
+}
+
 /**
  * /jadwal/draf/{draft} (operator, D-262, D-381): waits for the job, then
  * compares each class's current rows with the draft (locked rows stay),
@@ -60,41 +70,43 @@ export default function DraftTimetable({ draft, year, classes }: Props) {
 
   return (
     <>
-      <Head title={t('timetable.draft.title')} />
-      <Link
-        href={`/jadwal/susun-draf?tahun=${year.publicId}`}
-        className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong"
-      >
-        {t('timetable.draft.back')}
-      </Link>
-      <h1 className="text-2xl font-bold">{t('timetable.draft.title')}</h1>
-      <p className="mt-1 text-muted">
-        {draft.classNames.join(', ')} · {t(`timetable.draft.statuses.${draft.status}`)}
-      </p>
+      <PageHeader
+        title={t('timetable.draft.title')}
+        back={{
+          href: `/jadwal/susun-draf?tahun=${year.publicId}`,
+          label: t('timetable.draft.back'),
+        }}
+        description={draft.classNames.join(', ')}
+        meta={
+          <StatusChip tone={STATUS_TONE[draft.status]}>
+            {t(`timetable.draft.statuses.${draft.status}`)}
+          </StatusChip>
+        }
+      />
 
       {waiting && (
-        <Section title={t(`timetable.draft.statuses.${draft.status}`)} className="mt-6">
+        <Section title={t(`timetable.draft.statuses.${draft.status}`)}>
           <p role="status" className="text-muted">
             {t('timetable.draft.waiting_body')}
           </p>
-          <div className="mt-4 space-y-2">
-            <Skeleton className="h-6 w-2/3" />
-            <Skeleton className="h-6 w-1/2" />
-            <Skeleton className="h-6 w-3/4" />
-          </div>
+          <SkeletonText lines={4} className="mt-4" />
         </Section>
       )}
 
       {draft.status === 'failed' && (
-        <Section title={t('timetable.draft.statuses.failed')} className="mt-6">
+        <Section title={t('timetable.draft.statuses.failed')}>
           <StatusLine tone="danger">{t('timetable.draft.failed_body')}</StatusLine>
-          {canChange && <ReshuffleButton draftId={draft.publicId} />}
+          {canChange && (
+            <div className="mt-4">
+              <ReshuffleButton draftId={draft.publicId} />
+            </div>
+          )}
         </Section>
       )}
 
       {(draft.status === 'ready' || draft.status === 'saved') && shown && (
         <>
-          <div className="mt-6 flex flex-wrap items-end gap-3">
+          <div className="flex flex-wrap items-end gap-3">
             {draft.status === 'saved' ? (
               <StatusLine tone="ok">{t('timetable.draft.saved_body')}</StatusLine>
             ) : unplacedTotal === 0 ? (
@@ -107,19 +119,17 @@ export default function DraftTimetable({ draft, year, classes }: Props) {
           </div>
           {canChange && (
             <div className="mt-4 flex flex-wrap gap-2">
-              <Form
+              <ConfirmAction
                 action={`/jadwal/draf/${draft.publicId}/simpan`}
-                method="post"
-                onBefore={() =>
-                  window.confirm(t('timetable.draft.save_confirm', { count: classes.length }))
-                }
-              >
-                {({ processing }) => (
-                  <Button type="submit" disabled={processing}>
-                    {t('timetable.draft.save_action')}
-                  </Button>
-                )}
-              </Form>
+                label={t('timetable.draft.save_action')}
+                title={t('timetable.draft.save_title', { count: classes.length })}
+                description={t('timetable.draft.save_confirm', { count: classes.length })}
+                confirmLabel={t('timetable.draft.save_action')}
+                destructive={false}
+                preserveScroll={false}
+                variant="default"
+                className="w-full sm:w-auto"
+              />
               <ReshuffleButton draftId={draft.publicId} />
             </div>
           )}
@@ -189,14 +199,12 @@ export default function DraftTimetable({ draft, year, classes }: Props) {
 function ReshuffleButton({ draftId }: { draftId: string }) {
   const t = useT()
   return (
-    <Form action={`/jadwal/draf/${draftId}/acak-ulang`} method="post" className="mt-0">
+    <Form action={`/jadwal/draf/${draftId}/acak-ulang`} method="post" className="w-full sm:w-auto">
       {({ processing }) => (
-        <Button type="submit" variant="outline" disabled={processing}>
+        <Button type="submit" variant="outline" disabled={processing} className="w-full sm:w-auto">
           {t('timetable.draft.reshuffle_action')}
         </Button>
       )}
     </Form>
   )
 }
-
-DraftTimetable.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

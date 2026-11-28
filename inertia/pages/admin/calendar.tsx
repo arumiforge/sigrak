@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import PlainLayout from '~/layouts/plain_layout'
+import { Form } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip } from '~/components/patterns/status_chip'
 import { useSourceLabel } from '~/components/layers/source'
 import { formatDate, formatRange } from '~/lib/dates'
 import { useT } from '~/lib/i18n'
-import { cn } from '~/lib/utils'
 
 type Problem = { key: string; values?: Record<string, string | number> }
 
@@ -83,17 +83,15 @@ export default function ConsoleCalendar({ canImport, canActivate, files, package
 
   return (
     <>
-      <Head title={t('calendar.console.title')} />
-      <h1 className="text-2xl font-bold">{t('calendar.console.title')}</h1>
-      <p className="mt-2 max-w-3xl text-muted">{t('calendar.console.intro')}</p>
+      <PageHeader title={t('calendar.console.title')} description={t('calendar.console.intro')} />
 
-      <section aria-labelledby="files-title" className="mt-6">
+      <section aria-labelledby="files-title">
         <h2 id="files-title" className="text-lg font-bold">
           {t('calendar.console.files_title')}
         </h2>
         <ul className="mt-3 grid gap-3 lg:grid-cols-2">
           {files.map((file) => (
-            <li key={file.file} className="flex flex-col rounded-xl border bg-surface p-4">
+            <li key={file.file} className="flex flex-col rounded-lg border bg-surface p-4">
               <p className="text-sm text-muted">
                 {t(
                   file.kind === 'holidays'
@@ -107,9 +105,11 @@ export default function ConsoleCalendar({ canImport, canActivate, files, package
                   : (file.summary.code ?? file.file)}
               </h3>
               <p className="text-xs break-all text-muted">{file.file}</p>
-              <p className={cn('mt-2 text-sm font-semibold', file.ok ? 'text-ok' : 'text-danger')}>
-                {t(file.ok ? 'calendar.console.check_ok' : 'calendar.console.check_problems')}
-              </p>
+              <div className="mt-2">
+                <StatusChip tone={file.ok ? 'ok' : 'danger'} icon>
+                  {t(file.ok ? 'calendar.console.check_ok' : 'calendar.console.check_problems')}
+                </StatusChip>
+              </div>
               {file.kind === 'holidays' ? (
                 <ul className="mt-1 space-y-0.5 text-sm">
                   {file.summary.checkedOn && (
@@ -189,13 +189,15 @@ export default function ConsoleCalendar({ canImport, canActivate, files, package
           <p className="mt-1 text-sm text-muted">{t('calendar.console.approver_only')}</p>
         )}
         {packages.length === 0 ? (
-          <p className="mt-3 rounded-md border bg-surface p-4 text-muted">
-            {t('calendar.console.packages_empty')}
-          </p>
+          <EmptyState
+            icon="calendar"
+            description={t('calendar.console.packages_empty')}
+            className="mt-3"
+          />
         ) : (
           <ul className="mt-3 space-y-3">
             {packages.map((pkg) => (
-              <li key={pkg.id} className="rounded-xl border bg-surface p-4">
+              <li key={pkg.id} className="rounded-lg border bg-surface p-4">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div className="min-w-0">
                     <h3 className="font-bold break-words">{pkg.name}</h3>
@@ -215,16 +217,13 @@ export default function ConsoleCalendar({ canImport, canActivate, files, package
                       {t('calendar.console.version', { version: pkg.version })}
                     </p>
                   </div>
-                  <span
-                    className={cn(
-                      'inline-flex min-h-7 items-center rounded-full border px-2.5 text-xs font-semibold',
-                      pkg.status === 'active'
-                        ? 'border-ok/30 bg-ok/10 text-ok'
-                        : 'border-warn/40 bg-warn/10'
-                    )}
+                  <StatusChip
+                    tone={
+                      pkg.status === 'active' ? 'ok' : pkg.status === 'draft' ? 'warn' : 'neutral'
+                    }
                   >
                     {t(`calendar.console.status.${pkg.status}`)}
-                  </span>
+                  </StatusChip>
                 </div>
                 <p className="mt-1 text-sm">
                   {t('calendar.console.items', { count: pkg.items.length })}
@@ -291,5 +290,3 @@ export default function ConsoleCalendar({ canImport, canActivate, files, package
     </>
   )
 }
-
-ConsoleCalendar.layout = (page: ReactNode) => <PlainLayout>{page}</PlainLayout>

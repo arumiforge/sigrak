@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from '@inertiajs/react'
 import { Icon } from '~/components/icon'
+import { StatusChip } from '~/components/patterns/status_chip'
 import { useT } from '~/lib/i18n'
 import { cn } from '~/lib/utils'
 
@@ -79,9 +80,9 @@ export function RowLine({ row, actions }: { row: Row; actions?: ReactNode }) {
         <p className={cn('font-semibold', !lesson && 'font-normal italic')}>
           {rowTitle(t, row)}
           {row.locked && (
-            <span className="ml-2 inline-flex items-center rounded-full bg-brand-tint px-2 py-0.5 text-xs font-semibold text-brand-strong not-italic">
+            <StatusChip tone="brand" className="ml-2 align-middle not-italic">
               {t('timetable.locked_badge')}
-            </span>
+            </StatusChip>
           )}
         </p>
         {lesson && (
@@ -164,12 +165,13 @@ export function YearChips({
           <li key={row.publicId}>
             <Link
               href={`${basePath}?tahun=${row.publicId}`}
+              prefetch
               aria-current={row.publicId === current ? 'page' : undefined}
               className={cn(
                 'inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold whitespace-nowrap',
                 row.publicId === current
                   ? 'border-brand bg-brand-tint text-brand-strong'
-                  : 'text-muted hover:text-text'
+                  : 'bg-surface text-muted hover:text-text'
               )}
             >
               {row.name}

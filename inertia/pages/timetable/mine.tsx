@@ -1,7 +1,6 @@
-import type { ReactNode } from 'react'
-import { Head } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
 import { Section } from '~/components/section'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
 import { DayGroups, TimeRange, WEEKDAYS, type Row, dayName } from '~/components/timetable/parts'
 import { useT } from '~/lib/i18n'
 
@@ -29,16 +28,17 @@ export default function MyTimetable({ year, lessons, totalJp, homerooms }: Props
   const t = useT()
   return (
     <>
-      <Head title={t('timetable.mine.title')} />
-      <h1 className="text-2xl font-bold">{t('timetable.mine.title')}</h1>
+      <PageHeader
+        title={t('timetable.mine.title')}
+        description={year ? t('timetable.mine.intro', { year: year.name }) : undefined}
+      />
       {year === null ? (
-        <p className="mt-2 text-muted">{t('timetable.no_year')}</p>
+        <EmptyState icon="timetable" description={t('timetable.no_year_teacher')} />
       ) : (
         <>
-          <p className="mt-2 text-muted">{t('timetable.mine.intro', { year: year.name })}</p>
-          <Section title={t('timetable.mine.total', { count: totalJp })} className="mt-6">
+          <Section title={t('timetable.mine.total', { count: totalJp })}>
             {lessons.length === 0 ? (
-              <p className="text-muted">{t('timetable.mine.empty')}</p>
+              <EmptyState compact icon="timetable" description={t('timetable.mine.empty')} />
             ) : (
               <div className="grid gap-4 md:grid-cols-2">
                 {WEEKDAYS.map((weekday) => {
@@ -94,5 +94,3 @@ export default function MyTimetable({ year, lessons, totalJp, homerooms }: Props
     </>
   )
 }
-
-MyTimetable.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

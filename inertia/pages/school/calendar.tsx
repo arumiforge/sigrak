@@ -1,11 +1,18 @@
 import { useState, type ReactNode } from 'react'
-import { Deferred, Form, Head, Link, usePage } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { Form, Link, router, usePage } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
 import { Card } from '~/components/ui/card'
 import { Skeleton } from '~/components/ui/skeleton'
 import { Icon } from '~/components/icon'
 import { TextField } from '~/components/text_field'
+import { ConfirmAction } from '~/components/patterns/confirm_dialog'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { controlClass } from '~/components/patterns/form_field'
+import { PageHeader } from '~/components/patterns/page_header'
+import { ResponsiveDialog } from '~/components/patterns/responsive_dialog'
+import { DeferredSection, SkeletonList } from '~/components/patterns/skeletons'
+import { StatusChip } from '~/components/patterns/status_chip'
+import { clearFlashUndo, postWithUndo, queueFlashUndo } from '~/components/patterns/undo'
 import { SourceBadge } from '~/components/layers/source_badge'
 import { useSourceLabel, type LayerOwner, type LayerSource } from '~/components/layers/source'
 import { useT } from '~/lib/i18n'
@@ -107,8 +114,7 @@ type View = 'month' | 'list' | 'unused' | 'effective'
 
 const EVENT_KINDS = ['school_event', 'holiday', 'exam', 'no_lessons'] as const
 
-const fieldClass =
-  'block h-11 w-full rounded-md border bg-surface px-3 text-base outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30'
+const fieldClass = cn(controlClass, 'h-11')
 
 /** A day without lessons for the whole school (or for the entry's class). */
 function isDayOff(entry: Entry) {
@@ -142,57 +148,53 @@ export default function CalendarPage(props: Props) {
 
   return (
     <>
-      <Head title={t('calendar.title')} />
+      <PageHeader
+        title={t('calendar.title')}
+        meta={school && year ? t('calendar.year', { name: year.name }) : undefined}
+        description={school?.name}
+        actions={
+          props.years.length > 1 ? (
+            <nav aria-label={t('calendar.years_label')} className="flex flex-wrap gap-2">
+              {props.years.map((option) => (
+                <Link
+                  key={option.id}
+                  href={`/kalender?tahun=${option.id}`}
+                  prefetch
+                  aria-current={option.id === year?.id ? 'page' : undefined}
+                  className={cn(
+                    'inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold',
+                    option.id === year?.id
+                      ? 'border-brand bg-brand-tint text-brand-strong'
+                      : 'bg-surface text-muted hover:text-text'
+                  )}
+                >
+                  {option.name}
+                </Link>
+              ))}
+            </nav>
+          ) : undefined
+        }
+      />
 
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div className="min-w-0">
-          <h1 className="text-2xl font-bold sm:text-3xl">{t('calendar.title')}</h1>
-          {school && year && (
-            <p className="mt-1 text-muted">
-              {school.name} · {t('calendar.year', { name: year.name })}
-            </p>
-          )}
-        </div>
-        {props.years.length > 1 && (
-          <nav aria-label={t('calendar.years_label')} className="flex flex-wrap gap-2">
-            {props.years.map((option) => (
-              <Link
-                key={option.id}
-                href={`/kalender?tahun=${option.id}`}
-                aria-current={option.id === year?.id ? 'page' : undefined}
-                className={cn(
-                  'inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold',
-                  option.id === year?.id
-                    ? 'border-brand bg-brand-tint text-brand-strong'
-                    : 'bg-surface text-muted'
-                )}
-              >
-                {option.name}
-              </Link>
-            ))}
-          </nav>
-        )}
-      </div>
-
-      {!school && <EmptyState>{t('common.empty.no_role')}</EmptyState>}
+      {!school && <EmptyState icon="calendar" description={t('common.empty.no_role')} />}
 
       {school && year && (
         <>
           {!year.id && props.canEdit && (
-            <p className="mt-4 rounded-md border border-warn/40 bg-warn/10 p-4">
+            <p className="mb-4 rounded-md border border-warn/35 bg-warn-tint p-4">
               {t('calendar.no_year', { name: year.name })}
             </p>
           )}
 
-          <Deferred
+          <DeferredSection
             data={['changes', 'frame']}
-            fallback={<Skeleton className="mt-4 h-14 w-full rounded-xl" />}
+            fallback={<Skeleton className="h-14 w-full rounded-lg" />}
           >
             <>
               <ChangesNotice {...props} />
               <FrameCard {...props} />
             </>
-          </Deferred>
+          </DeferredSection>
 
           <div
             role="tablist"
@@ -210,11 +212,11 @@ export default function CalendarPage(props: Props) {
                   'inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-4 text-sm font-semibold whitespace-nowrap',
                   view === option
                     ? 'border-brand bg-brand-tint text-brand-strong'
-                    : 'bg-surface text-muted'
+                    : 'bg-surface text-muted hover:text-text'
                 )}
               >
-                {option === 'month' && <Icon name="grid" />}
-                {option === 'list' && <Icon name="list" />}
+                {option === 'month' && <Icon name="grid" active={view === option} />}
+                {option === 'list' && <Icon name="list" active={view === option} />}
                 {t(`calendar.views.${option}`)}
                 {option === 'unused' && props.hidden && (
                   <span className="rounded-full bg-surface px-2 text-xs text-text">
@@ -242,28 +244,28 @@ export default function CalendarPage(props: Props) {
             )}
             {view === 'list' && (
               <section className="mt-4" aria-label={t('calendar.views.list')}>
-                <Deferred data="entries" fallback={<EntryListSkeleton rows={8} />}>
+                <DeferredSection data="entries" fallback={<SkeletonList rows={8} />}>
                   <YearList {...props} entries={entries ?? []} />
-                </Deferred>
+                </DeferredSection>
               </section>
             )}
             {view === 'unused' && (
               <section className="mt-4" aria-label={t('calendar.views.unused')}>
-                <Deferred data="hidden" fallback={<EntryListSkeleton rows={3} />}>
+                <DeferredSection data="hidden" fallback={<SkeletonList rows={3} />}>
                   <HiddenList {...props} />
-                </Deferred>
+                </DeferredSection>
               </section>
             )}
             {view === 'effective' && (
-              <Deferred data="effective" fallback={<EntryListSkeleton rows={6} />}>
+              <DeferredSection data="effective" fallback={<SkeletonList rows={6} />}>
                 <EffectiveTable {...props} />
-              </Deferred>
+              </DeferredSection>
             )}
           </div>
 
           {(view === 'month' || view === 'list') && (props.canEdit || props.canPropose) && (
             <section
-              className="mt-8 rounded-xl border bg-surface p-4 sm:p-6"
+              className="mt-8 rounded-lg border bg-surface p-4 sm:p-6"
               aria-labelledby="event-form-title"
             >
               <h2 id="event-form-title" className="text-lg font-bold">
@@ -278,16 +280,6 @@ export default function CalendarPage(props: Props) {
         </>
       )}
     </>
-  )
-}
-
-CalendarPage.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>
-
-function EmptyState({ children }: { children: ReactNode }) {
-  return (
-    <Card className="mt-6 px-6">
-      <p>{children}</p>
-    </Card>
   )
 }
 
@@ -322,7 +314,7 @@ function ChangesNotice({ changes, year }: Props) {
   return (
     <section
       aria-labelledby="calendar-changes-title"
-      className="mt-4 rounded-xl border border-warn/40 bg-warn/10 p-4"
+      className="mt-4 rounded-lg border border-warn/35 bg-warn-tint p-4"
     >
       <h2 id="calendar-changes-title" className="flex items-center gap-2 font-bold">
         <Icon name="warning" />
@@ -376,13 +368,13 @@ function FrameCard({ frame, canEdit }: Props) {
   return (
     <>
       {!frame.ready && (
-        <p className="mt-4 rounded-md border border-warn/40 bg-warn/10 p-4">
+        <p className="mt-4 rounded-md border border-warn/35 bg-warn-tint p-4">
           {t('calendar.not_ready')}
         </p>
       )}
       <section
         aria-labelledby="calendar-frame-title"
-        className="mt-4 rounded-xl border bg-surface p-4"
+        className="mt-4 rounded-lg border bg-surface p-4"
       >
         <h2 id="calendar-frame-title" className="sr-only">
           {t('calendar.frame.title')}
@@ -473,9 +465,9 @@ function MonthView(
       <h3 className="mt-6 text-lg font-semibold">
         {t('calendar.events_in_month', { month: label })}
       </h3>
-      <Deferred data="entries" fallback={<EntryListSkeleton rows={4} />}>
+      <DeferredSection data="entries" fallback={<SkeletonList rows={4} className="mt-3" />}>
         <MonthList {...props} />
-      </Deferred>
+      </DeferredSection>
     </section>
   )
 }
@@ -580,13 +572,15 @@ function MonthGrid({ month, today, entries }: { month: string; today: string; en
 function MonthList(props: Props & { month: string }) {
   const t = useT()
   const inMonth = (props.entries ?? []).filter((entry) => overlapsMonth(entry, props.month))
-  if (inMonth.length === 0) return <p className="mt-3 text-muted">{t('calendar.empty_month')}</p>
+  if (inMonth.length === 0)
+    return <EmptyState compact icon="calendar" description={t('calendar.empty_month')} />
   return <EntryList {...props} entries={inMonth} />
 }
 
 function YearList(props: Props & { entries: Entry[] }) {
   const t = useT()
-  if (props.entries.length === 0) return <p className="text-muted">{t('calendar.empty_year')}</p>
+  if (props.entries.length === 0)
+    return <EmptyState icon="calendar" description={t('calendar.empty_year')} />
   const months = [...new Set(props.entries.map((entry) => monthKeyOf(entry.startsOn)))]
   return (
     <div className="space-y-6">
@@ -648,22 +642,19 @@ function EntryRow(props: Props & { entry: Entry; hiddenBy?: HiddenEntry['hiddenB
         <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
           <KindLabel entry={entry} />
           {entry.class && (
-            <span className="rounded-full border px-2 text-xs font-semibold">
-              {t('calendar.class_event', { name: entry.class.name })}
-            </span>
+            <StatusChip>{t('calendar.class_event', { name: entry.class.name })}</StatusChip>
           )}
           {entry.provisional && <span className="text-muted">({t('calendar.provisional')})</span>}
           {entry.kind === 'note' && <span className="text-muted">({t('calendar.note')})</span>}
           <SourceBadge source={entry.source} />
         </span>
         {hiddenBy && (
-          <span className="mt-1 block text-sm">
-            <span className="font-semibold text-ok">
+          <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+            <StatusChip tone={entry.kind === 'joint_leave' ? 'ok' : 'neutral'}>
               {entry.kind === 'joint_leave'
                 ? t('calendar.joint_leave_school_day')
                 : t('calendar.views.unused')}
-            </span>
-            {' · '}
+            </StatusChip>
             {t('layers.list.hidden_by', { source: sourceLabel(hiddenBy) })}
             {hiddenBy.reason && (
               <> · {t('layers.list.hidden_reason', { reason: hiddenBy.reason })}</>
@@ -683,6 +674,7 @@ function EntryRow(props: Props & { entry: Entry; hiddenBy?: HiddenEntry['hiddenB
 function EntryActions(props: Props & { entry: Entry; hiddenBy?: HiddenEntry['hiddenBy'] }) {
   const { entry, hiddenBy, canEdit, canPropose, year } = props
   const t = useT()
+  const yearData = year?.id ? { year: year.id } : {}
   const yearField = year?.id ? <input type="hidden" name="year" value={year.id} /> : null
   const mandatory = entry.source.force === 'mandatory'
 
@@ -692,21 +684,43 @@ function EntryActions(props: Props & { entry: Entry; hiddenBy?: HiddenEntry['hid
     }
     if (canEdit) {
       return (
-        <SimpleAction
-          action={`/kalender/${entry.key}/pakai-lagi`}
-          label={t('calendar.list.unhide')}
-          yearField={yearField}
-        />
+        <ActionRow>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full sm:w-auto"
+            onClick={() =>
+              postWithUndo({
+                url: `/kalender/${entry.key}/pakai-lagi`,
+                data: yearData,
+                optimistic: (page) => {
+                  const current = page as unknown as Pick<Props, 'entries' | 'hidden'>
+                  return {
+                    hidden: (current.hidden ?? []).filter((row) => row.key !== entry.key),
+                    entries: [...(current.entries ?? []), entry].sort((a, b) =>
+                      a.startsOn.localeCompare(b.startsOn)
+                    ),
+                  }
+                },
+                undo: { url: `/kalender/${entry.key}/tidak-dipakai`, data: yearData },
+              })
+            }
+          >
+            {t('calendar.list.unhide')}
+          </Button>
+        </ActionRow>
       )
     }
     if (canPropose) {
       return (
-        <ProposeAction
-          entry={entry}
-          action="unhide"
-          label={t('calendar.list.propose_unhide')}
-          yearField={yearField}
-        />
+        <ActionRow>
+          <ProposeAction
+            entry={entry}
+            action="unhide"
+            label={t('calendar.list.propose_unhide')}
+            yearField={yearField}
+          />
+        </ActionRow>
       )
     }
     return null
@@ -715,47 +729,44 @@ function EntryActions(props: Props & { entry: Entry; hiddenBy?: HiddenEntry['hid
   if (entry.own) {
     if (canEdit) {
       return (
-        <div className="mt-2 flex flex-wrap gap-2">
-          <details className="w-full text-sm">
-            <summary className="inline-flex min-h-11 cursor-pointer items-center font-semibold text-brand-strong">
-              {t('calendar.list.edit')}
-            </summary>
-            <EventForm {...props} mode="edit" entry={entry} />
-          </details>
-          <Form
-            action={`/kalender/acara/${entry.key}/hapus`}
-            method="post"
-            options={{ preserveScroll: true }}
-            onBefore={() => window.confirm(t('calendar.list.delete_confirm'))}
+        <ActionRow>
+          <DialogAction
+            label={t('calendar.list.edit')}
+            ariaLabel={t('calendar.list.edit_label', { title: entry.title })}
+            title={t('calendar.form.title_edit')}
           >
-            {({ processing }) => (
-              <>
-                {yearField}
-                <Button type="submit" variant="outline" disabled={processing}>
-                  {t('calendar.list.delete')}
-                </Button>
-              </>
-            )}
-          </Form>
-        </div>
+            {(close) => <EventForm {...props} mode="edit" entry={entry} onDone={close} />}
+          </DialogAction>
+          <ConfirmAction
+            action={`/kalender/acara/${entry.key}/hapus`}
+            data={yearData}
+            label={t('calendar.list.delete')}
+            ariaLabel={t('calendar.list.delete_label', { title: entry.title })}
+            title={t('calendar.list.delete_title', { title: entry.title })}
+            description={t('calendar.list.delete_confirm')}
+            confirmLabel={t('calendar.list.delete_action')}
+            className="w-full sm:w-auto"
+          />
+        </ActionRow>
       )
     }
     if (canPropose) {
       return (
-        <div className="mt-2 flex flex-col gap-1">
-          <details className="text-sm">
-            <summary className="inline-flex min-h-11 cursor-pointer items-center font-semibold text-brand-strong">
-              {t('calendar.list.propose_change')}
-            </summary>
-            <EventForm {...props} mode="propose_change" entry={entry} />
-          </details>
+        <ActionRow>
+          <DialogAction
+            label={t('calendar.list.propose_change')}
+            title={t('calendar.list.propose_change')}
+            description={t('calendar.form.intro_propose')}
+          >
+            {(close) => <EventForm {...props} mode="propose_change" entry={entry} onDone={close} />}
+          </DialogAction>
           <ProposeAction
             entry={entry}
             action="retire"
             label={t('calendar.list.propose_delete')}
             yearField={yearField}
           />
-        </div>
+        </ActionRow>
       )
     }
     return null
@@ -766,74 +777,97 @@ function EntryActions(props: Props & { entry: Entry; hiddenBy?: HiddenEntry['hid
     entry.kind === 'joint_leave' ? t('calendar.list.hide') : t('calendar.list.hide_other')
   if (canEdit) {
     return (
-      <details className="mt-1 text-sm">
-        <summary className="inline-flex min-h-11 cursor-pointer items-center font-semibold text-brand-strong">
-          {hideLabel}
-        </summary>
-        <Form
-          action={`/kalender/${entry.key}/tidak-dipakai`}
-          method="post"
-          options={{ preserveScroll: true }}
-          className="mt-2 flex flex-col gap-2"
-        >
-          {({ processing }) => (
-            <>
-              {yearField}
-              <label className="space-y-1.5">
-                <span className="block font-semibold">{t('calendar.list.hide_reason')}</span>
-                <input name="reason" maxLength={300} className={fieldClass} />
-              </label>
-              <Button
-                type="submit"
-                disabled={processing}
-                className="w-full sm:w-auto sm:self-start"
-              >
-                {t('calendar.list.hide_confirm')}
-              </Button>
-            </>
+      <ActionRow>
+        <DialogAction label={hideLabel} title={hideLabel} description={entry.title}>
+          {(close) => (
+            <Form
+              action={`/kalender/${entry.key}/tidak-dipakai`}
+              method="post"
+              options={{ preserveScroll: true }}
+              onStart={() =>
+                queueFlashUndo({
+                  run: () =>
+                    router.post(`/kalender/${entry.key}/pakai-lagi`, yearData, {
+                      preserveScroll: true,
+                    }),
+                })
+              }
+              onError={clearFlashUndo}
+              onSuccess={close}
+              className="flex flex-col gap-4"
+            >
+              {({ processing }) => (
+                <>
+                  {yearField}
+                  <TextField
+                    name="reason"
+                    label={t('calendar.list.hide_reason')}
+                    maxLength={300}
+                    autoComplete="off"
+                  />
+                  <Button type="submit" disabled={processing} className="w-full sm:self-end">
+                    {t('calendar.list.hide_confirm')}
+                  </Button>
+                </>
+              )}
+            </Form>
           )}
-        </Form>
-      </details>
+        </DialogAction>
+      </ActionRow>
     )
   }
   if (canPropose) {
     return (
-      <ProposeAction
-        entry={entry}
-        action="hide"
-        label={t('calendar.list.propose_hide')}
-        yearField={yearField}
-      />
+      <ActionRow>
+        <ProposeAction
+          entry={entry}
+          action="hide"
+          label={t('calendar.list.propose_hide')}
+          yearField={yearField}
+        />
+      </ActionRow>
     )
   }
   return null
 }
 
-function SimpleAction({
-  action,
+function ActionRow({ children }: { children: ReactNode }) {
+  return <span className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">{children}</span>
+}
+
+/**
+ * A 44 px button that opens a dialog (a bottom sheet on phones) with a
+ * small form; the form closes it when the save succeeds.
+ */
+function DialogAction({
   label,
-  yearField,
+  ariaLabel,
+  title,
+  description,
+  children,
 }: {
-  action: string
   label: string
-  yearField: ReactNode
+  ariaLabel?: string
+  title: string
+  description?: ReactNode
+  children: (close: () => void) => ReactNode
 }) {
+  const [open, setOpen] = useState(false)
   return (
-    <Form action={action} method="post" options={{ preserveScroll: true }} className="mt-2">
-      {({ processing }) => (
-        <>
-          {yearField}
-          <Button
-            type="submit"
-            variant="outline"
-            disabled={processing}
-            className="w-full sm:w-auto"
-          >
-            {label}
-          </Button>
-        </>
-      )}
-    </Form>
+    <>
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full sm:w-auto"
+        aria-label={ariaLabel}
+        onClick={() => setOpen(true)}
+      >
+        {label}
+      </Button>
+      <ResponsiveDialog open={open} onOpenChange={setOpen} title={title} description={description}>
+        {children(() => setOpen(false))}
+      </ResponsiveDialog>
+    </>
   )
 }
 
@@ -850,39 +884,46 @@ function ProposeAction({
 }) {
   const t = useT()
   return (
-    <details className="mt-1 text-sm">
-      <summary className="inline-flex min-h-11 cursor-pointer items-center font-semibold text-brand-strong">
-        {label}
-      </summary>
-      <Form
-        action="/kalender/usulan"
-        method="post"
-        options={{ preserveScroll: true }}
-        className="mt-2 flex flex-col gap-2"
-      >
-        {({ processing }) => (
-          <>
-            {yearField}
-            <input type="hidden" name="action" value={action} />
-            <input type="hidden" name="item_key" value={entry.key} />
-            <label className="space-y-1.5">
-              <span className="block font-semibold">{t('calendar.list.propose_reason')}</span>
-              <input name="reason" maxLength={500} className={fieldClass} />
-            </label>
-            <Button type="submit" disabled={processing} className="w-full sm:w-auto sm:self-start">
-              {t('calendar.list.send_proposal')}
-            </Button>
-          </>
-        )}
-      </Form>
-    </details>
+    <DialogAction label={label} title={label} description={entry.title}>
+      {(close) => (
+        <Form
+          action="/kalender/usulan"
+          method="post"
+          options={{ preserveScroll: true }}
+          onSuccess={close}
+          className="flex flex-col gap-4"
+        >
+          {({ processing }) => (
+            <>
+              {yearField}
+              <input type="hidden" name="action" value={action} />
+              <input type="hidden" name="item_key" value={entry.key} />
+              <TextField
+                name="reason"
+                label={t('calendar.list.propose_reason')}
+                maxLength={500}
+                autoComplete="off"
+              />
+              <Button type="submit" disabled={processing} className="w-full sm:self-end">
+                {t('calendar.list.send_proposal')}
+              </Button>
+            </>
+          )}
+        </Form>
+      )}
+    </DialogAction>
   )
 }
 
 function EventForm(
-  props: Props & { mode: 'add' | 'edit' | 'propose' | 'propose_change'; entry?: Entry }
+  props: Props & {
+    mode: 'add' | 'edit' | 'propose' | 'propose_change'
+    entry?: Entry
+    onDone?: () => void
+  }
 ) {
-  const { mode, entry, classes, year } = props
+  const { mode, entry, classes, year, onDone } = props
+  const inDialog = mode === 'edit' || mode === 'propose_change'
   const t = useT()
   const [kind, setKind] = useState<string>(entry?.kind ?? 'school_event')
   const action =
@@ -904,7 +945,8 @@ function EventForm(
       method="post"
       options={{ preserveScroll: true }}
       resetOnSuccess={mode === 'add' || mode === 'propose'}
-      className="mt-4 grid gap-4 sm:grid-cols-2"
+      onSuccess={onDone}
+      className={cn('grid gap-4 sm:grid-cols-2', !inDialog && 'mt-4')}
     >
       {({ processing, errors }) => (
         <>
@@ -997,7 +1039,7 @@ function EventForm(
               <TextField name="reason" label={t('calendar.list.propose_reason')} maxLength={500} />
             </div>
           )}
-          <div className="sm:col-span-2">
+          <div className={cn('sm:col-span-2', inDialog && 'sm:flex sm:justify-end')}>
             <Button type="submit" disabled={processing} className="w-full sm:w-auto">
               {t(submit)}
             </Button>
@@ -1012,9 +1054,7 @@ function HiddenList(props: Props) {
   const t = useT()
   const hidden = props.hidden ?? []
   if (hidden.length === 0)
-    return (
-      <p className="rounded-md border bg-surface p-4 text-muted">{t('calendar.empty_hidden')}</p>
-    )
+    return <EmptyState icon="calendar" description={t('calendar.empty_hidden')} />
   return (
     <ul className="divide-y rounded-lg border bg-surface">
       {hidden.map((entry) => (
@@ -1192,25 +1232,5 @@ function MonthCard({ title, totals, strong }: { title: string; totals: Totals; s
         ))}
       </dl>
     </div>
-  )
-}
-
-function EntryListSkeleton({ rows }: { rows: number }) {
-  return (
-    <ul
-      className="mt-3 divide-y rounded-lg border bg-surface"
-      aria-busy="true"
-      data-testid="calendar-skeleton"
-    >
-      {Array.from({ length: rows }, (_, index) => (
-        <li key={index} className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:gap-4">
-          <Skeleton className="h-4 w-40 sm:w-56" />
-          <span className="flex-1 space-y-2">
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-3 w-32" />
-          </span>
-        </li>
-      ))}
-    </ul>
   )
 }

@@ -1,9 +1,13 @@
-import { useState, type ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { useState } from 'react'
+import { Form, Link } from '@inertiajs/react'
 import { Section } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
+import { ConfirmAction } from '~/components/patterns/confirm_dialog'
+import { PageHeader } from '~/components/patterns/page_header'
+import { ResponsiveDialog } from '~/components/patterns/responsive_dialog'
+import { StatusChip, type StatusTone } from '~/components/patterns/status_chip'
+import { postWithUndo } from '~/components/patterns/undo'
 import { Select } from '~/components/school_year/fields'
 import {
   DayGroups,
@@ -15,7 +19,6 @@ import {
   dayName,
 } from '~/components/timetable/parts'
 import { useT } from '~/lib/i18n'
-import { cn } from '~/lib/utils'
 
 type SubjectStatus = 'complete' | 'under' | 'over' | 'no_allocation' | 'not_counted'
 
@@ -42,12 +45,12 @@ type Props = {
   warnings: string[]
 }
 
-const STATUS_TONE: Record<SubjectStatus, string> = {
-  complete: 'bg-ok/10 text-ok',
-  under: 'bg-warn/10 text-warn',
-  over: 'bg-danger/10 text-danger',
-  no_allocation: 'bg-brand-tint text-brand-strong',
-  not_counted: 'bg-line/40 text-muted',
+const STATUS_TONE: Record<SubjectStatus, StatusTone> = {
+  complete: 'ok',
+  under: 'warn',
+  over: 'danger',
+  no_allocation: 'brand',
+  not_counted: 'neutral',
 }
 
 function addMinutes(value: string, minutes: number) {
@@ -105,31 +108,36 @@ export default function ClassTimetable({
 
   return (
     <>
-      <Head title={t('timetable.class.title', { name: schoolClass.name })} />
-      <div className="flex flex-wrap gap-x-4">
-        <Link
-          href={`/kelas/${schoolClass.publicId}`}
-          className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong"
-        >
-          {t('timetable.class.back', { name: schoolClass.name })}
-        </Link>
-        <Link
-          href={`/jadwal?tahun=${year.publicId}`}
-          className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong"
-        >
-          {t('timetable.class.all_classes')}
-        </Link>
-      </div>
-      <h1 className="text-2xl font-bold">
-        {t('timetable.class.title', { name: schoolClass.name })}
-      </h1>
-      <p className="mt-1 text-muted">
-        {t('timetable.class.subtitle', { grade: schoolClass.grade, year: year.name })}
-      </p>
-      {readOnly && <p className="mt-2 text-sm text-warn">{t('timetable.closed_note')}</p>}
+      <PageHeader
+        title={t('timetable.class.title', { name: schoolClass.name })}
+        back={{
+          href: `/kelas/${schoolClass.publicId}`,
+          label: t('timetable.class.back', { name: schoolClass.name }),
+        }}
+        description={t('timetable.class.subtitle', {
+          grade: schoolClass.grade,
+          year: year.name,
+        })}
+        actions={
+          <Button asChild variant="outline" className="w-full sm:w-auto">
+            <Link href={`/jadwal?tahun=${year.publicId}`} prefetch>
+              {t('timetable.class.all_classes')}
+            </Link>
+          </Button>
+        }
+      >
+        {readOnly && (
+          <p className="mt-3 rounded-md border border-warn/35 bg-warn-tint p-3 text-sm">
+            {t('timetable.closed_note')}
+          </p>
+        )}
+      </PageHeader>
 
       {warnings.length > 0 && (
-        <Section title={t('timetable.class.warnings_title')} className="mt-6 border-warn">
+        <Section
+          title={t('timetable.class.warnings_title')}
+          className="mb-6 border-warn/35 bg-warn-tint"
+        >
           <ul className="space-y-2">
             {warnings.map((warning) => (
               <li key={warning}>
@@ -140,7 +148,7 @@ export default function ClassTimetable({
         </Section>
       )}
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[3fr_2fr]">
+      <div className="grid gap-4 lg:grid-cols-[3fr_2fr]">
         <div className="min-w-0 space-y-4">
           <Section
             title={t('timetable.class.days_title')}
@@ -166,23 +174,39 @@ export default function ClassTimetable({
 
         <div className="min-w-0 space-y-4 self-start">
           {!readOnly && (
-            <Section
-              title={editRow ? t('timetable.class.edit_title') : t('timetable.class.add_title')}
-            >
+            <Section title={t('timetable.class.add_title')}>
               <SlotForm
-                key={editRow?.publicId ?? 'new'}
-                row={editRow ?? newRowDefaults(rows, 1)}
+                key="new"
+                row={newRowDefaults(rows, 1)}
                 rows={rows}
-                action={
-                  editRow
-                    ? `/kelas/${schoolClass.publicId}/jadwal/${editRow.publicId}/ubah`
-                    : `/kelas/${schoolClass.publicId}/jadwal`
-                }
+                action={`/kelas/${schoolClass.publicId}/jadwal`}
                 subjectOptions={subjectOptions}
-                editing={Boolean(editRow)}
+                editing={false}
                 onDone={() => setEditing(null)}
               />
             </Section>
+          )}
+          {!readOnly && (
+            <ResponsiveDialog
+              open={Boolean(editRow)}
+              onOpenChange={(open) => {
+                if (!open) setEditing(null)
+              }}
+              title={t('timetable.class.edit_title')}
+              description={editRow ? rowTitle(t, editRow) : undefined}
+            >
+              {editRow && (
+                <SlotForm
+                  key={editRow.publicId}
+                  row={editRow}
+                  rows={rows}
+                  action={`/kelas/${schoolClass.publicId}/jadwal/${editRow.publicId}/ubah`}
+                  subjectOptions={subjectOptions}
+                  editing
+                  onDone={() => setEditing(null)}
+                />
+              )}
+            </ResponsiveDialog>
           )}
 
           <Section
@@ -214,14 +238,9 @@ export default function ClassTimetable({
                       {subject.teacherName ?? t('timetable.no_teacher')}
                     </p>
                   </div>
-                  <span
-                    className={cn(
-                      'shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold',
-                      STATUS_TONE[subject.status]
-                    )}
-                  >
+                  <StatusChip tone={STATUS_TONE[subject.status]} className="shrink-0">
                     {t(`timetable.class.statuses.${subject.status}`)}
-                  </span>
+                  </StatusChip>
                 </li>
               ))}
             </ul>
@@ -251,6 +270,13 @@ function RowActions({ row, classId, onEdit }: { row: Row; classId: string; onEdi
   const t = useT()
   const title = rowTitle(t, row)
   const base = `/kelas/${classId}/jadwal/${row.publicId}`
+  // Lock is a toggle: the page shows the new state at once and the
+  // toast offers to undo it (D-389).
+  const setLocked = (locked: boolean) => (page: Record<string, unknown>) => ({
+    rows: (page.rows as Row[]).map((item) =>
+      item.publicId === row.publicId ? { ...item, locked } : item
+    ),
+  })
   return (
     <>
       <Button
@@ -258,32 +284,42 @@ function RowActions({ row, classId, onEdit }: { row: Row; classId: string; onEdi
         variant="outline"
         size="sm"
         onClick={onEdit}
-        aria-label={`${t('timetable.class.edit_action')} ${title}`}
+        aria-label={t('timetable.class.edit_label', { title })}
       >
         {t('timetable.class.edit_action')}
       </Button>
-      <Form action={`${base}/kunci`} method="post" options={{ preserveScroll: true }}>
-        {({ processing }) => (
-          <>
-            <input type="hidden" name="locked" value={row.locked ? '0' : '1'} />
-            <Button type="submit" variant="outline" size="sm" disabled={processing}>
-              {row.locked ? t('timetable.class.unlock_action') : t('timetable.class.lock_action')}
-            </Button>
-          </>
-        )}
-      </Form>
-      <Form
-        action={`${base}/hapus`}
-        method="post"
-        options={{ preserveScroll: true }}
-        onBefore={() => window.confirm(t('timetable.class.delete_confirm'))}
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        aria-label={t(row.locked ? 'timetable.class.unlock_label' : 'timetable.class.lock_label', {
+          title,
+        })}
+        onClick={() =>
+          postWithUndo({
+            url: `${base}/kunci`,
+            data: { locked: row.locked ? '0' : '1' },
+            optimistic: setLocked(!row.locked),
+            undo: {
+              url: `${base}/kunci`,
+              data: { locked: row.locked ? '1' : '0' },
+              optimistic: setLocked(row.locked),
+            },
+          })
+        }
       >
-        {({ processing }) => (
-          <Button type="submit" variant="ghost" size="sm" disabled={processing}>
-            {t('timetable.class.delete_action')}
-          </Button>
-        )}
-      </Form>
+        {row.locked ? t('timetable.class.unlock_action') : t('timetable.class.lock_action')}
+      </Button>
+      <ConfirmAction
+        action={`${base}/hapus`}
+        label={t('timetable.class.delete_action')}
+        ariaLabel={t('timetable.class.delete_label', { title })}
+        title={t('timetable.class.delete_title', { title })}
+        description={t('timetable.class.delete_confirm')}
+        confirmLabel={t('timetable.class.delete_row_action')}
+        variant="ghost"
+        size="sm"
+      />
     </>
   )
 }
@@ -442,5 +478,3 @@ function SlotForm({
     </Form>
   )
 }
-
-ClassTimetable.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>
