@@ -39,7 +39,7 @@ async function post(
   path: string,
   data: Record<string, string | number> = {}
 ) {
-  const { response } = await postForm(client, session, path, data, '/hak-akses')
+  const { response } = await postForm(client, session, path, data, '/peran')
   return response
 }
 

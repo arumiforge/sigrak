@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 |
 | Staf (accounts, roles and scopes, D-338, D-339), Log aktivitas and
-| Hak akses (D-314). Each action checks its ability (app/staff/
+| Peran (D-314, D-481). Each action checks its ability (app/staff/
 | abilities.ts) in the controller. The set-password link works without
 | a session.
 |
@@ -60,7 +60,7 @@ router
       .where('staff', id)
 
     router.get('/log-aktivitas', [ActivityLogController, 'index']).as('activity_log.index')
-    router.get('/hak-akses', [AccessMatrixController, 'index']).as('access_matrix.index')
+    router.get('/peran', [AccessMatrixController, 'index']).as('access_matrix.index')
   })
   .domain(hosts.admin)
   .as('admin')

@@ -6,7 +6,10 @@ import Region from '#models/region'
 import School from '#models/school'
 import { seedRegionList } from '#regions/region_list'
 import { withinScope, withinScopeForUser } from '#staff/access'
-import { TRIAL_EXTEND_MAX_DAYS } from '#accounts/console'
+import {
+  DEFAULT_TRIAL_EXTEND_MAX_DAYS as TRIAL_EXTEND_MAX_DAYS,
+  trialExtendMaxDays,
+} from '#accounts/settings'
 import { createSchool, createStaff, createTeacher, setStaffRoles } from '#tests/helpers'
 import { inertiaPage, postForm, signIn, type Session } from '#tests/accounts'
 import { visit } from '#tests/helpers'
@@ -267,6 +270,63 @@ test.group('Staff | area scopes (D-338)', (group) => {
       logs.map((row: { action: string }) => row.action),
       ['trial.extend']
     )
+  })
+
+  test('an admin changes the Tambah hari limit in the settings, logged (D-481)', async ({
+    client,
+    assert,
+  }) => {
+    const { inside } = await fixture()
+    const sales = await createStaff(['sales'], { schoolIds: [inside.id] })
+    const salesSession = await signIn(client, 'admin', sales.email)
+    const page = `/sekolah/${inside.id}`
+
+    const refused = await postForm(
+      client,
+      salesSession,
+      '/pengaturan/batas-tambah-hari',
+      { days: 30 },
+      page
+    )
+    assert.equal(refused.response.status(), 403)
+    assert.equal(await trialExtendMaxDays(), TRIAL_EXTEND_MAX_DAYS)
+
+    const admin = await createStaff(['admin'], {})
+    const adminSession = await signIn(client, 'admin', admin.email)
+    await postForm(
+      client,
+      adminSession,
+      '/pengaturan/batas-tambah-hari',
+      { days: 30 },
+      '/pengaturan'
+    )
+    assert.equal(await trialExtendMaxDays(), 30)
+    const settingsProps = await propsOf(client, adminSession, '/pengaturan')
+    assert.equal(settingsProps.trialExtendMaxDays, 30)
+    const log = await db
+      .from('staff_activity_logs')
+      .where({ subject_type: 'setting', subject_id: 'trial.extend_max_days' })
+      .firstOrFail()
+    assert.deepEqual(log.changes, { from: TRIAL_EXTEND_MAX_DAYS, to: 30 })
+
+    const schoolProps = await propsOf(client, salesSession, page)
+    assert.equal(schoolProps.trialExtendMaxDays, 30)
+    const wider = await postForm(
+      client,
+      salesSession,
+      `${page}/uji-coba`,
+      { mode: 'extend', days: 30 },
+      page
+    )
+    assert.equal(wider.response.status(), 302)
+    const over = await postForm(
+      client,
+      salesSession,
+      `${page}/uji-coba`,
+      { mode: 'extend', days: 31 },
+      page
+    )
+    assert.equal(over.response.status(), 403)
   })
 
   test('roles without school powers cannot open the school pages', async ({ client, assert }) => {

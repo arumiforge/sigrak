@@ -128,7 +128,10 @@ test.group('System health | failed jobs', () => {
       attempts: 1,
       queuedAt: new Date(NOW - 2_000).toISOString(),
       failedAt: new Date(NOW - 1_000).toISOString(),
+      retryable: true,
     })
+    // Generation steps on `ai` are only removed, never retried here.
+    assert.isFalse(jobs[1].retryable)
   })
 
   test('a reason keeps its first line, masks e-mail addresses and is shortened', ({ assert }) => {

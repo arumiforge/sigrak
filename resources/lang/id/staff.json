@@ -68,7 +68,7 @@
       "view": "Lihat log aktivitas"
     },
     "access": {
-      "view": "Lihat halaman Hak akses"
+      "view": "Lihat halaman Peran"
     },
     "schools": {
       "view": "Lihat daftar dan profil sekolah",
@@ -222,6 +222,10 @@
     "email": "Email",
     "roles": "Peran",
     "status": "Status",
+    "two_factor": "2FA",
+    "two_factor_on": "Aktif",
+    "two_factor_off": "Belum aktif",
+    "two_factor_missing": "Wajib, belum aktif",
     "active": "Aktif",
     "disabled": "Nonaktif",
     "you": "Anda",
@@ -318,6 +322,11 @@
       "forum_meeting": "Forum",
       "curriculum_version": "Versi kurikulum"
     },
+    "subject_names": {
+      "legal_document": "{title}, versi {version}",
+      "forum_meeting": "Forum {date}",
+      "help_request": "Permintaan {id}"
+    },
     "actions": {
       "staff": {
         "create": "Akun staf dibuat",
@@ -406,9 +415,9 @@
     }
   },
   "matrix": {
-    "title": "Hak akses",
+    "title": "Peran",
     "intro": "Apa yang boleh dilakukan tiap peran. Hak ini tetap di aplikasi dan tidak bisa diubah di sini; yang diatur per staf hanya cakupannya.",
-    "caption": "Hak akses per peran",
+    "caption": "Hak tiap peran",
     "ability": "Hak",
     "full": "Boleh",
     "scoped": "Boleh, di cakupannya",

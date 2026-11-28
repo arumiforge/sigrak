@@ -8,7 +8,7 @@ import { cn } from '~/lib/utils'
 import { SidebarNav } from './shell_parts'
 
 const slot =
-  'flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 rounded-md px-1 text-xs font-semibold leading-tight transition-colors'
+  'flex min-h-14 w-full min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-md px-0.5 text-[0.6875rem] font-semibold leading-tight transition-colors sm:text-xs'
 
 /**
  * The bottom navigation on phones and tablets (below 1024 px): at most
@@ -48,7 +48,9 @@ export function BottomNav({ items, url }: { items: NavItem[]; url: string }) {
                 >
                   <Icon name={item.icon} size={24} active={active} />
                 </span>
-                <span className="max-w-full truncate">{t(item.label)}</span>
+                <span className="line-clamp-2 max-w-full text-center break-words">
+                  {t(item.label)}
+                </span>
               </Link>
             </li>
           )
@@ -70,7 +72,9 @@ export function BottomNav({ items, url }: { items: NavItem[]; url: string }) {
               >
                 <Icon name="more" size={24} />
               </span>
-              <span className="max-w-full truncate">{t('nav.more')}</span>
+              <span className="line-clamp-2 max-w-full text-center break-words">
+                {t('nav.more')}
+              </span>
             </button>
           </li>
         )}

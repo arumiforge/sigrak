@@ -47,9 +47,10 @@ function Mark({ cell }: { cell: Cell }) {
 }
 
 /**
- * Konsol /hak-akses (D-314): what every role may do, read-only and
+ * Konsol /peran (D-314, D-481): what every role may do, read-only and
  * straight from the code (app/staff/powers.ts). From 1024 px a full
- * matrix; on smaller screens one role at a time. Ability `access.view`.
+ * matrix whose first column stays put while it scrolls sideways; on
+ * smaller screens one role at a time. Ability `access.view`.
  */
 export default function ConsoleAccessMatrix({ roles, groups, ownRoles }: Props) {
   const t = useT()
@@ -82,12 +83,18 @@ export default function ConsoleAccessMatrix({ roles, groups, ownRoles }: Props) 
       </div>
 
       {wide ? (
-        <div className="overflow-x-auto rounded-lg border bg-surface" data-testid="matrix-table">
+        <div
+          className="relative overflow-x-auto rounded-lg border bg-surface"
+          data-testid="matrix-table"
+        >
           <table className="w-full border-collapse text-left text-sm">
             <caption className="sr-only">{t('staff.matrix.caption')}</caption>
             <thead className="sticky top-0 border-b bg-page">
               <tr>
-                <th scope="col" className="px-3 py-3 text-xs font-semibold text-muted">
+                <th
+                  scope="col"
+                  className="sticky left-0 z-10 border-r bg-page px-3 py-3 text-xs font-semibold text-muted"
+                >
                   {t('staff.matrix.ability')}
                 </th>
                 {roles.map(({ role }) => (
@@ -112,12 +119,16 @@ export default function ConsoleAccessMatrix({ roles, groups, ownRoles }: Props) 
                     colSpan={roles.length + 1}
                     className="px-3 py-2 text-xs font-bold tracking-wide text-text uppercase"
                   >
-                    {t(`staff.ability_groups.${group}`)}
+                    {/* Stays in view while the matrix scrolls sideways. */}
+                    <span className="sticky left-3">{t(`staff.ability_groups.${group}`)}</span>
                   </th>
                 </tr>
                 {abilities.map(({ ability, roles: holders }) => (
-                  <tr key={ability} className="hover:bg-surface-hover/60">
-                    <th scope="row" className="px-3 py-2 font-medium">
+                  <tr key={ability} className="group hover:bg-surface-hover/60">
+                    <th
+                      scope="row"
+                      className="sticky left-0 z-10 min-w-56 border-r bg-surface px-3 py-2 font-medium group-hover:bg-surface-hover"
+                    >
                       {t(abilityLabel(ability))}
                     </th>
                     {roles.map(({ role }) => (

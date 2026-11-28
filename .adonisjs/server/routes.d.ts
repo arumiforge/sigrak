@@ -19,6 +19,7 @@ export type ScannedRoutes = {
     'admin.users.trial': { paramsTuple: [ParamValue]; params: {'user': ParamValue} }
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.settings.update': { paramsTuple?: []; params?: {} }
+    'admin.settings.extend_limit': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.store': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.approve': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
@@ -427,6 +428,7 @@ export type ScannedRoutes = {
     'admin.schools.trial': { paramsTuple: [ParamValue]; params: {'school': ParamValue} }
     'admin.users.trial': { paramsTuple: [ParamValue]; params: {'user': ParamValue} }
     'admin.settings.update': { paramsTuple?: []; params?: {} }
+    'admin.settings.extend_limit': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.store': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.approve': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.area_proposals.return': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }

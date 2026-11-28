@@ -25,6 +25,7 @@ type Member = {
   disabled: boolean
   roles: string[]
   self: boolean
+  twoFactor: { enabled: boolean; required: boolean }
 }
 
 type Props = {
@@ -79,6 +80,20 @@ export default function ConsoleStaff({ staff, grantable, roleScopes, fields, can
               </StatusChip>
             ))}
           </span>
+        ),
+    },
+    {
+      id: 'two_factor',
+      header: t('staff.list.two_factor'),
+      cell: (member) =>
+        member.twoFactor.enabled ? (
+          <StatusChip tone="ok">{t('staff.list.two_factor_on')}</StatusChip>
+        ) : (
+          <StatusChip tone={member.twoFactor.required ? 'warn' : 'neutral'}>
+            {member.twoFactor.required
+              ? t('staff.list.two_factor_missing')
+              : t('staff.list.two_factor_off')}
+          </StatusChip>
         ),
     },
     {

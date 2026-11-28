@@ -15,7 +15,7 @@ import type { StaffRole } from './roles.js'
  * support session.
  */
 
-/** Every staff member: the Hak akses page and area proposals (R1-07: every staff role). */
+/** Every staff member: the Peran page and area proposals (R1-07: every staff role). */
 const EVERYONE: StaffAbility[] = ['access.view', 'layers.propose']
 
 /** Bank Masalah and the forum for all three teams of D-439. */

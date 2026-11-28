@@ -4,6 +4,7 @@ import School from '#models/school'
 import type StaffUser from '#models/staff_user'
 import User from '#models/user'
 import { logStaffActivity } from '#accounts/activity_log'
+import { trialExtendMaxDays } from '#accounts/settings'
 import { clampDays, extendedSchoolUntil, extendedUserDays, trialOf } from '#accounts/trial'
 import type { HttpContext } from '@adonisjs/core/http'
 import {
@@ -96,16 +97,9 @@ export async function changeUserTrial(staff: StaffUser, userId: number, change: 
 }
 
 /**
- * Most days one "Tambah hari" from Penjualan or Koordinator Wilayah may
- * add (`trials.extend`, internal-roles §3: "trial extensions within a
- * limit"). Provisional value until the owner names the limit.
- */
-export const TRIAL_EXTEND_MAX_DAYS = 14
-
-/**
  * Who may make a trial change: `trials.manage` within scope for any
- * change, or `trials.extend` within scope for "Tambah hari" up to
- * TRIAL_EXTEND_MAX_DAYS. A 403 otherwise.
+ * change, or `trials.extend` within scope for "Tambah hari" up to the
+ * limit set on the console settings page (D-481). A 403 otherwise.
  */
 export async function authorizeTrialChange(
   ctx: HttpContext,
@@ -120,7 +114,7 @@ export async function authorizeTrialChange(
   if (await reaches('trials.manage')) return staff
   if (
     change.mode === 'extend' &&
-    (change.days ?? 0) <= TRIAL_EXTEND_MAX_DAYS &&
+    (change.days ?? 0) <= (await trialExtendMaxDays()) &&
     (await reaches('trials.extend'))
   ) {
     return staff

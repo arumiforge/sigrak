@@ -1,6 +1,6 @@
 {
   "title": "Kesehatan sistem",
-  "intro": "Keadaan antrean, ruang disk, pembuatan konten, dan cadangan. Halaman ini diperbarui sendiri tiap 30 detik. Peringatan dikirim oleh pemantauan server, bukan oleh halaman ini.",
+  "intro": "Keadaan antrean, ruang disk, layanan pendukung, pembuatan konten, dan cadangan. Halaman ini diperbarui sendiri tiap 30 detik. Peringatan dikirim oleh pemantauan server, bukan oleh halaman ini.",
   "checked_at": "Diperbarui {time}",
   "refresh_action": "Perbarui sekarang",
   "unavailable": "Bagian ini tidak bisa dibaca sekarang. Halaman akan mencoba lagi sebentar lagi.",
@@ -53,10 +53,38 @@
     "retry_label": "Coba lagi pekerjaan {job}",
     "retry_title": "Coba lagi pekerjaan {job}?",
     "retry_description": "Pekerjaan masuk lagi ke antrean {queue} dan dijalankan dari awal.",
+    "no_retry_note": "Dicoba lagi oleh guru",
+    "no_retry_hint": "Pembuatan konten yang terhenti dicoba lagi oleh guru dari halaman pembuatannya. Mencoba lagi dari sini tidak membantu, jadi pekerjaan AI hanya bisa dihapus.",
     "remove_action": "Hapus",
     "remove_label": "Hapus pekerjaan {job}",
     "remove_title": "Hapus pekerjaan {job}?",
     "remove_description": "Pekerjaan ini dihapus dari antrean {queue} dan tidak bisa dikembalikan. Catatannya tetap ada di log aktivitas."
+  },
+  "services": {
+    "title": "Layanan pendukung",
+    "intro": "Redis untuk cache dan pengiriman email. Keduanya tidak menghentikan aplikasi kalau bermasalah, tetapi perlu diperiksa.",
+    "cache": {
+      "title": "Redis cache",
+      "reachable": "Terhubung",
+      "unreachable": "Tidak terhubung",
+      "unreachable_note": "Halaman bisa lebih lambat karena data dihitung ulang. Tidak ada data yang hilang.",
+      "memory": "Memori terpakai {used}",
+      "memory_of": "Memori terpakai {used} dari {max}",
+      "memory_unknown": "Pemakaian memori tidak terbaca.",
+      "note": "Hanya berisi data sementara yang bisa dibuat ulang."
+    },
+    "mail": {
+      "title": "Email",
+      "sends": "Terkirim",
+      "not_sending": "Tidak terkirim",
+      "sources": {
+        "env": "Pengaturan dari berkas lingkungan server.",
+        "console": "Pengaturan dari halaman Integrasi.",
+        "none": "Belum diatur."
+      },
+      "warn": "Email tidak dikirim. Undangan, tautan kata sandi, dan balasan bantuan tidak sampai. Atur email di halaman Integrasi.",
+      "dev_note": "Wajar saat pengembangan. Di server produksi, email harus terkirim."
+    }
   },
   "disk": {
     "title": "Ruang disk",
@@ -108,6 +136,7 @@
   "toasts": {
     "retried": "Pekerjaan {job} masuk lagi ke antrean {queue}.",
     "removed": "Pekerjaan {job} dihapus dari antrean {queue}.",
-    "not_found": "Pekerjaan itu sudah tidak ada di daftar yang belum berhasil. Daftarnya sudah diperbarui."
+    "not_found": "Pekerjaan itu sudah tidak ada di daftar yang belum berhasil. Daftarnya sudah diperbarui.",
+    "not_retryable": "Pekerjaan AI tidak dicoba lagi dari sini. Guru mencoba lagi dari halaman pembuatannya sendiri."
   }
 }

@@ -141,7 +141,7 @@ Staff use a separate console at `admin.sigrak.com` (rebuilt on the new stack in 
 
 - **Built:** three staff roles, `admin`, `support`, and `content` (D-167). A command-line task makes the first admin on a server.
 - **Designed:** eleven roles, all active from the start (D-339): Pemilik (`owner`), Admin (`admin`), Validator (`validator`, Tim Validasi SIGRAK), Penyusun Konten (`content`), Kurator Kurikulum (`curriculum`), Support (`support`), Pemasaran (`marketing`), Penjualan (`sales`), Koordinator Wilayah (`regional_lead`), Keuangan (`finance`), and Teknis (`engineer`). A person may hold several roles, each with its own scope, so `staff_role_assignments` replaces `staff_users.role`. Prices and AI models move from admin to owner.
-- **Powers stay in code, scopes are data.** The admin edits only each person's scope: region (province, kabupaten, kecamatan) or a named school list, level (SD/MI), and field (subject group or religion). Scope changes are logged (D-338). The console shows a read-only "Hak akses" matrix; an editable permission matrix was rejected (D-314).
+- **Powers stay in code, scopes are data.** The admin edits only each person's scope: region (province, kabupaten, kecamatan) or a named school list, level (SD/MI), and field (subject group or religion). Scope changes are logged (D-338). The console shows a read-only matrix on the "Peran" page (D-481); an editable permission matrix was rejected (D-314).
 - **Separation of duty.** A validator never signs off their own work (D-339). The person who records a payment is not the one who confirms it (D-340).
 - **Support access** to a school's view is read-only, covered by the MoU each school signs, with religion and health data hidden; Tim SIGRAK keeps one internal row per support session, not per page view, and no log is shown to schools (D-341). This replaces the school-granted, time-limited access first proposed in `docs/drafts/internal-roles.md` §4.
 - **Two-factor sign-in** uses an authenticator app (TOTP). It is required for Pemilik and Admin and optional for other staff; there are no recovery codes, and an admin resets a lost 2FA, with every reset logged (D-343).
@@ -624,7 +624,7 @@ Principal and supervisor can comment on any document (`document_comments`).
 
 **Who:** Tim SIGRAK.
 
-**The console.** The staff console at the root of `admin.sigrak.com`, sign-in at `/masuk`, behind the `staff` guard and Cloudflare Access; operations views sit behind the same guard on the same host (D-055, D-164). Phase R2 rebuilds it on the new stack. Staff powers are fixed in code and listed on a read-only "Hak akses" page (D-314).
+**The console.** The staff console at the root of `admin.sigrak.com`, sign-in at `/masuk`, behind the `staff` guard and Cloudflare Access; operations views sit behind the same guard on the same host (D-055, D-164). Phase R2 rebuilds it on the new stack. Staff powers are fixed in code and listed on the read-only "Peran" page (D-314, D-481).
 
 | Console feature | Status | Decision |
 |---|---|---|

@@ -146,7 +146,7 @@ test.group('Staff | 2FA', (group) => {
     const waiting = await waitingSession(client, staff)
 
     // Not signed in yet.
-    const home = await get(client, waiting, '/hak-akses')
+    const home = await get(client, waiting, '/peran')
     assert.equal(home.header('location'), '/masuk')
     const challenge = await inertiaPage(client, waiting, '/masuk/kode')
     assert.equal(challenge.status(), 200)
@@ -160,7 +160,7 @@ test.group('Staff | 2FA', (group) => {
     const right = await submitTwoFactorCode(client, session.sessionId, code)
     assert.equal(right.response.header('location'), '/')
     const signedIn: Session = { area: 'admin', sessionId: right.sessionId }
-    assert.equal(await statusOf(client, signedIn, '/hak-akses'), 200)
+    assert.equal(await statusOf(client, signedIn, '/peran'), 200)
 
     // The same code does not work a second time.
     const second = await waitingSession(client, staff)
@@ -247,7 +247,7 @@ test.group('Staff | 2FA', (group) => {
 
     // Staff with optional 2FA are never stopped.
     const supportSession = await signIn(client, 'admin', support.email)
-    assert.equal(await statusOf(client, supportSession, '/hak-akses'), 200)
+    assert.equal(await statusOf(client, supportSession, '/peran'), 200)
 
     // Keluar works before enrolling.
     const owner = await createStaff(['owner'])

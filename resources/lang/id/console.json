@@ -1,6 +1,16 @@
 {
   "home": {
-    "intro": "Kelola sekolah, anggota, undangan, dan masa uji coba lewat menu."
+    "intro": "Hal yang menunggu tindakan Anda ada di bagian atas. Di bawahnya ada semua halaman yang bisa Anda buka.",
+    "attention_title": "Perlu ditindaklanjuti",
+    "attention_empty": "Tidak ada yang menunggu saat ini.",
+    "attention": {
+      "help_new": "Permintaan bantuan baru",
+      "problems_new": "Masalah belum dipilah",
+      "problems_triaged": "Masalah menunggu analisis",
+      "curriculum_signoff": "Versi kurikulum menunggu pengesahan",
+      "curriculum_publish": "Versi kurikulum siap diterbitkan",
+      "failed_jobs": "Pekerjaan antrean belum berhasil"
+    }
   },
   "levels": {
     "sd": "SD",
@@ -77,6 +87,8 @@
     "days_label": "Jumlah hari",
     "save": "Simpan",
     "saved": "Pengaturan sudah disimpan.",
-    "read_only": "Hanya admin yang bisa mengubah pengaturan ini."
+    "read_only": "Hanya admin yang bisa mengubah pengaturan ini.",
+    "extend_title": "Batas tambah hari uji coba",
+    "extend_intro": "Paling banyak hari yang boleh ditambahkan Penjualan dan Koordinator wilayah dalam sekali tambah. Peran yang boleh mengatur masa uji coba sepenuhnya tidak terkena batas ini."
   }
 }

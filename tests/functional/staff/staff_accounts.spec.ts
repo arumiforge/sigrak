@@ -27,7 +27,7 @@ import {
 import { fakeMail, inertiaPage, postForm, signIn, tokenOf, type Session } from '#tests/accounts'
 
 /**
- * Staf, Log aktivitas and Hak akses (R2-01): creating staff with a
+ * Staf, Log aktivitas and Peran (R2-01): creating staff with a
  * set-password link, roles and scopes per assignment, disabling, and
  * the guards (no self-change, owner and admin only by an owner, never
  * without an active owner). Every change is logged.
@@ -287,14 +287,14 @@ test.group('Staff | accounts, roles and guards', (group) => {
     const admin = await createStaff(['admin'])
     const member = await createStaff(['support'])
     const memberSession = await signIn(client, 'admin', member.email)
-    assert.equal(await statusOf(client, memberSession, '/hak-akses'), 200)
+    assert.equal(await statusOf(client, memberSession, '/peran'), 200)
 
     const asAdmin = await signIn(client, 'admin', admin.email)
     await postForm(client, asAdmin, `/staf/${member.id}/nonaktifkan`, {}, '/staf')
     await member.refresh()
     assert.isNotNull(member.disabledAt)
 
-    const kicked = await get(client, memberSession, '/hak-akses')
+    const kicked = await get(client, memberSession, '/peran')
     assert.equal(kicked.status(), 302)
     assert.equal(kicked.header('location'), '/masuk')
     const again = await login(client, 'admin', { email: member.email, password: PASSWORD })
@@ -351,7 +351,7 @@ test.group('Staff | accounts, roles and guards', (group) => {
         session,
         `/staf/${member.id}/nonaktifkan`,
         {},
-        '/hak-akses'
+        '/peran'
       )
       assert.equal(changed.response.status(), 403, role)
     }
@@ -390,7 +390,7 @@ test.group('Staff | accounts, roles and guards', (group) => {
   })
 })
 
-test.group('Staff | Log aktivitas and Hak akses', (group) => {
+test.group('Staff | Log aktivitas and Peran', (group) => {
   group.each.setup(() => testUtils.db().truncate())
   group.each.setup(() => limiter.clear(['memory']))
 
@@ -443,10 +443,10 @@ test.group('Staff | Log aktivitas and Hak akses', (group) => {
     assert.equal(await statusOf(client, asSupport, '/log-aktivitas'), 403)
   })
 
-  test('Hak akses shows the matrix from code to every staff member', async ({ client, assert }) => {
+  test('Peran shows the matrix from code to every staff member', async ({ client, assert }) => {
     const sales = await createStaff(['sales', 'marketing'])
     const session = await signIn(client, 'admin', sales.email)
-    const props = await propsOf(client, session, '/hak-akses')
+    const props = await propsOf(client, session, '/peran')
     assert.lengthOf(props.roles, 12)
     assert.deepEqual(props.ownRoles.sort(), ['marketing', 'sales'])
     const team = props.groups.find((row: { group: string }) => row.group === 'team')

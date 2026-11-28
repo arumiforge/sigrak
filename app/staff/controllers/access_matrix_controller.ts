@@ -5,7 +5,7 @@ import { POWERS } from '../powers.js'
 import { ROLE_SCOPES, STAFF_ROLES } from '../roles.js'
 
 /**
- * Konsol: Hak akses (D-314). The read-only matrix of roles and
+ * Konsol: Peran (D-314, D-481). The read-only matrix of roles and
  * abilities, straight from app/staff/powers.ts, so the page can never
  * drift from what the code enforces. A cell is "within scope" when the
  * role uses an area, level or field scope. Ability `access.view`

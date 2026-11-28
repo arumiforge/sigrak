@@ -139,6 +139,12 @@ export function splitForBottomNav(items: NavItem[]) {
   }
 }
 
+/**
+ * Console menu in six groups (R2-09): Sekolah, Konten, Bantuan,
+ * Kurikulum, Sistem, Tim. Bank Masalah and the forum sit under Bantuan
+ * (help requests become problems, D-477); Bank Praktik Baik under
+ * Kurikulum (Tim Kurikulum dan Riset keeps it, D-439).
+ */
 const consoleItems: NavItem[] = [
   { key: 'home', href: '/', label: 'nav.console.home', icon: 'home', exact: true },
   {
@@ -146,7 +152,7 @@ const consoleItems: NavItem[] = [
     href: '/sekolah',
     label: 'nav.console.schools',
     icon: 'school',
-    section: 'nav.sections.schools',
+    section: 'nav.sections.console_schools',
     ability: 'schools.view',
   },
   {
@@ -154,7 +160,7 @@ const consoleItems: NavItem[] = [
     href: '/pengguna',
     label: 'nav.console.users',
     icon: 'users',
-    section: 'nav.sections.schools',
+    section: 'nav.sections.console_schools',
     ability: 'users.view',
   },
   {
@@ -162,7 +168,7 @@ const consoleItems: NavItem[] = [
     href: '/direktori-sekolah',
     label: 'nav.console.directory',
     icon: 'directory',
-    section: 'nav.sections.regions',
+    section: 'nav.sections.console_schools',
     ability: 'regions.review',
   },
   {
@@ -170,7 +176,7 @@ const consoleItems: NavItem[] = [
     href: '/perubahan-wilayah',
     label: 'nav.console.region_changes',
     icon: 'region',
-    section: 'nav.sections.regions',
+    section: 'nav.sections.console_schools',
     ability: 'regions.review',
   },
   {
@@ -178,7 +184,7 @@ const consoleItems: NavItem[] = [
     href: '/usulan-wilayah',
     label: 'nav.console.area_proposals',
     icon: 'proposals',
-    section: 'nav.sections.regions',
+    section: 'nav.sections.console_schools',
     ability: 'layers.propose',
   },
   {
@@ -186,23 +192,15 @@ const consoleItems: NavItem[] = [
     href: '/kalender',
     label: 'nav.console.calendar',
     icon: 'calendar',
-    section: 'nav.sections.regions',
+    section: 'nav.sections.console_schools',
     ability: 'layers.propose',
-  },
-  {
-    key: 'curriculum',
-    href: '/kurikulum',
-    label: 'nav.console.curriculum',
-    icon: 'curriculum',
-    section: 'nav.sections.curriculum',
-    ability: 'curriculum.view',
   },
   {
     key: 'announcements',
     href: '/kabar',
     label: 'nav.console.announcements',
     icon: 'news',
-    section: 'nav.sections.communication',
+    section: 'nav.sections.console_content',
     ability: 'announcements.write',
   },
   {
@@ -210,7 +208,7 @@ const consoleItems: NavItem[] = [
     href: '/acara',
     label: 'nav.console.events',
     icon: 'event',
-    section: 'nav.sections.communication',
+    section: 'nav.sections.console_content',
     ability: 'events.manage',
   },
   {
@@ -218,7 +216,7 @@ const consoleItems: NavItem[] = [
     href: '/cerita-sekolah',
     label: 'nav.console.stories',
     icon: 'story',
-    section: 'nav.sections.communication',
+    section: 'nav.sections.console_content',
     ability: 'stories.manage',
   },
   {
@@ -226,7 +224,7 @@ const consoleItems: NavItem[] = [
     href: '/halaman-legal',
     label: 'nav.console.legal',
     icon: 'legal',
-    section: 'nav.sections.communication',
+    section: 'nav.sections.console_content',
     ability: 'legal_pages.manage',
   },
   {
@@ -234,7 +232,7 @@ const consoleItems: NavItem[] = [
     href: '/bantuan',
     label: 'nav.console.help_requests',
     icon: 'support',
-    section: 'nav.sections.support',
+    section: 'nav.sections.console_support',
     ability: 'help_requests.view',
   },
   {
@@ -242,7 +240,7 @@ const consoleItems: NavItem[] = [
     href: '/sesi-bantuan',
     label: 'nav.console.support_sessions',
     icon: 'school-view',
-    section: 'nav.sections.support',
+    section: 'nav.sections.console_support',
     ability: 'support_sessions.view',
   },
   {
@@ -250,31 +248,39 @@ const consoleItems: NavItem[] = [
     href: '/bank-masalah',
     label: 'nav.console.problems',
     icon: 'problem',
-    section: 'nav.sections.problems',
+    section: 'nav.sections.console_support',
     ability: 'problems.view',
-  },
-  {
-    key: 'good_practices',
-    href: '/bank-praktik-baik',
-    label: 'nav.console.good_practices',
-    icon: 'practice',
-    section: 'nav.sections.problems',
-    ability: 'good_practices.view',
   },
   {
     key: 'forum',
     href: '/forum',
     label: 'nav.console.forum',
     icon: 'forum',
-    section: 'nav.sections.problems',
+    section: 'nav.sections.console_support',
     ability: 'forum.view',
+  },
+  {
+    key: 'curriculum',
+    href: '/kurikulum',
+    label: 'nav.console.curriculum',
+    icon: 'curriculum',
+    section: 'nav.sections.console_curriculum',
+    ability: 'curriculum.view',
+  },
+  {
+    key: 'good_practices',
+    href: '/bank-praktik-baik',
+    label: 'nav.console.good_practices',
+    icon: 'practice',
+    section: 'nav.sections.console_curriculum',
+    ability: 'good_practices.view',
   },
   {
     key: 'settings',
     href: '/pengaturan',
     label: 'nav.console.settings',
     icon: 'settings',
-    section: 'nav.sections.system',
+    section: 'nav.sections.console_system',
     ability: 'settings.view',
     // Integrasi and Model AI below are pages of the same area (R2-03).
     exact: true,
@@ -284,7 +290,7 @@ const consoleItems: NavItem[] = [
     href: '/pengaturan/integrasi',
     label: 'nav.console.integrations',
     icon: 'integrations',
-    section: 'nav.sections.system',
+    section: 'nav.sections.console_system',
     ability: 'integrations.view',
   },
   {
@@ -292,7 +298,7 @@ const consoleItems: NavItem[] = [
     href: '/pengaturan/model-ai',
     label: 'nav.console.ai_models',
     icon: 'ai-models',
-    section: 'nav.sections.system',
+    section: 'nav.sections.console_system',
     ability: 'ai_models.view',
   },
   {
@@ -300,7 +306,7 @@ const consoleItems: NavItem[] = [
     href: '/kesehatan-sistem',
     label: 'nav.console.system_health',
     icon: 'health',
-    section: 'nav.sections.system',
+    section: 'nav.sections.console_system',
     ability: 'system_health.view',
   },
   {
@@ -308,7 +314,7 @@ const consoleItems: NavItem[] = [
     href: '/staf',
     label: 'nav.console.staff',
     icon: 'staff',
-    section: 'nav.sections.team',
+    section: 'nav.sections.console_team',
     ability: 'staff.view',
   },
   {
@@ -316,15 +322,15 @@ const consoleItems: NavItem[] = [
     href: '/log-aktivitas',
     label: 'nav.console.activity_log',
     icon: 'activity',
-    section: 'nav.sections.team',
+    section: 'nav.sections.console_team',
     ability: 'audit.view',
   },
   {
     key: 'access',
-    href: '/hak-akses',
+    href: '/peran',
     label: 'nav.console.access',
     icon: 'access',
-    section: 'nav.sections.team',
+    section: 'nav.sections.console_team',
     ability: 'access.view',
   },
 ]

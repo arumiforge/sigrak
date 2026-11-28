@@ -5,7 +5,7 @@
  * in code in app/staff/powers.ts (D-314, D-338). A missing key is added
  * here by the integrator, never by a parallel task.
  *
- * Grouped as on the Hak akses page; labels are
+ * Grouped as on the Peran page; labels are
  * `staff.abilities.<group>.<action>` and `staff.ability_groups.<group>`
  * in resources/lang/id/staff.json. Scoped means the assignment's scope
  * (region, school list, level, field) limits the ability; see
@@ -21,7 +21,7 @@ export const ABILITY_GROUPS = {
     /** Reset another staff member's 2FA (R2-02). */
     'staff.reset_2fa',
     'audit.view',
-    /** The read-only Hak akses matrix (D-314): every staff member. */
+    /** The read-only Peran matrix (D-314, D-481): every staff member. */
     'access.view',
   ],
   /** Schools, school users, invitations and trials (R1-05, scoped by area). */

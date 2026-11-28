@@ -74,6 +74,17 @@ export async function mailSource(): Promise<MailSource> {
   return isCompleteMail(saved?.value) ? 'console' : 'none'
 }
 
+/**
+ * Where mail comes from and whether it really leaves the server: env
+ * with a real mailer (not `json`), or complete console values
+ * (Kesehatan sistem, R2-09).
+ */
+export async function mailDelivery(): Promise<{ source: MailSource; sends: boolean }> {
+  const source = await mailSource()
+  const sends = source === 'console' || (source === 'env' && envMailer() !== 'json')
+  return { source, sends }
+}
+
 /** What the console page shows: values without the password, and which source is used. */
 export async function presentMail() {
   const saved = await readIntegration('mail')

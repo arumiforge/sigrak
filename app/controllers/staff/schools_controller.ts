@@ -10,14 +10,14 @@ import {
   resendInvitation,
 } from '#accounts/invitations'
 import { logStaffActivity } from '#accounts/activity_log'
-import { authorizeTrialChange, changeSchoolTrial, TRIAL_EXTEND_MAX_DAYS } from '#accounts/console'
+import { authorizeTrialChange, changeSchoolTrial } from '#accounts/console'
 import {
   AlreadyMemberError,
   InvitationUnavailableError,
   PrincipalTakenError,
 } from '#accounts/errors'
 import { backWithFieldError } from '#accounts/http'
-import { defaultTrialDays } from '#accounts/settings'
+import { defaultTrialDays, trialExtendMaxDays } from '#accounts/settings'
 import { applySchoolScope, authorizeStaff, schoolScopeOf, withinScope } from '#staff/access'
 import { staffReadTransaction, staffTransaction } from '#tenancy/tenant_transaction'
 import { SUPPORT_SESSION_HOURS } from '#help/catalog'
@@ -111,7 +111,7 @@ export default class SchoolsController {
         trialExtendedUntil: data.school.trialExtendedUntil?.toISO() ?? null,
       },
       defaultTrialDays: await defaultTrialDays(),
-      trialExtendMaxDays: TRIAL_EXTEND_MAX_DAYS,
+      trialExtendMaxDays: await trialExtendMaxDays(),
       supportSessionHours: SUPPORT_SESSION_HOURS,
       members: data.members.map((member) => ({
         publicId: member.publicId,

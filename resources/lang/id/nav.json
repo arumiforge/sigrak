@@ -46,14 +46,12 @@
   "sections": {
     "school": "Sekolah",
     "layers": "Data daerah dan sekolah",
-    "schools": "Sekolah dan pengguna",
-    "regions": "Wilayah",
-    "system": "Sistem",
-    "team": "Tim",
-    "curriculum": "Kurikulum dan konten",
-    "communication": "Komunikasi",
-    "support": "Bantuan",
-    "problems": "Masalah dan solusi"
+    "console_schools": "Sekolah",
+    "console_content": "Konten",
+    "console_support": "Bantuan",
+    "console_curriculum": "Kurikulum",
+    "console_system": "Sistem",
+    "console_team": "Tim"
   },
   "roles": {
     "principal": "Kepala sekolah",
@@ -75,7 +73,7 @@
     "ai_models": "Model AI",
     "staff": "Staf",
     "activity_log": "Log aktivitas",
-    "access": "Hak akses",
+    "access": "Peran",
     "curriculum": "Kurikulum",
     "announcements": "Kabar",
     "events": "Acara",
