@@ -1,7 +1,7 @@
 # R0-06 — Spike: BullMQ AI job with SSE progress
 
 - **Phase:** R0
-- **Status:** review
+- **Status:** done (accepted, D-468)
 - **Owner:** igi/dazzling-franklin-5i1w8n
 - **Depends on:** R0-05
 - **Can run in parallel with:** R0-07

@@ -2323,3 +2323,10 @@ Accepted · 2026-11-28 · R0-08 · owner's choice (interview 2026-11-28) · resu
 - Load is measured again twice: with the first real R1 content page and row-level security, and on the VPS behind nginx and the tunnel in R3.
 - The R1 gate waits for the owner's review of R0-06; the gate report is ready.
 Reason: the spike met every target except AI queue wait, which is a setting.
+
+### D-468 — R0 gate passed: R0-06 accepted, R1 starts
+Accepted · 2026-11-28 · R0 gate · owner's choice ("R0-06 sudah saya review, setujui dan mulai R1") · confirms D-451; closes R0-06 and R0-08 (`docs/drafts/r0-gate.md`)
+- R0-06 is accepted as built; D-451 is no longer only a team decision.
+- R1 (foundation) starts on the phase R stack, split into R1-01…R1-11 in `docs/agent/tasks/` (`R1-00-foundation-plan.md` has the order). Work runs in waves: tenancy, Indonesian copy base, curriculum and runtime settings first, in parallel; then auth, layers, school year, calendar, timetable; the load re-measure of D-467 last.
+- Parallel R1 tasks keep apart: each owns its module folder, its own route file under `start/routes/`, its own migration timestamp block, and its own test database (`sigrak_test_<task>`) and Redis database numbers when tests run side by side (D-442).
+Reason: the spikes met the gate and the owner approved R1.
