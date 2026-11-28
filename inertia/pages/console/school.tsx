@@ -18,6 +18,7 @@ type Props = {
     npsn: string | null
     level: 'sd' | 'mi'
     trialDays: number | null
+    trialExtendedUntil: string | null
   }
   defaultTrialDays: number
   members: {
@@ -197,6 +198,20 @@ export default function ConsoleSchool({
                 ? t('console.trial.current_school', { days: school.trialDays })
                 : t('console.trial.current_default', { days: defaultTrialDays })}
             </p>
+            {school.trialExtendedUntil && (
+              <p className="mb-3" data-testid="school-trial-extension">
+                {new Date(school.trialExtendedUntil) > new Date()
+                  ? t('accounts.trial.school_extended', {
+                      date: formatShortDate(school.trialExtendedUntil),
+                    })
+                  : t('accounts.trial.school_extension_ended', {
+                      date: formatShortDate(school.trialExtendedUntil),
+                    })}
+              </p>
+            )}
+            {can.manageTrials && (
+              <p className="mb-3 text-sm text-muted">{t('accounts.trial.school_extend_hint')}</p>
+            )}
             {can.manageTrials && <TrialForm action={`${base}/uji-coba`} />}
           </Section>
         </div>

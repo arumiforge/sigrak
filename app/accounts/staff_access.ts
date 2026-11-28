@@ -8,15 +8,16 @@ import type { StaffRole } from '#models/staff_user'
  * roles the code has until the console slice (D-339):
  *
  * - admin: schools, members, invitations, trials, the default trial.
- * - support: schools and members, invitations (resend, invite the first
- *   operator); trials read-only.
+ * - support: views schools, members, invitations and trials, read-only
+ *   (D-469: support gets the read-only staff database role; changes go
+ *   through an admin).
  * - content: none of these.
  */
 export type StaffAbility = 'schools.view' | 'invitations.manage' | 'trials.manage'
 
 const powers: Record<StaffRole, StaffAbility[]> = {
   admin: ['schools.view', 'invitations.manage', 'trials.manage'],
-  support: ['schools.view', 'invitations.manage'],
+  support: ['schools.view'],
   content: [],
 }
 

@@ -294,6 +294,23 @@ export class CurriculumVersionSchema extends BaseModel {
   declare updatedAt: DateTime
 }
 
+export class EmailConfirmationTokenSchema extends BaseModel {
+  static $columns = ['createdAt', 'email', 'expiresAt', 'id', 'tokenHash', 'userId'] as const
+  $columns = EmailConfirmationTokenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare email: string
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column({ serializeAs: null })
+  declare tokenHash: string
+  @column()
+  declare userId: number
+}
+
 export class ExamParticipantSchema extends BaseModel {
   static $columns = ['createdAt', 'examSessionId', 'id', 'password', 'publicId', 'status', 'updatedAt', 'username'] as const
   $columns = ExamParticipantSchema.$columns
@@ -967,7 +984,7 @@ export class SchoolPackageChoiceSchema extends BaseModel {
 }
 
 export class SchoolSchema extends BaseModel {
-  static $columns = ['address', 'createdAt', 'district', 'districtId', 'id', 'level', 'name', 'npsn', 'regionCheckedAt', 'regionId', 'regionSource', 'trialDays', 'updatedAt'] as const
+  static $columns = ['address', 'createdAt', 'district', 'districtId', 'id', 'level', 'name', 'npsn', 'regionCheckedAt', 'regionId', 'regionSource', 'trialDays', 'trialExtendedUntil', 'updatedAt'] as const
   $columns = SchoolSchema.$columns
   @column()
   declare address: string
@@ -993,6 +1010,8 @@ export class SchoolSchema extends BaseModel {
   declare regionSource: string
   @column()
   declare trialDays: number | null
+  @column.dateTime()
+  declare trialExtendedUntil: DateTime | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }

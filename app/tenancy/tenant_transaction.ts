@@ -1,6 +1,6 @@
 import db from '@adonisjs/lucid/services/db'
 import type { TransactionClientContract } from '@adonisjs/lucid/types/database'
-import { STAFF_ROLE, TENANT_CONNECTION } from './database_roles.js'
+import { STAFF_READ_ROLE, STAFF_ROLE, TENANT_CONNECTION } from './database_roles.js'
 import { MissingSchoolContextException, SchoolContext, type SchoolScope } from './school_context.js'
 
 type Work<T> = (trx: TransactionClientContract) => Promise<T>
@@ -59,6 +59,26 @@ export async function staffTransaction<T>(work: Work<T>): Promise<T> {
     await trx.rawQuery(`SET LOCAL ROLE ${STAFF_ROLE}`)
     return SchoolContext.withTransaction({ schoolId: null, userId: null, staff: true }, trx, () =>
       work(trx)
+    )
+  })
+}
+
+/**
+ * Runs `work` as read-only staff (support, D-469): a READ ONLY
+ * transaction with `SET LOCAL ROLE sigrak_staff_readonly`, so every
+ * school is visible but the database refuses any write, both through
+ * the transaction mode and the role's grants. For the console's view
+ * pages; changes go through `staffTransaction` and an admin. The
+ * caller checks the staff member's role first.
+ */
+export async function staffReadTransaction<T>(work: Work<T>): Promise<T> {
+  return db.connection(TENANT_CONNECTION).transaction(async (trx) => {
+    await trx.rawQuery('SET TRANSACTION READ ONLY')
+    await trx.rawQuery(`SET LOCAL ROLE ${STAFF_READ_ROLE}`)
+    return SchoolContext.withTransaction(
+      { schoolId: null, userId: null, staff: true, readOnly: true },
+      trx,
+      () => work(trx)
     )
   })
 }

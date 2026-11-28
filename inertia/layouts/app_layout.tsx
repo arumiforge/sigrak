@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link, usePage } from '@inertiajs/react'
 import FlashToasts from '~/components/flash_toasts'
+import { EmailConfirmationBanner } from '~/components/email_confirmation_banner'
 import { SignOutButton } from '~/components/sign_out_button'
 import { Icon, type IconName } from '~/components/icon'
 import { useT } from '~/lib/i18n'
@@ -82,6 +83,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           <SignOutButton />
         </div>
       </header>
+      <EmailConfirmationBanner />
       <main id="isi" className="mx-auto max-w-6xl px-4 py-6">
         {children}
       </main>

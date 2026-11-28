@@ -7,6 +7,7 @@ import User from '#models/user'
 import PasswordResetMail from '#mails/password_reset_mail'
 import { hashToken, newToken, TOKEN_PATTERN, tokenMatches } from '#accounts/tokens'
 import { normalizeEmail } from '#accounts/invitations'
+import { spendConfirmationLinks } from '#accounts/email_confirmation'
 
 /**
  * "Lupa kata sandi" for school users (D-183). The request gets the same
@@ -75,6 +76,7 @@ export async function resetPassword(token: string, password: string): Promise<Us
     user.emailVerifiedAt = user.emailVerifiedAt ?? DateTime.now()
     await user.save()
     await row.delete()
+    await spendConfirmationLinks(user.id, trx)
     return user
   })
 }

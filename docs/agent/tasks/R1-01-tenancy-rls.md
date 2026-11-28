@@ -84,3 +84,14 @@ Branch `r1/r1-01-tenancy-rls`. 72 tests pass on `sigrak_test_r101` (24 new in `t
 5. Regions keyed by Kemendagri codes (D-466) are left to R1-04 (regions and school directory).
 6. Server setup (R3): create `sigrak_app` and `sigrak_staff` before the first migration if the owner has no CREATEROLE, and add an ace command that wraps `ensureAppLoginRole()` for production logins.
 
+
+### Follow-up D-469
+
+Branch `r1/r1-12-accounts-followups`. Answers open question 1: support gets a read-only role.
+
+- Migration `1764390000003` creates `sigrak_staff_readonly` (NOLOGIN, no BYPASSRLS, not a member of `sigrak_app`). It may SELECT every table except `STAFF_READ_HIDDEN_TABLES` (migration bookkeeping, password reset and confirmation hashes, `ai_credentials`), has no write grant, and gets a `<table>_staff_read` SELECT policy on every table with RLS. Default privileges give later tables SELECT; a later table with secrets is added to the hidden list and revoked in its own migration.
+- `staffPolicy()` (and so `schoolRls()` and `childRls()`) also adds the read policy, creating the role first when missing, so older migrations still run on an empty server. `dropRls()` drops it. `rls_coverage.spec.ts` now requires the three policies.
+- `ensureAppLoginRole()` grants the role to the app login `WITH INHERIT FALSE, SET TRUE`.
+- `staffReadTransaction(fn)` opens a `READ ONLY` transaction with `SET LOCAL ROLE sigrak_staff_readonly` (SchoolContext `staff: true, readOnly: true`). The console school list and page, user search and region change queue read through it.
+- Tests in `rls.spec.ts` ("read-only staff"): every school's rows are visible; writes through the helper fail; the role alone (without READ ONLY) is refused on UPDATE, INSERT and DELETE on RLS and non-RLS tables; the hidden tables are refused; the login holds the role only with SET.
+- R3 server setup: create `sigrak_staff_readonly` with the other two roles when the migrating user has no CREATEROLE.

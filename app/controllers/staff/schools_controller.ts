@@ -18,22 +18,24 @@ import {
 import { backWithFieldError, staffUser } from '#accounts/http'
 import { defaultTrialDays } from '#accounts/settings'
 import { authorizeStaff, staffCan } from '#accounts/staff_access'
-import { staffTransaction } from '#tenancy/tenant_transaction'
+import { staffReadTransaction, staffTransaction } from '#tenancy/tenant_transaction'
 import { staffInviteValidator, trialChangeValidator } from '#validators/accounts'
 
 const searchValidator = vine.create({ q: vine.string().trim().maxLength(100).optional() })
 
 /**
  * Konsol: schools, their members and invitations, and the school's
- * trial length (D-182, D-459). School-owned rows are read in a staff
- * transaction (SET LOCAL ROLE sigrak_staff) after the role check.
+ * trial (D-182, D-459, D-469). After the role check, the view pages read
+ * school-owned rows as read-only staff (`staffReadTransaction`, SET
+ * LOCAL ROLE sigrak_staff_readonly); only changes, which need an
+ * admin, run as full staff (`staffTransaction`).
  */
 export default class SchoolsController {
   async index(ctx: HttpContext) {
     authorizeStaff(staffUser(ctx), 'schools.view')
     const { q } = await searchValidator.validate(ctx.request.qs())
 
-    const schools = await staffTransaction(async (trx) => {
+    const schools = await staffReadTransaction(async (trx) => {
       const query = trx
         .from('schools as s')
         .select('s.id', 's.name', 's.npsn', 's.level', 's.trial_days')
@@ -79,7 +81,7 @@ export default class SchoolsController {
     authorizeStaff(staff, 'schools.view')
     const schoolId = Number(ctx.params.school)
 
-    const data = await staffTransaction(async (trx) => {
+    const data = await staffReadTransaction(async (trx) => {
       const school = await School.findOrFail(schoolId, { client: trx })
       const members = await SchoolMembership.query({ client: trx })
         .where('school_id', school.id)
@@ -101,6 +103,7 @@ export default class SchoolsController {
         npsn: data.school.npsn,
         level: data.school.level,
         trialDays: data.school.trialDays,
+        trialExtendedUntil: data.school.trialExtendedUntil?.toISO() ?? null,
       },
       defaultTrialDays: await defaultTrialDays(),
       members: data.members.map((member) => ({

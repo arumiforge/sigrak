@@ -45,6 +45,11 @@
       "staff_inviter": "Tim SIGRAK"
     }
   },
+  "trial": {
+    "school_extended": "Diperpanjang untuk semua guru sekolah ini sampai {date} WIB.",
+    "school_extension_ended": "Perpanjangan untuk semua guru sudah selesai pada {date} WIB.",
+    "school_extend_hint": "Tambah hari dihitung dari hari ini untuk semua guru, juga guru yang masa uji cobanya sudah lama selesai."
+  },
   "account": {
     "title": "Akun",
     "profile_title": "Data diri",

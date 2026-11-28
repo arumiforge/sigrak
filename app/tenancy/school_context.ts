@@ -20,6 +20,8 @@ export interface SchoolScope {
   trx?: TransactionClientContract
   /** True only inside staffTransaction(): every school is visible. */
   staff?: boolean
+  /** True only inside staffReadTransaction(): the database refuses writes. */
+  readOnly?: boolean
 }
 
 const storage = new AsyncLocalStorage<SchoolScope>()

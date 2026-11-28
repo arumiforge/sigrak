@@ -10,10 +10,11 @@ const CHILD_TABLES = ['calendar_events', 'catalog_items', 'exam_participants', '
 /**
  * Guards every later migration: a table with a school_id column (or a
  * listed child table) must have row-level security on, a policy for
- * sigrak_app and a policy for sigrak_staff (app/tenancy/rls.ts).
+ * sigrak_app, one for sigrak_staff and a read policy for
+ * sigrak_staff_readonly (app/tenancy/rls.ts, D-469).
  */
 test.group('Tenancy | RLS coverage', () => {
-  test('every school-owned table has RLS and both policies', async ({ assert }) => {
+  test('every school-owned table has RLS and the three policies', async ({ assert }) => {
     const result = await db.rawQuery(
       `SELECT c.relname AS table,
               c.relrowsecurity AS rls,
@@ -35,23 +36,34 @@ test.group('Tenancy | RLS coverage', () => {
     assert.isAbove(tables.length, CHILD_TABLES.length)
     for (const row of tables) {
       assert.isTrue(row.rls, `${row.table}: row-level security is off`)
-      assert.includeMembers(row.roles, ['sigrak_app', 'sigrak_staff'], `${row.table}: policies`)
+      assert.includeMembers(
+        row.roles,
+        ['sigrak_app', 'sigrak_staff', 'sigrak_staff_readonly'],
+        `${row.table}: policies`
+      )
     }
   })
 
   test('the app role cannot bypass RLS and does not own the tables', async ({ assert }) => {
     const roles = await db.rawQuery(
       `SELECT rolname, rolsuper, rolbypassrls, rolcanlogin FROM pg_roles
-        WHERE rolname IN ('sigrak_app', 'sigrak_staff') ORDER BY rolname`
+        WHERE rolname IN ('sigrak_app', 'sigrak_staff', 'sigrak_staff_readonly') ORDER BY rolname`
     )
     assert.deepEqual(roles.rows, [
       { rolname: 'sigrak_app', rolsuper: false, rolbypassrls: false, rolcanlogin: false },
       { rolname: 'sigrak_staff', rolsuper: false, rolbypassrls: false, rolcanlogin: false },
+      {
+        rolname: 'sigrak_staff_readonly',
+        rolsuper: false,
+        rolbypassrls: false,
+        rolcanlogin: false,
+      },
     ])
 
     const owned = await db.rawQuery(
       `SELECT count(*)::int AS count FROM pg_tables
-        WHERE schemaname = 'public' AND tableowner IN ('sigrak_app', 'sigrak_staff')`
+        WHERE schemaname = 'public'
+          AND tableowner IN ('sigrak_app', 'sigrak_staff', 'sigrak_staff_readonly')`
     )
     assert.equal(owned.rows[0].count, 0)
   })

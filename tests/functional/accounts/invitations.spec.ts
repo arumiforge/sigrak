@@ -405,14 +405,14 @@ test.group('Accounts | console invitations', (group) => {
   group.each.setup(() => limiter.clear(['memory']))
   group.each.setup(() => fakeMail().restore)
 
-  test('support invites the first operator; a second principal is refused', async ({
+  test('an admin invites the first operator; a second principal is refused', async ({
     client,
     assert,
   }) => {
     const { fake } = fakeMail()
     const school = await createSchool('SD Konsol')
     await createMember(school, 'principal')
-    const staff = await createStaffWithRole('support')
+    const staff = await createStaffWithRole('admin')
     const session = await signIn(client, 'admin', staff.email)
 
     await postForm(
@@ -442,6 +442,32 @@ test.group('Accounts | console invitations', (group) => {
     const page = await inertiaPage(client, session, `/sekolah/${school.id}`)
     assert.equal(page.inertiaProps.invitations[0].email, 'operator@uji.test')
     assert.lengthOf(page.inertiaProps.members, 1)
+  })
+
+  test('support views the school read-only and cannot invite (D-469)', async ({
+    client,
+    assert,
+  }) => {
+    fakeMail()
+    const school = await createSchool('SD Konsol')
+    await createMember(school, 'principal')
+    const staff = await createStaffWithRole('support')
+    const session = await signIn(client, 'admin', staff.email)
+
+    const page = await inertiaPage(client, session, `/sekolah/${school.id}`)
+    page.assertStatus(200)
+    assert.lengthOf(page.inertiaProps.members, 1)
+    assert.isFalse(page.inertiaProps.can.manageInvitations)
+
+    const { response } = await postForm(
+      client,
+      session,
+      `/sekolah/${school.id}/undangan`,
+      { email: 'operator@uji.test', role: 'operator' },
+      `/sekolah/${school.id}`
+    )
+    assert.equal(response.status(), 403)
+    assert.lengthOf(await allInvitations(), 0)
   })
 
   test('a content staff member cannot open schools or invite', async ({ client, assert }) => {

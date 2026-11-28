@@ -3,8 +3,9 @@
 | Routes: sign-in and accounts on app. (R1-05)
 |--------------------------------------------------------------------------
 |
-| Only sign-in, sign-up, password reset and invitation acceptance work
-| without a session (product concept, Access model; D-459). Everything
+| Only sign-in, sign-up, password reset, invitation acceptance and the
+| sign-up confirmation link work without a session (product concept,
+| Access model; D-459, D-469). Everything
 | else needs the "web" guard and runs in the school context of the
 | active membership (R1-01); a teacher who signed up alone has no school
 | yet and still reaches Akun and Ganti peran.
@@ -17,7 +18,9 @@ import { loginIpThrottle } from '#start/limiter'
 import { hosts } from '#config/hosts'
 import { TOKEN_PATTERN } from '#accounts/tokens'
 import {
+  confirmEmailThrottle,
   invitationThrottle,
+  resendConfirmationThrottle,
   resetLinkThrottle,
   resetPasswordThrottle,
   signUpThrottle,
@@ -27,6 +30,8 @@ const SessionController = () => import('#controllers/school/session_controller')
 const PasswordResetController = () => import('#controllers/school/password_reset_controller')
 const SignUpController = () => import('#controllers/school/sign_up_controller')
 const InvitationController = () => import('#controllers/school/invitation_controller')
+const EmailConfirmationController = () =>
+  import('#controllers/school/email_confirmation_controller')
 const AccountController = () => import('#controllers/school/account_controller')
 const RoleSwitchController = () => import('#controllers/school/role_switch_controller')
 const TeachersController = () => import('#controllers/school/teachers_controller')
@@ -66,7 +71,8 @@ router
 
     /*
     | With or without a session: a signed-in teacher who signed up alone
-    | accepts with the open session.
+    | accepts with the open session; a confirmation link may be opened
+    | on another device.
     */
     router
       .group(() => {
@@ -79,6 +85,16 @@ router
           .as('invitations.accept')
           .where('token', token)
           .use(invitationThrottle)
+
+        router
+          .get('/konfirmasi-email/:token', [EmailConfirmationController, 'show'])
+          .as('email_confirmation.show')
+          .where('token', token)
+        router
+          .post('/konfirmasi-email/:token', [EmailConfirmationController, 'store'])
+          .as('email_confirmation.confirm')
+          .where('token', token)
+          .use(confirmEmailThrottle)
       })
       .use(middleware.translations(['accounts']))
 
@@ -93,6 +109,10 @@ router
         router
           .post('/akun/kata-sandi', [AccountController, 'updatePassword'])
           .as('account.password')
+        router
+          .post('/akun/konfirmasi-email', [EmailConfirmationController, 'resend'])
+          .as('account.confirmation')
+          .use(resendConfirmationThrottle)
         router.get('/ganti-peran', [RoleSwitchController, 'show']).as('role_switch.show')
         router.post('/ganti-peran', [RoleSwitchController, 'store']).as('role_switch.store')
       })

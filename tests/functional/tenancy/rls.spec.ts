@@ -9,9 +9,13 @@ import type User from '#models/user'
 import Calendar from '#models/calendar'
 import { createCalendar, createParticipant, testRegions } from '#tests/helpers'
 import { assertRlsHides, asSchool, createMember, createTwoSchools } from '#tests/tenancy'
-import { TENANT_CONNECTION } from '#tenancy/database_roles'
+import { STAFF_READ_ROLE, TENANT_CONNECTION } from '#tenancy/database_roles'
 import { SchoolContext } from '#tenancy/school_context'
-import { staffTransaction, tenantTransaction } from '#tenancy/tenant_transaction'
+import {
+  staffReadTransaction,
+  staffTransaction,
+  tenantTransaction,
+} from '#tenancy/tenant_transaction'
 
 /**
  * Rows of every school-owned table for one school, written on the owner
@@ -351,5 +355,110 @@ test.group('Tenancy | row-level security', (group) => {
     assert.deepEqual(await visibleIds(tenant, 'exam_sessions', ids), [])
     const role = await tenant.rawQuery('SELECT current_user AS name')
     assert.notEqual(role.rows[0].name, 'sigrak_staff')
+  })
+})
+
+/**
+ * Read-only staff (support, D-469): `staffReadTransaction()` passes the
+ * school rules for reading only; the database itself refuses writes.
+ */
+test.group('Tenancy | read-only staff', (group) => {
+  group.each.setup(() => testUtils.db().truncate())
+
+  /** Runs one statement as the read-only role, in a transaction that is not READ ONLY. */
+  function asReadOnlyRole(sql: string, bindings: (string | number)[] = []) {
+    return db.connection(TENANT_CONNECTION).transaction(async (trx) => {
+      await trx.rawQuery(`SET LOCAL ROLE ${STAFF_READ_ROLE}`)
+      return trx.rawQuery(sql, bindings)
+    })
+  }
+
+  /** The error message of a refused statement, or '' when it ran. */
+  async function refusal(run: Promise<unknown>) {
+    try {
+      await run
+      return ''
+    } catch (error) {
+      return (error as Error).message
+    }
+  }
+
+  test('sees every school’s rows in every school table', async ({ assert }) => {
+    const { rowsA, rowsB } = await seedTwoSchools()
+    for (const table of Object.keys(rowsA) as (keyof SeededRows)[]) {
+      const ids = [...rowsA[table], ...rowsB[table]].sort((x, y) => x - y)
+      const seen = await staffReadTransaction((trx) => visibleIds(trx, table, ids))
+      assert.deepEqual(seen, ids, table)
+    }
+    const role = await staffReadTransaction((trx) => trx.rawQuery('SELECT current_user AS name'))
+    assert.equal(role.rows[0].name, STAFF_READ_ROLE)
+    const after = await db.connection(TENANT_CONNECTION).rawQuery('SELECT current_user AS name')
+    assert.notEqual(after.rows[0].name, STAFF_READ_ROLE)
+  })
+
+  test('cannot write through staffReadTransaction', async ({ assert }) => {
+    const { a } = await seedTwoSchools()
+    await assert.rejects(
+      () =>
+        staffReadTransaction((trx) =>
+          trx.from('schools').where('id', a.school.id).update({ name: 'Diubah' })
+        ),
+      /read-only transaction|permission denied/
+    )
+    await assert.rejects(
+      () =>
+        staffReadTransaction((trx) =>
+          trx.from('school_memberships').where('school_id', a.school.id).delete()
+        ),
+      /read-only transaction|permission denied/
+    )
+    const school = await db.from('schools').where('id', a.school.id).firstOrFail()
+    assert.notEqual(school.name, 'Diubah')
+  })
+
+  test('the role itself has no write grant, with or without RLS', async ({ assert }) => {
+    const { a, rowsA } = await seedTwoSchools()
+    const writes: [string, (string | number)[]][] = [
+      [`UPDATE schools SET name = 'Diubah' WHERE id = ?`, [a.school.id]],
+      [
+        `UPDATE school_memberships SET status = 'ended' WHERE id = ?`,
+        [rowsA.school_memberships[0]],
+      ],
+      [`DELETE FROM calendars WHERE id = ?`, [rowsA.calendars[0]]],
+      [`DELETE FROM generations WHERE id = ?`, [rowsA.generations[0]]],
+      [
+        `INSERT INTO app_settings (key, value, created_at, updated_at) VALUES ('x', '1', now(), now())`,
+        [],
+      ],
+      [`UPDATE users SET name = 'Diubah' WHERE id = ?`, [a.user.id]],
+      [`UPDATE invitations SET email = 'x@uji.test'`, []],
+    ]
+    for (const [sql, bindings] of writes) {
+      assert.match(await refusal(asReadOnlyRole(sql, bindings)), /permission denied/, sql)
+    }
+    const memberships = await db.from('school_memberships').where('id', rowsA.school_memberships[0])
+    assert.equal(memberships[0].status, 'active')
+  })
+
+  test('link hashes and AI keys stay out of reach', async ({ assert }) => {
+    for (const table of ['password_reset_tokens', 'email_confirmation_tokens', 'ai_credentials']) {
+      assert.match(
+        await refusal(asReadOnlyRole(`SELECT count(*) FROM ${table}`)),
+        /permission denied/,
+        table
+      )
+    }
+  })
+
+  test('the login reaches the role only with SET ROLE; it is not an app member', async ({
+    assert,
+  }) => {
+    const result = await db.connection(TENANT_CONNECTION).rawQuery(
+      `SELECT pg_has_role(current_user, ?, 'USAGE') AS usage,
+              pg_has_role(current_user, ?, 'SET') AS can_set,
+              pg_has_role(?, 'sigrak_app', 'MEMBER') AS app_member`,
+      [STAFF_READ_ROLE, STAFF_READ_ROLE, STAFF_READ_ROLE]
+    )
+    assert.deepEqual(result.rows[0], { usage: false, can_set: true, app_member: false })
   })
 })

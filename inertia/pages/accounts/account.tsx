@@ -80,6 +80,21 @@ export default function Account({ profile, memberships, trial }: Props) {
               </>
             )}
           </Form>
+          {!profile.emailVerified && (
+            <Form
+              action="/akun/konfirmasi-email"
+              method="post"
+              options={{ preserveScroll: true }}
+              className="mt-4 border-t pt-4"
+            >
+              {({ processing }) => (
+                <Button type="submit" variant="outline" disabled={processing}>
+                  <Icon name="mail" />
+                  {processing ? t('auth.confirm.sending') : t('auth.confirm.resend')}
+                </Button>
+              )}
+            </Form>
+          )}
         </Section>
 
         <div className="space-y-4">

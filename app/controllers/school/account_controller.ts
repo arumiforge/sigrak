@@ -27,7 +27,8 @@ export default class AccountController {
         active: membership.publicId === ctx.membership?.publicId,
       })),
       trial: {
-        started: trial.startedAt !== null,
+        // A school-wide extension (D-469) also counts as a started trial.
+        started: trial.endsAt !== null,
         active: trial.active,
         days: trial.days,
         daysLeft: trial.daysLeft,

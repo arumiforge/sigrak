@@ -39,6 +39,13 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
        * middleware), for the menus; null without a school.
        */
       role: ctx.inertia.always(ctx.membership?.role ?? null),
+      /**
+       * The signed-in school user's address while it is not confirmed
+       * (D-469), for the reminder banner; null otherwise.
+       */
+      emailToConfirm: ctx.inertia.always(
+        auth?.user instanceof User && !auth.user.emailVerifiedAt ? auth.user.email : null
+      ),
       messages: messagesFor(locale, [...SHARED_NAMESPACES, ...(ctx.translationNamespaces ?? [])]),
     }
   }
