@@ -8,6 +8,7 @@ import StaffUser from '#models/staff_user'
 import ExamParticipant from '#models/exam_participant'
 import { abilitiesOf } from '#staff/access'
 import { unreadCount } from '#publishing/announcement_feed'
+import { helpUnreadProp, supportSessionProp } from '#help/shared_props'
 
 /**
  * Who is signed in, in the shape every layout needs. Only the guard of
@@ -67,6 +68,9 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
       emailToConfirm: ctx.inertia.always(
         auth?.user instanceof User && !auth.user.emailVerifiedAt ? auth.user.email : null
       ),
+      /** app.: requests with unread replies (R2-06, D-320); admin.: the open support session (D-341). */
+      helpUnread: () => helpUnreadProp(auth?.user),
+      supportSession: () => supportSessionProp(auth?.user),
       messages: messagesFor(locale, [...SHARED_NAMESPACES, ...(ctx.translationNamespaces ?? [])]),
     }
   }

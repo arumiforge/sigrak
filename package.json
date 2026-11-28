@@ -48,6 +48,7 @@
     "#system_health/*": "./app/system_health/*.js",
     "#integrations/*": "./app/integrations/*.js",
     "#publishing/*": "./app/publishing/*.js",
+    "#help/*": "./app/help/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",

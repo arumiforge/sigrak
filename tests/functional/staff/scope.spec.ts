@@ -214,6 +214,7 @@ test.group('Staff | area scopes (D-338)', (group) => {
       manageInvitations: false,
       manageTrials: false,
       extendTrials: true,
+      openSchool: false,
     })
 
     const ok = await postForm(

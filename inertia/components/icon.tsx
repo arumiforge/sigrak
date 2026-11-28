@@ -93,6 +93,11 @@ import legalSvg from '~/icons/hugeicons/rounded-stroke/legal/legal-01.svg?raw'
 import legalSolidSvg from '~/icons/hugeicons/rounded-solid/legal/legal-01.svg?raw'
 import notificationSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/notification-03.svg?raw'
 import externalSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-up-right-01-round.svg?raw'
+import helpSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/help-circle.svg?raw'
+import supportSvg from '~/icons/hugeicons/rounded-stroke/communications/customer-service.svg?raw'
+import supportSolidSvg from '~/icons/hugeicons/rounded-solid/communications/customer-service.svg?raw'
+import schoolViewSvg from '~/icons/hugeicons/rounded-stroke/users/user-full-view.svg?raw'
+import schoolViewSolidSvg from '~/icons/hugeicons/rounded-solid/users/user-full-view.svg?raw'
 
 /** SIGRAK icon names → Rounded Stroke file. */
 const strokeIcons = {
@@ -150,6 +155,9 @@ const strokeIcons = {
   'legal': legalSvg,
   'notification': notificationSvg,
   'external': externalSvg,
+  'help': helpSvg,
+  'support': supportSvg,
+  'school-view': schoolViewSvg,
 } as const
 
 export type IconName = keyof typeof strokeIcons
@@ -188,6 +196,8 @@ const solidIcons: Partial<Record<IconName, string>> = {
   'event': eventSolidSvg,
   'story': storySolidSvg,
   'legal': legalSolidSvg,
+  'support': supportSolidSvg,
+  'school-view': schoolViewSolidSvg,
 }
 
 type ParsedIcon = { viewBox: string; body: string }

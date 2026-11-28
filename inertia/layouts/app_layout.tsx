@@ -20,7 +20,7 @@ import { appNavFor, pathOf } from '~/lib/navigation'
 export default function AppLayout({ children }: { children: ReactNode }) {
   const t = useT()
   const {
-    props: { viewer, role, kabarUnread },
+    props: { viewer, role, kabarUnread, helpUnread },
     url,
   } = usePage()
   const items = appNavFor(role)
@@ -53,6 +53,10 @@ export default function AppLayout({ children }: { children: ReactNode }) {
                 role={role}
                 accountHref="/akun"
                 canSwitchRole={role !== null}
+                help={{
+                  askHref: `/minta-bantuan?halaman=${encodeURIComponent(url)}`,
+                  unread: helpUnread,
+                }}
               />
             )}
           </div>

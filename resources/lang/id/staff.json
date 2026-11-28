@@ -366,6 +366,16 @@
         "signoff_withdraw": "Pengesahan versi kurikulum dibatalkan",
         "publish": "Versi kurikulum diterbitkan",
         "rollback": "Versi kurikulum dikembalikan"
+      },
+      "help_request": {
+        "reply": "Permintaan bantuan dibalas",
+        "note": "Catatan internal ditambahkan",
+        "status": "Status permintaan bantuan diubah",
+        "assign": "Permintaan bantuan diambil"
+      },
+      "support_session": {
+        "start": "Sesi bantuan dimulai",
+        "end": "Sesi bantuan diakhiri"
       }
     }
   },

@@ -67,7 +67,12 @@
     "consent_note": "Catatan persetujuan",
     "consent_on": "Tanggal persetujuan",
     "effective_on": "Berlaku sejak",
-    "change_note": "Catatan perubahan"
+    "change_note": "Catatan perubahan",
+    "category": "Jenis kendala",
+    "message": "Pesan",
+    "page_url": "Halaman",
+    "body": "Isi",
+    "status": "Status"
   },
   "messages": {
     "required": "{field} wajib diisi.",

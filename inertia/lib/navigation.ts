@@ -230,6 +230,22 @@ const consoleItems: NavItem[] = [
     ability: 'legal_pages.manage',
   },
   {
+    key: 'help_requests',
+    href: '/bantuan',
+    label: 'nav.console.help_requests',
+    icon: 'support',
+    section: 'nav.sections.support',
+    ability: 'help_requests.view',
+  },
+  {
+    key: 'support_sessions',
+    href: '/sesi-bantuan',
+    label: 'nav.console.support_sessions',
+    icon: 'school-view',
+    section: 'nav.sections.support',
+    ability: 'support_sessions.view',
+  },
+  {
     key: 'settings',
     href: '/pengaturan',
     label: 'nav.console.settings',
