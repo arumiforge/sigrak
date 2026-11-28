@@ -176,14 +176,30 @@ test.group('Accounts | password reset (D-183)', (group) => {
     await signIn(client, 'app', teacher.email, PASSWORD)
   })
 
-  test('reset links are limited to 5 a minute per IP', async ({ client, assert }) => {
+  test('reset links are limited to 30 a minute per IP', async ({ client, assert }) => {
     fakeMail()
     const visitor = await guest(client, 'app', '/lupa-kata-sandi')
     let last
-    for (let attempt = 0; attempt < 6; attempt++) {
+    for (let attempt = 0; attempt < 31; attempt++) {
       last = await postForm(client, visitor, '/lupa-kata-sandi', { email: `x${attempt}@uji.test` })
     }
     const page = await inertiaPage(client, last!.session, '/lupa-kata-sandi')
     assert.match(page.body().flash?.error ?? '', /Terlalu banyak percobaan/)
+  })
+
+  test('one account gets at most 3 reset mails in 15 minutes, with the same answer', async ({
+    client,
+    assert,
+  }) => {
+    const { fake } = fakeMail()
+    const teacher = await createTeacher(await createSchool('SD Uji'))
+    const visitor = await guest(client, 'app', '/lupa-kata-sandi')
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const { response } = await postForm(client, visitor, '/lupa-kata-sandi', {
+        email: teacher.email,
+      })
+      assert.equal(response.header('location'), '/masuk')
+    }
+    assert.lengthOf(fake.mails.queued(), 3)
   })
 })

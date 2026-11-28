@@ -1,6 +1,7 @@
 import env from '#start/env'
 import app from '@adonisjs/core/services/app'
 import { defineConfig } from '@adonisjs/core/http'
+import { trustedProxies } from '#services/trusted_proxies'
 
 /**
  * The app URL can be used in various places where you want to create absolute
@@ -31,6 +32,13 @@ export const http = defineConfig({
    * from anywhere inside your application.
    */
   useAsyncLocalStorage: false,
+
+  /**
+   * Believe X-Forwarded-For (and -Proto, -Host) only from the nginx hop
+   * listed in TRUSTED_PROXIES; schools share one public IP, so every
+   * limit needs the real client IP (D-479).
+   */
+  trustProxy: trustedProxies(env.get('TRUSTED_PROXIES')),
 
   router: {
     matcher: 'tree',

@@ -101,10 +101,8 @@ router
     router
       .group(() => {
         router.get('/masuk', [ExamSessionController, 'create']).as('login')
-        router
-          .post('/masuk', [ExamSessionController, 'store'])
-          .as('login.store')
-          .use(loginIpThrottle)
+        // Limits keyed on the exam session, in the controller (D-479).
+        router.post('/masuk', [ExamSessionController, 'store']).as('login.store')
       })
       .use(middleware.guest({ guard: 'exam' }))
 
