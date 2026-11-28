@@ -184,7 +184,10 @@ export default function CalendarPage(props: Props) {
             </p>
           )}
 
-          <Deferred data={['changes', 'frame']} fallback={null}>
+          <Deferred
+            data={['changes', 'frame']}
+            fallback={<Skeleton className="mt-4 h-14 w-full rounded-xl" />}
+          >
             <>
               <ChangesNotice {...props} />
               <FrameCard {...props} />
@@ -650,7 +653,7 @@ function EntryRow(props: Props & { entry: Entry; hiddenBy?: HiddenEntry['hiddenB
             </span>
           )}
           {entry.provisional && <span className="text-muted">({t('calendar.provisional')})</span>}
-          {entry.kind === 'note' && <span className="text-muted">{t('calendar.note')}</span>}
+          {entry.kind === 'note' && <span className="text-muted">({t('calendar.note')})</span>}
           <SourceBadge source={entry.source} />
         </span>
         {hiddenBy && (
