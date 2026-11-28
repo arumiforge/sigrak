@@ -155,6 +155,33 @@ export class CalendarSchema extends BaseModel {
   declare version: number
 }
 
+export class CurriculumVersionSchema extends BaseModel {
+  static $columns = ['appliesFromSchoolYear', 'code', 'createdAt', 'effectiveOn', 'id', 'kind', 'meta', 'name', 'status', 'supersedesId', 'updatedAt'] as const
+  $columns = CurriculumVersionSchema.$columns
+  @column()
+  declare appliesFromSchoolYear: string | null
+  @column()
+  declare code: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.date()
+  declare effectiveOn: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare kind: string
+  @column()
+  declare meta: Record<string, unknown>
+  @column()
+  declare name: string
+  @column()
+  declare status: string
+  @column()
+  declare supersedesId: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class ExamParticipantSchema extends BaseModel {
   static $columns = ['createdAt', 'examSessionId', 'id', 'password', 'publicId', 'status', 'updatedAt', 'username'] as const
   $columns = ExamParticipantSchema.$columns
@@ -195,6 +222,40 @@ export class ExamSessionSchema extends BaseModel {
   declare status: string
   @column()
   declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class FocusItemObjectiveSchema extends BaseModel {
+  static $columns = ['createdAt', 'focusItemId', 'learningObjectiveId'] as const
+  $columns = FocusItemObjectiveSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare focusItemId: number
+  @column()
+  declare learningObjectiveId: number
+}
+
+export class FocusItemSchema extends BaseModel {
+  static $columns = ['allocationStatus', 'code', 'createdAt', 'estimatedJp', 'id', 'order', 'title', 'topicId', 'updatedAt'] as const
+  $columns = FocusItemSchema.$columns
+  @column()
+  declare allocationStatus: string | null
+  @column()
+  declare code: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare estimatedJp: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare order: number
+  @column()
+  declare title: string
+  @column()
+  declare topicId: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }
@@ -265,6 +326,87 @@ export class GenerationSchema extends BaseModel {
   declare updatedAt: DateTime
   @column()
   declare userId: number
+}
+
+export class LearningObjectiveSchema extends BaseModel {
+  static $columns = ['code', 'createdAt', 'id', 'order', 'text', 'topicId', 'updatedAt'] as const
+  $columns = LearningObjectiveSchema.$columns
+  @column()
+  declare code: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare order: number
+  @column()
+  declare text: string
+  @column()
+  declare topicId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class LearningOutcomeElementSchema extends BaseModel {
+  static $columns = ['artBranch', 'code', 'createdAt', 'curriculumVersionId', 'id', 'linkedVersionCode', 'name', 'nameEn', 'order', 'phases', 'subjectId', 'updatedAt'] as const
+  $columns = LearningOutcomeElementSchema.$columns
+  @column()
+  declare artBranch: string | null
+  @column()
+  declare code: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare curriculumVersionId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare linkedVersionCode: string | null
+  @column()
+  declare name: string
+  @column()
+  declare nameEn: string | null
+  @column()
+  declare order: number
+  @column()
+  declare phases: any
+  @column()
+  declare subjectId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class LearningOutcomeSchema extends BaseModel {
+  static $columns = ['artBranch', 'code', 'createdAt', 'curriculumVersionId', 'element', 'elementCode', 'extras', 'id', 'order', 'phase', 'subElement', 'subjectId', 'text', 'updatedAt'] as const
+  $columns = LearningOutcomeSchema.$columns
+  @column()
+  declare artBranch: string | null
+  @column()
+  declare code: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare curriculumVersionId: number
+  @column()
+  declare element: string | null
+  @column()
+  declare elementCode: string | null
+  @column()
+  declare extras: any | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare order: number
+  @column()
+  declare phase: string
+  @column()
+  declare subElement: string | null
+  @column()
+  declare subjectId: number
+  @column()
+  declare text: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
 }
 
 export class NationalHolidaySchema extends BaseModel {
@@ -374,6 +516,84 @@ export class StaffUserSchema extends BaseModel {
   declare updatedAt: DateTime
 }
 
+export class SubjectAllocationSchema extends BaseModel {
+  static $columns = ['artBranch', 'basis', 'createdAt', 'curriculumVersionId', 'grade', 'id', 'jpPerWeek', 'jpPerYear', 'jpTargetSetBy', 'learningType', 'meta', 'phase', 's1EffectiveWeeks', 's1Jp', 's2EffectiveWeeks', 's2Jp', 'status', 'subjectId', 'updatedAt', 'weeksPerYear'] as const
+  $columns = SubjectAllocationSchema.$columns
+  @column()
+  declare artBranch: string | null
+  @column()
+  declare basis: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare curriculumVersionId: number
+  @column()
+  declare grade: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare jpPerWeek: number
+  @column()
+  declare jpPerYear: number
+  @column()
+  declare jpTargetSetBy: string
+  @column()
+  declare learningType: string
+  @column()
+  declare meta: Record<string, unknown>
+  @column()
+  declare phase: string
+  @column({ columnName: 's1_effective_weeks' })
+  declare s1EffectiveWeeks: number
+  @column({ columnName: 's1_jp' })
+  declare s1Jp: number
+  @column({ columnName: 's2_effective_weeks' })
+  declare s2EffectiveWeeks: number
+  @column({ columnName: 's2_jp' })
+  declare s2Jp: number
+  @column()
+  declare status: string
+  @column()
+  declare subjectId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare weeksPerYear: number
+}
+
+export class SubjectSchema extends BaseModel {
+  static $columns = ['aliases', 'code', 'createdAt', 'defaultTeacher', 'delivery', 'id', 'kind', 'name', 'offeredGrades', 'religion', 'schoolLevel', 'sortOrder', 'transition', 'updatedAt'] as const
+  $columns = SubjectSchema.$columns
+  @column()
+  declare aliases: any
+  @column()
+  declare code: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare defaultTeacher: string
+  @column()
+  declare delivery: any | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare kind: string
+  @column()
+  declare name: string
+  @column()
+  declare offeredGrades: any | null
+  @column()
+  declare religion: string | null
+  @column()
+  declare schoolLevel: string
+  @column()
+  declare sortOrder: number
+  @column()
+  declare transition: any | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class SupervisorAssignmentSchema extends BaseModel {
   static $columns = ['createdAt', 'decidedAt', 'decidedByStaffId', 'endedOn', 'id', 'schoolId', 'startedOn', 'status', 'updatedAt', 'userId'] as const
   $columns = SupervisorAssignmentSchema.$columns
@@ -397,6 +617,63 @@ export class SupervisorAssignmentSchema extends BaseModel {
   declare updatedAt: DateTime
   @column()
   declare userId: number
+}
+
+export class TopicSchema extends BaseModel {
+  static $columns = ['artBranch', 'atpCode', 'code', 'cpSummary', 'cpText', 'createdAt', 'curationNotes', 'curriculumVersionId', 'elementCodes', 'elements', 'extras', 'grade', 'id', 'jpPerWeek', 'jpTotal', 'orderInSemester', 'outsideCp', 'phase', 'references', 'semester', 'subjectId', 'title', 'updatedAt', 'weekEnd', 'weekStart', 'weeklyDistribution'] as const
+  $columns = TopicSchema.$columns
+  @column()
+  declare artBranch: string | null
+  @column()
+  declare atpCode: string
+  @column()
+  declare code: string
+  @column()
+  declare cpSummary: string | null
+  @column()
+  declare cpText: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare curationNotes: any | null
+  @column()
+  declare curriculumVersionId: number
+  @column()
+  declare elementCodes: any | null
+  @column()
+  declare elements: string
+  @column()
+  declare extras: any | null
+  @column()
+  declare grade: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare jpPerWeek: number
+  @column()
+  declare jpTotal: number
+  @column()
+  declare orderInSemester: number
+  @column()
+  declare outsideCp: any | null
+  @column()
+  declare phase: string
+  @column()
+  declare references: any
+  @column()
+  declare semester: number
+  @column()
+  declare subjectId: number
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare weekEnd: number
+  @column()
+  declare weekStart: number
+  @column()
+  declare weeklyDistribution: any
 }
 
 export class UserSchema extends BaseModel {
