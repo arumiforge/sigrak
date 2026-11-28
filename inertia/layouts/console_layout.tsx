@@ -26,9 +26,11 @@ export default function ConsoleLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)]">
       <SkipLink />
-      <aside className="sticky top-0 hidden h-dvh flex-col gap-6 overflow-y-auto border-r bg-surface px-3 py-3 lg:flex">
-        <Wordmark href="/" label={t('common.areas.admin')} className="px-3" />
-        <SidebarNav items={items} url={url} label={t('nav.console.label')} />
+      <aside className="hidden border-r bg-surface lg:block">
+        <div className="sticky top-0 flex h-dvh flex-col gap-6 overflow-y-auto px-3 py-3">
+          <Wordmark href="/" label={t('common.areas.admin')} className="px-3" />
+          <SidebarNav items={items} url={url} label={t('nav.console.label')} />
+        </div>
       </aside>
 
       <div className="flex min-w-0 flex-col">

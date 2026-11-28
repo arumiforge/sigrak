@@ -75,5 +75,10 @@
   "toasts": {
     "signed_out": "Anda sudah keluar.",
     "saved": "Tersimpan."
+  },
+  "email_banner": {
+    "body": "Email {email} belum dikonfirmasi. Buka tautan yang kami kirim ke email itu. SIGRAK tetap bisa Anda pakai.",
+    "resend_action": "Kirim ulang tautan",
+    "sending": "Mengirim…"
   }
 }

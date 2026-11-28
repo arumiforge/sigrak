@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Form } from '@inertiajs/react'
 import { EmptyState } from '~/components/patterns/empty_state'
+import { controlClass } from '~/components/patterns/form_field'
 import { PageHeader } from '~/components/patterns/page_header'
 import { Button } from '~/components/ui/button'
 import { TextField } from '~/components/text_field'
@@ -49,8 +50,7 @@ type Props = {
   decided: Proposal[]
 }
 
-const fieldClass =
-  'block h-11 w-full rounded-md border bg-surface px-3 text-base outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30'
+const fieldClass = cn(controlClass, 'h-11')
 
 const ACTIONS = ['create_package', 'add', 'hide', 'retire_package'] as const
 

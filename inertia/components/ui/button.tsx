@@ -12,8 +12,8 @@ import { cn } from '~/lib/utils'
 const buttonVariants = cva(
   [
     'inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-semibold whitespace-nowrap',
-    'transition-colors duration-150 outline-none select-none',
-    'focus-visible:ring-[3px] focus-visible:ring-brand/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand',
+    // Focus: the global 2 px brand outline with a 2 px gap (app.css).
+    'transition-colors duration-150 select-none',
     'disabled:pointer-events-none disabled:opacity-55',
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5",
   ].join(' '),

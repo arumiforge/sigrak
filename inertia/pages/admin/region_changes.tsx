@@ -1,10 +1,12 @@
 import { Form } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
 import { EmptyState } from '~/components/patterns/empty_state'
+import { controlClass } from '~/components/patterns/form_field'
 import { PageHeader } from '~/components/patterns/page_header'
 import { useRegionLabel, type RegionRef } from '~/components/regions/region_nav'
 import { formatDate } from '~/lib/dates'
 import { useT } from '~/lib/i18n'
+import { cn } from '~/lib/utils'
 
 type Place = { regency: RegionRef; district: RegionRef | null }
 
@@ -217,11 +219,7 @@ function Decision({ change }: { change: Change }) {
             <>
               <label className="flex-1 space-y-1.5">
                 <span className="block font-semibold">{t('regions.changes.reject_note')}</span>
-                <input
-                  name="note"
-                  maxLength={500}
-                  className="block h-11 w-full rounded-md border bg-surface px-3 text-base outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30"
-                />
+                <input name="note" maxLength={500} className={cn(controlClass, 'h-11')} />
               </label>
               <Button type="submit" variant="destructive" disabled={processing}>
                 {t('regions.changes.reject')}

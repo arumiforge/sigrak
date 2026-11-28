@@ -61,8 +61,8 @@ export function AccountMenu({
       <DropdownMenuTrigger
         aria-label={t('nav.account_menu')}
         className={cn(
-          'inline-flex min-h-11 min-w-11 items-center gap-2 rounded-md px-1.5 text-sm font-semibold text-text outline-none hover:bg-surface-hover sm:pr-2.5',
-          'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand data-[state=open]:bg-surface-hover'
+          'inline-flex min-h-11 min-w-11 items-center gap-2 rounded-md px-1.5 text-sm font-semibold text-text hover:bg-surface-hover sm:pr-2.5',
+          'data-[state=open]:bg-surface-hover'
         )}
       >
         <span
