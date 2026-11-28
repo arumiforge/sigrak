@@ -1,7 +1,7 @@
 import { StaffUserSchema } from '#database/schema'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { beforeSave, hasMany } from '@adonisjs/lucid/orm'
+import { beforeSave, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import type { LucidModel } from '@adonisjs/lucid/types/model'
@@ -21,6 +21,14 @@ export default class StaffUser extends compose(
 ) {
   @hasMany(() => StaffRoleAssignment)
   declare roleAssignments: HasMany<typeof StaffRoleAssignment>
+
+  /** The TOTP secret, encrypted (app/staff/two_factor.ts); never serialized. */
+  @column({ serializeAs: null })
+  declare twoFactorSecret: string | null
+
+  /** Never serialized either: the step of the last accepted code. */
+  @column({ serializeAs: null })
+  declare twoFactorLastStep: number | null
 
   get isDisabled() {
     return this.disabledAt !== null

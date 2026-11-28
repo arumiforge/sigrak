@@ -1055,7 +1055,7 @@ export class StaffRoleAssignmentSchema extends BaseModel {
 }
 
 export class StaffUserSchema extends BaseModel {
-  static $columns = ['createdAt', 'disabledAt', 'email', 'id', 'name', 'password', 'updatedAt'] as const
+  static $columns = ['createdAt', 'disabledAt', 'email', 'id', 'name', 'password', 'twoFactorConfirmedAt', 'twoFactorLastStep', 'twoFactorSecret', 'updatedAt'] as const
   $columns = StaffUserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -1069,6 +1069,12 @@ export class StaffUserSchema extends BaseModel {
   declare name: string
   @column({ serializeAs: null })
   declare password: string
+  @column.dateTime()
+  declare twoFactorConfirmedAt: DateTime | null
+  @column()
+  declare twoFactorLastStep: number | null
+  @column()
+  declare twoFactorSecret: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }
