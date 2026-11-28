@@ -26,14 +26,15 @@ export default class RegionChangesController {
           .preload('toRegion')
           .preload('toDistrict')
           .preload('decidedBy')
-      return Promise.all([
-        base().where('status', 'pending').orderBy('detected_at'),
-        base().where('status', 'accepted').whereNull('applied_at').orderBy('effective_on'),
-        base()
+      // One transaction client: the queries run one after another.
+      return [
+        await base().where('status', 'pending').orderBy('detected_at'),
+        await base().where('status', 'accepted').whereNull('applied_at').orderBy('effective_on'),
+        await base()
           .where((q) => q.where('status', 'rejected').orWhereNotNull('applied_at'))
           .orderBy('decided_at', 'desc')
           .limit(10),
-      ])
+      ] as const
     })
 
     return ctx.inertia.render('admin/region_changes', {

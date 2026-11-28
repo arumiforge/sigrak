@@ -119,8 +119,8 @@ export default class extends BaseSchema {
         ADD CONSTRAINT regions_status_check CHECK (status IN ('active', 'retired')),
         ADD CONSTRAINT regions_parent_check CHECK ((level = 'province') = (parent_id IS NULL)),
         ADD CONSTRAINT regions_regency_kind_check CHECK (
-          (level = 'regency' AND regency_kind IN ('kabupaten', 'kota'))
-          OR (level <> 'regency' AND regency_kind IS NULL)),
+          CASE WHEN level = 'regency' THEN coalesce(regency_kind IN ('kabupaten', 'kota'), false)
+          ELSE regency_kind IS NULL END),
         ADD CONSTRAINT regions_replaced_by_check CHECK (replaced_by_id IS NULL OR status = 'retired'),
         ADD CONSTRAINT regions_kemendagri_code_format_check CHECK (
           (level = 'province' AND kemendagri_code ~ '^[0-9]{2}$')

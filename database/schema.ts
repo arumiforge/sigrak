@@ -432,7 +432,7 @@ export class SchoolSchema extends BaseModel {
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
-  declare district: string
+  declare district: string | null
   @column()
   declare districtId: number | null
   @column({ isPrimary: true })

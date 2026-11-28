@@ -39,10 +39,11 @@ export async function testRegions() {
       },
     ],
   })
-  const [province, regency, district] = await Promise.all(
-    ['33', '33.99', '33.99.01'].map((code) => Region.findByOrFail('kemendagriCode', code))
-  )
-  return { province, regency, district }
+  return {
+    province: await Region.findByOrFail('kemendagriCode', '33'),
+    regency: await Region.findByOrFail('kemendagriCode', '33.99'),
+    district: await Region.findByOrFail('kemendagriCode', '33.99.01'),
+  }
 }
 
 export async function createSchool(name: string) {
