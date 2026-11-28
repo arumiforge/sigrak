@@ -305,7 +305,7 @@ test.group('System health | failed jobs: retry and remove', (group) => {
     assert.equal(await (await queue('ai').getJob(job.id!))!.getState(), 'failed')
     assert.equal(await jobLogCount(), 0)
     const page = await inertiaPage(client, next, PAGE)
-    assert.match(page.body().flash?.error ?? '', /guru/)
+    assert.match(page.body().flash?.error ?? '', /Guru mencoba lagi/)
 
     const [listed] = await listFailedJobs({ names: ['ai'] })
     assert.isFalse(listed.retryable)

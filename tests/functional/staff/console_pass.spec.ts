@@ -98,10 +98,9 @@ test.group('Console pass | home', (group) => {
     assert.notProperty(byKey, 'failed_jobs')
 
     const researcher = await signInAs(client, 'researcher')
+    const researcherReload = await homeAttention(client, researcher.session)
     const researcherItems = (
-      (await homeAttention(client, researcher.session)).inertiaProps as {
-        attention: { key: string; count: number }[]
-      }
+      researcherReload.inertiaProps as { attention: { key: string; count: number }[] }
     ).attention
     assert.deepEqual(
       researcherItems.map((item) => [item.key, item.count]),
@@ -216,9 +215,12 @@ test.group('Console pass | Kesehatan sistem services', () => {
     const none = async () => ({ source: 'none' as const, sends: false })
     const json = async () => ({ source: 'env' as const, sends: false })
     const smtp = async () => ({ source: 'console' as const, sends: true })
-    assert.isTrue((await collectMail({ production: true, delivery: none })).warn)
-    assert.isTrue((await collectMail({ production: true, delivery: json })).warn)
-    assert.isFalse((await collectMail({ production: false, delivery: none })).warn)
+    const productionNone = await collectMail({ production: true, delivery: none })
+    const productionJson = await collectMail({ production: true, delivery: json })
+    const developmentNone = await collectMail({ production: false, delivery: none })
+    assert.isTrue(productionNone.warn)
+    assert.isTrue(productionJson.warn)
+    assert.isFalse(developmentNone.warn)
     assert.deepEqual(await collectMail({ production: true, delivery: smtp }), {
       source: 'console',
       sends: true,

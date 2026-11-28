@@ -84,8 +84,12 @@ export default function ConsoleAccessMatrix({ roles, groups, ownRoles }: Props) 
 
       {wide ? (
         <div
-          className="relative overflow-x-auto rounded-lg border bg-surface"
+          className="relative overflow-x-auto rounded-lg border bg-surface focus-visible:ring-2 focus-visible:ring-brand focus-visible:outline-none"
           data-testid="matrix-table"
+          // Keyboard users scroll the wide matrix sideways (axe: scrollable region).
+          tabIndex={0}
+          role="region"
+          aria-label={t('staff.matrix.caption')}
         >
           <table className="w-full border-collapse text-left text-sm">
             <caption className="sr-only">{t('staff.matrix.caption')}</caption>

@@ -150,9 +150,17 @@ function Unavailable() {
   )
 }
 
-function Stat({ label, value }: { label: string; value: ReactNode }) {
+function Stat({
+  label,
+  value,
+  className,
+}: {
+  label: string
+  value: ReactNode
+  className?: string
+}) {
   return (
-    <div className="min-w-0">
+    <div className={className ? `min-w-0 ${className}` : 'min-w-0'}>
       <dt className="text-xs text-muted">{label}</dt>
       <dd className="text-lg font-semibold tabular-nums">{value}</dd>
     </div>
@@ -171,7 +179,7 @@ function ServerCards({ disk, backup }: Pick<Props, 'disk' | 'backup'>) {
     <div className="grid gap-3 sm:grid-cols-2">
       <div className="rounded-lg border bg-surface p-4" data-testid="disk-card">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="font-bold">{t('system_health.disk.title')}</h3>
+          <h2 className="font-bold">{t('system_health.disk.title')}</h2>
           {disk && (
             <StatusChip tone={diskTone[disk.status]} icon>
               {t(`system_health.disk.status.${disk.status}`)}
@@ -201,7 +209,7 @@ function ServerCards({ disk, backup }: Pick<Props, 'disk' | 'backup'>) {
       </div>
 
       <div className="rounded-lg border bg-surface p-4" data-testid="backup-card">
-        <h3 className="font-bold">{t('system_health.backup.title')}</h3>
+        <h2 className="font-bold">{t('system_health.backup.title')}</h2>
         {backup ? (
           backup.lastBackupAt ? (
             <>
@@ -271,7 +279,7 @@ function ServiceCards({ services }: { services: ServicesStatus | null | undefine
             )}
           </StatusChip>
         </div>
-        <p className="mt-2 text-sm">{t(`system_health.services.mail.sources.${mail.source}`)}</p>
+        <p className="mt-2 text-sm">{t(`system_health.services.mail.${mail.source}_note`)}</p>
         {mail.warn ? (
           <p className="mt-1 text-sm text-warn">{t('system_health.services.mail.warn')}</p>
         ) : (
@@ -318,16 +326,15 @@ function QueueCards({ queues }: { queues: QueueSummary[] | null | undefined }) {
               label={t('system_health.queues.labels.failed')}
               value={formatNumber(queue.failed)}
             />
-            <div className="col-span-2">
-              <Stat
-                label={t('system_health.queues.labels.oldest_wait')}
-                value={
-                  queue.oldestWaitMs === null
-                    ? t('system_health.queues.none_waiting')
-                    : duration(t, queue.oldestWaitMs)
-                }
-              />
-            </div>
+            <Stat
+              className="col-span-2"
+              label={t('system_health.queues.labels.oldest_wait')}
+              value={
+                queue.oldestWaitMs === null
+                  ? t('system_health.queues.none_waiting')
+                  : duration(t, queue.oldestWaitMs)
+              }
+            />
           </dl>
           <p className="mt-3 text-xs text-muted">
             {t('system_health.queues.threshold', { duration: duration(t, queue.thresholdMs) })}

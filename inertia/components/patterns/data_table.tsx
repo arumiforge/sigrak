@@ -1,4 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useT } from '~/lib/i18n'
 import { createColumnHelper, tableFeatures, useTable, type RowData } from '@tanstack/react-table'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useIsDesktop } from '~/lib/media'
@@ -54,6 +55,7 @@ export function DataTable<Row extends RowData>({
   estimateCardHeight?: number
   className?: string
 }) {
+  const t = useT()
   const desktop = useIsDesktop()
   const helper = useMemo(() => createColumnHelper<typeof features, Row>(), [])
   const tableColumns = useMemo(
@@ -168,7 +170,11 @@ export function DataTable<Row extends RowData>({
                   </th>
                 )
               })}
-              {rowActions && <th scope="col" className="w-0 px-4 py-3" />}
+              {rowActions && (
+                <th scope="col" className="w-0 px-4 py-3">
+                  <span className="sr-only">{t('common.labels.actions')}</span>
+                </th>
+              )}
             </tr>
           ))}
         </thead>

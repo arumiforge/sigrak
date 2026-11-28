@@ -77,11 +77,9 @@
       "title": "Email",
       "sends": "Terkirim",
       "not_sending": "Tidak terkirim",
-      "sources": {
-        "env": "Pengaturan dari berkas lingkungan server.",
-        "console": "Pengaturan dari halaman Integrasi.",
-        "none": "Belum diatur."
-      },
+      "env_note": "Pengaturan dari berkas lingkungan server.",
+      "console_note": "Pengaturan dari halaman Integrasi.",
+      "none_note": "Belum diatur.",
       "warn": "Email tidak dikirim. Undangan, tautan kata sandi, dan balasan bantuan tidak sampai. Atur email di halaman Integrasi.",
       "dev_note": "Wajar saat pengembangan. Di server produksi, email harus terkirim."
     }

@@ -77,7 +77,7 @@ export default function ConsoleLegalPages({ pages, today }: { pages: Page[]; tod
                   href={page.publicUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-semibold text-brand-strong hover:underline"
+                  className="inline-flex min-h-11 items-center gap-1 font-semibold break-all text-brand-strong hover:underline"
                 >
                   {page.publicUrl.replace(/^https?:\/\//, '')}
                   <Icon name="external" size={16} />
