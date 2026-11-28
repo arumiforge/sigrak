@@ -144,7 +144,8 @@ export default defineConfig({
      * owner's material in docs/sources is not needed.
      */
     {
-      pattern: 'docs/data/{profiles,curriculum,regulations,regions,calendar,catalogs,schools}/**/*.json',
+      pattern:
+        'docs/data/{profiles,curriculum,regulations,regions,calendar,catalogs,schools}/**/*.json',
       reloadServer: false,
     },
   ],

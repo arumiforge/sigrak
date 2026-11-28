@@ -17,6 +17,10 @@ function filesUnder(directory: string): string[] {
   })
 }
 
+function metaPatterns(): string[] {
+  return (rcFile.metaFiles ?? []).map((meta) => (typeof meta === 'string' ? meta : meta.pattern))
+}
+
 function dataFoldersReadByApp(): string[] {
   const folders = new Set<string>()
   for (const file of filesUnder(app.makePath('app'))) {
@@ -30,7 +34,7 @@ function dataFoldersReadByApp(): string[] {
 
 test.group('Build | meta files', () => {
   test('every data folder the app reads is copied into the build', ({ assert }) => {
-    const patterns = (rcFile.metaFiles ?? []).map((meta) => meta.pattern)
+    const patterns = metaPatterns()
     const folders = dataFoldersReadByApp()
     assert.includeMembers(folders, ['profiles', 'curriculum', 'regions', 'calendar', 'catalogs'])
 
@@ -50,7 +54,7 @@ test.group('Build | meta files', () => {
   })
 
   test('the owner material is not copied', ({ assert }) => {
-    const patterns = (rcFile.metaFiles ?? []).map((meta) => meta.pattern)
+    const patterns = metaPatterns()
     assert.isFalse(patterns.some((pattern) => matchesGlob('docs/sources/x.json', pattern)))
   })
 })
