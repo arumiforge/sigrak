@@ -22,6 +22,7 @@ Not in R2 (D-477): payment claims and confirmation, invoices, the sales pipeline
 | 2 | R2-05 | Kabar, Acara, Cerita Sekolah, legal pages (console editor + app and public pages) | R2-01 |
 | 2 | R2-06 | Minta Bantuan, help-request statuses, support sessions | R2-01 |
 | 2 | R2-08 | Curriculum console: compare, publish, roll back, impact | R2-01 |
+| 2 | R2-10 | Schools behind one IP, two Redis containers (D-479, D-480) | R2-01 |
 | 3 | R2-07 | Bank Masalah, Bank Praktik Baik, Forum Masalah→Solusi | R2-01, R2-06 |
 | 3 | R2-09 | Console pass: navigation, screenshot set, R2 checks | all above |
 
@@ -30,7 +31,7 @@ Not in R2 (D-477): payment claims and confirmation, invoices, the sales pipeline
 - Module code under `app/<module>/`, routes in `start/routes/<module>.ts` (one import line in `start/routes.ts`), lang files `resources/lang/id/<module>.json`.
 - R2-01 owns the staff ability catalogue (`app/staff/abilities.ts`) and defines every R2 ability key up front, so wave 2 tasks only use keys and never edit the catalogue (a missing key goes in the task Result for the integrator).
 - Console menu: each task adds its items to `inertia/lib/navigation.ts` `consoleItems` with small line-level edits; the integrator resolves order.
-- Migration timestamp blocks: R2-01 `17645000xxxxx`, R2-02 `17645100xxxxx`, R2-03 `17645200xxxxx`, R2-04 `17645300xxxxx`, R2-05 `17645400xxxxx`, R2-06 `17645500xxxxx`, R2-07 `17645600xxxxx`, R2-08 `17645700xxxxx`, R2-09 `17645800xxxxx`, follow-ups `17645900xxxxx`.
+- Migration timestamp blocks: R2-01 `17645000xxxxx`, R2-02 `17645100xxxxx`, R2-03 `17645200xxxxx`, R2-04 `17645300xxxxx`, R2-05 `17645400xxxxx`, R2-06 `17645500xxxxx`, R2-07 `17645600xxxxx`, R2-08 `17645700xxxxx`, R2-09 `17645800xxxxx`, R2-10 `17646000xxxxx`, follow-ups `17645900xxxxx`.
 - Tests side by side: `DB_DATABASE=sigrak_test_<task>` (for example `sigrak_test_r201`), distinct `REDIS_QUEUE_DB`/`REDIS_AI_DB` and `PORT`; CI keeps `sigrak_test`.
 - Every console page names the abilities that may use it; every staff change to school data or settings is logged (`staff_activity_logs`). Student data never shows in the console; religion and health data stay hidden (D-036, D-215, D-341).
 - Console pages use the R1-12 shell and patterns (`inertia/components/patterns/`), copy follows EYD V (D-471, D-472), and are checked at 360 and 1280 px.

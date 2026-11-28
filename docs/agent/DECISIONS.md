@@ -2179,7 +2179,7 @@ Reason: the owner prefers feedback from real use.
 
 ### D-450 — Typst is the PDF engine, with three conditions
 Accepted · 2026-11-27 · R0-07 · owner's choice ("setuju D-399, pakai Typst dengan syarat itu") · settles D-399 (spike passed, `docs/drafts/typst-spike.md`)
-Typst produces SIGRAK's PDFs: the CLI on `worker-exports` for final files, the WASM compiler (typst.ts) for browser previews. Gotenberg stays only as the fallback, including for any document that must carry copyable or searchable Arabic text, which Typst does not produce yet. Conditions:
+Typst produces SIGRAK's PDFs: the CLI on `worker-exports` for final files, the WASM compiler (typst.ts) for browser previews. Gotenberg stays only as the fallback, including for any document that must carry copyable or searchable Arabic text, which Typst does not produce yet. *(Gotenberg fallback removed by D-478.)* Conditions:
 - Font files are pinned in the image and the preview bundle (Liberation 2.1.5, Noto Naskh Arabic 2.021, New Computer Modern Math from typst-assets); system fonts are never used, because Ubuntu's Noto Naskh 2.004 draws the end-of-ayah sign wrongly.
 - Formulas are stored as LaTeX and converted to Typst (tex2typst plus the spike's fixes); column arithmetic gets its own block, not a LaTeX array.
 - The WASM compiler (about 10 MB compressed plus fonts) loads only on preview pages and is cached; previews show a short loading state on the first visit.
@@ -2399,4 +2399,25 @@ Accepted · 2026-11-28 · R2-00 · owner's choice (interview 2026-11-28) · refi
 - **Bank Masalah:** problems come in two ways: support turns a Minta Bantuan request into a problem with one action, and Tim Lapangan records problems from visits, chats or webinars by hand. The reporter is told when the solution ships.
 - **Kabar:** one editor; each Kabar is shown in the app (with the D-319 targets), on `sigrak.com/kabar`, or both.
 Reason: owner's choices; each part is built where it can be tested end to end.
+
+### D-478 — Gotenberg is removed
+Accepted · 2026-11-28 · owner's choice ("Gotenberg hapus saja") · supersedes the fallback part of D-450 and what was left of D-028, D-052, D-059, D-073
+Typst is the only PDF engine. No Gotenberg service, image, env keys or code path is planned or built. Arabic text in PDFs prints correctly but cannot be copied or searched (R0-07); if a searchable Arabic PDF is ever required, that needs a new decision.
+Reason: one engine, one less container and attack surface on the VPS.
+
+### D-479 — Schools behind one public IP
+Accepted · 2026-11-28 · owner's choice · refines D-183, Fondasi web-baseline §1; applies D-417, D-427
+A computer lab of 40–300 pupils usually reaches the internet through one public IP (school NAT), so:
+- The app reads the real client IP: nginx takes it from `CF-Connecting-IP` and the app trusts only the nginx hop (`trustProxy`); without this every user would share one IP.
+- Failed sign-ins are counted per account and IP (D-183). Limits keyed on IP alone are flood brakes sized for 300 people at once (for example 600 sign-ins per minute per IP); the exam site keys its limits on the exam session, not the IP.
+- Cloudflare rate-limit and WAF rules, nginx `limit_req`/`limit_conn` and CrowdSec are tuned so a school's shared IP is never blocked for normal use; sessions are never bound to an IP.
+- A k6 check signs in 300 pupils from one IP within a minute without errors.
+Reason: a whole lab signing in at the start of a lesson or exam must not be mistaken for an attack.
+
+### D-480 — Two Redis containers: state and cache
+Accepted · 2026-11-28 · owner's choice · refines D-415 (one `redis` 8 with AOF)
+- `redis` keeps state: BullMQ queues, sessions, rate limits and Transmit, with `maxmemory-policy noeviction` and AOF (BullMQ requires noeviction).
+- `redis-cache` keeps only caches that can be rebuilt (resolver and page caches): `allkeys-lru`, a memory cap, no AOF or RDB.
+- The app has separate connections (`main`/queue and `cache`); losing `redis-cache` slows pages but loses no data. Staging uses the same layout with its own instances or prefixes.
+Reason: a growing cache can never make the queue or sessions fail.
 
