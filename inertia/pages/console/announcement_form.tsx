@@ -178,6 +178,7 @@ export default function ConsoleAnnouncementForm({
         >
           <CheckboxGroup
             legend={t('publishing.announcements.form.where')}
+            hideLegend
             value={[
               ...(form.data.show_in_app ? ['app'] : []),
               ...(form.data.show_public ? ['public'] : []),

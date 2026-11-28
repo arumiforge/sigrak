@@ -416,6 +416,7 @@ const LABEL_PROPER_NAMES = [
   'Berkas Administrasi',
   'Tim SIGRAK',
   'Cerita Sekolah',
+  'Kabar',
   'Seni dan Budaya',
   'Seni Musik',
   'Seni Rupa',

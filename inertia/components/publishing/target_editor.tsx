@@ -159,8 +159,11 @@ export function CheckboxGroup({
   value,
   onChange,
   error,
+  hideLegend = false,
 }: {
   legend: string
+  /** Keep the legend for screen readers only (the section title already says it). */
+  hideLegend?: boolean
   hint?: string
   options: { value: string; label: string; hint?: string }[]
   value: string[]
@@ -169,7 +172,7 @@ export function CheckboxGroup({
 }) {
   return (
     <fieldset className="space-y-2">
-      <legend className="text-sm font-semibold">{legend}</legend>
+      <legend className={hideLegend ? 'sr-only' : 'text-sm font-semibold'}>{legend}</legend>
       {hint && <p className="text-xs text-muted">{hint}</p>}
       <div className="grid gap-1 sm:grid-cols-2">
         {options.map((option) => (

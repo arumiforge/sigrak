@@ -192,9 +192,11 @@ export function renderMarkdown(markdown: string): string {
 
 /** Plain text of the Markdown, for summaries and meta descriptions. */
 export function markdownToText(markdown: string, maxLength = 200): string {
-  const text = unescapeHtml(renderMarkdown(markdown).replace(/<[^>]+>/g, ' '))
-    .replace(/\s+/g, ' ')
-    .trim()
+  // Inline tags vanish; block tags and line breaks become a space.
+  const html = renderMarkdown(markdown)
+    .replace(/<\/?(?:strong|em|code|a)\b[^>]*>/g, '')
+    .replace(/<[^>]+>/g, ' ')
+  const text = unescapeHtml(html).replace(/\s+/g, ' ').trim()
   if (text.length <= maxLength) return text
   return `${text.slice(0, maxLength - 1).trimEnd()}…`
 }

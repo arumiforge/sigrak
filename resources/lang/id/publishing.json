@@ -254,7 +254,7 @@
     "menu_label": "Menu situs",
     "login": "Masuk",
     "legal_label": "Legal",
-    "copyright": "© {year} SIGRAK",
+    "copyright": "Hak cipta {year} SIGRAK",
     "menu": {
       "announcements": "Kabar",
       "events": "Acara",

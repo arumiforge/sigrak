@@ -187,15 +187,15 @@ export default class PublicController {
       if (!shown) return this.#notFound(ctx)
     }
     const path = LEGAL_PATHS[key]
-    const t = (name: string, data?: Record<string, unknown>) =>
-      ctx.i18n.t(`publishing.public.legal.${name}`, data)
     return this.#render(ctx, 'public/legal', {
       title: shown?.title ?? ctx.i18n.t(`publishing.legal.titles.${key}`),
-      description: t('description'),
+      description: ctx.i18n.t('publishing.public.legal.description'),
       document: shown
         ? {
-            version: t('version', { version: shown.version }),
-            effective: t('effective_since', { date: longDate(shown.effectiveOn) }),
+            version: ctx.i18n.t('publishing.public.legal.version', { version: shown.version }),
+            effective: ctx.i18n.t('publishing.public.legal.effective_since', {
+              date: longDate(shown.effectiveOn),
+            }),
             html: renderMarkdown(shown.body),
             isCurrent: current?.id === shown.id,
           }
@@ -203,7 +203,7 @@ export default class PublicController {
       upcoming:
         upcoming && upcoming.id !== shown?.id
           ? {
-              text: t('upcoming', {
+              text: ctx.i18n.t('publishing.public.legal.upcoming', {
                 version: upcoming.version,
                 date: longDate(upcoming.effectiveOn),
               }),
@@ -215,7 +215,7 @@ export default class PublicController {
         .filter((version) => version.id !== shown?.id)
         .map((version) => ({
           href: `${path}?versi=${version.version}`,
-          label: t('version_item', {
+          label: ctx.i18n.t('publishing.public.legal.version_item', {
             version: version.version,
             date: longDate(version.effectiveOn),
           }),

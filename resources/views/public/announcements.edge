@@ -1,7 +1,6 @@
 @component('public/layout', layout)
   <h1 class="text-3xl font-bold">{{ title }}</h1>
   <p class="mt-2 max-w-2xl text-muted">{{ t('publishing.public.announcements.intro') }}</p>
-
   @if(items.length === 0)
     <p class="mt-8 rounded-lg border border-dashed bg-surface p-6 text-muted">
       {{ t('publishing.public.announcements.empty') }}
@@ -10,7 +9,10 @@
     <ul class="mt-8 space-y-4">
       @each(item in items)
         <li>
-          <a href="{{ item.href }}" class="block rounded-lg border bg-surface p-5 transition-colors hover:border-brand">
+          <a
+            href="{{ item.href }}"
+            class="block rounded-lg border bg-surface p-5 transition-colors hover:border-brand"
+          >
             <p class="text-sm text-muted">{{ item.date }}</p>
             <h2 class="mt-1 text-xl font-bold break-words">{{ item.title }}</h2>
             <p class="mt-1 break-words text-muted">{{ item.summary }}</p>
@@ -19,16 +21,28 @@
       @end
     </ul>
   @end
-
   @if(previous || next)
-    <nav aria-label="{{ t('publishing.public.announcements.pages_label') }}" class="mt-8 flex justify-between gap-4">
+    <nav
+      aria-label="{{ t('publishing.public.announcements.pages_label') }}"
+      class="mt-8 flex justify-between gap-4"
+    >
       @if(previous)
-        <a href="{{ previous }}" class="inline-flex min-h-11 items-center rounded-md border px-4 font-semibold hover:border-brand">{{ t('publishing.public.announcements.previous') }}</a>
+        <a
+          href="{{ previous }}"
+          class="inline-flex min-h-11 items-center rounded-md border px-4 font-semibold hover:border-brand"
+        >
+          {{ t('publishing.public.announcements.previous') }}
+        </a>
       @else
         <span></span>
       @end
       @if(next)
-        <a href="{{ next }}" class="inline-flex min-h-11 items-center rounded-md border px-4 font-semibold hover:border-brand">{{ t('publishing.public.announcements.next') }}</a>
+        <a
+          href="{{ next }}"
+          class="inline-flex min-h-11 items-center rounded-md border px-4 font-semibold hover:border-brand"
+        >
+          {{ t('publishing.public.announcements.next') }}
+        </a>
       @end
     </nav>
   @end

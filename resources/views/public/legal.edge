@@ -7,7 +7,9 @@
         <p class="mt-4 rounded-md border border-warn/35 bg-warn-tint p-3 text-sm text-warn">
           {{ t('publishing.public.legal.not_current') }}
           @if(currentHref)
-            <a href="{{ currentHref }}" class="font-semibold underline">{{ t('publishing.public.legal.current_link') }}</a>
+            <a href="{{ currentHref }}" class="font-semibold underline">
+              {{ t('publishing.public.legal.current_link') }}
+            </a>
           @end
         </p>
       @end
@@ -15,7 +17,9 @@
     @if(upcoming)
       <p class="mt-4 rounded-md border border-info/30 bg-info-tint p-3 text-sm text-info">
         {{ upcoming.text }}
-        <a href="{{ upcoming.href }}" class="font-semibold underline">{{ t('publishing.public.legal.upcoming_link') }}</a>
+        <a href="{{ upcoming.href }}" class="font-semibold underline">
+          {{ t('publishing.public.legal.upcoming_link') }}
+        </a>
       </p>
     @end
     @if(document)
@@ -29,7 +33,14 @@
       <h2 class="mt-12 text-lg font-bold">{{ t('publishing.public.legal.older') }}</h2>
       <ul class="mt-2 space-y-1">
         @each(version in versions)
-          <li><a href="{{ version.href }}" class="inline-flex min-h-11 items-center font-semibold text-brand-strong hover:underline">{{ version.label }}</a></li>
+          <li>
+            <a
+              href="{{ version.href }}"
+              class="inline-flex min-h-11 items-center font-semibold text-brand-strong hover:underline"
+            >
+              {{ version.label }}
+            </a>
+          </li>
         @end
       </ul>
     @end

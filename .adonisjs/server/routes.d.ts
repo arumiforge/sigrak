@@ -29,6 +29,34 @@ export type ScannedRoutes = {
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.announcements.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.create': { paramsTuple?: []; params?: {} }
+    'admin.announcements.target_options': { paramsTuple?: []; params?: {} }
+    'admin.announcements.store': { paramsTuple?: []; params?: {} }
+    'admin.announcements.edit': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.update': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.unpublish': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.destroy': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.index': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.store': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.update': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.unpublish': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.destroy': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.index': { paramsTuple?: []; params?: {} }
+    'admin.stories.create': { paramsTuple?: []; params?: {} }
+    'admin.stories.store': { paramsTuple?: []; params?: {} }
+    'admin.stories.edit': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.update': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.unpublish': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.destroy': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.index': { paramsTuple?: []; params?: {} }
+    'admin.legal.start': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.legal.edit': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.update': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.publish': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.destroy': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
@@ -97,6 +125,9 @@ export type ScannedRoutes = {
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
+    'app.announcements.index': { paramsTuple?: []; params?: {} }
+    'app.announcements.read_all': { paramsTuple?: []; params?: {} }
+    'app.announcements.show': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.login.store': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
@@ -125,6 +156,15 @@ export type ScannedRoutes = {
     'app.ai_demo.store': { paramsTuple?: []; params?: {} }
     'app.ai_demo.cancel': { paramsTuple: [ParamValue]; params: {'generation': ParamValue} }
     'app.ai_demo.retry': { paramsTuple: [ParamValue]; params: {'generation': ParamValue} }
+    'public.announcements': { paramsTuple?: []; params?: {} }
+    'public.announcement': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.events': { paramsTuple?: []; params?: {} }
+    'public.event': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.stories': { paramsTuple?: []; params?: {} }
+    'public.story': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.terms': { paramsTuple?: []; params?: {} }
+    'public.privacy': { paramsTuple?: []; params?: {} }
+    'public.student_data': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.login.store': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
@@ -140,6 +180,18 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.create': { paramsTuple?: []; params?: {} }
+    'admin.announcements.target_options': { paramsTuple?: []; params?: {} }
+    'admin.announcements.edit': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.index': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.index': { paramsTuple?: []; params?: {} }
+    'admin.stories.create': { paramsTuple?: []; params?: {} }
+    'admin.stories.edit': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.index': { paramsTuple?: []; params?: {} }
+    'admin.legal.edit': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -162,6 +214,8 @@ export type ScannedRoutes = {
     'app.timetable.mine': { paramsTuple?: []; params?: {} }
     'app.calendar.index': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
+    'app.announcements.index': { paramsTuple?: []; params?: {} }
+    'app.announcements.show': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
     'app.password.reset': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
@@ -173,6 +227,15 @@ export type ScannedRoutes = {
     'app.teachers.index': { paramsTuple?: []; params?: {} }
     'app.home': { paramsTuple?: []; params?: {} }
     'app.ai_demo.index': { paramsTuple?: []; params?: {} }
+    'public.announcements': { paramsTuple?: []; params?: {} }
+    'public.announcement': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.events': { paramsTuple?: []; params?: {} }
+    'public.event': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.stories': { paramsTuple?: []; params?: {} }
+    'public.story': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.terms': { paramsTuple?: []; params?: {} }
+    'public.privacy': { paramsTuple?: []; params?: {} }
+    'public.student_data': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
   }
@@ -186,6 +249,18 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.create': { paramsTuple?: []; params?: {} }
+    'admin.announcements.target_options': { paramsTuple?: []; params?: {} }
+    'admin.announcements.edit': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.index': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.index': { paramsTuple?: []; params?: {} }
+    'admin.stories.create': { paramsTuple?: []; params?: {} }
+    'admin.stories.edit': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.index': { paramsTuple?: []; params?: {} }
+    'admin.legal.edit': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -208,6 +283,8 @@ export type ScannedRoutes = {
     'app.timetable.mine': { paramsTuple?: []; params?: {} }
     'app.calendar.index': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
+    'app.announcements.index': { paramsTuple?: []; params?: {} }
+    'app.announcements.show': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
     'app.password.reset': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
@@ -219,6 +296,15 @@ export type ScannedRoutes = {
     'app.teachers.index': { paramsTuple?: []; params?: {} }
     'app.home': { paramsTuple?: []; params?: {} }
     'app.ai_demo.index': { paramsTuple?: []; params?: {} }
+    'public.announcements': { paramsTuple?: []; params?: {} }
+    'public.announcement': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.events': { paramsTuple?: []; params?: {} }
+    'public.event': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.stories': { paramsTuple?: []; params?: {} }
+    'public.story': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.terms': { paramsTuple?: []; params?: {} }
+    'public.privacy': { paramsTuple?: []; params?: {} }
+    'public.student_data': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
   }
@@ -239,6 +325,22 @@ export type ScannedRoutes = {
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.announcements.store': { paramsTuple?: []; params?: {} }
+    'admin.announcements.update': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.unpublish': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.destroy': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.store': { paramsTuple?: []; params?: {} }
+    'admin.events.update': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.unpublish': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.destroy': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.store': { paramsTuple?: []; params?: {} }
+    'admin.stories.update': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.unpublish': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.destroy': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.start': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.legal.update': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.publish': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.destroy': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.grant': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff.scope': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }
@@ -285,6 +387,7 @@ export type ScannedRoutes = {
     'app.calendar.acknowledge': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
+    'app.announcements.read_all': { paramsTuple?: []; params?: {} }
     'app.login.store': { paramsTuple?: []; params?: {} }
     'app.password.email': { paramsTuple?: []; params?: {} }
     'app.password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }

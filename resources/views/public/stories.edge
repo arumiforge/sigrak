@@ -1,7 +1,6 @@
 @component('public/layout', layout)
   <h1 class="text-3xl font-bold">{{ title }}</h1>
   <p class="mt-2 max-w-2xl text-muted">{{ t('publishing.public.stories.intro') }}</p>
-
   @if(items.length === 0)
     <p class="mt-8 rounded-lg border border-dashed bg-surface p-6 text-muted">
       {{ t('publishing.public.stories.empty') }}
@@ -10,7 +9,10 @@
     <ul class="mt-8 grid gap-4 sm:grid-cols-2">
       @each(item in items)
         <li>
-          <a href="{{ item.href }}" class="block h-full rounded-lg border bg-surface p-5 transition-colors hover:border-brand">
+          <a
+            href="{{ item.href }}"
+            class="block h-full rounded-lg border bg-surface p-5 transition-colors hover:border-brand"
+          >
             <p class="text-sm font-semibold text-brand-strong">{{ item.school }}</p>
             <h2 class="mt-1 text-xl font-bold break-words">{{ item.title }}</h2>
             <p class="mt-1 break-words text-muted">{{ item.summary }}</p>

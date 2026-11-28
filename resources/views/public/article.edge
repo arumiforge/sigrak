@@ -1,6 +1,12 @@
 @component('public/layout', layout)
   <article class="mx-auto max-w-3xl">
-    <a href="{{ back.href }}" class="-ml-1 inline-flex min-h-11 items-center gap-1 rounded-md pr-2 pl-1 text-sm font-semibold text-brand-strong hover:underline">‹ {{ back.label }}</a>
+    <a
+      href="{{ back.href }}"
+      class="-ml-1 inline-flex min-h-11 items-center gap-1 rounded-md pr-2 pl-1 text-sm font-semibold text-brand-strong hover:underline"
+    >
+      ‹
+      {{ back.label }}
+    </a>
     <h1 class="mt-2 text-3xl font-bold break-words">{{ title }}</h1>
     @if(meta && meta.length)
       <p class="mt-2 text-muted">{{ meta.join(' · ') }}</p>
@@ -11,11 +17,18 @@
           <a
             href="{{ link.href }}"
             rel="noopener noreferrer"
-            class="inline-flex min-h-11 items-center rounded-md px-4 font-semibold {{ index === 0 ? 'bg-brand text-on-brand hover:bg-brand-strong' : 'border hover:border-brand' }}"
-          >{{ link.label }}</a>
+            class="inline-flex min-h-11 items-center rounded-md px-4 font-semibold {{
+              index === 0
+                ? 'bg-brand text-on-brand hover:bg-brand-strong'
+                : 'border hover:border-brand'
+            }}"
+          >
+            {{ link.label }}
+          </a>
         @end
       </p>
     @end
+
     <div class="rich-text mt-8">{{{ html }}}</div>
   </article>
 @end

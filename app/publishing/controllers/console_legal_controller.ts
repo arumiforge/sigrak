@@ -88,7 +88,6 @@ export default class ConsoleLegalController {
         status: document.status,
         publishedAt: isoOrNull(document.publishedAt),
       },
-      today: todayInJakarta(),
     })
   }
 

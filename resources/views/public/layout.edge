@@ -20,22 +20,33 @@
     <a
       href="#isi"
       class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold"
-    >{{ t('publishing.public.skip') }}</a>
+    >
+      {{ t('publishing.public.skip') }}
+    </a>
 
     <header class="border-b bg-surface">
       <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 lg:px-6">
         <a href="/kabar" class="text-xl font-extrabold tracking-tight text-brand-strong">
           {{ t('publishing.public.site_name') }}
         </a>
-        <nav aria-label="{{ t('publishing.public.menu_label') }}" class="order-3 w-full sm:order-none sm:w-auto sm:flex-1">
+        <nav
+          aria-label="{{ t('publishing.public.menu_label') }}"
+          class="order-3 w-full sm:order-none sm:w-auto sm:flex-1"
+        >
           <ul class="-mx-2 flex gap-1 overflow-x-auto">
             @each(item in menu)
               <li>
                 <a
                   href="{{ item.href }}"
-                  class="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-semibold whitespace-nowrap {{ item.current ? 'bg-brand-tint text-brand-strong' : 'text-text hover:bg-surface-hover' }}"
-                  @if(item.current) aria-current="page" @end
-                >{{ item.label }}</a>
+                  class="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-semibold whitespace-nowrap {{
+                    item.current
+                      ? 'bg-brand-tint text-brand-strong'
+                      : 'text-text hover:bg-surface-hover'
+                  }}"
+                  {{{ item.current ? 'aria-current="page"' : '' }}}
+                >
+                  {{ item.label }}
+                </a>
               </li>
             @end
           </ul>
@@ -43,7 +54,9 @@
         <a
           href="{{ loginUrl }}"
           class="ml-auto inline-flex min-h-11 items-center rounded-md bg-brand px-4 text-sm font-semibold text-on-brand hover:bg-brand-strong sm:ml-0"
-        >{{ t('publishing.public.login') }}</a>
+        >
+          {{ t('publishing.public.login') }}
+        </a>
       </div>
     </header>
 
@@ -52,7 +65,9 @@
     </main>
 
     <footer class="border-t bg-surface">
-      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 text-sm text-muted sm:flex-row sm:items-start sm:justify-between lg:px-6">
+      <div
+        class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 text-sm text-muted sm:flex-row sm:items-start sm:justify-between lg:px-6"
+      >
         <div class="space-y-1">
           <p class="font-bold text-text">{{ t('publishing.public.site_name') }}</p>
           <p>{{ t('publishing.public.site_description') }}</p>
@@ -62,7 +77,12 @@
           <ul class="space-y-1">
             @each(link in legalLinks)
               <li>
-                <a href="{{ link.href }}" class="inline-flex min-h-11 items-center font-semibold text-brand-strong hover:underline sm:min-h-0">{{ link.label }}</a>
+                <a
+                  href="{{ link.href }}"
+                  class="inline-flex min-h-11 items-center font-semibold text-brand-strong hover:underline sm:min-h-0"
+                >
+                  {{ link.label }}
+                </a>
               </li>
             @end
           </ul>
