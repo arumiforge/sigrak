@@ -251,13 +251,27 @@ function cookieValue(response: ApiResponse, name: string) {
 /**
  * Signs in through the real login form of an area: GET /masuk for the
  * session and CSRF token, then POST /masuk. Returns the session id of
- * the signed-in session and the POST response.
+ * the signed-in session and the POST response. A staff account with
+ * 2FA also passes the code step (passwordStep stops before it).
  */
 export async function login(
   client: ApiClient,
   area: Area,
   credentials: Record<string, string>
 ): Promise<{ sessionId: string | undefined; response: ApiResponse }> {
+  const { sessionId, response } = await passwordStep(client, area, credentials)
+  if (area === 'admin' && response.header('location') === '/masuk/kode') {
+    return passTwoFactor(client, sessionId, credentials.email)
+  }
+  return { sessionId, response }
+}
+
+/** GET and POST /masuk only, without the 2FA code step. */
+export async function passwordStep(
+  client: ApiClient,
+  area: Area,
+  credentials: Record<string, string>
+): Promise<{ sessionId: string; response: ApiResponse }> {
   const cookieName = sessionCookieNames[area]
   const page = await client.get('/masuk').header('host', hosts[area]).redirects(0)
   const sessionId = cookieValue(page, cookieName)
@@ -273,13 +287,7 @@ export async function login(
     .withCookie(cookieName, sessionId)
     .form(credentials)
     .redirects(0)
-  const next = cookieValue(response, cookieName) ?? sessionId
-
-  // A staff account with 2FA continues at the code step (R2-02).
-  if (area === 'admin' && response.header('location') === '/masuk/kode') {
-    return passTwoFactor(client, next, credentials.email)
-  }
-  return { sessionId: next, response }
+  return { sessionId: cookieValue(response, cookieName) ?? sessionId, response }
 }
 
 /**
