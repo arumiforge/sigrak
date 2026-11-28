@@ -99,7 +99,8 @@ test.group('Queue runtime: worker-exports, CPU pool, queue wait', (group) => {
     await queue('default').add('nothing', {}, { timestamp: Date.now() - 30_000 })
     await queue('exports').add('nothing', {}, { timestamp: Date.now() - 30_000 })
 
-    let body = (await visit(client, 'app', '/healthz/queues')).body()
+    const first = await visit(client, 'app', '/healthz/queues')
+    let body = first.body()
     assert.deepEqual(body.thresholdMs, thresholds)
     assert.equal(body.queues.default.status, 'slow')
     assert.equal(body.queues.exports.status, 'ok')
@@ -107,7 +108,8 @@ test.group('Queue runtime: worker-exports, CPU pool, queue wait', (group) => {
 
     await queue('exports').obliterate({ force: true })
     await queue('exports').add('nothing', {}, { timestamp: Date.now() - 90_000 })
-    body = (await visit(client, 'app', '/healthz/queues')).body()
+    const second = await visit(client, 'app', '/healthz/queues')
+    body = second.body()
     assert.equal(body.queues.exports.status, 'slow')
   })
 

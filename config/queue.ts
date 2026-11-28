@@ -29,11 +29,7 @@ export type WorkerSettings = {
 const adjustments: SettingAdjustment[] = []
 
 const cpuPoolSize = env.get('CPU_POOL_SIZE')
-const waitAlertMs = clampSetting(
-  'QUEUE_WAIT_ALERT_MS',
-  env.get('QUEUE_WAIT_ALERT_MS'),
-  adjustments
-)
+const waitAlertMs = clampSetting('QUEUE_WAIT_ALERT_MS', env.get('QUEUE_WAIT_ALERT_MS'), adjustments)
 
 const queueConfig = {
   /**

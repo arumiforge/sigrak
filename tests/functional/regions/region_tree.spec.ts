@@ -3,7 +3,7 @@ import testUtils from '@adonisjs/core/services/test_utils'
 import db from '@adonisjs/lucid/services/db'
 import Region from '#models/region'
 import School from '#models/school'
-import { jawaTengah } from '#regions/data/jawa_tengah'
+import { jawaTengahRegions } from '#regions/region_files'
 import { seedRegionList } from '#regions/region_list'
 import { SchoolDirectory } from '#regions/school_directory'
 import { TENANT_CONNECTION } from '#tenancy/database_roles'
@@ -14,10 +14,10 @@ test.group('Regions | tree', (group) => {
   group.each.setup(() => testUtils.db().withGlobalTransaction())
 
   test('the Jawa Tengah list seeds once, with both code sets', async ({ assert }) => {
-    const written = await seedRegionList(db.connection(), jawaTengah)
+    const written = await seedRegionList(db.connection(), jawaTengahRegions())
     // 1 province + 3 regencies + 21 + 9 + 16 kecamatan
     assert.equal(written, 50)
-    await seedRegionList(db.connection(), jawaTengah)
+    await seedRegionList(db.connection(), jawaTengahRegions())
 
     const counts = await db.from('regions').groupBy('level').select('level').count('* as total')
     assert.deepEqual(Object.fromEntries(counts.map((row) => [row.level, Number(row.total)])), {

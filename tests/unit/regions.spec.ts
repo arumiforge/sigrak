@@ -1,8 +1,11 @@
 import { test } from '@japa/runner'
 import { DateTime } from 'luxon'
 import { effectiveOn, nextSchoolYearStart, todayInJakarta } from '#regions/effective_dates'
-import { parseRegencyName, regionNameKey } from '#regions/region_list'
-import { jawaTengah } from '#regions/data/jawa_tengah'
+import { mkdtempSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { parseRegencyName, regionNameKey, type RegionSeed } from '#regions/region_list'
+import { jawaTengahRegions, loadRegionList, RegionFileError } from '#regions/region_files'
 
 test.group('Regions | effective dates', () => {
   test('the next school year starts on the coming 1 July', ({ assert }) => {
@@ -40,8 +43,9 @@ test.group('Regions | names and list', () => {
   })
 
   test('the Jawa Tengah list is well formed', ({ assert }) => {
+    const jawaTengah = jawaTengahRegions()
     const codes = new Set<string>()
-    const visit = (node: typeof jawaTengah, parent: string | null) => {
+    const visit = (node: RegionSeed, parent: string | null) => {
       assert.isFalse(codes.has(node.kemendagriCode), `${node.kemendagriCode} twice`)
       codes.add(node.kemendagriCode)
       if (parent) assert.isTrue(node.kemendagriCode.startsWith(`${parent}.`), node.kemendagriCode)
@@ -59,5 +63,42 @@ test.group('Regions | names and list', () => {
         ['Jepara', 16],
       ]
     )
+  })
+})
+
+test.group('Regions | list files in docs/data/regions', () => {
+  function writeList(regions: unknown, dataset = 'region_list') {
+    const path = join(mkdtempSync(join(tmpdir(), 'regions-')), 'list.json')
+    writeFileSync(path, JSON.stringify({ dataset, status: 'draft', regions }))
+    return path
+  }
+
+  test('reads the JSON file with codes, Dapodik codes and kinds (D-469)', ({ assert }) => {
+    const root = jawaTengahRegions()
+    assert.include(root, { kemendagriCode: '33', dapodikCode: '030000', name: 'Jawa Tengah' })
+    const kudus = root.children!.find((regency) => regency.kemendagriCode === '33.19')!
+    assert.include(kudus, { name: 'Kudus', dapodikCode: '031900', regencyKind: 'kabupaten' })
+    assert.deepInclude(kudus.children!, {
+      kemendagriCode: '33.19.02',
+      dapodikCode: null,
+      name: 'Kota Kudus',
+    })
+  })
+
+  test('refuses a file that is not a well-formed region list', ({ assert }) => {
+    const province = { kemendagri_code: '33', name: 'Jawa Tengah' }
+    assert.throws(() => loadRegionList(writeList(province, 'region_calendar')), RegionFileError)
+    for (const regions of [
+      { ...province, kemendagri_code: '3' },
+      { ...province, children: [{ kemendagri_code: '34.01', name: 'Lain' }] },
+      { ...province, children: [{ kemendagri_code: '33.01', name: '' }] },
+      { ...province, dapodik_code: '0300' },
+      {
+        ...province,
+        children: [{ kemendagri_code: '33.01', name: 'A', regency_kind: 'kota_adm' }],
+      },
+    ]) {
+      assert.throws(() => loadRegionList(writeList(regions)), RegionFileError)
+    }
   })
 })

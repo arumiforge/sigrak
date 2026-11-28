@@ -13,7 +13,7 @@ import CalendarEvent, { type CalendarEventKind, type ExamType } from '#models/ca
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
 import { seedRegionList } from '#regions/region_list'
-import { jawaTengah } from '#regions/data/jawa_tengah'
+import { jawaTengahRegions } from '#regions/region_files'
 
 /**
  * Local demo data: invented schools and people only (Fondasi
@@ -48,7 +48,7 @@ export default class DemoSeeder extends BaseSeeder {
     ) as RegionCalendarFile
 
     // The region list is idempotent; region_seeder also loads the school directory.
-    await seedRegionList(db.connection(), jawaTengah)
+    await seedRegionList(db.connection(), jawaTengahRegions())
     const province = await Region.findByOrFail('kemendagriCode', '33')
     const kudus = await Region.findByOrFail('kemendagriCode', '33.19')
     const kotaKudus = await Region.findByOrFail('kemendagriCode', '33.19.02')

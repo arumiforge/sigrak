@@ -115,7 +115,11 @@ function validateProfile(data: Record<string, unknown>, file: string): LevelProf
         ) {
           throw new LevelProfileError(`${entryWhere}: effective_on must be a date or null`)
         }
-        if (entry.borrowed_from != null && typeof entry.borrowed_from !== 'string') {
+        if (
+          entry.borrowed_from !== undefined &&
+          entry.borrowed_from !== null &&
+          typeof entry.borrowed_from !== 'string'
+        ) {
           throw new LevelProfileError(`${entryWhere}: borrowed_from must be a level code`)
         }
       }
