@@ -18,6 +18,7 @@ Pull the R2 console together: grouped console navigation per role, a console hom
 ## Output
 
 - Console navigation filtered by the signed-in staff member's abilities, grouped (Sekolah, Konten, Bantuan, Kurikulum, Sistem, Tim).
+- D-481: rename the "Hak akses" page to "Peran" (`/peran`, lang keys, nav label, the EYD exception added in R2-01 removed); make the trial-extension limit (`TRIAL_EXTEND_MAX_DAYS`, 14) an admin-editable `app_settings` value on the console settings page, logged.
 - Console home: counts that need action per role (new help requests, problems to triage, versions waiting for sign-off, failed jobs).
 - Fix inconsistencies found across R2 pages; axe check without serious issues; tap targets 44 px.
 - Screenshot set of every console page at 360 and 1280 px, light and dark, in `docs/screenshots/r2/` with a README index (D-475).

@@ -2421,3 +2421,10 @@ Accepted · 2026-11-28 · owner's choice · refines D-415 (one `redis` 8 with AO
 - The app has separate connections (`main`/queue and `cache`); losing `redis-cache` slows pages but loses no data. Staging uses the same layout with its own instances or prefixes.
 Reason: a growing cache can never make the queue or sessions fail.
 
+### D-481 — R2-01 answers: trial extension limit, fields, "Peran" page
+Accepted · 2026-11-28 · R2-01 · owner's choice · refines D-338, D-314
+- Penjualan and Koordinator wilayah may extend a school's trial by at most 14 days per action; an admin can change this limit in the console settings (an `app_settings` value, logged), with no deploy.
+- The field (bidang) list of R2-01 stands: the internal-roles §2 list plus Pendidikan Pancasila, Seni dan Budaya and PJOK.
+- The read-only role matrix page is called "Peran" (path `/peran`), not "Hak akses"; D-314's rule (fixed roles, read-only matrix) is unchanged.
+Reason: owner's answers.
+
