@@ -13,7 +13,7 @@
     "rate_limited": "Kunci pertama kena batas kuota",
     "timeout": "AI lambat menjawab",
     "empty_reply": "AI menjawab kosong",
-    "fails_then_recovers": "Gagal dulu, berhasil saat dicoba lagi"
+    "fails_then_recovers": "Belum berhasil, lalu berhasil saat dicoba lagi"
   },
   "keys": {
     "heading": "Kunci AI Anda",

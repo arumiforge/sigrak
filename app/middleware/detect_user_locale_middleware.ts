@@ -2,6 +2,7 @@ import { I18n } from '@adonisjs/i18n'
 import i18nManager from '@adonisjs/i18n/services/main'
 import type { NextFn } from '@adonisjs/core/types/http'
 import { type HttpContext, RequestValidator } from '@adonisjs/core/http'
+import { VALIDATION_NAMESPACE } from '#middleware/translations_middleware'
 
 /**
  * The "DetectUserLocaleMiddleware" middleware uses i18n service to share
@@ -9,12 +10,12 @@ import { type HttpContext, RequestValidator } from '@adonisjs/core/http'
  */
 export default class DetectUserLocaleMiddleware {
   /**
-   * Using i18n for validation messages. Applicable to only
-   * "request.validateUsing" method calls
+   * Validation messages for "request.validateUsing" come from
+   * resources/lang/id/validation.json (fields.* and messages.*).
    */
   static {
     RequestValidator.messagesProvider = (ctx) => {
-      return ctx.i18n.createMessagesProvider()
+      return ctx.i18n.createMessagesProvider(VALIDATION_NAMESPACE)
     }
   }
 
