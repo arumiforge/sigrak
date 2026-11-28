@@ -1,21 +1,22 @@
-import { parentPort } from 'node:worker_threads'
 import { cpuTasks, type CpuTaskName } from './tasks.js'
 
 /**
- * Body of one CPU pool thread: runs one task at a time and answers the
- * pool with its result or error. Messages: `{ id, task, payload }` in,
- * `{ id, ok, result | error }` out.
+ * Body of a CPU pool thread, loaded by Piscina in each worker thread.
+ * Runs one task and answers with an envelope, so the pool can tell a
+ * task's own error (`ok: false`) from a thread that ended.
  */
-type Request = { id: number; task: CpuTaskName; payload: unknown }
+export type ThreadRequest = { task: CpuTaskName; payload: unknown }
+export type ThreadReply =
+  | { ok: true; result: unknown }
+  | { ok: false; error: { name: string; message: string; stack?: string } }
 
-parentPort!.on('message', async ({ id, task, payload }: Request) => {
+export default async function runCpuTask({ task, payload }: ThreadRequest): Promise<ThreadReply> {
   try {
     const run = cpuTasks[task] as ((input: unknown) => unknown) | undefined
     if (!run) throw new Error(`Unknown CPU task "${task}"`)
-    const result = await run(payload)
-    parentPort!.postMessage({ id, ok: true, result })
+    return { ok: true, result: await run(payload) }
   } catch (error) {
     const { name, message, stack } = error instanceof Error ? error : new Error(String(error))
-    parentPort!.postMessage({ id, ok: false, error: { name, message, stack } })
+    return { ok: false, error: { name, message, stack } }
   }
-})
+}
