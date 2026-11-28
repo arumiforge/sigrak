@@ -1,5 +1,8 @@
 # Local services for development: PostgreSQL 19 (with pgvector, D-398, D-412)
-# and Redis. The app itself runs on the host with `npm run dev`.
+# and the two Redis instances of D-480: `redis` for state (queues, sessions,
+# limits, Transmit) and `redis-cache` for rebuildable caches. The app itself
+# runs on the host with `pnpm dev`; set REDIS_CACHE_HOST=127.0.0.1 and
+# REDIS_CACHE_PORT=6380 in .env to use redis-cache (empty: the cache uses redis).
 name: sigrak
 
 services:
@@ -24,11 +27,35 @@ services:
 
     redis:
         image: redis:8.8-alpine
-        command: ['redis-server', '--appendonly', 'yes']
+        # State: BullMQ needs noeviction; AOF keeps queues across restarts.
+        command: ['redis-server', '--appendonly', 'yes', '--maxmemory-policy', 'noeviction']
         ports:
             - '127.0.0.1:6379:6379'
         volumes:
             - redis:/data
+        healthcheck:
+            test: ['CMD', 'redis-cli', 'ping']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+
+    redis-cache:
+        image: redis:8.8-alpine
+        # Caches only: least recently used keys go first, no AOF or RDB.
+        command:
+            [
+                'redis-server',
+                '--maxmemory',
+                '256mb',
+                '--maxmemory-policy',
+                'allkeys-lru',
+                '--appendonly',
+                'no',
+                '--save',
+                '',
+            ]
+        ports:
+            - '127.0.0.1:6380:6379'
         healthcheck:
             test: ['CMD', 'redis-cli', 'ping']
             interval: 5s
