@@ -32,7 +32,7 @@ Pull the R2 console together: grouped console navigation per role, a console hom
 
 ## Result
 
-Branch `r2/r2-09-console-pass` (from `r2/r2-00-split` at 5b97dbe). Full suite 533 tests (525 before + 8 new), lint, both typechecks, `prettier --check .` and `node ace build` pass. No migration, no new dependency (`database/schema.ts` unchanged).
+Branch `r2/r2-09-console-pass` (from `r2/r2-00-split` at 5b97dbe). Full suite 533 tests (524 before + 9 new), lint, both typechecks, `prettier --check .` and `node ace build` pass. No migration, no new dependency (`database/schema.ts` unchanged).
 
 ### Built
 
