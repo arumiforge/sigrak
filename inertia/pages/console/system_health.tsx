@@ -334,7 +334,7 @@ function FailedJobs({
             ? (job) => {
                 const queue = t(`system_health.queues.names.${job.queue}`)
                 return (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:justify-end">
                     <ConfirmAction
                       action={`${base(job)}/coba-lagi`}
                       label={t('system_health.failed.retry_action')}
@@ -441,7 +441,7 @@ function Activity({
         caption={t('system_health.activity.caption')}
         estimateCardHeight={220}
       />
-      <div className="space-y-3">
+      <div className="order-first space-y-3 lg:order-none">
         <div className="rounded-lg border bg-surface p-4">
           <h3 className="font-bold">{t('system_health.activity.totals_title', { days })}</h3>
           <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3">
