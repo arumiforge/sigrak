@@ -1,13 +1,13 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { Exception } from '@adonisjs/core/exceptions'
 import StaffUser from '#models/staff_user'
-import type { StaffRole } from '#models/staff_user'
+import { staffCan } from '#staff/access'
 
 /**
- * Staff roles that work with the school directory and decide region
- * changes (docs/drafts/regional-layers.md §8: `support` or `admin`).
+ * Staff who work with the school directory and decide region changes
+ * hold `regions.review` (docs/drafts/regional-layers.md §8: `support`
+ * or `admin`; the owner too, app/staff/powers.ts).
  */
-export const REGION_REVIEW_ROLES: readonly StaffRole[] = ['admin', 'support']
 
 export class RegionAccessDeniedException extends Exception {
   static status = 403
@@ -16,7 +16,7 @@ export class RegionAccessDeniedException extends Exception {
 }
 
 export function canReviewRegions(staff: StaffUser) {
-  return REGION_REVIEW_ROLES.includes(staff.role)
+  return staffCan(staff, 'regions.review')
 }
 
 /**

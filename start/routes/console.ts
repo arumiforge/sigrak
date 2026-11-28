@@ -4,8 +4,9 @@
 |--------------------------------------------------------------------------
 |
 | Schools, members, invitations, trials and the default trial length
-| (D-182, D-459). Each action checks the staff role (app/accounts/
-| staff_access.ts); school-owned rows are read in a staff transaction.
+| (D-182, D-459). Each action checks the staff ability and scope
+| (app/staff/access.ts); school-owned rows are read in a staff
+| transaction.
 | The sign-in routes stay in start/routes.ts.
 |
 */

@@ -1,7 +1,7 @@
 # R1-10 — Runtime settings from R0-08: AI concurrency, queue-wait alert, worker_threads pool
 
 - **Phase:** R1
-- **Status:** review
+- **Status:** done
 - **Owner:** r1/r1-10-runtime-settings
 - **Depends on:** R0 gate (D-468)
 - **Can run in parallel with:** R1-01, R1-02, R1-03

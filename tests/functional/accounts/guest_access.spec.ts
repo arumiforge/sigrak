@@ -24,6 +24,9 @@ const PUBLIC_APP_PATTERNS = new Set([
   '/konfirmasi-email/:token',
 ])
 
+/** admin. pages without a session: sign-in and a new staff member's set-password link (R2-01). */
+const PUBLIC_ADMIN_PATTERNS = new Set(['/masuk', '/kata-sandi-baru/:token'])
+
 const SAMPLE_PARAMS: Record<string, string> = {
   token: newToken().token,
   invitation: '0190a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b',
@@ -91,7 +94,7 @@ test.group('Accounts | what works without a session', (group) => {
 
   test('the whole staff console needs a staff session', async ({ client, assert }) => {
     const gets = routesOf(hosts.admin).filter(
-      (route) => route.methods.includes('GET') && route.pattern !== '/masuk'
+      (route) => route.methods.includes('GET') && !PUBLIC_ADMIN_PATTERNS.has(route.pattern)
     )
     assert.isAbove(gets.length, 3)
     for (const route of gets) {

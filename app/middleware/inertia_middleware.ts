@@ -6,6 +6,7 @@ import { messagesFor, SHARED_NAMESPACES } from '#middleware/translations_middlew
 import User from '#models/user'
 import StaffUser from '#models/staff_user'
 import ExamParticipant from '#models/exam_participant'
+import { abilitiesOf } from '#staff/access'
 
 /**
  * Who is signed in, in the shape every layout needs. Only the guard of
@@ -39,6 +40,16 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
        * middleware), for the menus; null without a school.
        */
       role: ctx.inertia.always(ctx.membership?.role ?? null),
+      /**
+       * What the signed-in staff member may do on admin. (app/staff/
+       * abilities.ts), for the console menu and buttons; the server
+       * checks every action again. Empty elsewhere.
+       */
+      staffAbilities: ctx.inertia.always(
+        auth?.user instanceof StaffUser && auth.user.$preloaded.roleAssignments
+          ? abilitiesOf(auth.user)
+          : []
+      ),
       /**
        * The signed-in school user's address while it is not confirmed
        * (D-469), for the reminder banner; null otherwise.

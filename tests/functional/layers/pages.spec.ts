@@ -6,7 +6,7 @@ import db from '@adonisjs/lucid/services/db'
 import { hosts, type Area } from '#config/hosts'
 import { sessionCookieNames } from '#config/session'
 import type School from '#models/school'
-import type StaffUser from '#models/staff_user'
+import type { StaffRole } from '#staff/roles'
 import { PASSWORD, createStaff, login, visit } from '#tests/helpers'
 import { createMember } from '#tests/tenancy'
 import { createPackage, layerFixtures, publishedCatalog } from '#tests/layers'
@@ -31,10 +31,8 @@ async function member(
   return { ...fixture, session: await sessionFor(client, 'app', fixture.user.email) }
 }
 
-async function staff(client: ApiClient, role: StaffUser['role']) {
-  const account = await createStaff()
-  account.role = role
-  await account.save()
+async function staff(client: ApiClient, role: StaffRole) {
+  const account = await createStaff([role])
   return { account, session: await sessionFor(client, 'admin', account.email) }
 }
 

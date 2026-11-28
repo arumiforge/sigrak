@@ -33,7 +33,8 @@
     "layers": "Data daerah dan sekolah",
     "schools": "Sekolah dan pengguna",
     "regions": "Wilayah",
-    "system": "Sistem"
+    "system": "Sistem",
+    "team": "Tim"
   },
   "roles": {
     "principal": "Kepala sekolah",
@@ -49,6 +50,9 @@
     "region_changes": "Perubahan wilayah",
     "area_proposals": "Usulan wilayah",
     "calendar": "Kalender wilayah",
-    "settings": "Pengaturan"
+    "settings": "Pengaturan",
+    "staff": "Staf",
+    "activity_log": "Log aktivitas",
+    "access": "Hak akses"
   }
 }

@@ -22,14 +22,15 @@ type Props = {
       endsAt: string | null
     }
   }[]
-  can: { manageTrials: boolean }
+  can: { manageTrials: boolean; extendTrials: boolean }
+  trialExtendMaxDays: number
 }
 
 /**
  * Konsol /pengguna: find a school user and change their own trial
  * (D-459).
  */
-export default function ConsoleUsers({ q, users, can }: Props) {
+export default function ConsoleUsers({ q, users, can, trialExtendMaxDays }: Props) {
   const t = useT()
 
   return (
@@ -77,10 +78,13 @@ export default function ConsoleUsers({ q, users, can }: Props) {
                   source: t(`console.trial.sources.${user.trial.source}`),
                 })}
               </p>
-              {can.manageTrials && (
+              {(can.manageTrials || can.extendTrials) && (
                 <div className="mt-3 border-t pt-3">
                   <p className="mb-3 text-sm text-muted">{t('console.trial.user_intro')}</p>
-                  <TrialForm action={`/pengguna/${user.id}/uji-coba`} />
+                  <TrialForm
+                    action={`/pengguna/${user.id}/uji-coba`}
+                    extendMaxDays={can.manageTrials ? undefined : trialExtendMaxDays}
+                  />
                 </div>
               )}
             </li>

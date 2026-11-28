@@ -18,10 +18,10 @@ export default function ConsoleLayout({ children }: { children: ReactNode }) {
   const t = useT()
   const [menuOpen, setMenuOpen] = useState(false)
   const {
-    props: { viewer },
+    props: { viewer, staffAbilities },
     url,
   } = usePage()
-  const items = consoleNav()
+  const items = consoleNav(staffAbilities)
 
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)]">

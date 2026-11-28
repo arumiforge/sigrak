@@ -98,4 +98,10 @@ export default await Env.create(new URL('../', import.meta.url), {
   SMTP_PORT: Env.schema.number.optional(),
   SMTP_USERNAME: Env.schema.string.optional(),
   SMTP_PASSWORD: Env.schema.secret.optional(),
+
+  // First owner account (ace staff:create-owner, R2-01). Read once on
+  // the server; never committed. Without them the command asks.
+  STAFF_OWNER_NAME: Env.schema.string.optional(),
+  STAFF_OWNER_EMAIL: Env.schema.string.optional({ format: 'email' }),
+  STAFF_OWNER_PASSWORD: Env.schema.secret.optional(),
 })

@@ -27,6 +27,12 @@ export type NavItem = {
   exact?: boolean
   /** False while the page is still being built in another task. */
   available?: boolean
+  /**
+   * Console only: the staff ability that opens the page (app/staff/
+   * abilities.ts); the item is hidden from staff without it. The
+   * server checks again on every request.
+   */
+  ability?: string
 }
 
 const appItems = {
@@ -141,6 +147,7 @@ const consoleItems: NavItem[] = [
     label: 'nav.console.schools',
     icon: 'school',
     section: 'nav.sections.schools',
+    ability: 'schools.view',
   },
   {
     key: 'users',
@@ -148,6 +155,7 @@ const consoleItems: NavItem[] = [
     label: 'nav.console.users',
     icon: 'users',
     section: 'nav.sections.schools',
+    ability: 'users.view',
   },
   {
     key: 'directory',
@@ -155,6 +163,7 @@ const consoleItems: NavItem[] = [
     label: 'nav.console.directory',
     icon: 'directory',
     section: 'nav.sections.regions',
+    ability: 'regions.review',
   },
   {
     key: 'region_changes',
@@ -162,6 +171,7 @@ const consoleItems: NavItem[] = [
     label: 'nav.console.region_changes',
     icon: 'region',
     section: 'nav.sections.regions',
+    ability: 'regions.review',
   },
   {
     key: 'area_proposals',
@@ -169,6 +179,7 @@ const consoleItems: NavItem[] = [
     label: 'nav.console.area_proposals',
     icon: 'proposals',
     section: 'nav.sections.regions',
+    ability: 'layers.propose',
   },
   {
     key: 'calendar',
@@ -176,6 +187,7 @@ const consoleItems: NavItem[] = [
     label: 'nav.console.calendar',
     icon: 'calendar',
     section: 'nav.sections.regions',
+    ability: 'layers.propose',
   },
   {
     key: 'settings',
@@ -183,11 +195,42 @@ const consoleItems: NavItem[] = [
     label: 'nav.console.settings',
     icon: 'settings',
     section: 'nav.sections.system',
+    ability: 'settings.view',
+  },
+  {
+    key: 'staff',
+    href: '/staf',
+    label: 'nav.console.staff',
+    icon: 'staff',
+    section: 'nav.sections.team',
+    ability: 'staff.view',
+  },
+  {
+    key: 'activity_log',
+    href: '/log-aktivitas',
+    label: 'nav.console.activity_log',
+    icon: 'activity',
+    section: 'nav.sections.team',
+    ability: 'audit.view',
+  },
+  {
+    key: 'access',
+    href: '/hak-akses',
+    label: 'nav.console.access',
+    icon: 'access',
+    section: 'nav.sections.team',
+    ability: 'access.view',
   },
 ]
 
-export function consoleNav(): NavItem[] {
-  return consoleItems.filter(visible)
+/**
+ * The console menu for a staff member's abilities (shared prop
+ * `staffAbilities`): items without an ability show to everyone.
+ */
+export function consoleNav(abilities: readonly string[] = []): NavItem[] {
+  return consoleItems
+    .filter(visible)
+    .filter((item) => !item.ability || abilities.includes(item.ability))
 }
 
 /** The path part of an Inertia URL ("/kelas?tahun=…" → "/kelas"). */

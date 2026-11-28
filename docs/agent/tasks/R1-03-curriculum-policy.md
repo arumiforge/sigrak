@@ -1,7 +1,7 @@
 # R1-03 — Curriculum tables, import, Profil Jenjang, policy-profile resolver
 
 - **Phase:** R1
-- **Status:** review
+- **Status:** done
 - **Owner:** r1/r1-03-curriculum
 - **Depends on:** R0 gate (D-468); school-owned tables (`school_subjects`) wait for R1-01's tenancy helpers
 - **Can run in parallel with:** R1-01, R1-02, R1-10

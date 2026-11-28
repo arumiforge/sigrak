@@ -35,7 +35,11 @@
     "label": "Keterangan",
     "jp": "JP",
     "target": "Kelas",
-    "lessons": "Jumlah JP"
+    "lessons": "Jumlah JP",
+    "region_ids": "Wilayah",
+    "school_ids": "Sekolah",
+    "levels": "Jenjang",
+    "fields": "Bidang"
   },
   "messages": {
     "required": "{field} wajib diisi.",

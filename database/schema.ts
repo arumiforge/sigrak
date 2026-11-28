@@ -1014,11 +1014,53 @@ export class StaffActivityLogSchema extends BaseModel {
   declare subjectType: string
 }
 
+export class StaffPasswordTokenSchema extends BaseModel {
+  static $columns = ['createdAt', 'expiresAt', 'id', 'staffUserId', 'tokenHash'] as const
+  $columns = StaffPasswordTokenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare staffUserId: number
+  @column({ serializeAs: null })
+  declare tokenHash: string
+}
+
+export class StaffRoleAssignmentSchema extends BaseModel {
+  static $columns = ['createdAt', 'createdByStaffId', 'fields', 'id', 'levels', 'regionIds', 'role', 'schoolIds', 'staffUserId', 'updatedAt'] as const
+  $columns = StaffRoleAssignmentSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare createdByStaffId: number | null
+  @column()
+  declare fields: string[]
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare levels: string[]
+  @column()
+  declare regionIds: number[]
+  @column()
+  declare role: string
+  @column()
+  declare schoolIds: number[]
+  @column()
+  declare staffUserId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class StaffUserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'id', 'name', 'password', 'role', 'updatedAt'] as const
+  static $columns = ['createdAt', 'disabledAt', 'email', 'id', 'name', 'password', 'updatedAt'] as const
   $columns = StaffUserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare disabledAt: DateTime | null
   @column()
   declare email: string
   @column({ isPrimary: true })
@@ -1027,8 +1069,6 @@ export class StaffUserSchema extends BaseModel {
   declare name: string
   @column({ serializeAs: null })
   declare password: string
-  @column()
-  declare role: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }

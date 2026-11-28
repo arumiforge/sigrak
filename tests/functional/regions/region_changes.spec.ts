@@ -7,7 +7,7 @@ import { hosts } from '#config/hosts'
 import { sessionCookieNames } from '#config/session'
 import RegionChangeReview from '#models/region_change_review'
 import School from '#models/school'
-import type StaffUser from '#models/staff_user'
+import type { StaffRole } from '#staff/roles'
 import { RegionChangeQueue, ReviewNotPendingException } from '#regions/region_change_queue'
 import { importSchoolDirectory } from '#regions/school_directory_importer'
 import { PASSWORD, createStaff, login, visit } from '#tests/helpers'
@@ -39,10 +39,8 @@ async function pendingChange(name: string, npsn: string, district = 'Bae') {
   return { school, review, file }
 }
 
-async function staffSession(client: ApiClient, role: StaffUser['role'] = 'support') {
-  const staff = await createStaff()
-  staff.role = role
-  await staff.save()
+async function staffSession(client: ApiClient, role: StaffRole = 'support') {
+  const staff = await createStaff([role])
   const { sessionId } = await login(client, 'admin', { email: staff.email, password: PASSWORD })
   const page = await visit(client, 'admin', '/', {
     name: sessionCookieNames.admin,

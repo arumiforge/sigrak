@@ -1,7 +1,7 @@
 # R1-01 — Tenancy core and row-level security
 
 - **Phase:** R1
-- **Status:** review
+- **Status:** done
 - **Owner:** r1/r1-01-tenancy-rls
 - **Depends on:** R0 gate (D-468)
 - **Can run in parallel with:** R1-02, R1-03, R1-10

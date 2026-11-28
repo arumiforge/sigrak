@@ -1,7 +1,7 @@
 # R1-09 — Timetable and draft generator
 
 - **Phase:** R1
-- **Status:** review
+- **Status:** done
 - **Owner:** r1/r1-09-timetable
 - **Depends on:** R1-06
 - **Can run in parallel with:** R1-08

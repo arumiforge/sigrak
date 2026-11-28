@@ -36,7 +36,8 @@ type Props = {
     sentAt: string
     expiresAt: string
   }[]
-  can: { manageInvitations: boolean; manageTrials: boolean }
+  can: { manageInvitations: boolean; manageTrials: boolean; extendTrials: boolean }
+  trialExtendMaxDays: number
 }
 
 /**
@@ -49,6 +50,7 @@ export default function ConsoleSchool({
   members,
   invitations,
   can,
+  trialExtendMaxDays,
 }: Props) {
   const t = useT()
   const base = `/sekolah/${school.id}`
@@ -195,10 +197,16 @@ export default function ConsoleSchool({
                     })}
               </p>
             )}
-            {can.manageTrials && (
+            {(can.manageTrials || can.extendTrials) && (
               <p className="mb-3 text-sm text-muted">{t('accounts.trial.school_extend_hint')}</p>
             )}
-            {can.manageTrials && <TrialForm action={`${base}/uji-coba`} />}
+            {can.manageTrials ? (
+              <TrialForm action={`${base}/uji-coba`} />
+            ) : (
+              can.extendTrials && (
+                <TrialForm action={`${base}/uji-coba`} extendMaxDays={trialExtendMaxDays} />
+              )
+            )}
           </Section>
         </div>
       </div>

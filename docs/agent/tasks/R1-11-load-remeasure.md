@@ -1,7 +1,7 @@
 # R1-11 — Load re-measure with a real page and RLS
 
 - **Phase:** R1
-- **Status:** review
+- **Status:** done
 - **Owner:** r1/r1-11-load
 - **Depends on:** R1-08
 - **Can run in parallel with:** —

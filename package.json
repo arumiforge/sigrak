@@ -44,6 +44,7 @@
     "#school_year/*": "./app/school_year/*.js",
     "#timetable/*": "./app/timetable/*.js",
     "#calendar/*": "./app/calendar/*.js",
+    "#staff/*": "./app/staff/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",

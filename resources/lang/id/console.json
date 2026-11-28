@@ -49,6 +49,7 @@
       "clear": "Ikut bawaan"
     },
     "days_label": "Jumlah hari",
+    "extend_limit": "Paling banyak {days} hari sekali tambah.",
     "save": "Simpan",
     "saved": "Masa uji coba sudah diubah.",
     "status_active": "Aktif sampai {date}",

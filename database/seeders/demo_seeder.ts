@@ -8,6 +8,7 @@ import School from '#models/school'
 import User from '#models/user'
 import SchoolMembership from '#models/school_membership'
 import StaffUser from '#models/staff_user'
+import StaffRoleAssignment from '#models/staff_role_assignment'
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
 import { seedRegionList } from '#regions/region_list'
@@ -113,10 +114,12 @@ export default class DemoSeeder extends BaseSeeder {
     await this.membership(sd, operator, 'operator')
     await this.membership(mi, miTeacher, 'teacher')
 
-    await StaffUser.firstOrCreate(
+    // The demo console account holds the owner role, so every page shows (R2-01).
+    const staff = await StaffUser.firstOrCreate(
       { email: 'admin@sigrak.test' },
-      { name: 'Admin Tim SIGRAK', password: DEMO_PASSWORD, role: 'admin' }
+      { name: 'Admin Tim SIGRAK', password: DEMO_PASSWORD }
     )
+    await StaffRoleAssignment.firstOrCreate({ staffUserId: staff.id, role: 'owner' }, {})
 
     const session = await ExamSession.firstOrCreate(
       { title: 'Simulasi TKA Matematika (contoh)' },

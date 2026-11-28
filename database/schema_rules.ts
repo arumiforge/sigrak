@@ -32,5 +32,10 @@ export default {
     },
     value: { tsType: 'unknown', decorators: [{ name: '@column' }] },
     changes: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
+    // Staff scopes (D-338): bigint[] arrives as strings; StaffRoleAssignment converts them.
+    region_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
+    school_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
+    levels: { tsType: 'string[]', decorators: [{ name: '@column' }] },
+    fields: { tsType: 'string[]', decorators: [{ name: '@column' }] },
   },
 } satisfies SchemaRules
