@@ -20,7 +20,14 @@ export const plugins: Config['plugins'] = [
 ]
 
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
-  setup: [() => testUtils.db().migrate()],
+  setup: [
+    () => testUtils.db().migrate(),
+    // The app's login user for the RLS-bound "tenant" connection (R1-01).
+    async () => {
+      const { prepareTenantLogin } = await import('#tests/tenancy')
+      await prepareTenantLogin()
+    },
+  ],
   teardown: [],
 }
 

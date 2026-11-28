@@ -41,6 +41,13 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_USER: Env.schema.string(),
   DB_PASSWORD: Env.schema.secret.optional(),
   DB_DATABASE: Env.schema.string(),
+  /**
+   * The app's login user for the "tenant" connection: a member of the
+   * non-owner role sigrak_app, so row-level security applies (R1-01).
+   * DB_USER stays the owner that runs migrations.
+   */
+  DB_APP_USER: Env.schema.string.optional(),
+  DB_APP_PASSWORD: Env.schema.secret.optional(),
 
   // Redis
   REDIS_HOST: Env.schema.string({ format: 'host' }),
