@@ -6,9 +6,8 @@ import db from '@adonisjs/lucid/services/db'
 import testUtils from '@adonisjs/core/services/test_utils'
 import type School from '#models/school'
 import type User from '#models/user'
-import Region from '#models/region'
 import Calendar from '#models/calendar'
-import { createCalendar, createParticipant } from '#tests/helpers'
+import { createCalendar, createParticipant, testRegions } from '#tests/helpers'
 import { assertRlsHides, asSchool, createMember, createTwoSchools } from '#tests/tenancy'
 import { TENANT_CONNECTION } from '#tenancy/database_roles'
 import { SchoolContext } from '#tenancy/school_context'
@@ -284,7 +283,7 @@ test.group('Tenancy | row-level security', (group) => {
 
   test('region calendars are readable by schools and written only by staff', async ({ assert }) => {
     const { a } = await createTwoSchools()
-    const region = await Region.firstOrCreate({ province: 'Jawa Tengah', regency: null })
+    const { province: region } = await testRegions()
     const regionCalendar = await Calendar.create({
       regionId: region.id,
       schoolId: null,

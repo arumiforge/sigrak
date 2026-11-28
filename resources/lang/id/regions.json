@@ -1,0 +1,84 @@
+{
+  "kinds": {
+    "province": "Provinsi {name}",
+    "kabupaten": "Kabupaten {name}",
+    "kota": "Kota {name}",
+    "district": "Kecamatan {name}"
+  },
+  "levels": {
+    "sd": "SD",
+    "mi": "MI"
+  },
+  "nav": {
+    "label": "Menu wilayah",
+    "directory": "Direktori Sekolah",
+    "changes": "Perubahan Wilayah"
+  },
+  "directory": {
+    "title": "Direktori Sekolah",
+    "intro": "Data SD dan MI dari laman referensi Kemendikdasmen. Ketik NPSN untuk melihat isian formulir sekolah.",
+    "search_label": "NPSN",
+    "search_hint": "8 angka, misalnya 20317288.",
+    "search": "Cari",
+    "invalid": "NPSN berisi 8 angka.",
+    "not_found": "NPSN ini belum ada di direktori.",
+    "result_title": "Isian dari direktori",
+    "fields": {
+      "name": "Nama sekolah",
+      "level": "Jenjang",
+      "address": "Alamat",
+      "village": "Desa/kelurahan",
+      "district": "Kecamatan",
+      "regency": "Kabupaten/kota",
+      "province": "Provinsi",
+      "location": "Lokasi peta",
+      "fetched_on": "Diambil pada"
+    },
+    "district_unmatched": "{name} (belum cocok dengan daftar wilayah)",
+    "regency_unmatched": "{name} (belum ada di daftar wilayah)",
+    "empty_value": "Belum tercatat",
+    "removed": "Sekolah ini tidak muncul lagi pada pengambilan data terakhir.",
+    "already_registered": "Sudah terdaftar di SIGRAK sebagai {name}.",
+    "summary_title": "Isi direktori",
+    "summary": {
+      "regency": "Kabupaten/kota",
+      "total": "Sekolah",
+      "sd": "SD",
+      "mi": "MI",
+      "customers": "Pakai SIGRAK",
+      "without_district": "Kecamatan belum cocok",
+      "fetched_on": "Diambil"
+    },
+    "empty": "Direktori masih kosong. Jalankan impor direktori sekolah lebih dulu."
+  },
+  "changes": {
+    "title": "Perubahan Wilayah",
+    "intro": "Wilayah sekolah di direktori NPSN berbeda dengan data sekolah. Wilayah sekolah tidak berubah sebelum Anda memutuskan.",
+    "pending_title": "Menunggu keputusan",
+    "pending_empty": "Tidak ada perubahan wilayah yang menunggu.",
+    "scheduled_title": "Diterima, menunggu tanggal berlaku",
+    "decided_title": "Keputusan terakhir",
+    "from": "Sekarang",
+    "to": "Menurut direktori",
+    "npsn": "NPSN {npsn}",
+    "no_npsn": "NPSN kosong",
+    "no_district": "Kecamatan belum tercatat",
+    "detected_on": "Ditemukan {date}",
+    "accept_next_day": "Terima, berlaku besok",
+    "accept_next_school_year": "Terima mulai tahun ajaran baru",
+    "accept_hint": "Besok: {next_day}. Tahun ajaran baru: {next_school_year}.",
+    "reject": "Tolak",
+    "reject_note": "Alasan menolak (tidak wajib)",
+    "effective_on": "Berlaku {date}",
+    "applied_on": "Sudah berlaku sejak {date}",
+    "rejected": "Ditolak",
+    "decided_by": "Oleh {name}",
+    "toasts": {
+      "accepted": "Perubahan wilayah diterima. Berlaku mulai {date}.",
+      "rejected": "Perubahan wilayah ditolak. Wilayah sekolah tetap."
+    },
+    "errors": {
+      "not_pending": "Perubahan ini sudah diputuskan atau tidak ada lagi. Muat ulang halaman."
+    }
+  }
+}

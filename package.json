@@ -38,6 +38,7 @@
     "#policies/*": "./app/policies/*.js",
     "#abilities/*": "./app/abilities/*.js",
     "#tenancy/*": "./app/tenancy/*.js",
+    "#regions/*": "./app/regions/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",
