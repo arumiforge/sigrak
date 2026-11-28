@@ -404,7 +404,7 @@ function SignOffDialog({
         </>
       }
     >
-      <div className="px-4 pb-2 sm:px-0">
+      <div className="pb-2">
         <FormField
           label={t('curriculum.version.note')}
           optionalLabel={t('curriculum.version.optional')}

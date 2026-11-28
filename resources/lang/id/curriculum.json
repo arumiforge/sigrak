@@ -183,7 +183,12 @@
     "after": "Sesudah",
     "grade": "Kelas {grade}",
     "phase": "Fase {phase} (kelas {grades})",
-    "elements": "Elemen CP"
+    "elements": "Elemen CP",
+    "jp_all_grades": "JP setahun, semua kelas",
+    "only_base": "Hanya di versi pembanding",
+    "only_target": "Baru di versi ini",
+    "whole_base": "Mata pelajaran ini tidak ada di versi ini. Seluruh isinya ({count} baris) tidak dibawa, jadi rinciannya tidak didaftar satu per satu.",
+    "whole_target": "Mata pelajaran ini baru di versi ini dengan {count} baris, jadi rinciannya tidak didaftar satu per satu."
   },
   "impact": {
     "title": "Dampak {code}",

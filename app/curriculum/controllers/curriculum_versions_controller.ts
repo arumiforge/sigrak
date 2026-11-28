@@ -218,9 +218,10 @@ export default class CurriculumVersionsController {
     let subject: string | null = null
     if (base) {
       const first = await compareVersions(base, version, null)
-      const changed = first.subjects.filter(
-        (row) => row.added + row.removed + row.changed > 0 || row.jpBefore !== row.jpAfter
-      )
+      const changed = first.subjects
+        .filter((row) => row.added + row.removed + row.changed > 0 || row.jpBefore !== row.jpAfter)
+        // Subjects in both versions first: their row-by-row changes say the most.
+        .sort((a, b) => Number(a.presence !== 'both') - Number(b.presence !== 'both'))
       subject =
         first.subjects.find((row) => row.code === input.mapel)?.code ??
         changed[0]?.code ??

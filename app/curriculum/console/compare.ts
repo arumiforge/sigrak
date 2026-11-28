@@ -53,6 +53,8 @@ export interface SubjectSummary {
   /** JP per year over every grade, before and after. */
   jpBefore: number
   jpAfter: number
+  /** Whether the subject is in both versions or only in one of them. */
+  presence: 'both' | 'base' | 'target'
 }
 
 export interface Comparison {
@@ -361,9 +363,15 @@ export async function compareVersions(
 
   // Every subject that appears on either side, with counts and yearly JP.
   const codes = new Set<string>()
+  const inBase = new Set<string>()
+  const inTarget = new Set<string>()
   for (const { before, after } of loaded) {
-    for (const row of [...before, ...after]) codes.add(row.subject_code)
+    for (const row of before) inBase.add(row.subject_code)
+    for (const row of after) inTarget.add(row.subject_code)
   }
+  for (const code of [...inBase, ...inTarget]) codes.add(code)
+  const presenceOf = (code: string): SubjectSummary['presence'] =>
+    inBase.has(code) && inTarget.has(code) ? 'both' : inBase.has(code) ? 'base' : 'target'
   const names = new Map(
     (
       (await db
@@ -389,6 +397,7 @@ export async function compareVersions(
         changed: own.filter((change) => change.kind === 'changed').length,
         jpBefore: sumFor(jpBefore, code),
         jpAfter: sumFor(jpAfter, code),
+        presence: presenceOf(code),
       }
     })
     .sort(
@@ -408,8 +417,10 @@ export async function compareVersions(
     return group
   }
   if (subject) {
+    // A subject in one version only is shown as a whole, not row by row.
+    const listRows = presenceOf(subject) === 'both'
     for (const change of changes) {
-      if (change.subjectCode !== subject) continue
+      if (!listRows || change.subjectCode !== subject) continue
       const { area, kind, key, label, fields } = change
       groupFor(change.grade, change.phase).changes.push({ area, kind, key, label, fields })
     }

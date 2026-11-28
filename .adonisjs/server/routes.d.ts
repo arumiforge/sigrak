@@ -29,6 +29,14 @@ export type ScannedRoutes = {
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.curriculum.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.show': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.compare': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.impact': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.sign_off': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.withdraw': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.publish': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.rollback': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
@@ -140,6 +148,10 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.show': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.compare': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.impact': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -186,6 +198,10 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.show': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.compare': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.impact': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -239,6 +255,10 @@ export type ScannedRoutes = {
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.curriculum.sign_off': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.withdraw': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.publish': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.rollback': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.grant': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff.scope': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }

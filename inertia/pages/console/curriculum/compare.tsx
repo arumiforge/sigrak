@@ -38,6 +38,7 @@ type SubjectRow = {
   changed: number
   jpBefore: number
   jpAfter: number
+  presence: 'both' | 'base' | 'target'
 }
 
 type Props = {
@@ -77,6 +78,8 @@ export default function CurriculumCompare({ version, base, options, subject, com
     return `${path}?${params.toString()}`
   }
 
+  const selected = comparison?.subjects.find((row) => row.code === subject)
+
   const subjectColumns: DataColumn<SubjectRow>[] = [
     {
       id: 'subject',
@@ -102,11 +105,18 @@ export default function CurriculumCompare({ version, base, options, subject, com
     {
       id: 'changes',
       header: t('curriculum.compare.changes'),
-      cell: (row) => <KindCounts counts={row} />,
+      cell: (row) =>
+        row.presence === 'both' ? (
+          <KindCounts counts={row} />
+        ) : (
+          <StatusChip tone={row.presence === 'target' ? 'ok' : 'danger'}>
+            {t(`curriculum.compare.only_${row.presence}`)}
+          </StatusChip>
+        ),
     },
     {
       id: 'jp',
-      header: t('curriculum.compare.jp_year'),
+      header: t('curriculum.compare.jp_all_grades'),
       cell: (row) => <BeforeAfter before={row.jpBefore} after={row.jpAfter} />,
     },
   ]
@@ -172,9 +182,16 @@ export default function CurriculumCompare({ version, base, options, subject, com
           {subject && (
             <Section
               title={t('curriculum.compare.detail_title', {
-                subject: comparison.subjects.find((row) => row.code === subject)?.name ?? subject,
+                subject: selected?.name ?? subject,
               })}
             >
+              {selected && selected.presence !== 'both' && (
+                <p className="mb-4 rounded-md border bg-page px-3 py-2 text-sm">
+                  {t(`curriculum.compare.whole_${selected.presence}`, {
+                    count: formatNumber(selected.added + selected.removed),
+                  })}
+                </p>
+              )}
               {comparison.groups.length === 0 ? (
                 <p className="text-muted">{t('curriculum.compare.no_changes')}</p>
               ) : (
@@ -272,7 +289,9 @@ function ChangeItem({ change }: { change: Change }) {
           {t(`curriculum.compare.kind_${change.kind}`)}
         </StatusChip>
         <span className="font-semibold">{t(`curriculum.areas_one.${change.area}`)}</span>
-        <code className="text-xs break-all text-muted">{change.key}</code>
+        {change.area !== 'allocation' && (
+          <code className="text-xs break-all text-muted">{change.key}</code>
+        )}
       </div>
       <p className="break-words">{labelOf(t, change)}</p>
       {change.fields.length > 0 && (
