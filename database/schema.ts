@@ -459,6 +459,60 @@ export class GenerationSchema extends BaseModel {
   declare userId: number
 }
 
+export class HelpRequestNoteSchema extends BaseModel {
+  static $columns = ['body', 'createdAt', 'emailed', 'helpRequestId', 'id', 'kind', 'staffUserId', 'status'] as const
+  $columns = HelpRequestNoteSchema.$columns
+  @column()
+  declare body: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare emailed: boolean
+  @column()
+  declare helpRequestId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare kind: string
+  @column()
+  declare staffUserId: number | null
+  @column()
+  declare status: string | null
+}
+
+export class HelpRequestSchema extends BaseModel {
+  static $columns = ['assigneeStaffId', 'category', 'createdAt', 'id', 'membershipRole', 'message', 'pageUrl', 'publicId', 'schoolId', 'senderUnreadAt', 'status', 'statusChangedAt', 'updatedAt', 'userId'] as const
+  $columns = HelpRequestSchema.$columns
+  @column()
+  declare assigneeStaffId: number | null
+  @column()
+  declare category: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare membershipRole: string | null
+  @column()
+  declare message: string
+  @column()
+  declare pageUrl: string | null
+  @column()
+  declare publicId: string
+  @column()
+  declare schoolId: number | null
+  @column.dateTime()
+  declare senderUnreadAt: DateTime | null
+  @column()
+  declare status: string
+  @column.dateTime()
+  declare statusChangedAt: DateTime
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number | null
+}
+
 export class InvitationSchema extends BaseModel {
   static $columns = ['acceptedAt', 'acceptedUserId', 'createdAt', 'email', 'expiresAt', 'id', 'invitedBy', 'invitedByStaffId', 'publicId', 'role', 'schoolId', 'sendCount', 'sentAt', 'tokenHash', 'updatedAt'] as const
   $columns = InvitationSchema.$columns
@@ -1174,6 +1228,21 @@ export class SupervisorAssignmentSchema extends BaseModel {
   declare updatedAt: DateTime
   @column()
   declare userId: number
+}
+
+export class SupportSessionSchema extends BaseModel {
+  static $columns = ['endedAt', 'id', 'schoolId', 'staffUserId', 'startedAt'] as const
+  $columns = SupportSessionSchema.$columns
+  @column.dateTime()
+  declare endedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare schoolId: number
+  @column()
+  declare staffUserId: number
+  @column.dateTime()
+  declare startedAt: DateTime
 }
 
 export class TeachingAssignmentSchema extends BaseModel {

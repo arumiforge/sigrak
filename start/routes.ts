@@ -24,6 +24,7 @@ import '#start/routes/layers'
 import '#start/routes/school_year'
 import '#start/routes/timetable'
 import '#start/routes/calendar'
+import '#start/routes/help'
 
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')
 const StaffSessionController = () => import('#controllers/staff/session_controller')

@@ -39,7 +39,12 @@
     "region_ids": "Wilayah",
     "school_ids": "Sekolah",
     "levels": "Jenjang",
-    "fields": "Bidang"
+    "fields": "Bidang",
+    "category": "Jenis kendala",
+    "message": "Pesan",
+    "page_url": "Halaman",
+    "body": "Isi",
+    "status": "Status"
   },
   "messages": {
     "required": "{field} wajib diisi.",

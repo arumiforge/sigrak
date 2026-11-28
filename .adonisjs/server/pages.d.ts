@@ -28,14 +28,21 @@ declare module '@adonisjs/inertia/types' {
     'auth/sign_up': ExtractProps<(typeof import('../../inertia/pages/auth/sign_up.tsx'))['default']>
     'console/access_matrix': ExtractProps<(typeof import('../../inertia/pages/console/access_matrix.tsx'))['default']>
     'console/activity_log': ExtractProps<(typeof import('../../inertia/pages/console/activity_log.tsx'))['default']>
+    'console/help_request': ExtractProps<(typeof import('../../inertia/pages/console/help_request.tsx'))['default']>
+    'console/help_requests': ExtractProps<(typeof import('../../inertia/pages/console/help_requests.tsx'))['default']>
     'console/school': ExtractProps<(typeof import('../../inertia/pages/console/school.tsx'))['default']>
     'console/schools': ExtractProps<(typeof import('../../inertia/pages/console/schools.tsx'))['default']>
     'console/settings': ExtractProps<(typeof import('../../inertia/pages/console/settings.tsx'))['default']>
     'console/staff_member': ExtractProps<(typeof import('../../inertia/pages/console/staff_member.tsx'))['default']>
     'console/staff': ExtractProps<(typeof import('../../inertia/pages/console/staff.tsx'))['default']>
+    'console/support_sessions': ExtractProps<(typeof import('../../inertia/pages/console/support_sessions.tsx'))['default']>
+    'console/support_view': ExtractProps<(typeof import('../../inertia/pages/console/support_view.tsx'))['default']>
     'console/users': ExtractProps<(typeof import('../../inertia/pages/console/users.tsx'))['default']>
     'errors/error': ExtractProps<(typeof import('../../inertia/pages/errors/error.tsx'))['default']>
     'exam/home': ExtractProps<(typeof import('../../inertia/pages/exam/home.tsx'))['default']>
+    'help/ask': ExtractProps<(typeof import('../../inertia/pages/help/ask.tsx'))['default']>
+    'help/mine': ExtractProps<(typeof import('../../inertia/pages/help/mine.tsx'))['default']>
+    'help/request': ExtractProps<(typeof import('../../inertia/pages/help/request.tsx'))['default']>
     'school_year/academic_year_edit': ExtractProps<(typeof import('../../inertia/pages/school_year/academic_year_edit.tsx'))['default']>
     'school_year/academic_years': ExtractProps<(typeof import('../../inertia/pages/school_year/academic_years.tsx'))['default']>
     'school_year/class': ExtractProps<(typeof import('../../inertia/pages/school_year/class.tsx'))['default']>

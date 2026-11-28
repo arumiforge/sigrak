@@ -9,6 +9,15 @@
   "news": "Kabar",
   "help": "Bantuan",
   "request_help": "Minta bantuan",
+  "my_help": "Bantuan saya",
+  "help_unread": "{count} baru",
+  "support_session": {
+    "start": "Lihat sekolah ini",
+    "start_hint": "Membuka tampilan sekolah dalam mode baca saja, sesuai perjanjian kerja sama dengan sekolah. Sesi berakhir sendiri setelah {hours} jam.",
+    "banner": "Anda sedang melihat {school} dalam mode baca saja, sampai pukul {time}.",
+    "open": "Buka tampilan sekolah",
+    "end": "Akhiri sesi"
+  },
   "account": "Akun",
   "account_menu": "Menu akun",
   "school_settings": "Pengaturan sekolah",
@@ -34,6 +43,7 @@
     "schools": "Sekolah dan pengguna",
     "regions": "Wilayah",
     "system": "Sistem",
+    "support": "Bantuan",
     "team": "Tim"
   },
   "roles": {
@@ -53,6 +63,8 @@
     "settings": "Pengaturan",
     "staff": "Staf",
     "activity_log": "Log aktivitas",
-    "access": "Hak akses"
+    "access": "Hak akses",
+    "help_requests": "Permintaan bantuan",
+    "support_sessions": "Sesi bantuan"
   }
 }
