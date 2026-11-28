@@ -7,7 +7,10 @@ import { isSchoolYear } from '../school_year.js'
  * One rule set listed in a Profil Jenjang version (D-354, D-355).
  * `supersedes` (optional) names the code this entry replaces, which
  * makes both one line for the resolver; `region_province` limits an
- * entry to one province.
+ * entry to one province. `borrowed_from` marks a rule set of another
+ * level that this level also uses (MI lists the SD topic version for its
+ * general subjects, D-469); the import cross-checks such a version only
+ * against its own level's structure.
  */
 export interface RuleSetEntry {
   code: string
@@ -16,6 +19,7 @@ export interface RuleSetEntry {
   source?: string
   region_province?: string | null
   supersedes?: string | null
+  borrowed_from?: string | null
 }
 
 export type RuleSetDomain = 'structure_jp' | 'cp' | 'tp_atp_defaults' | (string & {})
@@ -110,6 +114,9 @@ function validateProfile(data: Record<string, unknown>, file: string): LevelProf
           !/^\d{4}-\d{2}-\d{2}$/.test(String(entry.effective_on))
         ) {
           throw new LevelProfileError(`${entryWhere}: effective_on must be a date or null`)
+        }
+        if (entry.borrowed_from != null && typeof entry.borrowed_from !== 'string') {
+          throw new LevelProfileError(`${entryWhere}: borrowed_from must be a level code`)
         }
       }
     }
