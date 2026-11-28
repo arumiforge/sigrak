@@ -199,6 +199,23 @@ export class CurriculumVersionSchema extends BaseModel {
   declare updatedAt: DateTime
 }
 
+export class EmailConfirmationTokenSchema extends BaseModel {
+  static $columns = ['createdAt', 'email', 'expiresAt', 'id', 'tokenHash', 'userId'] as const
+  $columns = EmailConfirmationTokenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare email: string
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column({ serializeAs: null })
+  declare tokenHash: string
+  @column()
+  declare userId: number
+}
+
 export class ExamParticipantSchema extends BaseModel {
   static $columns = ['createdAt', 'examSessionId', 'id', 'password', 'publicId', 'status', 'updatedAt', 'username'] as const
   $columns = ExamParticipantSchema.$columns

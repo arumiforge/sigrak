@@ -3,6 +3,7 @@ import mail from '@adonisjs/mail/services/main'
 import { DateTime } from 'luxon'
 import type { TransactionClientContract } from '@adonisjs/lucid/types/database'
 import { areaUrl } from '#config/hosts'
+import EmailConfirmationToken from '#models/email_confirmation_token'
 import Invitation from '#models/invitation'
 import School from '#models/school'
 import SchoolMembership, { type MembershipRole } from '#models/school_membership'
@@ -309,9 +310,11 @@ export async function acceptInvitation(
       }
 
       user.useTransaction(trx)
+      // The link reached this mailbox, so it also confirms the email (D-469).
       user.emailVerifiedAt = user.emailVerifiedAt ?? now
       user.trialStartedAt = user.trialStartedAt ?? now
       await user.save()
+      await EmailConfirmationToken.query({ client: trx }).where('user_id', user.id).delete()
 
       if (invitation.role === 'principal' && (await principalTaken(trx, school.id))) {
         throw new PrincipalTakenError()

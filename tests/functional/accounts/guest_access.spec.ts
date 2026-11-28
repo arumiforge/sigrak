@@ -8,8 +8,9 @@ import { visit } from '#tests/helpers'
 import { guest, postForm } from '#tests/accounts'
 
 /**
- * Only sign-in, sign-up, password reset and invitation acceptance work
- * without a session (product concept, Access model; D-459). Every other
+ * Only sign-in, sign-up, password reset, invitation acceptance and the
+ * sign-up confirmation link work without a session (product concept,
+ * Access model; D-459, D-469). Every other
  * route of app. and admin. sends a guest to /masuk. The list of routes
  * comes from the router, so a new route is checked without editing this
  * test.
@@ -20,6 +21,7 @@ const PUBLIC_APP_PATTERNS = new Set([
   '/lupa-kata-sandi',
   '/kata-sandi-baru/:token',
   '/undangan/:token',
+  '/konfirmasi-email/:token',
 ])
 
 const SAMPLE_PARAMS: Record<string, string> = {
@@ -45,7 +47,7 @@ test.group('Accounts | what works without a session', (group) => {
   group.each.setup(() => testUtils.db().truncate())
   group.each.setup(() => limiter.clear(['memory']))
 
-  test('on app., only sign-in, sign-up, reset and invitations open for a guest', async ({
+  test('on app., only sign-in, sign-up, reset, invitations and confirmation open for a guest', async ({
     client,
     assert,
   }) => {

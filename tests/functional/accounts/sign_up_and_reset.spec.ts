@@ -20,6 +20,7 @@ const SIGN_UP = {
 test.group('Accounts | self sign-up (D-459)', (group) => {
   group.each.setup(() => testUtils.db().truncate())
   group.each.setup(() => limiter.clear(['memory']))
+  group.each.setup(() => fakeMail().restore)
 
   test('a teacher signs up alone, is signed in and starts the default trial', async ({
     client,
