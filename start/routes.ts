@@ -19,6 +19,7 @@ import { hosts } from '#config/hosts'
 import '#start/routes/regions'
 import '#start/routes/auth'
 import '#start/routes/console'
+import '#start/routes/layers'
 
 const CalendarController = () => import('#controllers/school/calendar_controller')
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')
