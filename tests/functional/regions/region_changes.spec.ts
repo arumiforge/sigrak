@@ -154,6 +154,14 @@ test.group('Regions | change queue', (group) => {
       ReviewNotPendingException
     )
     assert.equal(await RegionChangeQueue.applyDue('2099-01-01'), 0)
+
+    // The same difference on the next import is not asked again; another target is.
+    const file = smallKudusFile()
+    const same = await importSchoolDirectory(await writeDirectoryFile(file))
+    assert.equal(same.reviewsQueued, 0)
+    file.schools[1].district = 'Dawe'
+    const moved = await importSchoolDirectory(await writeDirectoryFile(file))
+    assert.equal(moved.reviewsQueued, 1)
     assert.equal(await districtOf(school.id), 'Jati')
   })
 

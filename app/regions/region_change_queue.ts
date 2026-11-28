@@ -101,6 +101,27 @@ export async function detectRegionChanges(client: QueryClientContract, npsns: st
     }
     if (samePlace(baseline, target)) continue
 
+    // Staff already rejected this move: ask again only for another target.
+    const rejected = await client
+      .from('region_change_reviews')
+      .where('school_id', row.school_id)
+      .where('status', 'rejected')
+      .where('from_region_id', baseline.regionId)
+      .where('to_region_id', target.regionId)
+      .where((q) =>
+        baseline.districtId === null
+          ? q.whereNull('from_district_id')
+          : q.where('from_district_id', baseline.districtId)
+      )
+      .where((q) =>
+        target.districtId === null
+          ? q.whereNull('to_district_id')
+          : q.where('to_district_id', target.districtId)
+      )
+      .select('id')
+      .first()
+    if (rejected) continue
+
     await client.table('region_change_reviews').insert({
       school_id: row.school_id,
       directory_entry_id: row.entry_id,
