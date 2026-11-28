@@ -1,8 +1,7 @@
 import { test } from '@japa/runner'
 import { cleanPageUrl } from '#help/validators'
 import { withoutSensitiveFields } from '#help/support_sessions'
-import { helpRequestToProblem, PROBLEM_HOOK_READY } from '#help/problem_hook'
-import StaffUser from '#models/staff_user'
+import { PROBLEM_HOOK_READY } from '#help/problem_hook'
 
 test.group('Help | helpers', () => {
   test('the attached page is a same-site path, never another host', ({ assert }) => {
@@ -34,8 +33,7 @@ test.group('Help | helpers', () => {
     })
   })
 
-  test('the Bank Masalah hook is a stub until R2-07', async ({ assert }) => {
-    assert.isFalse(PROBLEM_HOOK_READY)
-    await assert.rejects(() => helpRequestToProblem(new StaffUser(), 1), /R2-07/)
+  test('the Bank Masalah hook is ready since R2-07', ({ assert }) => {
+    assert.isTrue(PROBLEM_HOOK_READY)
   })
 })

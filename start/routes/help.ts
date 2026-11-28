@@ -65,6 +65,10 @@ router
       .post('/bantuan/:request/ambil', [ConsoleHelpRequestsController, 'assign'])
       .as('help_requests.assign')
       .where('request', id)
+    router
+      .post('/bantuan/:request/jadikan-masalah', [ConsoleHelpRequestsController, 'toProblem'])
+      .as('help_requests.to_problem')
+      .where('request', id)
 
     router
       .post('/sekolah/:school/lihat', [SupportSessionsController, 'start'])
@@ -80,5 +84,13 @@ router
   .as('admin')
   .use([
     middleware.auth({ guard: 'staff' }),
-    middleware.translations(['auth', 'areas', 'console', 'accounts', 'help', 'regions']),
+    middleware.translations([
+      'auth',
+      'areas',
+      'console',
+      'accounts',
+      'help',
+      'regions',
+      'problems',
+    ]),
   ])

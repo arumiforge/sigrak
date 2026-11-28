@@ -192,7 +192,7 @@ test.group('Help | Minta bantuan and console', (group) => {
     const detail = await props(client, staff, `/bantuan/${row.id}`)
     assert.isTrue(detail.can.manage)
     assert.isTrue(detail.can.openSchool)
-    assert.isFalse(detail.can.toProblem)
+    assert.isTrue(detail.can.toProblem)
     assert.equal(detail.request.senderName, user.name)
     assert.equal(detail.request.pageUrl, '/jadwal?kelas=4A')
 

@@ -195,6 +195,37 @@ async function applyStatus(
   return true
 }
 
+/**
+ * For Bank Masalah (R2-07), inside its open staff transaction: locks
+ * the request, then tells the sender with a reply on their timeline
+ * (the in-app notice) and an optional status change, logged as
+ * `action`. Returns the request.
+ */
+export async function noticeToSender(
+  trx: TransactionClientContract,
+  staff: StaffUser,
+  requestId: number,
+  input: { body: string; status?: HelpStatus; action: string; changes: Record<string, unknown> }
+) {
+  const request = await lockRequest(trx, requestId)
+  if (input.status) await applyStatus(trx, staff, request, input.status)
+  const note = await HelpRequestNote.create(
+    { helpRequestId: request.id, staffUserId: staff.id, kind: 'reply', body: input.body },
+    { client: trx }
+  )
+  request.merge({ senderUnreadAt: DateTime.now() })
+  await request.useTransaction(trx).save()
+  await logStaffActivity(
+    staff,
+    input.action,
+    'help_request',
+    request.id,
+    { ...input.changes, note_id: note.id, school_id: request.schoolId },
+    trx
+  )
+  return request
+}
+
 /** Changes the status; the sender sees it as news (D-320). */
 export async function changeHelpStatus({ staff, requestId }: Change, status: HelpStatus) {
   return staffTransaction(async (trx) => {

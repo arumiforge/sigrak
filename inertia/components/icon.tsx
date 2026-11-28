@@ -98,6 +98,14 @@ import supportSvg from '~/icons/hugeicons/rounded-stroke/communications/customer
 import supportSolidSvg from '~/icons/hugeicons/rounded-solid/communications/customer-service.svg?raw'
 import schoolViewSvg from '~/icons/hugeicons/rounded-stroke/users/user-full-view.svg?raw'
 import schoolViewSolidSvg from '~/icons/hugeicons/rounded-solid/users/user-full-view.svg?raw'
+import chevronUpSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-up-01-round.svg?raw'
+import problemSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/alert-diamond.svg?raw'
+import problemSolidSvg from '~/icons/hugeicons/rounded-solid/alert-notification/alert-diamond.svg?raw'
+import practiceSvg from '~/icons/hugeicons/rounded-stroke/education/idea.svg?raw'
+import practiceSolidSvg from '~/icons/hugeicons/rounded-solid/education/idea.svg?raw'
+import forumSvg from '~/icons/hugeicons/rounded-stroke/presentation/co-present.svg?raw'
+import forumSolidSvg from '~/icons/hugeicons/rounded-solid/presentation/co-present.svg?raw'
+import mergeSvg from '~/icons/hugeicons/rounded-stroke/git/git-merge.svg?raw'
 
 /** SIGRAK icon names → Rounded Stroke file. */
 const strokeIcons = {
@@ -158,6 +166,11 @@ const strokeIcons = {
   'help': helpSvg,
   'support': supportSvg,
   'school-view': schoolViewSvg,
+  'chevron-up': chevronUpSvg,
+  'problem': problemSvg,
+  'practice': practiceSvg,
+  'forum': forumSvg,
+  'merge': mergeSvg,
 } as const
 
 export type IconName = keyof typeof strokeIcons
@@ -198,6 +211,9 @@ const solidIcons: Partial<Record<IconName, string>> = {
   'legal': legalSolidSvg,
   'support': supportSolidSvg,
   'school-view': schoolViewSolidSvg,
+  'problem': problemSolidSvg,
+  'practice': practiceSolidSvg,
+  'forum': forumSolidSvg,
 }
 
 type ParsedIcon = { viewBox: string; body: string }
