@@ -198,6 +198,14 @@ const consoleItems: NavItem[] = [
     ability: 'settings.view',
   },
   {
+    key: 'system_health',
+    href: '/kesehatan-sistem',
+    label: 'nav.console.system_health',
+    icon: 'health',
+    section: 'nav.sections.system',
+    ability: 'system_health.view',
+  },
+  {
     key: 'staff',
     href: '/staf',
     label: 'nav.console.staff',

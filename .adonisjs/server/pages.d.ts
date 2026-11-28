@@ -33,6 +33,7 @@ declare module '@adonisjs/inertia/types' {
     'console/settings': ExtractProps<(typeof import('../../inertia/pages/console/settings.tsx'))['default']>
     'console/staff_member': ExtractProps<(typeof import('../../inertia/pages/console/staff_member.tsx'))['default']>
     'console/staff': ExtractProps<(typeof import('../../inertia/pages/console/staff.tsx'))['default']>
+    'console/system_health': ExtractProps<(typeof import('../../inertia/pages/console/system_health.tsx'))['default']>
     'console/users': ExtractProps<(typeof import('../../inertia/pages/console/users.tsx'))['default']>
     'errors/error': ExtractProps<(typeof import('../../inertia/pages/errors/error.tsx'))['default']>
     'exam/home': ExtractProps<(typeof import('../../inertia/pages/exam/home.tsx'))['default']>

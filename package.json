@@ -45,6 +45,7 @@
     "#timetable/*": "./app/timetable/*.js",
     "#calendar/*": "./app/calendar/*.js",
     "#staff/*": "./app/staff/*.js",
+    "#system_health/*": "./app/system_health/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",
