@@ -12,7 +12,8 @@ Bahasa: panduan di folder ini memakai bahasa Indonesia (permintaan pemilik). Per
 | [bitvise.md](bitvise.md) | Terhubung dari Windows dengan Bitvise SSH Client dan public key |
 | [cloudflare-access.md](cloudflare-access.md) | Menyiapkan rute tunnel dan Cloudflare Access untuk SSH, Cockpit, `admin.`, dan staging |
 | [server-setup-flow.md](server-setup-flow.md) | Dari server Ubuntu 26.04 yang baru diinstal sampai semua aplikasi menjawab (`check.sh` → `setup.sh` → lapisan SIGRAK → S9) |
-| [compose-and-processes.md](compose-and-processes.md) | Susunan Docker Compose, peran proses, pemakaian banyak core, dan pembagian memori |
+| [compose-and-processes.md](compose-and-processes.md) | Susunan Docker Compose, peran proses, pemakaian banyak core, pembagian memori, dan dua Redis (state dan cache) |
+| [sekolah-satu-ip.md](sekolah-satu-ip.md) | Banyak murid masuk dari satu IP sekolah: IP asli lewat nginx, batas `limit_req`/`limit_conn`, aturan rate limit Cloudflare, dan penyetelan CrowdSec supaya sekolah tidak terblokir |
 | [terminal-safety.md](terminal-safety.md) | Bekerja di terminal server: tmux, riwayat perintah, logout otomatis |
 | [terminal-zsh-neovim.md](terminal-zsh-neovim.md) | Terminal nyaman untuk kerja harian: zsh dan Neovim di akun admin, root tetap bash |
 | [rekomendasi-tambahan.md](rekomendasi-tambahan.md) | Usulan peningkatan dan alat tambahan untuk diputuskan pemilik (keamanan, database, pemantauan, backup, email, alat terminal) |
