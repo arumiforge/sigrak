@@ -75,3 +75,28 @@ R1-08 and R1-09 merged into `r1/r1-00-gate-split` while part A ran; the branch m
 6. Invitation "Menunggu" as a grey chip, "Lewat 7 hari" as warn. OK?
 7. Coba AI (the R0 spike) still has a menu slot for every role. Keep until the content slices, or hide it?
 8. Dark mode follows the device only. Add a Tampilan setting now (Akun), or later with the sound settings?
+
+### Part B (branch `r1/r1-12b-ui-pages`, from `r1/r1-12-ui-shell`)
+
+**Pages moved onto the shell** (layout lines and imports dropped; the resolver picks AppLayout or ConsoleLayout)
+
+- **Kalender (school `/kalender`)**: `PageHeader` (year chips as header actions), `DeferredSection` + `SkeletonList`, `EmptyState` for empty month, year and "Tidak dipakai", `StatusChip` for the class chip and "Masuk sekolah", warn boxes on `warn-tint`, `controlClass`. Every row action is now a 44 px button: "Ubah" and "Usulkan perubahan" open the event form in a `ResponsiveDialog` (sheet on phones, dialog from 640 px), and so do "Tidak dipakai di sekolah ini"/"Jadikan hari masuk sekolah" and the proposal forms (reason field). "Hapus" uses `ConfirmAction` ("Hapus {title}?", button "Hapus acara"), so `window.confirm` is gone. "Pakai lagi" is optimistic with undo (`postWithUndo`); hiding offers "Urungkan" on the success toast. This fixes the 38×44 px `summary` "Ubah" finding.
+- **Kalender wilayah (console `/kalender`)**: `PageHeader`, `StatusChip` for the check result (ok/danger) and the package status (Berlaku ok, Draf warn, Tidak berlaku neutral), `EmptyState`, `rounded-lg`. This fixes the serious axe contrast finding on the green chip.
+- **Jadwal (`/jadwal`)**: `PageHeader` with "Susun draf jadwal" as the header action; the class list is a `DataTable` (table on desktop, cards on phones) with status chips (Lengkap, progress, Jadwal masih kosong, warnings).
+- **Jadwal kelas (`/kelas/:class/jadwal`)**: `PageHeader` with a back link to the class and "Semua jadwal" as action; status chips per subject; warnings on `warn-tint`. "Ubah" opens the row form in a `ResponsiveDialog`, and the side card keeps "Tambah baris". "Kunci"/"Buka kunci" are optimistic with undo, and "Hapus" goes through `ConfirmAction` ("Hapus baris {title}?"). Row buttons carry full accessible names ("Ubah Matematika", "Kunci Matematika").
+- **Susun draf jadwal**, **Draf jadwal**: `PageHeader` with back links, `EmptyState`, status chips for draft states. On the draft page, `SkeletonText` shows while the draft waits, and "Simpan draf" goes through `ConfirmAction` ("Simpan draf ke {count} kelas?"; not destructive styled, since locked rows stay).
+- **Jadwal mengajar (`/kelas-saya/jadwal`)**: `PageHeader`, `EmptyState`. The no-year text for teachers no longer tells them to create a year.
+- Shared timetable parts: the locked badge is `StatusChip tone="brand"`, and the year chips prefetch. The "Jadwal kelas" button on the class page was already done in part A.
+- `ConfirmAction` gains an optional `ariaLabel` (fuller name for buttons repeated on every row).
+
+**D-472 review of `calendar.json` and `timetable.json`** (by hand; the automated checks passed before and after): labels, buttons and titles were already sentence case. Changes: "menu Tahun Ajaran" → "menu Tahun ajaran"; "Tanggal dari Tahun ajaran sekolah" / "Tanggal di Tahun ajaran sekolah" → lower case (running text about the school's year, not the menu name). The confirm texts were rewritten as title + consequence + named action (no "Lanjutkan?"). New keys: `calendar.list.{edit_label,delete_label,delete_title,delete_action}`, `timetable.class.{edit_label,lock_label,unlock_label,delete_label,delete_title,delete_row_action}`, `timetable.draft.save_title`, `timetable.index.{year_meta,table_caption,class_column,status_column,warnings_column,no_warnings,open_label}`, `timetable.no_year_teacher`. Unused `calendar.list.actions` removed. Neither file uses "file"; "berkas" was already in place.
+
+**Checks**: lint, typecheck, format check, `node ace build` and all 349 tests pass (`sigrak_test_r112b`). Playwright (Chromium, scale 1) over 40 pages × 360/1280 × light/dark (160 page checks): no horizontal scroll, no tap target under 44 px at 360, visible focus on the first three Tab stops, no serious or critical axe findings, 0 flagged. Open states were shot too: Lainnya sheet/account menu, invitation cancel confirm, calendar edit sheet/dialog and delete confirm, timetable row edit and delete confirm, draft save confirm. In total there are 188 images and a contact sheet (`index.html`), all kept in the session scratchpad (`r112b/`), not in the repository. Demo data for the shots: `setup.cjs` (part A), then `setup2.cjs` (guru kelas and guru mapel for 1A, saved frame, a saved draft for 1A with one locked row, and a ready draft for all classes) and `setup3.cjs` (two school events). The dev database needs `node ace curriculum:import` and a dev-server restart before the class page lists subjects.
+
+**Shared files touched**: `inertia/components/patterns/confirm_dialog.tsx` (`ariaLabel`), `inertia/components/timetable/parts.tsx`, `resources/lang/id/{calendar,timetable}.json`, this task file. No new dependencies; `app/`, `start/`, `database/`, tests untouched.
+
+**Visual questions from part B**
+
+9. The phone view of a full class timetable is long (six days × about 10 rows, each with three buttons). Should rows collapse per day (one day open at a time), or should a day picker sit above the list?
+10. Draft states as chips: Menunggu giliran (grey), Sedang disusun (info), Siap dilihat (brand), Belum berhasil (danger), Sudah disimpan (ok). OK?
+11. "Tambah acara sekolah" stays as a card under the calendar. Should it become a header button with a sheet, like the row edits?
