@@ -137,6 +137,16 @@ export default defineConfig({
       pattern: 'resources/lang/**/*.{json,yaml,yml}',
       reloadServer: false,
     },
+    /**
+     * Data files the app reads at run time: the Profil Jenjang on every
+     * page that resolves the policy profile, and the files behind the
+     * curriculum, region, calendar and catalog imports (R1-11). The
+     * owner's material in docs/sources is not needed.
+     */
+    {
+      pattern: 'docs/data/{profiles,curriculum,regulations,regions,calendar,catalogs,schools}/**/*.json',
+      reloadServer: false,
+    },
   ],
 
   hooks: {
