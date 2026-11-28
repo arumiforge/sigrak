@@ -44,6 +44,24 @@ const dbConfig = defineConfig({
       },
       debug: app.inDev && env.get('LOG_LEVEL') === 'debug',
     },
+
+    /**
+     * The same database as the app's login user, a member of the
+     * non-owner role `sigrak_app`, so row-level security applies (R1-01,
+     * app/tenancy). Used through tenantTransaction(), which sets the
+     * school with SET LOCAL inside each transaction (D-429).
+     */
+    tenant: {
+      client: 'pg',
+      connection: {
+        host: env.get('DB_HOST'),
+        port: env.get('DB_PORT'),
+        user: env.get('DB_APP_USER', 'sigrak_app_user'),
+        password: env.get('DB_APP_PASSWORD')?.release(),
+        database: env.get('DB_DATABASE'),
+      },
+      debug: app.inDev && env.get('LOG_LEVEL') === 'debug',
+    },
   },
 })
 
