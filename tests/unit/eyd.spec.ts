@@ -430,6 +430,7 @@ const LABEL_PROPER_NAMES = [
   'Word',
   'Excel',
   'Google',
+  'Gemini',
 ]
 
 /**
