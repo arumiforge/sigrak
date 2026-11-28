@@ -12,6 +12,8 @@ const navItems: NavItem[] = [
   { href: '/kalender', label: 'nav.calendar', icon: 'calendar' },
   { href: '/coba-ai', label: 'nav.ai_demo', icon: 'lab' },
   { href: '/guru', label: 'nav.teachers', icon: 'users', operatorOnly: true },
+  { href: '/tahun-ajaran', label: 'nav.school_years', icon: 'list', operatorOnly: true },
+  { href: '/kelas', label: 'nav.classes', icon: 'school', operatorOnly: true },
 ]
 
 /**

@@ -20,7 +20,13 @@
     "days": "Jumlah hari",
     "role": "Peran",
     "membership": "Peran",
-    "mode": "Pilihan"
+    "mode": "Pilihan",
+    "even_semester_starts_on": "Awal semester 2",
+    "class_name": "Nama kelas",
+    "grade": "Kelas",
+    "art_branch": "Cabang Seni dan Budaya",
+    "homeroom": "Guru",
+    "assignments": "Guru mata pelajaran"
   },
   "messages": {
     "required": "{field} wajib diisi.",

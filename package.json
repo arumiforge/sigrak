@@ -40,6 +40,7 @@
     "#tenancy/*": "./app/tenancy/*.js",
     "#regions/*": "./app/regions/*.js",
     "#accounts/*": "./app/accounts/*.js",
+    "#school_year/*": "./app/school_year/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",
