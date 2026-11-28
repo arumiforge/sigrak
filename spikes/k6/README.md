@@ -1,4 +1,4 @@
-# Load scripts (k6): R0-08 and R1-11
+# Load scripts (k6): R0-08, R1-11 and R2-10
 
 Light load on the app: sign-in, the R1 pages behind row-level security (`/kalender` on the layer model, `/ekstrakurikuler`, `/jadwal`, `/kelas/:class/jadwal`, `/kelas-saya/jadwal`), starting AI jobs on the fake provider, and Transmit (SSE) connections held open. Results: [`docs/drafts/r0-gate.md`](../../docs/drafts/r0-gate.md) (§3 R0-08, "R1 re-measure" R1-11). Tasks: [`R0-08`](../../docs/agent/tasks/R0-08-spike-load-gate.md), [`R1-11`](../../docs/agent/tasks/R1-11-load-remeasure.md).
 
@@ -12,6 +12,8 @@ Light load on the app: sign-in, the R1 pages behind row-level security (`/kalend
 | `loop-lag.mjs` | Preloaded into the web and worker processes with `--import`; writes event-loop delay, CPU and memory every 5 s to a JSON-lines file. Changes no app code |
 | `seed-load-users.sql` | R0-08: 300 load users `beban001…beban300@sd-contoh.test` (demo password), teachers at the invented demo school |
 | `seed_r1_load.ts` | R1-11: 300 schools from the NPSN directory; in 20 of them (16 SD, 4 MI, spread over Kudus, Jepara and Pati) year 2026/2027 on the Jawa Tengah frame, 12 classes, 15 load teachers and one operator (`operator-beban01…20@sd-contoh.test`), assignments, a saved timetable per class (real generator and save path), school calendar events, a kept-open joint-leave day, an own and a hidden extracurricular. Writes the users file for the tenant check. School-owned rows go through the app's services in tenant transactions, so RLS checks every one of them; schools and users are written as the owner |
+| `shared_ip.js` | R2-10 (D-479): a lab behind one school IP. 300 exam cards sign in on `ujian.` and 300 load teachers on `app.` within one minute, every request with the same `X-Forwarded-For` (`SCHOOL_IP`); every sign-in must succeed |
+| `seed_exam_cards.ts` | R2-10: 300 exam cards `lab-001…lab-300` (password `kartu-lab`) in the demo exam session, whose window it opens |
 | `proc-sample.mjs` | CPU and memory per process tree (`pg=pid:<postmaster>`) or command name, every 5 s; used instead of `pidstat -C postgres` when other PostgreSQL servers share the machine |
 
 The scripts never call a real AI provider: `ai-jobs.js`, `sse.js` and `sse-latency.mjs` stop when the page reports a driver other than `fake`. Never run them against production; the load users and the demo seed exist only in local and test databases.
@@ -30,6 +32,15 @@ R1=1 USERS_FILE=/abs/path/load-users.json k6 run spikes/k6/pages.js
 ```
 
 The pages run on the `tenant` connection (`DB_APP_USER`, a member of `sigrak_app`, no BYPASSRLS) inside `tenantTransaction()`, which sets `app.school_id` and `app.user_id` with `SET LOCAL` per transaction. Sign-in (`users`), the school's level for the policy profile and the AI demo still use the owner connection (R1-01, D-470).
+
+R2-10 (shared school IP): the R0-08 database steps with the load users, then
+
+```bash
+node --import=@poppinss/ts-exec spikes/k6/seed_exam_cards.ts
+# web process from build/ as in step 2-3, started with TRUSTED_PROXIES=127.0.0.1 (k6 plays nginx)
+k6 run spikes/k6/shared_ip.js              # 300 pupils + 300 teachers in 60 s
+WINDOW=10 k6 run spikes/k6/shared_ip.js    # the same in 10 s
+```
 
 R0-08 (skeleton):
 
@@ -77,6 +88,8 @@ For CPU per process outside Node (PostgreSQL, Redis, k6) run `pidstat -u -r -h -
 | `AI_VUS`, `HOLD`, `POLL_SECONDS`, `AI_USER_BASE` | `10`, `3m`, `2`, `100` | `ai-jobs.js`; teachers `beban101…` |
 | `SSE_VUS`, `SSE_RAMP`, `SSE_HOLD` | `200`, `60s`, `240s` | `sse.js`; teachers `beban001…beban200` |
 | `PROBE_USERS`, `PROBE_USER_BASE`, `PROBE_EVERY_S`, `PROBE_DURATION_S` | `10`, `230`, `10`, `180` | `sse-latency.mjs`; teachers `beban231…` |
+| `SCENARIO`, `LAB`, `WINDOW`, `SCHOOL_IP` | `both`, `300`, `60`, `203.0.113.10` | `shared_ip.js`; `pupils`, `teachers` or both, sign-ins per scenario, seconds they are spread over, the lab's one IP |
+| `EXAM_HOST`, `CARD_PASSWORD` | `ujian.` + `APP_HOST`'s domain, `kartu-lab` | `shared_ip.js`; `CARDS` and `CARD_PASSWORD` also set `seed_exam_cards.ts` |
 | `LOOP_LAG_FILE`, `LOOP_LAG_INTERVAL_MS` | none, `5000` | `loop-lag.mjs` |
 
 The user ranges do not overlap except on purpose: `sse.js` (1–200) includes the `ai-jobs.js` teachers (101–110), so their streams receive real progress messages during the mixed run.

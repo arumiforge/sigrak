@@ -1,4 +1,5 @@
 import db from '@adonisjs/lucid/services/db'
+import limiter from '@adonisjs/limiter/services/main'
 import mail from '@adonisjs/mail/services/main'
 import { DateTime } from 'luxon'
 import { areaUrl } from '#config/hosts'
@@ -17,12 +18,23 @@ import { spendConfirmationLinks } from '#accounts/email_confirmation'
  */
 export const RESET_VALID_MINUTES = 60
 
+/**
+ * Reset mails per account: the per-IP limit is loose because schools
+ * share one IP (D-479), so a mailbox is protected here. Requests over
+ * the limit get the same neutral answer and send nothing.
+ */
+const resetMails = () => limiter.use({ requests: 3, duration: '15 minutes' })
+
 export async function requestPasswordReset(email: string) {
   const user = await User.query()
     .whereRaw('lower(email) = ?', [normalizeEmail(email)])
     .first()
   if (!user) return
 
+  await resetMails().attempt(`reset_mail_${user.id}`, () => sendResetLink(user))
+}
+
+async function sendResetLink(user: User) {
   const { token, hash } = newToken()
   const expiresAt = DateTime.now().plus({ minutes: RESET_VALID_MINUTES })
   await db.transaction(async (trx) => {

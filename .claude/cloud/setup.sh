@@ -77,6 +77,7 @@ if [ -x "/usr/lib/postgresql/${PG_MAJOR}/bin/postgres" ]; then
     done
     log "postgresql ${PG_MAJOR} running (local role/password sigrak/sigrak, databases sigrak and sigrak_test)"
 fi
+# One Redis: the app's cache connection uses database 3 of it while REDIS_CACHE_HOST is empty (D-480).
 pgrep -x redis-server >/dev/null || redis-server --daemonize yes >/dev/null 2>&1 || true
 
 # Typst CLI (D-399 spike), k6 (R0-08), fonts and pandoc (docs PDF build)

@@ -14,6 +14,7 @@ import {
   type PackageInput,
   type Resolution,
 } from './resolve_core.js'
+import { SharedCache } from '../../services/shared_cache.js'
 import { ResolutionCache } from './resolution_cache.js'
 
 export class LayerTransactionRequiredException extends Exception {
@@ -82,8 +83,16 @@ interface PackageRow {
 }
 
 const policyProfiles = new PolicyProfileResolver()
-const cache = new ResolutionCache()
-const stats = { hits: 0, misses: 0 }
+/**
+ * Two levels (D-480): a small in-process cache that saves the round
+ * trip for repeated reads in one process, then the shared `redis-cache`
+ * so every web replica reuses a resolution. Keys hold the layer stamps,
+ * so neither level can serve a stale value (after a database restore,
+ * run `node ace cache:clear`).
+ */
+const cache = new ResolutionCache(500, 60 * 1000)
+const shared = new SharedCache('resolver', { ttlSeconds: 24 * 60 * 60 })
+const stats = { hits: 0, sharedHits: 0, misses: 0 }
 
 function clientOf(options: ResolveOptions) {
   const client = options.client ?? SchoolContext.current()?.trx
@@ -229,6 +238,13 @@ export const LayerResolver = {
         stats.hits++
         return cached
       }
+      const fromShared = await shared.get<SchoolResolution<V>>(key)
+      if (fromShared) {
+        stats.hits++
+        stats.sharedHits++
+        cache.set(key, fromShared)
+        return fromShared
+      }
     }
     stats.misses++
 
@@ -283,6 +299,7 @@ export const LayerResolver = {
       schoolPackageId: schoolPackage ? Number(schoolPackage.id) : null,
     }
     cache.set(key, result)
+    await shared.set(key, result)
     return result
   },
 
@@ -314,13 +331,21 @@ export const LayerResolver = {
     return resolveFromRows<V>(client, domain, packages, options.line ?? null, [])
   },
 
-  clearCache() {
+  /** Empties both levels and the counters. */
+  async clearCache() {
     cache.clear()
+    await shared.clear()
     stats.hits = 0
+    stats.sharedHits = 0
     stats.misses = 0
   },
 
-  /** Cache hits and misses since the last clear (tests, monitoring). */
+  /** Empties only this process's level (tests: the next read comes from Redis). */
+  clearLocalCache() {
+    cache.clear()
+  },
+
+  /** Cache hits (of them from Redis) and misses since the last clear (tests, monitoring). */
   cacheStats() {
     return { ...stats, size: cache.size }
   },

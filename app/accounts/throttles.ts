@@ -3,7 +3,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 /**
  * Loose per-IP limits on the forms that work without a session (D-183):
- * a whole school can share one IP, so the numbers are generous. Sign-in
+ * a whole school, or a training of 300 teachers, shares one public IP
+ * (D-479), so these are flood brakes, not per-person limits. Sign-in
  * keeps its own limits (start/limiter.ts, app/services/login_attempts.ts).
  */
 function perIp(name: string, requests: number) {
@@ -18,20 +19,20 @@ function perIp(name: string, requests: number) {
   )
 }
 
-/** "Lupa kata sandi" requests: 5 per minute (D-183). */
-export const resetLinkThrottle = perIp('reset_link', 5)
+/** "Lupa kata sandi" requests (D-183 had 5; raised for a shared IP, D-479). */
+export const resetLinkThrottle = perIp('reset_link', 30)
 
 /** New password from a reset link. */
-export const resetPasswordThrottle = perIp('reset_password', 10)
+export const resetPasswordThrottle = perIp('reset_password', 60)
 
-/** Self sign-up. */
-export const signUpThrottle = perIp('sign_up', 10)
+/** Self sign-up: a training where every teacher signs up at once. */
+export const signUpThrottle = perIp('sign_up', 120)
 
-/** Accepting an invitation: 10 per minute (D-183). */
-export const invitationThrottle = perIp('invitation_accept', 10)
+/** Accepting an invitation: the operator invites the whole school at once. */
+export const invitationThrottle = perIp('invitation_accept', 120)
 
 /** Using a sign-up confirmation link (D-469). */
-export const confirmEmailThrottle = perIp('confirm_email', 10)
+export const confirmEmailThrottle = perIp('confirm_email', 120)
 
 /**
  * Sending the confirmation link again from Akun: 3 per 10 minutes per

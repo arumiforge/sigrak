@@ -68,7 +68,7 @@ test.group('Calendar | import of the repository data (D-253, D-254)', (group) =>
     assert.lengthOf(draft.items, 0)
 
     await db.transaction((trx) => activateCalendarPackage(trx, NATIONAL_PACKAGE_CODE, null))
-    LayerResolver.clearCache()
+    await LayerResolver.clearCache()
     const active = await calendarOf(sdJati)
     assert.isTrue(active.ready)
     assert.isTrue(active.items.some((item) => item.itemKey === 'HOL-2026-08-17-national_holiday'))

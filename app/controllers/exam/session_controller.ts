@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import ExamParticipant from '#models/exam_participant'
 import { examCardLoginValidator } from '#validators/auth'
 import { attemptLogin, backWithError } from '#services/login_attempts'
+import { brakeExamSignIn } from '#services/exam_sign_in_limits'
 
 /**
  * Sign-in with an exam card on ujian. The proctor token check comes
@@ -14,6 +15,12 @@ export default class SessionController {
 
   async store(ctx: HttpContext) {
     const { username, password } = await ctx.request.validateUsing(examCardLoginValidator)
+
+    // Keyed on the exam session, not the IP: a whole lab shares one IP (D-479).
+    const braked = await brakeExamSignIn(ctx, username)
+    if (braked) {
+      return backWithError(ctx, 'username', braked)
+    }
 
     const result = await attemptLogin(
       ctx,

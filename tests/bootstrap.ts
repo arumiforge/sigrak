@@ -27,6 +27,12 @@ export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
       const { prepareTenantLogin } = await import('#tests/tenancy')
       await prepareTenantLogin()
     },
+    // Shared cache entries of an earlier run could match the same ids again (D-480).
+    async () => {
+      const { cacheConnectionReady } = await import('#services/shared_cache')
+      const { LayerResolver } = await import('#layers/resolver/layer_resolver')
+      if (await cacheConnectionReady()) await LayerResolver.clearCache()
+    },
   ],
   teardown: [],
 }

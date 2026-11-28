@@ -1,6 +1,6 @@
 # Usulan peningkatan server dan alat tambahan
 
-Daftar usulan yang sudah dibahas pemilik pada 27 November 2026. Kolom "Keputusan" berisi hasilnya: ✅ dipakai, ✗ tidak atau ditunda, ⏳ nanti, ☐ belum dibahas. Keputusan resminya ada di `docs/agent/DECISIONS.md` (D-424…D-432) dan dikerjakan di R3. Yang sudah diputuskan (nginx, Docker Compose, PostgreSQL 19 + pgBackRest, Redis 8, GlitchTip, tmux, Cloudflare Tunnel dan Access, backup R2 + disk pribadi + penyedia kedua) tidak diulang di sini.
+Daftar usulan yang sudah dibahas pemilik pada 27 November 2026. Kolom "Keputusan" berisi hasilnya: ✅ dipakai, ✗ tidak atau ditunda, ⏳ nanti, ☐ belum dibahas. Keputusan resminya ada di `docs/agent/DECISIONS.md` (D-424…D-432) dan dikerjakan di R3. Yang sudah diputuskan (nginx, Docker Compose, PostgreSQL 19 + pgBackRest, Redis 8 (dua kontainer: state dan cache, D-480), GlitchTip, tmux, Cloudflare Tunnel dan Access, backup R2 + disk pribadi + penyedia kedua) tidak diulang di sini.
 
 Arti prioritas:
 

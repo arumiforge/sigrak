@@ -16,7 +16,7 @@ Settings the owner applies once per Claude account (claude.ai â†’ Claude Code â†
 
 - Node.js 26 LTS (D-412) in `/opt/node26`, next to the image's Node 22. The image puts `/opt/node22/bin` early on `PATH`, so the script links `node`, `npm`, `npx` and `pnpm` into `~/.local/bin` (which comes before it) and `/usr/local/bin`, removes stale links such as `corepack` (Node 26 ships none), and adds `/etc/profile.d/zz-node26.sh` for login shells. `node -v` shows 26 in the session; Node is downloaded only when `/opt/node26/bin/node` is missing.
 - PostgreSQL 19 with pgvector (D-398, D-412), started on port 5432; other clusters in the image (such as 16) are stopped and set to manual start. Local role `sigrak` (password `sigrak`, local only), databases `sigrak` and `sigrak_test`.
-- Redis, started.
+- Redis, started: one instance. The app's `cache` connection falls back to it on database 3 when `REDIS_CACHE_HOST` is empty (D-480). To test the split, start a private cache instance (`redis-server --port 6390 --save '' --appendonly no --maxmemory 64mb --maxmemory-policy allkeys-lru --daemonize yes`), run with `REDIS_CACHE_HOST=127.0.0.1 REDIS_CACHE_PORT=6390`, and stop it afterwards (`redis-cli -p 6390 shutdown nosave`).
 - Typst CLI (D-399 spike) and k6 (R0-08).
 - pandoc, Liberation and Noto fonts, for the docs PDF build.
 - Git identity `Arumi Studios <arumiforge@gmail.com>`, `core.hooksPath .githooks`, and, when `pnpm-lock.yaml` exists, pnpm at the version pinned in `package.json` (installed under Node 26) plus `pnpm install --frozen-lockfile` (D-422).
