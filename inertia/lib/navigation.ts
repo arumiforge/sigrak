@@ -97,22 +97,23 @@ type AppItemKey = keyof typeof appItems
  * menus (Hari ini, Di kelas, Buat, Asesmen, Kelas saya) replace this
  * list when their slices arrive (R5). Without a school (a teacher who
  * signed up alone, D-459) only pages that need no school are listed.
+ * Operator order puts Kalender first (D-474); Coba AI (the R0 test
+ * page) stays reachable by URL only, not in any menu (D-474).
  */
 const appMenus: Record<SchoolRole | 'none', AppItemKey[]> = {
   operator: [
-    'school_years',
+    'calendar',
     'classes',
     'teachers',
     'timetable',
-    'calendar',
+    'school_years',
     'extracurricular',
     'packages',
     'proposals',
-    'ai_demo',
   ],
-  principal: ['calendar', 'extracurricular', 'packages', 'proposals', 'ai_demo'],
-  teacher: ['calendar', 'my_timetable', 'extracurricular', 'proposals', 'ai_demo'],
-  none: ['calendar', 'ai_demo'],
+  principal: ['calendar', 'extracurricular', 'packages', 'proposals'],
+  teacher: ['calendar', 'my_timetable', 'extracurricular', 'proposals'],
+  none: ['calendar'],
 }
 
 const visible = (item: NavItem) => item.available !== false
