@@ -1,8 +1,8 @@
 # R1-06 — Academic year, classes, teaching assignments, copy classes
 
 - **Phase:** R1
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r1/r1-06-school-year
 - **Depends on:** R1-03, R1-05
 - **Can run in parallel with:** R1-08 (after its layer part), R1-09
 
