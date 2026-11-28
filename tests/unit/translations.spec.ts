@@ -3,6 +3,7 @@ import { join, relative } from 'node:path'
 import ts from 'typescript'
 import { test } from '@japa/runner'
 import app from '@adonisjs/core/services/app'
+import i18nManager from '@adonisjs/i18n/services/main'
 
 /**
  * Checks that keep resources/lang/id complete and plain (design system,
@@ -418,6 +419,28 @@ test.group('Translations: code', () => {
     const sent = messagesFor('id', ['common', 'validation'])
     assert.isTrue(Object.keys(sent).some((key) => key.startsWith('common.')))
     assert.isFalse(Object.keys(sent).some((key) => key.startsWith('validation.')))
+  })
+
+  test('the messages of a namespace set are picked once and shared (R1-11)', async ({ assert }) => {
+    const { messagesFor } = await import('#middleware/translations_middleware')
+    const first = messagesFor('id', ['common', 'nav', 'calendar'])
+    // Same set in another order, with a duplicate and a server-only namespace.
+    const again = messagesFor('id', ['calendar', 'nav', 'common', 'nav', 'validation'])
+    assert.strictEqual(again, first)
+    assert.isTrue(Object.isFrozen(first))
+
+    const all = i18nManager.getTranslationsFor('id')
+    const expected = Object.fromEntries(
+      Object.entries(all).filter(([key]) =>
+        ['common.', 'nav.', 'calendar.'].some((prefix) => key.startsWith(prefix))
+      )
+    )
+    assert.deepEqual({ ...first }, expected)
+
+    const other = messagesFor('id', ['common', 'nav', 'timetable'])
+    assert.notStrictEqual(other, first)
+    assert.isTrue(Object.keys(other).some((key) => key.startsWith('timetable.')))
+    assert.isFalse(Object.keys(other).some((key) => key.startsWith('calendar.')))
   })
 
   test('pages and components carry no hard-coded text', ({ assert }) => {

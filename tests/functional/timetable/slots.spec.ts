@@ -350,6 +350,9 @@ test.group('Timetable | Jadwal per class', (group) => {
     const overview = await inertiaPage(client, operator, '/jadwal')
     const b = overview.inertiaProps.classes.find((item: { name: string }) => item.name === '4B')
     assert.equal(b.warningCount, 1)
+    // The overview reads the year's rows once (R1-11); a clash still counts in both classes.
+    const a = overview.inertiaProps.classes.find((item: { name: string }) => item.name === '4A')
+    assert.equal(a.warningCount, 1)
   })
 
   test('rows can be changed, deleted and locked; days are renumbered', async ({

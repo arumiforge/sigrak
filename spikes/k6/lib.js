@@ -1,5 +1,5 @@
 /*
- * Shared helpers for the R0-08 k6 scripts. See README.md.
+ * Shared helpers for the R0-08 and R1-11 k6 scripts. See README.md.
  *
  * The skeleton runs on hostnames (app.<APP_DOMAIN>), so every request
  * carries a Host header and goes to TARGET (the web process or nginx).
@@ -16,11 +16,26 @@ export const PASSWORD = __ENV.LOAD_PASSWORD || 'sigrak-demo-2026'
 export const USER_COUNT = Number(__ENV.USER_COUNT || 300)
 export const USER_OFFSET = Number(__ENV.USER_OFFSET || 0)
 
-/** Load users from seed-load-users.sql: beban001@sd-contoh.test … */
+/** Load users from seed-load-users.sql or seed_r1_load.ts: beban001@sd-contoh.test … */
 export function userEmail(index) {
   const n = (index % USER_COUNT) + 1
   return `beban${String(n).padStart(3, '0')}@sd-contoh.test`
 }
+
+/** R1-11 operators from seed_r1_load.ts, one per load school: operator-beban01@… */
+export const OPERATOR_COUNT = Number(__ENV.OPERATOR_COUNT || 20)
+export function operatorEmail(index) {
+  const n = (index % OPERATOR_COUNT) + 1
+  return `operator-beban${String(n).padStart(2, '0')}@sd-contoh.test`
+}
+
+/**
+ * R1-11 tenant check: USERS_FILE is the JSON that seed_r1_load.ts writes
+ * (e-mail → { school, own }). With it, the scripts check that every page shows
+ * the signed-in user's own school and nothing of another school. Read in the
+ * init context, as k6 requires for open().
+ */
+export const USERS = __ENV.USERS_FILE ? JSON.parse(open(__ENV.USERS_FILE)) : null
 
 /**
  * Each VU looks like its own client IP. The web process trusts
@@ -37,6 +52,7 @@ export class Client {
     this.cookies = {}
     this.ip = clientIp(vu)
     this.inertiaVersion = null
+    this.email = null
   }
 
   cookieHeader() {
@@ -118,6 +134,7 @@ export class Client {
 
   /** GET /masuk then POST /masuk; true when the session is signed in. */
   login(email) {
+    this.email = email
     const { response: form } = this.page('/masuk', 'GET /masuk')
     check(form, { 'login form 200': (r) => r.status === 200 })
     const response = this.post('/masuk', { email, password: PASSWORD }, 'POST /masuk')
@@ -145,16 +162,34 @@ export function readPage(response) {
 
 /** Signs a VU in once and keeps the client across iterations. */
 const clients = {}
-export function signedInClient(emailIndex) {
+export function signedInClient(emailIndex, email) {
   const vu = exec.vu.idInTest
   if (!clients[vu]) {
     const client = new Client(vu)
-    if (!client.login(userEmail(emailIndex ?? USER_OFFSET + vu - 1))) {
+    if (!client.login(email ?? userEmail(emailIndex ?? USER_OFFSET + vu - 1))) {
       fail(`VU ${vu} could not sign in`)
     }
     clients[vu] = client
   }
   return clients[vu]
+}
+
+/** The Inertia props of an XHR response, or null. */
+export function propsOf(response) {
+  try {
+    return response.json('props')
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Comma-separated deferred props of a page (all groups), as the browser
+ * asks for them after the first render.
+ */
+export function deferredOf(page) {
+  if (!page || !page.deferredProps) return ''
+  return Object.values(page.deferredProps).flat().join(',')
 }
 
 export function uuid() {
