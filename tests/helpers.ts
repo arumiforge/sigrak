@@ -13,6 +13,7 @@ import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
 import AiCredential from '#models/ai_credential'
 import { seedRegionList } from '#regions/region_list'
+import { syncLayerDomains } from '#layers/domains/registry'
 
 export const PASSWORD = 'rahasia-uji-123'
 
@@ -108,6 +109,8 @@ export async function createCalendar(school: School, titles: string[]) {
   const startYear = today.month >= 7 ? today.year : today.year - 1
   const schoolYear = `${startYear}/${startYear + 1}`
   const now = new Date()
+  // A test truncate empties the domain registry; restore it.
+  await syncLayerDomains(db.connection())
   const [pkg] = (await db
     .table('layer_packages')
     .insert({

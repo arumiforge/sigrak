@@ -7,6 +7,7 @@ import type School from '#models/school'
 import type User from '#models/user'
 import { createCalendar, createParticipant, testRegions } from '#tests/helpers'
 import { assertRlsHides, asSchool, createMember, createTwoSchools } from '#tests/tenancy'
+import { syncLayerDomains } from '#layers/domains/registry'
 import { TENANT_CONNECTION } from '#tenancy/database_roles'
 import { SchoolContext } from '#tenancy/school_context'
 import { staffTransaction, tenantTransaction } from '#tenancy/tenant_transaction'
@@ -283,6 +284,7 @@ test.group('Tenancy | row-level security', (group) => {
   }) => {
     const { a } = await createTwoSchools()
     const { province: region } = await testRegions()
+    await syncLayerDomains(db.connection())
     const now = new Date()
     const [regionPackage] = (await db
       .table('layer_packages')

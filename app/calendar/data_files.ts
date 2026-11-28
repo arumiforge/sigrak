@@ -263,7 +263,9 @@ export interface RegionCheck {
 
 export function checkRegionFile(data: RegionFile): RegionCheck {
   const problems: CheckProblem[] = []
-  const inFrame = (date: string) => date >= data.starts_on && date <= data.ends_on
+  // Events may run past the last school day (the year-end break), never out of the school year.
+  const startYear = Number(String(data.academic_year ?? '').slice(0, 4))
+  const inFrame = (date: string) => date >= `${startYear}-07-01` && date <= `${startYear + 1}-06-30`
   if (data.dataset !== 'region_calendar') problems.push({ key: 'dataset' })
   if (!data.code || !/^[A-Z0-9][A-Z0-9-]{2,119}$/.test(data.code)) problems.push({ key: 'code' })
   if (!data.region?.province) problems.push({ key: 'region_missing' })
