@@ -2,6 +2,7 @@ import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
 import limiter from '@adonisjs/limiter/services/main'
 import db from '@adonisjs/lucid/services/db'
+import type { RawQueryBindings } from '@adonisjs/lucid/types/querybuilder'
 import User from '#models/user'
 import StaffUser from '#models/staff_user'
 import { byEmail } from '#models/email_lookup'
@@ -13,11 +14,11 @@ import { signIn } from '#tests/accounts'
  * The auth mixin's own `where email = ?` cannot use that index and read
  * the whole users table on every sign-in.
  */
-async function planOf(sql: string, bindings: unknown[]) {
+async function planOf(sql: string, bindings: readonly unknown[]) {
   return db.transaction(async (trx) => {
     // On a near-empty test table the planner would pick a scan anyway.
     await trx.rawQuery('SET LOCAL enable_seqscan = off')
-    const result = await trx.rawQuery(`EXPLAIN ${sql}`, bindings)
+    const result = await trx.rawQuery(`EXPLAIN ${sql}`, bindings as RawQueryBindings)
     return (result.rows as { 'QUERY PLAN': string }[]).map((row) => row['QUERY PLAN']).join('\n')
   })
 }
@@ -43,7 +44,7 @@ test.group('Accounts | sign-in lookup', (group) => {
       [StaffUser, 'staff_users_email_unique'],
     ] as const) {
       const { sql, bindings } = byEmail(model, 'Guru@Uji.Test').limit(1).toSQL()
-      const plan = await planOf(sql, bindings as unknown[])
+      const plan = await planOf(sql, bindings)
       assert.include(plan, `Index Scan using ${index}`)
     }
   })
