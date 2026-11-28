@@ -10,7 +10,10 @@ export default defineConfig({
     // React Compiler (D-389)
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
-    adonisjs({ entryPoints: ['inertia/app.tsx'], reload: ['resources/views/**/*.edge'] }),
+    adonisjs({
+      entryPoints: ['inertia/app.tsx', 'inertia/css/app.css'],
+      reload: ['resources/views/**/*.edge'],
+    }),
   ],
 
   resolve: {

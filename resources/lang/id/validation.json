@@ -54,7 +54,20 @@
     "bucket": "Nama bucket",
     "access_key_id": "ID kunci akses",
     "secret_access_key": "Kunci akses rahasia",
-    "gemini_key": "Kunci Gemini"
+    "gemini_key": "Kunci Gemini",
+    "summary": "Ringkasan",
+    "body": "Isi",
+    "show_from": "Mulai tampil",
+    "show_until": "Tampil sampai",
+    "event_start": "Waktu mulai",
+    "event_end": "Waktu selesai",
+    "place": "Tempat",
+    "online_url": "Tautan daring",
+    "registration_url": "Tautan pendaftaran",
+    "consent_note": "Catatan persetujuan",
+    "consent_on": "Tanggal persetujuan",
+    "effective_on": "Berlaku sejak",
+    "change_note": "Catatan perubahan"
   },
   "messages": {
     "required": "{field} wajib diisi.",

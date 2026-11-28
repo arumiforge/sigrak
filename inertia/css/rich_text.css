@@ -1,0 +1,78 @@
+/*
+ * Rich text of Kabar, Acara, Cerita Sekolah and the legal pages (R2-05):
+ * the few tags the safe Markdown renderer makes (app/publishing/
+ * markdown.ts), in reading size, on the app, the console preview and
+ * sigrak.com.
+ */
+@layer components {
+  .rich-text {
+    max-width: 70ch;
+    overflow-wrap: anywhere;
+    line-height: 1.65;
+  }
+
+  .rich-text > * + * {
+    margin-top: 0.875rem;
+  }
+
+  .rich-text h2 {
+    margin-top: 1.75rem;
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+    font-weight: 700;
+  }
+
+  .rich-text h3,
+  .rich-text h4 {
+    margin-top: 1.25rem;
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+    font-weight: 700;
+  }
+
+  .rich-text ul,
+  .rich-text ol {
+    padding-left: 1.5rem;
+  }
+
+  .rich-text ul {
+    list-style: disc;
+  }
+
+  .rich-text ol {
+    list-style: decimal;
+  }
+
+  .rich-text li + li {
+    margin-top: 0.25rem;
+  }
+
+  .rich-text a {
+    color: var(--brand-strong);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .rich-text blockquote {
+    border-left: 3px solid var(--brand);
+    background: var(--brand-tint);
+    border-radius: var(--radius-input);
+    padding: 0.75rem 1rem;
+  }
+
+  .rich-text code {
+    border-radius: 4px;
+    background: var(--surface-hover);
+    padding: 0.05rem 0.3rem;
+    font-size: 0.9em;
+  }
+
+  .rich-text hr {
+    border-color: var(--border-line);
+  }
+
+  .rich-text strong {
+    font-weight: 700;
+  }
+}

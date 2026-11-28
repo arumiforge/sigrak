@@ -83,6 +83,16 @@ import healthSvg from '~/icons/hugeicons/rounded-stroke/medical/cardiogram-01.sv
 import healthSolidSvg from '~/icons/hugeicons/rounded-solid/medical/cardiogram-01.svg?raw'
 import curriculumSvg from '~/icons/hugeicons/rounded-stroke/education/books-01.svg?raw'
 import curriculumSolidSvg from '~/icons/hugeicons/rounded-solid/education/books-01.svg?raw'
+import newsSvg from '~/icons/hugeicons/rounded-stroke/files-folders/news.svg?raw'
+import newsSolidSvg from '~/icons/hugeicons/rounded-solid/files-folders/news.svg?raw'
+import eventSvg from '~/icons/hugeicons/rounded-stroke/date-and-time/calendar-check-in-01.svg?raw'
+import eventSolidSvg from '~/icons/hugeicons/rounded-solid/date-and-time/calendar-check-in-01.svg?raw'
+import storySvg from '~/icons/hugeicons/rounded-stroke/education/book-open-01.svg?raw'
+import storySolidSvg from '~/icons/hugeicons/rounded-solid/education/book-open-01.svg?raw'
+import legalSvg from '~/icons/hugeicons/rounded-stroke/legal/legal-01.svg?raw'
+import legalSolidSvg from '~/icons/hugeicons/rounded-solid/legal/legal-01.svg?raw'
+import notificationSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/notification-03.svg?raw'
+import externalSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-up-right-01-round.svg?raw'
 
 /** SIGRAK icon names → Rounded Stroke file. */
 const strokeIcons = {
@@ -134,6 +144,12 @@ const strokeIcons = {
   'activity': activitySvg,
   'health': healthSvg,
   'curriculum': curriculumSvg,
+  'news': newsSvg,
+  'event': eventSvg,
+  'story': storySvg,
+  'legal': legalSvg,
+  'notification': notificationSvg,
+  'external': externalSvg,
 } as const
 
 export type IconName = keyof typeof strokeIcons
@@ -168,6 +184,10 @@ const solidIcons: Partial<Record<IconName, string>> = {
   'activity': activitySolidSvg,
   'health': healthSolidSvg,
   'curriculum': curriculumSolidSvg,
+  'news': newsSolidSvg,
+  'event': eventSolidSvg,
+  'story': storySolidSvg,
+  'legal': legalSolidSvg,
 }
 
 type ParsedIcon = { viewBox: string; body: string }

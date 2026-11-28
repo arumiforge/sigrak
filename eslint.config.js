@@ -17,7 +17,11 @@ export default configApp(...react, {
     '@adonisjs/no-backend-import-in-frontend': [
       'error',
       {
-        allowed: ['../../app/services/i18n/format', '../../app/services/i18n/level_terms'],
+        allowed: [
+          '../../app/services/i18n/format',
+          '../../app/services/i18n/level_terms',
+          '../../app/publishing/markdown',
+        ],
       },
     ],
   },

@@ -41,7 +41,8 @@
     "regions": "Wilayah",
     "system": "Sistem",
     "team": "Tim",
-    "curriculum": "Kurikulum dan konten"
+    "curriculum": "Kurikulum dan konten",
+    "communication": "Komunikasi"
   },
   "roles": {
     "principal": "Kepala sekolah",
@@ -64,6 +65,11 @@
     "staff": "Staf",
     "activity_log": "Log aktivitas",
     "access": "Hak akses",
-    "curriculum": "Kurikulum"
-  }
+    "curriculum": "Kurikulum",
+    "announcements": "Kabar",
+    "events": "Acara",
+    "stories": "Cerita Sekolah",
+    "legal": "Halaman legal"
+  },
+  "news_unread": "Kabar, {count} belum dibaca"
 }
