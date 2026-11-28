@@ -8,7 +8,9 @@ import type { FileReport } from '../app/curriculum/import/report.js'
  * order. Each file is one transaction and is matched by code, so a
  * second run changes nothing. Data mismatches are listed; with
  * `--strict` the first file that has any writes nothing and the
- * command fails.
+ * command fails. `--by <staff email>` records who imported, so that
+ * person cannot sign the version off in the curriculum console (R2-08,
+ * D-339).
  */
 export default class CurriculumImport extends BaseCommand {
   static commandName = 'curriculum:import'
@@ -32,11 +34,45 @@ export default class CurriculumImport extends BaseCommand {
   @flags.boolean({ description: 'List every mismatch, note and kept row instead of the first ten' })
   declare verbose: boolean
 
+  @flags.string({
+    description: 'Email of the staff member who prepared the files (they cannot sign it off)',
+  })
+  declare by?: string
+
   async run() {
     const { importCurriculum } = await import('../app/curriculum/import/curriculum_importer.js')
+    const { default: StaffUser } = await import('#models/staff_user')
+    const { recordImport } = await import('../app/curriculum/console/review.js')
+    const { default: CurriculumVersion } =
+      await import('../app/curriculum/models/curriculum_version.js')
+
+    const staff = this.by
+      ? await StaffUser.findBy('email', this.by.trim().toLowerCase())
+      : undefined
+    if (staff === null) {
+      this.logger.error(`No staff account with the email ${this.by}`)
+      this.exitCode = 1
+      return
+    }
+
     const result = await importCurriculum({ files: this.files, strict: this.strict })
 
     for (const report of result.files) this.#print(report)
+    for (const report of result.files) {
+      if (!report.versionCode || report.changes === 0) continue
+      if (staff)
+        await recordImport(staff, report.versionCode, {
+          file: report.file,
+          changes: report.changes,
+        })
+      const version = await CurriculumVersion.findBy('code', report.versionCode)
+      if (version && version.status !== 'draft') {
+        // D-229: an import never changes a status; the console shows the change.
+        this.logger.warning(
+          `${version.code} is ${version.status}: ${version.status === 'signed_off' ? 'publish now needs a new sign-off' : 'its data changed after publication'}`
+        )
+      }
+    }
     if (result.profiles) this.#print(result.profiles)
 
     const mismatches = result.files.reduce((sum, report) => sum + report.mismatches.length, 0)

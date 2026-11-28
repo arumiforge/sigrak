@@ -27,6 +27,7 @@ import '#start/routes/school_year'
 import '#start/routes/timetable'
 import '#start/routes/calendar'
 import '#start/routes/system_health'
+import '#start/routes/curriculum'
 
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')
 const StaffSessionController = () => import('#controllers/staff/session_controller')

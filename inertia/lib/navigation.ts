@@ -190,6 +190,14 @@ const consoleItems: NavItem[] = [
     ability: 'layers.propose',
   },
   {
+    key: 'curriculum',
+    href: '/kurikulum',
+    label: 'nav.console.curriculum',
+    icon: 'curriculum',
+    section: 'nav.sections.curriculum',
+    ability: 'curriculum.view',
+  },
+  {
     key: 'settings',
     href: '/pengaturan',
     label: 'nav.console.settings',

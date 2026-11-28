@@ -37,6 +37,10 @@ export default class CurriculumVersion extends CurriculumVersionSchema {
   @column({ prepare: (value: VersionMeta) => JSON.stringify(value) })
   declare meta: VersionMeta
 
+  /** bigint[] arrives from pg as strings; ids are far below 2^53. */
+  @column({ consume: (value: (string | number)[] | null) => (value ?? []).map(Number) })
+  declare importedByIds: number[]
+
   /**
    * Subjects whose curation status is `curated` in the version's files:
    * only these are active for teachers (D-364, enforced from the content
