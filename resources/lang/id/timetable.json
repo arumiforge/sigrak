@@ -1,11 +1,11 @@
 {
   "weekdays": {
-    "1": "Senin",
-    "2": "Selasa",
-    "3": "Rabu",
-    "4": "Kamis",
-    "5": "Jumat",
-    "6": "Sabtu"
+    "monday": "Senin",
+    "tuesday": "Selasa",
+    "wednesday": "Rabu",
+    "thursday": "Kamis",
+    "friday": "Jumat",
+    "saturday": "Sabtu"
   },
   "kinds": {
     "lesson": "Pelajaran",
@@ -129,7 +129,7 @@
       "queued": "Menunggu giliran",
       "running": "Sedang disusun",
       "ready": "Siap dilihat",
-      "failed": "Gagal disusun",
+      "failed": "Belum berhasil disusun",
       "saved": "Sudah disimpan"
     },
     "waiting_body": "Draf sedang disusun. Halaman ini diperbarui sendiri.",

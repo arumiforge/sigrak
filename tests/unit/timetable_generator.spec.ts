@@ -192,6 +192,15 @@ test.group('Timetable | draft generator', () => {
         `seed ${seed}`
       )
 
+      // A day of the draft never ends with an opening or break row.
+      for (const draft of result.classes) {
+        for (const weekday of new Set(draft.rows.map((row) => row.weekday))) {
+          const day = draft.rows.filter((row) => row.weekday === weekday)
+          const last = day.reduce((a, b) => (b.end > a.end ? b : a))
+          assert.equal(last.kind, 'lesson', `seed ${seed}: day ${weekday} ends with ${last.kind}`)
+        }
+      }
+
       // Locked rows untouched: no new row overlaps one of its class.
       for (const row of generated) {
         const hit = kept.find((other) => other.classId === row.classId && overlaps(other, row))

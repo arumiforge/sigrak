@@ -50,10 +50,12 @@ export default function DraftTimetable({ draft, year, classes }: Props) {
   }, [waiting, start, stop])
   const [picked, setPicked] = useState(classes[0]?.publicId ?? '')
   const shown = classes.find((row) => row.publicId === picked) ?? classes[0]
-  const unplacedTotal = classes.reduce(
-    (sum, row) => sum + row.unplaced.reduce((total, item) => total + item.jp, 0),
-    0
-  )
+  // Religions without a teacher are not counted (D-251); they are listed, not warned about.
+  const missingJp = (row: Props['classes'][number]) =>
+    row.unplaced
+      .filter((item) => item.reason !== 'no_teacher')
+      .reduce((total, item) => total + item.jp, 0)
+  const unplacedTotal = classes.reduce((sum, row) => sum + missingJp(row), 0)
   const canChange = !year.closed && draft.status !== 'saved'
 
   return (
@@ -132,10 +134,8 @@ export default function DraftTimetable({ draft, year, classes }: Props) {
                 options={classes.map((row) => ({
                   value: row.publicId,
                   label:
-                    row.unplaced.length > 0
-                      ? `${row.name} · ${t('timetable.jp_count', {
-                          count: row.unplaced.reduce((sum, item) => sum + item.jp, 0),
-                        })}`
+                    missingJp(row) > 0
+                      ? `${row.name} · ${t('timetable.jp_count', { count: missingJp(row) })}`
                       : row.name,
                 }))}
               />

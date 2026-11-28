@@ -545,14 +545,24 @@ function runAttempt(input: GeneratorInput, setups: ClassSetup[], random: Random)
 
   attempt.improve(IMPROVE_ROUNDS_PER_CLASS * setups.length)
 
-  const classes = setups.map((setup, classIndex) => ({
-    classId: setup.source.id,
-    rows: [...setup.extras, ...lessonRows(setup, attempt.placed[classIndex])].sort(
-      (a, b) =>
-        a.weekday - b.weekday || a.start - b.start || (a.subjectId ?? 0) - (b.subjectId ?? 0)
-    ),
-    unplaced: [...setup.fixedUnplaced, ...unplaced[classIndex].values()],
-  }))
+  const classes = setups
+    .map((setup, classIndex) => {
+      const lessons = lessonRows(setup, attempt.placed[classIndex])
+      // Opening and break rows only where a lesson of the class follows them,
+      // so a shorter day does not end with a break.
+      const extras = setup.extras.filter((extra) =>
+        lessons.some((row) => row.weekday === extra.weekday && row.start >= extra.end)
+      )
+      return { setup, lessons, extras, classIndex }
+    })
+    .map(({ setup, lessons, extras, classIndex }) => ({
+      classId: setup.source.id,
+      rows: [...extras, ...lessons].sort(
+        (a, b) =>
+          a.weekday - b.weekday || a.start - b.start || (a.subjectId ?? 0) - (b.subjectId ?? 0)
+      ),
+      unplaced: [...setup.fixedUnplaced, ...unplaced[classIndex].values()],
+    }))
   const unplacedJp = classes.reduce(
     (sum, row) =>
       sum +

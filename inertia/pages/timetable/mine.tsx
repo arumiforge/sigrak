@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
 import AppLayout from '~/layouts/app_layout'
 import { Section } from '~/components/section'
-import { DayGroups, TimeRange, WEEKDAYS, type Row } from '~/components/timetable/parts'
+import { DayGroups, TimeRange, WEEKDAYS, type Row, dayName } from '~/components/timetable/parts'
 import { useT } from '~/lib/i18n'
 
 type Props = {
@@ -46,7 +46,7 @@ export default function MyTimetable({ year, lessons, totalJp, homerooms }: Props
                   if (dayLessons.length === 0) return null
                   return (
                     <div key={weekday} className="min-w-0">
-                      <h3 className="font-bold">{t(`timetable.weekdays.${weekday}`)}</h3>
+                      <h3 className="font-bold">{dayName(t, weekday)}</h3>
                       <ul className="divide-y">
                         {dayLessons.map((row, index) => (
                           <li

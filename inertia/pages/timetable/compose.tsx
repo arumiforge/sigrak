@@ -5,7 +5,13 @@ import { Section } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
 import { Checkbox, Select } from '~/components/school_year/fields'
-import { StatusLine, WEEKDAYS, YearChips, type YearChoice } from '~/components/timetable/parts'
+import {
+  StatusLine,
+  WEEKDAYS,
+  YearChips,
+  type YearChoice,
+  dayName,
+} from '~/components/timetable/parts'
 import { formatDateTime } from '~/lib/format'
 import { useT } from '~/lib/i18n'
 
@@ -275,7 +281,7 @@ function DayFields({
   const name = (field: string) => `days[${index}][${field}]`
   return (
     <fieldset className="rounded-lg border p-3">
-      <legend className="px-1 font-bold">{t(`timetable.weekdays.${day.weekday}`)}</legend>
+      <legend className="px-1 font-bold">{dayName(t, day.weekday)}</legend>
       <input type="hidden" name={name('weekday')} value={day.weekday} />
       <div className="grid gap-3 sm:grid-cols-3">
         <TextField

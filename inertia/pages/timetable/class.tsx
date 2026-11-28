@@ -12,6 +12,7 @@ import {
   minutesOf,
   rowTitle,
   type Row,
+  dayName,
 } from '~/components/timetable/parts'
 import { useT } from '~/lib/i18n'
 import { cn } from '~/lib/utils'
@@ -342,7 +343,7 @@ function SlotForm({
             onChange={changeDay}
             options={WEEKDAYS.map((day) => ({
               value: String(day),
-              label: t(`timetable.weekdays.${day}`),
+              label: dayName(t, day),
             }))}
             error={errors.weekday}
           />

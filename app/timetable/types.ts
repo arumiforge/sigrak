@@ -13,6 +13,13 @@ export type OpeningKind = (typeof openingKinds)[number]
 /** Monday (1) to Saturday (6). */
 export const weekdays = [1, 2, 3, 4, 5, 6] as const
 
+/** Lang keys of the weekdays (`timetable.weekdays.<key>`). */
+export const WEEKDAY_KEYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+
+export function weekdayKey(weekday: number) {
+  return WEEKDAY_KEYS[weekday - 1] ?? 'monday'
+}
+
 /** 1 JP = 35 minutes (data model, D-250). */
 export const JP_MINUTES = 35
 export const MIN_JP = 1

@@ -2,6 +2,7 @@ import i18nManager from '@adonisjs/i18n/services/main'
 import { SchoolYearRuleError } from '../school_year/errors.js'
 import type { RuleRow, Violation } from './rules.js'
 import { toDisplayTime } from './time.js'
+import { weekdayKey } from './types.js'
 import type { YearState } from './year_state.js'
 
 /**
@@ -17,7 +18,7 @@ export interface RuleMessage {
 }
 
 function dayName(weekday: number) {
-  return i18nManager.locale('id').t(`timetable.weekdays.${weekday}`)
+  return i18nManager.locale('id').t(`timetable.weekdays.${weekdayKey(weekday)}`)
 }
 
 function rowName(row: RuleRow, state: YearState) {

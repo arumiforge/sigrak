@@ -11,6 +11,13 @@ import { cn } from '~/lib/utils'
 
 export const WEEKDAYS = [1, 2, 3, 4, 5, 6] as const
 
+const WEEKDAY_KEYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+
+/** The day's name, Monday (1) to Saturday (6). */
+export function dayName(t: ReturnType<typeof useT>, weekday: number) {
+  return t(`timetable.weekdays.${WEEKDAY_KEYS[weekday - 1] ?? 'monday'}`)
+}
+
 export type Row = {
   publicId: string | null
   weekday: number
@@ -114,7 +121,7 @@ export function DayGroups({
         if (hideEmpty && dayRows.length === 0) return null
         return (
           <div key={weekday} className="min-w-0">
-            <h3 className="font-bold">{t(`timetable.weekdays.${weekday}`)}</h3>
+            <h3 className="font-bold">{dayName(t, weekday)}</h3>
             {dayRows.length === 0 ? (
               <p className="py-2 text-sm text-muted">{t('timetable.class.day_empty')}</p>
             ) : (
