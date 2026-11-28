@@ -14,6 +14,11 @@ import { BaseSchema } from '@adonisjs/lucid/schema'
  * - Who published it and when.
  *
  * History stays in staff_activity_logs (subject `curriculum_version`).
+ *
+ * The staff ids carry no foreign key on purpose: staff accounts are
+ * disabled, never deleted, and a key would let `TRUNCATE staff_users
+ * CASCADE` (test fixtures, restores) empty the global curriculum
+ * tables.
  */
 export default class extends BaseSchema {
   protected tableName = 'curriculum_versions'
@@ -24,21 +29,11 @@ export default class extends BaseSchema {
     )
     this.schema.alterTable(this.tableName, (table) => {
       table.specificType('imported_by_ids', 'bigint[]').notNullable().defaultTo('{}')
-      table
-        .bigInteger('signed_off_by_id')
-        .nullable()
-        .references('id')
-        .inTable('staff_users')
-        .onDelete('SET NULL')
+      table.bigInteger('signed_off_by_id').nullable()
       table.timestamp('signed_off_at', { useTz: true }).nullable()
       table.text('sign_off_note').nullable()
       table.string('signed_off_fingerprint', 64).nullable()
-      table
-        .bigInteger('published_by_id')
-        .nullable()
-        .references('id')
-        .inTable('staff_users')
-        .onDelete('SET NULL')
+      table.bigInteger('published_by_id').nullable()
       table.timestamp('published_at', { useTz: true }).nullable()
 
       table.check(

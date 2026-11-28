@@ -94,6 +94,16 @@ async function reload(version: CurriculumVersion) {
   return CurriculumVersion.findOrFail(version.id)
 }
 
+async function statusOf(version: CurriculumVersion) {
+  const fresh = await reload(version)
+  return fresh.status
+}
+
+async function importersOf(version: CurriculumVersion) {
+  const fresh = await reload(version)
+  return fresh.importedByIds
+}
+
 async function refusal(work: () => Promise<unknown>) {
   try {
     await work()
@@ -127,7 +137,7 @@ test.group('Curriculum console | sign-off, publish, rollback', (group) => {
     assert.deepEqual(imported.importedByIds, [preparer.id])
 
     assert.equal(await refusal(() => signOff(preparer, next.id, null)), 'own_import')
-    assert.equal((await reload(next)).status, 'draft')
+    assert.equal(await statusOf(next), 'draft')
 
     const signed = await signOff(other, next.id, 'Topik kelas 1 sudah diperiksa.')
     assert.equal(signed.status, 'signed_off')
@@ -165,13 +175,13 @@ test.group('Curriculum console | sign-off, publish, rollback', (group) => {
     // Nothing changed in the file: nobody is recorded.
     const unchanged = await ace.exec('curriculum:import', [newFile, '--by', content.email])
     assert.equal(unchanged.exitCode, 0)
-    assert.deepEqual((await reload(next)).importedByIds, [])
+    assert.deepEqual(await importersOf(next), [])
 
     newData.subjects[0].topics[0].title = 'Judul dari penyusun'
     await writeJson(newFile.replace(/new\.json$/, ''), 'new.json', newData)
     const command = await ace.exec('curriculum:import', [newFile, '--by', content.email])
     assert.equal(command.exitCode, 0)
-    assert.deepEqual((await reload(next)).importedByIds, [content.id])
+    assert.deepEqual(await importersOf(next), [content.id])
     assert.deepEqual(await actionsOf(next), ['curriculum.import'])
   }).timeout(60_000)
 
@@ -203,7 +213,7 @@ test.group('Curriculum console | sign-off, publish, rollback', (group) => {
     assert.equal(published.publishedById, curator.id)
     assert.isNotNull(published.publishedAt)
     // The predecessor stays active for the school years before NEW starts.
-    assert.equal((await reload(old)).status, 'active')
+    assert.equal(await statusOf(old), 'active')
     assert.include(await actionsOf(next), 'curriculum.publish')
   }).timeout(60_000)
 
@@ -212,7 +222,8 @@ test.group('Curriculum console | sign-off, publish, rollback', (group) => {
     const resolver = new PolicyProfileResolver({ profilesDirectory: profiles })
     const pick = async (schoolYear: string) => {
       const policy = await resolver.resolve({ schoolYear, level: 'sd' })
-      return policy.ruleSets.tp_atp_defaults.map((ruleSet) => ruleSet.code)
+      const ruleSets = policy.ruleSets
+      return ruleSets.tp_atp_defaults.map((entry) => entry.code)
     }
     const validator = await createStaff(['validator'])
     const curator = await createStaff(['curriculum'])
@@ -241,7 +252,7 @@ test.group('Curriculum console | sign-off, publish, rollback', (group) => {
     assert.isNull(version.signedOffFingerprint)
     assert.isNull(version.publishedAt)
     assert.equal(restored?.code, OLD)
-    assert.equal((await reload(old)).status, 'active')
+    assert.equal(await statusOf(old), 'active')
     assert.deepEqual(await pick('2027/2028'), [OLD])
     assert.equal(await refusal(() => rollback(curator, next.id)), 'not_active')
 
@@ -338,6 +349,16 @@ function get(client: Parameters<typeof visit>[0], session: Session, path: string
   })
 }
 
+async function statusAt(client: Parameters<typeof visit>[0], session: Session, path: string) {
+  const response = await get(client, session, path)
+  return response.status()
+}
+
+async function propsAt(client: Parameters<typeof visit>[0], session: Session, path: string) {
+  const page = await inertiaPage(client, session, path)
+  return page.inertiaProps
+}
+
 test.group('Curriculum console | pages and abilities', (group) => {
   group.each.setup(() => testUtils.db().truncate())
   group.each.setup(() => PolicyProfileResolver.clearCache())
@@ -353,13 +374,13 @@ test.group('Curriculum console | pages and abilities', (group) => {
         `/kurikulum/${next.id}/bandingkan`,
         `/kurikulum/${next.id}/dampak`,
       ]) {
-        assert.equal((await get(client, session, path)).status(), 200, `${role} ${path}`)
+        assert.equal(await statusAt(client, session, path), 200, `${role} ${path}`)
       }
     }
     const support = await createStaff(['support'])
     const session = await signIn(client, 'admin', support.email)
-    assert.equal((await get(client, session, '/kurikulum')).status(), 403)
-    assert.equal((await get(client, session, `/kurikulum/${old.id}`)).status(), 403)
+    assert.equal(await statusAt(client, session, '/kurikulum'), 403)
+    assert.equal(await statusAt(client, session, `/kurikulum/${old.id}`), 403)
   }).timeout(120_000)
 
   test('the pages show versions, the comparison and what the staff member may do', async ({
@@ -371,19 +392,18 @@ test.group('Curriculum console | pages and abilities', (group) => {
     await recordImport(preparer, NEW, { file: 'new.json', changes: 10 })
     const session = await signIn(client, 'admin', preparer.email)
 
-    const list = (await inertiaPage(client, session, '/kurikulum')).inertiaProps
+    const list = await propsAt(client, session, '/kurikulum')
     const codes = (list.versions as { code: string }[]).map((version) => version.code)
     assert.includeMembers(codes, [OLD, NEW, 'CP-UMUM-SD-BSKAP-046-2025'])
 
-    const own = (await inertiaPage(client, session, `/kurikulum/${next.id}`)).inertiaProps
+    const own = await propsAt(client, session, `/kurikulum/${next.id}`)
     assert.deepInclude(own.can, { signOff: false, publish: false, blocked: ['own_import'] })
     assert.deepEqual(own.version.importedBy, ['Staf Uji'])
     assert.deepEqual(own.predecessor.code, OLD)
-    const other = (await inertiaPage(client, session, `/kurikulum/${old.id}`)).inertiaProps
+    const other = await propsAt(client, session, `/kurikulum/${old.id}`)
     assert.deepInclude(other.can, { signOff: true, publish: false, rollback: false })
 
-    const compare = (await inertiaPage(client, session, `/kurikulum/${next.id}/bandingkan`))
-      .inertiaProps
+    const compare = await propsAt(client, session, `/kurikulum/${next.id}/bandingkan`)
     assert.equal(compare.base.code, OLD)
     assert.equal(compare.subject, 'PP')
     assert.deepEqual(compare.comparison.summary.topic, { added: 1, removed: 1, changed: 1 })
@@ -412,23 +432,23 @@ test.group('Curriculum console | pages and abilities', (group) => {
     )
     assert.equal(signed.response.status(), 302)
     assert.equal(signed.response.header('location'), page)
-    assert.equal((await reload(old)).status, 'signed_off')
+    assert.equal(await statusOf(old), 'signed_off')
     const denied = await postForm(client, signed.session, `${page}/terbitkan`, {}, page)
     assert.equal(denied.response.status(), 403)
 
     const curatorSession = await signIn(client, 'admin', curator.email)
     const published = await postForm(client, curatorSession, `${page}/terbitkan`, {}, page)
     assert.equal(published.response.status(), 302)
-    assert.equal((await reload(old)).status, 'active')
+    assert.equal(await statusOf(old), 'active')
 
     // A refused change returns to the page with the reason and changes nothing.
     const again = await postForm(client, published.session, `${page}/terbitkan`, {}, page)
     assert.equal(again.response.status(), 302)
-    assert.equal((await reload(old)).status, 'active')
+    assert.equal(await statusOf(old), 'active')
 
     const back = await postForm(client, again.session, `${page}/kembalikan`, {}, page)
     assert.equal(back.response.status(), 302)
-    assert.equal((await reload(old)).status, 'draft')
+    assert.equal(await statusOf(old), 'draft')
     assert.deepEqual(await actionsOf(old), [
       'curriculum.signoff',
       'curriculum.publish',
