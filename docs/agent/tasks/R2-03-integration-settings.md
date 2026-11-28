@@ -1,8 +1,8 @@
 # R2-03 — Integration settings and AI models per purpose
 
 - **Phase:** R2
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r2/r2-03-integration-settings
 - **Depends on:** R2-01
 - **Can run in parallel with:** R2-02, R2-04…R2-06, R2-08
 

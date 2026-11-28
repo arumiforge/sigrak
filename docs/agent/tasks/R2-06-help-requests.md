@@ -1,8 +1,8 @@
 # R2-06 — Minta Bantuan, help-request statuses, support sessions
 
 - **Phase:** R2
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r2/r2-06-help-requests
 - **Depends on:** R2-01
 - **Can run in parallel with:** R2-02…R2-05, R2-08
 

@@ -1,8 +1,8 @@
 # R2-08 — Curriculum console: compare, publish, roll back, impact
 
 - **Phase:** R2
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r2/r2-08-curriculum-console
 - **Depends on:** R2-01
 - **Can run in parallel with:** R2-02…R2-06
 

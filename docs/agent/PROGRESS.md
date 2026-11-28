@@ -141,13 +141,13 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R1-12 | UI shell: layouts, navigation, Hugeicons, design tokens, SPA feel; R1 pages moved onto it (D-473) | done | r1/r1-12-ui-shell | R1-08, R1-09 | `tasks/R1-12-*.md` |
 | R2 | Staff console on `admin.` (D-476, D-477): split into R2-01…R2-09 in `tasks/R2-00-console-plan.md` | in-progress | r2/r2-00-split | R1 (done, D-476) | `tasks/R2-*.md` |
 | R2-01 | Staff roles, scopes, staff accounts, audit log, Hak akses | review | r2/r2-01-staff-roles | — | `tasks/R2-01-*.md` |
-| R2-02 | Staff 2FA with TOTP | todo | — | R2-01 | `tasks/R2-02-*.md` |
-| R2-03 | Integration settings and AI models per purpose | todo | — | R2-01 | `tasks/R2-03-*.md` |
-| R2-04 | Kesehatan Sistem page | todo | — | R2-01 | `tasks/R2-04-*.md` |
-| R2-05 | Kabar, Acara, Cerita Sekolah, legal pages | todo | — | R2-01 | `tasks/R2-05-*.md` |
-| R2-06 | Minta Bantuan, help-request statuses, support sessions | todo | — | R2-01 | `tasks/R2-06-*.md` |
+| R2-02 | Staff 2FA with TOTP | in-progress | r2/r2-02-staff-2fa | R2-01 | `tasks/R2-02-*.md` |
+| R2-03 | Integration settings and AI models per purpose | in-progress | r2/r2-03-integration-settings | R2-01 | `tasks/R2-03-*.md` |
+| R2-04 | Kesehatan Sistem page | in-progress | r2/r2-04-system-health | R2-01 | `tasks/R2-04-*.md` |
+| R2-05 | Kabar, Acara, Cerita Sekolah, legal pages | in-progress | r2/r2-05-content-pages | R2-01 | `tasks/R2-05-*.md` |
+| R2-06 | Minta Bantuan, help-request statuses, support sessions | in-progress | r2/r2-06-help-requests | R2-01 | `tasks/R2-06-*.md` |
 | R2-07 | Bank Masalah, Bank Praktik Baik, Forum Masalah→Solusi | todo | — | R2-01, R2-06 | `tasks/R2-07-*.md` |
-| R2-08 | Curriculum console: compare, publish, roll back, impact | todo | — | R2-01 | `tasks/R2-08-*.md` |
+| R2-08 | Curriculum console: compare, publish, roll back, impact | in-progress | r2/r2-08-curriculum-console | R2-01 | `tasks/R2-08-*.md` |
 | R2-09 | Console pass: navigation, screenshot set, R2 checks | todo | — | R2-01…R2-08 | `tasks/R2-09-*.md` |
 | R3 | Infrastructure per Fondasi and `docs/server/`: `deploy/compose.yaml` with replicas (D-415), nginx config (D-414), `deploy/server/sigrak-setup.sh` and `check-app` (D-416), tmux provisioning (D-418), cloudflared and Cloudflare Access (D-417), R2, backups with pgBackRest (D-404, D-405), GlitchTip (D-403), monitoring, DR runbook and standby VPS on Ubuntu 26.04 (D-413), Renovate (D-412, D-428), CalVer release workflow (D-420); the 2026-11-27 ops decisions: Ubuntu Pro (D-424), Portainer and the "SIGRAK ops" Access application (D-425), Better Stack, Uptime Kuma, Netdata and alerts (D-426), CrowdSec, WAF, Lynis, auditd, chrony, terminal tools (D-427), Trivy, gitleaks, SHA-pinned Actions (D-428), PgBouncer, PgHero, pgtune, Cloudflare caching (D-429), Backrest, bucket locks, monthly restore drill (D-430), SPF/DMARC (D-431), Plane CE as `sigrak-plane` (D-440); proposals still ☐ in `docs/server/rekomendasi-tambahan.md` only after the owner decides | planned | — | R0 gate | split when it starts |
 | R4 | New stack docs replacing the removed ones (architecture, server setup, coding standards, export and localization, monitoring, local setup) + update the developer handbook, with Indonesian PDFs | planned | — | R1, R3 | — |

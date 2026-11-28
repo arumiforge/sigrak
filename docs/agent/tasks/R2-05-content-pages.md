@@ -1,8 +1,8 @@
 # R2-05 — Kabar, Acara, Cerita Sekolah and legal pages
 
 - **Phase:** R2
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r2/r2-05-content-pages
 - **Depends on:** R2-01
 - **Can run in parallel with:** R2-02…R2-04, R2-06, R2-08
 

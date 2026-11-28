@@ -1,8 +1,8 @@
 # R2-04 — Kesehatan Sistem page
 
 - **Phase:** R2
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r2/r2-04-system-health
 - **Depends on:** R2-01
 - **Can run in parallel with:** R2-02, R2-03, R2-05, R2-06, R2-08
 

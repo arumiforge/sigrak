@@ -1,8 +1,8 @@
 # R2-02 — Staff 2FA with TOTP
 
 - **Phase:** R2
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r2/r2-02-staff-2fa
 - **Depends on:** R2-01
 - **Can run in parallel with:** R2-03…R2-06, R2-08
 
