@@ -2386,3 +2386,17 @@ Reason: owner's choices on the R1-12 visual questions.
 Accepted · 2026-11-28 · owner's choice ("simpan screenshot di repo") · changes the screenshot rule of R1-12 (D-473)
 Screenshot sets that the owner reviews are kept in `docs/screenshots/<phase>/` (R1: `docs/screenshots/r1/`, with a README index) as well as in the PR summary. They are retaken when the shell changes visibly; old sets are replaced, not piled up.
 Reason: the owner wants to see the screenshots in the repository; files in a cloud session's scratchpad are lost when the session ends.
+
+### D-476 — R1 accepted; R2 starts
+Accepted · 2026-11-28 · owner's choice ("R1-11 diterima, screenshot sudah saya review, mulai R2") · closes R1 (D-468); accepts D-467 with the R1 re-measure
+The R1 load re-measure passes D-467 (about 1,350 active teachers per web process, no change to D-415), the R1-12 screenshot set is reviewed, and R1 is done. R2 (staff console on `admin.`) starts, split in `docs/agent/tasks/R2-00-console-plan.md`. Team follow-ups carried from R1-11: the AI generation service moves onto tenant transactions before R3 switches production to the app login; the timetable read path gets its own task before R5.
+Reason: owner's approval.
+
+### D-477 — R2 scope choices
+Accepted · 2026-11-28 · R2-00 · owner's choice (interview 2026-11-28) · refines D-340, D-309, D-439, D-319, D-435
+- **Payments:** R2 only sets up the Penjualan and Keuangan roles and their scopes; recording payment claims, confirming them (D-340), invoices, receipts, and the sales pipeline are built with prices and plans in the R5 business slice.
+- **Sekolah binaan:** the pengawas request and its approval in the console (D-309) are built with the pengawas portal in R5.
+- **Bank Masalah:** problems come in two ways: support turns a Minta Bantuan request into a problem with one action, and Tim Lapangan records problems from visits, chats or webinars by hand. The reporter is told when the solution ships.
+- **Kabar:** one editor; each Kabar is shown in the app (with the D-319 targets), on `sigrak.com/kabar`, or both.
+Reason: owner's choices; each part is built where it can be tested end to end.
+

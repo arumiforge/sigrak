@@ -1,7 +1,7 @@
 # R1-02 — Indonesian copy base and translation checks
 
 - **Phase:** R1
-- **Status:** review
+- **Status:** done
 - **Owner:** r1/r1-02-lang-id
 - **Depends on:** R0 gate (D-468)
 - **Can run in parallel with:** R1-01, R1-03, R1-10

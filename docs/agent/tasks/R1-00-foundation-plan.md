@@ -1,7 +1,7 @@
 # R1-00 — Foundation plan and split
 
 - **Phase:** R1
-- **Status:** in-progress
+- **Status:** done
 - **Owner:** r1/r1-00-gate-split
 - **Depends on:** R0 gate (D-468)
 
