@@ -48,7 +48,7 @@ export default function ConsoleLayout({ children }: { children: ReactNode }) {
             </button>
             <Wordmark href="/" label={t('common.areas.admin')} className="lg:hidden" />
             <div className="flex-1" />
-            {viewer && <AccountMenu name={viewer.name} />}
+            {viewer && <AccountMenu name={viewer.name} accountHref="/akun" />}
           </div>
         </header>
         <main

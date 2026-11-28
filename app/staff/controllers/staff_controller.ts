@@ -4,6 +4,7 @@ import StaffUser from '#models/staff_user'
 import type StaffRoleAssignment from '#models/staff_role_assignment'
 import { backWithFieldError } from '#accounts/http'
 import { authorizeStaff, hasRole, staffCan } from '../access.js'
+import { twoFactorEnabled, twoFactorRequired } from '../two_factor.js'
 import {
   createStaff,
   grantRole,
@@ -135,6 +136,16 @@ export default class StaffController {
         email: member.email,
         disabled: member.disabledAt !== null,
         createdAt: member.createdAt.toISO()!,
+      },
+      // 2FA (R2-02): its state and whether the viewer may reset it.
+      twoFactor: {
+        enabled: twoFactorEnabled(member),
+        required: twoFactorRequired(member),
+        canReset:
+          staffCan(actor, 'staff.reset_2fa') &&
+          !self &&
+          member.twoFactorSecret !== null &&
+          (manageHigh || !high),
       },
       assignments: assignments.map((assignment) => ({
         role: assignment.role,

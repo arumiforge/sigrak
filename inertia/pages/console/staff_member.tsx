@@ -32,6 +32,7 @@ type Assignment = {
 
 type Props = {
   member: { id: number; name: string; email: string; disabled: boolean; createdAt: string }
+  twoFactor: TwoFactorState
   assignments: Assignment[]
   recent: { id: number; action: string; role: string | null; at: string; by: string | null }[]
   grantable: string[]
@@ -56,6 +57,7 @@ const valueOf = (assignment: Assignment): ScopeValue => ({
  */
 export default function ConsoleStaffMember({
   member,
+  twoFactor,
   assignments,
   recent,
   grantable,
@@ -214,6 +216,8 @@ export default function ConsoleStaffMember({
             )}
           </Section>
 
+          <TwoFactorSection member={member} twoFactor={twoFactor} self={can.self} />
+
           <Section title={t('staff.member.recent_title')}>
             {recent.length === 0 ? (
               <p className="text-muted">{t('staff.member.recent_empty')}</p>
@@ -246,6 +250,58 @@ export default function ConsoleStaffMember({
         />
       )}
     </>
+  )
+}
+
+type TwoFactorState = { enabled: boolean; required: boolean; canReset: boolean }
+
+/**
+ * The member's 2FA (R2-02, D-343) and "Atur ulang 2FA" for staff with
+ * `staff.reset_2fa`, never on themselves; the reset is logged.
+ */
+function TwoFactorSection({
+  member,
+  twoFactor,
+  self,
+}: {
+  member: Props['member']
+  twoFactor: TwoFactorState
+  self: boolean
+}) {
+  const t = useT()
+  return (
+    <Section
+      title={t('two_factor.staff.title')}
+      actions={
+        twoFactor.enabled ? (
+          <StatusChip tone="ok">{t('two_factor.staff.on')}</StatusChip>
+        ) : (
+          <StatusChip tone={twoFactor.required ? 'warn' : 'neutral'}>
+            {t('two_factor.staff.off')}
+          </StatusChip>
+        )
+      }
+    >
+      {!twoFactor.enabled && (
+        <p className="text-sm text-muted">
+          {twoFactor.required
+            ? t('two_factor.staff.required_off')
+            : t('two_factor.staff.optional_off')}
+        </p>
+      )}
+      {self && <p className="text-sm text-muted">{t('two_factor.staff.self_note')}</p>}
+      {twoFactor.canReset && (
+        <div className={twoFactor.enabled && !self ? '' : 'mt-4'}>
+          <ConfirmAction
+            action={`/staf/${member.id}/atur-ulang-2fa`}
+            label={t('two_factor.staff.reset')}
+            title={t('two_factor.staff.reset_title', { name: member.name })}
+            description={t('two_factor.staff.reset_body')}
+            confirmLabel={t('two_factor.staff.reset_confirm')}
+          />
+        </div>
+      )}
+    </Section>
   )
 }
 
