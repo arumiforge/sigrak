@@ -29,6 +29,8 @@ type Notice = {
   packageName: string | null
   actorName: string | null
   status: string | null
+  schoolYear: string | null
+  carriedPackages: string[]
   endedPackages: string[]
 }
 
@@ -214,6 +216,11 @@ function NoticeList({ notices }: { notices: Notice[] }) {
         })
       case 'package_retired':
         return t('layers.notices.package_retired', { package: notice.packageName ?? '' })
+      case 'package_carried_over':
+        return t('layers.notices.package_carried_over', {
+          year: notice.schoolYear ?? '',
+          packages: notice.carriedPackages.join(', '),
+        })
       default:
         return t(
           notice.status === 'approved'

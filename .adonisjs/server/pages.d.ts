@@ -15,6 +15,7 @@ declare module '@adonisjs/inertia/types' {
     'accounts/account': ExtractProps<(typeof import('../../inertia/pages/accounts/account.tsx'))['default']>
     'accounts/switch_role': ExtractProps<(typeof import('../../inertia/pages/accounts/switch_role.tsx'))['default']>
     'accounts/teachers': ExtractProps<(typeof import('../../inertia/pages/accounts/teachers.tsx'))['default']>
+    'admin/calendar': ExtractProps<(typeof import('../../inertia/pages/admin/calendar.tsx'))['default']>
     'admin/home': ExtractProps<(typeof import('../../inertia/pages/admin/home.tsx'))['default']>
     'admin/layers/area_proposals': ExtractProps<(typeof import('../../inertia/pages/admin/layers/area_proposals.tsx'))['default']>
     'admin/region_changes': ExtractProps<(typeof import('../../inertia/pages/admin/region_changes.tsx'))['default']>
@@ -40,5 +41,10 @@ declare module '@adonisjs/inertia/types' {
     'school/layers/extracurriculars': ExtractProps<(typeof import('../../inertia/pages/school/layers/extracurriculars.tsx'))['default']>
     'school/layers/packages': ExtractProps<(typeof import('../../inertia/pages/school/layers/packages.tsx'))['default']>
     'school/layers/proposals': ExtractProps<(typeof import('../../inertia/pages/school/layers/proposals.tsx'))['default']>
+    'timetable/class': ExtractProps<(typeof import('../../inertia/pages/timetable/class.tsx'))['default']>
+    'timetable/compose': ExtractProps<(typeof import('../../inertia/pages/timetable/compose.tsx'))['default']>
+    'timetable/draft': ExtractProps<(typeof import('../../inertia/pages/timetable/draft.tsx'))['default']>
+    'timetable/index': ExtractProps<(typeof import('../../inertia/pages/timetable/index.tsx'))['default']>
+    'timetable/mine': ExtractProps<(typeof import('../../inertia/pages/timetable/mine.tsx'))['default']>
   }
 }

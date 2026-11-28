@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { Exception } from '@adonisjs/core/exceptions'
 import User from '#models/user'
 import { tenantTransaction } from '#tenancy/tenant_transaction'
+import { refuseAssignmentClashes } from '#timetable/assignment_clashes'
 import Subject from '../../curriculum/models/subject.js'
 import AcademicYear from '../models/academic_year.js'
 import SchoolClass from '../models/school_class.js'
@@ -320,6 +321,8 @@ export default class ClassesController {
           const current = rows.find((row) => row.subjectId === subjectId)?.teacherId ?? null
           changes.set(subjectId, pickTeacher(options, value, current, `assignments.${code}`))
         }
+        // A new guru mapel must not clash with their other lessons (D-248, R1-09).
+        await refuseAssignmentClashes(deps, fresh, changes)
         await setTeachers(fresh, changes)
       })
       ctx.session.flash('success', ctx.i18n.t('classes.assignments.saved'))

@@ -6,7 +6,7 @@ import type { Force } from './types.js'
  * (inertia/components/layers/source_badge.tsx). Every layered value the
  * UI shows carries one (§5.5, §9.1).
  */
-export interface SourceProps {
+export type SourceProps = {
   layer: ItemSource['layer']
   regionName: string | null
   regionKind: string | null
@@ -53,7 +53,7 @@ export function sourceProps(item: ResolvedItem<unknown>): SourceProps {
   }
 }
 
-export interface HiddenByProps {
+export type HiddenByProps = {
   layer: HiddenItem<unknown>['hiddenBy']['layer']
   regionName: string | null
   regionKind: string | null

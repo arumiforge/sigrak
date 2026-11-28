@@ -1,19 +1,25 @@
 {
   "title": "Kalender",
   "year": "Tahun ajaran {name}",
-  "source": "Disalin dari {name}.",
-  "no_calendar": "Sekolah belum punya kalender untuk tahun ajaran ini. Operator sekolah perlu membuatnya dulu.",
+  "years_label": "Pilih tahun ajaran",
+  "no_year": "Tahun ajaran {name} belum dibuat. Kalender memakai tanggal 1 Juli sampai 30 Juni sampai operator membuatnya di Tahun ajaran.",
+  "not_ready": "Kalender nasional dan kalender daerah sedang diperiksa Tim SIGRAK. Hari libur akan muncul setelah selesai diperiksa.",
   "empty_month": "Tidak ada acara atau libur di bulan ini.",
   "empty_year": "Belum ada acara.",
-  "national_holiday": "Libur nasional",
+  "empty_hidden": "Semua hari libur dan acara dipakai.",
   "provisional": "sementara",
   "joint_leave_school_day": "Masuk sekolah",
   "whole_school": "Seluruh sekolah",
+  "class_event": "Kelas {name}",
   "today": "Hari ini",
+  "note": "tetap hari efektif",
+  "own_event": "Acara sekolah",
   "views": {
     "label": "Tampilan",
     "month": "Bulan",
-    "list": "Daftar"
+    "list": "Daftar",
+    "unused": "Tidak dipakai",
+    "effective": "Hari efektif"
   },
   "month_nav": {
     "previous": "Bulan sebelumnya",
@@ -26,14 +32,169 @@
     "school_event": "Kegiatan sekolah",
     "no_lessons": "Tidak ada pelajaran",
     "national_holiday": "Libur nasional",
-    "joint_leave": "Cuti bersama"
+    "joint_leave": "Cuti bersama",
+    "note": "Catatan"
   },
   "exam_types": {
     "sts": "STS",
     "sas": "SAS",
     "other": "Asesmen lain"
   },
-  "legend": "Keterangan",
   "events_in_month": "Acara dan libur bulan {month}",
-  "date_range": "{start} sampai {end}"
+  "frame": {
+    "title": "Tahun ajaran",
+    "dates": "{start} sampai {end}",
+    "even_semester": "Semester 2 mulai {date}",
+    "days_per_week": "{days} hari sekolah per minggu",
+    "from_layer": "Tanggal dari kalender daerah",
+    "from_academic_year": "Tanggal dari Tahun ajaran sekolah",
+    "from_default": "Tanggal sementara, sampai tahun ajaran dibuat",
+    "differs": "Tanggal di Tahun ajaran sekolah berbeda dengan kalender daerah. Hari efektif dihitung dengan tanggal kalender daerah karena tanggal itu wajib diikuti."
+  },
+  "list": {
+    "hide": "Jadikan hari masuk sekolah",
+    "hide_other": "Tidak dipakai di sekolah ini",
+    "hide_reason": "Alasan (boleh dikosongkan)",
+    "hide_confirm": "Simpan",
+    "unhide": "Pakai lagi",
+    "edit": "Ubah",
+    "delete": "Hapus",
+    "delete_confirm": "Hapus acara ini dari kalender sekolah?",
+    "mandatory_note": "Wajib diikuti, tidak bisa diubah sekolah.",
+    "propose_change": "Usulkan perubahan",
+    "propose_delete": "Usulkan hapus",
+    "propose_hide": "Usulkan masuk sekolah",
+    "propose_unhide": "Usulkan dipakai lagi",
+    "propose_reason": "Alasan usulan (boleh dikosongkan)",
+    "send_proposal": "Kirim usulan",
+    "actions": "Pilihan untuk {title}"
+  },
+  "form": {
+    "title_add": "Tambah acara sekolah",
+    "title_propose": "Usulkan acara",
+    "title_edit": "Ubah acara",
+    "intro_propose": "Operator sekolah memeriksa usulan Anda dan memutuskannya.",
+    "kind": "Jenis",
+    "exam_type": "Jenis asesmen",
+    "event_title": "Nama acara",
+    "starts_on": "Mulai",
+    "ends_on": "Sampai (boleh dikosongkan)",
+    "class": "Untuk",
+    "class_all": "Seluruh sekolah",
+    "submit_add": "Tambahkan",
+    "submit_edit": "Simpan perubahan",
+    "submit_propose": "Kirim usulan",
+    "cancel": "Batal"
+  },
+  "effective": {
+    "title": "Hari efektif",
+    "intro": "Dihitung dari hari sekolah dikurangi libur, asesmen, dan kegiatan. Hari dengan catatan tetap dihitung sebagai hari efektif.",
+    "for": "Hitung untuk",
+    "month": "Bulan",
+    "school_days": "Hari sekolah",
+    "holidays": "Libur",
+    "assessments": "Asesmen",
+    "activities": "Kegiatan",
+    "effective_days": "Hari efektif",
+    "effective_weeks": "Minggu efektif",
+    "semester": "Semester {number}",
+    "semester_total": "Jumlah semester {number}",
+    "year_total": "Jumlah satu tahun",
+    "days_per_week": "Dihitung dengan {days} hari sekolah per minggu."
+  },
+  "changes": {
+    "operator_title": "Kalender daerah berubah",
+    "operator_intro": "Perubahan dari kalender nasional atau daerah langsung berlaku untuk sekolah Anda.",
+    "teacher_title": "Hari belajar berubah",
+    "teacher_intro": "Hari-hari ini berubah sejak Anda terakhir membuka kalender. Periksa jadwal mengajar Anda.",
+    "added": "Baru: {title} ({date})",
+    "changed": "Berubah: {title} ({date})",
+    "removed": "Dihapus: {title} ({date})",
+    "now_off": "{date} sekarang tidak ada pelajaran: {title}",
+    "now_school_day": "{date} sekarang hari belajar lagi",
+    "effective": "Hari efektif seluruh sekolah: {before} menjadi {after}",
+    "mark_read": "Tandai sudah dibaca"
+  },
+  "toasts": {
+    "added": "Acara ditambahkan ke kalender sekolah.",
+    "updated": "Acara diubah.",
+    "deleted": "Acara dihapus dari kalender sekolah.",
+    "hidden": "Disimpan. Hari ini tidak dipakai di sekolah Anda.",
+    "unhidden": "Dipakai lagi.",
+    "read": "Ditandai sudah dibaca."
+  },
+  "errors": {
+    "date": "Tulis tanggal yang benar.",
+    "end_before_start": "Tanggal selesai tidak boleh sebelum tanggal mulai.",
+    "exam_type": "Pilih jenis asesmen.",
+    "outside_year": "Tanggal harus di dalam tahun ajaran ({start} sampai {end}).",
+    "exam_on_holiday": "STS atau SAS tidak bisa pada hari libur nasional atau cuti bersama: {date} ({name}).",
+    "class_not_found": "Kelas ini tidak ada di tahun ajaran yang dipilih."
+  },
+  "warnings": {
+    "non_school_day": "Perhatian: {date} hari {day}, tidak ada pelajaran."
+  },
+  "console": {
+    "title": "Kalender",
+    "intro": "Hari libur nasional dan kalender daerah. Data diperiksa dulu, lalu diimpor sebagai draf. Setelah Tim Validasi menyetujui, admin mengaktifkannya dan kalender langsung berlaku untuk sekolah.",
+    "files_title": "Data di repositori",
+    "file_holidays": "Hari libur nasional (SKB)",
+    "file_region": "Kalender daerah",
+    "check_ok": "Lolos pemeriksaan",
+    "check_problems": "Belum lolos pemeriksaan",
+    "checked_on": "Diperiksa dengan SKB resmi pada {date}",
+    "official_sources": "{count} sumber resmi",
+    "differences": "{count} perbedaan sudah dicatat",
+    "days": "{count} hari",
+    "events": "{count} acara, {notes} catatan, {days} cuti bersama tetap masuk",
+    "import": "Impor sebagai draf",
+    "check_failed": "Data belum bisa diimpor: {problem}",
+    "packages_title": "Paket kalender",
+    "packages_empty": "Belum ada paket kalender. Impor data di atas.",
+    "status": {
+      "draft": "Draf, belum berlaku",
+      "active": "Berlaku",
+      "retired": "Tidak berlaku"
+    },
+    "version": "Versi {version}",
+    "school_years": "Tahun ajaran {years}",
+    "open_ended": "mulai {year}",
+    "items": "{count} data",
+    "hides": "{count} cuti bersama tetap masuk",
+    "show_items": "Lihat isi paket",
+    "mandatory": "Wajib",
+    "setting": "Pengaturan",
+    "activate": "Aktifkan",
+    "activate_hint": "Aktifkan hanya setelah Tim Validasi menyetujui data ini.",
+    "approver_only": "Hanya admin yang bisa mengaktifkan paket.",
+    "changes_hint": "Perubahan pada paket yang sudah berlaku diajukan lewat Usulan wilayah.",
+    "toasts": {
+      "imported": "Data diimpor: {created} baru, {revised} berubah, {retired} dihapus, {unchanged} sama.",
+      "activated": "Paket diaktifkan dan berlaku untuk sekolah."
+    },
+    "errors": {
+      "file": "Berkas data ini tidak ditemukan.",
+      "not_draft": "Paket ini sudah berlaku atau tidak ditemukan."
+    },
+    "problems": {
+      "dataset": "jenis data tidak dikenal",
+      "code": "kode paket tidak sah",
+      "check_missing": "belum ada catatan pemeriksaan SKB beserta tanggalnya",
+      "no_official_source": "belum ada sumber resmi dari situs pemerintah (go.id)",
+      "no_days": "tidak ada hari libur",
+      "school_year": "tahun ajaran {year} tidak sah",
+      "day_date": "tanggal {date} di luar tahun ajaran {year}",
+      "day_kind": "jenis hari {date} tidak dikenal",
+      "day_name": "nama hari {date} kosong",
+      "day_twice": "tanggal {date} tercatat dua kali",
+      "day_decree": "tanggal {date} tidak menyebut SKB",
+      "decree_unbacked": "{decree} tidak ada di sumber resmi pemeriksaan",
+      "region_missing": "wilayah kalender belum ada di daftar wilayah",
+      "frame": "tanggal tahun ajaran tidak urut",
+      "days_per_week": "hari sekolah per minggu harus 5 atau 6",
+      "evidence": "dasar aturan (nomor peraturan dan sha256 berkas) belum ada",
+      "event_kind": "jenis acara “{title}” tidak dikenal",
+      "event_date": "tanggal “{title}” tidak sah atau di luar tahun ajaran"
+    }
+  }
 }

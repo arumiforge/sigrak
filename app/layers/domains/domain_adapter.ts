@@ -1,6 +1,7 @@
 import { randomBytes } from 'node:crypto'
 import type { QueryClientContract } from '@adonisjs/lucid/types/database'
 import type { ItemInput, ResolvedItem } from '../resolver/resolve_core.js'
+import type { SchoolResolution } from '../resolver/layer_resolver.js'
 import type { Force, ItemShape, Origin, SourceRef } from '../types.js'
 
 /**
@@ -31,6 +32,19 @@ export interface DomainAdapter<V = Record<string, unknown>, P = Record<string, u
   labelOf(value: V | P): string
   /** Display order of resolved items. */
   compare(a: ResolvedItem<V>, b: ResolvedItem<V>): number
+  /**
+   * The domain's own rules for a school addition or change (calendar:
+   * the conflict checker, D-260), run with the layer rules when the
+   * operator saves, when a proposal is sent and again when it is
+   * approved. `replacing` is the item key a change replaces. Throws a
+   * LayerRuleException.
+   */
+  checkChange?(
+    client: QueryClientContract,
+    resolution: SchoolResolution<V>,
+    payload: P,
+    options: { replacing: string | null }
+  ): Promise<void>
 }
 
 /**

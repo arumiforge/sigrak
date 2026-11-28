@@ -134,7 +134,8 @@
     "unfollow_confirm_body": "Isinya tidak lagi dipakai mulai hari ini. Kepala sekolah mendapat pemberitahuan.",
     "operator_only": "Hanya operator sekolah yang bisa memilih paket. Kepala sekolah mendapat pemberitahuan setiap ada perubahan.",
     "domains": {
-      "extracurricular": "Ekstrakurikuler"
+      "extracurricular": "Ekstrakurikuler",
+      "calendar": "Kalender"
     }
   },
   "notices": {
@@ -146,6 +147,7 @@
     "package_chosen": "{name} memilih mengikuti “{package}”.",
     "package_left": "{name} berhenti mengikuti “{package}”.",
     "package_retired": "Paket “{package}” sudah tidak berlaku, jadi tidak diikuti lagi.",
+    "package_carried_over": "Kesepakatan yang diikuti tetap berlaku di tahun ajaran {year}: {packages}. Pilih “Berhenti mengikuti” bila sekolah tidak lagi ikut.",
     "proposal_decided_approved": "Usulan “{label}” disetujui.",
     "proposal_decided_rejected": "Usulan “{label}” tidak disetujui.",
     "someone": "Operator"

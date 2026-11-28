@@ -5,7 +5,7 @@ import db from '@adonisjs/lucid/services/db'
  * Tables owned by one school through a parent row, without their own
  * school_id. Add a child table here when its migration adds childRls().
  */
-const CHILD_TABLES = ['calendar_events', 'catalog_items', 'exam_participants', 'generation_steps']
+const CHILD_TABLES = ['calendar_items', 'catalog_items', 'exam_participants', 'generation_steps']
 
 /**
  * Guards every later migration: a table with a school_id column (or a

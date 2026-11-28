@@ -81,6 +81,7 @@
     "title": "Kelas {name}",
     "subtitle": "Kelas {grade} · Tahun ajaran {year}",
     "back": "Kembali ke kelas {year}",
+    "timetable_link": "Jadwal kelas",
     "details_title": "Data kelas",
     "grade_hint": "Guru mata pelajaran yang tidak ada di tingkat baru akan dilepas.",
     "delete_title": "Hapus kelas",

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Form } from '@inertiajs/react'
+import { Form, Link } from '@inertiajs/react'
 import { ConfirmAction } from '~/components/patterns/confirm_dialog'
 import { EmptyState } from '~/components/patterns/empty_state'
 import { PageHeader } from '~/components/patterns/page_header'
@@ -69,6 +69,14 @@ export default function ClassPage({
           href: `/kelas?tahun=${year.publicId}`,
           label: t('classes.class.back', { year: year.name }),
         }}
+        actions={
+          <Button asChild variant="outline">
+            <Link href={`/kelas/${schoolClass.publicId}/jadwal`} prefetch>
+              <Icon name="timetable" />
+              {t('classes.class.timetable_link')}
+            </Link>
+          </Button>
+        }
       >
         {readOnly && (
           <p className="mt-3 rounded-md border border-warn/35 bg-warn-tint p-3 text-sm">

@@ -26,7 +26,16 @@
     "grade": "Kelas",
     "art_branch": "Cabang Seni dan Budaya",
     "homeroom": "Guru",
-    "assignments": "Guru mata pelajaran"
+    "assignments": "Guru mata pelajaran",
+    "weekday": "Hari",
+    "starts_at": "Jam mulai",
+    "ends_at": "Jam selesai",
+    "kind": "Jenis baris",
+    "subject": "Mata pelajaran",
+    "label": "Keterangan",
+    "jp": "JP",
+    "target": "Kelas",
+    "lessons": "Jumlah JP"
   },
   "messages": {
     "required": "{field} wajib diisi.",

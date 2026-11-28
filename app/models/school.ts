@@ -1,8 +1,7 @@
 import { SchoolSchema } from '#database/schema'
-import { belongsTo, hasMany } from '@adonisjs/lucid/orm'
-import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import { belongsTo } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Region from '#models/region'
-import Calendar from '#models/calendar'
 
 export type SchoolLevel = 'sd' | 'mi'
 export type RegionSource = 'npsn_directory' | 'dapodik_import' | 'staff_manual'
@@ -20,7 +19,4 @@ export default class School extends SchoolSchema {
 
   @belongsTo(() => Region, { foreignKey: 'districtId' })
   declare districtRegion: BelongsTo<typeof Region>
-
-  @hasMany(() => Calendar)
-  declare calendars: HasMany<typeof Calendar>
 }
