@@ -13,6 +13,46 @@ export const APP_ROLE = 'sigrak_app'
 export const STAFF_ROLE = 'sigrak_staff'
 
 /**
+ * Read-only staff (support, D-469): SELECT only, and a SELECT policy on
+ * every school table, so it sees every school but cannot change a row.
+ * Reached with `SET LOCAL ROLE` inside one transaction (see
+ * `staffReadTransaction`). Not a member of `sigrak_app`, so it inherits
+ * none of the app's write grants.
+ */
+export const STAFF_READ_ROLE = 'sigrak_staff_readonly'
+
+/**
+ * Tables the read-only staff role may not read even though it reads
+ * everything else: mailed-link hashes, AI keys, migration bookkeeping.
+ * A later table with secrets is added here and revoked in its migration.
+ */
+export const STAFF_READ_HIDDEN_TABLES = [
+  'adonis_schema',
+  'adonis_schema_versions',
+  'password_reset_tokens',
+  'email_confirmation_tokens',
+  'ai_credentials',
+] as const
+
+/**
+ * SQL that creates the read-only staff role when it is missing (roles
+ * are cluster-wide and never dropped). Used by its migration and by the
+ * RLS helpers, so a policy for it can always be created.
+ */
+export const ENSURE_STAFF_READ_ROLE_SQL = `
+  DO $$
+  BEGIN
+    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${STAFF_READ_ROLE}') THEN
+      BEGIN
+        CREATE ROLE ${STAFF_READ_ROLE} NOLOGIN NOSUPERUSER NOBYPASSRLS;
+      EXCEPTION WHEN duplicate_object THEN NULL;
+      END;
+    END IF;
+  END
+  $$
+`
+
+/**
  * The connection that logs in as the app role (config/database.ts).
  */
 export const TENANT_CONNECTION = 'tenant'
@@ -20,8 +60,8 @@ export const TENANT_CONNECTION = 'tenant'
 /**
  * Creates or updates the app's login user: a member of `sigrak_app`
  * (inherits its grants and the school policies) and of `sigrak_staff`
- * without inheritance, so staff access needs an explicit
- * `SET LOCAL ROLE`. Runs as a user that may create roles (the owner in
+ * and `sigrak_staff_readonly` without inheritance, so staff access
+ * needs an explicit `SET LOCAL ROLE`. Runs as a user that may create roles (the owner in
  * tests and CI; the server setup in production). Safe to run again and
  * from parallel test runs.
  */
@@ -48,6 +88,9 @@ export async function ensureAppLoginRole(
   await retryCatalogRace(() => client.rawQuery(`GRANT ${APP_ROLE} TO ${name} WITH INHERIT TRUE`))
   await retryCatalogRace(() =>
     client.rawQuery(`GRANT ${STAFF_ROLE} TO ${name} WITH INHERIT FALSE, SET TRUE`)
+  )
+  await retryCatalogRace(() =>
+    client.rawQuery(`GRANT ${STAFF_READ_ROLE} TO ${name} WITH INHERIT FALSE, SET TRUE`)
   )
 }
 

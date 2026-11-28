@@ -1,4 +1,9 @@
-import { APP_ROLE, STAFF_ROLE } from './database_roles.js'
+import {
+  APP_ROLE,
+  ENSURE_STAFF_READ_ROLE_SQL,
+  STAFF_READ_ROLE,
+  STAFF_ROLE,
+} from './database_roles.js'
 
 /**
  * SQL for row-level security on school-owned tables, for migrations:
@@ -7,11 +12,12 @@ import { APP_ROLE, STAFF_ROLE } from './database_roles.js'
  * for (const sql of schoolRls('classes')) this.schema.raw(sql)
  * ```
  *
- * Every school-owned table gets two policies: the school policy for
+ * Every school-owned table gets three policies: the school policy for
  * the app role (rows of the school set by `SET LOCAL app.school_id`,
- * nothing when it is unset) and the staff policy for `sigrak_staff`.
+ * nothing when it is unset), the staff policy for `sigrak_staff`, and
+ * a SELECT-only policy for the read-only staff role (support, D-469).
  * `tests/functional/tenancy/rls_coverage.spec.ts` fails when a table
- * with a `school_id` column has RLS off or misses either policy.
+ * with a `school_id` column has RLS off or misses one of them.
  */
 export function schoolRls(table: string, options: { userColumn?: string } = {}) {
   const own = options.userColumn
@@ -47,12 +53,26 @@ export function childRls(
 }
 
 /**
- * The staff policy alone, for tables whose school policy is written by
- * hand.
+ * The staff policies alone (full and read-only), for tables whose
+ * school policy is written by hand. The read-only role is created first
+ * when missing, so migrations older than its own still run on an empty
+ * server.
  */
 export function staffPolicy(table: string) {
   return [
     `CREATE POLICY ${table}_staff ON ${table} FOR ALL TO ${STAFF_ROLE} USING (true) WITH CHECK (true)`,
+    ...staffReadPolicy(table),
+  ]
+}
+
+/**
+ * The read-only staff policy: every row is visible, nothing is
+ * writable (the role has no write grants either).
+ */
+export function staffReadPolicy(table: string) {
+  return [
+    ENSURE_STAFF_READ_ROLE_SQL,
+    `CREATE POLICY ${table}_staff_read ON ${table} FOR SELECT TO ${STAFF_READ_ROLE} USING (true)`,
   ]
 }
 
@@ -61,6 +81,7 @@ export function staffPolicy(table: string) {
  */
 export function dropRls(table: string) {
   return [
+    `DROP POLICY IF EXISTS ${table}_staff_read ON ${table}`,
     `DROP POLICY IF EXISTS ${table}_staff ON ${table}`,
     `DROP POLICY IF EXISTS ${table}_school ON ${table}`,
     `ALTER TABLE ${table} DISABLE ROW LEVEL SECURITY`,
