@@ -244,6 +244,7 @@ const OLD_TERMS: Record<string, string> = {
   'canggih': '(no decoration)',
   'gagal': '… belum berhasil',
   'error': 'plain words',
+  'file': 'Berkas (D-472)',
 }
 
 /**

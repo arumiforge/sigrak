@@ -284,7 +284,7 @@ test.group('Regions | console pages', (group) => {
     }
     assert.lengthOf(props.pending, 2)
     assert.deepInclude(props.pending[0].to.district, { name: 'Bae', kind: 'district' })
-    assert.equal(props.messages['regions.changes.title'], 'Perubahan Wilayah')
+    assert.equal(props.messages['regions.changes.title'], 'Perubahan wilayah')
 
     const accepted = await post(
       client,
