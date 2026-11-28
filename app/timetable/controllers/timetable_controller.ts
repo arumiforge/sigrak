@@ -11,7 +11,7 @@ import TimetableDraft from '../models/timetable_draft.js'
 import { classRows, presentRow } from '../presenters.js'
 import { newSeed } from '../random.js'
 import { frameFromInput, loadSettings, saveSettings } from '../settings.js'
-import { classSummary, classWarnings } from '../slots.js'
+import { classSummary, classWarnings, yearRuleRows } from '../slots.js'
 import { toClock } from '../time.js'
 import { preferenceKeys, type DayFrame, type Preferences } from '../types.js'
 import { draftValidator, settingsValidator } from '../validators.js'
@@ -77,6 +77,7 @@ export default class TimetableController {
       const { year, years } = await pickYear(ctx)
       if (!year) return { years, year: null, classes: [] }
       const state = await loadYearState(deps, year)
+      const rows = yearRuleRows(state)
       return {
         years,
         year: { publicId: year.publicId, name: year.name, closed: year.isClosed },
@@ -90,7 +91,7 @@ export default class TimetableController {
             complete: summary.complete,
             countedTotal: summary.countedTotal,
             countedComplete: summary.countedComplete,
-            warningCount: classWarnings(state, classState.model.id).length,
+            warningCount: classWarnings(state, classState.model.id, rows).length,
           }
         }),
       }

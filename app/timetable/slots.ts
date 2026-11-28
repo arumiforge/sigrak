@@ -205,11 +205,21 @@ export function classSummary(state: YearState, classId: number) {
 /**
  * Broken limits that already sit in a class's rows, for example a clash
  * left by a homeroom change (D-248): shown as warnings on the Jadwal
- * page until the operator fixes them.
+ * page until the operator fixes them. A page that asks for several
+ * classes passes the year's rows once (`yearRuleRows`) instead of
+ * converting every row of the year again for each class (R1-11).
  */
-export function classWarnings(state: YearState, classId: number) {
-  const rows = state.slots.map(ruleRowOf)
+export function classWarnings(
+  state: YearState,
+  classId: number,
+  rows: RuleRow[] = yearRuleRows(state)
+) {
   return checkRows(rows, state.context, (row) => row.classId === classId).filter(
     (violation) => violation.rule === 'teacher_clash' || violation.rule === 'over_allocation'
   )
+}
+
+/** Every row of the year in the shape the rules read. */
+export function yearRuleRows(state: YearState): RuleRow[] {
+  return state.slots.map(ruleRowOf)
 }
