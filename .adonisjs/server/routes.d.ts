@@ -29,6 +29,19 @@ export type ScannedRoutes = {
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.integrations.show': { paramsTuple?: []; params?: {} }
+    'admin.integrations.mail': { paramsTuple?: []; params?: {} }
+    'admin.integrations.mail_test': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key_remove': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.integrations.storage': { paramsTuple?: []; params?: {} }
+    'admin.integrations.team_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.clear': { paramsTuple: [ParamValue]; params: {'integration': ParamValue} }
+    'admin.ai_models.index': { paramsTuple?: []; params?: {} }
+    'admin.ai_models.update': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.reset': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.test': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
@@ -140,6 +153,8 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.integrations.show': { paramsTuple?: []; params?: {} }
+    'admin.ai_models.index': { paramsTuple?: []; params?: {} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -186,6 +201,8 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.integrations.show': { paramsTuple?: []; params?: {} }
+    'admin.ai_models.index': { paramsTuple?: []; params?: {} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -239,6 +256,17 @@ export type ScannedRoutes = {
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.integrations.mail': { paramsTuple?: []; params?: {} }
+    'admin.integrations.mail_test': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key_remove': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.integrations.storage': { paramsTuple?: []; params?: {} }
+    'admin.integrations.team_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.clear': { paramsTuple: [ParamValue]; params: {'integration': ParamValue} }
+    'admin.ai_models.update': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.reset': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.test': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.grant': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff.scope': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }

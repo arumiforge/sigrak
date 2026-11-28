@@ -337,6 +337,17 @@
       "setting": {
         "updated": "Pengaturan diubah"
       },
+      "integration": {
+        "updated": "Integrasi diubah",
+        "cleared": "Isian integrasi dikosongkan",
+        "key_added": "Kunci chatbot ditambahkan",
+        "key_removed": "Kunci chatbot dihapus",
+        "mail_tested": "Email uji dikirim"
+      },
+      "ai_model": {
+        "updated": "Model AI diubah",
+        "tested": "Model AI diuji"
+      },
       "invitation": {
         "create": "Undangan dikirim",
         "resend": "Undangan dikirim ulang",

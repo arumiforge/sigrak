@@ -39,7 +39,22 @@
     "region_ids": "Wilayah",
     "school_ids": "Sekolah",
     "levels": "Jenjang",
-    "fields": "Bidang"
+    "fields": "Bidang",
+    "host": "Server SMTP",
+    "port": "Port",
+    "security": "Pengamanan",
+    "from_address": "Alamat pengirim",
+    "from_name": "Nama pengirim",
+    "base_url": "Alamat API",
+    "model": "Model",
+    "models": "Daftar model",
+    "secret": "Kunci",
+    "endpoint": "Alamat endpoint",
+    "region": "Region",
+    "bucket": "Nama bucket",
+    "access_key_id": "ID kunci akses",
+    "secret_access_key": "Kunci akses rahasia",
+    "gemini_key": "Kunci Gemini"
   },
   "messages": {
     "required": "{field} wajib diisi.",

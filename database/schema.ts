@@ -75,6 +75,23 @@ export class AiCredentialSchema extends BaseModel {
   declare userId: number
 }
 
+export class AiPurposeModelSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'models', 'purpose', 'updatedAt', 'updatedByStaffId'] as const
+  $columns = AiPurposeModelSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare models: any
+  @column()
+  declare purpose: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare updatedByStaffId: number | null
+}
+
 export class AiUsageLogSchema extends BaseModel {
   static $columns = ['aiCredentialId', 'attempt', 'createdAt', 'generationId', 'httpStatus', 'id', 'inputTokens', 'latencyMs', 'model', 'outcome', 'outputTokens', 'purpose', 'schoolId', 'stepKey', 'userId'] as const
   $columns = AiUsageLogSchema.$columns
@@ -457,6 +474,23 @@ export class GenerationSchema extends BaseModel {
   declare updatedAt: DateTime
   @column()
   declare userId: number
+}
+
+export class IntegrationSettingSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'key', 'payload', 'updatedAt', 'updatedByStaffId'] as const
+  $columns = IntegrationSettingSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare key: string
+  @column()
+  declare payload: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare updatedByStaffId: number | null
 }
 
 export class InvitationSchema extends BaseModel {

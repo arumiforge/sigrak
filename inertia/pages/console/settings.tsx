@@ -1,6 +1,7 @@
 import { Form } from '@inertiajs/react'
 import { PageHeader } from '~/components/patterns/page_header'
 import { Section } from '~/components/section'
+import { SettingsTabs } from '~/components/settings_tabs'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
 import { useT } from '~/lib/i18n'
@@ -19,6 +20,7 @@ export default function ConsoleSettings({ defaultTrialDays, can }: Props) {
   return (
     <>
       <PageHeader title={t('console.settings.title')} />
+      <SettingsTabs />
 
       <Section
         title={t('console.settings.trial_title')}

@@ -73,6 +73,10 @@ import staffSvg from '~/icons/hugeicons/rounded-stroke/users/user-shield-01.svg?
 import staffSolidSvg from '~/icons/hugeicons/rounded-solid/users/user-shield-01.svg?raw'
 import accessSvg from '~/icons/hugeicons/rounded-stroke/security/security-check.svg?raw'
 import accessSolidSvg from '~/icons/hugeicons/rounded-solid/security/security-check.svg?raw'
+import integrationsSvg from '~/icons/hugeicons/rounded-stroke/devices/electric-plugs.svg?raw'
+import integrationsSolidSvg from '~/icons/hugeicons/rounded-solid/devices/electric-plugs.svg?raw'
+import aiModelsSvg from '~/icons/hugeicons/rounded-stroke/education/brain.svg?raw'
+import aiModelsSolidSvg from '~/icons/hugeicons/rounded-solid/education/brain.svg?raw'
 import activitySvg from '~/icons/hugeicons/rounded-stroke/note-task/task-daily-01.svg?raw'
 import activitySolidSvg from '~/icons/hugeicons/rounded-solid/note-task/task-daily-01.svg?raw'
 
@@ -121,6 +125,8 @@ const strokeIcons = {
   'check': checkSvg,
   'staff': staffSvg,
   'access': accessSvg,
+  'integrations': integrationsSvg,
+  'ai-models': aiModelsSvg,
   'activity': activitySvg,
 } as const
 
@@ -151,6 +157,8 @@ const solidIcons: Partial<Record<IconName, string>> = {
   'region': regionSolidSvg,
   'staff': staffSolidSvg,
   'access': accessSolidSvg,
+  'integrations': integrationsSolidSvg,
+  'ai-models': aiModelsSolidSvg,
   'activity': activitySolidSvg,
 }
 

@@ -196,6 +196,24 @@ const consoleItems: NavItem[] = [
     icon: 'settings',
     section: 'nav.sections.system',
     ability: 'settings.view',
+    // Integrasi and Model AI below are pages of the same area (R2-03).
+    exact: true,
+  },
+  {
+    key: 'integrations',
+    href: '/pengaturan/integrasi',
+    label: 'nav.console.integrations',
+    icon: 'integrations',
+    section: 'nav.sections.system',
+    ability: 'integrations.view',
+  },
+  {
+    key: 'ai_models',
+    href: '/pengaturan/model-ai',
+    label: 'nav.console.ai_models',
+    icon: 'ai-models',
+    section: 'nav.sections.system',
+    ability: 'ai_models.view',
   },
   {
     key: 'staff',
