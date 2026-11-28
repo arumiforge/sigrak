@@ -71,12 +71,12 @@ export type CpuPoolStats = { size: number; threads: number; busy: number; queued
 const fromSource = import.meta.url.endsWith('.ts')
 const threadEntry = new URL(`./thread.${fromSource ? 'ts' : 'js'}`, import.meta.url).href
 const tsHook = fromSource ? import.meta.resolve('@poppinss/ts-exec') : undefined
+/** Only dynamic imports, so it runs whether eval code is read as CommonJS or ESM. */
 const bootstrap = `
-const { workerData } = require('node:worker_threads');
-(async () => {
-  if (workerData.tsHook) await import(workerData.tsHook);
+import('node:worker_threads').then(async ({ workerData }) => {
+  await import(workerData.tsHook);
   await import(workerData.threadEntry);
-})();
+});
 `
 
 export class CpuPool {
@@ -167,11 +167,9 @@ export class CpuPool {
   }
 
   #spawn() {
-    const worker = new Worker(bootstrap, {
-      eval: true,
-      workerData: { tsHook, threadEntry },
-      name: 'cpu-pool',
-    })
+    const worker = tsHook
+      ? new Worker(bootstrap, { eval: true, workerData: { tsHook, threadEntry }, name: 'cpu-pool' })
+      : new Worker(new URL(threadEntry), { name: 'cpu-pool' })
     const slot: Slot = { worker }
     worker.unref()
     worker.on('message', (reply: Reply) => this.#onReply(slot, reply))
