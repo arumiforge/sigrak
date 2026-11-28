@@ -131,7 +131,7 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R1-02 | Indonesian copy base and translation checks | review (merged into the R1 branch) | r1/r1-02-lang-id | — | `tasks/R1-02-*.md` |
 | R1-03 | Curriculum tables, import, Profil Jenjang, policy-profile resolver | review (merged into the R1 branch) | r1/r1-03-curriculum | — | `tasks/R1-03-*.md` |
 | R1-10 | Runtime settings: AI concurrency, queue-wait alert, worker_threads pool (D-463, D-467) | review (merged into the R1 branch) | r1/r1-10-runtime-settings | — | `tasks/R1-10-*.md` |
-| R1-04 | Regions and school directory (NPSN → region) | in-progress | r1/r1-04-regions | R1-01 | `tasks/R1-04-*.md` |
+| R1-04 | Regions and school directory (NPSN → region) | review (merged into the R1 branch) | r1/r1-04-regions | R1-01 | `tasks/R1-04-*.md` |
 | R1-05 | Auth, invitations, self sign-up, flexible trial, role switch, staff console | in-progress | r1/r1-05-auth | R1-01, R1-02 | `tasks/R1-05-*.md` |
 | R1-07 | Layer model core and resolver (D-456, D-466) | todo | — | R1-01, R1-04 | `tasks/R1-07-*.md` |
 | R1-06 | Academic year, classes, teaching assignments | todo | — | R1-03, R1-05 | `tasks/R1-06-*.md` |
