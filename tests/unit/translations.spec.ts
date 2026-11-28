@@ -421,9 +421,7 @@ test.group('Translations: code', () => {
     assert.isFalse(Object.keys(sent).some((key) => key.startsWith('validation.')))
   })
 
-  test('the messages of a namespace set are picked once and shared (R1-11)', async ({
-    assert,
-  }) => {
+  test('the messages of a namespace set are picked once and shared (R1-11)', async ({ assert }) => {
     const { messagesFor } = await import('#middleware/translations_middleware')
     const first = messagesFor('id', ['common', 'nav', 'calendar'])
     // Same set in another order, with a duplicate and a server-only namespace.
