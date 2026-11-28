@@ -2381,3 +2381,8 @@ Accepted · 2026-11-28 · R1-12 · owner's choice (interview 2026-11-28) · refi
 - Dark mode follows the device for now; a light/dark setting comes later with the sound settings.
 - Accepted as built: grouped sidebar headings on desktop, the icon picks (desk for Kelas, medal for Ekstrakurikuler, map pin for Paket daerah, note-edit for Usulan, clock-calendar for Jadwal), input borders darker than card lines for 3:1 contrast, invitation chips "Menunggu" (grey) and "Lewat 7 hari" (warn).
 Reason: owner's choices on the R1-12 visual questions.
+
+### D-475 — Page screenshots are kept in the repository
+Accepted · 2026-11-28 · owner's choice ("simpan screenshot di repo") · changes the screenshot rule of R1-12 (D-473)
+Screenshot sets that the owner reviews are kept in `docs/screenshots/<phase>/` (R1: `docs/screenshots/r1/`, with a README index) as well as in the PR summary. They are retaken when the shell changes visibly; old sets are replaced, not piled up.
+Reason: the owner wants to see the screenshots in the repository; files in a cloud session's scratchpad are lost when the session ends.

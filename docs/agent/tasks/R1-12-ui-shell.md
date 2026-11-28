@@ -28,7 +28,7 @@ One UI shell every page uses, so the app looks and feels like SIGRAK on phones a
 - **Shared patterns:** page header, empty state, skeletons, toast (Sonner) with undo, confirm dialog, drawer (Vaul) on phones vs dialog on desktop, data table (TanStack Table + Virtual) with mobile cards, form field with hint and error, source badge from R1-07 aligned to the tokens.
 - **SPA feel (D-389):** persistent layouts, link prefetch on hover/touch, deferred props with skeletons, optimistic updates with undo where a page already saves, view transitions between pages, progress bar for slow visits; respects reduced motion.
 - **Pages moved onto the shell:** login and auth pages, Akun, Guru, Tahun Ajaran, Kelas, Kalender, Jadwal, the layer pages, the console pages, the exam home, error pages.
-- **Checks:** Playwright screenshots of every page at 360 and 1280 px, light and dark; no horizontal scroll; tap targets at least 44 px; visible focus; axe accessibility check without serious issues; translation and EYD tests still pass. Screenshots go in the PR description summary, not the repository.
+- **Checks:** Playwright screenshots of every page at 360 and 1280 px, light and dark; no horizontal scroll; tap targets at least 44 px; visible focus; axe accessibility check without serious issues; translation and EYD tests still pass. Screenshots go in the PR description summary and, since D-475, in `docs/screenshots/r1/`.
 
 ## Done when
 
