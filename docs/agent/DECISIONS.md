@@ -2323,3 +2323,52 @@ Accepted · 2026-11-28 · R0-08 · owner's choice (interview 2026-11-28) · resu
 - Load is measured again twice: with the first real R1 content page and row-level security, and on the VPS behind nginx and the tunnel in R3.
 - The R1 gate waits for the owner's review of R0-06; the gate report is ready.
 Reason: the spike met every target except AI queue wait, which is a setting.
+
+### D-468 — R0 gate passed: R0-06 accepted, R1 starts
+Accepted · 2026-11-28 · R0 gate · owner's choice ("R0-06 sudah saya review, setujui dan mulai R1") · confirms D-451; closes R0-06 and R0-08 (`docs/drafts/r0-gate.md`)
+- R0-06 is accepted as built; D-451 is no longer only a team decision.
+- R1 (foundation) starts on the phase R stack, split into R1-01…R1-11 in `docs/agent/tasks/` (`R1-00-foundation-plan.md` has the order). Work runs in waves: tenancy, Indonesian copy base, curriculum and runtime settings first, in parallel; then auth, layers, school year, calendar, timetable; the load re-measure of D-467 last.
+- Parallel R1 tasks keep apart: each owns its module folder, its own route file under `start/routes/`, its own migration timestamp block, and its own test database (`sigrak_test_<task>`) and Redis database numbers when tests run side by side (D-442).
+Reason: the spikes met the gate and the owner approved R1.
+
+### D-469 — R1 owner answers: sign-up confirmation, trial extension, MI subjects, formats, support access, region codes, CPU pool, queue thresholds
+Accepted · 2026-11-28 · R1 · owner's choice (interview 2026-11-28) · answers open questions of R1-01…R1-05 and R1-10; refines D-459, D-463, D-467
+- **Sign-up confirmation:** a self sign-up gets a confirmation mail; the teacher can use the app meanwhile, with a reminder until the email is confirmed (an invitation or reset link also confirms it).
+- **Trial extension:** a school-wide extension reopens every teacher's trial counted from today, also for trials that ended long ago.
+- **MI subjects:** the MI profile also lists the general SD curriculum (`SIGRAK-SD-2026-R1`) for the general subjects; PAI and Bahasa Arab come from the MI curriculum (KMA 1503/2025).
+- **Formats:** money is written `Rp1.234.567` (no space, PUEBI); UI copy writes the product name "SIGRAK" until the logo is chosen (D-462).
+- **Support access:** support staff (D-341) get a read-only staff database role; changes go through admin.
+- **Region codes:** the kecamatan list moves to `docs/data/regions/` as `draft` with its source; agents check it against the current Kepmendagri (D-447) and the owner reviews the flagged items.
+- **CPU pool:** use Piscina for the `worker_threads` pool (D-463), pinned exactly and vetted under D-422.
+- **Queue-wait alert:** 60 s for the exports queue, 10 s for the others.
+Reason: owner's choices on the R1 wave 1–2 questions.
+
+### D-470 — R1 team decisions from waves 1–2
+Accepted · 2026-11-28 · R1 · team decisions recorded in the Results of R1-01…R1-05 and R1-10 (full text there)
+- **Tenancy (R1-01):** migrations run as the owner; the app runs as a member of the non-owner role `sigrak_app`; staff pass the school rules only with `SET LOCAL ROLE sigrak_staff` (support: the read-only role of D-469). Each tenant transaction sets `app.school_id` and `app.user_id` with `SET LOCAL`; no school in context means no rows. Modules move onto tenant transactions one by one (R1-05 memberships, R1-08 calendars); production runs on the app login from R3.
+- **Curriculum (R1-03):** one allocations table for official yearly rows and SIGRAK semester targets; official CP elements in their own table; rule sets of one profile domain run side by side unless joined by `supersedes`; resolver cache per process, 10 minutes.
+- **Regions (R1-04):** the region tree replaces the old text columns; only migrations, seeders and the import write regions and the directory; a school missing from a later fetch is marked removed, never deleted; a rejected region change is not asked again for the same move; "next school year" means the coming 1 July until R1-06 stores school years.
+- **Accounts (R1-05):** joining a school moves nothing: a teacher's earlier personal work stays theirs and stays private; the longest trial (default, school or person) wins; invitations are opened through a narrow database function returning only the school id; all mail goes through the `default` queue; console powers until the D-339 roles exist: admin all, support read-mostly, content none.
+- **Runtime (R1-10):** queue numbers on the internal-only `/healthz/queues`; out-of-range settings are clamped with a warning, non-numbers stop the boot.
+Reason: keep the build choices of R1 findable in the decision log.
+
+### D-471 — EYD V is the spelling standard for all Indonesian text
+Accepted · 2026-11-28 · owner's choice ("masukan https://eyd.netlify.app/ untuk aturan eyd") · extends D-150, D-382 and the design system's UI writing rules
+- All Indonesian text SIGRAK produces follows *Ejaan Bahasa Indonesia yang Disempurnakan* Edisi Kelima (EYD V, Badan Pengembangan dan Pembinaan Bahasa): UI copy in `resources/lang/id`, exports and import templates, generated PDFs and documents, AI templates' fixed text, the public site and the Indonesian guides in `docs/server/`.
+- Working reference: https://eyd.netlify.app/ (community copy, CC BY-SA 4.0). Where it differs from Badan Bahasa's official publication, the official text wins. A rule summary for SIGRAK lives in `docs/drafts/eyd-rules.md`; mechanical checks run in the translation tests.
+- House choices that EYD leaves open stay as decided: money in UI without decimals `Rp1.234.567` (D-469); formal documents and receipts use `Rp1.234.567,00` and the amount in words where EYD requires it; times `14.30` with "WIB" where it matters.
+- Owner-supplied material in `docs/sources/` is never corrected (CLAUDE.md).
+Reason: one spelling standard for every Indonesian text, checked automatically where possible.
+
+### D-472 — Writing choices next to EYD; local agreements carry over
+Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · refines D-471, D-165, D-466; answers open questions of `docs/drafts/eyd-rules.md` and R1-07
+- **Numeric dates** stay `25/11/2026` in the app and exports (D-165); letters and official documents write the date in full (`25 November 2026`).
+- **Terms:** "email" stays (written plainly, not in italics, in the UI); "berkas" replaces "file".
+- **Capitals in UI:** menu labels, page titles and buttons are capitalised on the first word only ("Hari ini", "Pengaturan sekolah", "Simpan perubahan"); names of SIGRAK features stay capitalised (Bank Soal, Dokumen Saya).
+- **Local agreements:** a school's chosen local agreements are copied into the new school year when it is created; the operator is notified and can stop following them.
+Reason: owner's choices.
+
+### D-473 — R1 gets a UI shell task (R1-12)
+Accepted · 2026-11-28 · owner's choice ("ya, tambahkan R1-12 kerangka UI") · extends D-468; follows D-389, D-390, D-402, D-434
+R1 adds R1-12: one UI shell for every page (persistent layouts and navigation per area, bottom navigation on phones and sidebar on desktop, Hugeicons Pro mapping, design tokens from the design system, shared patterns, the SPA behaviour of D-389), with the R1 pages moved onto it. It runs after R1-08 and R1-09 merge, next to R1-11; R5 builds on the same patterns. The logo stays out of scope until the owner picks one (RS-16, D-462).
+Reason: the R1 tasks built working pages but no shared shell; doing it once in R1 keeps later pages consistent.

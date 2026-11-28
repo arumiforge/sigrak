@@ -16,9 +16,14 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 import { loginIpThrottle } from '#start/limiter'
 import { hosts } from '#config/hosts'
+import '#start/routes/regions'
+import '#start/routes/auth'
+import '#start/routes/console'
+import '#start/routes/layers'
+import '#start/routes/school_year'
+import '#start/routes/timetable'
+import '#start/routes/calendar'
 
-const SchoolSessionController = () => import('#controllers/school/session_controller')
-const CalendarController = () => import('#controllers/school/calendar_controller')
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')
 const StaffSessionController = () => import('#controllers/staff/session_controller')
 const StaffHomeController = () => import('#controllers/staff/home_controller')
@@ -28,50 +33,38 @@ const ExamHomeController = () => import('#controllers/exam/home_controller')
 // GET /healthz is answered by HealthzMiddleware on every host, before routing.
 
 /*
-| app. — school users
+| app. — school users. Sign-in, sign-up, password reset, invitations,
+| Akun, Ganti peran and Guru: start/routes/auth.ts (R1-05).
 */
 router
   .group(() => {
+    router.on('/').redirectToPath('/kalender').as('home')
+    // Kalender: start/routes/calendar.ts (R1-08).
     router
       .group(() => {
-        router.get('/masuk', [SchoolSessionController, 'create']).as('login')
+        router.get('/coba-ai', [AiDemoController, 'index']).as('index')
+        router.post('/coba-ai', [AiDemoController, 'store']).as('store')
         router
-          .post('/masuk', [SchoolSessionController, 'store'])
-          .as('login.store')
-          .use(loginIpThrottle)
+          .post('/coba-ai/:generation/batal', [AiDemoController, 'cancel'])
+          .as('cancel')
+          .where('generation', router.matchers.uuid())
+        router
+          .post('/coba-ai/:generation/coba-lagi', [AiDemoController, 'retry'])
+          .as('retry')
+          .where('generation', router.matchers.uuid())
       })
-      .use(middleware.guest({ guard: 'web' }))
-
-    router
-      .group(() => {
-        router.on('/').redirectToPath('/kalender').as('home')
-        router
-          .get('/kalender', [CalendarController, 'index'])
-          .as('calendar.index')
-          .use(middleware.translations(['calendar']))
-        router
-          .group(() => {
-            router.get('/coba-ai', [AiDemoController, 'index']).as('index')
-            router.post('/coba-ai', [AiDemoController, 'store']).as('store')
-            router
-              .post('/coba-ai/:generation/batal', [AiDemoController, 'cancel'])
-              .as('cancel')
-              .where('generation', router.matchers.uuid())
-            router
-              .post('/coba-ai/:generation/coba-lagi', [AiDemoController, 'retry'])
-              .as('retry')
-              .where('generation', router.matchers.uuid())
-          })
-          .as('ai_demo')
-          .use(middleware.translations(['ai_demo']))
-        router.post('/keluar', [SchoolSessionController, 'destroy']).as('logout')
-      })
-      .use(middleware.auth({ guard: 'web' }))
+      .as('ai_demo')
+      .use(middleware.translations(['ai_demo']))
     // The SSE endpoints (/__transmit/*) are registered in start/transmit.ts.
   })
   .domain(hosts.app)
   .as('app')
-  .use(middleware.translations(['auth']))
+  .use([
+    middleware.translations(['auth']),
+    middleware.auth({ guard: 'web' }),
+    // A teacher who signed up alone has no school yet (D-459).
+    middleware.school({ optional: true }),
+  ])
 
 /*
 | admin. — Tim SIGRAK staff
@@ -97,7 +90,7 @@ router
   })
   .domain(hosts.admin)
   .as('admin')
-  .use(middleware.translations(['auth', 'areas']))
+  .use(middleware.translations(['auth', 'areas', 'console']))
 
 /*
 | ujian. — exam participants

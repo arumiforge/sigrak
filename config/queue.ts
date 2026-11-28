@@ -1,5 +1,6 @@
 import env from '#start/env'
 import type { ConnectionOptions, DefaultJobOptions } from 'bullmq'
+import { clampSetting, type SettingAdjustment } from '#services/queue/settings'
 
 /**
  * BullMQ queues on Redis (D-388). Each queue is served by its own
@@ -23,6 +24,12 @@ export type WorkerSettings = {
   /** A job that stalls more often than this fails. */
   maxStalledCount: number
 }
+
+/** Env values that were outside their range; the worker logs them at start. */
+const adjustments: SettingAdjustment[] = []
+
+const cpuPoolSize = env.get('CPU_POOL_SIZE')
+const waitAlertMs = clampSetting('QUEUE_WAIT_ALERT_MS', env.get('QUEUE_WAIT_ALERT_MS'), adjustments)
 
 const queueConfig = {
   /**
@@ -57,12 +64,74 @@ const queueConfig = {
    */
   shutdownGraceMs: 8_000,
 
+  /**
+   * Concurrency is a per-environment setting (D-467): QUEUE_AI_CONCURRENCY
+   * and friends in env, clamped to the ranges in
+   * app/services/queue/settings.ts.
+   */
   workers: {
     // A crashed worker's step is back in the queue after about lockDuration + stalledInterval.
-    ai: { concurrency: 4, lockDuration: 15_000, stalledInterval: 5_000, maxStalledCount: 2 },
-    exports: { concurrency: 2, lockDuration: 60_000, stalledInterval: 30_000, maxStalledCount: 1 },
-    default: { concurrency: 4, lockDuration: 30_000, stalledInterval: 30_000, maxStalledCount: 1 },
+    ai: {
+      concurrency: clampSetting(
+        'QUEUE_AI_CONCURRENCY',
+        env.get('QUEUE_AI_CONCURRENCY'),
+        adjustments
+      ),
+      lockDuration: 15_000,
+      stalledInterval: 5_000,
+      maxStalledCount: 2,
+    },
+    exports: {
+      concurrency: clampSetting(
+        'QUEUE_EXPORTS_CONCURRENCY',
+        env.get('QUEUE_EXPORTS_CONCURRENCY'),
+        adjustments
+      ),
+      lockDuration: 60_000,
+      stalledInterval: 30_000,
+      maxStalledCount: 1,
+    },
+    default: {
+      concurrency: clampSetting(
+        'QUEUE_DEFAULT_CONCURRENCY',
+        env.get('QUEUE_DEFAULT_CONCURRENCY'),
+        adjustments
+      ),
+      lockDuration: 30_000,
+      stalledInterval: 30_000,
+      maxStalledCount: 1,
+    },
   } satisfies Record<QueueName, WorkerSettings>,
+
+  /**
+   * Queue wait = time from enqueue (or the end of a delay) to the start
+   * of a job. A start that waited longer than this is logged as a
+   * queue-wait alert, and /healthz/queues reports the queue as "slow".
+   * Exports may wait longer than AI steps and mail (D-469). The alert
+   * channel itself (Telegram, Slack) comes with R3 monitoring.
+   */
+  waitAlertMs: {
+    ai: waitAlertMs,
+    exports: clampSetting(
+      'QUEUE_EXPORTS_WAIT_ALERT_MS',
+      env.get('QUEUE_EXPORTS_WAIT_ALERT_MS'),
+      adjustments
+    ),
+    default: waitAlertMs,
+  } satisfies Record<QueueName, number>,
+
+  /**
+   * worker_threads pool for CPU-heavy export work (D-463). "auto" sizes
+   * it to the container's CPU limit minus one, at least one thread.
+   */
+  cpuPool: {
+    size:
+      cpuPoolSize === undefined
+        ? ('auto' as const)
+        : clampSetting('CPU_POOL_SIZE', cpuPoolSize, adjustments),
+  } as { size: number | 'auto' },
+
+  adjustments,
 }
 
 export default queueConfig

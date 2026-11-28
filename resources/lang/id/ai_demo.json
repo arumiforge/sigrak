@@ -13,7 +13,7 @@
     "rate_limited": "Kunci pertama kena batas kuota",
     "timeout": "AI lambat menjawab",
     "empty_reply": "AI menjawab kosong",
-    "fails_then_recovers": "Gagal dulu, berhasil saat dicoba lagi"
+    "fails_then_recovers": "Belum berhasil, lalu berhasil saat dicoba lagi"
   },
   "keys": {
     "heading": "Kunci AI Anda",
@@ -76,7 +76,7 @@
     "cancelled": "Dihentikan",
     "unknown": "Terputus",
     "key_invalid": "Kunci ditolak",
-    "project_unavailable": "Project tidak bisa dipakai",
+    "project_unavailable": "Proyek tidak bisa dipakai",
     "model_unavailable": "Model tidak tersedia",
     "bad_request": "Permintaan ditolak",
     "blocked": "Diblokir",
@@ -95,7 +95,7 @@
     "cancelled": "Pembuatan dihentikan. Tekan Coba lagi untuk melanjutkan."
   },
   "errors": {
-    "too_many_active": "Masih ada 2 pembuatan yang berjalan. Tunggu salah satunya selesai, lalu mulai lagi.",
+    "too_many_active": "Masih ada dua pembuatan yang berjalan. Tunggu salah satunya selesai, lalu mulai lagi.",
     "not_running": "Pembuatan ini sudah tidak berjalan.",
     "not_retryable": "Pembuatan ini tidak bisa dicoba lagi."
   }

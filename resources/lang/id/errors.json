@@ -11,5 +11,14 @@
     "title": "Anda tidak punya akses",
     "body": "Halaman ini tidak tersedia untuk akun Anda."
   },
-  "home": "Kembali ke halaman awal"
+  "home": "Kembali ke halaman awal",
+  "general": "Terjadi kendala. Coba lagi, atau hubungi kami bila terus terjadi.",
+  "load_failed": "Data belum berhasil dimuat. Periksa koneksi Anda, lalu coba lagi.",
+  "save_failed": "Belum tersimpan. Periksa koneksi Anda, lalu coba lagi.",
+  "offline": "Koneksi terputus. Periksa internet Anda, lalu coba lagi.",
+  "page_expired": "Halaman ini sudah terlalu lama terbuka. Muat ulang halaman, lalu coba lagi.",
+  "too_many_requests": "Terlalu banyak permintaan. Tunggu sebentar, lalu coba lagi.",
+  "session_expired": "Sesi Anda berakhir. Silakan masuk lagi.",
+  "check_slow": "Pemeriksaan akun terlalu lama. Periksa koneksi, lalu coba lagi.",
+  "import_failed": "File belum berhasil diimpor. Pastikan file berasal dari SIGRAK dan belum diubah."
 }

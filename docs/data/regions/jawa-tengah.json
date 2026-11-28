@@ -1,0 +1,248 @@
+{
+  "dataset": "region_list",
+  "code": "WILAYAH-JATENG",
+  "status": "draft",
+  "verify_by": "Tim Validasi SIGRAK (D-113)",
+  "decisions": [
+    "D-169",
+    "D-170",
+    "D-447",
+    "D-466",
+    "D-469"
+  ],
+  "scope": "Provinsi Jawa Tengah dengan Kabupaten Pati, Kudus dan Jepara serta kecamatannya",
+  "source": {
+    "kemendagri_codes": {
+      "decree": "Keputusan Menteri Dalam Negeri Nomor 300.2.2-2138 Tahun 2025 tentang Pemberian dan Pemutakhiran Kode, Data Wilayah Administrasi Pemerintahan, dan Pulau",
+      "set_on": "2025-04-25",
+      "part": "Lampiran C (kecamatan per kabupaten/kota), Provinsi Jawa Tengah",
+      "file": null,
+      "sha256": null,
+      "note": "The official Lampiran C is not in the repository and was not read; the list was compared with a community transcription of the decree. See README.md, \"Pre-check\"."
+    },
+    "dapodik_codes": {
+      "source": "Source URLs of docs/data/schools/*.json (referensi.data.kemendikdasmen.go.id) and docs/drafts/regional-layers.md §2.2",
+      "note": "Province and regency codes only; kecamatan Dapodik codes are not in the repository yet."
+    }
+  },
+  "checked": {
+    "on": "2026-11-28",
+    "against": "cahyadsn/wilayah db/wilayah.sql (MIT; header \"Data Kode Wilayah sesuai Kepmendagri No 300.2.2-2138 Tahun 2025\", last edit 2026-02-13), sha256 c4c3396d9380d4edee072af1d9dff83573b574d7cd00a6562cf82e200e954031",
+    "result": "All 46 kecamatan codes and names and the three regency codes match the transcription; open points are flagged in README.md."
+  },
+  "regions": {
+    "kemendagri_code": "33",
+    "dapodik_code": "030000",
+    "name": "Jawa Tengah",
+    "children": [
+      {
+        "kemendagri_code": "33.18",
+        "dapodik_code": "031800",
+        "name": "Pati",
+        "regency_kind": "kabupaten",
+        "children": [
+          {
+            "kemendagri_code": "33.18.01",
+            "name": "Sukolilo"
+          },
+          {
+            "kemendagri_code": "33.18.02",
+            "name": "Kayen"
+          },
+          {
+            "kemendagri_code": "33.18.03",
+            "name": "Tambakromo"
+          },
+          {
+            "kemendagri_code": "33.18.04",
+            "name": "Winong"
+          },
+          {
+            "kemendagri_code": "33.18.05",
+            "name": "Pucakwangi"
+          },
+          {
+            "kemendagri_code": "33.18.06",
+            "name": "Jaken"
+          },
+          {
+            "kemendagri_code": "33.18.07",
+            "name": "Batangan"
+          },
+          {
+            "kemendagri_code": "33.18.08",
+            "name": "Juwana"
+          },
+          {
+            "kemendagri_code": "33.18.09",
+            "name": "Jakenan"
+          },
+          {
+            "kemendagri_code": "33.18.10",
+            "name": "Pati"
+          },
+          {
+            "kemendagri_code": "33.18.11",
+            "name": "Gabus"
+          },
+          {
+            "kemendagri_code": "33.18.12",
+            "name": "Margorejo"
+          },
+          {
+            "kemendagri_code": "33.18.13",
+            "name": "Gembong"
+          },
+          {
+            "kemendagri_code": "33.18.14",
+            "name": "Tlogowungu"
+          },
+          {
+            "kemendagri_code": "33.18.15",
+            "name": "Wedarijaksa"
+          },
+          {
+            "kemendagri_code": "33.18.16",
+            "name": "Margoyoso"
+          },
+          {
+            "kemendagri_code": "33.18.17",
+            "name": "Gunungwungkal"
+          },
+          {
+            "kemendagri_code": "33.18.18",
+            "name": "Cluwak"
+          },
+          {
+            "kemendagri_code": "33.18.19",
+            "name": "Tayu"
+          },
+          {
+            "kemendagri_code": "33.18.20",
+            "name": "Dukuhseti"
+          },
+          {
+            "kemendagri_code": "33.18.21",
+            "name": "Trangkil"
+          }
+        ]
+      },
+      {
+        "kemendagri_code": "33.19",
+        "dapodik_code": "031900",
+        "name": "Kudus",
+        "regency_kind": "kabupaten",
+        "children": [
+          {
+            "kemendagri_code": "33.19.01",
+            "name": "Kaliwungu"
+          },
+          {
+            "kemendagri_code": "33.19.02",
+            "name": "Kota Kudus"
+          },
+          {
+            "kemendagri_code": "33.19.03",
+            "name": "Jati"
+          },
+          {
+            "kemendagri_code": "33.19.04",
+            "name": "Undaan"
+          },
+          {
+            "kemendagri_code": "33.19.05",
+            "name": "Mejobo"
+          },
+          {
+            "kemendagri_code": "33.19.06",
+            "name": "Jekulo"
+          },
+          {
+            "kemendagri_code": "33.19.07",
+            "name": "Bae"
+          },
+          {
+            "kemendagri_code": "33.19.08",
+            "name": "Gebog"
+          },
+          {
+            "kemendagri_code": "33.19.09",
+            "name": "Dawe"
+          }
+        ]
+      },
+      {
+        "kemendagri_code": "33.20",
+        "dapodik_code": "032000",
+        "name": "Jepara",
+        "regency_kind": "kabupaten",
+        "children": [
+          {
+            "kemendagri_code": "33.20.01",
+            "name": "Kedung"
+          },
+          {
+            "kemendagri_code": "33.20.02",
+            "name": "Pecangaan"
+          },
+          {
+            "kemendagri_code": "33.20.03",
+            "name": "Welahan"
+          },
+          {
+            "kemendagri_code": "33.20.04",
+            "name": "Mayong"
+          },
+          {
+            "kemendagri_code": "33.20.05",
+            "name": "Batealit"
+          },
+          {
+            "kemendagri_code": "33.20.06",
+            "name": "Jepara"
+          },
+          {
+            "kemendagri_code": "33.20.07",
+            "name": "Mlonggo"
+          },
+          {
+            "kemendagri_code": "33.20.08",
+            "name": "Bangsri"
+          },
+          {
+            "kemendagri_code": "33.20.09",
+            "name": "Keling"
+          },
+          {
+            "kemendagri_code": "33.20.10",
+            "name": "Karimunjawa"
+          },
+          {
+            "kemendagri_code": "33.20.11",
+            "name": "Tahunan"
+          },
+          {
+            "kemendagri_code": "33.20.12",
+            "name": "Nalumsari"
+          },
+          {
+            "kemendagri_code": "33.20.13",
+            "name": "Kalinyamatan"
+          },
+          {
+            "kemendagri_code": "33.20.14",
+            "name": "Kembang"
+          },
+          {
+            "kemendagri_code": "33.20.15",
+            "name": "Pakis Aji"
+          },
+          {
+            "kemendagri_code": "33.20.16",
+            "name": "Donorojo"
+          }
+        ]
+      }
+    ]
+  }
+}

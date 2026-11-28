@@ -53,6 +53,7 @@ Everything is built fresh on this stack at the repository root (R0-05 onwards); 
 - URL paths people see are Indonesian, plain and kebab-case (`/masuk`, `/dokumen/{document}`); route names stay English (`login`, `documents.show`) (D-149).
 - Database: plural snake_case tables and columns in English.
 - Exports (Excel/CSV/Word/PDF) and generated PDFs: Indonesian labels. Map English field names to Indonesian through translation keys, e.g. `export.columns.created_at` → "Tanggal Dibuat". Imports read the same Indonesian headings and labels back (D-150).
+- Indonesian spelling: EYD V for every Indonesian text (UI, exports, PDFs, public site, server guides); summary `docs/drafts/eyd-rules.md`, checks in the translation tests (D-471).
 - Dates/numbers in exports and UI: Indonesian format (`d/m/Y`, `1.234.567,89`, `Rp`). App timezone is `Asia/Jakarta` (WIB) for storage and display (D-165).
 - Maps: MapLibre + PMTiles; pupils at desa level at most, counts under 5 shown as "<5" outside the school's own view (D-437).
 - Tests: **Japa** (D-388), run by **GitHub Actions** on every PR to `main` (D-084). Code rules come with R4.

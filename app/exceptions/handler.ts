@@ -19,7 +19,8 @@ export default class HttpExceptionHandler extends ExceptionHandler {
   }
 
   #errorPage(ctx: HttpContext, kind: 'forbidden' | 'not_found' | 'server_error') {
-    ctx.translationNamespaces = ['errors']
+    // The shared namespaces (errors among them) are always sent.
+    ctx.translationNamespaces = []
     return ctx.inertia.render('errors/error', { kind })
   }
 

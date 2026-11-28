@@ -41,6 +41,13 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_USER: Env.schema.string(),
   DB_PASSWORD: Env.schema.secret.optional(),
   DB_DATABASE: Env.schema.string(),
+  /**
+   * The app's login user for the "tenant" connection: a member of the
+   * non-owner role sigrak_app, so row-level security applies (R1-01).
+   * DB_USER stays the owner that runs migrations.
+   */
+  DB_APP_USER: Env.schema.string.optional(),
+  DB_APP_PASSWORD: Env.schema.secret.optional(),
 
   // Redis
   REDIS_HOST: Env.schema.string({ format: 'host' }),
@@ -52,6 +59,15 @@ export default await Env.create(new URL('../', import.meta.url), {
    */
   REDIS_QUEUE_DB: Env.schema.number.optional(),
   REDIS_AI_DB: Env.schema.number.optional(),
+
+  // Queues and the CPU pool (D-463, D-467). Ranges and defaults:
+  // app/services/queue/settings.ts; out-of-range values are clamped.
+  QUEUE_AI_CONCURRENCY: Env.schema.number.optional(),
+  QUEUE_EXPORTS_CONCURRENCY: Env.schema.number.optional(),
+  QUEUE_DEFAULT_CONCURRENCY: Env.schema.number.optional(),
+  QUEUE_WAIT_ALERT_MS: Env.schema.number.optional(),
+  QUEUE_EXPORTS_WAIT_ALERT_MS: Env.schema.number.optional(),
+  CPU_POOL_SIZE: Env.schema.number.optional(),
 
   // AI (docs/final/ai-provider-engine.md)
   /**
@@ -71,4 +87,15 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   // Rate limiter
   LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const),
+
+  // Mail (D-110, D-431). Provider-neutral: "smtp" sends (Gmail SMTP for
+  // now); "json" only renders the message and sends nothing, for
+  // development. Mail always goes through the default queue.
+  MAIL_MAILER: Env.schema.enum.optional(['smtp', 'json'] as const),
+  MAIL_FROM_ADDRESS: Env.schema.string.optional({ format: 'email' }),
+  MAIL_FROM_NAME: Env.schema.string.optional(),
+  SMTP_HOST: Env.schema.string.optional({ format: 'host' }),
+  SMTP_PORT: Env.schema.number.optional(),
+  SMTP_USERNAME: Env.schema.string.optional(),
+  SMTP_PASSWORD: Env.schema.secret.optional(),
 })

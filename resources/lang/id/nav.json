@@ -1,0 +1,23 @@
+{
+  "label": "Menu utama",
+  "skip_to_content": "Langsung ke isi halaman",
+  "home": "Ringkasan",
+  "today": "Hari Ini",
+  "calendar": "Kalender",
+  "ai_demo": "Coba AI",
+  "my_documents": "Dokumen Saya",
+  "news": "Kabar",
+  "help": "Bantuan",
+  "request_help": "Minta bantuan",
+  "account": "Akun",
+  "school_settings": "Pengaturan Sekolah",
+  "sign_out": "Keluar",
+  "open_menu": "Buka menu",
+  "close_menu": "Tutup menu",
+  "teachers": "Guru",
+  "switch_role": "Ganti peran",
+  "school_years": "Tahun Ajaran",
+  "classes": "Kelas",
+  "timetable": "Jadwal",
+  "my_timetable": "Jadwal mengajar"
+}

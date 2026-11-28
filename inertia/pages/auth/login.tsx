@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { Form, Head, usePage } from '@inertiajs/react'
+import { Form, Head, Link, usePage } from '@inertiajs/react'
 import AuthLayout from '~/layouts/auth_layout'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
@@ -106,7 +106,21 @@ export default function Login({ kind }: Props) {
         )}
       </Form>
 
-      {area === 'app' && <p className="mt-6 text-sm text-muted">{t('auth.intro.invite_only')}</p>}
+      {area === 'app' && (
+        <div className="mt-6 space-y-3 text-sm">
+          <p>
+            <Link href="/lupa-kata-sandi" className="font-semibold text-brand-strong underline">
+              {t('auth.links.forgot_password')}
+            </Link>
+          </p>
+          <p className="text-muted">
+            {t('auth.links.no_account')}{' '}
+            <Link href="/daftar" className="font-semibold text-brand-strong underline">
+              {t('auth.links.sign_up')}
+            </Link>
+          </p>
+        </div>
+      )}
     </>
   )
 }

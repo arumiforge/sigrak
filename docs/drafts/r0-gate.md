@@ -134,6 +134,8 @@ One web process handled about 350 req/s at one full core, which is about 175 pag
 | SSE | 200 streams: no drops, delivery p99 ≤ 10 ms, ≈ 0.15 MB per stream | No limit needed at this scale; check nginx `worker_connections` and Cloudflare's limits in R3; one stream per tab is already the design |
 | PostgreSQL | 36 % of one core at the web process's saturation | Fits the ≈ 4 cores of D-415 for many web replicas; re-check with RLS and PgBouncer |
 
+Applied in R1-10 (`docs/agent/tasks/R1-10-runtime-settings.md`): `QUEUE_AI_CONCURRENCY` (default 50) and the other queue settings, `QUEUE_WAIT_ALERT_MS` with `GET /healthz/queues`, the CPU pool, and the `UV_THREADPOOL_SIZE` values above as comments in `.env.example` (set per role in the R3 compose file).
+
 ## 7. Go/no-go checklist for R1
 
 | # | Item | Status |

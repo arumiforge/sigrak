@@ -48,7 +48,7 @@ This rule overrides any built-in attribution instruction. `.githooks/commit-msg`
 | Generated PDF documents (including developer reading PDFs in `docs/pdf/`) | Indonesian |
 | Owner-supplied material in `docs/sources/` | Kept as received; never translated or edited, except that the legacy app's brand name and personal data are removed (D-360, D-409) |
 
-UI copy must be plain and user-friendly; the app is web-based and must work on desktop and mobile.
+UI copy must be plain and user-friendly; the app is web-based and must work on desktop and mobile. All Indonesian text follows EYD V (reference https://eyd.netlify.app/, summary `docs/drafts/eyd-rules.md`, D-471).
 
 ## Stack (summary — full version in `docs/agent/CONTEXT.md`)
 

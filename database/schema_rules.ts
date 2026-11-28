@@ -26,5 +26,11 @@ export default {
     error_meta: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
     output: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
     secret: { tsType: 'string', decorators: [{ name: '@column', args: { serializeAs: null } }] },
+    token_hash: {
+      tsType: 'string',
+      decorators: [{ name: '@column', args: { serializeAs: null } }],
+    },
+    value: { tsType: 'unknown', decorators: [{ name: '@column' }] },
+    changes: { tsType: 'Record<string, unknown>', decorators: [{ name: '@column' }] },
   },
 } satisfies SchemaRules

@@ -12,11 +12,39 @@ type ExtractProps<T> =
 
 declare module '@adonisjs/inertia/types' {
   export interface InertiaPages {
+    'accounts/account': ExtractProps<(typeof import('../../inertia/pages/accounts/account.tsx'))['default']>
+    'accounts/switch_role': ExtractProps<(typeof import('../../inertia/pages/accounts/switch_role.tsx'))['default']>
+    'accounts/teachers': ExtractProps<(typeof import('../../inertia/pages/accounts/teachers.tsx'))['default']>
+    'admin/calendar': ExtractProps<(typeof import('../../inertia/pages/admin/calendar.tsx'))['default']>
     'admin/home': ExtractProps<(typeof import('../../inertia/pages/admin/home.tsx'))['default']>
+    'admin/layers/area_proposals': ExtractProps<(typeof import('../../inertia/pages/admin/layers/area_proposals.tsx'))['default']>
+    'admin/region_changes': ExtractProps<(typeof import('../../inertia/pages/admin/region_changes.tsx'))['default']>
+    'admin/school_directory': ExtractProps<(typeof import('../../inertia/pages/admin/school_directory.tsx'))['default']>
+    'auth/confirm_email': ExtractProps<(typeof import('../../inertia/pages/auth/confirm_email.tsx'))['default']>
+    'auth/forgot_password': ExtractProps<(typeof import('../../inertia/pages/auth/forgot_password.tsx'))['default']>
+    'auth/invitation': ExtractProps<(typeof import('../../inertia/pages/auth/invitation.tsx'))['default']>
     'auth/login': ExtractProps<(typeof import('../../inertia/pages/auth/login.tsx'))['default']>
+    'auth/reset_password': ExtractProps<(typeof import('../../inertia/pages/auth/reset_password.tsx'))['default']>
+    'auth/sign_up': ExtractProps<(typeof import('../../inertia/pages/auth/sign_up.tsx'))['default']>
+    'console/school': ExtractProps<(typeof import('../../inertia/pages/console/school.tsx'))['default']>
+    'console/schools': ExtractProps<(typeof import('../../inertia/pages/console/schools.tsx'))['default']>
+    'console/settings': ExtractProps<(typeof import('../../inertia/pages/console/settings.tsx'))['default']>
+    'console/users': ExtractProps<(typeof import('../../inertia/pages/console/users.tsx'))['default']>
     'errors/error': ExtractProps<(typeof import('../../inertia/pages/errors/error.tsx'))['default']>
     'exam/home': ExtractProps<(typeof import('../../inertia/pages/exam/home.tsx'))['default']>
+    'school_year/academic_year_edit': ExtractProps<(typeof import('../../inertia/pages/school_year/academic_year_edit.tsx'))['default']>
+    'school_year/academic_years': ExtractProps<(typeof import('../../inertia/pages/school_year/academic_years.tsx'))['default']>
+    'school_year/class': ExtractProps<(typeof import('../../inertia/pages/school_year/class.tsx'))['default']>
+    'school_year/classes': ExtractProps<(typeof import('../../inertia/pages/school_year/classes.tsx'))['default']>
     'school/ai_demo': ExtractProps<(typeof import('../../inertia/pages/school/ai_demo.tsx'))['default']>
     'school/calendar': ExtractProps<(typeof import('../../inertia/pages/school/calendar.tsx'))['default']>
+    'school/layers/extracurriculars': ExtractProps<(typeof import('../../inertia/pages/school/layers/extracurriculars.tsx'))['default']>
+    'school/layers/packages': ExtractProps<(typeof import('../../inertia/pages/school/layers/packages.tsx'))['default']>
+    'school/layers/proposals': ExtractProps<(typeof import('../../inertia/pages/school/layers/proposals.tsx'))['default']>
+    'timetable/class': ExtractProps<(typeof import('../../inertia/pages/timetable/class.tsx'))['default']>
+    'timetable/compose': ExtractProps<(typeof import('../../inertia/pages/timetable/compose.tsx'))['default']>
+    'timetable/draft': ExtractProps<(typeof import('../../inertia/pages/timetable/draft.tsx'))['default']>
+    'timetable/index': ExtractProps<(typeof import('../../inertia/pages/timetable/index.tsx'))['default']>
+    'timetable/mine': ExtractProps<(typeof import('../../inertia/pages/timetable/mine.tsx'))['default']>
   }
 }

@@ -12,3 +12,6 @@ ai
 .github
 .githooks
 .claude
+
+# Plain-text mail: blank lines and line breaks are the layout.
+resources/views/emails/*_text.edge
