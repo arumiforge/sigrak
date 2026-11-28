@@ -1,7 +1,7 @@
 # R2-00 — Staff console plan and split
 
 - **Phase:** R2
-- **Status:** in-progress
+- **Status:** done
 - **Owner:** r2/r2-00-split
 - **Depends on:** R1 (done, D-476)
 
