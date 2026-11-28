@@ -140,7 +140,7 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R1-11 | Load re-measure with a real page and RLS (D-467) | done | r1/r1-11-load | R1-08 | `tasks/R1-11-*.md` |
 | R1-12 | UI shell: layouts, navigation, Hugeicons, design tokens, SPA feel; R1 pages moved onto it (D-473) | done | r1/r1-12-ui-shell | R1-08, R1-09 | `tasks/R1-12-*.md` |
 | R2 | Staff console on `admin.` (D-476, D-477): split into R2-01…R2-09 in `tasks/R2-00-console-plan.md` | in-progress | r2/r2-00-split | R1 (done, D-476) | `tasks/R2-*.md` |
-| R2-01 | Staff roles, scopes, staff accounts, audit log, Hak akses | in-progress | r2/r2-01-staff-roles | — | `tasks/R2-01-*.md` |
+| R2-01 | Staff roles, scopes, staff accounts, audit log, Hak akses | review | r2/r2-01-staff-roles | — | `tasks/R2-01-*.md` |
 | R2-02 | Staff 2FA with TOTP | todo | — | R2-01 | `tasks/R2-02-*.md` |
 | R2-03 | Integration settings and AI models per purpose | todo | — | R2-01 | `tasks/R2-03-*.md` |
 | R2-04 | Kesehatan Sistem page | todo | — | R2-01 | `tasks/R2-04-*.md` |
