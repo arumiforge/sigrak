@@ -1,19 +1,19 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import db from '@adonisjs/lucid/services/db'
 import vine from '@vinejs/vine'
 import User from '#models/user'
 import { changeUserTrial } from '#accounts/console'
 import { staffUser } from '#accounts/http'
 import { trialOf } from '#accounts/trial'
 import { authorizeStaff, staffCan } from '#accounts/staff_access'
+import { staffReadTransaction } from '#tenancy/tenant_transaction'
 import { trialChangeValidator } from '#validators/accounts'
 
 const searchValidator = vine.create({ q: vine.string().trim().maxLength(254).optional() })
 
 /**
  * Konsol: find a school user by name or email and change their own
- * trial (D-459). Users are not school-owned, so the owner connection
- * reads them; their trial reads their memberships the same way.
+ * trial (D-459). The list is read as read-only staff
+ * (`staffReadTransaction`, D-469), memberships and schools included.
  */
 export default class UsersController {
   async index(ctx: HttpContext) {
@@ -21,32 +21,34 @@ export default class UsersController {
     authorizeStaff(staff, 'schools.view')
     const { q } = await searchValidator.validate(ctx.request.qs())
 
-    const users = q
-      ? await User.query()
-          .where((where) => {
-            where.whereILike('name', `%${q}%`).orWhereILike('email', `%${q}%`)
-          })
-          .orderBy('name', 'asc')
-          .limit(50)
+    const rows = q
+      ? await staffReadTransaction(async (trx) => {
+          const users = await User.query({ client: trx })
+            .where((where) => {
+              where.whereILike('name', `%${q}%`).orWhereILike('email', `%${q}%`)
+            })
+            .orderBy('name', 'asc')
+            .limit(50)
+          const found = []
+          // One transaction client: the trials are read one after another.
+          for (const user of users) {
+            const trial = await trialOf(user, trx)
+            found.push({
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              trial: {
+                started: trial.endsAt !== null,
+                active: trial.active,
+                days: trial.days,
+                source: trial.source,
+                endsAt: trial.endsAt?.toISO() ?? null,
+              },
+            })
+          }
+          return found
+        })
       : []
-
-    const rows = await Promise.all(
-      users.map(async (user) => {
-        const trial = await trialOf(user, db.connection())
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          trial: {
-            started: trial.startedAt !== null,
-            active: trial.active,
-            days: trial.days,
-            source: trial.source,
-            endsAt: trial.endsAt?.toISO() ?? null,
-          },
-        }
-      })
-    )
 
     return ctx.inertia.render('console/users', {
       q: q ?? '',

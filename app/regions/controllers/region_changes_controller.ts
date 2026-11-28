@@ -5,7 +5,7 @@ import { effectiveOn, todayInJakarta } from '#regions/effective_dates'
 import { RegionChangeQueue, ReviewNotPendingException } from '#regions/region_change_queue'
 import { regionRef } from '#regions/school_directory'
 import { acceptRegionChangeValidator, rejectRegionChangeValidator } from '#regions/validators'
-import { staffTransaction } from '#tenancy/tenant_transaction'
+import { staffReadTransaction } from '#tenancy/tenant_transaction'
 
 /**
  * Perubahan wilayah on admin. (D-466): region differences found by a
@@ -17,7 +17,8 @@ export default class RegionChangesController {
     regionReviewer(ctx)
     const today = todayInJakarta()
 
-    const [pending, scheduled, decided] = await staffTransaction(async () => {
+    // A view page: read-only staff (D-469); accepting and rejecting go through the queue.
+    const [pending, scheduled, decided] = await staffReadTransaction(async () => {
       const base = () =>
         RegionChangeReview.query()
           .preload('school')
