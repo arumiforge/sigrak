@@ -111,7 +111,7 @@ export default function SchoolDirectory({ query, invalid, result, regencies }: P
               {t('regions.directory.removed')}
             </p>
           )}
-          <dl className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-[12rem_1fr]">
+          <dl className="mt-4 space-y-3 sm:grid sm:grid-cols-[12rem_1fr] sm:gap-x-6 sm:gap-y-3 sm:space-y-0">
             <Row term={t('regions.directory.search_label')} value={result.npsn} />
             <Row term={t('regions.directory.fields.name')} value={result.name} />
             <Row
@@ -197,10 +197,10 @@ export default function SchoolDirectory({ query, invalid, result, regencies }: P
 
 function Row({ term, value }: { term: string; value: string }) {
   return (
-    <>
+    <div className="sm:contents">
       <dt className="text-sm font-semibold text-muted">{term}</dt>
       <dd className="break-words">{value}</dd>
-    </>
+    </div>
   )
 }
 
