@@ -55,11 +55,18 @@ export default class extends BaseSchema {
       AS $$
       DECLARE
         pkg layer_packages%ROWTYPE;
+        item_table text;
+        item_label text;
       BEGIN
         SELECT * INTO pkg FROM layer_packages WHERE id = p_package;
         IF NOT FOUND THEN
           RETURN;
         END IF;
+        SELECT d.item_table INTO item_table FROM layer_domains d WHERE d.domain = pkg.domain;
+        EXECUTE format(
+          'SELECT to_jsonb(i) ->> ''label'' FROM %I i
+            WHERE i.package_id = $1 AND i.item_key = $2 AND i.status <> ''retired'' LIMIT 1',
+          item_table) INTO item_label USING p_package, p_item_key;
         WITH voided AS (
           UPDATE layer_hides h
              SET status = 'void', void_reason = 'became_mandatory', updated_at = now()
@@ -86,8 +93,8 @@ export default class extends BaseSchema {
         INSERT INTO layer_notices (school_id, kind, audience, payload, created_at)
         SELECT a.school_id, 'became_mandatory', 'all',
                jsonb_build_object('domain', pkg.domain, 'item_key', p_item_key,
-                                  'package_code', pkg.code, 'package_name', pkg.name,
-                                  'layer', pkg.layer),
+                                  'label', item_label, 'package_code', pkg.code,
+                                  'package_name', pkg.name, 'layer', pkg.layer),
                now()
           FROM affected a;
       END

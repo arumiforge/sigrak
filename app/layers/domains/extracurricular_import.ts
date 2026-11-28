@@ -52,9 +52,17 @@ export async function importExtracurricularCatalog(
   client: QueryClientContract,
   options: { file?: string; activate?: boolean; schoolYear?: string } = {}
 ): Promise<ImportReport> {
-  const data = JSON.parse(await readFile(options.file ?? defaultCatalogFile(), 'utf8')) as CatalogFile
+  const data = JSON.parse(
+    await readFile(options.file ?? defaultCatalogFile(), 'utf8')
+  ) as CatalogFile
   const now = new Date()
-  const report: ImportReport = { packageCreated: false, created: 0, revised: 0, unchanged: 0, status: 'draft' }
+  const report: ImportReport = {
+    packageCreated: false,
+    created: 0,
+    revised: 0,
+    unchanged: 0,
+    status: 'draft',
+  }
 
   let pkg = (await client
     .from('layer_packages')
@@ -88,7 +96,8 @@ export async function importExtracurricularCatalog(
   const byKey = new Map(data.items.map((item) => [item.key, item.code]))
   for (const group of data.offer_groups) {
     const defaultItemKey = byKey.get(group.default)
-    if (!defaultItemKey) throw new Error(`offer group ${group.key}: unknown default ${group.default}`)
+    if (!defaultItemKey)
+      throw new Error(`offer group ${group.key}: unknown default ${group.default}`)
     await client
       .table('layer_group_rules')
       .insert({
@@ -137,7 +146,10 @@ export async function importExtracurricularCatalog(
       continue
     }
     if (live) {
-      await client.from('catalog_items').where('id', live.id).update({ status: 'retired', updated_at: now })
+      await client
+        .from('catalog_items')
+        .where('id', live.id)
+        .update({ status: 'retired', updated_at: now })
     }
     await client.table('catalog_items').insert({
       package_id: packageId,

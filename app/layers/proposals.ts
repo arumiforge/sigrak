@@ -106,7 +106,13 @@ export interface SchoolProposalInput {
 async function checkSchoolProposal(
   client: QueryClientContract,
   schoolId: number,
-  input: { domain: string; schoolYear: string; action: SchoolProposalAction; itemKey: string | null; item: unknown }
+  input: {
+    domain: string
+    schoolYear: string
+    action: SchoolProposalAction
+    itemKey: string | null
+    item: unknown
+  }
 ) {
   const adapter = domainAdapter<any, any>(input.domain)
   const resolution = await LayerResolver.resolve(input.domain, schoolId, input.schoolYear, {
@@ -151,7 +157,8 @@ export const SchoolProposals = {
       throw new LayerRuleException('layers.errors.action_unknown')
     }
     const itemKey = input.action === 'add' ? null : (input.itemKey ?? null)
-    if (input.action !== 'add' && !itemKey) throw new LayerRuleException('layers.errors.item_not_found')
+    if (input.action !== 'add' && !itemKey)
+      throw new LayerRuleException('layers.errors.item_not_found')
     const checked = await checkSchoolProposal(client, actor.schoolId, {
       domain: input.domain,
       schoolYear: input.schoolYear,
@@ -198,7 +205,13 @@ export const SchoolProposals = {
         await SchoolLayer.add(actor, proposal.domain, schoolYear, proposal.payload.item)
         break
       case 'hide':
-        await SchoolLayer.hide(actor, proposal.domain, schoolYear, proposal.item_key!, proposal.reason)
+        await SchoolLayer.hide(
+          actor,
+          proposal.domain,
+          schoolYear,
+          proposal.item_key!,
+          proposal.reason
+        )
         break
       case 'unhide':
         await SchoolLayer.unhide(actor, proposal.domain, schoolYear, proposal.item_key!)
@@ -298,13 +311,20 @@ const newPackageValidator = vine.create({
   name: vine.string().trim().minLength(3).maxLength(200),
   line: vine.enum(LINES),
   level_scope: vine.enum(LEVEL_SCOPES),
-  applies_from_school_year: vine.string().trim().regex(/^\d{4}\/\d{4}$/),
+  applies_from_school_year: vine
+    .string()
+    .trim()
+    .regex(/^\d{4}\/\d{4}$/),
   applies_to_school_year: vine
     .string()
     .trim()
     .regex(/^\d{4}\/\d{4}$/)
     .optional(),
-  effective_on: vine.string().trim().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  effective_on: vine
+    .string()
+    .trim()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional(),
 })
 
 const forceValidator = vine.create({ force: vine.enum(FORCES).optional() })
@@ -339,14 +359,20 @@ interface AreaPackageRow {
 
 const hasEvidence = (evidence: Evidence | null | undefined) =>
   !!evidence &&
-  !!(evidence.regulation_code || evidence.document_title || evidence.source_url || evidence.source_file)
+  !!(
+    evidence.regulation_code ||
+    evidence.document_title ||
+    evidence.source_url ||
+    evidence.source_file
+  )
 
 async function regionOf(client: QueryClientContract, regionId: number) {
   const region = (await client
     .from('regions')
     .where('id', regionId)
     .select('id', 'level', 'kemendagri_code', 'name')
-    .first()) as { id: number; level: RegionLayer; kemendagri_code: string; name: string } | undefined
+    .first()) as
+    { id: number; level: RegionLayer; kemendagri_code: string; name: string } | undefined
   if (!region) throw new LayerRuleException('layers.errors.not_found')
   return region
 }
@@ -357,7 +383,8 @@ async function areaPackage(
   regionId: number,
   domain: string
 ) {
-  if (publicId === null || publicId === undefined) throw new LayerRuleException('layers.errors.package_required')
+  if (publicId === null || publicId === undefined)
+    throw new LayerRuleException('layers.errors.package_required')
   const query = client.from('layer_packages').where('region_id', regionId).where('domain', domain)
   if (typeof publicId === 'number') query.where('id', publicId)
   else query.where('public_id', publicId)
@@ -389,15 +416,18 @@ async function checkAreaProposal(
 
   if (input.action === 'create_package') {
     const fields = await newPackageValidator.validate(input.payload)
-    if (!isSchoolYear(fields.applies_from_school_year) ||
-        (fields.applies_to_school_year && !isSchoolYear(fields.applies_to_school_year))) {
+    if (
+      !isSchoolYear(fields.applies_from_school_year) ||
+      (fields.applies_to_school_year && !isSchoolYear(fields.applies_to_school_year))
+    ) {
       throw new LayerRuleException('layers.errors.school_year')
     }
     if (region.level === 'district' && fields.kind === 'official') {
       throw new LayerRuleException('layers.errors.official_at_district')
     }
     await evidenceValidator.validate({ evidence: input.evidence ?? undefined })
-    if (!hasEvidence(input.evidence)) throw new LayerRuleException('layers.errors.evidence_required')
+    if (!hasEvidence(input.evidence))
+      throw new LayerRuleException('layers.errors.evidence_required')
     return { region, pkg: null, payload: fields, label: fields.name }
   }
 
@@ -427,7 +457,12 @@ async function checkAreaProposal(
         )
         if (!own) throw new LayerRuleException('layers.errors.not_own_item')
       }
-      return { region, pkg, payload: { item, force: force ?? 'free' }, label: adapter.labelOf(item) }
+      return {
+        region,
+        pkg,
+        payload: { item, force: force ?? 'free' },
+        label: adapter.labelOf(item),
+      }
     }
     case 'hide': {
       const target = LayerRules.checkHide(await view(), input.itemKey!, region.level, groups)
@@ -532,7 +567,13 @@ async function applyAreaChange(
         revision: old.revision + 1,
         supersedesId: old.id,
       })
-      await setForce(client, adapter.itemTable, pkg.id, proposal.item_key!, (checked.payload as any).force)
+      await setForce(
+        client,
+        adapter.itemTable,
+        pkg.id,
+        proposal.item_key!,
+        (checked.payload as any).force
+      )
       break
     }
     case 'hide':
@@ -585,7 +626,10 @@ async function affectedSchools(client: QueryClientContract, regionId: number) {
     .from('schools as s')
     .join('regions as r', 'r.id', 's.region_id')
     .where((q) =>
-      q.where('s.region_id', regionId).orWhere('s.district_id', regionId).orWhere('r.parent_id', regionId)
+      q
+        .where('s.region_id', regionId)
+        .orWhere('s.district_id', regionId)
+        .orWhere('r.parent_id', regionId)
     )
     .count('* as total')
     .first()) as { total: string | number }
@@ -658,7 +702,8 @@ export const AreaProposals = {
       if (needsEvidence && !decision.evidenceChecked) {
         throw new LayerRuleException('layers.errors.evidence_unchecked')
       }
-      const { label: _label, school_year: schoolYear, ...payload } = proposal.payload
+      const { label, school_year: schoolYear, ...payload } = proposal.payload
+      void label
       const checked = await checkAreaProposal(client, {
         domain: proposal.domain,
         regionId: proposal.region_id!,
@@ -717,7 +762,8 @@ export const AreaProposals = {
       const proposal = await lockOpen(client, publicId, ['returned'])
       if (proposal.proposed_by_staff_id !== staff.id) throw new LayerAccessDeniedException()
       const evidence = changes.evidence !== undefined ? changes.evidence : proposal.evidence
-      const { label: _label, school_year: schoolYear, ...payload } = proposal.payload
+      const { label, school_year: schoolYear, ...payload } = proposal.payload
+      void label
       await checkAreaProposal(client, {
         domain: proposal.domain,
         regionId: proposal.region_id!,

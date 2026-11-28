@@ -8,7 +8,8 @@ import type { CommandOptions } from '@adonisjs/core/types/ace'
  */
 export default class LayersImportCatalog extends BaseCommand {
   static commandName = 'layers:import-catalog'
-  static description = 'Import docs/data/catalogs/extracurriculars.json as the national layer package'
+  static description =
+    'Import docs/data/catalogs/extracurriculars.json as the national layer package'
 
   static options: CommandOptions = {
     startApp: true,
@@ -22,9 +23,7 @@ export default class LayersImportCatalog extends BaseCommand {
 
   async run() {
     const { default: db } = await import('@adonisjs/lucid/services/db')
-    const { importExtracurricularCatalog } = await import(
-      '#layers/domains/extracurricular_import'
-    )
+    const { importExtracurricularCatalog } = await import('#layers/domains/extracurricular_import')
     const report = await db.transaction((trx) =>
       importExtracurricularCatalog(trx, { file: this.file, activate: this.activate })
     )

@@ -4,14 +4,7 @@ import { belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Region from '#models/region'
 import { withPublicId } from '#models/mixins/with_public_id'
-import type {
-  Evidence,
-  Layer,
-  LevelScope,
-  Line,
-  PackageKind,
-  PackageStatus,
-} from '../types.js'
+import type { Evidence, Layer, LevelScope, Line, PackageKind, PackageStatus } from '../types.js'
 import { withTenantConnection } from './with_tenant_connection.js'
 
 /**

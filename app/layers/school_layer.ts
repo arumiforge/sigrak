@@ -90,7 +90,13 @@ export async function insertItem<P>(
   adapter: DomainAdapter<any, P>,
   packageId: number,
   payload: P,
-  options: { origin: string; tag: string; itemKey?: string; revision?: number; supersedesId?: number }
+  options: {
+    origin: string
+    tag: string
+    itemKey?: string
+    revision?: number
+    supersedesId?: number
+  }
 ) {
   const itemKey = options.itemKey ?? newItemKey(adapter.keyPrefix, options.tag)
   const now = new Date()

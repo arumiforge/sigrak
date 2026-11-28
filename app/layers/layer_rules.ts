@@ -138,7 +138,8 @@ export function asLayerRuleError(error: unknown): unknown {
   const hint = (error as { hint?: string }).hint
   if (hint === 'layer_hide_on_mandatory') return new LayerRuleException('layers.errors.mandatory')
   if (hint === 'layer_choice_outside_area') return new LayerRuleException('layers.errors.not_found')
-  if (hint === 'layer_choice_not_agreement') return new LayerRuleException('layers.errors.not_found')
+  if (hint === 'layer_choice_not_agreement')
+    return new LayerRuleException('layers.errors.not_found')
   if (hint === 'layer_choice_school_year')
     return new LayerRuleException('layers.errors.choice_school_year')
   return error

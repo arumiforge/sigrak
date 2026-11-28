@@ -158,7 +158,9 @@ test.group('Layers | resolver properties', () => {
       const input = randomStack(seed)
       const result = resolveLayers(input)
       const codeOf = new Map(input.packages.map((pkg) => [pkg.id, pkg.code]))
-      const expected = input.items.map((item) => `${codeOf.get(item.packageId)}|${item.itemKey}`).sort()
+      const expected = input.items
+        .map((item) => `${codeOf.get(item.packageId)}|${item.itemKey}`)
+        .sort()
       const actual = [...result.items, ...result.hidden, ...result.shadowed]
         .map((item) => `${item.source.packageCode}|${item.itemKey}`)
         .sort()
@@ -201,7 +203,10 @@ test.group('Layers | resolver properties', () => {
       if (!target) continue
       const withHide = resolveLayers({
         ...input,
-        hides: [...input.hides, { packageId: school.id, targetItemKey: target.itemKey, reason: null }],
+        hides: [
+          ...input.hides,
+          { packageId: school.id, targetItemKey: target.itemKey, reason: null },
+        ],
       })
       if (!withHide.warnings.some((w) => w.kind === 'group_minimum')) {
         assert.notInclude(

@@ -283,7 +283,11 @@ export function resolveLayers<V>(input: ResolveInput<V>): Resolution<V> {
       }
       if (item.shape === 'setting') {
         if (existing.force === 'mandatory') {
-          warnings.push({ kind: 'setting_on_mandatory', itemKey: item.itemKey, packageCode: pkg.code })
+          warnings.push({
+            kind: 'setting_on_mandatory',
+            itemKey: item.itemKey,
+            packageCode: pkg.code,
+          })
           shadow(item, existing, 'duplicate')
         } else {
           take(existing)

@@ -3,7 +3,6 @@ import testUtils from '@adonisjs/core/services/test_utils'
 import db from '@adonisjs/lucid/services/db'
 import { LayerResolver } from '#layers/resolver/layer_resolver'
 import { SchoolLayer } from '#layers/school_layer'
-import { LayerRuleException } from '#layers/layer_rules'
 import { PackageChoices } from '#layers/package_choices'
 import { RegionChangeQueue } from '#regions/region_change_queue'
 import { region } from '#tests/regions'
@@ -17,6 +16,7 @@ import {
   hide,
   jatengJointLeaveSchoolDays,
   keys,
+  itemKeysFor,
   layerFixtures,
   nationalHolidays,
   resolveFor,
@@ -55,8 +55,8 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     await addItems(await createPackage({ layer: 'province', regionCode: '33' }), [{ key: 'P1' }])
     await addItems(await createPackage({ layer: 'regency', regionCode: '33.19' }), [{ key: 'K1' }])
 
-    assert.deepEqual(keys((await resolveFor(sdJati)).items), ['K1', 'N1', 'P1'])
-    assert.deepEqual(keys((await resolveFor(sdDawe)).items), ['K1', 'N1', 'P1'])
+    assert.deepEqual(await itemKeysFor(sdJati), ['K1', 'N1', 'P1'])
+    assert.deepEqual(await itemKeysFor(sdDawe), ['K1', 'N1', 'P1'])
     const jepara = await resolveFor(sdJepara)
     assert.deepEqual(keys(jepara.items), ['N1', 'P1'])
     const p1 = jepara.items.find((item) => item.itemKey === 'P1')!
@@ -93,7 +93,13 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     await assert.rejects(
       () =>
         asSchool(sdJati, () =>
-          SchoolLayer.hide({ schoolId: sdJati.id, userId: member.user.id }, 'layer_test', YEAR, 'M', null)
+          SchoolLayer.hide(
+            { schoolId: sdJati.id, userId: member.user.id },
+            'layer_test',
+            YEAR,
+            'M',
+            null
+          )
         ),
       /layers\.errors\.mandatory/
     )
@@ -104,17 +110,14 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
       () =>
         asSchool(sdJati, async () => {
           const now = new Date()
-          await db
-            .connection('tenant')
-            .table('layer_hides')
-            .insert({
-              package_id: own.id,
-              domain: 'layer_test',
-              target_item_key: 'M',
-              status: 'active',
-              created_at: now,
-              updated_at: now,
-            })
+          await db.connection('tenant').table('layer_hides').insert({
+            package_id: own.id,
+            domain: 'layer_test',
+            target_item_key: 'M',
+            status: 'active',
+            created_at: now,
+            updated_at: now,
+          })
         }),
       /mandatory and cannot be hidden/
     )
@@ -135,12 +138,13 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     } finally {
       await db.rawQuery('ALTER TABLE layer_hides ENABLE TRIGGER layer_hides_guard')
     }
+    const ownRow = await db.from('layer_packages').where('id', own.id).first()
     const result = await resolveFor(sdJati)
     assert.include(keys(result.items), 'M')
     assert.deepInclude(result.warnings, {
       kind: 'hide_on_mandatory',
       itemKey: 'M',
-      packageCode: (await db.from('layer_packages').where('id', own.id).first()).code,
+      packageCode: ownRow.code,
     })
   })
 
@@ -218,7 +222,7 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     const agreement = await createPackage({ layer: 'district', regionCode: '33.19.03' })
     await addItems(agreement, [{ key: 'JATI-1' }])
 
-    assert.deepEqual(keys((await resolveFor(sdJati)).items), ['N1'])
+    assert.deepEqual(await itemKeysFor(sdJati), ['N1'])
 
     await asSchool(sdJati, () =>
       PackageChoices.choose(
@@ -230,7 +234,10 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     )
     const chosen = await resolveFor(sdJati, 'layer_test', { on: '2026-08-01' })
     assert.deepEqual(keys(chosen.items), ['JATI-1', 'N1'])
-    assert.equal(chosen.items.find((i) => i.itemKey === 'JATI-1')!.source.packageKind, 'local_agreement')
+    assert.equal(
+      chosen.items.find((i) => i.itemKey === 'JATI-1')!.source.packageKind,
+      'local_agreement'
+    )
 
     // Staff move the school to Dawe; the choice of the Jati agreement ends.
     const dawe = await region('33.19.09')
@@ -245,7 +252,7 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     const choice = await db.from('school_package_choices').where('school_id', sdJati.id).first()
     assert.equal(choice.status, 'ended')
     assert.equal(choice.end_reason, 'region_changed')
-    assert.deepEqual(keys((await resolveFor(sdJati, 'layer_test', { on: '2026-08-01' })).items), ['N1'])
+    assert.deepEqual(await itemKeysFor(sdJati, 'layer_test', { on: '2026-08-01' }), ['N1'])
     const notice = await db
       .from('layer_notices')
       .where('school_id', sdJati.id)
@@ -263,10 +270,10 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     await addItems(await createPackage({ layer: 'province', regionCode: '33', line: 'all' }), [
       { key: 'CAL', label: 'Kalender Dinas' },
     ])
-    await addItems(
-      await createPackage({ layer: 'province', regionCode: '33', line: 'kemenag' }),
-      [{ key: 'CAL', label: 'Kalender Kanwil' }, { key: 'MI-ONLY' }]
-    )
+    await addItems(await createPackage({ layer: 'province', regionCode: '33', line: 'kemenag' }), [
+      { key: 'CAL', label: 'Kalender Kanwil' },
+      { key: 'MI-ONLY' },
+    ])
     await addItems(
       await createPackage({ layer: 'province', regionCode: '33', line: 'kemendikdasmen' }),
       [{ key: 'SD-ONLY' }]
@@ -292,7 +299,13 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     const { sdJati, sdJepara } = await layerFixtures()
     await addItems(await createPackage({ layer: 'national' }), [
       { key: 'S-04', label: 'Instrumen S-04 standar', shape: 'setting', matchKey: 'S-04' },
-      { key: 'S-07', label: 'Kerangka observasi', shape: 'setting', matchKey: 'S-07', force: 'mandatory' },
+      {
+        key: 'S-07',
+        label: 'Kerangka observasi',
+        shape: 'setting',
+        matchKey: 'S-07',
+        force: 'mandatory',
+      },
     ])
     await addItems(await createPackage({ layer: 'regency', regionCode: '33.19' }), [
       { key: 'S-04', label: 'Instrumen S-04 Kudus', shape: 'setting', matchKey: 'S-04' },
@@ -308,7 +321,10 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
       'setting_on_mandatory'
     )
     const jepara = await resolveFor(sdJepara)
-    assert.equal(jepara.items.find((i) => i.itemKey === 'S-04')!.value.label, 'Instrumen S-04 standar')
+    assert.equal(
+      jepara.items.find((i) => i.itemKey === 'S-04')!.value.label,
+      'Instrumen S-04 standar'
+    )
   })
 
   test('10. a later national duplicate shadows a school addition with the same match key', async ({
@@ -323,7 +339,7 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
         label: 'Tenis Meja',
       })
     )
-    assert.include(keys((await resolveFor(sdJati)).items), added)
+    assert.include(await itemKeysFor(sdJati), added)
 
     // Tim SIGRAK later adds "Tenis meja" nationally.
     await addItems(base, [{ key: 'B', label: 'Tenis meja' }])
@@ -331,7 +347,10 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     assert.deepEqual(keys(result.items), ['A', 'B'])
     assert.equal(result.shadowed[0].itemKey, added)
     assert.equal(result.shadowed[0].shadowedBy, 'B')
-    assert.deepInclude(result.warnings.map((w) => w.kind), 'duplicate_of_higher')
+    assert.deepInclude(
+      result.warnings.map((w) => w.kind),
+      'duplicate_of_higher'
+    )
   })
 
   test('11. an item becomes mandatory: hides voided, item back, notice queued', async ({
@@ -342,7 +361,7 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     await addItems(base, [{ key: 'A' }, { key: 'B' }])
     await hide(await createPackage({ layer: 'school', school: sdJati }), 'B')
     await hide(await createPackage({ layer: 'district', regionCode: '33.19.09' }), 'B')
-    assert.deepEqual(keys((await resolveFor(sdJati)).items), ['A'])
+    assert.deepEqual(await itemKeysFor(sdJati), ['A'])
 
     await db
       .from('catalog_items')
@@ -373,25 +392,22 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
   }) => {
     const { sdJati } = await layerFixtures()
     await addItems(await createPackage({ layer: 'national' }), [{ key: 'N1' }])
-    await addItems(await createPackage({ layer: 'province', regionCode: '33', from: '2027/2028' }), [
-      { key: 'NEXT' },
-    ])
+    await addItems(
+      await createPackage({ layer: 'province', regionCode: '33', from: '2027/2028' }),
+      [{ key: 'NEXT' }]
+    )
     await addItems(
       await createPackage({ layer: 'regency', regionCode: '33.19', effectiveOn: '2027-01-04' }),
       [{ key: 'MID' }]
     )
 
-    assert.deepEqual(keys((await resolveFor(sdJati, 'layer_test', { on: '2026-12-01' })).items), [
-      'N1',
-    ])
-    assert.deepEqual(keys((await resolveFor(sdJati, 'layer_test', { on: '2027-01-04' })).items), [
+    assert.deepEqual(await itemKeysFor(sdJati, 'layer_test', { on: '2026-12-01' }), ['N1'])
+    assert.deepEqual(await itemKeysFor(sdJati, 'layer_test', { on: '2027-01-04' }), ['MID', 'N1'])
+    assert.deepEqual(await itemKeysFor(sdJati, 'layer_test', { schoolYear: '2027/2028' }), [
       'MID',
       'N1',
+      'NEXT',
     ])
-    assert.deepEqual(
-      keys((await resolveFor(sdJati, 'layer_test', { schoolYear: '2027/2028' })).items),
-      ['MID', 'N1', 'NEXT']
-    )
   })
 
   test('13. missing kecamatan: the district layer is skipped and a warning returned', async ({

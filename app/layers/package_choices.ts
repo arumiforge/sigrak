@@ -1,7 +1,11 @@
 import type { QueryClientContract } from '@adonisjs/lucid/types/database'
 import { SchoolContext } from '../tenancy/school_context.js'
 import { asLayerRuleError, LayerRuleException } from './layer_rules.js'
-import { LayerTransactionRequiredException, chainIds, schoolFrame } from './resolver/layer_resolver.js'
+import {
+  LayerTransactionRequiredException,
+  chainIds,
+  schoolFrame,
+} from './resolver/layer_resolver.js'
 import { coversSchoolYear, todayIso } from './school_years.js'
 import type { Layer, Line, PackageKind } from './types.js'
 import type { SchoolActor } from './school_layer.js'
@@ -207,8 +211,7 @@ async function notifyPrincipal(
   pkg: { code: string; name: string; domain: string }
 ) {
   const user = (await client.from('users').where('id', actor.userId).select('name').first()) as
-    | { name: string }
-    | undefined
+    { name: string } | undefined
   await client.table('layer_notices').insert({
     school_id: actor.schoolId,
     kind,

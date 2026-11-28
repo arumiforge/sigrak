@@ -333,9 +333,11 @@ export async function regionAncestry(client: QueryClientContract, regionId: numb
   const ids: number[] = []
   let current: number | null = regionId
   while (current !== null) {
-    const row = (await client.from('regions').where('id', current).select('id', 'parent_id').first()) as
-      | { id: number; parent_id: number | null }
-      | undefined
+    const row = (await client
+      .from('regions')
+      .where('id', current)
+      .select('id', 'parent_id')
+      .first()) as { id: number; parent_id: number | null } | undefined
     if (!row) break
     ids.unshift(Number(row.id))
     current = row.parent_id === null ? null : Number(row.parent_id)

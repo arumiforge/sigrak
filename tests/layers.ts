@@ -79,7 +79,8 @@ const defaultKind: Record<Layer, PackageKind> = {
  */
 export async function createPackage(fields: PackageFields) {
   const kind = fields.kind ?? defaultKind[fields.layer]
-  const regionId = fields.regionCode ? (await region(fields.regionCode)).id : null
+  const area = fields.regionCode ? await region(fields.regionCode) : null
+  const regionId = area ? area.id : null
   const now = new Date()
   const code = `TEST-${fields.layer.toUpperCase()}-${Date.now().toString(36)}-${packageCounter++}`
   const [row] = (await db
@@ -222,6 +223,11 @@ export function resolveFor(
 }
 
 export const keys = (items: { itemKey: string }[]) => items.map((item) => item.itemKey).sort()
+
+export async function itemKeysFor(...args: Parameters<typeof resolveFor>) {
+  const result = await resolveFor(...args)
+  return keys(result.items)
+}
 
 /**
  * The national extracurricular base, published (tests only; the real
