@@ -23,8 +23,12 @@ export const settingRanges = {
   /** CPU-heavy work runs in the CPU pool; this only limits jobs in flight. */
   QUEUE_EXPORTS_CONCURRENCY: { min: 1, max: 32, fallback: 2 },
   QUEUE_DEFAULT_CONCURRENCY: { min: 1, max: 100, fallback: 4 },
-  /** Wait from enqueue to start above this is logged as a queue-wait alert. */
+  /**
+   * Wait from enqueue to start above this is logged as a queue-wait alert
+   * (D-469: 10 s for `ai` and `default`, 60 s for `exports`).
+   */
   QUEUE_WAIT_ALERT_MS: { min: 1_000, max: 3_600_000, fallback: 10_000 },
+  QUEUE_EXPORTS_WAIT_ALERT_MS: { min: 1_000, max: 3_600_000, fallback: 60_000 },
   /**
    * Threads in the CPU pool when set; unset means container CPU limit − 1
    * (D-463), worked out by the pool itself.

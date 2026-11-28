@@ -99,7 +99,7 @@ export async function startWorker(
     logger.warn(adjustment, 'Queue setting outside its range; clamped')
   }
 
-  const alert = new QueueWaitAlert(name, settings.waitAlertMs)
+  const alert = new QueueWaitAlert(name, settings.waitAlertMs[name])
   const run =
     name === 'exports'
       ? processExportJob
