@@ -14,7 +14,7 @@
   "support_session": {
     "start": "Lihat sekolah ini",
     "start_hint": "Membuka tampilan sekolah dalam mode baca saja, sesuai perjanjian kerja sama dengan sekolah. Sesi berakhir sendiri setelah {hours} jam.",
-    "banner": "Anda sedang melihat {school} dalam mode baca saja, sampai pukul {time}.",
+    "banner_body": "Anda sedang melihat {school} dalam mode baca saja, sampai pukul {time}.",
     "open": "Buka tampilan sekolah",
     "end": "Akhiri sesi"
   },

@@ -29,6 +29,16 @@ export type ScannedRoutes = {
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.help_requests.index': { paramsTuple?: []; params?: {} }
+    'admin.help_requests.show': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.reply': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.note': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.status': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.assign': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.support_sessions.start': { paramsTuple: [ParamValue]; params: {'school': ParamValue} }
+    'admin.support_sessions.show': { paramsTuple?: []; params?: {} }
+    'admin.support_sessions.end': { paramsTuple?: []; params?: {} }
+    'admin.support_sessions.index': { paramsTuple?: []; params?: {} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
@@ -94,6 +104,10 @@ export type ScannedRoutes = {
     'app.calendar.unhide': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
     'app.calendar.propose': { paramsTuple?: []; params?: {} }
     'app.calendar.acknowledge': { paramsTuple?: []; params?: {} }
+    'app.help.create': { paramsTuple?: []; params?: {} }
+    'app.help.store': { paramsTuple?: []; params?: {} }
+    'app.help.index': { paramsTuple?: []; params?: {} }
+    'app.help.show': { paramsTuple: [ParamValue]; params: {'helpRequest': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -140,6 +154,10 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.help_requests.index': { paramsTuple?: []; params?: {} }
+    'admin.help_requests.show': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.support_sessions.show': { paramsTuple?: []; params?: {} }
+    'admin.support_sessions.index': { paramsTuple?: []; params?: {} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -161,6 +179,9 @@ export type ScannedRoutes = {
     'app.timetable.class.show': { paramsTuple: [ParamValue]; params: {'class': ParamValue} }
     'app.timetable.mine': { paramsTuple?: []; params?: {} }
     'app.calendar.index': { paramsTuple?: []; params?: {} }
+    'app.help.create': { paramsTuple?: []; params?: {} }
+    'app.help.index': { paramsTuple?: []; params?: {} }
+    'app.help.show': { paramsTuple: [ParamValue]; params: {'helpRequest': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
@@ -186,6 +207,10 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.help_requests.index': { paramsTuple?: []; params?: {} }
+    'admin.help_requests.show': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.support_sessions.show': { paramsTuple?: []; params?: {} }
+    'admin.support_sessions.index': { paramsTuple?: []; params?: {} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
@@ -207,6 +232,9 @@ export type ScannedRoutes = {
     'app.timetable.class.show': { paramsTuple: [ParamValue]; params: {'class': ParamValue} }
     'app.timetable.mine': { paramsTuple?: []; params?: {} }
     'app.calendar.index': { paramsTuple?: []; params?: {} }
+    'app.help.create': { paramsTuple?: []; params?: {} }
+    'app.help.index': { paramsTuple?: []; params?: {} }
+    'app.help.show': { paramsTuple: [ParamValue]; params: {'helpRequest': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
@@ -239,6 +267,12 @@ export type ScannedRoutes = {
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.help_requests.reply': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.note': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.status': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.assign': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.support_sessions.start': { paramsTuple: [ParamValue]; params: {'school': ParamValue} }
+    'admin.support_sessions.end': { paramsTuple?: []; params?: {} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.grant': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff.scope': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }
@@ -283,6 +317,7 @@ export type ScannedRoutes = {
     'app.calendar.unhide': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
     'app.calendar.propose': { paramsTuple?: []; params?: {} }
     'app.calendar.acknowledge': { paramsTuple?: []; params?: {} }
+    'app.help.store': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
     'app.login.store': { paramsTuple?: []; params?: {} }

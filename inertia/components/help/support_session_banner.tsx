@@ -29,7 +29,7 @@ export function SupportSessionBanner() {
         <p className="flex min-w-0 flex-1 items-start gap-2 text-sm">
           <Icon name="school-view" className="mt-0.5 shrink-0 text-warn" />
           <span className="min-w-0 break-words">
-            {t('nav.support_session.banner', {
+            {t('nav.support_session.banner_body', {
               school: supportSession.schoolName,
               time: formatTime(supportSession.expiresAt),
             })}

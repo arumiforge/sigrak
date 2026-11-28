@@ -53,7 +53,7 @@ export default class HelpController {
 
   async show(ctx: HttpContext) {
     const user = schoolUser(ctx)
-    const { request, notes } = await openMyHelpRequest(user.id, ctx.params.request)
+    const { request, notes } = await openMyHelpRequest(user.id, ctx.params.helpRequest)
     return ctx.inertia.render('help/request', {
       request: {
         publicId: request.publicId,

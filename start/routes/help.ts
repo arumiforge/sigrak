@@ -30,9 +30,9 @@ router
     router.post('/minta-bantuan', [HelpController, 'store']).as('help.store')
     router.get('/bantuan-saya', [HelpController, 'index']).as('help.index')
     router
-      .get('/bantuan-saya/:request', [HelpController, 'show'])
+      .get('/bantuan-saya/:helpRequest', [HelpController, 'show'])
       .as('help.show')
-      .where('request', uuid)
+      .where('helpRequest', uuid)
   })
   .domain(hosts.app)
   .as('app')
