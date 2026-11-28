@@ -19,6 +19,6 @@ export default class AcademicYear extends compose(
   declare classes: HasMany<typeof SchoolClass>
 
   get isClosed() {
-    return this.closedAt !== null
+    return Boolean(this.closedAt)
   }
 }
