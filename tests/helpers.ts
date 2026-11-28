@@ -1,7 +1,9 @@
 import type { ApiClient, ApiResponse } from '@japa/api-client'
 import { DateTime } from 'luxon'
 import app from '@adonisjs/core/services/app'
+import encryption from '@adonisjs/core/services/encryption'
 import db from '@adonisjs/lucid/services/db'
+import { Secret, TOTP } from 'otpauth'
 import { hosts, type Area } from '#config/hosts'
 import { sessionCookieNames } from '#config/session'
 import Region from '#models/region'
@@ -111,7 +113,35 @@ export async function setStaffRoles(staff: StaffUser, roles: StaffRole[], scope:
     })
   }
   await staff.load('roleAssignments')
+  // Owner and admin must use 2FA (R2-02): give them a known authenticator.
+  if (roles.some((role) => role === 'owner' || role === 'admin') && !staff.twoFactorConfirmedAt) {
+    await enrolTwoFactor(staff)
+  }
   return staff
+}
+
+/**
+ * Gives a staff account a confirmed TOTP secret (R2-02), as if they had
+ * enrolled; `currentCode` reads it back.
+ */
+export async function enrolTwoFactor(staff: StaffUser) {
+  staff.twoFactorSecret = encryption.encrypt(new Secret({ size: 20 }).base32)
+  staff.twoFactorConfirmedAt = DateTime.now()
+  staff.twoFactorLastStep = null
+  await staff.save()
+  return staff
+}
+
+/**
+ * The code the staff member's authenticator shows now (or `steps`
+ * periods away).
+ */
+export function currentCode(staff: StaffUser, steps = 0) {
+  const secret = encryption.decrypt<string>(staff.twoFactorSecret!)!
+  return TOTP.generate({
+    secret: Secret.fromBase32(secret),
+    timestamp: Date.now() + steps * 30_000,
+  })
 }
 
 export async function createParticipant(school: School, status: ExamSession['status'] = 'open') {
@@ -221,13 +251,27 @@ function cookieValue(response: ApiResponse, name: string) {
 /**
  * Signs in through the real login form of an area: GET /masuk for the
  * session and CSRF token, then POST /masuk. Returns the session id of
- * the signed-in session and the POST response.
+ * the signed-in session and the POST response. A staff account with
+ * 2FA also passes the code step (passwordStep stops before it).
  */
 export async function login(
   client: ApiClient,
   area: Area,
   credentials: Record<string, string>
 ): Promise<{ sessionId: string | undefined; response: ApiResponse }> {
+  const { sessionId, response } = await passwordStep(client, area, credentials)
+  if (area === 'admin' && response.header('location') === '/masuk/kode') {
+    return passTwoFactor(client, sessionId, credentials.email)
+  }
+  return { sessionId, response }
+}
+
+/** GET and POST /masuk only, without the 2FA code step. */
+export async function passwordStep(
+  client: ApiClient,
+  area: Area,
+  credentials: Record<string, string>
+): Promise<{ sessionId: string; response: ApiResponse }> {
   const cookieName = sessionCookieNames[area]
   const page = await client.get('/masuk').header('host', hosts[area]).redirects(0)
   const sessionId = cookieValue(page, cookieName)
@@ -243,8 +287,41 @@ export async function login(
     .withCookie(cookieName, sessionId)
     .form(credentials)
     .redirects(0)
-
   return { sessionId: cookieValue(response, cookieName) ?? sessionId, response }
+}
+
+/**
+ * Types the current code at admin. /masuk/kode, as the staff member's
+ * authenticator would. The last-used step is cleared first, so a test
+ * may sign the same account in twice within one 30-second period.
+ */
+export async function passTwoFactor(client: ApiClient, sessionId: string, email: string) {
+  const staff = await StaffUser.query()
+    .whereRaw('lower(email) = ?', [email.toLowerCase()])
+    .firstOrFail()
+  await db.from('staff_users').where('id', staff.id).update({ two_factor_last_step: null })
+  staff.twoFactorLastStep = null
+  return submitTwoFactorCode(client, sessionId, currentCode(staff))
+}
+
+/** POSTs a code at admin. /masuk/kode in a session waiting for one. */
+export async function submitTwoFactorCode(client: ApiClient, sessionId: string, code: string) {
+  const cookieName = sessionCookieNames.admin
+  const page = await client
+    .get('/masuk/kode')
+    .header('host', hosts.admin)
+    .withCookie(cookieName, sessionId)
+    .redirects(0)
+  const csrfToken = cookieValue(page, 'XSRF-TOKEN')
+  const current = cookieValue(page, cookieName) ?? sessionId
+  const response = await client
+    .post('/masuk/kode')
+    .header('host', hosts.admin)
+    .header('x-csrf-token', csrfToken ?? '')
+    .withCookie(cookieName, current)
+    .form({ code })
+    .redirects(0)
+  return { sessionId: cookieValue(response, cookieName) ?? current, response }
 }
 
 /**

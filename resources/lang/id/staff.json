@@ -327,7 +327,10 @@
         "disable": "Akun dinonaktifkan",
         "enable": "Akun diaktifkan",
         "link_resend": "Tautan kata sandi dikirim",
-        "owner_bootstrap": "Pemilik pertama dibuat"
+        "owner_bootstrap": "Pemilik pertama dibuat",
+        "two_factor_enable": "2FA diaktifkan",
+        "two_factor_disable": "2FA dimatikan",
+        "two_factor_reset": "2FA diatur ulang"
       },
       "trial": {
         "extend": "Masa uji coba ditambah",

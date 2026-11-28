@@ -2,10 +2,13 @@ import type { HttpContext } from '@adonisjs/core/http'
 import StaffUser from '#models/staff_user'
 import { emailLoginValidator } from '#validators/auth'
 import { attemptLogin, backWithError } from '#services/login_attempts'
+import { twoFactorEnabled } from '#staff/two_factor'
+import { rememberPending, TWO_FACTOR_CHALLENGE_PATH } from '#staff/two_factor_session'
 
 /**
- * Sign-in for Tim SIGRAK staff on admin. TOTP comes with the console
- * (D-343).
+ * Sign-in for Tim SIGRAK staff on admin. With 2FA on, a right password
+ * leads to the code step (app/staff/controllers/
+ * two_factor_challenge_controller.ts, D-343).
  */
 export default class SessionController {
   async create({ inertia }: HttpContext) {
@@ -24,6 +27,12 @@ export default class SessionController {
     // A disabled account (R2-01) keeps its password but cannot sign in.
     if (result.account.disabledAt) {
       return backWithError(ctx, 'email', ctx.i18n.t('auth.staff_disabled'))
+    }
+
+    // With 2FA on, the password only opens the code step (R2-02, D-343).
+    if (twoFactorEnabled(result.account)) {
+      rememberPending(ctx, result.account.id)
+      return ctx.response.redirect().toPath(TWO_FACTOR_CHALLENGE_PATH)
     }
 
     await ctx.auth.use('staff').login(result.account)

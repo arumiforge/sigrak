@@ -26,7 +26,9 @@ declare module '@adonisjs/inertia/types' {
     'auth/login': ExtractProps<(typeof import('../../inertia/pages/auth/login.tsx'))['default']>
     'auth/reset_password': ExtractProps<(typeof import('../../inertia/pages/auth/reset_password.tsx'))['default']>
     'auth/sign_up': ExtractProps<(typeof import('../../inertia/pages/auth/sign_up.tsx'))['default']>
+    'auth/two_factor_challenge': ExtractProps<(typeof import('../../inertia/pages/auth/two_factor_challenge.tsx'))['default']>
     'console/access_matrix': ExtractProps<(typeof import('../../inertia/pages/console/access_matrix.tsx'))['default']>
+    'console/account': ExtractProps<(typeof import('../../inertia/pages/console/account.tsx'))['default']>
     'console/activity_log': ExtractProps<(typeof import('../../inertia/pages/console/activity_log.tsx'))['default']>
     'console/ai_models': ExtractProps<(typeof import('../../inertia/pages/console/ai_models.tsx'))['default']>
     'console/integrations': ExtractProps<(typeof import('../../inertia/pages/console/integrations.tsx'))['default']>
@@ -36,6 +38,7 @@ declare module '@adonisjs/inertia/types' {
     'console/staff_member': ExtractProps<(typeof import('../../inertia/pages/console/staff_member.tsx'))['default']>
     'console/staff': ExtractProps<(typeof import('../../inertia/pages/console/staff.tsx'))['default']>
     'console/system_health': ExtractProps<(typeof import('../../inertia/pages/console/system_health.tsx'))['default']>
+    'console/two_factor_setup': ExtractProps<(typeof import('../../inertia/pages/console/two_factor_setup.tsx'))['default']>
     'console/users': ExtractProps<(typeof import('../../inertia/pages/console/users.tsx'))['default']>
     'errors/error': ExtractProps<(typeof import('../../inertia/pages/errors/error.tsx'))['default']>
     'exam/home': ExtractProps<(typeof import('../../inertia/pages/exam/home.tsx'))['default']>

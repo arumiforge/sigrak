@@ -66,7 +66,7 @@ router
   .as('admin')
   .use([
     middleware.auth({ guard: 'staff' }),
-    middleware.translations(['auth', 'areas', 'console', 'staff', 'regions']),
+    middleware.translations(['auth', 'areas', 'console', 'staff', 'regions', 'two_factor']),
   ])
 
 router

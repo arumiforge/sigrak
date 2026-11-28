@@ -41,7 +41,7 @@ export function RoleSwitch({ role }: { role: SchoolRole }) {
 /**
  * The account button: initials (and the name from 640 px), opening a
  * menu with the role, Ganti peran, Akun and Keluar. `accountHref` is
- * null where there is no account page (console, exam site).
+ * null where there is no account page (exam site).
  */
 export function AccountMenu({
   name,

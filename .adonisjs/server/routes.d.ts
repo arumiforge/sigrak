@@ -56,6 +56,13 @@ export type ScannedRoutes = {
     'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
     'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'admin.staff_password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.challenge': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.verify': { paramsTuple?: []; params?: {} }
+    'admin.account.show': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.edit': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.confirm': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.disable': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.reset': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
@@ -161,6 +168,9 @@ export type ScannedRoutes = {
     'admin.activity_log.index': { paramsTuple?: []; params?: {} }
     'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
     'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.challenge': { paramsTuple?: []; params?: {} }
+    'admin.account.show': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.edit': { paramsTuple?: []; params?: {} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -209,6 +219,9 @@ export type ScannedRoutes = {
     'admin.activity_log.index': { paramsTuple?: []; params?: {} }
     'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
     'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.challenge': { paramsTuple?: []; params?: {} }
+    'admin.account.show': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.edit': { paramsTuple?: []; params?: {} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -275,6 +288,10 @@ export type ScannedRoutes = {
     'admin.staff.enable': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff.resend_link': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff_password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.verify': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.confirm': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.disable': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.reset': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.logout': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.store': { paramsTuple?: []; params?: {} }
