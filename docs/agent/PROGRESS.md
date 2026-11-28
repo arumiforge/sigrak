@@ -129,7 +129,7 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R1 | Build the foundation (D-468): split into R1-01…R1-11, order and parallel rules in `tasks/R1-00-foundation-plan.md` | in-progress | r1/r1-00-gate-split | R0 gate (passed, D-468) | `tasks/R1-*.md` |
 | R1-01 | Tenancy core and RLS (`SET LOCAL` per transaction) | review (merged into the R1 branch) | r1/r1-01-tenancy-rls | — | `tasks/R1-01-*.md` |
 | R1-02 | Indonesian copy base and translation checks | review (merged into the R1 branch) | r1/r1-02-lang-id | — | `tasks/R1-02-*.md` |
-| R1-03 | Curriculum tables, import, Profil Jenjang, policy-profile resolver | in-progress | r1/r1-03-curriculum | — | `tasks/R1-03-*.md` |
+| R1-03 | Curriculum tables, import, Profil Jenjang, policy-profile resolver | review (merged into the R1 branch) | r1/r1-03-curriculum | — | `tasks/R1-03-*.md` |
 | R1-10 | Runtime settings: AI concurrency, queue-wait alert, worker_threads pool (D-463, D-467) | review (merged into the R1 branch) | r1/r1-10-runtime-settings | — | `tasks/R1-10-*.md` |
 | R1-04 | Regions and school directory (NPSN → region) | in-progress | r1/r1-04-regions | R1-01 | `tasks/R1-04-*.md` |
 | R1-05 | Auth, invitations, self sign-up, flexible trial, role switch, staff console | in-progress | r1/r1-05-auth | R1-01, R1-02 | `tasks/R1-05-*.md` |
