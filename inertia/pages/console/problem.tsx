@@ -144,6 +144,49 @@ export default function ConsoleProblem(props: Props) {
           </Section>
 
           <Section
+            title={t('problems.detail.reports', { count: reports.length })}
+            description={t('problems.detail.reports_hint')}
+          >
+            {reports.length === 0 ? (
+              <p className="text-muted">{t('problems.detail.no_reports')}</p>
+            ) : (
+              <ul className="divide-y">
+                {reports.map((report) => (
+                  <li
+                    key={report.id}
+                    className="flex flex-wrap items-center justify-between gap-2 py-2"
+                  >
+                    <span className="min-w-0">
+                      <span className="block break-words">
+                        {report.schoolName ?? t('problems.detail.no_school')}
+                        {report.role && ` · ${t(`nav.roles.${report.role}`)}`}
+                      </span>
+                      <span className="block text-xs text-muted">
+                        {regionLabel(t, report.region)} · {formatDateTime(report.linkedAt)}
+                      </span>
+                    </span>
+                    <span className="flex flex-wrap items-center gap-2">
+                      {report.notifiedAt && (
+                        <StatusChip tone="ok" icon>
+                          {t('problems.detail.notified')}
+                        </StatusChip>
+                      )}
+                      {report.helpRequestId && (
+                        <Link
+                          href={`/bantuan/${report.helpRequestId}`}
+                          className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong hover:underline"
+                        >
+                          {t('problems.detail.open_request', { number: report.helpRequestId })}
+                        </Link>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Section>
+
+          <Section
             title={t('problems.detail.analyses')}
             description={t('problems.detail.analyses_hint')}
           >
@@ -195,49 +238,6 @@ export default function ConsoleProblem(props: Props) {
             )}
             {can.analyse && (
               <AnalysisForm action={`${base}/analisis`} researchers={props.researchers} />
-            )}
-          </Section>
-
-          <Section
-            title={t('problems.detail.reports', { count: reports.length })}
-            description={t('problems.detail.reports_hint')}
-          >
-            {reports.length === 0 ? (
-              <p className="text-muted">{t('problems.detail.no_reports')}</p>
-            ) : (
-              <ul className="divide-y">
-                {reports.map((report) => (
-                  <li
-                    key={report.id}
-                    className="flex flex-wrap items-center justify-between gap-2 py-2"
-                  >
-                    <span className="min-w-0">
-                      <span className="block break-words">
-                        {report.schoolName ?? t('problems.detail.no_school')}
-                        {report.role && ` · ${t(`nav.roles.${report.role}`)}`}
-                      </span>
-                      <span className="block text-xs text-muted">
-                        {regionLabel(t, report.region)} · {formatDateTime(report.linkedAt)}
-                      </span>
-                    </span>
-                    <span className="flex flex-wrap items-center gap-2">
-                      {report.notifiedAt && (
-                        <StatusChip tone="ok" icon>
-                          {t('problems.detail.notified')}
-                        </StatusChip>
-                      )}
-                      {report.helpRequestId && (
-                        <Link
-                          href={`/bantuan/${report.helpRequestId}`}
-                          className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong hover:underline"
-                        >
-                          {t('problems.detail.open_request', { number: report.helpRequestId })}
-                        </Link>
-                      )}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             )}
           </Section>
 

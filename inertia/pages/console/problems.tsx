@@ -193,7 +193,6 @@ export default function ConsoleProblems({
         {filters.status && <input type="hidden" name="status" value={filters.status} />}
         <TextField
           label={t('problems.list.search')}
-          hint={t('problems.list.search_hint')}
           name="cari"
           type="search"
           defaultValue={filters.search}
