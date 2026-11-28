@@ -202,6 +202,11 @@ export function resolveLayers<V>(input: ResolveInput<V>): Resolution<V> {
     list.push(hide)
     hidesByPackage.set(hide.packageId, list)
   }
+  for (const list of hidesByPackage.values()) {
+    list.sort((a, b) =>
+      a.targetItemKey < b.targetItemKey ? -1 : a.targetItemKey > b.targetItemKey ? 1 : 0
+    )
+  }
 
   const current = new Map<string, ResolvedItem<V>>()
   const byMatch = new Map<string, string>()
@@ -236,7 +241,7 @@ export function resolveLayers<V>(input: ResolveInput<V>): Resolution<V> {
         continue
       }
       take(target)
-      hidden.set(hide.targetItemKey, {
+      hidden.set(`${target.source.packageCode}|${target.itemKey}`, {
         ...target,
         hiddenBy: {
           layer: pkg.layer,
@@ -308,12 +313,15 @@ export function resolveLayers<V>(input: ResolveInput<V>): Resolution<V> {
     let visible = 0
     for (const item of current.values()) if (item.groupKey === rule.groupKey) visible++
     if (visible >= rule.min) continue
-    const restorable = hidden.get(rule.defaultItemKey)
-    if (!restorable) {
+    const hiddenKey = [...hidden.keys()]
+      .reverse()
+      .find((key) => hidden.get(key)!.itemKey === rule.defaultItemKey)
+    const restorable = hiddenKey === undefined ? undefined : hidden.get(hiddenKey)
+    if (hiddenKey === undefined || !restorable) {
       warnings.push({ kind: 'group_minimum_unmet', groupKey: rule.groupKey })
       continue
     }
-    hidden.delete(rule.defaultItemKey)
+    hidden.delete(hiddenKey)
     const { hiddenBy, ...item } = restorable
     put(item)
     warnings.push({
