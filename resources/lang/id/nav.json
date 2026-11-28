@@ -28,6 +28,12 @@
   "extracurricular": "Ekstrakurikuler",
   "packages": "Paket daerah",
   "proposals": "Usulan",
+  "settings_tabs": {
+    "label": "Bagian pengaturan",
+    "general": "Umum",
+    "integrations": "Integrasi",
+    "ai_models": "Model AI"
+  },
   "sections": {
     "school": "Sekolah",
     "layers": "Data daerah dan sekolah",
@@ -52,6 +58,8 @@
     "calendar": "Kalender wilayah",
     "settings": "Pengaturan",
     "system_health": "Kesehatan sistem",
+    "integrations": "Integrasi",
+    "ai_models": "Model AI",
     "staff": "Staf",
     "activity_log": "Log aktivitas",
     "access": "Hak akses"

@@ -46,6 +46,7 @@
     "#calendar/*": "./app/calendar/*.js",
     "#staff/*": "./app/staff/*.js",
     "#system_health/*": "./app/system_health/*.js",
+    "#integrations/*": "./app/integrations/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",
