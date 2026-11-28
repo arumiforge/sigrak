@@ -20,10 +20,16 @@ import '#start/routes/regions'
 import '#start/routes/auth'
 import '#start/routes/console'
 import '#start/routes/staff'
+import '#start/routes/integrations'
+import '#start/routes/two_factor'
 import '#start/routes/layers'
 import '#start/routes/school_year'
 import '#start/routes/timetable'
 import '#start/routes/calendar'
+import '#start/routes/system_health'
+import '#start/routes/curriculum'
+import '#start/routes/publishing'
+import '#start/routes/help'
 
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')
 const StaffSessionController = () => import('#controllers/staff/session_controller')
@@ -101,10 +107,8 @@ router
     router
       .group(() => {
         router.get('/masuk', [ExamSessionController, 'create']).as('login')
-        router
-          .post('/masuk', [ExamSessionController, 'store'])
-          .as('login.store')
-          .use(loginIpThrottle)
+        // Limits keyed on the exam session, in the controller (D-479).
+        router.post('/masuk', [ExamSessionController, 'store']).as('login.store')
       })
       .use(middleware.guest({ guard: 'exam' }))
 

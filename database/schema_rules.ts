@@ -37,5 +37,12 @@ export default {
     school_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
     levels: { tsType: 'string[]', decorators: [{ name: '@column' }] },
     fields: { tsType: 'string[]', decorators: [{ name: '@column' }] },
+    // Curriculum console (R2-08): staff who imported into a version; CurriculumVersion converts them.
+    imported_by_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
+    // Kabar targets (D-319, R2-05): bigint[] arrives as strings; Announcement converts them.
+    target_region_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
+    target_school_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
+    target_levels: { tsType: 'string[]', decorators: [{ name: '@column' }] },
+    target_roles: { tsType: 'string[]', decorators: [{ name: '@column' }] },
   },
 } satisfies SchemaRules

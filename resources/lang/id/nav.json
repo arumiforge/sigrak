@@ -9,6 +9,15 @@
   "news": "Kabar",
   "help": "Bantuan",
   "request_help": "Minta bantuan",
+  "my_help": "Bantuan saya",
+  "help_unread": "{count} baru",
+  "support_session": {
+    "start": "Lihat sekolah ini",
+    "start_hint": "Membuka tampilan sekolah dalam mode baca saja, sesuai perjanjian kerja sama dengan sekolah. Sesi berakhir sendiri setelah {hours} jam.",
+    "banner_body": "Anda sedang melihat {school} dalam mode baca saja, sampai pukul {time}.",
+    "open": "Buka tampilan sekolah",
+    "end": "Akhiri sesi"
+  },
   "account": "Akun",
   "account_menu": "Menu akun",
   "school_settings": "Pengaturan sekolah",
@@ -28,13 +37,22 @@
   "extracurricular": "Ekstrakurikuler",
   "packages": "Paket daerah",
   "proposals": "Usulan",
+  "settings_tabs": {
+    "label": "Bagian pengaturan",
+    "general": "Umum",
+    "integrations": "Integrasi",
+    "ai_models": "Model AI"
+  },
   "sections": {
     "school": "Sekolah",
     "layers": "Data daerah dan sekolah",
     "schools": "Sekolah dan pengguna",
     "regions": "Wilayah",
     "system": "Sistem",
-    "team": "Tim"
+    "team": "Tim",
+    "curriculum": "Kurikulum dan konten",
+    "communication": "Komunikasi",
+    "support": "Bantuan"
   },
   "roles": {
     "principal": "Kepala sekolah",
@@ -51,8 +69,19 @@
     "area_proposals": "Usulan wilayah",
     "calendar": "Kalender wilayah",
     "settings": "Pengaturan",
+    "system_health": "Kesehatan sistem",
+    "integrations": "Integrasi",
+    "ai_models": "Model AI",
     "staff": "Staf",
     "activity_log": "Log aktivitas",
-    "access": "Hak akses"
-  }
+    "access": "Hak akses",
+    "curriculum": "Kurikulum",
+    "announcements": "Kabar",
+    "events": "Acara",
+    "stories": "Cerita Sekolah",
+    "legal": "Halaman legal",
+    "help_requests": "Permintaan bantuan",
+    "support_sessions": "Sesi bantuan"
+  },
+  "news_unread": "Kabar, {count} belum dibaca"
 }

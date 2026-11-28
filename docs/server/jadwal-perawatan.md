@@ -76,7 +76,7 @@ sudo pro status
 
 - **PR Renovate**: baca daftar PR baru. Patch keamanan yang mendesak (Trivy menandai celah berat) dikerjakan minggu ini; patch biasa dikumpulkan untuk update bulanan (D-412).
 - **PgHero** (lewat "SIGRAK ops"): query paling lambat dan saran indeks. Catat yang baru muncul untuk pengembang.
-- **CrowdSec**: `sudo cscli decisions list` dan `sudo cscli alerts list`. Lonjakan besar atau blokir yang salah sasaran (sekolah sendiri ikut terblokir) dilaporkan ke pengembang.
+- **CrowdSec**: `sudo cscli decisions list` dan `sudo cscli alerts list`. Lonjakan besar atau blokir yang salah sasaran (sekolah sendiri ikut terblokir) dilaporkan ke pengembang; IP sekolah yang salah terblokir dibuka dan masuk daftar putih ([sekolah-satu-ip.md](sekolah-satu-ip.md)).
 - **Backrest**: snapshot terakhir berhasil untuk produksi dan staging.
 
 ## Setiap bulan
@@ -166,7 +166,7 @@ sudo ausearch -k <kunci aturan auditd> --start this-month | tail -50
     - Cloudflare: anggota akun dan token API (termasuk token situs catatan, D-436);
     - Better Stack, Slack, Telegram, penyedia AI, penyedia VPS: siapa saja yang punya akses.
 4. **Kapasitas**: bandingkan CPU, RAM, dan disk tiga bulan terakhir di Netdata dengan pembagian di [compose-and-processes.md](compose-and-processes.md). Jumlah salinan atau penyetelan PostgreSQL (pgtune, D-429) diubah lewat PR.
-5. **Aturan WAF dan CrowdSec**: masih sesuai dengan serangan yang terlihat; aturan yang tidak pernah terpakai di paket Free dipertimbangkan untuk diganti.
+5. **Aturan WAF dan CrowdSec**: masih sesuai dengan serangan yang terlihat; aturan yang tidak pernah terpakai di paket Free dipertimbangkan untuk diganti. Daftar putih IP sekolah di CrowdSec ditinjau: IP yang sudah tidak dipakai sekolahnya dihapus ([sekolah-satu-ip.md](sekolah-satu-ip.md)).
 6. **Panduan ini**: perintah di runbook dan jadwal ini masih benar. Perbaiki yang sudah berubah.
 
 ## Setiap tahun

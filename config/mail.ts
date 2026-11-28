@@ -12,8 +12,9 @@ import type { InferMailers } from '@adonisjs/mail/types'
  * in the fake mailer.
  *
  * Every mail is queued (start/mail.ts) and sent by `worker-default`.
- * Values from the console when env is empty (D-431) come with the
- * console's integration settings.
+ * While MAIL_MAILER is empty, worker-default sends with the SMTP values
+ * set in the console instead (D-431, app/integrations/mail.ts); with
+ * none there, the `json` default sends nothing.
  */
 const mailConfig = defineConfig({
   default: env.get('MAIL_MAILER', 'json'),

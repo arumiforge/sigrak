@@ -1,0 +1,79 @@
+{
+  "challenge": {
+    "title": "Masukkan kode verifikasi",
+    "intro": "Buka aplikasi autentikator di ponsel Anda, lalu ketik 6 digit kode untuk SIGRAK.",
+    "code": "Kode verifikasi",
+    "code_hint": "Kode berganti setiap 30 detik.",
+    "submit": "Masuk",
+    "submitting": "Memeriksa kode…",
+    "lost": "Ponsel hilang atau aplikasinya terhapus? Minta admin SIGRAK mengatur ulang 2FA Anda.",
+    "other_account": "Masuk dengan akun lain"
+  },
+  "setup": {
+    "title": "Aktifkan verifikasi dua langkah",
+    "intro": "Setelah aktif, setiap kali masuk Anda mengetik kata sandi, lalu kode dari aplikasi autentikator.",
+    "required": "Akun Pemilik dan Admin wajib memakai verifikasi dua langkah. Selesaikan langkah ini dulu untuk membuka konsol.",
+    "back": "Kembali ke Akun",
+    "link_title": "Hubungkan aplikasi autentikator",
+    "step_app_title": "Pasang aplikasi autentikator",
+    "step_app_body": "Misalnya Google Authenticator, Microsoft Authenticator, atau 2FAS di ponsel Anda.",
+    "step_scan_title": "Pindai kode QR",
+    "step_scan_body": "Di aplikasi, pilih tambah akun, lalu pindai kode QR ini.",
+    "qr_label": "Kode QR untuk aplikasi autentikator",
+    "manual_title": "Tidak bisa memindai? Ketik kunci ini di aplikasi:",
+    "manual_label": "Kunci pengaturan",
+    "copy": "Salin kunci",
+    "copied": "Kunci sudah disalin.",
+    "step_confirm_title": "Ketik kode dari aplikasi",
+    "step_confirm_body": "Aplikasi menampilkan 6 digit kode untuk SIGRAK. Ketik kode itu untuk menyelesaikan.",
+    "submit": "Aktifkan",
+    "submitting": "Memeriksa kode…",
+    "no_recovery": "SIGRAK tidak memakai kode cadangan. Jika ponsel hilang, minta admin SIGRAK mengatur ulang 2FA Anda."
+  },
+  "account": {
+    "title": "Akun",
+    "intro": "Data akun staf Anda dan cara Anda masuk ke konsol.",
+    "profile_title": "Data akun",
+    "name": "Nama",
+    "email": "Email",
+    "roles": "Peran",
+    "no_roles": "Belum ada peran.",
+    "section_title": "Verifikasi dua langkah (2FA)",
+    "on": "Aktif",
+    "off": "Belum aktif",
+    "on_body": "Aktif sejak {date}. Setiap kali masuk, Anda mengetik kode dari aplikasi autentikator.",
+    "off_body": "Minta kode dari aplikasi autentikator setiap kali masuk agar akun Anda lebih aman.",
+    "required_note": "Wajib untuk peran Pemilik dan Admin, jadi tidak bisa dimatikan.",
+    "enable": "Aktifkan 2FA",
+    "disable": "Matikan 2FA",
+    "disable_title": "Matikan verifikasi dua langkah?",
+    "disable_body": "Setelah dimatikan, Anda masuk hanya dengan kata sandi. Ketik kode dari aplikasi untuk memastikan ini Anda.",
+    "disable_confirm": "Matikan 2FA"
+  },
+  "staff": {
+    "title": "Verifikasi dua langkah",
+    "on": "2FA aktif",
+    "off": "2FA belum aktif",
+    "required_off": "Wajib untuk peran ini. Staf ini diminta memasangnya saat masuk berikutnya.",
+    "optional_off": "Tidak wajib untuk peran ini.",
+    "reset": "Atur ulang 2FA",
+    "reset_title": "Atur ulang 2FA {name}?",
+    "reset_body": "Aplikasi autentikator yang terhubung tidak bisa dipakai lagi. Staf ini memasang ulang 2FA saat masuk berikutnya. Perubahan ini dicatat di log aktivitas.",
+    "reset_confirm": "Atur ulang 2FA",
+    "self_note": "2FA Anda sendiri diatur di halaman Akun."
+  },
+  "errors": {
+    "wrong_code": "Kode tidak cocok. Periksa kode terbaru di aplikasi, lalu coba lagi.",
+    "blocked": "Terlalu banyak kode yang salah. Coba lagi dalam {minutes} menit.",
+    "expired": "Waktu memasukkan kode sudah habis. Silakan masuk lagi.",
+    "self": "2FA Anda sendiri tidak bisa diatur ulang di sini. Minta admin lain.",
+    "high_role": "Hanya Pemilik yang bisa mengatur ulang 2FA akun Pemilik dan Admin.",
+    "not_enrolled": "Staf ini belum memasang 2FA.",
+    "required": "Verifikasi dua langkah wajib untuk peran Pemilik dan Admin."
+  },
+  "toasts": {
+    "enabled": "Verifikasi dua langkah sudah aktif.",
+    "disabled": "Verifikasi dua langkah sudah dimatikan.",
+    "reset": "2FA sudah diatur ulang. Staf ini memasang ulang 2FA saat masuk berikutnya."
+  }
+}

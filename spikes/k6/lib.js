@@ -38,10 +38,10 @@ export function operatorEmail(index) {
 export const USERS = __ENV.USERS_FILE ? JSON.parse(open(__ENV.USERS_FILE)) : null
 
 /**
- * Each VU looks like its own client IP. The web process trusts
- * X-Forwarded-For from loopback (AdonisJS default), as it will trust nginx
- * in production, so the per-IP login limit (30 POST /masuk per minute)
- * applies per VU and not to the whole test.
+ * Each VU looks like its own client IP. Run the web process with
+ * TRUSTED_PROXIES=127.0.0.1 so it believes X-Forwarded-For from k6, as it
+ * believes nginx in production (D-479); without it every VU is 127.0.0.1
+ * and shares the per-IP sign-in brake (600 POST /masuk per minute).
  */
 export function clientIp(vu) {
   return `10.${(vu >> 16) & 255}.${(vu >> 8) & 255}.${vu & 255}`

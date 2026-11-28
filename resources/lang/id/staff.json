@@ -327,7 +327,10 @@
         "disable": "Akun dinonaktifkan",
         "enable": "Akun diaktifkan",
         "link_resend": "Tautan kata sandi dikirim",
-        "owner_bootstrap": "Pemilik pertama dibuat"
+        "owner_bootstrap": "Pemilik pertama dibuat",
+        "two_factor_enable": "2FA diaktifkan",
+        "two_factor_disable": "2FA dimatikan",
+        "two_factor_reset": "2FA diatur ulang"
       },
       "trial": {
         "extend": "Masa uji coba ditambah",
@@ -337,10 +340,42 @@
       "setting": {
         "updated": "Pengaturan diubah"
       },
+      "job": {
+        "retry": "Pekerjaan antrean dicoba lagi",
+        "remove": "Pekerjaan antrean dihapus"
+      },
+      "integration": {
+        "updated": "Integrasi diubah",
+        "cleared": "Isian integrasi dikosongkan",
+        "key_added": "Kunci chatbot ditambahkan",
+        "key_removed": "Kunci chatbot dihapus",
+        "mail_tested": "Email uji dikirim"
+      },
+      "ai_model": {
+        "updated": "Model AI diubah",
+        "tested": "Model AI diuji"
+      },
       "invitation": {
         "create": "Undangan dikirim",
         "resend": "Undangan dikirim ulang",
         "cancel": "Undangan dibatalkan"
+      },
+      "curriculum": {
+        "import": "Data kurikulum diimpor",
+        "signoff": "Versi kurikulum disahkan",
+        "signoff_withdraw": "Pengesahan versi kurikulum dibatalkan",
+        "publish": "Versi kurikulum diterbitkan",
+        "rollback": "Versi kurikulum dikembalikan"
+      },
+      "help_request": {
+        "reply": "Permintaan bantuan dibalas",
+        "note": "Catatan internal ditambahkan",
+        "status": "Status permintaan bantuan diubah",
+        "assign": "Permintaan bantuan diambil"
+      },
+      "support_session": {
+        "start": "Sesi bantuan dimulai",
+        "end": "Sesi bantuan diakhiri"
       }
     }
   },

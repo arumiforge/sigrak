@@ -20,22 +20,49 @@ declare module '@adonisjs/inertia/types' {
     'admin/layers/area_proposals': ExtractProps<(typeof import('../../inertia/pages/admin/layers/area_proposals.tsx'))['default']>
     'admin/region_changes': ExtractProps<(typeof import('../../inertia/pages/admin/region_changes.tsx'))['default']>
     'admin/school_directory': ExtractProps<(typeof import('../../inertia/pages/admin/school_directory.tsx'))['default']>
+    'announcements/index': ExtractProps<(typeof import('../../inertia/pages/announcements/index.tsx'))['default']>
+    'announcements/show': ExtractProps<(typeof import('../../inertia/pages/announcements/show.tsx'))['default']>
     'auth/confirm_email': ExtractProps<(typeof import('../../inertia/pages/auth/confirm_email.tsx'))['default']>
     'auth/forgot_password': ExtractProps<(typeof import('../../inertia/pages/auth/forgot_password.tsx'))['default']>
     'auth/invitation': ExtractProps<(typeof import('../../inertia/pages/auth/invitation.tsx'))['default']>
     'auth/login': ExtractProps<(typeof import('../../inertia/pages/auth/login.tsx'))['default']>
     'auth/reset_password': ExtractProps<(typeof import('../../inertia/pages/auth/reset_password.tsx'))['default']>
     'auth/sign_up': ExtractProps<(typeof import('../../inertia/pages/auth/sign_up.tsx'))['default']>
+    'auth/two_factor_challenge': ExtractProps<(typeof import('../../inertia/pages/auth/two_factor_challenge.tsx'))['default']>
     'console/access_matrix': ExtractProps<(typeof import('../../inertia/pages/console/access_matrix.tsx'))['default']>
+    'console/account': ExtractProps<(typeof import('../../inertia/pages/console/account.tsx'))['default']>
     'console/activity_log': ExtractProps<(typeof import('../../inertia/pages/console/activity_log.tsx'))['default']>
+    'console/ai_models': ExtractProps<(typeof import('../../inertia/pages/console/ai_models.tsx'))['default']>
+    'console/announcement_form': ExtractProps<(typeof import('../../inertia/pages/console/announcement_form.tsx'))['default']>
+    'console/announcements': ExtractProps<(typeof import('../../inertia/pages/console/announcements.tsx'))['default']>
+    'console/curriculum/compare': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/compare.tsx'))['default']>
+    'console/curriculum/impact': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/impact.tsx'))['default']>
+    'console/curriculum/version': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/version.tsx'))['default']>
+    'console/curriculum/versions': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/versions.tsx'))['default']>
+    'console/event_form': ExtractProps<(typeof import('../../inertia/pages/console/event_form.tsx'))['default']>
+    'console/events': ExtractProps<(typeof import('../../inertia/pages/console/events.tsx'))['default']>
+    'console/help_request': ExtractProps<(typeof import('../../inertia/pages/console/help_request.tsx'))['default']>
+    'console/help_requests': ExtractProps<(typeof import('../../inertia/pages/console/help_requests.tsx'))['default']>
+    'console/integrations': ExtractProps<(typeof import('../../inertia/pages/console/integrations.tsx'))['default']>
+    'console/legal_document_form': ExtractProps<(typeof import('../../inertia/pages/console/legal_document_form.tsx'))['default']>
+    'console/legal_pages': ExtractProps<(typeof import('../../inertia/pages/console/legal_pages.tsx'))['default']>
     'console/school': ExtractProps<(typeof import('../../inertia/pages/console/school.tsx'))['default']>
     'console/schools': ExtractProps<(typeof import('../../inertia/pages/console/schools.tsx'))['default']>
     'console/settings': ExtractProps<(typeof import('../../inertia/pages/console/settings.tsx'))['default']>
     'console/staff_member': ExtractProps<(typeof import('../../inertia/pages/console/staff_member.tsx'))['default']>
     'console/staff': ExtractProps<(typeof import('../../inertia/pages/console/staff.tsx'))['default']>
+    'console/stories': ExtractProps<(typeof import('../../inertia/pages/console/stories.tsx'))['default']>
+    'console/story_form': ExtractProps<(typeof import('../../inertia/pages/console/story_form.tsx'))['default']>
+    'console/support_sessions': ExtractProps<(typeof import('../../inertia/pages/console/support_sessions.tsx'))['default']>
+    'console/support_view': ExtractProps<(typeof import('../../inertia/pages/console/support_view.tsx'))['default']>
+    'console/system_health': ExtractProps<(typeof import('../../inertia/pages/console/system_health.tsx'))['default']>
+    'console/two_factor_setup': ExtractProps<(typeof import('../../inertia/pages/console/two_factor_setup.tsx'))['default']>
     'console/users': ExtractProps<(typeof import('../../inertia/pages/console/users.tsx'))['default']>
     'errors/error': ExtractProps<(typeof import('../../inertia/pages/errors/error.tsx'))['default']>
     'exam/home': ExtractProps<(typeof import('../../inertia/pages/exam/home.tsx'))['default']>
+    'help/ask': ExtractProps<(typeof import('../../inertia/pages/help/ask.tsx'))['default']>
+    'help/mine': ExtractProps<(typeof import('../../inertia/pages/help/mine.tsx'))['default']>
+    'help/request': ExtractProps<(typeof import('../../inertia/pages/help/request.tsx'))['default']>
     'school_year/academic_year_edit': ExtractProps<(typeof import('../../inertia/pages/school_year/academic_year_edit.tsx'))['default']>
     'school_year/academic_years': ExtractProps<(typeof import('../../inertia/pages/school_year/academic_years.tsx'))['default']>
     'school_year/class': ExtractProps<(typeof import('../../inertia/pages/school_year/class.tsx'))['default']>

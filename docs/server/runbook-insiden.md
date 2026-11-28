@@ -140,6 +140,8 @@ Lihat juga GlitchTip untuk error yang baru muncul. Lalu, sesuai yang ditemukan:
 - **Kontainer `unhealthy` atau berhenti**: `dc up -d --wait web` (atau `exam`). Salinan diganti satu per satu.
 - **Masalah muncul tepat setelah deploy**: kembalikan ke image sebelumnya dengan `<perintah rollback>`. Migrasi tidak di-rollback. Bila migrasi merusak data, pulihkan backup bersama pengembang ([compose-and-processes.md](compose-and-processes.md) bagian Deploy).
 - **Error koneksi database atau Redis** di log: periksa `dc ps postgres <layanan pgbouncer> redis`, lalu lanjut ke [Database lambat](#database-lambat) atau [Disk penuh](#disk-penuh).
+- **Hanya `redis-cache` yang mati atau penuh** (log berisi `Redis connection failure` untuk port cache): aplikasi tetap jalan, hanya lebih lambat. `dc up -d --wait redis-cache`. Tidak ada data yang hilang (D-480).
+- **Satu sekolah tidak bisa masuk atau mendapat halaman 429/blokir**: hampir selalu IP sekolah yang tertahan di Cloudflare, nginx, atau CrowdSec. Ikuti [sekolah-satu-ip.md](sekolah-satu-ip.md) bagian CrowdSec ("Membuka blokir yang salah") dan Cloudflare Security → Events.
 - **RAM habis** (`docker stats` menunjukkan kontainer di batasnya, log berisi `heap out of memory` atau `OOMKilled`): restart layanan itu, lalu catat untuk penyetelan `--max-old-space-size`.
 - **Hanya fitur AI atau ekspor yang macet**: periksa `dc logs --tail=200 worker-ai` atau `worker-exports`. Bila penyedia AI sedang gangguan, cukup umumkan di halaman status; aplikasi lain tetap jalan.
 

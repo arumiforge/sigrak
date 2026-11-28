@@ -1,0 +1,307 @@
+{
+  "toasts": {
+    "published": "“{title}” sudah terbit.",
+    "draft_saved": "Draf “{title}” tersimpan.",
+    "saved": "Perubahan pada “{title}” tersimpan.",
+    "unpublished": "Tulisan ditarik kembali menjadi draf.",
+    "deleted": "Draf sudah dihapus."
+  },
+  "errors": {
+    "state": "Status tulisan ini sudah berubah. Muat ulang halaman, lalu coba lagi.",
+    "date": "Tanggal belum benar."
+  },
+  "statuses": {
+    "draft": "Draf",
+    "published": "Terbit",
+    "scheduled": "Terjadwal",
+    "live": "Sedang tampil",
+    "ended": "Sudah berakhir"
+  },
+  "kinds": {
+    "general": "Umum",
+    "event": "Acara",
+    "curriculum": "Kurikulum",
+    "maintenance": "Pemeliharaan sistem"
+  },
+  "levels": {
+    "sd": "SD",
+    "mi": "MI"
+  },
+  "roles": {
+    "principal": "Kepala sekolah",
+    "operator": "Operator sekolah",
+    "teacher": "Guru",
+    "supervisor": "Pengawas"
+  },
+  "editor": {
+    "write": "Tulis",
+    "preview": "Pratinjau",
+    "tabs_label": "Tampilan isi",
+    "hint": "Format: **tebal**, *miring*, [teks tautan](https://…), baris berawalan “- ” untuk daftar, dan “## ” untuk subjudul.",
+    "preview_empty": "Belum ada isi untuk dipratinjau."
+  },
+  "form": {
+    "title": "Judul",
+    "summary": "Ringkasan",
+    "summary_hint": "Satu atau dua kalimat untuk daftar. Kosongkan agar diambil dari awal isi.",
+    "body": "Isi",
+    "optional": "opsional",
+    "save_draft": "Simpan draf",
+    "publish": "Terbitkan",
+    "save": "Simpan perubahan",
+    "unpublish": "Tarik kembali",
+    "unpublish_title": "Tarik kembali tulisan ini?",
+    "unpublish_body": "Tulisan tidak tampil lagi sampai diterbitkan ulang.",
+    "delete": "Hapus draf",
+    "delete_title": "Hapus draf ini?",
+    "delete_body": "Draf yang dihapus tidak bisa dikembalikan.",
+    "public_link": "Lihat di sigrak.com",
+    "published_on": "Terbit {date}",
+    "status_label": "Status"
+  },
+  "announcements": {
+    "list": {
+      "title": "Kabar",
+      "intro": "Kabar dari Tim SIGRAK untuk pengguna aplikasi, untuk pengunjung sigrak.com, atau keduanya.",
+      "add": "Tulis Kabar",
+      "caption": "Daftar Kabar",
+      "empty": "Belum ada Kabar. Tulis Kabar pertama untuk pengguna aplikasi atau sigrak.com.",
+      "col_title": "Judul",
+      "col_kind": "Jenis",
+      "col_where": "Tampil di",
+      "col_status": "Status",
+      "col_window": "Waktu tampil",
+      "open": "Buka",
+      "open_label": "Buka {title}",
+      "where_app": "Aplikasi",
+      "where_public": "sigrak.com",
+      "always": "Sejak terbit, tanpa batas",
+      "from": "Mulai {date}",
+      "until": "Sampai {date}"
+    },
+    "form": {
+      "new_title": "Tulis Kabar",
+      "edit_title": "Ubah Kabar",
+      "back": "Kabar",
+      "kind": "Jenis Kabar",
+      "kind_hint": "Kurator kurikulum menulis Kabar kurikulum, Teknis menulis Kabar pemeliharaan sistem.",
+      "where": "Tampil di",
+      "where_hint": "Pilih paling tidak satu.",
+      "show_in_app": "Aplikasi SIGRAK",
+      "show_in_app_hint": "Untuk pengguna yang masuk sasaran di bawah.",
+      "show_public": "Situs sigrak.com",
+      "show_public_hint": "Untuk semua pengunjung. Sasaran tidak berlaku di sana.",
+      "targets": "Sasaran di aplikasi",
+      "targets_hint": "Semua yang kosong berarti semua. Tanpa wilayah dan sekolah, Kabar sampai ke semua sekolah.",
+      "region_search": "Cari provinsi, kabupaten, kota, atau kecamatan",
+      "region_search_hint": "Ketik paling tidak dua huruf.",
+      "school_search": "Cari sekolah",
+      "school_search_hint": "Ketik nama sekolah atau NPSN.",
+      "levels": "Jenjang",
+      "levels_hint": "Kosongkan untuk semua jenjang.",
+      "roles": "Peran",
+      "roles_hint": "Kosongkan untuk semua peran.",
+      "window": "Waktu tampil",
+      "window_hint": "Waktu Indonesia Barat (WIB).",
+      "show_from": "Mulai tampil",
+      "show_from_hint": "Kosongkan agar tampil sejak diterbitkan.",
+      "show_until": "Tampil sampai",
+      "show_until_hint": "Kosongkan agar tampil terus.",
+      "scope_hint": "Anda hanya bisa menulis Kabar dengan jenis dan sasaran di dalam cakupan peran Anda.",
+      "searching": "Mencari…",
+      "no_matches": "Tidak ada yang cocok.",
+      "add_item": "Tambahkan {name}",
+      "remove_item": "Hapus {name}",
+      "no_kinds": "Peran Anda belum bisa menulis Kabar."
+    },
+    "errors": {
+      "kind": "Peran Anda tidak bisa menulis Kabar dengan jenis ini.",
+      "targets": "Sasaran ini di luar cakupan peran Anda. Pilih wilayah atau sekolah di dalam cakupan Anda.",
+      "public": "Peran Anda tidak bisa menampilkan Kabar di sigrak.com.",
+      "window": "Waktu selesai harus sesudah waktu mulai.",
+      "where": "Pilih paling tidak satu tempat tampil.",
+      "state": "Status Kabar ini sudah berubah. Muat ulang halaman, lalu coba lagi."
+    }
+  },
+  "events": {
+    "list": {
+      "title": "Acara",
+      "intro": "Webinar, pelatihan, dan kunjungan yang tampil di sigrak.com/acara.",
+      "add": "Tambah acara",
+      "caption": "Daftar acara",
+      "empty": "Belum ada acara. Tambahkan webinar atau pelatihan berikutnya.",
+      "col_title": "Judul",
+      "col_when": "Waktu",
+      "col_where": "Tempat",
+      "col_status": "Status",
+      "past": "Sudah lewat",
+      "online": "Daring",
+      "open_label": "Buka {title}"
+    },
+    "form": {
+      "new_title": "Tambah acara",
+      "edit_title": "Ubah acara",
+      "back": "Acara",
+      "event_start": "Waktu mulai",
+      "event_end": "Waktu selesai",
+      "event_end_hint": "Kosongkan bila tidak ada jam selesai.",
+      "time_hint": "Waktu Indonesia Barat (WIB).",
+      "place": "Tempat",
+      "place_hint": "Misalnya Aula SD Negeri 1 Kudus. Kosongkan bila hanya daring.",
+      "online_url": "Tautan daring",
+      "online_url_hint": "Tautan Zoom, Google Meet, atau YouTube.",
+      "registration_url": "Tautan pendaftaran",
+      "body_hint": "Isi acara, pembicara, dan siapa yang cocok ikut."
+    },
+    "errors": {
+      "window": "Waktu selesai harus sesudah waktu mulai.",
+      "where": "Isi tempat atau tautan daring."
+    }
+  },
+  "stories": {
+    "list": {
+      "title": "Cerita Sekolah",
+      "intro": "Cerita sekolah yang memakai SIGRAK, tampil di sigrak.com/cerita-sekolah dengan persetujuan sekolah.",
+      "add": "Tulis cerita",
+      "caption": "Daftar cerita sekolah",
+      "empty": "Belum ada cerita. Tulis cerita pertama setelah sekolah setuju namanya disebut.",
+      "col_title": "Judul",
+      "col_school": "Sekolah",
+      "col_status": "Status",
+      "col_updated": "Terakhir diubah",
+      "open_label": "Buka {title}"
+    },
+    "form": {
+      "new_title": "Tulis cerita",
+      "edit_title": "Ubah cerita",
+      "back": "Cerita Sekolah",
+      "consent_notice": "Sekolah hanya boleh disebut dengan persetujuannya. Catat siapa yang setuju dan kapan. Foto menyusul pada tahap berikutnya.",
+      "school_name": "Nama sekolah",
+      "consent_note": "Catatan persetujuan",
+      "consent_note_hint": "Siapa yang setuju dan dengan cara apa, misalnya kepala sekolah lewat surat.",
+      "consent_on": "Tanggal persetujuan"
+    }
+  },
+  "legal": {
+    "titles": {
+      "terms": "Syarat penggunaan",
+      "privacy": "Kebijakan privasi",
+      "student_data": "Perlindungan data murid"
+    },
+    "list": {
+      "title": "Halaman legal",
+      "intro": "Syarat penggunaan, kebijakan privasi, dan perlindungan data murid di sigrak.com. Setiap versi yang terbit disimpan dan tetap bisa dibaca.",
+      "review_note": "Semua teks halaman legal masih draf dan perlu ditinjau ahli hukum sebelum SIGRAK diluncurkan.",
+      "new_version": "Buat versi baru",
+      "open_draft": "Lanjutkan draf",
+      "none": "Belum ada versi yang terbit.",
+      "current": "Berlaku",
+      "upcoming": "Berlaku mulai {date}",
+      "older": "Versi lama",
+      "version": "Versi {version}",
+      "effective": "Berlaku sejak {date}",
+      "view": "Lihat",
+      "view_label": "Lihat {page} versi {version}"
+    },
+    "form": {
+      "back": "Halaman legal",
+      "edit_title": "{page}, versi {version}",
+      "effective_on": "Berlaku sejak",
+      "effective_on_hint": "Tanggal versi ini mulai berlaku. Setelah terbit, tanggal tidak bisa diubah.",
+      "change_note": "Catatan perubahan",
+      "change_note_hint": "Ringkasan singkat hal yang berubah dari versi sebelumnya.",
+      "save": "Simpan draf",
+      "publish": "Terbitkan versi {version}",
+      "publish_title": "Terbitkan versi {version}?",
+      "publish_body": "Versi yang sudah terbit tidak bisa diubah lagi. Perubahan berikutnya dibuat sebagai versi baru.",
+      "discard": "Hapus draf",
+      "discard_title": "Hapus draf ini?",
+      "discard_body": "Draf yang dihapus tidak bisa dikembalikan.",
+      "locked": "Versi ini sudah terbit dan tidak bisa diubah. Buat versi baru untuk perubahan.",
+      "review_note": "Teks ini perlu ditinjau ahli hukum sebelum diterbitkan untuk peluncuran."
+    },
+    "toasts": {
+      "draft_started": "Draf versi baru sudah dibuat dari teks terakhir.",
+      "saved": "Draf tersimpan.",
+      "published": "Versi {version} sudah terbit.",
+      "discarded": "Draf sudah dihapus."
+    },
+    "errors": {
+      "draft_exists": "Halaman ini sudah punya draf. Lanjutkan draf itu.",
+      "not_draft": "Versi ini sudah terbit dan tidak bisa diubah."
+    },
+    "placeholders": {
+      "terms": "> **Draf, perlu ditinjau ahli hukum.** Teks ini hanya kerangka sementara dan belum berlaku sebagai perjanjian.\n\n## Tentang SIGRAK\nSIGRAK adalah aplikasi web untuk guru dan pimpinan SD dan MI.\n\n## Akun\n[Akan dilengkapi: siapa yang boleh membuat akun dan tanggung jawab pemilik akun.]\n\n## Penggunaan yang wajar\n[Akan dilengkapi.]\n\n## Kunci AI milik guru\n[Akan dilengkapi: guru memakai kunci AI miliknya sendiri.]\n\n## Perubahan syarat\n[Akan dilengkapi.]\n\n## Kontak\n[Akan dilengkapi.]",
+      "privacy": "> **Draf, perlu ditinjau ahli hukum.** Teks ini hanya kerangka sementara dan belum berlaku sebagai kebijakan.\n\n## Data yang kami simpan\n[Akan dilengkapi.]\n\n## Untuk apa data dipakai\n[Akan dilengkapi.]\n\n## Tempat dan lama penyimpanan\n[Akan dilengkapi.]\n\n## Hak Anda\n[Akan dilengkapi.]\n\n## Kontak\n[Akan dilengkapi.]",
+      "student_data": "> **Draf, perlu ditinjau ahli hukum.** Teks ini hanya kerangka sementara perjanjian pemrosesan data murid antara sekolah dan SIGRAK sesuai UU PDP, dan belum berlaku.\n\n## Para pihak\n[Akan dilengkapi.]\n\n## Data murid yang diproses\n[Akan dilengkapi.]\n\n## Tujuan pemrosesan\n[Akan dilengkapi.]\n\n## Keamanan data\n[Akan dilengkapi.]\n\n## Jangka waktu dan penghapusan\n[Akan dilengkapi.]\n\n## Hak dan kewajiban sekolah\n[Akan dilengkapi.]"
+    }
+  },
+  "app": {
+    "title": "Kabar",
+    "intro": "Kabar dari Tim SIGRAK untuk Anda.",
+    "empty": "Belum ada Kabar untuk Anda.",
+    "unread": "Belum dibaca",
+    "mark_all": "Tandai semua sudah dibaca",
+    "all_read": "Semua Kabar sudah ditandai dibaca.",
+    "back": "Kabar",
+    "caption": "Daftar Kabar",
+    "from_team": "Dari Tim SIGRAK"
+  },
+  "public": {
+    "site_name": "SIGRAK",
+    "site_description": "Aplikasi web untuk guru dan pimpinan SD dan MI.",
+    "skip": "Langsung ke isi halaman",
+    "menu_label": "Menu situs",
+    "login": "Masuk",
+    "legal_label": "Legal",
+    "copyright": "Hak cipta {year} SIGRAK",
+    "menu": {
+      "announcements": "Kabar",
+      "events": "Acara",
+      "stories": "Cerita Sekolah"
+    },
+    "announcements": {
+      "title": "Kabar",
+      "intro": "Kabar terbaru dari Tim SIGRAK.",
+      "empty": "Belum ada Kabar.",
+      "back": "Semua Kabar",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "pages_label": "Halaman Kabar"
+    },
+    "events": {
+      "title": "Acara",
+      "intro": "Webinar, pelatihan, dan kunjungan dari Tim SIGRAK.",
+      "upcoming": "Akan datang",
+      "past": "Sudah lewat",
+      "empty_upcoming": "Belum ada acara yang akan datang.",
+      "online": "Daring",
+      "register": "Daftar",
+      "join": "Buka tautan acara",
+      "back": "Semua acara"
+    },
+    "stories": {
+      "title": "Cerita Sekolah",
+      "intro": "Cerita dari sekolah yang memakai SIGRAK, ditampilkan dengan persetujuan sekolah.",
+      "empty": "Belum ada cerita.",
+      "back": "Semua cerita"
+    },
+    "legal": {
+      "description": "Halaman legal SIGRAK dengan versi dan tanggal berlakunya.",
+      "version": "Versi {version}",
+      "effective_since": "Berlaku sejak {date}",
+      "upcoming": "Versi {version} berlaku mulai {date}.",
+      "upcoming_link": "Baca versi baru",
+      "older": "Versi lain",
+      "version_item": "Versi {version}, berlaku sejak {date}",
+      "not_current": "Ini bukan versi yang berlaku sekarang.",
+      "current_link": "Baca versi yang berlaku",
+      "preparing": "Halaman ini sedang disiapkan."
+    },
+    "not_found": {
+      "title": "Halaman tidak ditemukan",
+      "body": "Tulisan ini tidak ada atau sudah tidak tampil.",
+      "home": "Ke halaman Kabar"
+    }
+  }
+}

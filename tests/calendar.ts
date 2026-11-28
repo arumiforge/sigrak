@@ -41,7 +41,7 @@ export async function importCalendars(options: { activate?: boolean } = {}) {
       await activateCalendarPackage(trx, JATENG_CODE, null)
     }
   })
-  LayerResolver.clearCache()
+  await LayerResolver.clearCache()
 }
 
 /** SD and MI in Jati (Kudus), SD in Dawe, SD in Jepara without kecamatan; calendars active. */

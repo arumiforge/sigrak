@@ -1,8 +1,8 @@
 # R2-07 — Bank Masalah, Bank Praktik Baik, Forum Masalah→Solusi
 
 - **Phase:** R2
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r2/r2-07-problem-bank
 - **Depends on:** R2-01, R2-06
 - **Can run in parallel with:** R2-09 (start), after wave 2
 

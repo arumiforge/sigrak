@@ -74,7 +74,8 @@ const cacheTtlMs = 10 * 60 * 1000
  *   the religion CP) or replace each other. Entries joined by
  *   `supersedes` (in the profile, or `curriculum_versions.supersedes_id`)
  *   form one line; for each line the resolver picks the entry that has
- *   started and is not retired, a province entry before a national one,
+ *   started and is not retired (and, once the line has a published
+ *   version, only among published ones: R2-08), a province entry before a national one,
  *   the latest start first. When none has started it uses the earliest
  *   one and marks it `inForce: false`.
  *
@@ -219,11 +220,17 @@ function pickPerLine(
 
   const picked: { ruleSet: ResolvedRuleSet; index: number }[] = []
   for (const line of lines.values()) {
-    const candidates = line.filter(
+    const present = line.filter(
       ({ entry }) =>
         versions.get(entry.code)?.status !== 'retired' &&
         (!entry.region_province || entry.region_province === province)
     )
+    // Once a line has a published version, unpublished ones (draft,
+    // signed off) wait for their own publication (R2-08, D-317).
+    const published = present.some(({ entry }) => versions.get(entry.code)?.status === 'active')
+    const candidates = published
+      ? present.filter(({ entry }) => versions.get(entry.code)?.status === 'active')
+      : present
     if (candidates.length === 0) continue
     const started = candidates
       .filter(({ entry }) => compareSchoolYears(entry.applies_from_school_year, schoolYear) <= 0)

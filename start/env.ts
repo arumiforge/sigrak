@@ -31,6 +31,13 @@ export default await Env.create(new URL('../', import.meta.url), {
    * https behind Cloudflare Tunnel).
    */
   APP_SCHEME: Env.schema.enum(['http', 'https'] as const),
+  /**
+   * Addresses or CIDR ranges of the proxies whose X-Forwarded-* headers
+   * the app believes (comma-separated): only nginx's address on the
+   * Compose network (D-479). Empty trusts nobody, so request.ip() is the
+   * socket address and a forged X-Forwarded-For is ignored.
+   */
+  TRUSTED_PROXIES: Env.schema.string.optional(),
 
   // Session
   SESSION_DRIVER: Env.schema.enum(['cookie', 'redis', 'memory'] as const),
@@ -59,6 +66,16 @@ export default await Env.create(new URL('../', import.meta.url), {
    */
   REDIS_QUEUE_DB: Env.schema.number.optional(),
   REDIS_AI_DB: Env.schema.number.optional(),
+  /**
+   * The `redis-cache` instance for rebuildable caches (D-480):
+   * allkeys-lru with a memory cap and no persistence. Without
+   * REDIS_CACHE_HOST the cache uses the main Redis (development, CI)
+   * on database REDIS_CACHE_DB (default 3 there, 0 on its own instance).
+   */
+  REDIS_CACHE_HOST: Env.schema.string.optional({ format: 'host' }),
+  REDIS_CACHE_PORT: Env.schema.number.optional(),
+  REDIS_CACHE_PASSWORD: Env.schema.secret.optional(),
+  REDIS_CACHE_DB: Env.schema.number.optional(),
 
   // Queues and the CPU pool (D-463, D-467). Ranges and defaults:
   // app/services/queue/settings.ts; out-of-range values are clamped.
@@ -104,4 +121,9 @@ export default await Env.create(new URL('../', import.meta.url), {
   STAFF_OWNER_NAME: Env.schema.string.optional(),
   STAFF_OWNER_EMAIL: Env.schema.string.optional({ format: 'email' }),
   STAFF_OWNER_PASSWORD: Env.schema.secret.optional(),
+
+  // Kesehatan sistem (R2-04): the data volume whose free space the page
+  // shows, and the marker file the backup job writes after each success.
+  SYSTEM_DATA_PATH: Env.schema.string.optional(),
+  BACKUP_MARKER_PATH: Env.schema.string.optional(),
 })

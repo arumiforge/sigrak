@@ -3,6 +3,7 @@ import { usePage } from '@inertiajs/react'
 import FlashToasts from '~/components/flash_toasts'
 import { Icon } from '~/components/icon'
 import { AccountMenu } from '~/components/shell/account_menu'
+import { SupportSessionBanner } from '~/components/help/support_session_banner'
 import { SidebarNav, SkipLink, Wordmark } from '~/components/shell/shell_parts'
 import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from '~/components/ui/drawer'
 import { useT } from '~/lib/i18n'
@@ -48,9 +49,10 @@ export default function ConsoleLayout({ children }: { children: ReactNode }) {
             </button>
             <Wordmark href="/" label={t('common.areas.admin')} className="lg:hidden" />
             <div className="flex-1" />
-            {viewer && <AccountMenu name={viewer.name} />}
+            {viewer && <AccountMenu name={viewer.name} accountHref="/akun" />}
           </div>
         </header>
+        <SupportSessionBanner />
         <main
           id="isi"
           tabIndex={-1}

@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
 import app from '@adonisjs/core/services/app'
 import logger from '@adonisjs/core/services/logger'
-import type { AiConfig, PurposeSettings } from '#config/ai'
+import type { AiConfig } from '#config/ai'
 import AiUsageLog from '#models/ai_usage_log'
+import { resolvePurpose } from '#integrations/ai_models'
 import {
   AICancelledError,
   AIError,
@@ -68,7 +69,8 @@ export class AIGateway {
 
   async run(call: GatewayCall): Promise<GatewayResult> {
     const config = app.config.get<AiConfig>('ai')
-    const purpose = (config.purposes as Record<string, PurposeSettings>)[call.request.purpose]
+    // The console's model list for the purpose (D-315), timeout from config.
+    const purpose = await resolvePurpose(call.request.purpose)
     if (!purpose) {
       throw new Error(`Unknown AI purpose "${call.request.purpose}"`)
     }

@@ -20,6 +20,7 @@ import { backWithFieldError } from '#accounts/http'
 import { defaultTrialDays } from '#accounts/settings'
 import { applySchoolScope, authorizeStaff, schoolScopeOf, withinScope } from '#staff/access'
 import { staffReadTransaction, staffTransaction } from '#tenancy/tenant_transaction'
+import { SUPPORT_SESSION_HOURS } from '#help/catalog'
 import { staffInviteValidator, trialChangeValidator } from '#validators/accounts'
 
 const searchValidator = vine.create({ q: vine.string().trim().maxLength(100).optional() })
@@ -111,6 +112,7 @@ export default class SchoolsController {
       },
       defaultTrialDays: await defaultTrialDays(),
       trialExtendMaxDays: TRIAL_EXTEND_MAX_DAYS,
+      supportSessionHours: SUPPORT_SESSION_HOURS,
       members: data.members.map((member) => ({
         publicId: member.publicId,
         name: member.user.name,
@@ -131,6 +133,8 @@ export default class SchoolsController {
         manageInvitations: await withinScope(staff, 'invitations.manage', schoolId),
         manageTrials: await withinScope(staff, 'trials.manage', schoolId),
         extendTrials: await withinScope(staff, 'trials.extend', schoolId),
+        // "Lihat sekolah ini": a read-only support session (R2-06, D-341).
+        openSchool: await withinScope(staff, 'support_sessions.start', schoolId),
       },
     })
   }

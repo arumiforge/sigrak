@@ -49,6 +49,7 @@ export function SelectField({
   options,
   defaultValue,
   error,
+  disabled,
   onChange,
 }: {
   label: string
@@ -56,6 +57,7 @@ export function SelectField({
   options: { value: string; label: string }[]
   defaultValue?: string
   error?: string
+  disabled?: boolean
   onChange?: (value: string) => void
 }) {
   return (
@@ -65,6 +67,7 @@ export function SelectField({
           {...field}
           name={name}
           defaultValue={defaultValue}
+          disabled={disabled}
           onChange={(event) => onChange?.(event.target.value)}
           className={controlClass}
         >

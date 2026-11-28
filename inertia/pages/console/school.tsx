@@ -5,6 +5,7 @@ import { Section, SelectField } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { TrialForm } from '~/components/trial_form'
 import { Button } from '~/components/ui/button'
+import { StartSupportSession } from '~/components/help/start_support_session'
 import { useT } from '~/lib/i18n'
 import { formatShortDate } from '~/lib/format'
 
@@ -36,8 +37,14 @@ type Props = {
     sentAt: string
     expiresAt: string
   }[]
-  can: { manageInvitations: boolean; manageTrials: boolean; extendTrials: boolean }
+  can: {
+    manageInvitations: boolean
+    manageTrials: boolean
+    extendTrials: boolean
+    openSchool: boolean
+  }
   trialExtendMaxDays: number
+  supportSessionHours: number
 }
 
 /**
@@ -51,6 +58,7 @@ export default function ConsoleSchool({
   invitations,
   can,
   trialExtendMaxDays,
+  supportSessionHours,
 }: Props) {
   const t = useT()
   const base = `/sekolah/${school.id}`
@@ -60,6 +68,15 @@ export default function ConsoleSchool({
       <PageHeader
         title={school.name}
         back={{ href: '/sekolah', label: t('console.school.back') }}
+        actions={
+          can.openSchool ? (
+            <StartSupportSession
+              schoolId={school.id}
+              schoolName={school.name}
+              hours={supportSessionHours}
+            />
+          ) : undefined
+        }
         description={`${t(`console.levels.${school.level}`)} · ${
           school.npsn
             ? t('console.schools.npsn', { npsn: school.npsn })

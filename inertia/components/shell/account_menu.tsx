@@ -40,19 +40,24 @@ export function RoleSwitch({ role }: { role: SchoolRole }) {
 
 /**
  * The account button: initials (and the name from 640 px), opening a
- * menu with the role, Ganti peran, Akun and Keluar. `accountHref` is
- * null where there is no account page (console, exam site).
+ * menu with the role, Ganti peran, Akun, Minta bantuan and Bantuan saya
+ * (app only, `help`; R2-06) and Keluar. `accountHref` is null where
+ * there is no account page (console, exam site). Unread replies show a
+ * dot on the button and a count next to Bantuan saya (D-320).
  */
 export function AccountMenu({
   name,
   role,
   accountHref,
   canSwitchRole,
+  help,
 }: {
   name: string
   role?: SchoolRole | null
   accountHref?: string | null
   canSwitchRole?: boolean
+  /** Minta bantuan with the current page attached, and unread replies. */
+  help?: { askHref: string; unread: number }
 }) {
   const t = useT()
 
@@ -67,9 +72,15 @@ export function AccountMenu({
       >
         <span
           aria-hidden
-          className="inline-flex size-8 items-center justify-center rounded-full bg-brand-tint text-xs font-bold text-brand-strong"
+          className="relative inline-flex size-8 items-center justify-center rounded-full bg-brand-tint text-xs font-bold text-brand-strong"
         >
           {initials(name) || <Icon name="user" size={18} />}
+          {help && help.unread > 0 && (
+            <span
+              className="absolute -top-0.5 -right-0.5 size-2.5 rounded-full bg-danger ring-2 ring-surface"
+              data-testid="help-unread-dot"
+            />
+          )}
         </span>
         <span className="hidden max-w-40 truncate sm:inline" data-testid="viewer-name">
           {name}
@@ -102,7 +113,28 @@ export function AccountMenu({
             </Link>
           </DropdownMenuItem>
         )}
-        {(canSwitchRole || accountHref) && <DropdownMenuSeparator />}
+        {help && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link href={help.askHref} data-testid="ask-help">
+                <Icon name="help" />
+                {t('nav.request_help')}
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/bantuan-saya" data-testid="my-help">
+                <Icon name="inbox" />
+                <span className="flex-1">{t('nav.my_help')}</span>
+                {help.unread > 0 && (
+                  <span className="rounded-full bg-danger-tint px-2 py-0.5 text-xs font-semibold text-danger">
+                    {t('nav.help_unread', { count: help.unread })}
+                  </span>
+                )}
+              </Link>
+            </DropdownMenuItem>
+          </>
+        )}
+        {(canSwitchRole || accountHref || help) && <DropdownMenuSeparator />}
         <DropdownMenuItem onSelect={() => router.post('/keluar')} data-testid="sign-out">
           <Icon name="logout" />
           {t('nav.sign_out')}

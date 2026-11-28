@@ -1,0 +1,93 @@
+{{--
+  The simple public layout of sigrak.com (D-435, R2-05): a header with
+  the wordmark, the Kabar, Acara and Cerita Sekolah links and "Masuk",
+  the page, and a footer with the legal pages. The full marketing site
+  (mega menu, product pages, Codex visuals) is a later task.
+--}}
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} · {{ t('publishing.public.site_name') }}</title>
+    @if(description)
+      <meta name="description" content="{{ description }}" />
+    @end
+    @vite(['inertia/css/app.css'], { nonce: cspNonce })
+  </head>
+
+  <body class="min-h-dvh bg-page text-text">
+    <a
+      href="#isi"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold"
+    >
+      {{ t('publishing.public.skip') }}
+    </a>
+
+    <header class="border-b bg-surface">
+      <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 lg:px-6">
+        <a href="/kabar" class="text-xl font-extrabold tracking-tight text-brand-strong">
+          {{ t('publishing.public.site_name') }}
+        </a>
+        <nav
+          aria-label="{{ t('publishing.public.menu_label') }}"
+          class="order-3 w-full sm:order-none sm:w-auto sm:flex-1"
+        >
+          <ul class="-mx-2 flex gap-1 overflow-x-auto">
+            @each(item in menu)
+              <li>
+                <a
+                  href="{{ item.href }}"
+                  class="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-semibold whitespace-nowrap {{
+                    item.current
+                      ? 'bg-brand-tint text-brand-strong'
+                      : 'text-text hover:bg-surface-hover'
+                  }}"
+                  {{{ item.current ? 'aria-current="page"' : '' }}}
+                >
+                  {{ item.label }}
+                </a>
+              </li>
+            @end
+          </ul>
+        </nav>
+        <a
+          href="{{ loginUrl }}"
+          class="ml-auto inline-flex min-h-11 items-center rounded-md bg-brand px-4 text-sm font-semibold text-on-brand hover:bg-brand-strong sm:ml-0"
+        >
+          {{ t('publishing.public.login') }}
+        </a>
+      </div>
+    </header>
+
+    <main id="isi" class="mx-auto w-full max-w-5xl px-4 pt-8 pb-16 lg:px-6">
+      {{{ await $slots.main() }}}
+    </main>
+
+    <footer class="border-t bg-surface">
+      <div
+        class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 text-sm text-muted sm:flex-row sm:items-start sm:justify-between lg:px-6"
+      >
+        <div class="space-y-1">
+          <p class="font-bold text-text">{{ t('publishing.public.site_name') }}</p>
+          <p>{{ t('publishing.public.site_description') }}</p>
+          <p>{{ t('publishing.public.copyright', { year }) }}</p>
+        </div>
+        <nav aria-label="{{ t('publishing.public.legal_label') }}">
+          <ul class="space-y-1">
+            @each(link in legalLinks)
+              <li>
+                <a
+                  href="{{ link.href }}"
+                  class="inline-flex min-h-11 items-center font-semibold text-brand-strong hover:underline sm:min-h-0"
+                >
+                  {{ link.label }}
+                </a>
+              </li>
+            @end
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

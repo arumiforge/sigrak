@@ -432,7 +432,7 @@ test.group('Layers | resolver cases (§11.3)', (group) => {
     const cached = () =>
       asSchool(sdJati, () => LayerResolver.resolve('layer_test', sdJati.id, YEAR))
 
-    LayerResolver.clearCache()
+    await LayerResolver.clearCache()
     await cached()
     await cached()
     assert.include(LayerResolver.cacheStats(), { hits: 1, misses: 1 })

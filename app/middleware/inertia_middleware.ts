@@ -7,6 +7,8 @@ import User from '#models/user'
 import StaffUser from '#models/staff_user'
 import ExamParticipant from '#models/exam_participant'
 import { abilitiesOf } from '#staff/access'
+import { unreadCount } from '#publishing/announcement_feed'
+import { helpUnreadProp, supportSessionProp } from '#help/shared_props'
 
 /**
  * Who is signed in, in the shape every layout needs. Only the guard of
@@ -23,13 +25,17 @@ function viewerOf(user: unknown): { name: string } | null {
 }
 
 export default class InertiaMiddleware extends BaseInertiaMiddleware {
-  share(ctx: HttpContext) {
+  async share(ctx: HttpContext) {
     /**
      * A page may render before the session or auth middleware ran (for
      * example a 404), so the context may be partly hydrated.
      */
     const { auth, request, i18n } = ctx as Partial<HttpContext>
     const locale = i18n?.locale ?? 'id'
+    const kabarUnread =
+      auth?.user instanceof User && areaForHost(request?.hostname()) === 'app'
+        ? await unreadCount(auth.user.id)
+        : 0
 
     return {
       errors: ctx.inertia.always(this.getValidationErrors(ctx)),
@@ -51,12 +57,20 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
           : []
       ),
       /**
+       * Kabar the signed-in school user has not opened yet, for the
+       * badge in the app header (R2-05); 0 elsewhere.
+       */
+      kabarUnread: ctx.inertia.always(kabarUnread),
+      /**
        * The signed-in school user's address while it is not confirmed
        * (D-469), for the reminder banner; null otherwise.
        */
       emailToConfirm: ctx.inertia.always(
         auth?.user instanceof User && !auth.user.emailVerifiedAt ? auth.user.email : null
       ),
+      /** app.: requests with unread replies (R2-06, D-320); admin.: the open support session (D-341). */
+      helpUnread: () => helpUnreadProp(auth?.user),
+      supportSession: () => supportSessionProp(auth?.user),
       messages: messagesFor(locale, [...SHARED_NAMESPACES, ...(ctx.translationNamespaces ?? [])]),
     }
   }
