@@ -106,10 +106,8 @@ export async function impactOf(
     if (known) return known
     let value = { listed: false, currentCode: null as string | null }
     try {
-      const [target, now] = await Promise.all([
-        resolver.resolve({ schoolYear, level, regionProvince: province }),
-        resolver.resolve({ schoolYear: today, level, regionProvince: province }),
-      ])
+      const target = await resolver.resolve({ schoolYear, level, regionProvince: province })
+      const now = await resolver.resolve({ schoolYear: today, level, regionProvince: province })
       const domain = listedIn(target, version.code, province)
       const current = Object.values(now.ruleSets)
         .flat()

@@ -337,13 +337,11 @@ export async function compareVersions(
   target: VersionRef,
   subject: string | null
 ): Promise<Comparison> {
-  const loaded = await Promise.all(
-    SPECS.map(async (spec) => ({
-      spec,
-      before: await spec.load(base.id),
-      after: await spec.load(target.id),
-    }))
-  )
+  // One query after another: callers may run inside a transaction (one connection).
+  const loaded: { spec: AreaSpec; before: Row[]; after: Row[] }[] = []
+  for (const spec of SPECS) {
+    loaded.push({ spec, before: await spec.load(base.id), after: await spec.load(target.id) })
+  }
   const changes = loaded.flatMap(({ spec, before, after }) =>
     diffArea(spec, base, before, target, after)
   )
