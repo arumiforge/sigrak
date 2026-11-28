@@ -6,22 +6,27 @@ import { Icon, type IconName } from '~/components/icon'
 import { useT } from '~/lib/i18n'
 import { cn } from '~/lib/utils'
 
-const navItems: { href: string; label: string; icon: IconName }[] = [
+type NavItem = { href: string; label: string; icon: IconName; operatorOnly?: boolean }
+
+const navItems: NavItem[] = [
   { href: '/kalender', label: 'nav.calendar', icon: 'calendar' },
   { href: '/coba-ai', label: 'nav.ai_demo', icon: 'lab' },
+  { href: '/guru', label: 'nav.teachers', icon: 'users', operatorOnly: true },
 ]
 
 /**
  * Persistent shell of app. (school users). Kalender and the Coba AI
- * spike exist so far; the five teacher menus (bottom nav on phones,
- * sidebar on laptops) come with their slices.
+ * spike exist so far, plus Guru for the operator and Akun behind the
+ * user icon; the five teacher menus (bottom nav on phones, sidebar on
+ * laptops) come with their slices.
  */
 export default function AppLayout({ children }: { children: ReactNode }) {
   const t = useT()
   const {
-    props: { viewer },
+    props: { viewer, role },
     url,
   } = usePage()
+  const items = navItems.filter((item) => !item.operatorOnly || role === 'operator')
 
   return (
     <div className="min-h-dvh">
@@ -36,9 +41,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           <Link href="/kalender" className="text-lg font-bold text-brand-strong">
             {t('common.app_name')}
           </Link>
-          <nav aria-label={t('nav.label')} className="flex-1">
+          <nav aria-label={t('nav.label')} className="min-w-0 flex-1 overflow-x-auto">
             <ul className="flex items-center gap-1">
-              {navItems.map((item) => (
+              {items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -57,9 +62,20 @@ export default function AppLayout({ children }: { children: ReactNode }) {
             </ul>
           </nav>
           {viewer && (
-            <span className="hidden text-sm text-muted sm:inline" data-testid="viewer-name">
-              {viewer.name}
-            </span>
+            <Link
+              href="/akun"
+              aria-current={url.startsWith('/akun') ? 'page' : undefined}
+              aria-label={t('nav.account')}
+              className={cn(
+                'inline-flex min-h-11 items-center gap-2 rounded-md px-2 text-sm text-muted hover:text-text',
+                url.startsWith('/akun') && 'bg-brand-tint text-brand-strong'
+              )}
+            >
+              <Icon name="user" />
+              <span className="hidden max-w-40 truncate sm:inline" data-testid="viewer-name">
+                {viewer.name}
+              </span>
+            </Link>
           )}
           <SignOutButton />
         </div>
