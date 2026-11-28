@@ -53,6 +53,14 @@ export default await Env.create(new URL('../', import.meta.url), {
   REDIS_QUEUE_DB: Env.schema.number.optional(),
   REDIS_AI_DB: Env.schema.number.optional(),
 
+  // Queues and the CPU pool (D-463, D-467). Ranges and defaults:
+  // app/services/queue/settings.ts; out-of-range values are clamped.
+  QUEUE_AI_CONCURRENCY: Env.schema.number.optional(),
+  QUEUE_EXPORTS_CONCURRENCY: Env.schema.number.optional(),
+  QUEUE_DEFAULT_CONCURRENCY: Env.schema.number.optional(),
+  QUEUE_WAIT_ALERT_MS: Env.schema.number.optional(),
+  CPU_POOL_SIZE: Env.schema.number.optional(),
+
   // AI (docs/final/ai-provider-engine.md)
   /**
    * "fake" runs every generation on the scripted fake provider (no key,
