@@ -312,7 +312,10 @@ function GrantRole({
   fields: string[]
 }) {
   const t = useT()
-  const [role, setRole] = useState(grantable[0] ?? '')
+  // Start on a role without high powers, so Pemilik is never one tap away.
+  const [role, setRole] = useState(
+    grantable.find((value) => value !== 'owner' && value !== 'admin') ?? grantable[0] ?? ''
+  )
   const [scope, setScope] = useState<ScopeValue>(emptyScope)
   const [processing, setProcessing] = useState(false)
   const rule = roleScopes[role]

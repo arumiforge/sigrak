@@ -29,6 +29,20 @@ export type ScannedRoutes = {
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.staff.index': { paramsTuple?: []; params?: {} }
+    'admin.staff.store': { paramsTuple?: []; params?: {} }
+    'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
+    'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff.grant': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff.scope': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }
+    'admin.staff.revoke': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }
+    'admin.staff.disable': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff.enable': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff.resend_link': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.activity_log.index': { paramsTuple?: []; params?: {} }
+    'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
+    'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.staff_password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
@@ -126,6 +140,12 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.staff.index': { paramsTuple?: []; params?: {} }
+    'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
+    'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.activity_log.index': { paramsTuple?: []; params?: {} }
+    'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
+    'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -166,6 +186,12 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.staff.index': { paramsTuple?: []; params?: {} }
+    'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
+    'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.activity_log.index': { paramsTuple?: []; params?: {} }
+    'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
+    'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -213,6 +239,14 @@ export type ScannedRoutes = {
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.staff.store': { paramsTuple?: []; params?: {} }
+    'admin.staff.grant': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff.scope': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }
+    'admin.staff.revoke': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }
+    'admin.staff.disable': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff.enable': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff.resend_link': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
+    'admin.staff_password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.logout': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.store': { paramsTuple?: []; params?: {} }
