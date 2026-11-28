@@ -1,12 +1,10 @@
 import { test } from '@japa/runner'
 import { randomUUID } from 'node:crypto'
-import { DateTime } from 'luxon'
 import env from '#start/env'
 import db from '@adonisjs/lucid/services/db'
 import testUtils from '@adonisjs/core/services/test_utils'
 import type School from '#models/school'
 import type User from '#models/user'
-import Calendar from '#models/calendar'
 import { createCalendar, createParticipant, testRegions } from '#tests/helpers'
 import { assertRlsHides, asSchool, createMember, createTwoSchools } from '#tests/tenancy'
 import { TENANT_CONNECTION } from '#tenancy/database_roles'
@@ -67,7 +65,6 @@ async function seedSchoolRows(school: School, user: User) {
       updated_at: now,
     })
     .returning('id')
-  const events = await db.from('calendar_events').where('calendar_id', calendar.id).select('id')
   const memberships = await db.from('school_memberships').where('school_id', school.id).select('id')
 
   return {
@@ -75,8 +72,8 @@ async function seedSchoolRows(school: School, user: User) {
     supervisor_assignments: [assignment.id as number],
     exam_sessions: [participant.examSessionId],
     exam_participants: [participant.id],
-    calendars: [calendar.id],
-    calendar_events: events.map((row) => row.id as number),
+    layer_packages: [calendar.packageId],
+    calendar_items: calendar.itemIds,
     generations: [generation.id as number],
     generation_steps: [step.id as number],
     ai_usage_logs: [usage.id as number],
@@ -281,52 +278,63 @@ test.group('Tenancy | row-level security', (group) => {
     assert.notInclude(seen, b.membership.id)
   })
 
-  test('region calendars are readable by schools and written only by staff', async ({ assert }) => {
+  test('region calendar packages are readable by schools and written only by staff', async ({
+    assert,
+  }) => {
     const { a } = await createTwoSchools()
     const { province: region } = await testRegions()
-    const regionCalendar = await Calendar.create({
-      regionId: region.id,
-      schoolId: null,
-      academicYear: '2026/2027',
-      name: 'Kalender Jawa Tengah',
-      status: 'active',
-      schoolDaysPerWeek: 6,
-      startsOn: DateTime.fromISO('2026-07-13'),
-      evenSemesterStartsOn: DateTime.fromISO('2027-01-04'),
-      endsOn: DateTime.fromISO('2027-06-26'),
-      jointLeaveSchoolDays: [],
-      meta: {},
-    })
+    const now = new Date()
+    const [regionPackage] = (await db
+      .table('layer_packages')
+      .insert({
+        code: 'KALDIK-UJI-2026-2027',
+        domain: 'calendar',
+        layer: 'province',
+        region_id: region.id,
+        line: 'all',
+        kind: 'official',
+        level_scope: 'both',
+        name: 'Kalender Jawa Tengah',
+        status: 'active',
+        applies_from_school_year: '2026/2027',
+        applies_to_school_year: '2026/2027',
+        evidence: JSON.stringify({ document_title: 'Pedoman uji' }),
+        approved_at: now,
+        version: 1,
+        created_at: now,
+        updated_at: now,
+      })
+      .returning('id')) as { id: number }[]
 
     const seen = await asSchool(a.school, async () =>
-      visibleIds(SchoolContext.current()!.trx!, 'calendars', [regionCalendar.id])
+      visibleIds(SchoolContext.current()!.trx!, 'layer_packages', [regionPackage.id])
     )
-    assert.deepEqual(seen, [regionCalendar.id])
+    assert.deepEqual(seen, [regionPackage.id])
 
     // Visible, but a changed row must still pass WITH CHECK (school_id of the school).
-    await assert.rejects(
-      () =>
-        asSchool(a.school, async () => {
-          await SchoolContext.current()!
-            .trx!.from('calendars')
-            .where('id', regionCalendar.id)
-            .update({ name: 'Diubah sekolah' })
-        }),
-      /row-level security/
+    const renamedBySchool = await asSchool(a.school, async () =>
+      SchoolContext.current()!
+        .trx!.from('layer_packages')
+        .where('id', regionPackage.id)
+        .update({ name: 'Diubah sekolah' })
     )
+    assert.equal(renamedBySchool, 0)
 
     await assert.rejects(
       () =>
         asSchool(a.school, async () => {
           const trx = SchoolContext.current()!.trx!
-          const now = new Date()
-          await trx.table('calendar_events').insert({
-            public_id: randomUUID(),
-            calendar_id: regionCalendar.id,
-            starts_on: '2026-08-17',
-            ends_on: '2026-08-17',
+          await trx.table('calendar_items').insert({
+            package_id: regionPackage.id,
+            item_key: 'EV-2026-08-18-disusup',
+            shape: 'list',
+            force: 'mandatory',
+            origin: 'official',
+            match_key: 'disusupkan',
             kind: 'school_event',
             title: 'Disusupkan',
+            starts_on: '2026-08-18',
+            ends_on: '2026-08-18',
             created_at: now,
             updated_at: now,
           })
@@ -335,7 +343,7 @@ test.group('Tenancy | row-level security', (group) => {
     )
 
     const renamed = await staffTransaction(async (trx) =>
-      trx.from('calendars').where('id', regionCalendar.id).update({ name: 'Diubah staf' })
+      trx.from('layer_packages').where('id', regionPackage.id).update({ name: 'Diubah staf' })
     )
     assert.equal(renamed, 1)
   })

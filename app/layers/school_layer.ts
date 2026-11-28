@@ -202,6 +202,7 @@ export const SchoolLayer = {
       fresh: true,
     })
     LayerRules.checkAddition(resolution, { matchKey: adapter.matchKeyOf(payload) })
+    await adapter.checkChange?.(client, resolution, payload, { replacing: null })
     const packageId = await ensureSchoolPackage(client, actor.schoolId, domain, schoolYear)
     const itemKey = await insertItem(client, adapter, packageId, payload, {
       origin: 'school',
@@ -209,6 +210,54 @@ export const SchoolLayer = {
     })
     await bumpVersion(client, packageId)
     return itemKey
+  },
+
+  /**
+   * Changes one of the school's own items: the old row is retired and a
+   * new revision with the same item key takes its place (§2.3), after
+   * the same rules as an addition.
+   */
+  async revise(
+    actor: SchoolActor,
+    domain: string,
+    schoolYear: string,
+    itemKey: string,
+    input: unknown
+  ) {
+    const client = trxOrFail()
+    const adapter = domainAdapter<any, any>(domain)
+    const payload = await adapter.validatePayload(input)
+    const resolution = await LayerResolver.resolve(domain, actor.schoolId, schoolYear, {
+      fresh: true,
+    })
+    const current = resolution.items.find((item) => item.itemKey === itemKey)
+    if (!current || current.source.layer !== 'school') {
+      throw new LayerRuleException('layers.errors.not_own_item')
+    }
+    const others = { ...resolution, items: resolution.items.filter((item) => item !== current) }
+    LayerRules.checkAddition(others, { matchKey: adapter.matchKeyOf(payload) })
+    await adapter.checkChange?.(client, resolution, payload, { replacing: itemKey })
+    const packageId = await ensureSchoolPackage(client, actor.schoolId, domain, schoolYear)
+    const old = (await client
+      .from(adapter.itemTable)
+      .where('package_id', packageId)
+      .where('item_key', itemKey)
+      .whereNot('status', 'retired')
+      .select('id', 'revision')
+      .first()) as { id: number; revision: number } | undefined
+    if (!old) throw new LayerRuleException('layers.errors.not_own_item')
+    await client
+      .from(adapter.itemTable)
+      .where('id', old.id)
+      .update({ status: 'retired', updated_at: new Date() })
+    await insertItem(client, adapter, packageId, payload, {
+      origin: 'school',
+      tag: 'SCH',
+      itemKey,
+      revision: Number(old.revision) + 1,
+      supersedesId: Number(old.id),
+    })
+    await bumpVersion(client, packageId)
   },
 
   /**

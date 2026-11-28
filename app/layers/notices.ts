@@ -33,6 +33,10 @@ export const Notices = {
       packageName: (notice.payload.package_name as string | undefined) ?? null,
       actorName: (notice.payload.actor_name as string | undefined) ?? null,
       status: (notice.payload.status as string | undefined) ?? null,
+      schoolYear: (notice.payload.school_year as string | undefined) ?? null,
+      carriedPackages: Array.isArray(notice.payload.packages)
+        ? (notice.payload.packages as { package_name: string }[]).map((pkg) => pkg.package_name)
+        : [],
       endedPackages: Array.isArray(notice.payload.ended_packages)
         ? (notice.payload.ended_packages as { package_name: string }[]).map(
             (pkg) => pkg.package_name

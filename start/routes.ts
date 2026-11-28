@@ -21,8 +21,8 @@ import '#start/routes/auth'
 import '#start/routes/console'
 import '#start/routes/layers'
 import '#start/routes/school_year'
+import '#start/routes/calendar'
 
-const CalendarController = () => import('#controllers/school/calendar_controller')
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')
 const StaffSessionController = () => import('#controllers/staff/session_controller')
 const StaffHomeController = () => import('#controllers/staff/home_controller')
@@ -38,10 +38,7 @@ const ExamHomeController = () => import('#controllers/exam/home_controller')
 router
   .group(() => {
     router.on('/').redirectToPath('/kalender').as('home')
-    router
-      .get('/kalender', [CalendarController, 'index'])
-      .as('calendar.index')
-      .use(middleware.translations(['calendar']))
+    // Kalender: start/routes/calendar.ts (R1-08).
     router
       .group(() => {
         router.get('/coba-ai', [AiDemoController, 'index']).as('index')

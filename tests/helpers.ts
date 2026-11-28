@@ -9,8 +9,6 @@ import School from '#models/school'
 import User from '#models/user'
 import SchoolMembership from '#models/school_membership'
 import StaffUser from '#models/staff_user'
-import Calendar from '#models/calendar'
-import CalendarEvent from '#models/calendar_event'
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
 import AiCredential from '#models/ai_credential'
@@ -101,34 +99,56 @@ export async function createParticipant(school: School, status: ExamSession['sta
 }
 
 /**
- * A school calendar for the academic year that holds today, with one
- * event per given title.
+ * The school's own calendar package (layer `school`, R1-08) with one
+ * school event per given title, from today on (owner connection, so it
+ * bypasses the walls under test).
  */
 export async function createCalendar(school: School, titles: string[]) {
   const today = DateTime.now().setZone('Asia/Jakarta').startOf('day')
-  const calendar = await Calendar.create({
-    schoolId: school.id,
-    academicYear: `${today.year}/${today.year + 1}`,
-    name: `Kalender ${school.name}`,
-    status: 'active',
-    schoolDaysPerWeek: 6,
-    startsOn: today.minus({ months: 3 }),
-    evenSemesterStartsOn: today.plus({ months: 2 }),
-    endsOn: today.plus({ months: 8 }),
-    jointLeaveSchoolDays: [],
-    meta: {},
-  })
-  for (const [index, title] of titles.entries()) {
-    await CalendarEvent.create({
-      calendarId: calendar.id,
-      kind: 'school_event',
-      examType: null,
-      title,
-      startsOn: today.plus({ days: index }),
-      endsOn: today.plus({ days: index }),
+  const startYear = today.month >= 7 ? today.year : today.year - 1
+  const schoolYear = `${startYear}/${startYear + 1}`
+  const now = new Date()
+  const [pkg] = (await db
+    .table('layer_packages')
+    .insert({
+      code: `SCHOOL-${school.id}-CALENDAR-${schoolYear.replace('/', '-')}`,
+      domain: 'calendar',
+      layer: 'school',
+      school_id: school.id,
+      line: 'all',
+      kind: 'school',
+      level_scope: 'both',
+      name: 'Perubahan sekolah',
+      status: 'active',
+      applies_from_school_year: schoolYear,
+      version: 1,
+      created_at: now,
+      updated_at: now,
     })
+    .returning('id')) as { id: number }[]
+  const itemIds: number[] = []
+  for (const [index, title] of titles.entries()) {
+    const date = today.plus({ days: index }).toISODate()!
+    const [item] = (await db
+      .table('calendar_items')
+      .insert({
+        package_id: pkg.id,
+        item_key: `CAL-SCH-T${unique()}`,
+        shape: 'list',
+        force: 'free',
+        origin: 'school',
+        match_key: `${date}|${title}`,
+        kind: 'school_event',
+        title,
+        starts_on: date,
+        ends_on: date,
+        created_at: now,
+        updated_at: now,
+      })
+      .returning('id')) as { id: number }[]
+    itemIds.push(Number(item.id))
   }
-  return calendar
+  return { packageId: Number(pkg.id), itemIds, schoolYear }
 }
 
 /**

@@ -89,6 +89,7 @@ export const NOTICE_KINDS = [
   'package_left',
   'package_retired',
   'proposal_decided',
+  'package_carried_over',
 ] as const
 export type NoticeKind = (typeof NOTICE_KINDS)[number]
 

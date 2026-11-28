@@ -2,6 +2,7 @@ import { Exception } from '@adonisjs/core/exceptions'
 import type { QueryClientContract } from '@adonisjs/lucid/types/database'
 import type { DomainAdapter } from './domain_adapter.js'
 import { extracurricularAdapter } from './extracurricular.js'
+import { calendarAdapter } from '../../calendar/domain.js'
 
 export class UnknownLayerDomainException extends Exception {
   static status = 404
@@ -10,10 +11,11 @@ export class UnknownLayerDomainException extends Exception {
 
 const adapters = new Map<string, DomainAdapter<any, any>>([
   [extracurricularAdapter.domain, extracurricularAdapter],
+  [calendarAdapter.domain, calendarAdapter],
 ])
 
 /**
- * The adapter of a layered domain. R1-08 registers `calendar` here.
+ * The adapter of a layered domain (`extracurricular` R1-07, `calendar` R1-08).
  */
 export function domainAdapter<V = Record<string, unknown>, P = Record<string, unknown>>(
   domain: string
