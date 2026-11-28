@@ -5,7 +5,9 @@ import { sessionCookieNames } from '#config/session'
 import { PASSWORD, createCalendar, createSchool, createTeacher, login, visit } from '#tests/helpers'
 
 test.group('Kalender', (group) => {
-  group.each.setup(() => testUtils.db().withGlobalTransaction())
+  // The school context reads memberships on the tenant connection, so
+  // fixtures must be committed (a global transaction is invisible to it).
+  group.each.setup(() => testUtils.db().truncate())
   group.each.setup(() => limiter.clear(['memory']))
 
   async function signedInTeacher(client: Parameters<typeof login>[0]) {

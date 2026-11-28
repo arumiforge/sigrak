@@ -16,7 +16,9 @@ import {
 const homes: Record<Area, string> = { app: '/kalender', admin: '/', exam: '/' }
 
 test.group('Areas: each login reaches only its own host', (group) => {
-  group.each.setup(() => testUtils.db().withGlobalTransaction())
+  // The school context reads memberships on the tenant connection, so
+  // fixtures must be committed (a global transaction is invisible to it).
+  group.each.setup(() => testUtils.db().truncate())
   group.each.setup(() => limiter.clear(['memory']))
 
   test('a guest is sent to /masuk on every host', async ({ client, assert }) => {

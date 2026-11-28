@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "label": "Menu konsol",
+    "home": "Ringkasan",
+    "schools": "Sekolah",
+    "users": "Pengguna",
+    "settings": "Pengaturan"
+  },
+  "home": {
+    "intro": "Kelola sekolah, anggota, undangan, dan masa uji coba dari menu di atas."
+  },
+  "levels": {
+    "sd": "SD",
+    "mi": "MI"
+  },
+  "search": {
+    "submit": "Cari"
+  },
+  "schools": {
+    "title": "Sekolah",
+    "intro": "Cari sekolah lewat nama atau NPSN.",
+    "search_label": "Cari sekolah",
+    "search_placeholder": "Nama sekolah atau NPSN",
+    "empty": "Tidak ada sekolah yang cocok.",
+    "members": "{count} anggota aktif",
+    "npsn": "NPSN {npsn}",
+    "no_npsn": "NPSN belum ada",
+    "trial_default": "Uji coba ikut bawaan",
+    "trial_days": "Uji coba {days} hari"
+  },
+  "school": {
+    "back": "Semua sekolah",
+    "members_title": "Anggota",
+    "members_empty": "Belum ada anggota. Undang operator atau kepala sekolah pertama.",
+    "invitations_title": "Undangan yang belum diterima",
+    "invitations_empty": "Tidak ada undangan yang menunggu.",
+    "invite_title": "Undang anggota",
+    "invite_intro": "Biasanya operator atau kepala sekolah pertama. Tautan berlaku 7 hari.",
+    "invite_action": "Kirim undangan",
+    "invited": "Undangan sudah dikirim ke {email}.",
+    "resent": "Undangan dikirim ulang ke {email}.",
+    "cancelled": "Undangan untuk {email} dibatalkan.",
+    "since": "sejak {date}",
+    "role_label": "Peran"
+  },
+  "trial": {
+    "title": "Masa uji coba",
+    "school_intro": "Berlaku untuk semua guru di sekolah ini. Kalau seorang guru punya pengaturan sendiri yang lebih panjang, yang lebih panjang dipakai.",
+    "user_intro": "Pengaturan untuk satu orang. Tambah hari dihitung dari hari ini kalau uji cobanya sudah selesai.",
+    "current_school": "Lama uji coba sekolah ini: {days} hari.",
+    "current_default": "Sekolah ini ikut lama uji coba bawaan: {days} hari.",
+    "mode_label": "Cara mengubah",
+    "modes": {
+      "extend": "Tambah hari",
+      "set": "Atur lama",
+      "clear": "Ikut bawaan"
+    },
+    "days_label": "Jumlah hari",
+    "save": "Simpan",
+    "saved": "Masa uji coba sudah diubah.",
+    "status_active": "Aktif sampai {date}",
+    "status_ended": "Selesai {date}",
+    "status_not_started": "Belum dimulai",
+    "length": "{days} hari, {source}",
+    "sources": {
+      "user": "pengaturan sendiri",
+      "school": "dari sekolah",
+      "default": "bawaan"
+    }
+  },
+  "users": {
+    "title": "Pengguna",
+    "intro": "Cari guru, kepala sekolah, atau operator lewat nama atau email.",
+    "search_label": "Cari pengguna",
+    "search_placeholder": "Nama atau email",
+    "empty": "Tidak ada pengguna yang cocok.",
+    "hint": "Tulis nama atau email, lalu tekan Cari."
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "trial_title": "Lama uji coba bawaan",
+    "trial_intro": "Dipakai untuk guru yang akun dan sekolahnya tidak punya pengaturan sendiri.",
+    "days_label": "Jumlah hari",
+    "save": "Simpan",
+    "saved": "Pengaturan sudah disimpan.",
+    "read_only": "Hanya admin yang bisa mengubah pengaturan ini."
+  }
+}

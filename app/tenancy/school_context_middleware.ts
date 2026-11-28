@@ -29,18 +29,24 @@ export class NoActiveMembershipException extends Exception {
  * user's active membership (the session's choice, else the earliest
  * active one). Place it after `auth({ guard: 'web' })`. The context is
  * new for each request, so nothing carries over between requests.
+ *
+ * With `{ optional: true }` a user without any active membership (a
+ * teacher who signed up alone, D-459) still passes: the request runs
+ * with no school and only the user's own rows, and `ctx.membership`
+ * stays unset. Routes that need a school leave the option off.
  */
 export default class SchoolContextMiddleware {
-  async handle(ctx: HttpContext, next: NextFn) {
+  async handle(ctx: HttpContext, next: NextFn, options: { optional?: boolean } = {}) {
     const user = ctx.auth.getUserOrFail() as { id: number }
     const preferred = ctx.session?.get(ACTIVE_MEMBERSHIP_SESSION_KEY) as string | undefined
     const membership = await resolveActiveMembership(user.id, preferred)
 
-    if (!membership) {
-      throw new NoActiveMembershipException()
-    }
-    if (preferred && preferred !== membership.publicId) {
+    if (preferred && preferred !== membership?.publicId) {
       ctx.session.forget(ACTIVE_MEMBERSHIP_SESSION_KEY)
+    }
+    if (!membership) {
+      if (!options.optional) throw new NoActiveMembershipException()
+      return SchoolContext.run({ schoolId: null, userId: user.id }, () => next())
     }
 
     ctx.membership = membership

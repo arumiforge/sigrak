@@ -1,0 +1,105 @@
+{
+  "roles": {
+    "principal": "Kepala sekolah",
+    "operator": "Operator sekolah",
+    "teacher": "Guru"
+  },
+  "statuses": {
+    "active": "Aktif",
+    "ended": "Berhenti"
+  },
+  "invitation_states": {
+    "open": "Menunggu",
+    "expired": "Lewat 7 hari",
+    "accepted": "Diterima"
+  },
+  "invitation": {
+    "title": "Undangan bergabung",
+    "intro": "{school} mengundang Anda sebagai {role}.",
+    "for_email": "Undangan untuk {email}",
+    "new_account": "Buat akun untuk menerima undangan ini.",
+    "sign_in": "Email ini sudah punya akun SIGRAK. Masukkan kata sandinya untuk bergabung. Dokumen dan kunci AI Anda tetap ada.",
+    "join": "Anda sedang masuk dengan email yang diundang. Gabungkan akun ini ke {school}? Dokumen dan kunci AI Anda tetap ada.",
+    "other_account_body": "Undangan ini untuk {email}, tetapi Anda sedang masuk dengan akun lain. Keluar dulu, lalu buka tautan undangan ini lagi.",
+    "accept": "Terima undangan",
+    "join_action": "Gabung ke sekolah",
+    "accepting": "Memproses…",
+    "invalid_title": "Undangan tidak bisa dipakai",
+    "invalid_body": "Tautan undangan ini tidak dikenal, sudah dipakai, atau sudah lewat 7 hari. Minta operator sekolah mengirim undangan lagi.",
+    "to_login": "Ke halaman masuk",
+    "unavailable": "Undangan ini sudah tidak bisa dipakai. Minta operator sekolah mengirimnya lagi.",
+    "other_account": "Undangan ini untuk email lain. Keluar dulu, lalu buka tautannya lagi.",
+    "account_exists": "Email ini sudah punya akun. Muat ulang halaman, lalu masukkan kata sandinya.",
+    "wrong_password": "Kata sandi salah. Periksa lagi, atau pakai Lupa kata sandi.",
+    "joined": "Anda sudah bergabung dengan {school}."
+  },
+  "mail": {
+    "invitation": {
+      "subject": "Undangan bergabung ke {school} di SIGRAK",
+      "heading": "Anda diundang ke {school}",
+      "body": "{inviter} mengundang Anda bergabung di SIGRAK sebagai {role} di {school}.",
+      "how": "Tekan tombol di bawah. Kalau belum punya akun, Anda bisa membuatnya di sana. Kalau sudah punya akun dengan email ini, akun itulah yang tergabung, lengkap dengan dokumennya.",
+      "action": "Terima undangan",
+      "expires": "Tautan berlaku sampai {expires_at} WIB.",
+      "ignore": "Kalau Anda merasa tidak perlu undangan ini, abaikan saja email ini.",
+      "staff_inviter": "Tim SIGRAK"
+    }
+  },
+  "account": {
+    "title": "Akun",
+    "profile_title": "Data diri",
+    "email_hint": "Email dipakai untuk masuk. Untuk menggantinya, hubungi Tim SIGRAK.",
+    "email_unverified": "Email ini belum dikonfirmasi.",
+    "nip_hint": "Kosongkan kalau Anda bukan ASN.",
+    "save_profile": "Simpan data diri",
+    "profile_saved": "Data diri sudah disimpan.",
+    "password_title": "Ganti kata sandi",
+    "save_password": "Simpan kata sandi",
+    "password_saved": "Kata sandi baru sudah disimpan.",
+    "wrong_password": "Kata sandi sekarang salah. Periksa lagi.",
+    "roles_title": "Peran Anda",
+    "no_roles": "Anda belum tergabung di sekolah mana pun. Kalau operator sekolah mengundang email Anda, akun ini langsung tergabung tanpa kehilangan dokumen.",
+    "active_role": "Sedang dipakai",
+    "trial_title": "Masa uji coba",
+    "trial_active": "Uji coba berlaku sampai {date} WIB, sisa {days} hari.",
+    "trial_ended": "Masa uji coba sudah selesai pada {date} WIB.",
+    "trial_not_started": "Masa uji coba belum dimulai.",
+    "current_password": "Kata sandi sekarang",
+    "nip": "NIP"
+  },
+  "switch_role": {
+    "title": "Ganti peran",
+    "intro": "Pilih peran yang ingin Anda pakai sekarang. Menu menyesuaikan peran yang dipilih.",
+    "use": "Pakai peran ini",
+    "current": "Sedang dipakai",
+    "switched": "Sekarang Anda bekerja sebagai {role} di {school}.",
+    "unavailable": "Peran itu sudah tidak aktif. Pilih peran lain.",
+    "none": "Anda belum punya peran di sekolah mana pun."
+  },
+  "teachers": {
+    "title": "Guru",
+    "intro": "Undang guru sekolah Anda lewat email. Tautan undangan berlaku 7 hari.",
+    "invite_title": "Undang guru",
+    "invite_action": "Kirim undangan",
+    "inviting": "Mengirim…",
+    "email_hint": "Kalau guru sudah punya akun SIGRAK dengan email ini, akunnya langsung tergabung beserta dokumennya.",
+    "list_title": "Guru aktif",
+    "empty": "Belum ada guru. Undang guru pertama lewat formulir di atas.",
+    "invitations_title": "Undangan yang belum diterima",
+    "invitations_empty": "Tidak ada undangan yang menunggu.",
+    "joined_on": "Bergabung {date}",
+    "sent_on": "Dikirim {date}",
+    "expires_on": "Berlaku sampai {date}",
+    "resend": "Kirim ulang",
+    "cancel": "Batalkan",
+    "cancel_confirm": "Batalkan undangan untuk {email}?",
+    "invited": "Undangan sudah dikirim ke {email}.",
+    "resent": "Undangan dikirim ulang ke {email}.",
+    "cancelled": "Undangan untuk {email} dibatalkan."
+  },
+  "errors": {
+    "already_member": "Email ini sudah tergabung dengan peran yang sama di sekolah ini.",
+    "principal_taken": "Sekolah ini sudah punya kepala sekolah aktif.",
+    "not_resendable": "Undangan ini tidak bisa dikirim ulang. Muat ulang halaman."
+  }
+}

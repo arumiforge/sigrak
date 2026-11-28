@@ -34,6 +34,11 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
       errors: ctx.inertia.always(this.getValidationErrors(ctx)),
       area: ctx.inertia.always(areaForHost(request?.hostname()) ?? 'app'),
       viewer: ctx.inertia.always(viewerOf(auth?.user)),
+      /**
+       * The role the request runs as on app. (school context
+       * middleware), for the menus; null without a school.
+       */
+      role: ctx.inertia.always(ctx.membership?.role ?? null),
       messages: messagesFor(locale, [...SHARED_NAMESPACES, ...(ctx.translationNamespaces ?? [])]),
     }
   }

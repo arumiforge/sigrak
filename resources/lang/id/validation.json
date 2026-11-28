@@ -15,7 +15,12 @@
     "ends_on": "Tanggal selesai",
     "file": "File",
     "scenario": "Situasi",
-    "clientToken": "Formulir"
+    "clientToken": "Formulir",
+    "current_password": "Kata sandi sekarang",
+    "days": "Jumlah hari",
+    "role": "Peran",
+    "membership": "Peran",
+    "mode": "Pilihan"
   },
   "messages": {
     "required": "{field} wajib diisi.",
@@ -66,6 +71,12 @@
     "date.beforeOrSameAs": "{field} tidak boleh setelah {otherField}.",
     "nativeFile": "Pilih file yang benar.",
     "database.unique": "{field} ini sudah dipakai.",
-    "database.exists": "{field} tidak ditemukan."
+    "database.exists": "{field} tidak ditemukan.",
+    "password": {
+      "regex": "Kata sandi harus memuat huruf dan angka."
+    },
+    "nip": {
+      "regex": "NIP harus 18 angka, tanpa spasi."
+    }
   }
 }

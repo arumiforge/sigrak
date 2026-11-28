@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
-import User from '#models/user'
+import School from '#models/school'
 import { SchoolCalendar } from '#services/school_calendar'
 
 /**
@@ -10,13 +10,8 @@ import { SchoolCalendar } from '#services/school_calendar'
  * skeleton.
  */
 export default class CalendarController {
-  async index({ inertia, auth }: HttpContext) {
-    const user = auth.use('web').getUserOrFail()
-    if (!(user instanceof User)) {
-      throw new Error('Expected a school user')
-    }
-
-    const membership = await user.currentMembership()
+  async index({ inertia, membership }: HttpContext) {
+    // Set by the school context middleware; unset for a teacher without a school.
     const today = DateTime.now().setZone('Asia/Jakarta').toISODate()!
 
     if (!membership) {
@@ -28,11 +23,12 @@ export default class CalendarController {
       })
     }
 
+    const school = await School.findOrFail(membership.schoolId)
     const schoolCalendar = new SchoolCalendar(membership.schoolId)
     const calendar = await schoolCalendar.current()
 
     return inertia.render('school/calendar', {
-      school: { name: membership.school.name },
+      school: { name: school.name },
       calendar: calendar
         ? {
             name: calendar.name,
