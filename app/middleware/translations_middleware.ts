@@ -29,17 +29,43 @@ export default class TranslationsMiddleware {
 }
 
 /**
+ * Messages already picked, per locale and namespace set. Kept per
+ * translations object, so reloaded translations are picked again.
+ */
+const picked = new WeakMap<object, Map<string, Readonly<Record<string, string>>>>()
+
+/**
  * Flat key → message map for the given namespaces, e.g.
  * { "calendar.title": "Kalender" }. Server-only namespaces are left out.
+ * Runs on every request (the Inertia `messages` prop), so the result is
+ * kept per namespace set instead of filtering every key again (R1-11).
+ * The returned object is frozen and shared.
  */
-export function messagesFor(locale: string, namespaces: string[]): Record<string, string> {
+export function messagesFor(
+  locale: string,
+  namespaces: string[]
+): Readonly<Record<string, string>> {
   const all = i18nManager.getTranslationsFor(locale)
-  const prefixes = [...new Set(namespaces)]
+  const wanted = [...new Set(namespaces)]
     .filter((namespace) => !SERVER_ONLY_NAMESPACES.has(namespace))
-    .map((namespace) => `${namespace}.`)
-  return Object.fromEntries(
-    Object.entries(all).filter(([key]) => prefixes.some((prefix) => key.startsWith(prefix)))
+    .sort()
+  const cacheKey = `${locale}|${wanted.join(',')}`
+  let cache = picked.get(all)
+  if (!cache) {
+    cache = new Map()
+    picked.set(all, cache)
+  }
+  const cached = cache.get(cacheKey)
+  if (cached) return cached
+
+  const prefixes = wanted.map((namespace) => `${namespace}.`)
+  const messages = Object.freeze(
+    Object.fromEntries(
+      Object.entries(all).filter(([key]) => prefixes.some((prefix) => key.startsWith(prefix)))
+    )
   )
+  cache.set(cacheKey, messages)
+  return messages
 }
 
 declare module '@adonisjs/core/http' {

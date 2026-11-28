@@ -1,6 +1,5 @@
-import { useState, type ReactNode } from 'react'
+import { useState } from 'react'
 import { Form, Head, Link, usePage } from '@inertiajs/react'
-import AuthLayout from '~/layouts/auth_layout'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
 import { Icon } from '~/components/icon'
@@ -124,5 +123,3 @@ export default function Login({ kind }: Props) {
     </>
   )
 }
-
-Login.layout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>

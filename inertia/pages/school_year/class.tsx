@@ -1,9 +1,12 @@
-import { useState, type ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { useState } from 'react'
+import { Form, Link } from '@inertiajs/react'
+import { ConfirmAction } from '~/components/patterns/confirm_dialog'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
 import { Section } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
+import { Icon } from '~/components/icon'
 import {
   ArtBranchSelect,
   Select,
@@ -59,25 +62,30 @@ export default function ClassPage({
 
   return (
     <>
-      <Head title={t('classes.class.title', { name: schoolClass.name })} />
-      <Link
-        href={`/kelas?tahun=${year.publicId}`}
-        className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong"
+      <PageHeader
+        title={t('classes.class.title', { name: schoolClass.name })}
+        description={t('classes.class.subtitle', { grade: schoolClass.grade, year: year.name })}
+        back={{
+          href: `/kelas?tahun=${year.publicId}`,
+          label: t('classes.class.back', { year: year.name }),
+        }}
+        actions={
+          <Button asChild variant="outline">
+            <Link href={`/kelas/${schoolClass.publicId}/jadwal`} prefetch>
+              <Icon name="timetable" />
+              {t('classes.class.timetable_link')}
+            </Link>
+          </Button>
+        }
       >
-        {t('classes.class.back', { year: year.name })}
-      </Link>
-      <h1 className="text-2xl font-bold">{t('classes.class.title', { name: schoolClass.name })}</h1>
-      <p className="mt-1 text-muted">
-        {t('classes.class.subtitle', { grade: schoolClass.grade, year: year.name })}
-      </p>
-      {readOnly && <p className="mt-2 text-sm text-warn">{t('classes.years.closed_note')}</p>}
-      <Button asChild variant="outline" className="mt-4">
-        <Link href={`/kelas/${schoolClass.publicId}/jadwal`}>
-          {t('classes.class.timetable_link')}
-        </Link>
-      </Button>
+        {readOnly && (
+          <p className="mt-3 rounded-md border border-warn/35 bg-warn-tint p-3 text-sm">
+            {t('classes.years.closed_note')}
+          </p>
+        )}
+      </PageHeader>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[2fr_3fr]">
+      <div className="grid gap-4 lg:grid-cols-[2fr_3fr]">
         <div className="space-y-4 self-start">
           <Section title={t('classes.class.details_title')}>
             <Form
@@ -149,20 +157,16 @@ export default function ClassPage({
           {!readOnly && (
             <Section title={t('classes.class.delete_title')}>
               <p className="text-sm text-muted">{t('classes.class.delete_body')}</p>
-              <Form
+              <ConfirmAction
                 action={`/kelas/${schoolClass.publicId}/hapus`}
-                method="post"
+                preserveScroll={false}
                 className="mt-3"
-                onBefore={() =>
-                  window.confirm(t('classes.class.delete_confirm', { name: schoolClass.name }))
-                }
-              >
-                {({ processing }) => (
-                  <Button type="submit" variant="outline" disabled={processing}>
-                    {t('classes.class.delete_action')}
-                  </Button>
-                )}
-              </Form>
+                icon={<Icon name="delete" />}
+                label={t('classes.class.delete_action')}
+                title={t('classes.class.delete_confirm', { name: schoolClass.name })}
+                description={t('classes.class.delete_body')}
+                confirmLabel={t('classes.class.delete_action')}
+              />
             </Section>
           )}
         </div>
@@ -178,7 +182,7 @@ export default function ClassPage({
           }
         >
           {subjects.length === 0 ? (
-            <p className="text-muted">{t('classes.assignments.no_subjects')}</p>
+            <EmptyState compact description={t('classes.assignments.no_subjects')} />
           ) : (
             <Form
               action={`/kelas/${schoolClass.publicId}/guru-mapel`}
@@ -236,5 +240,3 @@ export default function ClassPage({
     </>
   )
 }
-
-ClassPage.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

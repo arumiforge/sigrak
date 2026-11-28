@@ -22,4 +22,6 @@ The other styles in the owner's set (Rounded Bulk, Duotone, Twotone, Sharp Strok
 
 ## Use
 
-Components never import these files directly. `inertia/components/icon.tsx` is the one place that maps SIGRAK icon names to files (wired up in R1).
+Components never import these files directly. `inertia/components/icon.tsx` is the one place that maps SIGRAK icon names to files (R1-12): `<Icon name="calendar" />` draws Rounded Stroke, `<Icon name="calendar" active />` the Rounded Solid twin (active and selected states only). Each file is a static `?raw` import, so only the mapped icons reach the bundle; the colour `#141B34` becomes `currentColor`.
+
+To add an icon: pick the file here, add one import and one entry in `strokeIcons` (and in `solidIcons` when it can mark an active item), then use the new name.

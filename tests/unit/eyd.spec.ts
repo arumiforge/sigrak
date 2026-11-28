@@ -355,11 +355,18 @@ const ABBREVIATIONS = new Set([
 /** Keys that hold a sentence even inside a group of labels. */
 const SENTENCE_KEY = /(^|_)(hint|intro|body|description|note|help)$/
 
+/** Files whose every value is a label: the menus (nav.json). */
+const LABEL_FILES = new Set(['nav'])
+
 function isLabelKey(key: string) {
   const parts = key.split('.')
   const last = parts.at(-1) ?? ''
   if (SENTENCE_KEY.test(last)) return false
-  return LABEL_KEY.test(last) || parts.slice(1, -1).some((part) => LABEL_GROUPS.has(part))
+  return (
+    LABEL_FILES.has(parts[0]) ||
+    LABEL_KEY.test(last) ||
+    parts.slice(1, -1).some((part) => LABEL_GROUPS.has(part))
+  )
 }
 
 function labelPeriod(value: string, key: string) {
@@ -391,6 +398,50 @@ function abbreviations(value: string) {
   if (bare) found.push(`"${bare[0]}" → "${bare[0]}."`)
   if (/(?<!\p{L})(s\/d|sd\.)(?!\p{L})/iu.test(value)) found.push('write "s.d." or "sampai"')
   return found
+}
+
+/**
+ * Names that keep their capitals inside a label (D-472): SIGRAK feature
+ * names, products, subject names and the polite "Anda". Everything else
+ * in a menu label, page title or button is capitalised on the first word
+ * only ("Hari ini", "Pengaturan sekolah", "Simpan perubahan").
+ */
+const LABEL_PROPER_NAMES = [
+  'Bank Soal',
+  'Dokumen Saya',
+  'Kunci AI',
+  'Simulasi TKA',
+  'Paket Soal TKA',
+  'Quiz Battle',
+  'Berkas Administrasi',
+  'Tim SIGRAK',
+  'Seni dan Budaya',
+  'Seni Musik',
+  'Seni Rupa',
+  'Seni Tari',
+  'Seni Teater',
+  'Anda',
+  'Word',
+  'Excel',
+  'Google',
+]
+
+/**
+ * D-472: a label with a capitalised word after the first, outside the
+ * names above. A word right before a placeholder names a place or a
+ * person ("Kesepakatan Kabupaten {name}") and keeps its capital; ALL
+ * CAPS abbreviations (NPSN, PDF) and labels that hold whole sentences
+ * are left out.
+ */
+function labelCapitals(value: string, key: string) {
+  if (!isLabelKey(key) || /[.?!]\s/.test(value)) return []
+  let text = value
+  for (const name of LABEL_PROPER_NAMES) text = text.replaceAll(name, name.toLowerCase())
+  const words = text.split(/\s+/)
+  const found = words
+    .slice(1)
+    .filter((part, index) => /^[("“]?\p{Lu}\p{Ll}/u.test(part) && words[index + 2] !== '{}')
+  return found.map((part) => `"${part}" → small letter (D-472)`)
 }
 
 type Check = {
@@ -499,6 +550,20 @@ const CHECKS: Check[] = [
     good: ['Simpan', 'No.', 'Keluar dari SIGRAK?', 'Memuat…', 'dll.'],
   },
   {
+    name: 'label capitals',
+    run: labelCapitals,
+    sampleKey: 'sample.actions.save',
+    bad: ['Hari Ini', 'Pengaturan Sekolah', 'Simpan Perubahan', 'Kembali ke Tahun Ajaran'],
+    good: [
+      'Hari ini',
+      'Buka Dokumen Saya',
+      'Unduh PDF',
+      'Kunci AI Anda',
+      'Kesepakatan Kabupaten {name}',
+      'Simpan perubahan',
+    ],
+  },
+  {
     name: 'punctuation spacing',
     run: spacing,
     bad: ['Keluar ?', 'Halo , {name}', 'Sesi :{title}', 'Selesai !', 'Halo,{name}'],
@@ -546,9 +611,13 @@ test.group('EYD: lang/id values', () => {
     assert.isTrue(isLabelKey('accounts.teachers.invite_title'))
     assert.isTrue(isLabelKey('common.actions.save'))
     assert.isTrue(isLabelKey('regions.directory.fields.name'))
+    assert.isTrue(isLabelKey('nav.school_settings'))
+    assert.isTrue(isLabelKey('nav.console.calendar'))
     assert.isFalse(isLabelKey('accounts.invitation.intro'))
     assert.isFalse(isLabelKey('common.toasts.saved'))
     assert.isFalse(isLabelKey('errors.general'))
     assert.isFalse(isLabelKey('auth.fields.password_hint'))
+    assert.isNotEmpty(labelCapitals('Ganti Peran', 'common.actions.switch'))
+    assert.isEmpty(labelCapitals('Ganti Peran', 'common.toasts.switched'))
   })
 })

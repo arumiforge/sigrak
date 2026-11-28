@@ -1,52 +1,98 @@
-import type { ReactNode } from 'react'
-import { Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
-import { Section } from '~/components/section'
+import { Link } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
-import { StatusLine, YearChips, type YearChoice } from '~/components/timetable/parts'
+import { Icon } from '~/components/icon'
+import { DataTable, type DataColumn } from '~/components/patterns/data_table'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip } from '~/components/patterns/status_chip'
+import { YearChips, type YearChoice } from '~/components/timetable/parts'
 import { useT } from '~/lib/i18n'
+
+type ClassRow = {
+  publicId: string
+  name: string
+  grade: number
+  rowCount: number
+  complete: boolean
+  countedTotal: number
+  countedComplete: number
+  warningCount: number
+}
 
 type Props = {
   years: YearChoice[]
   year: { publicId: string; name: string; closed: boolean } | null
-  classes: {
-    publicId: string
-    name: string
-    grade: number
-    rowCount: number
-    complete: boolean
-    countedTotal: number
-    countedComplete: number
-    warningCount: number
-  }[]
+  classes: ClassRow[]
 }
 
 /**
  * /jadwal (operator): every class of the year with the state of its
  * timetable (D-250), warnings (D-248), and the way to Susun draf jadwal
- * (D-262).
+ * (D-262). A table on desktop, cards on phones.
  */
 export default function TimetableIndex({ years, year, classes }: Props) {
   const t = useT()
+
+  const columns: DataColumn<ClassRow>[] = [
+    {
+      id: 'name',
+      header: t('timetable.index.class_column'),
+      primary: true,
+      cell: (row) => <span className="font-bold">{row.name}</span>,
+    },
+    {
+      id: 'status',
+      header: t('timetable.index.status_column'),
+      cell: (row) =>
+        row.rowCount === 0 ? (
+          <StatusChip>{t('timetable.index.empty_class')}</StatusChip>
+        ) : row.complete ? (
+          <StatusChip tone="ok" icon>
+            {t('timetable.index.complete')}
+          </StatusChip>
+        ) : (
+          <StatusChip tone="info">
+            {t('timetable.index.progress', {
+              done: row.countedComplete,
+              total: row.countedTotal,
+            })}
+          </StatusChip>
+        ),
+    },
+    {
+      id: 'warnings',
+      header: t('timetable.index.warnings_column'),
+      cell: (row) =>
+        row.warningCount > 0 ? (
+          <StatusChip tone="warn" icon>
+            {t('timetable.index.warnings', { count: row.warningCount })}
+          </StatusChip>
+        ) : (
+          <span className="text-muted">{t('timetable.index.no_warnings')}</span>
+        ),
+    },
+  ]
+
   return (
     <>
-      <Head title={t('timetable.index.title')} />
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="text-2xl font-bold">{t('timetable.index.title')}</h1>
-          <p className="mt-2 max-w-2xl text-muted">{t('timetable.index.intro')}</p>
-        </div>
-        {year && !year.closed && classes.length > 0 && (
-          <Button asChild>
-            <Link href={`/jadwal/susun-draf?tahun=${year.publicId}`}>
-              {t('timetable.index.compose_action')}
-            </Link>
-          </Button>
-        )}
-      </div>
+      <PageHeader
+        title={t('timetable.index.title')}
+        meta={year ? t('timetable.index.year_meta', { year: year.name }) : undefined}
+        description={t('timetable.index.intro')}
+        actions={
+          year && !year.closed && classes.length > 0 ? (
+            <Button asChild className="w-full sm:w-auto">
+              <Link href={`/jadwal/susun-draf?tahun=${year.publicId}`} prefetch>
+                <Icon name="timetable" />
+                {t('timetable.index.compose_action')}
+              </Link>
+            </Button>
+          ) : undefined
+        }
+      />
 
       {year === null ? (
-        <p className="mt-6 text-muted">{t('timetable.no_year')}</p>
+        <EmptyState icon="school-years" description={t('timetable.no_year')} />
       ) : (
         <>
           <YearChips
@@ -55,47 +101,32 @@ export default function TimetableIndex({ years, year, classes }: Props) {
             basePath="/jadwal"
             label={t('timetable.index.year_label')}
           />
-          {year.closed && <p className="mt-3 text-sm text-warn">{t('timetable.closed_note')}</p>}
-          {classes.length === 0 ? (
-            <p className="mt-6 text-muted">{t('timetable.index.no_classes')}</p>
-          ) : (
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {classes.map((row) => (
-                <li key={row.publicId}>
-                  <Section title={row.name} className="h-full">
-                    <div className="space-y-2">
-                      {row.rowCount === 0 ? (
-                        <StatusLine tone="info">{t('timetable.index.empty_class')}</StatusLine>
-                      ) : row.complete ? (
-                        <StatusLine tone="ok">{t('timetable.index.complete')}</StatusLine>
-                      ) : (
-                        <StatusLine tone="info">
-                          {t('timetable.index.progress', {
-                            done: row.countedComplete,
-                            total: row.countedTotal,
-                          })}
-                        </StatusLine>
-                      )}
-                      {row.warningCount > 0 && (
-                        <StatusLine tone="warn">
-                          {t('timetable.index.warnings', { count: row.warningCount })}
-                        </StatusLine>
-                      )}
-                    </div>
-                    <Button asChild variant="outline" className="mt-4">
-                      <Link href={`/kelas/${row.publicId}/jadwal`}>
-                        {t('timetable.index.open_action')}
-                      </Link>
-                    </Button>
-                  </Section>
-                </li>
-              ))}
-            </ul>
+          {year.closed && (
+            <p className="mt-4 rounded-md border border-warn/35 bg-warn-tint p-3 text-sm">
+              {t('timetable.closed_note')}
+            </p>
           )}
+          <DataTable
+            className="mt-6"
+            rows={classes}
+            columns={columns}
+            getRowId={(row) => row.publicId}
+            caption={t('timetable.index.table_caption', { year: year.name })}
+            empty={<EmptyState icon="classes" description={t('timetable.index.no_classes')} />}
+            rowActions={(row) => (
+              <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
+                <Link
+                  href={`/kelas/${row.publicId}/jadwal`}
+                  prefetch
+                  aria-label={t('timetable.index.open_label', { name: row.name })}
+                >
+                  {t('timetable.index.open_action')}
+                </Link>
+              </Button>
+            )}
+          />
         </>
       )}
     </>
   )
 }
-
-TimetableIndex.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

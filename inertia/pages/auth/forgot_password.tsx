@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react'
 import { Form, Head, Link } from '@inertiajs/react'
-import AuthLayout from '~/layouts/auth_layout'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
 import { useT } from '~/lib/i18n'
@@ -46,5 +44,3 @@ export default function ForgotPassword() {
     </>
   )
 }
-
-ForgotPassword.layout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>

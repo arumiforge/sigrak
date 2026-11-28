@@ -28,7 +28,8 @@
     "understood": "Mengerti",
     "see_details": "Lihat detail",
     "zoom_in": "Perbesar",
-    "zoom_out": "Perkecil"
+    "zoom_out": "Perkecil",
+    "undo": "Urungkan"
   },
   "status": {
     "loading": "Memuat…",
@@ -53,8 +54,8 @@
     "new_version": "Versi baru tersedia"
   },
   "semesters": {
-    "odd": "Semester 1 (Ganjil)",
-    "even": "Semester 2 (Genap)"
+    "odd": "Semester 1 (ganjil)",
+    "even": "Semester 2 (genap)"
   },
   "paper_sizes": {
     "a4": "A4 (210 × 297 mm)",
@@ -74,5 +75,10 @@
   "toasts": {
     "signed_out": "Anda sudah keluar.",
     "saved": "Tersimpan."
+  },
+  "email_banner": {
+    "body": "Email {email} belum dikonfirmasi. Buka tautan yang kami kirim ke email itu. SIGRAK tetap bisa Anda pakai.",
+    "resend_action": "Kirim ulang tautan",
+    "sending": "Mengirim…"
   }
 }

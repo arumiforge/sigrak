@@ -26,6 +26,9 @@ export type ScannedRoutes = {
     'admin.area_proposals.reject': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.area_proposals.resubmit': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
+    'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
+    'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
@@ -69,6 +72,14 @@ export type ScannedRoutes = {
     'app.timetable.class.destroy': { paramsTuple: [ParamValue,ParamValue]; params: {'class': ParamValue,'slot': ParamValue} }
     'app.timetable.class.lock': { paramsTuple: [ParamValue,ParamValue]; params: {'class': ParamValue,'slot': ParamValue} }
     'app.timetable.mine': { paramsTuple?: []; params?: {} }
+    'app.calendar.index': { paramsTuple?: []; params?: {} }
+    'app.calendar.store': { paramsTuple?: []; params?: {} }
+    'app.calendar.update': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.destroy': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.hide': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.unhide': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.propose': { paramsTuple?: []; params?: {} }
+    'app.calendar.acknowledge': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -82,10 +93,13 @@ export type ScannedRoutes = {
     'app.sign_up.store': { paramsTuple?: []; params?: {} }
     'app.invitations.show': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.invitations.accept': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'app.email_confirmation.show': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'app.email_confirmation.confirm': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.logout': { paramsTuple?: []; params?: {} }
     'app.account.show': { paramsTuple?: []; params?: {} }
     'app.account.update': { paramsTuple?: []; params?: {} }
     'app.account.password': { paramsTuple?: []; params?: {} }
+    'app.account.confirmation': { paramsTuple?: []; params?: {} }
     'app.role_switch.show': { paramsTuple?: []; params?: {} }
     'app.role_switch.store': { paramsTuple?: []; params?: {} }
     'app.teachers.index': { paramsTuple?: []; params?: {} }
@@ -93,7 +107,6 @@ export type ScannedRoutes = {
     'app.teachers.resend': { paramsTuple: [ParamValue]; params: {'invitation': ParamValue} }
     'app.teachers.cancel': { paramsTuple: [ParamValue]; params: {'invitation': ParamValue} }
     'app.home': { paramsTuple?: []; params?: {} }
-    'app.calendar.index': { paramsTuple?: []; params?: {} }
     'app.ai_demo.index': { paramsTuple?: []; params?: {} }
     'app.ai_demo.store': { paramsTuple?: []; params?: {} }
     'app.ai_demo.cancel': { paramsTuple: [ParamValue]; params: {'generation': ParamValue} }
@@ -112,6 +125,7 @@ export type ScannedRoutes = {
     'admin.users.index': { paramsTuple?: []; params?: {} }
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
+    'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -126,17 +140,18 @@ export type ScannedRoutes = {
     'app.timetable.drafts.show': { paramsTuple: [ParamValue]; params: {'draft': ParamValue} }
     'app.timetable.class.show': { paramsTuple: [ParamValue]; params: {'class': ParamValue} }
     'app.timetable.mine': { paramsTuple?: []; params?: {} }
+    'app.calendar.index': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
     'app.password.reset': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.sign_up': { paramsTuple?: []; params?: {} }
     'app.invitations.show': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'app.email_confirmation.show': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.account.show': { paramsTuple?: []; params?: {} }
     'app.role_switch.show': { paramsTuple?: []; params?: {} }
     'app.teachers.index': { paramsTuple?: []; params?: {} }
     'app.home': { paramsTuple?: []; params?: {} }
-    'app.calendar.index': { paramsTuple?: []; params?: {} }
     'app.ai_demo.index': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
@@ -150,6 +165,7 @@ export type ScannedRoutes = {
     'admin.users.index': { paramsTuple?: []; params?: {} }
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
+    'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -164,17 +180,18 @@ export type ScannedRoutes = {
     'app.timetable.drafts.show': { paramsTuple: [ParamValue]; params: {'draft': ParamValue} }
     'app.timetable.class.show': { paramsTuple: [ParamValue]; params: {'class': ParamValue} }
     'app.timetable.mine': { paramsTuple?: []; params?: {} }
+    'app.calendar.index': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
     'app.password.reset': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.sign_up': { paramsTuple?: []; params?: {} }
     'app.invitations.show': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'app.email_confirmation.show': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.account.show': { paramsTuple?: []; params?: {} }
     'app.role_switch.show': { paramsTuple?: []; params?: {} }
     'app.teachers.index': { paramsTuple?: []; params?: {} }
     'app.home': { paramsTuple?: []; params?: {} }
-    'app.calendar.index': { paramsTuple?: []; params?: {} }
     'app.ai_demo.index': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
@@ -194,6 +211,8 @@ export type ScannedRoutes = {
     'admin.area_proposals.reject': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.area_proposals.resubmit': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
+    'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
+    'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.logout': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.store': { paramsTuple?: []; params?: {} }
@@ -223,6 +242,13 @@ export type ScannedRoutes = {
     'app.timetable.class.update': { paramsTuple: [ParamValue,ParamValue]; params: {'class': ParamValue,'slot': ParamValue} }
     'app.timetable.class.destroy': { paramsTuple: [ParamValue,ParamValue]; params: {'class': ParamValue,'slot': ParamValue} }
     'app.timetable.class.lock': { paramsTuple: [ParamValue,ParamValue]; params: {'class': ParamValue,'slot': ParamValue} }
+    'app.calendar.store': { paramsTuple?: []; params?: {} }
+    'app.calendar.update': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.destroy': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.hide': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.unhide': { paramsTuple: [ParamValue]; params: {'item': ParamValue} }
+    'app.calendar.propose': { paramsTuple?: []; params?: {} }
+    'app.calendar.acknowledge': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
     'app.login.store': { paramsTuple?: []; params?: {} }
@@ -230,9 +256,11 @@ export type ScannedRoutes = {
     'app.password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.sign_up.store': { paramsTuple?: []; params?: {} }
     'app.invitations.accept': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'app.email_confirmation.confirm': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'app.logout': { paramsTuple?: []; params?: {} }
     'app.account.update': { paramsTuple?: []; params?: {} }
     'app.account.password': { paramsTuple?: []; params?: {} }
+    'app.account.confirmation': { paramsTuple?: []; params?: {} }
     'app.role_switch.store': { paramsTuple?: []; params?: {} }
     'app.teachers.invite': { paramsTuple?: []; params?: {} }
     'app.teachers.resend': { paramsTuple: [ParamValue]; params: {'invitation': ParamValue} }

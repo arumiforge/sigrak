@@ -2,7 +2,7 @@
   "label": "Menu utama",
   "skip_to_content": "Langsung ke isi halaman",
   "home": "Ringkasan",
-  "today": "Hari Ini",
+  "today": "Hari ini",
   "calendar": "Kalender",
   "ai_demo": "Coba AI",
   "my_documents": "Dokumen Saya",
@@ -10,14 +10,45 @@
   "help": "Bantuan",
   "request_help": "Minta bantuan",
   "account": "Akun",
-  "school_settings": "Pengaturan Sekolah",
+  "account_menu": "Menu akun",
+  "school_settings": "Pengaturan sekolah",
   "sign_out": "Keluar",
   "open_menu": "Buka menu",
   "close_menu": "Tutup menu",
+  "more": "Lainnya",
+  "more_title": "Menu lainnya",
   "teachers": "Guru",
   "switch_role": "Ganti peran",
-  "school_years": "Tahun Ajaran",
+  "switch_role_label": "Ganti peran, sekarang {role}",
+  "acting_as": "Sebagai {role}",
+  "school_years": "Tahun ajaran",
   "classes": "Kelas",
   "timetable": "Jadwal",
-  "my_timetable": "Jadwal mengajar"
+  "my_timetable": "Jadwal mengajar",
+  "extracurricular": "Ekstrakurikuler",
+  "packages": "Paket daerah",
+  "proposals": "Usulan",
+  "sections": {
+    "school": "Sekolah",
+    "layers": "Data daerah dan sekolah",
+    "schools": "Sekolah dan pengguna",
+    "regions": "Wilayah",
+    "system": "Sistem"
+  },
+  "roles": {
+    "principal": "Kepala sekolah",
+    "operator": "Operator sekolah",
+    "teacher": "Guru"
+  },
+  "console": {
+    "label": "Menu konsol",
+    "home": "Ringkasan",
+    "schools": "Sekolah",
+    "users": "Pengguna",
+    "directory": "Direktori sekolah",
+    "region_changes": "Perubahan wilayah",
+    "area_proposals": "Usulan wilayah",
+    "calendar": "Kalender wilayah",
+    "settings": "Pengaturan"
+  }
 }

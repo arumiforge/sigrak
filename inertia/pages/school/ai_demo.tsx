@@ -1,7 +1,6 @@
-import { useState, type ReactNode } from 'react'
+import { useState } from 'react'
 import { Head, router, useForm } from '@inertiajs/react'
 import { v4 as uuidv4 } from 'uuid'
-import AppLayout from '~/layouts/app_layout'
 import { Button } from '~/components/ui/button'
 import { Card } from '~/components/ui/card'
 import { Icon, type IconName } from '~/components/icon'
@@ -190,8 +189,6 @@ export default function AiDemoPage({
     </>
   )
 }
-
-AiDemoPage.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>
 
 function LiveIndicator({ status }: { status: LiveStatus }) {
   const t = useT()

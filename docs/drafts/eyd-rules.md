@@ -27,7 +27,7 @@ Page URLs below are relative to `https://eyd.netlify.app`. For example, `/penuli
 | Ellipsis | The single character `…` with no space before it in status text: `Memuat…` (translation tests) | EYD writes three dots with spaces (`/penggunaan-tanda-baca/tanda-elipsis`). The single character is a typographic house choice |
 | Numbers in UI copy | Numerals for limits, lengths, durations and format rules (`minimal 8 karakter`, `berlaku 7 hari`, `8 angka`). Words for a one-word count in running text (`Masih ada dua pembuatan`) | `/penulisan-kata/angka-dan-bilangan`: numbers that fit in one word are written as words, except in a series of numbers; measures and values (including time) use numerals |
 | Capitals in headings | UI headings, buttons and labels use sentence case (design system, UI writing rule 2). Titles of generated documents (PDF title pages, report titles) capitalise every word except function words | `/penggunaan-huruf/huruf-kapital` (titles of books, articles and documents) |
-| Product and feature names | `SIGRAK` in capitals (D-469); fixed feature names keep their capitals: `Hari Ini`, `Dokumen Saya`, `Kunci AI`, `Simulasi TKA` | Proper names take capitals (`/penggunaan-huruf/huruf-kapital`) |
+| Product and feature names | `SIGRAK` in capitals (D-469); SIGRAK feature names keep their capitals: `Bank Soal`, `Dokumen Saya`, `Kunci AI`, `Simulasi TKA`, `Berkas Administrasi`. Menu names are labels, not feature names: `Hari ini`, `Pengaturan sekolah`, `Tahun ajaran`, `Paket daerah` (D-472) | Proper names take capitals (`/penggunaan-huruf/huruf-kapital`) |
 
 ## 3. UI labels, buttons and titles
 
@@ -179,8 +179,9 @@ For Typst exports (D-450), from `/penulisan-kata/pemenggalan-kata`:
 | label period | a period at the end of a label, button, title or heading | final abbreviations (`No.`, `dll.`), `?`, `…` |
 | punctuation spacing | a space before `. , ; : ? !`; no space after `, ; :` before a word | decimal commas (`1,5`), URLs |
 | abbreviations | `dll`, `dsb`, `dst`, `dkk`, `hlm`, `yth` without a period; `s/d`, `sd.` | `dll.`, `s.d.`, `sampai` |
+| label capitals (D-472) | a capitalised word after the first in a label, button, title or menu name (`Hari Ini`, `Kembali ke Tahun Ajaran`) | the names in `LABEL_PROPER_NAMES` (feature names, subject names, `Anda`, products), a word right before a placeholder (`Kesepakatan Kabupaten {name}`), ALL CAPS abbreviations, labels holding whole sentences |
 
-The label check finds labels by key name. A key is a label when its last part is or ends with `title`, `label`, `heading`, `button`, `action`, `submit`, `caption`, `legend` or `placeholder` (`invite_title`, `search_label`), or when it sits inside a group of labels: `actions`, `fields`, `labels`, `titles`, `nav`, `kinds`, `levels`, `modes`, `outcomes`, `roles`, `scenarios`, `semesters`, `sources`, `statuses`, `status`, `step_status`, `steps`, `summary`, `views`, `month_nav`, `exam_types`, `invitation_states`, `paper_sizes`. Keys ending in `hint`, `intro`, `body`, `description`, `note` or `help` hold sentences and are never treated as labels. New groups of labels should use one of these names, or be added to the list.
+The label checks find labels by key name; every value in `nav.json` is a label. A key is a label when its last part is or ends with `title`, `label`, `heading`, `button`, `action`, `submit`, `caption`, `legend` or `placeholder` (`invite_title`, `search_label`), or when it sits inside a group of labels: `actions`, `fields`, `labels`, `titles`, `nav`, `kinds`, `levels`, `modes`, `outcomes`, `roles`, `scenarios`, `semesters`, `sources`, `statuses`, `status`, `step_status`, `steps`, `summary`, `views`, `month_nav`, `exam_types`, `invitation_states`, `paper_sizes`. Keys ending in `hint`, `intro`, `body`, `description`, `note` or `help` hold sentences and are never treated as labels. New groups of labels should use one of these names, or be added to the list.
 
 The existing translation tests already check: no `...` (use `…`), no stacked `!`/`?`, no `&`, no double spaces, no emoji, banned words and old terms (`tests/unit/translations.spec.ts`).
 
@@ -198,7 +199,7 @@ The existing translation tests already check: no `...` (use `…`), no stacked `
 
 ## 11. Open questions
 
-- **Email and file.** KBBI's standard forms are *surel* and *berkas*/*fail*. The design system uses *Email* and *File* as UI terms. Should they stay, as plain words teachers use, or change?
+- ~~**Email and file.**~~ Decided (D-472): "email" stays; "berkas" replaces "file" (the translation tests reject "file").
 - **Short date format.** EYD writes numeric dates with hyphens (`25-11-2026`). SIGRAK uses `25/11/2026` in the UI and import files (R1-02). Keep the slash as a house choice?
 - **Ranges in documents.** Em dash (`5—10 April`, as on the site's dash page), en dash (`98–105`, as on its colon page), or `s.d.`? Check against Badan Bahasa's official PDF before the export templates are fixed.
-- **Capitals in `Semester 1 (Ganjil)` and in nav names** (`Hari Ini`, `Pengaturan Sekolah`): are they names (capitals), or should they follow sentence case (`Semester 1 (ganjil)`, `Pengaturan sekolah`)? Left unchanged until the owner decides.
+- ~~**Capitals in `Semester 1 (Ganjil)` and in nav names.**~~ Decided (D-472): sentence case, `Semester 1 (ganjil)`, `Hari ini`, `Pengaturan sekolah`; feature names keep their capitals. Checked by "label capitals".

@@ -1,6 +1,8 @@
-import { useState, type ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import PlainLayout from '~/layouts/plain_layout'
+import { useState } from 'react'
+import { Form } from '@inertiajs/react'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { controlClass } from '~/components/patterns/form_field'
+import { PageHeader } from '~/components/patterns/page_header'
 import { Button } from '~/components/ui/button'
 import { TextField } from '~/components/text_field'
 import { useSourceLabel } from '~/components/layers/source'
@@ -48,8 +50,7 @@ type Props = {
   decided: Proposal[]
 }
 
-const fieldClass =
-  'block h-11 w-full rounded-md border bg-surface px-3 text-base outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30'
+const fieldClass = cn(controlClass, 'h-11')
 
 const ACTIONS = ['create_package', 'add', 'hide', 'retire_package'] as const
 
@@ -62,12 +63,11 @@ export default function AreaProposals(props: Props) {
 
   return (
     <>
-      <Head title={t('layers.console.title')} />
-      <h1 className="text-2xl font-bold">{t('layers.console.title')}</h1>
-      <p className="mt-2 max-w-3xl text-muted">{t('layers.console.intro')}</p>
-      {!props.canApprove && (
-        <p className="mt-2 text-sm text-muted">{t('layers.console.approver_note')}</p>
-      )}
+      <PageHeader title={t('layers.console.title')} description={t('layers.console.intro')}>
+        {!props.canApprove && (
+          <p className="mt-2 text-sm text-muted">{t('layers.console.approver_note')}</p>
+        )}
+      </PageHeader>
 
       <ProposalSection
         id="waiting"
@@ -80,6 +80,7 @@ export default function AreaProposals(props: Props) {
         <ProposalSection
           id="returned"
           title={t('layers.console.returned_title')}
+          empty={t('layers.console.waiting_empty')}
           proposals={props.returned}
           canApprove={props.canApprove}
         />
@@ -88,6 +89,7 @@ export default function AreaProposals(props: Props) {
         <ProposalSection
           id="decided"
           title={t('layers.console.decided_title')}
+          empty={t('layers.console.waiting_empty')}
           proposals={props.decided}
           canApprove={false}
         />
@@ -119,21 +121,21 @@ function ProposalSection({
 }: {
   id: string
   title: string
-  empty?: string
+  empty: string
   proposals: Proposal[]
   canApprove: boolean
 }) {
   return (
-    <section aria-labelledby={`${id}-title`} className="mt-8">
+    <section aria-labelledby={`${id}-title`} className="mt-8 first-of-type:mt-0">
       <h2 id={`${id}-title`} className="text-lg font-bold">
         {title}
       </h2>
       {proposals.length === 0 ? (
-        <p className="mt-2 rounded-md border bg-surface p-4 text-muted">{empty}</p>
+        <EmptyState className="mt-3" icon="proposals" description={empty} />
       ) : (
         <ul className="mt-3 space-y-3">
           {proposals.map((proposal) => (
-            <li key={proposal.id} className="rounded-xl border bg-surface p-4">
+            <li key={proposal.id} className="rounded-lg border bg-surface p-4">
               <ProposalCard proposal={proposal} canApprove={canApprove} />
             </li>
           ))}
@@ -336,7 +338,7 @@ function NewProposal({ domains, regions, packages, schoolYear }: Props) {
   )
 
   return (
-    <section aria-labelledby="new-title" className="mt-10 rounded-xl border bg-surface p-4 sm:p-6">
+    <section aria-labelledby="new-title" className="mt-10 rounded-lg border bg-surface p-4 sm:p-6">
       <h2 id="new-title" className="text-lg font-bold">
         {t('layers.console.new_title')}
       </h2>
@@ -522,5 +524,3 @@ function NewProposal({ domains, regions, packages, schoolYear }: Props) {
     </section>
   )
 }
-
-AreaProposals.layout = (page: ReactNode) => <PlainLayout>{page}</PlainLayout>

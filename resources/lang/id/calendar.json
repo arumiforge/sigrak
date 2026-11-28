@@ -47,9 +47,9 @@
     "even_semester": "Semester 2 mulai {date}",
     "days_per_week": "{days} hari sekolah per minggu",
     "from_layer": "Tanggal dari kalender daerah",
-    "from_academic_year": "Tanggal dari Tahun ajaran sekolah",
+    "from_academic_year": "Tanggal dari tahun ajaran sekolah",
     "from_default": "Tanggal sementara, sampai tahun ajaran dibuat",
-    "differs": "Tanggal di Tahun ajaran sekolah berbeda dengan kalender daerah. Hari efektif dihitung dengan tanggal kalender daerah karena tanggal itu wajib diikuti."
+    "differs": "Tanggal tahun ajaran sekolah berbeda dengan kalender daerah. Hari efektif dihitung dengan tanggal kalender daerah karena tanggal itu wajib diikuti."
   },
   "list": {
     "hide": "Jadikan hari masuk sekolah",
@@ -58,16 +58,19 @@
     "hide_confirm": "Simpan",
     "unhide": "Pakai lagi",
     "edit": "Ubah",
+    "edit_label": "Ubah {title}",
     "delete": "Hapus",
-    "delete_confirm": "Hapus acara ini dari kalender sekolah?",
+    "delete_label": "Hapus {title}",
+    "delete_title": "Hapus {title}?",
+    "delete_confirm": "Acara ini dihapus dari kalender sekolah dan tidak bisa dikembalikan.",
+    "delete_action": "Hapus acara",
     "mandatory_note": "Wajib diikuti, tidak bisa diubah sekolah.",
     "propose_change": "Usulkan perubahan",
     "propose_delete": "Usulkan hapus",
     "propose_hide": "Usulkan masuk sekolah",
     "propose_unhide": "Usulkan dipakai lagi",
     "propose_reason": "Alasan usulan (boleh dikosongkan)",
-    "send_proposal": "Kirim usulan",
-    "actions": "Pilihan untuk {title}"
+    "send_proposal": "Kirim usulan"
   },
   "form": {
     "title_add": "Tambah acara sekolah",

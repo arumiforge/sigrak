@@ -2372,3 +2372,12 @@ Reason: owner's choices.
 Accepted · 2026-11-28 · owner's choice ("ya, tambahkan R1-12 kerangka UI") · extends D-468; follows D-389, D-390, D-402, D-434
 R1 adds R1-12: one UI shell for every page (persistent layouts and navigation per area, bottom navigation on phones and sidebar on desktop, Hugeicons Pro mapping, design tokens from the design system, shared patterns, the SPA behaviour of D-389), with the R1 pages moved onto it. It runs after R1-08 and R1-09 merge, next to R1-11; R5 builds on the same patterns. The logo stays out of scope until the owner picks one (RS-16, D-462).
 Reason: the R1 tasks built working pages but no shared shell; doing it once in R1 keeps later pages consistent.
+
+### D-474 — UI shell choices from R1-12
+Accepted · 2026-11-28 · R1-12 · owner's choice (interview 2026-11-28) · refines D-473
+- Until the logo is chosen (D-462), the header shows the text "SIGRAK" in the brand colour.
+- "Coba AI" (the R0 test page) is not in any menu; it stays reachable by URL for the team.
+- Operator's phone bar: Kalender, Kelas, Guru, Jadwal, Lainnya (Tahun ajaran moves under Lainnya).
+- Dark mode follows the device for now; a light/dark setting comes later with the sound settings.
+- Accepted as built: grouped sidebar headings on desktop, the icon picks (desk for Kelas, medal for Ekstrakurikuler, map pin for Paket daerah, note-edit for Usulan, clock-calendar for Jadwal), input borders darker than card lines for 3:1 contrast, invitation chips "Menunggu" (grey) and "Lewat 7 hari" (warn).
+Reason: owner's choices on the R1-12 visual questions.

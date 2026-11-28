@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { Form, Link } from '@inertiajs/react'
+import { PageHeader } from '~/components/patterns/page_header'
 import { Section } from '~/components/section'
 import { Button } from '~/components/ui/button'
 import { YearDateFields, type YearDates } from '~/components/school_year/year_parts'
@@ -20,17 +19,17 @@ export default function AcademicYearEdit({ year }: Props) {
 
   return (
     <>
-      <Head title={t('classes.years.edit_title', { year: year.name })} />
-      <Link
-        href="/tahun-ajaran"
-        className="inline-flex min-h-11 items-center text-sm font-semibold text-brand-strong"
-      >
-        {t('classes.years.back')}
-      </Link>
-      <h1 className="text-2xl font-bold">{t('classes.years.edit_title', { year: year.name })}</h1>
+      <PageHeader
+        title={t('classes.years.edit_title', { year: year.name })}
+        back={{ href: '/tahun-ajaran', label: t('classes.years.back') }}
+      />
 
-      <Section title={t('classes.years.dates_title')} className="mt-6 max-w-xl">
-        {year.closed && <p className="mb-4 text-sm text-warn">{t('classes.years.closed_note')}</p>}
+      <Section title={t('classes.years.dates_title')} className="max-w-xl">
+        {year.closed && (
+          <p className="mb-4 rounded-md border border-warn/35 bg-warn-tint p-3 text-sm text-text">
+            {t('classes.years.closed_note')}
+          </p>
+        )}
         <Form
           action={`/tahun-ajaran/${year.publicId}/ubah`}
           method="post"
@@ -55,5 +54,3 @@ export default function AcademicYearEdit({ year }: Props) {
     </>
   )
 }
-
-AcademicYearEdit.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

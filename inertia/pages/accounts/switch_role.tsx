@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { Form } from '@inertiajs/react'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip } from '~/components/patterns/status_chip'
+import { EmptyState } from '~/components/patterns/empty_state'
 import { Button } from '~/components/ui/button'
 import { useT } from '~/lib/i18n'
 
@@ -22,27 +23,28 @@ export default function SwitchRole({ memberships }: Props) {
 
   return (
     <>
-      <Head title={t('accounts.switch_role.title')} />
-      <h1 className="text-2xl font-bold">{t('accounts.switch_role.title')}</h1>
-      <p className="mt-2 text-muted">{t('accounts.switch_role.intro')}</p>
+      <PageHeader
+        title={t('accounts.switch_role.title')}
+        description={t('accounts.switch_role.intro')}
+      />
 
       {memberships.length === 0 ? (
-        <p className="mt-6">{t('accounts.switch_role.none')}</p>
+        <EmptyState icon="switch" description={t('accounts.switch_role.none')} />
       ) : (
-        <ul className="mt-6 max-w-xl space-y-3">
+        <ul className="max-w-xl space-y-3">
           {memberships.map((membership) => (
             <li
               key={membership.publicId}
-              className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-surface p-4"
+              className="flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-surface p-4"
             >
               <div>
                 <p className="font-semibold">{t(`accounts.roles.${membership.role}`)}</p>
                 <p className="text-sm text-muted">{membership.schoolName}</p>
               </div>
               {membership.active ? (
-                <span className="rounded-full bg-brand-tint px-3 py-1 text-sm font-semibold text-brand-strong">
+                <StatusChip tone="brand" icon="check">
                   {t('accounts.switch_role.current')}
-                </span>
+                </StatusChip>
               ) : (
                 <Form action="/ganti-peran" method="post">
                   {({ processing }) => (
@@ -62,5 +64,3 @@ export default function SwitchRole({ memberships }: Props) {
     </>
   )
 }
-
-SwitchRole.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

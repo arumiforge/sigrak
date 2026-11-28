@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import ConsoleLayout from '~/layouts/console_layout'
+import { Form } from '@inertiajs/react'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
 import { TextField } from '~/components/text_field'
 import { TrialForm } from '~/components/trial_form'
 import { Button } from '~/components/ui/button'
@@ -34,11 +34,9 @@ export default function ConsoleUsers({ q, users, can }: Props) {
 
   return (
     <>
-      <Head title={t('console.users.title')} />
-      <h1 className="text-2xl font-bold">{t('console.users.title')}</h1>
-      <p className="mt-2 text-muted">{t('console.users.intro')}</p>
+      <PageHeader title={t('console.users.title')} description={t('console.users.intro')} />
 
-      <Form action="/pengguna" method="get" className="mt-4 flex max-w-xl items-end gap-2">
+      <Form action="/pengguna" method="get" className="flex max-w-xl items-end gap-2">
         <div className="flex-1">
           <TextField
             label={t('console.users.search_label')}
@@ -55,13 +53,13 @@ export default function ConsoleUsers({ q, users, can }: Props) {
       </Form>
 
       {!q ? (
-        <p className="mt-6 text-muted">{t('console.users.hint')}</p>
+        <EmptyState className="mt-6" icon="search" description={t('console.users.hint')} />
       ) : users.length === 0 ? (
-        <p className="mt-6 text-muted">{t('console.users.empty')}</p>
+        <EmptyState className="mt-6" icon="users" description={t('console.users.empty')} />
       ) : (
         <ul className="mt-6 space-y-3">
           {users.map((user) => (
-            <li key={user.id} className="rounded-xl border bg-surface p-4">
+            <li key={user.id} className="rounded-lg border bg-surface p-4">
               <p className="font-semibold">{user.name}</p>
               <p className="text-sm break-all text-muted">{user.email}</p>
               <p className="mt-2 text-sm" data-testid="user-trial">
@@ -92,5 +90,3 @@ export default function ConsoleUsers({ q, users, can }: Props) {
     </>
   )
 }
-
-ConsoleUsers.layout = (page: ReactNode) => <ConsoleLayout>{page}</ConsoleLayout>

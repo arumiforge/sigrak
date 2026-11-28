@@ -170,3 +170,122 @@ Answered 2026-11-28 (D-463, D-467): items 3, 4 and 5 accepted as written; RS-19 
 3. **`worker-ai` concurrency:** approve making it a per-environment setting in R1, starting at 50 slots in one process (two processes for restarts), with a queue-wait metric and alert, instead of the fixed 4. This also settles the "concurrency about 20" of D-415.
 4. **Sizing proposals for RS-19:** accept §6 (`UV_THREADPOOL_SIZE`, heap limits, replicas per role) as the starting values, or change them.
 5. **Re-measure points:** agree that load is measured again (a) with the first real R1 content page and RLS, and (b) on the VPS behind nginx and the tunnel in R3, with these thresholds as the pass line.
+
+## R1 re-measure (R1-11, 2026-11-28)
+
+The first re-measure of D-467: the R1 pages (calendar on the layer model, extracurricular list, timetable) behind row-level security with `SET LOCAL` per transaction, on the same machine type and with the same load shapes as R0-08. Task: `docs/agent/tasks/R1-11-load-remeasure.md`. Scripts and how to run them: `spikes/k6/README.md`.
+
+### Setup and what ran under RLS
+
+- **Where:** Claude cloud container, 4 vCPU, 15 GB, as in R0-08; app, PostgreSQL, Redis and k6 on the same cores. Production build (`node ace build`), Node 26.13, one `web` process, one `worker-ai` in run C at `QUEUE_AI_CONCURRENCY=50` (the R1-10 default from D-467), `UV_THREADPOOL_SIZE=4`, `AI_PROVIDER=fake`.
+- **PostgreSQL:** 19.0 in a private cluster on its own port with the shared cluster's settings (128 MB shared buffers, `jit = off`) plus `pg_stat_statements`. The shared cluster does not preload it, and restarting it would have disturbed other sessions. Statistics were reset before each run.
+- **Data** (`spikes/k6/seed_r1_load.ts`): 300 schools from the NPSN directory (Kudus, Jepara, Pati). 20 load schools (16 SD, 4 MI, spread over the three regencies), each with year 2026/2027 on the Jawa Tengah frame, 12 classes, 15 teachers (12 homeroom, 3 subject teachers), one operator, three school calendar events, a kept-open joint-leave day, and an own and a hidden extracurricular. In all: 1,776 teaching assignments and 7,278 timetable rows, saved through the real draft generator and save path. The national and Jawa Tengah calendar packages and the extracurricular catalog are active; the SD and MI curricula are imported. 320 load users.
+- **Under RLS:** the `tenant` connection, login `sigrak_app_user` (member of `sigrak_app`, `NOBYPASSRLS`, not the owner); every transaction starts with `set_config('app.school_id' | 'app.user_id', …, true)`. This covers the active-membership lookup of the `school` middleware on every app request; `/kalender` (shell and deferred props: years, classes, the layer resolver's reads of packages, items, hides, stamps and choices, calendar snapshots); `/ekstrakurikuler`; and `/jadwal`, `/kelas/:class/jadwal`, `/kelas-saya/jadwal` (years, classes, timetable rows, teaching assignments).
+- **Still on the owner connection** (as R1-01 and D-470 allow until R3): the user lookup at sign-in and on each request (`users`, no RLS), the school's level and province for the policy profile (`schools`, `regions`), curriculum reads (`subjects`, `subject_allocations`, `topics`), teacher names, and the whole AI demo (`generations` and its children: RLS tables, bypassed because the owner owns them). `app_region_chain()` runs as its owner by design. A smoke run with the default connection also on the app login: every R1 page and sign-in work, but starting an AI generation fails on the `generations` RLS policy. The generation service must move onto tenant transactions before production switches to the app login in R3.
+
+| Run | Load (shapes as R0-08) | Length |
+|---|---|---|
+| A0 | R0-08 run A unchanged: 50 teachers on `/kalender` (2–5 s think time) + 2 sign-ins/s; R1 data, RLS, all five deferred props | 4 min 20 s |
+| A | R1 mix: 50 teachers taking `/kalender`, `/ekstrakurikuler`, `/kelas-saya/jadwal` in turn + 10 operators taking `/jadwal`, `/kelas/:class/jadwal`, `/kalender?kelas=` in turn (2–5 s) + 2 sign-ins/s | 4 min 20 s |
+| C (mixed) | A + 200 held SSE streams + 10 teachers starting AI generations + the SSE latency probe; 1 `worker-ai` | about 5 min |
+| D0 / D1 (capacity) | A0 / A with **no** think time + 1 sign-in/s | 3 min 20 s |
+| E | 30 sign-ins/s, each followed by `/kalender` | 1 min |
+
+### Comparison with R0-08
+
+Server time as k6 measured it, in ms, p50 / p95 / p99. Thresholds: p95 / p99 < 300 / 800 ms for pages, `GET /masuk` p95 < 200, `POST /masuk` p95 < 800.
+
+| Request | R0-08 A | R1 A0 | R1 A | R0-08 C | R1 C | R0-08 D | R1 D0 | R1 D1 |
+|---|---|---|---|---|---|---|---|---|
+| `GET /kalender` (shell) | 5.1 / 8.3 / 11.8 | 6.9 / 11.6 / 17.6 | 6.4 / 17.5 / 29.9 | 5.1 / 8.8 / 13.9 | 6.3 / 17.1 / 28.4 | 109 / 143 / 159 | 147 / 187 / 203 | 380 / 527 / 598 |
+| `GET /kalender` deferred reload¹ | 6.2 / 10.6 / 16.8 | 10.1 / 17.8 / 23.8 | 9.7 / 24.7 / 38.6 | 6.4 / 11.4 / 16.6 | 9.8 / 24.3 / 36.1 | 135 / 174 / 193 | 222 / 275 / 296 | 535 / 748 / 837 |
+| `GET /kalender?kelas=` shell · deferred | | | 6.7 / 17.4 / 24.7 · 10.0 / 26.9 / 36.7 | | 6.8 / 17.5 / 22.2 · 10.2 / 26.9 / 40.0 | | | 374 / 526 / 588 · 557 / 749 / 887 |
+| `GET /ekstrakurikuler` | | | 6.1 / 17.5 / 26.1 | | 6.1 / 17.4 / 25.5 | | | 343 / 518 / 571 |
+| `GET /jadwal` (operator) | | | 33.6 / 60.4 / 95.6 | | 34.3 / 59.1 / 83.6 | | | 464 / 618 / 702 |
+| `GET /kelas/:class/jadwal` (operator) | | | 30.1 / 54.2 / 81.2 | | 30.3 / 51.8 / 63.0 | | | 467 / 622 / 709 |
+| `GET /kelas-saya/jadwal` (teacher) | | | 28.3 / 50.9 / 70.7 | | 28.3 / 49.2 / 65.7 | | | 475 / 628 / 718 |
+| `GET /masuk` | 2.3 / 4.8 / 8.8 | 2.3 / 4.2 / 7.6 | 2.2 / 6.7 / 10.9 | 2.4 / 5.2 / 9.3 | 2.1 / 8.5 / 14.3 | 30 / 45 / 61 | 17 / 26 / 35 | 28 / 49 / 64 |
+| `POST /masuk` (scrypt) | 48.5 / 64.5 / 74.8 | 35.2 / 47.2 / 56.4 | 35.1 / 49.0 / 60.3 | 49.5 / 69.6 / 81.7 | 35.2 / 50.7 / 58.2 | 127 / 153 / 168 | 68 / 96 / 107 | 90 / 121 / 131 |
+| Requests per second | 31 | 31 | 26 | 31 | 26 | **354** | **249** | **123** |
+| Errors / failed checks | 0 % / 0 | 0 % / 0 of 19,147 | 0 % / 0 of 15,897 | 0 % / 0 | 0 % / 0 of 15,831 | 0 % / 0 | 0 % / 0 of 123,662 | 0 % / 0 of 60,018 |
+| Tenant checks (own school only) | | 3,617 of 3,617 | 2,801 of 2,801 | | 2,789 of 2,789 | | 24,650 of 24,650 | 11,190 of 11,190 |
+
+¹ R0-08 asked for `entries` only; R1 asks for every deferred prop of the page in one reload (`entries`, `hidden`, `frame`, `effective`, `changes`), as the browser does for one defer group.
+
+| Other measures | R0-08 | R1-11 |
+|---|---|---|
+| Sign-ins at 30/s (E): `POST /masuk` p50 / p95 / p99; sign-ins not started in time | 50 / 69 / 98 ms; 1 of 1,800 | 36 / 49 / 85 ms; 0 of 1,800; web CPU 143 % avg, 155 % max |
+| SSE (C): streams subscribed and held | 200 of 200 | 200 of 200 |
+| `POST /__transmit/subscribe` p50 / p95 / p99 | 3.3 / 5.5 / 10.4 ms | 2.8 / 4.9 / 9.4 ms |
+| SSE delivery, state change to message (C) | p50 3, p95 7, p99 10, max 22 ms (973 messages) | p50 2, p95 6, p99 12, max 22 ms (1,260 messages, 180 of 180 generations); 0 over 1 s |
+| AI generation time p50 / p95 (C) | 18.0 / 22.6 s at concurrency 4 (failed) | 3.6 / 3.7 s at concurrency 50 (236 generations); queue and runner overhead p95 0.1 s; `POST /coba-ai` p95 24.6 ms |
+| Web CPU, % of one core avg / max (A · C · D) | 20 / 27 · 27 / 48 · 99 / 114 | 28 / 42 · 27 / 62 · 105 / 112 (D0), 111 / 117 (D1) |
+| Web CPU per request at saturation | 2.8 ms (`/kalender` mix) | 4.2 ms (D0, `/kalender` mix); 9.0 ms (D1, R1 mix) |
+| Web RSS max (A · C · D) / heap max | 274 · 307 · 363 MB / ≤ 133 MB | 328 · 400 · 520 MB / 105 · 126 · 259 MB |
+| Event-loop delay p99 (median / worst window); worst single delay | A 1.3 / 3.6, C 1.5 / 5.7, D 9.7 / 14.4 ms; 70 ms | A 5.7 / 7.2, C 5.7 / 9.6, D0 5.6 / 10.6, D1 15.3 / 26.1 ms; 52 ms |
+| `worker-ai` (C) | 3 / 5 % CPU, RSS 191 MB | 3 / 7 % CPU, RSS 205 MB |
+| PostgreSQL CPU avg (A · C · D) | 3 · 6 · 36 % | 7 · 8 · 46 % (D0), 38 % (D1) |
+| Redis CPU | 1 · 1 · 3 % | 0–2 % |
+
+PostgreSQL CPU and RSS come from `spikes/k6/proc-sample.mjs` over the private cluster's process tree (RSS is summed per backend, so shared buffers count more than once: 360–780 MB). There were no shared-buffer reads from disk in any run (everything cached), no rollbacks, no deadlocks and no temp files.
+
+### `SET LOCAL` per transaction, no leakage
+
+- In every run `pg_stat_statements` counts, for `sigrak_app_user`, exactly as many `BEGIN` as `COMMIT` as `SELECT set_config($3, $1, $4), set_config($5, $2, $6)` (A0 18,085; A 13,766; C 15,038; D0 123,260; D1 54,543; E 9,000), no `ROLLBACK`, and no session-level `SET`. Every tenant transaction set its school first and nothing set it outside a transaction, so a pooled connection (PgBouncer in transaction mode, D-429) never carries a tenant into the next transaction.
+- Under load, 46,847 page checks across the 20 schools compared the school name on `/kalender` and the school's own extracurricular (a unique name per school) with the signed-in user's school: no page showed another school's data. R1-01's test still covers one backend reused across tenants and after a rollback.
+- The `set_config` statement costs 0.006 ms of database time per transaction. The cost of RLS is in the extra round trips per request (regression 1), not in the policies.
+
+### Regressions and causes
+
+1. **`/kalender` costs about 1.5 times the skeleton's.** Light-load p95 rose from 8–11 ms to 12–25 ms, and one web process now saturates at 249 instead of 354 req/s (CPU per request 2.8 → 4.2 ms). Causes: the deferred reload carries five props instead of one, and effective days are computed on every reload (`effectiveDays`, `addDays` show in the CPU profile); the layer resolver reads its stamps and the calendar snapshot is read for the change notice on each reload; and every app request runs the membership lookup in its own tenant transaction (`BEGIN`, `set_config`, `SELECT`, `COMMIT`) before the page's own transaction, so one `/kalender` view (shell and reload) makes four transactions. PostgreSQL CPU per request rose from about 1.0 to 1.9 ms.
+2. **The timetable pages are the heaviest R1 pages:** 28–34 ms median at light load, about five times `/kalender`, and the reason the R1 mix saturates one web process at 123 req/s (9 ms CPU per request). They are CPU-bound in Node, not in PostgreSQL: `loadYearState` hydrates every row of the year (≈ 360 timetable rows, ≈ 90 assignments) into Lucid models, the rules run per class, and `SubjectsForGrade` makes two uncached curriculum queries per grade (12 per request). Before the fix below, `/jadwal` converted every row of the year once per class (p50 / p95 / p99 40.0 / 64.9 / 86.6 ms before, 33.6 / 60.4 / 95.6 ms after).
+3. **Memory:** web heap peaked at 259 MB under saturation (R0-08: 133 MB), RSS at 520 MB. Still inside the proposed 512 MB heap limit (§6); watch it in the R3 soak test.
+4. **Event loop:** the timetable pages run synchronous chunks of 20–30 ms, so the p99 per window rose from ≈ 1.5 to ≈ 6 ms at light load and to 15–26 ms at saturation. The worst single delay (52 ms) is at the proposed 50 ms alert line.
+5. Not regressions: sign-in is faster than in R0-08 (`POST /masuk` p50 35 vs 49 ms; machine variance, since the lookup fix below matters only with many users), and the AI queue wait is gone because R1-10 made the concurrency a setting (D-467).
+
+### Fixed in R1-11 (with tests)
+
+| Fix | Effect |
+|---|---|
+| `adonisrc.ts` `metaFiles` copies `docs/data/{profiles,curriculum,regulations,regions,calendar,catalogs,schools}` into the build | The production build answered **500** on `/jadwal`, `/ekstrakurikuler` and every page that resolves the Profil Jenjang, because `docs/data/profiles` was missing. Test: every `docs/data` folder the app reads is in `metaFiles` |
+| Sign-in looks accounts up by `lower(email)` (`User`, `StaffUser`) | The auth mixin's `where email = ?` cannot use the unique `lower(email)` index and read the whole table on every sign-in: 8 ms at 100,000 users, 0.04 ms with the index. Tests: index plan, capitals |
+| `/jadwal` converts the year's rows once instead of once per class | `classWarnings` share of web CPU 11.9 % → 5.3 % in the saturated operator profile; `/jadwal` p50 −16 % at light load. Test: a clash still counts in both classes |
+| `messagesFor` keeps the picked messages per namespace set | It took 2.3 % of web CPU, on every request (the R0-08 §6 note). Test: shared, frozen, same content |
+| Index `topics (curriculum_version_id, grade)` | The busiest statement under load (D1: 39,126 calls, 5.5 s of 16.5 s database time) read the whole table each time. Buffers per call 144 → ≈ 50 today, and the table grows with every curriculum version. Test: the plan uses the index |
+
+### Slow and frequent queries (D1)
+
+| Statement | Calls | Mean | Note and suggestion |
+|---|---|---|---|
+| `topics` count per version and grade (owner) | 39,126 | 0.14 ms | Index added (above). Also cache `SubjectsForGrade` per process like the policy profile (10 min, D-470): the data changes only with a curriculum import |
+| `subject_allocations` join `subjects` (owner) | 39,126 | 0.08 ms | Same cache; 43 rows each, 12 calls per timetable page |
+| `timetable_slots` of a year (`school_id`, `class_id IN …`) | 6,871 | 0.45 ms | Uses `(school_id, class_id, weekday)`; the cost is row volume (≈ 360 rows), not a missing index. Reading only the columns the rules need would save hydration time in Node |
+| `classes` of a year | 19,149 | 0.04 ms | Index `(school_id, academic_year_id, grade)` exists; the seq scans in the statistics are the planner's choice on a 240-row table |
+| `academic_years` of a school | 30,515 | 0.02 ms | Read two or three times per request (`chooseYear` and the year list); once per request would do |
+| `school_memberships` active membership | 24,202 | 0.02 ms | On every app request, and with its own transaction it is four round trips. Fold it into the page's transaction, or keep it in the session and recheck it every few minutes |
+| `calendar_snapshots` of user and year | 6,139 | 0.07 ms | Unique index used |
+
+No other index is missing at this data size. The sequential scans in `pg_stat_user_tables` (`classes`, `academic_years`, `regions`, `layer_stamps`) are all on tables under 400 rows, where an index scan would cost more. Check again with PgHero on the VPS (D-429).
+
+### Larger items, not fixed here
+
+1. Move the generation service (`generations`, `generation_steps`, `ai_usage_logs`, `ai_credentials`) onto tenant transactions before production runs on the app login (R3); today it only works on the owner connection.
+2. Timetable read path: one year state per request with plain rows instead of Lucid models, the rule checks once per year instead of once per class, and a cache for `SubjectsForGrade`. Expected to halve the timetable pages' CPU and bring the event-loop delay down.
+3. One tenant transaction per request: the membership lookup, the page's reads and the deferred props each open their own, and with PgBouncer each adds round trips.
+4. Effective days per class are recomputed on every deferred reload; cache them by the resolver's stamp and the class's lesson days.
+
+### Pass / fail against the D-467 thresholds
+
+| # | Threshold (R0-08) | R1-11 | Result |
+|---|---|---|---|
+| 1 | Pages p95 < 300 ms, p99 < 800 ms at light load (A, C) | Highest p95 60.4 ms (`/jadwal`), highest p99 95.6 ms | **Pass** |
+| 2 | `GET /masuk` p95 < 200 ms | 4.2–8.5 ms | **Pass** |
+| 3 | `POST /masuk` p95 < 800 ms, p99 < 1.5 s at 2/s and 30/s | p95 47–51 ms, p99 ≤ 85 ms | **Pass** |
+| 4 | Errors < 1 %, checks > 99 % | 0 errors, 0 failed checks in every run | **Pass** |
+| 5 | 200 SSE streams held, subscribe p95 < 300 ms, delivery p99 < 1 s | 200 of 200, 4.9 ms, 12 ms | **Pass** |
+| 6 | AI generation p95 < 15 s at the offered load | 3.7 s (concurrency 50) | **Pass** (failed in R0-08 at concurrency 4) |
+| 7 | Event-loop lag stays low; alert line 50 ms | p99 per window ≤ 26 ms even at saturation; worst single 52 ms | **Pass**, with the margin in regression 4 |
+| 8 | Tenant isolation under load (new) | 46,847 of 46,847 own-school checks; `SET LOCAL` in every transaction | **Pass** |
+| — | Saturation runs (D0, D1) | Capacity measures, not pass lines; D1 p95 is 518–749 ms because one process is at 100 % CPU | 249 req/s (`/kalender` mix) and 123 req/s (R1 mix) per web process |
+
+**Scale estimate, revised (§5).** In the saturated R1 mix one web process served about 90 page views per second on one core (≈ 12 ms of CPU per view, about twice the skeleton's 5.7 ms). At 50 % CPU and one view per teacher every 30 s, that is about 1,350 simultaneously active teachers per web replica and about 5,400 on the four replicas of D-415. That is above the R0-08 estimate of 2,000–3,000 (which assumed pages three to five times `/kalender`) and well above an early SD/MI launch. The second re-measure of D-467 (VPS, nginx, tunnel, PgBouncer) stays in R3.

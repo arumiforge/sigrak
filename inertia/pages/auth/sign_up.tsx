@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react'
 import { Form, Head, Link } from '@inertiajs/react'
-import AuthLayout from '~/layouts/auth_layout'
 import { TextField } from '~/components/text_field'
 import { PasswordField } from '~/components/password_field'
 import { Button } from '~/components/ui/button'
@@ -74,5 +72,3 @@ export default function SignUp() {
     </>
   )
 }
-
-SignUp.layout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>

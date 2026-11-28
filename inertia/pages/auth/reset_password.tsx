@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react'
 import { Form, Head, Link, usePage } from '@inertiajs/react'
-import AuthLayout from '~/layouts/auth_layout'
 import { PasswordField } from '~/components/password_field'
 import { Button } from '~/components/ui/button'
 import { useT } from '~/lib/i18n'
@@ -79,5 +77,3 @@ export default function ResetPassword({ valid, email }: Props) {
     </>
   )
 }
-
-ResetPassword.layout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>

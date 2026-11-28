@@ -1,9 +1,8 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import PlainLayout from '~/layouts/plain_layout'
+import { Form } from '@inertiajs/react'
+import { PageHeader } from '~/components/patterns/page_header'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
-import { RegionNav, useRegionLabel, type RegionRef } from '~/components/regions/region_nav'
+import { useRegionLabel, type RegionRef } from '~/components/regions/region_nav'
 import { formatDate } from '~/lib/dates'
 import { formatNumber } from '~/lib/format'
 import { useT } from '~/lib/i18n'
@@ -56,15 +55,12 @@ export default function SchoolDirectory({ query, invalid, result, regencies }: P
 
   return (
     <>
-      <Head title={t('regions.directory.title')} />
-      <RegionNav />
-      <h1 className="text-2xl font-bold">{t('regions.directory.title')}</h1>
-      <p className="mt-2 text-muted">{t('regions.directory.intro')}</p>
+      <PageHeader title={t('regions.directory.title')} description={t('regions.directory.intro')} />
 
       <Form
         action="/direktori-sekolah"
         method="get"
-        className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-start"
+        className="flex flex-col gap-3 sm:flex-row sm:items-start"
       >
         {({ processing }) => (
           <>
@@ -96,7 +92,7 @@ export default function SchoolDirectory({ query, invalid, result, regencies }: P
       {result && (
         <section
           aria-labelledby="directory-result"
-          className="mt-6 rounded-xl border bg-surface p-4 sm:p-6"
+          className="mt-6 rounded-lg border bg-surface p-4 sm:p-6"
         >
           <h2 id="directory-result" className="text-lg font-bold">
             {t('regions.directory.result_title')}
@@ -107,7 +103,7 @@ export default function SchoolDirectory({ query, invalid, result, regencies }: P
             </p>
           )}
           {result.removed && (
-            <p className="mt-2 rounded-md border border-warn p-3 text-sm">
+            <p className="mt-2 rounded-md border border-warn/35 bg-warn-tint p-3 text-sm">
               {t('regions.directory.removed')}
             </p>
           )}
@@ -165,7 +161,7 @@ export default function SchoolDirectory({ query, invalid, result, regencies }: P
         ) : (
           <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {regencies.map((row) => (
-              <li key={row.regency} className="rounded-xl border bg-surface p-4">
+              <li key={row.regency} className="rounded-lg border bg-surface p-4">
                 <p className="font-bold">{row.regency}</p>
                 <p className="text-sm text-muted">
                   {row.province}
@@ -212,5 +208,3 @@ function Stat({ term, value }: { term: string; value: number }) {
     </div>
   )
 }
-
-SchoolDirectory.layout = (page: ReactNode) => <PlainLayout>{page}</PlainLayout>

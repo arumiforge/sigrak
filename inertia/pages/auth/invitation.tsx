@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react'
 import { Form, Head, Link, usePage } from '@inertiajs/react'
-import AuthLayout from '~/layouts/auth_layout'
 import { TextField } from '~/components/text_field'
 import { PasswordField } from '~/components/password_field'
 import { SignOutButton } from '~/components/sign_out_button'
@@ -146,5 +144,3 @@ export default function Invitation({ invitation }: Props) {
     </>
   )
 }
-
-Invitation.layout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>
