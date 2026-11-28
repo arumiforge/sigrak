@@ -1,8 +1,8 @@
 # R1-07 — Layer model core and resolver
 
 - **Phase:** R1
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r1/r1-07-layers
 - **Depends on:** R1-01, R1-04
 - **Can run in parallel with:** R1-05, R1-06
 
