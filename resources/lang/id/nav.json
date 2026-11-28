@@ -34,7 +34,8 @@
     "schools": "Sekolah dan pengguna",
     "regions": "Wilayah",
     "system": "Sistem",
-    "team": "Tim"
+    "team": "Tim",
+    "curriculum": "Kurikulum dan konten"
   },
   "roles": {
     "principal": "Kepala sekolah",
@@ -53,6 +54,7 @@
     "settings": "Pengaturan",
     "staff": "Staf",
     "activity_log": "Log aktivitas",
-    "access": "Hak akses"
+    "access": "Hak akses",
+    "curriculum": "Kurikulum"
   }
 }

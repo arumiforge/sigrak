@@ -37,5 +37,7 @@ export default {
     school_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
     levels: { tsType: 'string[]', decorators: [{ name: '@column' }] },
     fields: { tsType: 'string[]', decorators: [{ name: '@column' }] },
+    // Curriculum console (R2-08): staff who imported into a version; CurriculumVersion converts them.
+    imported_by_ids: { tsType: 'number[]', decorators: [{ name: '@column' }] },
   },
 } satisfies SchemaRules

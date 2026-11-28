@@ -28,6 +28,10 @@ declare module '@adonisjs/inertia/types' {
     'auth/sign_up': ExtractProps<(typeof import('../../inertia/pages/auth/sign_up.tsx'))['default']>
     'console/access_matrix': ExtractProps<(typeof import('../../inertia/pages/console/access_matrix.tsx'))['default']>
     'console/activity_log': ExtractProps<(typeof import('../../inertia/pages/console/activity_log.tsx'))['default']>
+    'console/curriculum/compare': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/compare.tsx'))['default']>
+    'console/curriculum/impact': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/impact.tsx'))['default']>
+    'console/curriculum/version': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/version.tsx'))['default']>
+    'console/curriculum/versions': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/versions.tsx'))['default']>
     'console/school': ExtractProps<(typeof import('../../inertia/pages/console/school.tsx'))['default']>
     'console/schools': ExtractProps<(typeof import('../../inertia/pages/console/schools.tsx'))['default']>
     'console/settings': ExtractProps<(typeof import('../../inertia/pages/console/settings.tsx'))['default']>

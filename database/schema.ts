@@ -270,7 +270,7 @@ export class ClassSchema extends BaseModel {
 }
 
 export class CurriculumVersionSchema extends BaseModel {
-  static $columns = ['appliesFromSchoolYear', 'code', 'createdAt', 'effectiveOn', 'id', 'kind', 'meta', 'name', 'status', 'supersedesId', 'updatedAt'] as const
+  static $columns = ['appliesFromSchoolYear', 'code', 'createdAt', 'effectiveOn', 'id', 'importedByIds', 'kind', 'meta', 'name', 'publishedAt', 'publishedById', 'signOffNote', 'signedOffAt', 'signedOffById', 'signedOffFingerprint', 'status', 'supersedesId', 'updatedAt'] as const
   $columns = CurriculumVersionSchema.$columns
   @column()
   declare appliesFromSchoolYear: string | null
@@ -283,11 +283,25 @@ export class CurriculumVersionSchema extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
   @column()
+  declare importedByIds: number[]
+  @column()
   declare kind: string
   @column()
   declare meta: Record<string, unknown>
   @column()
   declare name: string
+  @column.dateTime()
+  declare publishedAt: DateTime | null
+  @column()
+  declare publishedById: number | null
+  @column()
+  declare signOffNote: string | null
+  @column.dateTime()
+  declare signedOffAt: DateTime | null
+  @column()
+  declare signedOffById: number | null
+  @column()
+  declare signedOffFingerprint: string | null
   @column()
   declare status: string
   @column()

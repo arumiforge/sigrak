@@ -6,7 +6,11 @@
 export const versionKinds = ['structure', 'cp', 'topics'] as const
 export type VersionKind = (typeof versionKinds)[number]
 
-export const versionStatuses = ['draft', 'active', 'retired'] as const
+/**
+ * draft → signed_off (validator, D-339) → active (published, D-317);
+ * a rollback sends an active version back to draft (R2-08).
+ */
+export const versionStatuses = ['draft', 'signed_off', 'active', 'retired'] as const
 export type VersionStatus = (typeof versionStatuses)[number]
 
 export const subjectKinds = ['compulsory', 'elective', 'local_content', 'cocurricular'] as const

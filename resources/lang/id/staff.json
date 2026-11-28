@@ -341,6 +341,13 @@
         "create": "Undangan dikirim",
         "resend": "Undangan dikirim ulang",
         "cancel": "Undangan dibatalkan"
+      },
+      "curriculum": {
+        "import": "Data kurikulum diimpor",
+        "signoff": "Versi kurikulum disahkan",
+        "signoff_withdraw": "Pengesahan versi kurikulum dibatalkan",
+        "publish": "Versi kurikulum diterbitkan",
+        "rollback": "Versi kurikulum dikembalikan"
       }
     }
   },
