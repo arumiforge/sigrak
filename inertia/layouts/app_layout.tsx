@@ -7,8 +7,8 @@ import { useT } from '~/lib/i18n'
 import { cn } from '~/lib/utils'
 
 const navItems: { href: string; label: string; icon: IconName }[] = [
-  { href: '/kalender', label: 'common.nav.calendar', icon: 'calendar' },
-  { href: '/coba-ai', label: 'common.nav.ai_demo', icon: 'lab' },
+  { href: '/kalender', label: 'nav.calendar', icon: 'calendar' },
+  { href: '/coba-ai', label: 'nav.ai_demo', icon: 'lab' },
 ]
 
 /**
@@ -29,14 +29,14 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         href="#isi"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-4 focus:py-2"
       >
-        {t('common.nav.skip_to_content')}
+        {t('nav.skip_to_content')}
       </a>
       <header className="border-b bg-surface">
         <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-2 sm:gap-4">
           <Link href="/kalender" className="text-lg font-bold text-brand-strong">
             {t('common.app_name')}
           </Link>
-          <nav aria-label={t('common.nav.label')} className="flex-1">
+          <nav aria-label={t('nav.label')} className="flex-1">
             <ul className="flex items-center gap-1">
               {navItems.map((item) => (
                 <li key={item.href}>

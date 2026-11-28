@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 import BaseInertiaMiddleware from '@adonisjs/inertia/inertia_middleware'
 import { areaForHost } from '#config/hosts'
-import { messagesFor } from '#middleware/translations_middleware'
+import { messagesFor, SHARED_NAMESPACES } from '#middleware/translations_middleware'
 import User from '#models/user'
 import StaffUser from '#models/staff_user'
 import ExamParticipant from '#models/exam_participant'
@@ -34,7 +34,7 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
       errors: ctx.inertia.always(this.getValidationErrors(ctx)),
       area: ctx.inertia.always(areaForHost(request?.hostname()) ?? 'app'),
       viewer: ctx.inertia.always(viewerOf(auth?.user)),
-      messages: messagesFor(locale, ['common', ...(ctx.translationNamespaces ?? [])]),
+      messages: messagesFor(locale, [...SHARED_NAMESPACES, ...(ctx.translationNamespaces ?? [])]),
     }
   }
 

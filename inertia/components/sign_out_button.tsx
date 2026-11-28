@@ -14,7 +14,7 @@ export function SignOutButton() {
       {({ processing }) => (
         <Button type="submit" variant="ghost" disabled={processing}>
           <Icon name="logout" />
-          {t('common.nav.sign_out')}
+          {t('nav.sign_out')}
         </Button>
       )}
     </Form>

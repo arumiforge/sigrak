@@ -5,27 +5,74 @@
     "admin": "Konsol Tim SIGRAK",
     "exam": "Simulasi TKA"
   },
-  "nav": {
-    "label": "Menu utama",
-    "calendar": "Kalender",
-    "home": "Ringkasan",
-    "sign_out": "Keluar",
-    "skip_to_content": "Langsung ke isi halaman",
-    "ai_demo": "Coba AI"
-  },
   "actions": {
-    "retry": "Coba lagi",
+    "save": "Simpan",
+    "save_and_continue": "Simpan dan lanjutkan",
+    "cancel": "Batal",
     "back": "Kembali",
-    "close": "Tutup"
+    "next": "Lanjut",
+    "continue": "Lanjutkan",
+    "close": "Tutup",
+    "add": "Tambah",
+    "edit": "Ubah",
+    "delete": "Hapus",
+    "download": "Unduh",
+    "download_pdf": "Unduh PDF",
+    "download_word": "Unduh Word",
+    "print": "Cetak",
+    "send": "Kirim",
+    "search": "Cari",
+    "select_all": "Pilih semua",
+    "retry": "Coba lagi",
+    "reload": "Muat ulang",
+    "understood": "Mengerti",
+    "see_details": "Lihat detail",
+    "zoom_in": "Perbesar",
+    "zoom_out": "Perkecil"
+  },
+  "status": {
+    "loading": "Memuat…",
+    "loading_data": "Memuat data…",
+    "checking": "Memeriksa…",
+    "saving": "Menyimpan…",
+    "saved": "Tersimpan",
+    "done": "Selesai"
+  },
+  "labels": {
+    "example": "Contoh",
+    "optional": "opsional",
+    "from": "Dari",
+    "until": "Sampai",
+    "number": "No.",
+    "actions": "Aksi",
+    "title": "Judul",
+    "created": "Dibuat",
+    "yes": "Ya",
+    "no": "Tidak",
+    "all_subjects": "Semua mata pelajaran",
+    "new_version": "Versi baru tersedia"
+  },
+  "semesters": {
+    "odd": "Semester 1 (Ganjil)",
+    "even": "Semester 2 (Genap)"
+  },
+  "paper_sizes": {
+    "a4": "A4 (210 × 297 mm)",
+    "f4": "F4 (215 × 330 mm)"
+  },
+  "terms": {
+    "homeroom_teacher": {
+      "sd": "Guru kelas",
+      "mi": "Wali kelas"
+    }
   },
   "empty": {
     "page": "Halaman ini sedang disiapkan.",
-    "no_role": "Anda belum punya peran aktif di sekolah mana pun. Minta operator sekolah mengirim undangan."
-  },
-  "errors": {
-    "load_failed": "Data belum berhasil dimuat. Periksa koneksi Anda, lalu coba lagi."
+    "no_role": "Anda belum punya peran aktif di sekolah mana pun. Minta operator sekolah mengirim undangan.",
+    "preview": "Pratinjau akan muncul di sini."
   },
   "toasts": {
-    "signed_out": "Anda sudah keluar."
+    "signed_out": "Anda sudah keluar.",
+    "saved": "Tersimpan."
   }
 }

@@ -5,6 +5,7 @@ import AppLayout from '~/layouts/app_layout'
 import { Button } from '~/components/ui/button'
 import { Card } from '~/components/ui/card'
 import { Icon, type IconName } from '~/components/icon'
+import { formatNumber, formatTime } from '~/lib/format'
 import { useT } from '~/lib/i18n'
 import { useChannel, type LiveStatus } from '~/lib/transmit'
 import { cn } from '~/lib/utils'
@@ -62,12 +63,6 @@ function newer(current: Generation | null, incoming: Generation | null) {
   if (incoming.id !== current.id) return incoming.id > current.id ? incoming : current
   return incoming.version >= current.version ? incoming : current
 }
-
-const clock = new Intl.DateTimeFormat('id-ID', {
-  hour: '2-digit',
-  minute: '2-digit',
-  timeZone: 'Asia/Jakarta',
-})
 
 /** crypto.randomUUID() needs a secure context; local http hosts are not one. */
 function newToken() {
@@ -235,7 +230,7 @@ function failureMessage(t: ReturnType<typeof useT>, generation: Generation) {
     case 'no_usable_key':
       return generation.availableAt
         ? t('ai_demo.failures.no_usable_key', {
-            time: clock.format(new Date(generation.availableAt)),
+            time: formatTime(generation.availableAt),
           })
         : t('ai_demo.failures.busy')
     case 'rate_limited':
@@ -385,9 +380,7 @@ function GenerationView({ generation }: { generation: Generation }) {
                     <td className="py-1 pr-3">{t(`ai_demo.outcomes.${attempt.outcome}`)}</td>
                     <td className="py-1">
                       {t('ai_demo.details.duration_value', {
-                        seconds: (attempt.latencyMs / 1000).toLocaleString('id-ID', {
-                          maximumFractionDigits: 1,
-                        }),
+                        seconds: formatNumber(Math.round(attempt.latencyMs / 100) / 10),
                       })}
                     </td>
                   </tr>
