@@ -2359,3 +2359,11 @@ Accepted · 2026-11-28 · owner's choice ("masukan https://eyd.netlify.app/ untu
 - House choices that EYD leaves open stay as decided: money in UI without decimals `Rp1.234.567` (D-469); formal documents and receipts use `Rp1.234.567,00` and the amount in words where EYD requires it; times `14.30` with "WIB" where it matters.
 - Owner-supplied material in `docs/sources/` is never corrected (CLAUDE.md).
 Reason: one spelling standard for every Indonesian text, checked automatically where possible.
+
+### D-472 — Writing choices next to EYD; local agreements carry over
+Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · refines D-471, D-165, D-466; answers open questions of `docs/drafts/eyd-rules.md` and R1-07
+- **Numeric dates** stay `25/11/2026` in the app and exports (D-165); letters and official documents write the date in full (`25 November 2026`).
+- **Terms:** "email" stays (written plainly, not in italics, in the UI); "berkas" replaces "file".
+- **Capitals in UI:** menu labels, page titles and buttons are capitalised on the first word only ("Hari ini", "Pengaturan sekolah", "Simpan perubahan"); names of SIGRAK features stay capitalised (Bank Soal, Dokumen Saya).
+- **Local agreements:** a school's chosen local agreements are copied into the new school year when it is created; the operator is notified and can stop following them.
+Reason: owner's choices.
