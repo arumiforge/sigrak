@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import ConsoleLayout from '~/layouts/console_layout'
+import { Form } from '@inertiajs/react'
+import { PageHeader } from '~/components/patterns/page_header'
 import { Section } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
@@ -19,13 +18,12 @@ export default function ConsoleSettings({ defaultTrialDays, can }: Props) {
 
   return (
     <>
-      <Head title={t('console.settings.title')} />
-      <h1 className="text-2xl font-bold">{t('console.settings.title')}</h1>
+      <PageHeader title={t('console.settings.title')} />
 
       <Section
         title={t('console.settings.trial_title')}
         description={t('console.settings.trial_intro')}
-        className="mt-6 max-w-xl"
+        className="max-w-xl"
       >
         <Form action="/pengaturan" method="post" className="space-y-3">
           {({ errors, processing }) => (
@@ -56,4 +54,3 @@ export default function ConsoleSettings({ defaultTrialDays, can }: Props) {
   )
 }
 
-ConsoleSettings.layout = (page: ReactNode) => <ConsoleLayout>{page}</ConsoleLayout>

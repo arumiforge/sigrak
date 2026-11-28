@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { Form } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
-import { LayerNav } from '~/components/layers/layer_nav'
+import { ConfirmAction } from '~/components/patterns/confirm_dialog'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
 import { SourceBadge } from '~/components/layers/source_badge'
 import { useSourceLabel, type LayerSource } from '~/components/layers/source'
 import { formatDate } from '~/lib/dates'
@@ -80,14 +80,15 @@ export default function Packages({ canEdit, region, official, agreements, notice
 
   return (
     <>
-      <Head title={t('layers.packages.title')} />
-      <LayerNav />
-      <h1 className="text-2xl font-bold">{t('layers.packages.title')}</h1>
-      <p className="mt-2 max-w-3xl text-muted">{t('layers.packages.intro')}</p>
-      <div className="mt-4 rounded-md border bg-surface p-4 text-sm">
+      <PageHeader title={t('layers.packages.title')} description={t('layers.packages.intro')} />
+      <div className="rounded-lg border bg-surface p-4 text-sm">
         <p className="font-semibold break-words">{t('layers.packages.region', { area })}</p>
         <p className="text-muted">{t('layers.packages.region_hint')}</p>
-        {!region.district && <p className="mt-2 text-warn">{t('layers.packages.no_district')}</p>}
+        {!region.district && (
+          <p className="mt-2 rounded-md border border-warn/35 bg-warn-tint p-2.5 text-text">
+            {t('layers.packages.no_district')}
+          </p>
+        )}
       </div>
 
       {notices.length > 0 && <NoticeList notices={notices} />}
@@ -97,13 +98,15 @@ export default function Packages({ canEdit, region, official, agreements, notice
           {t('layers.packages.official_title')}
         </h2>
         {official.length === 0 ? (
-          <p className="mt-2 rounded-md border bg-surface p-4 text-muted">
-            {t('layers.packages.official_empty')}
-          </p>
+          <EmptyState
+            className="mt-3"
+            icon="packages"
+            description={t('layers.packages.official_empty')}
+          />
         ) : (
           <ul className="mt-3 grid gap-3 lg:grid-cols-2">
             {official.map((pkg) => (
-              <li key={pkg.id} className="rounded-xl border bg-surface p-4">
+              <li key={pkg.id} className="rounded-lg border bg-surface p-4">
                 <PackageSummary pkg={pkg} />
                 <p className="mt-3 text-sm font-semibold text-brand-strong">
                   {t('layers.packages.always_on')}
@@ -122,13 +125,15 @@ export default function Packages({ canEdit, region, official, agreements, notice
           <p className="mt-1 text-sm text-muted">{t('layers.packages.operator_only')}</p>
         )}
         {agreements.length === 0 ? (
-          <p className="mt-2 rounded-md border bg-surface p-4 text-muted">
-            {t('layers.packages.agreement_empty')}
-          </p>
+          <EmptyState
+            className="mt-3"
+            icon="packages"
+            description={t('layers.packages.agreement_empty')}
+          />
         ) : (
           <ul className="mt-3 grid gap-3 lg:grid-cols-2">
             {agreements.map((pkg) => (
-              <li key={pkg.id} className="flex flex-col rounded-xl border bg-surface p-4">
+              <li key={pkg.id} className="flex flex-col rounded-lg border bg-surface p-4">
                 <PackageSummary pkg={pkg} />
                 {pkg.chosen && (
                   <p className="mt-3 text-sm font-semibold text-ok">
@@ -138,24 +143,28 @@ export default function Packages({ canEdit, region, official, agreements, notice
                       : ''}
                   </p>
                 )}
-                {canEdit && (
+                {canEdit && pkg.chosen && (
+                  <div className="mt-auto pt-3">
+                    <ConfirmAction
+                      action={`/paket-daerah/${pkg.id}/berhenti`}
+                      label={t('layers.packages.unfollow')}
+                      className="w-full sm:w-auto"
+                      title={t('layers.packages.unfollow_confirm_title', { package: pkg.name })}
+                      description={t('layers.packages.unfollow_confirm_body')}
+                      confirmLabel={t('layers.packages.unfollow')}
+                    />
+                  </div>
+                )}
+                {canEdit && !pkg.chosen && (
                   <Form
-                    action={`/paket-daerah/${pkg.id}/${pkg.chosen ? 'berhenti' : 'ikuti'}`}
+                    action={`/paket-daerah/${pkg.id}/ikuti`}
                     method="post"
                     options={{ preserveScroll: true }}
-                    onBefore={() =>
-                      !pkg.chosen || window.confirm(t('layers.packages.unfollow_confirm'))
-                    }
                     className="mt-auto pt-3"
                   >
                     {({ processing }) => (
-                      <Button
-                        type="submit"
-                        variant={pkg.chosen ? 'outline' : 'default'}
-                        disabled={processing}
-                        className="w-full sm:w-auto"
-                      >
-                        {t(pkg.chosen ? 'layers.packages.unfollow' : 'layers.packages.follow')}
+                      <Button type="submit" disabled={processing} className="w-full sm:w-auto">
+                        {t('layers.packages.follow')}
                       </Button>
                     )}
                   </Form>
@@ -223,7 +232,7 @@ function NoticeList({ notices }: { notices: Notice[] }) {
         {notices.map((notice) => (
           <li
             key={notice.id}
-            className="flex flex-col gap-2 rounded-md border border-info/30 bg-info/5 p-3 text-sm sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-2 rounded-md border border-info/30 bg-info-tint p-3 text-sm sm:flex-row sm:items-center sm:justify-between"
           >
             <p>
               <span className="text-muted">{formatDate(notice.createdOn)} · </span>
@@ -252,4 +261,3 @@ function NoticeList({ notices }: { notices: Notice[] }) {
   )
 }
 
-Packages.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

@@ -1,11 +1,10 @@
-import type { ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import ConsoleLayout from '~/layouts/console_layout'
+import { Form } from '@inertiajs/react'
+import { ConfirmAction } from '~/components/patterns/confirm_dialog'
+import { PageHeader } from '~/components/patterns/page_header'
 import { Section, SelectField } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { TrialForm } from '~/components/trial_form'
 import { Button } from '~/components/ui/button'
-import { Icon } from '~/components/icon'
 import { useT } from '~/lib/i18n'
 import { formatShortDate } from '~/lib/format'
 
@@ -56,23 +55,17 @@ export default function ConsoleSchool({
 
   return (
     <>
-      <Head title={school.name} />
-      <Link
-        href="/sekolah"
-        className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-brand-strong"
-      >
-        <Icon name="chevron-left" />
-        {t('console.school.back')}
-      </Link>
-      <h1 className="text-2xl font-bold">{school.name}</h1>
-      <p className="mt-1 text-muted">
-        {t(`console.levels.${school.level}`)} ·{' '}
-        {school.npsn
-          ? t('console.schools.npsn', { npsn: school.npsn })
-          : t('console.schools.no_npsn')}
-      </p>
+      <PageHeader
+        title={school.name}
+        back={{ href: '/sekolah', label: t('console.school.back') }}
+        description={`${t(`console.levels.${school.level}`)} · ${
+          school.npsn
+            ? t('console.schools.npsn', { npsn: school.npsn })
+            : t('console.schools.no_npsn')
+        }`}
+      />
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         <Section title={t('console.school.members_title')}>
           {members.length === 0 ? (
             <p className="text-muted">{t('console.school.members_empty')}</p>
@@ -168,22 +161,15 @@ export default function ConsoleSchool({
                             </Button>
                           )}
                         </Form>
-                        <Form
+                        <ConfirmAction
                           action={`${base}/undangan/${invitation.publicId}/batal`}
-                          method="post"
-                          options={{ preserveScroll: true }}
-                          onBefore={() =>
-                            window.confirm(
-                              t('accounts.teachers.cancel_confirm', { email: invitation.email })
-                            )
-                          }
-                        >
-                          {({ processing }) => (
-                            <Button type="submit" variant="ghost" size="sm" disabled={processing}>
-                              {t('accounts.teachers.cancel')}
-                            </Button>
-                          )}
-                        </Form>
+                          label={t('accounts.teachers.cancel')}
+                          variant="ghost"
+                          size="sm"
+                          title={t('accounts.teachers.cancel_confirm', { email: invitation.email })}
+                          description={t('accounts.teachers.cancel_confirm_body')}
+                          confirmLabel={t('accounts.teachers.cancel_confirm_action')}
+                        />
                       </div>
                     )}
                   </li>
@@ -220,4 +206,3 @@ export default function ConsoleSchool({
   )
 }
 
-ConsoleSchool.layout = (page: ReactNode) => <ConsoleLayout>{page}</ConsoleLayout>

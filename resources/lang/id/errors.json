@@ -20,5 +20,5 @@
   "too_many_requests": "Terlalu banyak permintaan. Tunggu sebentar, lalu coba lagi.",
   "session_expired": "Sesi Anda berakhir. Silakan masuk lagi.",
   "check_slow": "Pemeriksaan akun terlalu lama. Periksa koneksi, lalu coba lagi.",
-  "import_failed": "File belum berhasil diimpor. Pastikan file berasal dari SIGRAK dan belum diubah."
+  "import_failed": "Berkas belum berhasil diimpor. Pastikan berkas berasal dari SIGRAK dan belum diubah."
 }

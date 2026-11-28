@@ -62,12 +62,6 @@
     "open_source": "Buka sumber",
     "close": "Tutup"
   },
-  "nav": {
-    "label": "Data daerah dan sekolah",
-    "extracurricular": "Ekstrakurikuler",
-    "packages": "Paket daerah",
-    "proposals": "Usulan"
-  },
   "tabs": {
     "used": "Dipakai",
     "unused": "Tidak dipakai"
@@ -111,12 +105,12 @@
     "intro_proposer": "Ingin mengubah daftar ini? Kirim usulan, operator sekolah yang memutuskan.",
     "school_year": "Tahun ajaran {year}",
     "categories": {
-      "scouting_leadership": "Kepramukaan dan Kepemimpinan",
+      "scouting_leadership": "Kepramukaan dan kepemimpinan",
       "sports": "Olahraga",
-      "arts_culture": "Seni dan Budaya",
-      "martial_arts": "Bela Diri",
+      "arts_culture": "Seni dan budaya",
+      "martial_arts": "Bela diri",
       "health": "Kesehatan",
-      "science_technology": "Teknologi dan Sains"
+      "science_technology": "Teknologi dan sains"
     },
     "not_ready": "Katalog ekstrakurikuler sedang diperiksa Tim SIGRAK. Daftar akan muncul setelah selesai diperiksa."
   },
@@ -136,7 +130,8 @@
     "followed_by": "dipilih oleh {name}",
     "follow": "Ikuti paket",
     "unfollow": "Berhenti mengikuti",
-    "unfollow_confirm": "Berhenti mengikuti paket ini? Isinya tidak lagi dipakai mulai hari ini.",
+    "unfollow_confirm_title": "Berhenti mengikuti {package}?",
+    "unfollow_confirm_body": "Isinya tidak lagi dipakai mulai hari ini. Kepala sekolah mendapat pemberitahuan.",
     "operator_only": "Hanya operator sekolah yang bisa memilih paket. Kepala sekolah mendapat pemberitahuan setiap ada perubahan.",
     "domains": {
       "extracurricular": "Ekstrakurikuler"

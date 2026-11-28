@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { Form } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
-import { LayerNav } from '~/components/layers/layer_nav'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { controlClass } from '~/components/patterns/form_field'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip, type StatusTone } from '~/components/patterns/status_chip'
 import { formatDate } from '~/lib/dates'
 import { useT } from '~/lib/i18n'
 import { cn } from '~/lib/utils'
@@ -27,8 +28,15 @@ type Props = {
   decided: Proposal[]
 }
 
-const fieldClass =
-  'block h-11 w-full rounded-md border bg-surface px-3 text-base outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30'
+const fieldClass = cn(controlClass, 'h-11')
+
+/** Usulan statuses as chips (text plus colour, D-263). */
+const statusTone: Record<string, StatusTone> = {
+  submitted: 'info',
+  returned: 'warn',
+  approved: 'ok',
+  rejected: 'danger',
+}
 
 /**
  * Usulan (D-380): the operator decides school proposals; teachers and
@@ -39,25 +47,27 @@ export default function Proposals({ canDecide, waiting, decided }: Props) {
 
   return (
     <>
-      <Head title={t('layers.proposals.title')} />
-      <LayerNav />
-      <h1 className="text-2xl font-bold">{t('layers.proposals.title')}</h1>
-      <p className="mt-2 max-w-3xl text-muted">
-        {t(canDecide ? 'layers.proposals.intro_operator' : 'layers.proposals.intro_proposer')}
-      </p>
+      <PageHeader
+        title={t('layers.proposals.title')}
+        description={t(
+          canDecide ? 'layers.proposals.intro_operator' : 'layers.proposals.intro_proposer'
+        )}
+      />
 
-      <section aria-labelledby="waiting-title" className="mt-6">
+      <section aria-labelledby="waiting-title">
         <h2 id="waiting-title" className="text-lg font-bold">
           {t('layers.proposals.waiting_title')}
         </h2>
         {waiting.length === 0 ? (
-          <p className="mt-2 rounded-md border bg-surface p-4 text-muted">
-            {t('layers.proposals.waiting_empty')}
-          </p>
+          <EmptyState
+            className="mt-3"
+            icon="proposals"
+            description={t('layers.proposals.waiting_empty')}
+          />
         ) : (
           <ul className="mt-3 space-y-3">
             {waiting.map((proposal) => (
-              <li key={proposal.id} className="rounded-xl border bg-surface p-4">
+              <li key={proposal.id} className="rounded-lg border bg-surface p-4">
                 <Summary proposal={proposal} />
                 {canDecide && !proposal.own && <Decide proposal={proposal} />}
                 {proposal.own && (
@@ -92,7 +102,7 @@ export default function Proposals({ canDecide, waiting, decided }: Props) {
           </h2>
           <ul className="mt-3 space-y-3">
             {decided.map((proposal) => (
-              <li key={proposal.id} className="rounded-xl border bg-surface p-4">
+              <li key={proposal.id} className="rounded-lg border bg-surface p-4">
                 <Summary proposal={proposal} />
                 {proposal.decisionNote && <p className="mt-2 text-sm">{proposal.decisionNote}</p>}
               </li>
@@ -112,16 +122,9 @@ function Summary({ proposal }: { proposal: Proposal }) {
         <h3 className="font-bold break-words">
           {t(`layers.proposals.actions.${proposal.action}`, { label: proposal.label })}
         </h3>
-        <span
-          className={cn(
-            'inline-flex min-h-7 items-center rounded-full border px-2.5 text-xs font-semibold',
-            proposal.status === 'approved' && 'border-ok/30 bg-ok/10 text-ok',
-            proposal.status === 'rejected' && 'border-danger/30 bg-danger/10 text-danger',
-            proposal.status === 'submitted' && 'border-brand/30 bg-brand-tint text-brand-strong'
-          )}
-        >
+        <StatusChip tone={statusTone[proposal.status] ?? 'neutral'}>
           {t(`layers.proposals.status.${proposal.status}`)}
-        </span>
+        </StatusChip>
       </div>
       <p className="text-sm text-muted">
         {formatDate(proposal.createdOn)}
@@ -176,4 +179,3 @@ function Decide({ proposal }: { proposal: Proposal }) {
   )
 }
 
-Proposals.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

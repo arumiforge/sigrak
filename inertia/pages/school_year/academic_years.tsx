@@ -1,6 +1,9 @@
-import { useState, type ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { useState } from 'react'
+import { Form, Link } from '@inertiajs/react'
+import { ConfirmAction } from '~/components/patterns/confirm_dialog'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip } from '~/components/patterns/status_chip'
 import { Section } from '~/components/section'
 import { Button } from '~/components/ui/button'
 import { Checkbox } from '~/components/school_year/fields'
@@ -41,11 +44,9 @@ export default function AcademicYears({ years, suggestion, createCopy, levelTerm
 
   return (
     <>
-      <Head title={t('classes.years.title')} />
-      <h1 className="text-2xl font-bold">{t('classes.years.title')}</h1>
-      <p className="mt-2 text-muted">{t('classes.years.intro')}</p>
+      <PageHeader title={t('classes.years.title')} description={t('classes.years.intro')} />
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[2fr_3fr]">
+      <div className="grid gap-4 lg:grid-cols-[2fr_3fr]">
         <Section title={t('classes.years.add_title')} className="self-start">
           <Form
             action="/tahun-ajaran"
@@ -77,7 +78,7 @@ export default function AcademicYears({ years, suggestion, createCopy, levelTerm
 
         <Section title={t('classes.years.list_title')}>
           {years.length === 0 ? (
-            <p className="text-muted">{t('classes.years.empty')}</p>
+            <EmptyState compact icon="school-years" description={t('classes.years.empty')} />
           ) : (
             <ul className="divide-y">
               {years.map((year) => (
@@ -99,16 +100,8 @@ function YearRow({ year, levelTerms }: { year: Year; levelTerms: Props['levelTer
         <div className="min-w-0 flex-1">
           <p className="flex flex-wrap items-center gap-2">
             <span className="text-lg font-bold">{year.name}</span>
-            {year.isCurrent && (
-              <span className="rounded-full bg-brand-tint px-2 py-0.5 text-xs font-semibold text-brand-strong">
-                {t('classes.years.current')}
-              </span>
-            )}
-            {year.closed && (
-              <span className="rounded-full border px-2 py-0.5 text-xs font-semibold text-muted">
-                {t('classes.years.closed')}
-              </span>
-            )}
+            {year.isCurrent && <StatusChip tone="brand">{t('classes.years.current')}</StatusChip>}
+            {year.closed && <StatusChip>{t('classes.years.closed')}</StatusChip>}
           </p>
           <p className="text-sm text-muted">
             {t('classes.years.dates', {
@@ -134,28 +127,23 @@ function YearRow({ year, levelTerms }: { year: Year; levelTerms: Props['levelTer
               <Link href={`/tahun-ajaran/${year.publicId}/ubah`}>{t('common.actions.edit')}</Link>
             </Button>
             {year.classCount === 0 && (
-              <Form
+              <ConfirmAction
                 action={`/tahun-ajaran/${year.publicId}/hapus`}
-                method="post"
-                options={{ preserveScroll: true }}
-                onBefore={() =>
-                  window.confirm(t('classes.years.delete_confirm', { year: year.name }))
-                }
-              >
-                {({ processing }) => (
-                  <Button type="submit" variant="ghost" size="sm" disabled={processing}>
-                    {t('common.actions.delete')}
-                  </Button>
-                )}
-              </Form>
+                label={t('common.actions.delete')}
+                variant="ghost"
+                size="sm"
+                title={t('classes.years.delete_confirm', { year: year.name })}
+                description={t('classes.years.delete_confirm_body')}
+                confirmLabel={t('classes.years.delete_action')}
+              />
             )}
           </div>
         )}
       </div>
 
       {year.copy && (
-        <details className="rounded-md border p-3">
-          <summary className="cursor-pointer text-sm font-semibold text-brand-strong">
+        <details className="rounded-md border bg-page/50 p-3">
+          <summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold text-brand-strong">
             {t('classes.copy.from_year', { year: year.copy.sourceName })}
           </summary>
           <Form
@@ -178,4 +166,3 @@ function YearRow({ year, levelTerms }: { year: Year; levelTerms: Props['levelTer
   )
 }
 
-AcademicYears.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import PlainLayout from '~/layouts/plain_layout'
+import { Form } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
-import { RegionNav, useRegionLabel, type RegionRef } from '~/components/regions/region_nav'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
+import { useRegionLabel, type RegionRef } from '~/components/regions/region_nav'
 import { formatDate } from '~/lib/dates'
 import { useT } from '~/lib/i18n'
 
@@ -39,19 +39,18 @@ export default function RegionChanges({ dates, pending, scheduled, decided }: Pr
 
   return (
     <>
-      <Head title={t('regions.changes.title')} />
-      <RegionNav />
-      <h1 className="text-2xl font-bold">{t('regions.changes.title')}</h1>
-      <p className="mt-2 text-muted">{t('regions.changes.intro')}</p>
+      <PageHeader title={t('regions.changes.title')} description={t('regions.changes.intro')} />
 
-      <section aria-labelledby="changes-pending" className="mt-6">
+      <section aria-labelledby="changes-pending">
         <h2 id="changes-pending" className="text-lg font-bold">
           {t('regions.changes.pending_title')}
         </h2>
         {pending.length === 0 ? (
-          <p className="mt-2 rounded-md border bg-surface p-4 text-muted">
-            {t('regions.changes.pending_empty')}
-          </p>
+          <EmptyState
+            className="mt-3"
+            icon="region"
+            description={t('regions.changes.pending_empty')}
+          />
         ) : (
           <>
             <p className="mt-1 text-sm text-muted">
@@ -62,7 +61,7 @@ export default function RegionChanges({ dates, pending, scheduled, decided }: Pr
             </p>
             <ul className="mt-3 space-y-3">
               {pending.map((change) => (
-                <li key={change.id} className="rounded-xl border bg-surface p-4">
+                <li key={change.id} className="rounded-lg border bg-surface p-4">
                   <ChangeSummary change={change} />
                   <Decision change={change} />
                 </li>
@@ -79,7 +78,7 @@ export default function RegionChanges({ dates, pending, scheduled, decided }: Pr
           </h2>
           <ul className="mt-3 space-y-3">
             {scheduled.map((change) => (
-              <li key={change.id} className="rounded-xl border bg-surface p-4">
+              <li key={change.id} className="rounded-lg border bg-surface p-4">
                 <ChangeSummary change={change} />
                 <p className="mt-3 text-sm font-semibold text-brand-strong">
                   {t('regions.changes.effective_on', { date: formatDate(change.effectiveOn!) })}
@@ -102,7 +101,7 @@ export default function RegionChanges({ dates, pending, scheduled, decided }: Pr
           </h2>
           <ul className="mt-3 space-y-3">
             {decided.map((change) => (
-              <li key={change.id} className="rounded-xl border bg-surface p-4">
+              <li key={change.id} className="rounded-lg border bg-surface p-4">
                 <ChangeSummary change={change} />
                 <p className="mt-3 text-sm font-semibold">
                   {change.status === 'rejected'
@@ -235,4 +234,3 @@ function Decision({ change }: { change: Change }) {
   )
 }
 
-RegionChanges.layout = (page: ReactNode) => <PlainLayout>{page}</PlainLayout>

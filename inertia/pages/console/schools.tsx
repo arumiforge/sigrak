@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import ConsoleLayout from '~/layouts/console_layout'
+import { Form, Link } from '@inertiajs/react'
+import { PageHeader } from '~/components/patterns/page_header'
+import { EmptyState } from '~/components/patterns/empty_state'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
 import { Icon } from '~/components/icon'
@@ -26,11 +26,9 @@ export default function ConsoleSchools({ q, schools }: Props) {
 
   return (
     <>
-      <Head title={t('console.schools.title')} />
-      <h1 className="text-2xl font-bold">{t('console.schools.title')}</h1>
-      <p className="mt-2 text-muted">{t('console.schools.intro')}</p>
+      <PageHeader title={t('console.schools.title')} description={t('console.schools.intro')} />
 
-      <Form action="/sekolah" method="get" className="mt-4 flex max-w-xl items-end gap-2">
+      <Form action="/sekolah" method="get" className="flex max-w-xl items-end gap-2">
         <div className="flex-1">
           <TextField
             label={t('console.schools.search_label')}
@@ -47,14 +45,15 @@ export default function ConsoleSchools({ q, schools }: Props) {
       </Form>
 
       {schools.length === 0 ? (
-        <p className="mt-6 text-muted">{t('console.schools.empty')}</p>
+        <EmptyState className="mt-6" icon="school" description={t('console.schools.empty')} />
       ) : (
-        <ul className="mt-6 divide-y rounded-xl border bg-surface">
+        <ul className="mt-6 divide-y rounded-lg border bg-surface">
           {schools.map((school) => (
             <li key={school.id}>
               <Link
                 href={`/sekolah/${school.id}`}
-                className="flex flex-wrap items-center justify-between gap-2 p-4 hover:bg-brand-tint"
+                prefetch
+                className="flex min-h-11 flex-wrap items-center justify-between gap-2 p-4 first:rounded-t-lg last:rounded-b-lg hover:bg-brand-tint"
               >
                 <span className="min-w-0">
                   <span className="block font-semibold">{school.name}</span>
@@ -80,4 +79,3 @@ export default function ConsoleSchools({ q, schools }: Props) {
   )
 }
 
-ConsoleSchools.layout = (page: ReactNode) => <ConsoleLayout>{page}</ConsoleLayout>

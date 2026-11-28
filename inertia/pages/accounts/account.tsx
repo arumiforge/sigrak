@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { Form, Link } from '@inertiajs/react'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip } from '~/components/patterns/status_chip'
 import { Section } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { PasswordField } from '~/components/password_field'
@@ -8,7 +8,6 @@ import { Button } from '~/components/ui/button'
 import { Icon } from '~/components/icon'
 import { useT } from '~/lib/i18n'
 import { formatShortDate } from '~/lib/format'
-import { cn } from '~/lib/utils'
 
 type Role = 'principal' | 'operator' | 'teacher'
 
@@ -33,10 +32,9 @@ export default function Account({ profile, memberships, trial }: Props) {
 
   return (
     <>
-      <Head title={t('accounts.account.title')} />
-      <h1 className="text-2xl font-bold">{t('accounts.account.title')}</h1>
+      <PageHeader title={t('accounts.account.title')} />
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         <Section title={t('accounts.account.profile_title')}>
           <Form
             action="/akun"
@@ -129,9 +127,7 @@ export default function Account({ profile, memberships, trial }: Props) {
                         <span className="text-muted"> · {membership.schoolName}</span>
                       </span>
                       {membership.active && (
-                        <span className="rounded-full bg-brand-tint px-2 py-0.5 text-xs font-semibold text-brand-strong">
-                          {t('accounts.account.active_role')}
-                        </span>
+                        <StatusChip tone="brand">{t('accounts.account.active_role')}</StatusChip>
                       )}
                     </li>
                   ))}
@@ -149,7 +145,7 @@ export default function Account({ profile, memberships, trial }: Props) {
           </Section>
         </div>
 
-        <Section title={t('accounts.account.password_title')} className={cn('lg:col-span-1')}>
+        <Section title={t('accounts.account.password_title')}>
           <Form
             action="/akun/kata-sandi"
             method="post"
@@ -202,4 +198,3 @@ export default function Account({ profile, memberships, trial }: Props) {
   )
 }
 
-Account.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

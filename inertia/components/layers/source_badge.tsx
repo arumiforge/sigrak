@@ -1,24 +1,12 @@
-import { useState, useSyncExternalStore } from 'react'
+import { useState } from 'react'
 import { Dialog, Popover } from 'radix-ui'
 import { Icon } from '~/components/icon'
+import { statusToneClass } from '~/components/patterns/status_chip'
+import { useIsDesktop } from '~/lib/media'
 import { formatDate } from '~/lib/dates'
 import { useT } from '~/lib/i18n'
 import { cn } from '~/lib/utils'
 import { useSourceLabel, type LayerSource } from './source'
-
-const DESKTOP = '(min-width: 640px)'
-
-function useIsDesktop() {
-  return useSyncExternalStore(
-    (notify) => {
-      const query = window.matchMedia(DESKTOP)
-      query.addEventListener('change', notify)
-      return () => query.removeEventListener('change', notify)
-    },
-    () => window.matchMedia(DESKTOP).matches,
-    () => true
-  )
-}
 
 const chip =
   'inline-flex min-h-7 items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-semibold leading-tight'
@@ -42,14 +30,14 @@ export function SourceBadge({ source, className }: { source: LayerSource; classN
       aria-label={t('layers.badge.open_origin', { label })}
       className={cn(
         chip,
-        'min-h-11 max-w-full cursor-pointer text-left whitespace-normal hover:bg-accent focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none sm:min-h-7',
+        'min-h-11 max-w-full cursor-pointer text-left whitespace-normal hover:border-brand focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none sm:min-h-7',
         source.layer === 'school'
-          ? 'border-line bg-surface text-text'
+          ? 'border-line-strong/50 bg-surface text-text'
           : source.packageKind === 'local_agreement'
-            ? 'border-warn/40 bg-warn/10 text-text'
+            ? 'border-warn/35 bg-warn-tint text-text'
             : source.layer === 'national'
               ? 'border-line bg-page text-muted'
-              : 'border-brand/30 bg-brand-tint text-brand-strong'
+              : statusToneClass.brand
       )}
     >
       <Icon name="info" size={14} />
@@ -67,7 +55,7 @@ export function SourceBadge({ source, className }: { source: LayerSource; classN
               align="start"
               sideOffset={6}
               collisionPadding={16}
-              className="z-50 w-80 rounded-xl border bg-surface p-4 text-sm shadow-lg"
+              className="z-50 w-80 rounded-lg border bg-surface p-4 text-sm shadow-float"
             >
               <OriginDetails source={source} label={label} titleAs="p" />
               <Popover.Close asChild>
@@ -85,8 +73,8 @@ export function SourceBadge({ source, className }: { source: LayerSource; classN
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
           <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/40" />
-            <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 max-h-[85dvh] overflow-y-auto rounded-t-2xl border-t bg-surface p-4 pb-6 text-sm shadow-xl">
+            <Dialog.Overlay className="fixed inset-0 z-50 bg-overlay" />
+            <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 max-h-[85dvh] overflow-y-auto rounded-t-2xl border-t bg-surface p-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-sm shadow-float">
               <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-line" aria-hidden />
               <Dialog.Description className="sr-only">{label}</Dialog.Description>
               <OriginDetails source={source} label={label} titleAs="dialog" />
@@ -103,12 +91,12 @@ export function SourceBadge({ source, className }: { source: LayerSource; classN
         </Dialog.Root>
       )}
       {source.force === 'mandatory' && (
-        <span className={cn(chip, 'border-danger/30 bg-danger/10 text-danger')}>
+        <span className={cn(chip, statusToneClass.danger)}>
           {t('layers.badge.mandatory')}
         </span>
       )}
       {source.line !== 'all' && (
-        <span className={cn(chip, 'border-line bg-surface text-muted')}>
+        <span className={cn(chip, statusToneClass.neutral)}>
           {t(`layers.lines.${source.line}`)}
         </span>
       )}

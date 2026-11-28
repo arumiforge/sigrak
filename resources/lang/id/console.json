@@ -1,13 +1,6 @@
 {
-  "nav": {
-    "label": "Menu konsol",
-    "home": "Ringkasan",
-    "schools": "Sekolah",
-    "users": "Pengguna",
-    "settings": "Pengaturan"
-  },
   "home": {
-    "intro": "Kelola sekolah, anggota, undangan, dan masa uji coba dari menu di atas."
+    "intro": "Kelola sekolah, anggota, undangan, dan masa uji coba lewat menu."
   },
   "levels": {
     "sd": "SD",

@@ -1,9 +1,12 @@
-import { useState, type ReactNode } from 'react'
-import { Form, Head } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { useState } from 'react'
+import { Form, router } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
 import { TextField } from '~/components/text_field'
-import { LayerNav } from '~/components/layers/layer_nav'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { controlClass } from '~/components/patterns/form_field'
+import { PageHeader } from '~/components/patterns/page_header'
+import { StatusChip } from '~/components/patterns/status_chip'
+import { clearFlashUndo, postWithUndo, queueFlashUndo } from '~/components/patterns/undo'
 import { SourceBadge } from '~/components/layers/source_badge'
 import { useSourceLabel, type LayerOwner, type LayerSource } from '~/components/layers/source'
 import { useT } from '~/lib/i18n'
@@ -36,8 +39,7 @@ type Props = {
   hidden: HiddenItem[]
 }
 
-const fieldClass =
-  'block h-11 w-full rounded-md border bg-surface px-3 text-base outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30'
+const fieldClass = cn(controlClass, 'h-11')
 
 /**
  * Ekstrakurikuler (R1-07 proof domain of the layer model): "Dipakai" and
@@ -51,38 +53,31 @@ export default function Extracurriculars(props: Props) {
 
   return (
     <>
-      <Head title={t('layers.extracurricular.title')} />
-      <LayerNav />
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h1 className="text-2xl font-bold">{t('layers.extracurricular.title')}</h1>
-        <p className="text-sm text-muted">
-          {t('layers.extracurricular.school_year', { year: props.schoolYear })}
-        </p>
-      </div>
-      <p className="mt-2 max-w-3xl text-muted">{t('layers.extracurricular.intro')}</p>
-      {props.canPropose && (
-        <p className="mt-1 max-w-3xl text-sm text-muted">
-          {t('layers.extracurricular.intro_proposer')}
-        </p>
-      )}
+      <PageHeader
+        title={t('layers.extracurricular.title')}
+        meta={t('layers.extracurricular.school_year', { year: props.schoolYear })}
+        description={t('layers.extracurricular.intro')}
+      >
+        {props.canPropose && (
+          <p className="mt-1 max-w-3xl text-sm text-muted">
+            {t('layers.extracurricular.intro_proposer')}
+          </p>
+        )}
+      </PageHeader>
 
       {!props.ready && (
-        <p className="mt-4 rounded-md border border-warn/40 bg-warn/10 p-4">
+        <p className="mb-4 rounded-md border border-warn/35 bg-warn-tint p-4">
           {t('layers.extracurricular.not_ready')}
         </p>
       )}
 
       {props.groups.map((group) => (
-        <p key={group.key} className="mt-4 rounded-md bg-brand-tint p-3 text-sm text-brand-strong">
+        <p key={group.key} className="mb-4 rounded-md bg-brand-tint p-3 text-sm text-brand-strong">
           {t('layers.list.group_note', { min: group.min, group: group.label })}
         </p>
       ))}
 
-      <div
-        role="tablist"
-        aria-label={t('layers.extracurricular.title')}
-        className="mt-6 flex gap-2"
-      >
+      <div role="tablist" aria-label={t('layers.extracurricular.title')} className="flex gap-2">
         {(['used', 'unused'] as const).map((name) => {
           const count = name === 'used' ? props.items.length : props.hidden.length
           return (
@@ -96,7 +91,7 @@ export default function Extracurriculars(props: Props) {
                 'inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-semibold whitespace-nowrap',
                 tab === name
                   ? 'border-brand bg-brand-tint text-brand-strong'
-                  : 'bg-surface text-muted'
+                  : 'bg-surface text-muted hover:text-text'
               )}
             >
               {t(`layers.tabs.${name}`)}
@@ -108,9 +103,10 @@ export default function Extracurriculars(props: Props) {
 
       <div role="tabpanel" className="mt-4">
         {list.length === 0 ? (
-          <p className="rounded-md border bg-surface p-4 text-muted">
-            {t(tab === 'used' ? 'layers.list.empty_used' : 'layers.list.empty_unused')}
-          </p>
+          <EmptyState
+            icon="extracurricular"
+            description={t(tab === 'used' ? 'layers.list.empty_used' : 'layers.list.empty_unused')}
+          />
         ) : (
           <ul className="grid gap-3 lg:grid-cols-2">
             {list.map((item) => (
@@ -139,7 +135,7 @@ function ItemCard({
   const mandatory = item.source.force === 'mandatory'
 
   return (
-    <article className="flex h-full flex-col rounded-xl border bg-surface p-4">
+    <article className="flex h-full flex-col rounded-lg border bg-surface p-4">
       <h3 className="font-bold break-words">{item.label}</h3>
       {item.category && (
         <p className="text-sm text-muted">
@@ -149,9 +145,7 @@ function ItemCard({
       <div className="mt-2 flex flex-wrap gap-1.5">
         <SourceBadge source={item.source} />
         {item.offeredByDefault && !hidden && (
-          <span className="inline-flex min-h-7 items-center rounded-full border border-ok/30 bg-ok/10 px-2.5 text-xs font-semibold text-ok">
-            {t('layers.list.offered_by_default')}
-          </span>
+          <StatusChip tone="ok">{t('layers.list.offered_by_default')}</StatusChip>
         )}
       </div>
       {item.description && <p className="mt-2 text-sm">{item.description}</p>}
@@ -188,22 +182,26 @@ function OperatorActions({ item, hidden }: { item: Item; hidden: boolean }) {
   const t = useT()
   if (hidden) {
     return (
-      <Form
-        action={`/ekstrakurikuler/${item.key}/pakai-lagi`}
-        method="post"
-        options={{ preserveScroll: true }}
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full sm:w-auto"
+        onClick={() =>
+          postWithUndo({
+            url: `/ekstrakurikuler/${item.key}/pakai-lagi`,
+            optimistic: (props) => {
+              const page = props as unknown as Pick<Props, 'items' | 'hidden'>
+              return {
+                hidden: page.hidden.filter((row) => row.key !== item.key),
+                items: [...page.items, item],
+              }
+            },
+            undo: { url: `/ekstrakurikuler/${item.key}/sembunyikan` },
+          })
+        }
       >
-        {({ processing }) => (
-          <Button
-            type="submit"
-            variant="outline"
-            disabled={processing}
-            className="w-full sm:w-auto"
-          >
-            {t('layers.list.unhide')}
-          </Button>
-        )}
-      </Form>
+        {t('layers.list.unhide')}
+      </Button>
     )
   }
   if (item.own) {
@@ -236,6 +234,13 @@ function OperatorActions({ item, hidden }: { item: Item; hidden: boolean }) {
         action={`/ekstrakurikuler/${item.key}/sembunyikan`}
         method="post"
         options={{ preserveScroll: true }}
+        onStart={() =>
+          queueFlashUndo({
+            run: () =>
+              router.post(`/ekstrakurikuler/${item.key}/pakai-lagi`, {}, { preserveScroll: true }),
+          })
+        }
+        onError={clearFlashUndo}
         className="mt-2 flex flex-col gap-2"
       >
         {({ processing }) => (
@@ -288,7 +293,7 @@ function ProposeAction({ item, hidden }: { item: Item; hidden: boolean }) {
 function AddForm({ canEdit, categories }: Props) {
   const t = useT()
   return (
-    <section aria-labelledby="add-title" className="mt-8 rounded-xl border bg-surface p-4 sm:p-6">
+    <section aria-labelledby="add-title" className="mt-8 rounded-lg border bg-surface p-4 sm:p-6">
       <h2 id="add-title" className="text-lg font-bold">
         {t(canEdit ? 'layers.add.title_operator' : 'layers.add.title_proposer')}
       </h2>
@@ -329,7 +334,12 @@ function AddForm({ canEdit, categories }: Props) {
               />
             </div>
             <label className="flex min-h-11 items-start gap-3 sm:col-span-2">
-              <input type="checkbox" name="scouting" value="true" className="mt-1 size-5" />
+              <input
+                type="checkbox"
+                name="scouting"
+                value="true"
+                className="mt-1 size-5 shrink-0 accent-brand"
+              />
               <span>
                 <span className="block font-semibold">{t('layers.add.scouting')}</span>
                 <span className="block text-sm text-muted">{t('layers.add.scouting_hint')}</span>
@@ -352,4 +362,3 @@ function AddForm({ canEdit, categories }: Props) {
   )
 }
 
-Extracurriculars.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>

@@ -9,13 +9,8 @@
     "sd": "SD",
     "mi": "MI"
   },
-  "nav": {
-    "label": "Menu wilayah",
-    "directory": "Direktori Sekolah",
-    "changes": "Perubahan Wilayah"
-  },
   "directory": {
-    "title": "Direktori Sekolah",
+    "title": "Direktori sekolah",
     "intro": "Data SD dan MI dari laman referensi Kemendikdasmen. Ketik NPSN untuk melihat isian formulir sekolah.",
     "search_label": "NPSN",
     "search_hint": "8 angka, misalnya 20317288.",
@@ -52,7 +47,7 @@
     "empty": "Direktori masih kosong. Jalankan impor direktori sekolah lebih dulu."
   },
   "changes": {
-    "title": "Perubahan Wilayah",
+    "title": "Perubahan wilayah",
     "intro": "Wilayah sekolah di direktori NPSN berbeda dengan data sekolah. Wilayah sekolah tidak berubah sebelum Anda memutuskan.",
     "pending_title": "Menunggu keputusan",
     "pending_empty": "Tidak ada perubahan wilayah yang menunggu.",

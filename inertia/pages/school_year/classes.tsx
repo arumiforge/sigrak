@@ -1,6 +1,7 @@
-import { useState, type ReactNode } from 'react'
-import { Form, Head, Link } from '@inertiajs/react'
-import AppLayout from '~/layouts/app_layout'
+import { useState } from 'react'
+import { Form, Link } from '@inertiajs/react'
+import { EmptyState } from '~/components/patterns/empty_state'
+import { PageHeader } from '~/components/patterns/page_header'
 import { Section } from '~/components/section'
 import { TextField } from '~/components/text_field'
 import { Button } from '~/components/ui/button'
@@ -44,31 +45,34 @@ export default function Classes(props: Props) {
 
   return (
     <>
-      <Head title={t('classes.classes.title')} />
-      <h1 className="text-2xl font-bold">{t('classes.classes.title')}</h1>
-      <p className="mt-2 text-muted">{t('classes.classes.intro')}</p>
+      <PageHeader title={t('classes.classes.title')} description={t('classes.classes.intro')} />
 
       {year === null ? (
-        <Section title={t('classes.classes.no_year_title')} className="mt-6 max-w-xl">
-          <p className="text-muted">{t('classes.classes.no_year')}</p>
-          <Button asChild className="mt-4">
-            <Link href="/tahun-ajaran">{t('classes.classes.to_years')}</Link>
-          </Button>
-        </Section>
+        <EmptyState
+          icon="school-years"
+          title={t('classes.classes.no_year_title')}
+          description={t('classes.classes.no_year')}
+          action={
+            <Button asChild>
+              <Link href="/tahun-ajaran">{t('classes.classes.to_years')}</Link>
+            </Button>
+          }
+        />
       ) : (
         <>
-          <nav aria-label={t('classes.classes.year_picker')} className="mt-4 overflow-x-auto">
-            <ul className="flex gap-2">
+          <nav aria-label={t('classes.classes.year_picker')} className="-mx-4 overflow-x-auto px-4">
+            <ul className="flex gap-2 pb-1">
               {years.map((row) => (
                 <li key={row.publicId}>
                   <Link
                     href={`/kelas?tahun=${row.publicId}`}
+                    prefetch
                     aria-current={row.publicId === year.publicId ? 'page' : undefined}
                     className={cn(
                       'inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold whitespace-nowrap',
                       row.publicId === year.publicId
                         ? 'border-brand bg-brand-tint text-brand-strong'
-                        : 'text-muted hover:text-text'
+                        : 'bg-surface text-muted hover:text-text'
                     )}
                   >
                     {row.isCurrent
@@ -161,7 +165,7 @@ function ClassesOfYear({
 
       <Section title={t('classes.classes.list_title', { year: year.name })}>
         {classes.length === 0 ? (
-          <p className="text-muted">{t('classes.classes.empty')}</p>
+          <EmptyState compact icon="classes" description={t('classes.classes.empty')} />
         ) : (
           <div className="space-y-5">
             {grades.map((gradeNo) => (
@@ -176,7 +180,8 @@ function ClassesOfYear({
                       <li key={row.publicId}>
                         <Link
                           href={`/kelas/${row.publicId}`}
-                          className="block rounded-lg border p-3 hover:border-brand"
+                          prefetch
+                          className="block min-h-11 rounded-lg border bg-surface p-3 transition-colors hover:border-brand hover:bg-brand-tint/40"
                           data-testid="class-card"
                         >
                           <p className="font-bold">{row.name}</p>
@@ -205,4 +210,3 @@ function ClassesOfYear({
   )
 }
 
-Classes.layout = (page: ReactNode) => <AppLayout>{page}</AppLayout>
