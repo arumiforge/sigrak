@@ -1,8 +1,8 @@
 # R1-08 — Calendar on the layer model
 
 - **Phase:** R1
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r1/r1-08-calendar
 - **Depends on:** R1-06, R1-07
 - **Can run in parallel with:** R1-09
 
