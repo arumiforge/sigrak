@@ -1,4 +1,5 @@
-import { useId, type InputHTMLAttributes, type ReactNode } from 'react'
+import type { InputHTMLAttributes, ReactNode } from 'react'
+import { FormField, controlClass } from '~/components/patterns/form_field'
 import { cn } from '~/lib/utils'
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -10,47 +11,25 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 }
 
 /**
- * A labelled input with its hint and error under it (Fondasi ui.md,
- * feedback.md tier 3): never placeholder-only, aria-invalid plus
- * aria-describedby when there is an error.
+ * A labelled input with its hint and error under it (FormField): never
+ * placeholder-only, aria-invalid plus aria-describedby when there is an
+ * error.
  */
 export function TextField({ label, error, hint, trailing, className, ...props }: TextFieldProps) {
-  const id = useId()
-  const hintId = `${id}-hint`
-  const errorId = `${id}-error`
-  const describedBy = [hint ? hintId : null, error ? errorId : null].filter(Boolean).join(' ')
-
   return (
-    <div className="space-y-1.5">
-      <label htmlFor={id} className="block text-sm font-semibold">
-        {label}
-      </label>
-      <div className="relative">
-        <input
-          id={id}
-          aria-invalid={error ? true : undefined}
-          aria-describedby={describedBy || undefined}
-          className={cn(
-            'block h-11 w-full rounded-md border bg-surface px-3 text-base text-text outline-none',
-            'focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30',
-            error && 'border-danger',
-            trailing ? 'pr-12' : null,
-            className
+    <FormField label={label} hint={hint} error={error}>
+      {(field) => (
+        <div className="relative">
+          <input
+            {...field}
+            className={cn(controlClass, 'h-11', trailing ? 'pr-12' : null, className)}
+            {...props}
+          />
+          {trailing && (
+            <div className="absolute inset-y-0 right-0 flex items-center">{trailing}</div>
           )}
-          {...props}
-        />
-        {trailing && <div className="absolute inset-y-0 right-0 flex items-center">{trailing}</div>}
-      </div>
-      {hint && (
-        <p id={hintId} className="text-xs text-muted">
-          {hint}
-        </p>
+        </div>
       )}
-      {error && (
-        <p id={errorId} className="text-sm text-danger">
-          {error}
-        </p>
-      )}
-    </div>
+    </FormField>
   )
 }

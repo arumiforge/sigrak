@@ -1,18 +1,12 @@
 import { useId, useState, type ReactNode } from 'react'
+import { FormField, controlClass } from '~/components/patterns/form_field'
 import { useT } from '~/lib/i18n'
-import { cn } from '~/lib/utils'
 
 /**
  * Form parts of the Tahun Ajaran and Kelas pages (R1-06).
  */
 
 export type Option = { value: string; label: string }
-
-const controlClass = cn(
-  'block h-11 w-full rounded-md border bg-surface px-3 text-base text-text outline-none',
-  'focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30',
-  'disabled:opacity-60'
-)
 
 /** A labelled native select with hint and error. */
 export function Select({
@@ -38,43 +32,26 @@ export function Select({
   disabled?: boolean
   srOnlyLabel?: boolean
 }) {
-  const id = useId()
-  const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-error` : null]
-    .filter(Boolean)
-    .join(' ')
   return (
-    <div className="space-y-1.5">
-      <label htmlFor={id} className={cn('block text-sm font-semibold', srOnlyLabel && 'sr-only')}>
-        {label}
-      </label>
-      <select
-        id={id}
-        name={name}
-        value={value}
-        defaultValue={value === undefined ? defaultValue : undefined}
-        disabled={disabled}
-        aria-invalid={error ? true : undefined}
-        aria-describedby={describedBy || undefined}
-        onChange={(event) => onChange?.(event.target.value)}
-        className={cn(controlClass, error && 'border-danger')}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-      {hint && (
-        <p id={`${id}-hint`} className="text-xs text-muted">
-          {hint}
-        </p>
+    <FormField label={label} hint={hint} error={error} srOnlyLabel={srOnlyLabel}>
+      {(field) => (
+        <select
+          {...field}
+          name={name}
+          value={value}
+          defaultValue={value === undefined ? defaultValue : undefined}
+          disabled={disabled}
+          onChange={(event) => onChange?.(event.target.value)}
+          className={controlClass}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       )}
-      {error && (
-        <p id={`${id}-error`} className="text-sm text-danger">
-          {error}
-        </p>
-      )}
-    </div>
+    </FormField>
   )
 }
 
@@ -94,20 +71,25 @@ export function Checkbox({
 }) {
   const id = useId()
   return (
-    <div className="flex gap-3">
+    <div className="flex min-h-11 gap-3">
       <input
         id={id}
         type="checkbox"
         name={name}
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
+        aria-describedby={hint ? `${id}-hint` : undefined}
         className="mt-0.5 size-5 shrink-0 accent-brand"
       />
       <div>
         <label htmlFor={id} className="text-sm font-semibold">
           {label}
         </label>
-        {hint && <p className="text-xs text-muted">{hint}</p>}
+        {hint && (
+          <p id={`${id}-hint`} className="text-xs text-muted">
+            {hint}
+          </p>
+        )}
       </div>
     </div>
   )

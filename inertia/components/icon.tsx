@@ -1,102 +1,204 @@
 import type { SVGProps } from 'react'
 import { cn } from '~/lib/utils'
 
-/**
- * The one place icons come from. SIGRAK uses Hugeicons Pro (D-402); the
- * owner uploads the licensed files later. Until then every name renders
- * a neutral placeholder glyph of the right size, so swapping in the real
- * set changes only this file.
+/*
+ * Hugeicons Pro under the owner's licence (D-402, D-434). Only the files
+ * named here are bundled: each is a static `?raw` import, so the other
+ * ~7,300 licensed SVGs never reach the build. Rounded Stroke is the
+ * default style; Rounded Solid is for active and selected states only
+ * (bottom nav, sidebar). Components never import the SVG files; they
+ * use <Icon name="…" />.
  */
-export const iconNames = [
-  'calendar',
-  'chevron-left',
-  'chevron-right',
-  'list',
-  'grid',
-  'logout',
-  'success',
-  'error',
-  'info',
-  'warning',
-  'loading',
-  'close',
-  'eye',
-  'eye-off',
-  'lab',
-  'user',
-  'users',
-  'mail',
-  'school',
-  'settings',
-  'switch',
-  'search',
-] as const
+import calendarSvg from '~/icons/hugeicons/rounded-stroke/date-and-time/calendar-03.svg?raw'
+import timetableSvg from '~/icons/hugeicons/rounded-stroke/date-and-time/time-schedule.svg?raw'
+import schoolYearsSvg from '~/icons/hugeicons/rounded-stroke/date-and-time/calendar-04.svg?raw'
+import todaySvg from '~/icons/hugeicons/rounded-stroke/home/home-01.svg?raw'
+import homeSvg from '~/icons/hugeicons/rounded-stroke/dashboard/dashboard-square-01.svg?raw'
+import chevronLeftSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-left-01-round.svg?raw'
+import chevronRightSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-right-01-round.svg?raw'
+import chevronDownSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-down-01-round.svg?raw'
+import menuSvg from '~/icons/hugeicons/rounded-stroke/more-menu/menu-01.svg?raw'
+import moreSvg from '~/icons/hugeicons/rounded-stroke/more-menu/more-horizontal.svg?raw'
+import listSvg from '~/icons/hugeicons/rounded-stroke/edit-formatting/check-list.svg?raw'
+import gridSvg from '~/icons/hugeicons/rounded-stroke/dashboard/dashboard-square-02.svg?raw'
+import logoutSvg from '~/icons/hugeicons/rounded-stroke/login-logout/logout-03.svg?raw'
+import successSvg from '~/icons/hugeicons/rounded-stroke/check-validation/checkmark-circle-02.svg?raw'
+import errorSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/alert-circle.svg?raw'
+import infoSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/information-circle.svg?raw'
+import warningSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/alert-02.svg?raw'
+import loadingSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/circle-arrow-reload-01-round.svg?raw'
+import closeSvg from '~/icons/hugeicons/rounded-stroke/add-remove-delete/cancel-01.svg?raw'
+import eyeSvg from '~/icons/hugeicons/rounded-stroke/edit-formatting/view.svg?raw'
+import eyeOffSvg from '~/icons/hugeicons/rounded-stroke/edit-formatting/view-off.svg?raw'
+import labSvg from '~/icons/hugeicons/rounded-stroke/science-technology/test-tube.svg?raw'
+import userSvg from '~/icons/hugeicons/rounded-stroke/users/user.svg?raw'
+import usersSvg from '~/icons/hugeicons/rounded-stroke/users/user-group.svg?raw'
+import teachersSvg from '~/icons/hugeicons/rounded-stroke/users/user-multiple.svg?raw'
+import mailSvg from '~/icons/hugeicons/rounded-stroke/communications/mail-01.svg?raw'
+import schoolSvg from '~/icons/hugeicons/rounded-stroke/education/school.svg?raw'
+import classesSvg from '~/icons/hugeicons/rounded-stroke/education/desk.svg?raw'
+import settingsSvg from '~/icons/hugeicons/rounded-stroke/settings/setting-01.svg?raw'
+import switchSvg from '~/icons/hugeicons/rounded-stroke/users/user-switch.svg?raw'
+import searchSvg from '~/icons/hugeicons/rounded-stroke/search/search.svg?raw'
+import extracurricularSvg from '~/icons/hugeicons/rounded-stroke/award-reward/medal-01.svg?raw'
+import packagesSvg from '~/icons/hugeicons/rounded-stroke/location-map/maps-location-01.svg?raw'
+import proposalsSvg from '~/icons/hugeicons/rounded-stroke/note-task/note-edit.svg?raw'
+import directorySvg from '~/icons/hugeicons/rounded-stroke/education/library.svg?raw'
+import regionSvg from '~/icons/hugeicons/rounded-stroke/location-map/location-01.svg?raw'
+import addSvg from '~/icons/hugeicons/rounded-stroke/add-remove-delete/add-01.svg?raw'
+import deleteSvg from '~/icons/hugeicons/rounded-stroke/add-remove-delete/delete-02.svg?raw'
+import undoSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-turn-backward-round.svg?raw'
+import inboxSvg from '~/icons/hugeicons/rounded-stroke/communications/inbox.svg?raw'
+import checkSvg from '~/icons/hugeicons/rounded-stroke/check-validation/tick-02.svg?raw'
+import calendarSolidSvg from '~/icons/hugeicons/rounded-solid/date-and-time/calendar-03.svg?raw'
+import timetableSolidSvg from '~/icons/hugeicons/rounded-solid/date-and-time/time-schedule.svg?raw'
+import schoolYearsSolidSvg from '~/icons/hugeicons/rounded-solid/date-and-time/calendar-04.svg?raw'
+import todaySolidSvg from '~/icons/hugeicons/rounded-solid/home/home-01.svg?raw'
+import homeSolidSvg from '~/icons/hugeicons/rounded-solid/dashboard/dashboard-square-01.svg?raw'
+import listSolidSvg from '~/icons/hugeicons/rounded-solid/edit-formatting/check-list.svg?raw'
+import gridSolidSvg from '~/icons/hugeicons/rounded-solid/dashboard/dashboard-square-02.svg?raw'
+import labSolidSvg from '~/icons/hugeicons/rounded-solid/science-technology/test-tube.svg?raw'
+import userSolidSvg from '~/icons/hugeicons/rounded-solid/users/user.svg?raw'
+import usersSolidSvg from '~/icons/hugeicons/rounded-solid/users/user-group.svg?raw'
+import teachersSolidSvg from '~/icons/hugeicons/rounded-solid/users/user-multiple.svg?raw'
+import schoolSolidSvg from '~/icons/hugeicons/rounded-solid/education/school.svg?raw'
+import classesSolidSvg from '~/icons/hugeicons/rounded-solid/education/desk.svg?raw'
+import settingsSolidSvg from '~/icons/hugeicons/rounded-solid/settings/setting-01.svg?raw'
+import extracurricularSolidSvg from '~/icons/hugeicons/rounded-solid/award-reward/medal-01.svg?raw'
+import packagesSolidSvg from '~/icons/hugeicons/rounded-solid/location-map/maps-location-01.svg?raw'
+import proposalsSolidSvg from '~/icons/hugeicons/rounded-solid/note-task/note-edit.svg?raw'
+import directorySolidSvg from '~/icons/hugeicons/rounded-solid/education/library.svg?raw'
+import regionSolidSvg from '~/icons/hugeicons/rounded-solid/location-map/location-01.svg?raw'
 
-export type IconName = (typeof iconNames)[number]
+/** SIGRAK icon names → Rounded Stroke file. */
+const strokeIcons = {
+  'calendar': calendarSvg,
+  'timetable': timetableSvg,
+  'school-years': schoolYearsSvg,
+  'today': todaySvg,
+  'home': homeSvg,
+  'chevron-left': chevronLeftSvg,
+  'chevron-right': chevronRightSvg,
+  'chevron-down': chevronDownSvg,
+  'menu': menuSvg,
+  'more': moreSvg,
+  'list': listSvg,
+  'grid': gridSvg,
+  'logout': logoutSvg,
+  'success': successSvg,
+  'error': errorSvg,
+  'info': infoSvg,
+  'warning': warningSvg,
+  'loading': loadingSvg,
+  'close': closeSvg,
+  'eye': eyeSvg,
+  'eye-off': eyeOffSvg,
+  'lab': labSvg,
+  'user': userSvg,
+  'users': usersSvg,
+  'teachers': teachersSvg,
+  'mail': mailSvg,
+  'school': schoolSvg,
+  'classes': classesSvg,
+  'settings': settingsSvg,
+  'switch': switchSvg,
+  'search': searchSvg,
+  'extracurricular': extracurricularSvg,
+  'packages': packagesSvg,
+  'proposals': proposalsSvg,
+  'directory': directorySvg,
+  'region': regionSvg,
+  'add': addSvg,
+  'delete': deleteSvg,
+  'undo': undoSvg,
+  'inbox': inboxSvg,
+  'check': checkSvg,
+} as const
 
-type IconProps = Omit<SVGProps<SVGSVGElement>, 'name'> & {
+export type IconName = keyof typeof strokeIcons
+
+export const iconNames = Object.keys(strokeIcons) as IconName[]
+
+/** Rounded Solid twins, for the icons that can mark an active item. */
+const solidIcons: Partial<Record<IconName, string>> = {
+  'calendar': calendarSolidSvg,
+  'timetable': timetableSolidSvg,
+  'school-years': schoolYearsSolidSvg,
+  'today': todaySolidSvg,
+  'home': homeSolidSvg,
+  'list': listSolidSvg,
+  'grid': gridSolidSvg,
+  'lab': labSolidSvg,
+  'user': userSolidSvg,
+  'users': usersSolidSvg,
+  'teachers': teachersSolidSvg,
+  'school': schoolSolidSvg,
+  'classes': classesSolidSvg,
+  'settings': settingsSolidSvg,
+  'extracurricular': extracurricularSolidSvg,
+  'packages': packagesSolidSvg,
+  'proposals': proposalsSolidSvg,
+  'directory': directorySolidSvg,
+  'region': regionSolidSvg,
+}
+
+type ParsedIcon = { viewBox: string; body: string }
+
+const parsed = new Map<string, ParsedIcon>()
+
+/**
+ * The licensed files draw in #141B34; the colour becomes currentColor
+ * so icons follow the text colour and the dark theme.
+ */
+function parse(raw: string): ParsedIcon {
+  const cached = parsed.get(raw)
+  if (cached) return cached
+  const viewBox = /viewBox="([^"]+)"/.exec(raw)?.[1] ?? '0 0 24 24'
+  const body = raw
+    .replace(/^[\s\S]*?<svg[^>]*>/, '')
+    .replace(/<\/svg>\s*$/, '')
+    .replace(/#141B34/gi, 'currentColor')
+    .trim()
+  const icon = { viewBox, body }
+  parsed.set(raw, icon)
+  return icon
+}
+
+type IconProps = Omit<SVGProps<SVGSVGElement>, 'name' | 'dangerouslySetInnerHTML'> & {
   name: IconName
   /** Pixel size; 20 by default, 24 in the bottom nav (design system). */
   size?: number
+  /** Rounded Solid, for an active or selected item (D-434). */
+  active?: boolean
   /** Accessible label. Without it the icon is decorative (aria-hidden). */
   label?: string
 }
 
-/**
- * Placeholder shapes: simple strokes that hint at the meaning, drawn in
- * currentColor at a 1.5 px stroke.
- */
-const placeholderPaths: Partial<Record<IconName, string>> = {
-  'chevron-left': 'M14 6l-6 6 6 6',
-  'chevron-right': 'M10 6l6 6-6 6',
-  'close': 'M6 6l12 12M18 6L6 18',
-  'list': 'M5 7h14M5 12h14M5 17h14',
-  'grid': 'M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z',
-  'calendar': 'M5 6h14v13H5zM5 10h14M9 4v4M15 4v4',
-  'success': 'M7 12.5l3 3 7-7',
-  'error': 'M12 7v6M12 16.5v.5',
-  'warning': 'M12 8v5M12 16.5v.5',
-  'info': 'M12 11v6M12 7.5v.5',
-  'lab': 'M9.5 4h5M10.5 4v5.5L6 18.5h12l-4.5-9V4M8 14.5h8',
-  'user': 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM5 20a7 7 0 0 1 14 0',
-  'users':
-    'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 19a6 6 0 0 1 12 0M16 4.5a3.5 3.5 0 0 1 0 6.5M18 13.5a6 6 0 0 1 3 5.5',
-  'mail': 'M4 6h16v12H4zM4 7l8 6 8-6',
-  'school': 'M3 9l9-5 9 5-9 5zM7 11.5V16c0 1.5 2.2 3 5 3s5-1.5 5-3v-4.5',
-  'settings':
-    'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1',
-  'switch': 'M7 7h12l-3-3M17 17H5l3 3',
-  'search': 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM16 16l4 4',
-}
-
-export function Icon({ name, size = 20, label, className, ...props }: IconProps) {
-  const path = placeholderPaths[name]
+export function Icon({ name, size = 20, active = false, label, className, ...props }: IconProps) {
+  const raw = (active ? solidIcons[name] : undefined) ?? strokeIcons[name]
+  const { viewBox, body } = parse(raw)
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
+      viewBox={viewBox}
       fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
       role={label ? 'img' : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}
       focusable="false"
       data-icon={name}
-      className={cn('shrink-0', name === 'loading' && 'animate-spin', className)}
-      {...props}
-    >
-      {path ? (
-        <path d={path} />
-      ) : name === 'loading' ? (
-        <path d="M12 4a8 8 0 1 0 8 8" />
-      ) : (
-        <circle cx="12" cy="12" r="7" />
+      data-active={active || undefined}
+      className={cn(
+        'shrink-0',
+        name === 'loading' && 'animate-spin motion-reduce:animate-none',
+        className
       )}
-    </svg>
+      // The SVG bodies are the licensed files checked at import (no
+      // scripts, handlers or links); see inertia/icons/hugeicons/README.md.
+      dangerouslySetInnerHTML={{ __html: body }}
+      {...props}
+    />
   )
 }

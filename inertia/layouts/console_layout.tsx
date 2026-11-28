@@ -1,59 +1,78 @@
-import type { ReactNode } from 'react'
-import { Link, usePage } from '@inertiajs/react'
+import { useState, type ReactNode } from 'react'
+import { usePage } from '@inertiajs/react'
 import FlashToasts from '~/components/flash_toasts'
-import { SignOutButton } from '~/components/sign_out_button'
-import { Icon, type IconName } from '~/components/icon'
+import { Icon } from '~/components/icon'
+import { AccountMenu } from '~/components/shell/account_menu'
+import { SidebarNav, SkipLink, Wordmark } from '~/components/shell/shell_parts'
+import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from '~/components/ui/drawer'
 import { useT } from '~/lib/i18n'
-import { cn } from '~/lib/utils'
-
-const navItems: { href: string; label: string; icon: IconName }[] = [
-  { href: '/sekolah', label: 'console.nav.schools', icon: 'school' },
-  { href: '/pengguna', label: 'console.nav.users', icon: 'users' },
-  { href: '/pengaturan', label: 'console.nav.settings', icon: 'settings' },
-]
+import { consoleNav } from '~/lib/navigation'
 
 /**
  * Persistent shell of the staff console on admin. (laptop first, still
- * usable on a phone).
+ * usable on a phone): the sidebar from 1024 px; below it a menu button
+ * opens the same list as a bottom sheet. The console may have its own
+ * look but keeps the brand colour (design system, Stack mapping).
  */
 export default function ConsoleLayout({ children }: { children: ReactNode }) {
   const t = useT()
+  const [menuOpen, setMenuOpen] = useState(false)
   const {
     props: { viewer },
     url,
   } = usePage()
+  const items = consoleNav()
 
   return (
-    <div className="min-h-dvh">
-      <header className="border-b bg-surface">
-        <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-2 sm:gap-4">
-          <Link href="/" className="hidden text-lg font-bold text-brand-strong md:inline">
-            {t('common.areas.admin')}
-          </Link>
-          <nav aria-label={t('console.nav.label')} className="min-w-0 flex-1 overflow-x-auto">
-            <ul className="flex items-center gap-1">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={url.startsWith(item.href) ? 'page' : undefined}
-                    className={cn(
-                      'inline-flex min-h-11 items-center gap-2 rounded-md px-2 text-sm font-semibold whitespace-nowrap text-muted hover:text-text sm:px-3',
-                      url.startsWith(item.href) && 'bg-brand-tint text-brand-strong'
-                    )}
-                  >
-                    <Icon name={item.icon} className="hidden sm:block" />
-                    {t(item.label)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          {viewer && <span className="hidden text-sm text-muted lg:inline">{viewer.name}</span>}
-          <SignOutButton />
-        </div>
-      </header>
-      <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
+    <div className="min-h-dvh lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)]">
+      <SkipLink />
+      <aside className="sticky top-0 hidden h-dvh flex-col gap-6 overflow-y-auto border-r bg-surface px-3 py-3 lg:flex">
+        <Wordmark href="/" label={t('common.areas.admin')} className="px-3" />
+        <SidebarNav items={items} url={url} label={t('nav.console.label')} />
+      </aside>
+
+      <div className="flex min-w-0 flex-col">
+        <header className="sticky top-0 z-30 border-b bg-surface">
+          <div className="mx-auto flex h-[var(--header-height)] max-w-6xl items-center gap-1 px-2 sm:px-4 lg:px-6">
+            <button
+              type="button"
+              aria-label={t('nav.open_menu')}
+              aria-haspopup="dialog"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen(true)}
+              className="inline-flex size-11 items-center justify-center rounded-md text-text hover:bg-surface-hover lg:hidden"
+            >
+              <Icon name="menu" />
+            </button>
+            <Wordmark href="/" label={t('common.areas.admin')} className="lg:hidden" />
+            <div className="flex-1" />
+            {viewer && <AccountMenu name={viewer.name} />}
+          </div>
+        </header>
+        <main
+          id="isi"
+          tabIndex={-1}
+          data-page-content
+          className="mx-auto w-full max-w-6xl flex-1 px-4 pt-5 pb-12 outline-none sm:pt-6 lg:px-6"
+        >
+          {children}
+        </main>
+      </div>
+
+      <Drawer open={menuOpen} onOpenChange={setMenuOpen}>
+        <DrawerContent>
+          <DrawerTitle className="px-3 pb-1">{t('nav.console.label')}</DrawerTitle>
+          <DrawerDescription className="sr-only">{t('common.areas.admin')}</DrawerDescription>
+          <div className="pt-2">
+            <SidebarNav
+              items={items}
+              url={url}
+              label={t('nav.console.label')}
+              onNavigate={() => setMenuOpen(false)}
+            />
+          </div>
+        </DrawerContent>
+      </Drawer>
       <FlashToasts />
     </div>
   )

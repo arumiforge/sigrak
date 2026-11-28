@@ -1,24 +1,40 @@
 import { useId, type ReactNode } from 'react'
+import { FormField, controlClass } from '~/components/patterns/form_field'
 import { cn } from '~/lib/utils'
 
 /**
- * A titled block on a page (a card on wide screens, flat on phones).
+ * A titled block on a page: a card with a 1 px line and 10 px radius
+ * (design system), its heading wired to the section for screen readers.
  */
 export function Section({
   title,
   description,
+  actions,
   children,
   className,
 }: {
   title: string
   description?: ReactNode
+  /** Small actions on the right of the heading. */
+  actions?: ReactNode
   children: ReactNode
   className?: string
 }) {
+  const id = useId()
   return (
-    <section className={cn('rounded-xl border bg-surface p-4 sm:p-6', className)}>
-      <h2 className="text-lg font-bold">{title}</h2>
-      {description && <p className="mt-1 text-sm text-muted">{description}</p>}
+    <section
+      aria-labelledby={`${id}-title`}
+      className={cn('min-w-0 rounded-lg border bg-surface p-4 sm:p-6', className)}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h2 id={`${id}-title`} className="text-lg font-bold">
+            {title}
+          </h2>
+          {description && <p className="mt-1 text-sm text-muted">{description}</p>}
+        </div>
+        {actions}
+      </div>
       <div className="mt-4">{children}</div>
     </section>
   )
@@ -42,36 +58,23 @@ export function SelectField({
   error?: string
   onChange?: (value: string) => void
 }) {
-  const id = useId()
   return (
-    <div className="space-y-1.5">
-      <label htmlFor={id} className="block text-sm font-semibold">
-        {label}
-      </label>
-      <select
-        id={id}
-        name={name}
-        defaultValue={defaultValue}
-        aria-invalid={error ? true : undefined}
-        aria-describedby={error ? `${id}-error` : undefined}
-        onChange={(event) => onChange?.(event.target.value)}
-        className={cn(
-          'block h-11 w-full rounded-md border bg-surface px-3 text-base text-text outline-none',
-          'focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30',
-          error && 'border-danger'
-        )}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-      {error && (
-        <p id={`${id}-error`} className="text-sm text-danger">
-          {error}
-        </p>
+    <FormField label={label} error={error}>
+      {(field) => (
+        <select
+          {...field}
+          name={name}
+          defaultValue={defaultValue}
+          onChange={(event) => onChange?.(event.target.value)}
+          className={controlClass}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       )}
-    </div>
+    </FormField>
   )
 }
