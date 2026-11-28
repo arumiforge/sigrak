@@ -2367,3 +2367,8 @@ Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · refines D-471
 - **Capitals in UI:** menu labels, page titles and buttons are capitalised on the first word only ("Hari ini", "Pengaturan sekolah", "Simpan perubahan"); names of SIGRAK features stay capitalised (Bank Soal, Dokumen Saya).
 - **Local agreements:** a school's chosen local agreements are copied into the new school year when it is created; the operator is notified and can stop following them.
 Reason: owner's choices.
+
+### D-473 — R1 gets a UI shell task (R1-12)
+Accepted · 2026-11-28 · owner's choice ("ya, tambahkan R1-12 kerangka UI") · extends D-468; follows D-389, D-390, D-402, D-434
+R1 adds R1-12: one UI shell for every page (persistent layouts and navigation per area, bottom navigation on phones and sidebar on desktop, Hugeicons Pro mapping, design tokens from the design system, shared patterns, the SPA behaviour of D-389), with the R1 pages moved onto it. It runs after R1-08 and R1-09 merge, next to R1-11; R5 builds on the same patterns. The logo stays out of scope until the owner picks one (RS-16, D-462).
+Reason: the R1 tasks built working pages but no shared shell; doing it once in R1 keeps later pages consistent.

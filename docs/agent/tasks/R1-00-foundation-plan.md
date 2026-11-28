@@ -24,20 +24,21 @@ Build the foundation every later phase uses, fresh on the phase R stack (D-411):
 | 3 | R1-08 | Calendar on the layer model | R1-06, R1-07 |
 | 3 | R1-09 | Timetable and draft generator | R1-06 |
 | 4 | R1-11 | Load re-measure with a real page and RLS (D-467) | R1-08 |
+| 4 | R1-12 | UI shell: layouts, navigation, icons, tokens, SPA feel (D-473) | R1-08, R1-09 |
 
 Product rules for the old build's equivalent tasks are in `P5-03-foundation.md` (history only: rules and defaults apply, class names and paths do not).
 
 ## Rules for parallel work (D-442, D-468)
 
 - Module code under `app/<module>/` (for example `app/tenancy/`, `app/curriculum/`); each task adds its routes in its own file `start/routes/<module>.ts`, imported from `start/routes.ts` with one line.
-- Migration timestamp blocks: R1-01 `17643000xxxxx`, R1-03 `17643100xxxxx`, R1-04 `17643200xxxxx`, R1-05 `17643300xxxxx`, R1-06 `17643400xxxxx`, R1-07 `17643500xxxxx`, R1-08 `17643600xxxxx`, R1-09 `17643700xxxxx`, R1-10 `17643800xxxxx`.
+- Migration timestamp blocks: R1-01 `17643000xxxxx`, R1-03 `17643100xxxxx`, R1-04 `17643200xxxxx`, R1-05 `17643300xxxxx`, R1-06 `17643400xxxxx`, R1-07 `17643500xxxxx`, R1-08 `17643600xxxxx`, R1-09 `17643700xxxxx`, R1-10 `17643800xxxxx`, follow-ups `17643900xxxxx`/`17644000xxxxx`, R1-12 `17644100xxxxx`.
 - Tests side by side: `DB_DATABASE=sigrak_test_<task>` (for example `sigrak_test_r101`) and distinct `REDIS_QUEUE_DB`/`REDIS_AI_DB` numbers; CI keeps `sigrak_test`.
 - Lang files are per module (`resources/lang/id/<module>.json`); R1-02 owns the shared ones (`common`, `validation`, `errors`, `nav`).
 - Every school-owned table: `school_id`, RLS policy, IDOR test (school A never reads school B).
 
 ## Done when
 
-- [ ] R1-01…R1-11 done and merged; CI green
+- [ ] R1-01…R1-12 done and merged; CI green
 - [ ] Owner sees the foundation on staging or in screenshots at 360 and 1280 px
 
 ## Result
