@@ -1157,6 +1157,101 @@ export class TeachingAssignmentSchema extends BaseModel {
   declare updatedAt: DateTime
 }
 
+export class TimetableDraftSchema extends BaseModel {
+  static $columns = ['academicYearId', 'classIds', 'createdAt', 'createdById', 'error', 'id', 'input', 'publicId', 'result', 'savedAt', 'schoolId', 'seed', 'status', 'updatedAt'] as const
+  $columns = TimetableDraftSchema.$columns
+  @column()
+  declare academicYearId: number
+  @column()
+  declare classIds: any
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare createdById: number | null
+  @column()
+  declare error: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare input: any | null
+  @column()
+  declare publicId: string
+  @column()
+  declare result: any | null
+  @column.dateTime()
+  declare savedAt: DateTime | null
+  @column()
+  declare schoolId: number
+  @column()
+  declare seed: number
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class TimetableSettingSchema extends BaseModel {
+  static $columns = ['breaks', 'createdAt', 'days', 'id', 'prefCoreEarly', 'prefMaxConsecutive', 'prefNoSplitBreak', 'prefPjokMorning', 'prefSpreadWeek', 'schoolId', 'updatedAt'] as const
+  $columns = TimetableSettingSchema.$columns
+  @column()
+  declare breaks: any
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare days: any
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare prefCoreEarly: boolean
+  @column()
+  declare prefMaxConsecutive: boolean
+  @column()
+  declare prefNoSplitBreak: boolean
+  @column()
+  declare prefPjokMorning: boolean
+  @column()
+  declare prefSpreadWeek: boolean
+  @column()
+  declare schoolId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class TimetableSlotSchema extends BaseModel {
+  static $columns = ['classId', 'createdAt', 'endsAt', 'id', 'isLocked', 'jp', 'kind', 'label', 'periodNo', 'publicId', 'schoolId', 'startsAt', 'subjectId', 'updatedAt', 'weekday'] as const
+  $columns = TimetableSlotSchema.$columns
+  @column()
+  declare classId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare endsAt: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isLocked: boolean
+  @column()
+  declare jp: number
+  @column()
+  declare kind: string
+  @column()
+  declare label: string | null
+  @column()
+  declare periodNo: number
+  @column()
+  declare publicId: string
+  @column()
+  declare schoolId: number
+  @column()
+  declare startsAt: string
+  @column()
+  declare subjectId: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare weekday: number
+}
+
 export class TopicSchema extends BaseModel {
   static $columns = ['artBranch', 'atpCode', 'code', 'cpSummary', 'cpText', 'createdAt', 'curationNotes', 'curriculumVersionId', 'elementCodes', 'elements', 'extras', 'grade', 'id', 'jpPerWeek', 'jpTotal', 'orderInSemester', 'outsideCp', 'phase', 'references', 'semester', 'subjectId', 'title', 'updatedAt', 'weekEnd', 'weekStart', 'weeklyDistribution'] as const
   $columns = TopicSchema.$columns

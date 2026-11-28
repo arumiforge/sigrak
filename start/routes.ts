@@ -21,6 +21,7 @@ import '#start/routes/auth'
 import '#start/routes/console'
 import '#start/routes/layers'
 import '#start/routes/school_year'
+import '#start/routes/timetable'
 
 const CalendarController = () => import('#controllers/school/calendar_controller')
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')

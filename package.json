@@ -42,6 +42,7 @@
     "#accounts/*": "./app/accounts/*.js",
     "#layers/*": "./app/layers/*.js",
     "#school_year/*": "./app/school_year/*.js",
+    "#timetable/*": "./app/timetable/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",

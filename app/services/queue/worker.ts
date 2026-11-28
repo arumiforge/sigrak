@@ -69,14 +69,24 @@ async function processExportJob(job: Job, token?: string, signal?: AbortSignal) 
 }
 
 /**
- * Runs one `default` job (mail and other small background work).
+ * Runs one `default` job (mail and other small background work). A job
+ * whose CPU pool work (the draft timetable, R1-09) is cut off by
+ * shutdown goes back to the queue, as on `exports`.
  */
-async function processDefaultJob(job: Job) {
+async function processDefaultJob(job: Job, token?: string, signal?: AbortSignal) {
   const handler = defaultJobFor(job.name)
   if (!handler) {
     throw new Error(`No default handler for job "${job.name}"`)
   }
-  return handler.handle(job)
+  try {
+    return await handler.handle(job, signal)
+  } catch (error) {
+    if (error instanceof CpuPoolClosedError || error instanceof CpuTaskInterruptedError) {
+      await job.moveToWait(token)
+      throw new WaitingError()
+    }
+    throw error
+  }
 }
 
 /**
@@ -147,7 +157,9 @@ export async function startWorker(
         // then are cut off and their jobs return to the queue (D-451).
         await Promise.all([
           worker.close(),
-          name === 'exports' ? closeCpuPool(graceMs) : Promise.resolve(),
+          // `default` starts the pool on its first draft timetable; closing
+          // a pool that never started does nothing.
+          name === 'exports' || name === 'default' ? closeCpuPool(graceMs) : Promise.resolve(),
         ])
       } finally {
         clearTimeout(timer)

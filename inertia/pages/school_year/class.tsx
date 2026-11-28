@@ -71,6 +71,11 @@ export default function ClassPage({
         {t('classes.class.subtitle', { grade: schoolClass.grade, year: year.name })}
       </p>
       {readOnly && <p className="mt-2 text-sm text-warn">{t('classes.years.closed_note')}</p>}
+      <Button asChild variant="outline" className="mt-4">
+        <Link href={`/kelas/${schoolClass.publicId}/jadwal`}>
+          {t('classes.class.timetable_link')}
+        </Link>
+      </Button>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[2fr_3fr]">
         <div className="space-y-4 self-start">
