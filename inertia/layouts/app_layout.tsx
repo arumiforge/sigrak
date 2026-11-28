@@ -7,7 +7,13 @@ import { Icon, type IconName } from '~/components/icon'
 import { useT } from '~/lib/i18n'
 import { cn } from '~/lib/utils'
 
-type NavItem = { href: string; label: string; icon: IconName; operatorOnly?: boolean }
+type NavItem = {
+  href: string
+  label: string
+  icon: IconName
+  operatorOnly?: boolean
+  teacherOnly?: boolean
+}
 
 const navItems: NavItem[] = [
   { href: '/kalender', label: 'nav.calendar', icon: 'calendar' },
@@ -15,6 +21,8 @@ const navItems: NavItem[] = [
   { href: '/guru', label: 'nav.teachers', icon: 'users', operatorOnly: true },
   { href: '/tahun-ajaran', label: 'nav.school_years', icon: 'list', operatorOnly: true },
   { href: '/kelas', label: 'nav.classes', icon: 'school', operatorOnly: true },
+  { href: '/jadwal', label: 'nav.timetable', icon: 'grid', operatorOnly: true },
+  { href: '/kelas-saya/jadwal', label: 'nav.my_timetable', icon: 'grid', teacherOnly: true },
 ]
 
 /**
@@ -29,7 +37,10 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     props: { viewer, role },
     url,
   } = usePage()
-  const items = navItems.filter((item) => !item.operatorOnly || role === 'operator')
+  const items = navItems.filter(
+    (item) =>
+      (!item.operatorOnly || role === 'operator') && (!item.teacherOnly || role === 'teacher')
+  )
 
   return (
     <div className="min-h-dvh">

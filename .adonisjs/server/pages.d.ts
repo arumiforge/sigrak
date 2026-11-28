@@ -40,5 +40,10 @@ declare module '@adonisjs/inertia/types' {
     'school/layers/extracurriculars': ExtractProps<(typeof import('../../inertia/pages/school/layers/extracurriculars.tsx'))['default']>
     'school/layers/packages': ExtractProps<(typeof import('../../inertia/pages/school/layers/packages.tsx'))['default']>
     'school/layers/proposals': ExtractProps<(typeof import('../../inertia/pages/school/layers/proposals.tsx'))['default']>
+    'timetable/class': ExtractProps<(typeof import('../../inertia/pages/timetable/class.tsx'))['default']>
+    'timetable/compose': ExtractProps<(typeof import('../../inertia/pages/timetable/compose.tsx'))['default']>
+    'timetable/draft': ExtractProps<(typeof import('../../inertia/pages/timetable/draft.tsx'))['default']>
+    'timetable/index': ExtractProps<(typeof import('../../inertia/pages/timetable/index.tsx'))['default']>
+    'timetable/mine': ExtractProps<(typeof import('../../inertia/pages/timetable/mine.tsx'))['default']>
   }
 }

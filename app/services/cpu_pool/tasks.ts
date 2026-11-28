@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import { threadId } from 'node:worker_threads'
+import { generateDraft, type GeneratorInput } from '../../timetable/draft_generator.js'
 
 /**
  * Functions that run inside a CPU pool thread. Each takes one plain,
@@ -11,6 +12,11 @@ import { threadId } from 'node:worker_threads'
  * leger) is added here by the tasks that build it (D-463).
  */
 export const cpuTasks = {
+  /** Draft timetable (D-262, R1-09): the pure, seeded generator. */
+  timetableDraft(payload: GeneratorInput) {
+    return generateDraft(payload)
+  },
+
   /**
    * Sample CPU job for `worker-exports`: hashes the seed `rounds` times.
    * Stands in for an export build until the real ones exist.
