@@ -9,7 +9,7 @@ import db from '@adonisjs/lucid/services/db'
 import Invitation from '#models/invitation'
 import type School from '#models/school'
 import type SchoolMembership from '#models/school_membership'
-import { PASSWORD, login, visit } from '#tests/helpers'
+import { PASSWORD, login, setStaffRoles, visit, type TestScope } from '#tests/helpers'
 import { createMember } from '#tests/tenancy'
 
 /**
@@ -106,13 +106,13 @@ export async function inertiaPage(client: ApiClient, session: Session, path: str
 
 let counter = 0
 
-export async function createStaffWithRole(role: StaffRole) {
-  return StaffUser.create({
+export async function createStaffWithRole(role: StaffRole, scope: TestScope = {}) {
+  const staff = await StaffUser.create({
     name: `Staf ${role}`,
     email: `staf-${role}-${Date.now().toString(36)}${(counter++).toString(36)}@uji.test`,
     password: PASSWORD,
-    role,
   })
+  return setStaffRoles(staff, [role], scope)
 }
 
 /** The user of a new membership in `school` (owner connection). */

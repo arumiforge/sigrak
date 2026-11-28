@@ -9,15 +9,16 @@ import {
   mailInvitation,
   resendInvitation,
 } from '#accounts/invitations'
-import { changeSchoolTrial } from '#accounts/console'
+import { logStaffActivity } from '#accounts/activity_log'
+import { authorizeTrialChange, changeSchoolTrial, TRIAL_EXTEND_MAX_DAYS } from '#accounts/console'
 import {
   AlreadyMemberError,
   InvitationUnavailableError,
   PrincipalTakenError,
 } from '#accounts/errors'
-import { backWithFieldError, staffUser } from '#accounts/http'
+import { backWithFieldError } from '#accounts/http'
 import { defaultTrialDays } from '#accounts/settings'
-import { authorizeStaff, staffCan } from '#accounts/staff_access'
+import { applySchoolScope, authorizeStaff, schoolScopeOf, withinScope } from '#staff/access'
 import { staffReadTransaction, staffTransaction } from '#tenancy/tenant_transaction'
 import { staffInviteValidator, trialChangeValidator } from '#validators/accounts'
 
@@ -25,14 +26,17 @@ const searchValidator = vine.create({ q: vine.string().trim().maxLength(100).opt
 
 /**
  * Konsol: schools, their members and invitations, and the school's
- * trial (D-182, D-459, D-469). After the role check, the view pages read
- * school-owned rows as read-only staff (`staffReadTransaction`, SET
- * LOCAL ROLE sigrak_staff_readonly); only changes, which need an
- * admin, run as full staff (`staffTransaction`).
+ * trial (D-182, D-459, D-469). Abilities: `schools.view` (list and
+ * profile, limited to the staff member's area, D-338), `invitations.
+ * manage`, `trials.manage` or `trials.extend` (app/staff/powers.ts).
+ * After the check, the view pages read school-owned rows as read-only
+ * staff (`staffReadTransaction`, SET LOCAL ROLE sigrak_staff_readonly);
+ * only changes run as full staff (`staffTransaction`).
  */
 export default class SchoolsController {
   async index(ctx: HttpContext) {
-    authorizeStaff(staffUser(ctx), 'schools.view')
+    const staff = await authorizeStaff(ctx, 'schools.view')
+    const scope = schoolScopeOf(staff, 'schools.view')
     const { q } = await searchValidator.validate(ctx.request.qs())
 
     const schools = await staffReadTransaction(async (trx) => {
@@ -46,6 +50,7 @@ export default class SchoolsController {
         )
         .orderBy('s.name', 'asc')
         .limit(100)
+      applySchoolScope(query, scope, 's')
       if (q) {
         query.where((where) => {
           where.whereILike('s.name', `%${q}%`).orWhere('s.npsn', q)
@@ -77,9 +82,8 @@ export default class SchoolsController {
   }
 
   async show(ctx: HttpContext) {
-    const staff = staffUser(ctx)
-    authorizeStaff(staff, 'schools.view')
     const schoolId = Number(ctx.params.school)
+    const staff = await authorizeStaff(ctx, 'schools.view', schoolId)
 
     const data = await staffReadTransaction(async (trx) => {
       const school = await School.findOrFail(schoolId, { client: trx })
@@ -106,6 +110,7 @@ export default class SchoolsController {
         trialExtendedUntil: data.school.trialExtendedUntil?.toISO() ?? null,
       },
       defaultTrialDays: await defaultTrialDays(),
+      trialExtendMaxDays: TRIAL_EXTEND_MAX_DAYS,
       members: data.members.map((member) => ({
         publicId: member.publicId,
         name: member.user.name,
@@ -123,16 +128,16 @@ export default class SchoolsController {
         expiresAt: invitation.expiresAt.toISO()!,
       })),
       can: {
-        manageInvitations: staffCan(staff, 'invitations.manage'),
-        manageTrials: staffCan(staff, 'trials.manage'),
+        manageInvitations: await withinScope(staff, 'invitations.manage', schoolId),
+        manageTrials: await withinScope(staff, 'trials.manage', schoolId),
+        extendTrials: await withinScope(staff, 'trials.extend', schoolId),
       },
     })
   }
 
   async invite(ctx: HttpContext) {
-    const staff = staffUser(ctx)
-    authorizeStaff(staff, 'invitations.manage')
     const schoolId = Number(ctx.params.school)
+    const staff = await authorizeStaff(ctx, 'invitations.manage', schoolId)
     const back = `/sekolah/${schoolId}`
     const { email, role } = await ctx.request.validateUsing(staffInviteValidator)
 
@@ -140,7 +145,16 @@ export default class SchoolsController {
     try {
       pending = await staffTransaction(async (trx) => {
         const school = await School.findOrFail(schoolId, { client: trx })
-        return inviteToSchool({ school, email, role, inviter: { staff } })
+        const invited = await inviteToSchool({ school, email, role, inviter: { staff } })
+        await logStaffActivity(
+          staff,
+          'invitation.create',
+          'invitation',
+          invited.invitation.publicId,
+          { school_id: school.id, email, role },
+          trx
+        )
+        return invited
       })
     } catch (error) {
       if (error instanceof AlreadyMemberError) {
@@ -157,13 +171,21 @@ export default class SchoolsController {
   }
 
   async resend(ctx: HttpContext) {
-    const staff = staffUser(ctx)
-    authorizeStaff(staff, 'invitations.manage')
+    const staff = await authorizeStaff(ctx, 'invitations.manage', Number(ctx.params.school))
     const back = `/sekolah/${Number(ctx.params.school)}`
     try {
-      const pending = await staffTransaction(async () =>
-        resendInvitation(await this.#invitation(ctx), { staff })
-      )
+      const pending = await staffTransaction(async (trx) => {
+        const resent = await resendInvitation(await this.#invitation(ctx), { staff })
+        await logStaffActivity(
+          staff,
+          'invitation.resend',
+          'invitation',
+          resent.invitation.publicId,
+          { school_id: Number(ctx.params.school), email: resent.invitation.email },
+          trx
+        )
+        return resent
+      })
       await mailInvitation(pending)
       ctx.session.flash(
         'success',
@@ -183,11 +205,18 @@ export default class SchoolsController {
   }
 
   async cancel(ctx: HttpContext) {
-    const staff = staffUser(ctx)
-    authorizeStaff(staff, 'invitations.manage')
-    const email = await staffTransaction(async () => {
+    const staff = await authorizeStaff(ctx, 'invitations.manage', Number(ctx.params.school))
+    const email = await staffTransaction(async (trx) => {
       const invitation = await this.#invitation(ctx)
       await cancelInvitation(invitation)
+      await logStaffActivity(
+        staff,
+        'invitation.cancel',
+        'invitation',
+        invitation.publicId,
+        { school_id: invitation.schoolId, email: invitation.email },
+        trx
+      )
       return invitation.email
     })
     ctx.session.flash('success', ctx.i18n.t('console.school.cancelled', { email }))
@@ -195,10 +224,10 @@ export default class SchoolsController {
   }
 
   async updateTrial(ctx: HttpContext) {
-    const staff = staffUser(ctx)
-    authorizeStaff(staff, 'trials.manage')
+    const schoolId = Number(ctx.params.school)
     const change = await ctx.request.validateUsing(trialChangeValidator)
-    const school = await changeSchoolTrial(staff, Number(ctx.params.school), change)
+    const staff = await authorizeTrialChange(ctx, change, { schoolId })
+    const school = await changeSchoolTrial(staff, schoolId, change)
     ctx.session.flash('success', ctx.i18n.t('console.trial.saved'))
     return ctx.response.redirect().toPath(`/sekolah/${school.id}`)
   }

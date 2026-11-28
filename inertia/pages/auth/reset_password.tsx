@@ -6,13 +6,15 @@ import { useT } from '~/lib/i18n'
 type Props = {
   valid: boolean
   email: string | null
+  /** admin.: a staff member's set-password link (R2-01), 12 characters and no self-service request. */
+  staff?: boolean
 }
 
 /**
  * /kata-sandi-baru/{token}: set a new password from the mailed link.
  * An unknown, used or expired link shows one neutral message.
  */
-export default function ResetPassword({ valid, email }: Props) {
+export default function ResetPassword({ valid, email, staff = false }: Props) {
   const t = useT()
   const { url } = usePage()
 
@@ -21,9 +23,15 @@ export default function ResetPassword({ valid, email }: Props) {
       <>
         <Head title={t('auth.reset.invalid_title')} />
         <h1 className="text-2xl font-bold">{t('auth.reset.invalid_title')}</h1>
-        <p className="mt-2 text-muted">{t('auth.reset.invalid_body')}</p>
+        <p className="mt-2 text-muted">
+          {staff ? t('staff.password.invalid_body') : t('auth.reset.invalid_body')}
+        </p>
         <Button asChild className="mt-6 w-full">
-          <Link href="/lupa-kata-sandi">{t('auth.reset.request_new')}</Link>
+          {staff ? (
+            <Link href="/masuk">{t('staff.password.back_to_login')}</Link>
+          ) : (
+            <Link href="/lupa-kata-sandi">{t('auth.reset.request_new')}</Link>
+          )}
         </Button>
       </>
     )
@@ -33,7 +41,9 @@ export default function ResetPassword({ valid, email }: Props) {
     <>
       <Head title={t('auth.titles.reset_password')} />
       <h1 className="text-2xl font-bold">{t('auth.titles.reset_password')}</h1>
-      <p className="mt-2 text-muted">{t('auth.reset.intro', { email: email ?? '' })}</p>
+      <p className="mt-2 text-muted">
+        {t(staff ? 'staff.password.intro' : 'auth.reset.intro', { email: email ?? '' })}
+      </p>
 
       <Form
         action={url}
@@ -58,7 +68,7 @@ export default function ResetPassword({ valid, email }: Props) {
               autoComplete="new-password"
               required
               autoFocus
-              hint={t('auth.fields.password_hint')}
+              hint={staff ? undefined : t('auth.fields.password_hint')}
               error={errors.password}
             />
             <PasswordField

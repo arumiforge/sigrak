@@ -1,0 +1,392 @@
+{
+  "roles": {
+    "owner": "Pemilik",
+    "admin": "Admin",
+    "validator": "Validator",
+    "content": "Penyusun konten",
+    "curriculum": "Kurator kurikulum",
+    "support": "Support",
+    "marketing": "Pemasaran",
+    "sales": "Penjualan",
+    "regional_lead": "Koordinator wilayah",
+    "finance": "Keuangan",
+    "engineer": "Teknis",
+    "researcher": "Peneliti"
+  },
+  "role_notes": {
+    "owner": "Semua hak, termasuk akun Pemilik dan Admin, harga, dan model AI.",
+    "admin": "Akun staf, peran, cakupan, sekolah, langganan, dan pengaturan konsol.",
+    "validator": "Memeriksa dan mengesahkan data kurasi. Tidak mengesahkan karyanya sendiri.",
+    "content": "Menyiapkan data kurasi, bahan templat, dan draf kurikulum.",
+    "curriculum": "Menerbitkan dan mengembalikan versi kurikulum yang sudah disahkan.",
+    "support": "Permintaan bantuan, bantuan penyiapan sekolah, dan perbaikan daftar sekolah.",
+    "marketing": "Kabar kampanye dan webinar, Acara, Cerita Sekolah, laporan jumlah per wilayah.",
+    "sales": "Sekolah di wilayahnya sendiri, tambah masa uji coba dalam batas, catat klaim pembayaran.",
+    "regional_lead": "Seperti Penjualan untuk beberapa wilayah, plus menyetujui usulan wilayah.",
+    "finance": "Konfirmasi pembayaran, invoice, kuitansi, dan laporan pendapatan.",
+    "engineer": "Kesehatan Sistem, antrean, pekerjaan yang belum berhasil, dan cadangan data.",
+    "researcher": "Analisis akar masalah, cek regulasi, dan Bank Praktik Baik."
+  },
+  "fields": {
+    "mathematics": "Matematika",
+    "languages": "Bahasa",
+    "science_social": "IPAS",
+    "pancasila": "Pendidikan Pancasila",
+    "arts": "Seni dan Budaya",
+    "physical_education": "PJOK",
+    "islamic": "PAI dan mapel MI",
+    "christian": "Pendidikan Agama Kristen",
+    "catholic": "Pendidikan Agama Katolik",
+    "hindu": "Pendidikan Agama Hindu",
+    "buddhist": "Pendidikan Agama Buddha",
+    "confucian": "Pendidikan Agama Khonghucu",
+    "local_content": "Muatan lokal"
+  },
+  "levels": {
+    "sd": "SD",
+    "mi": "MI"
+  },
+  "ability_groups": {
+    "team": "Tim SIGRAK",
+    "schools": "Sekolah dan pengguna",
+    "business": "Langganan dan pembayaran",
+    "content": "Konten kurasi",
+    "curriculum": "Kurikulum",
+    "communication": "Kabar dan halaman publik",
+    "help": "Bantuan",
+    "problems": "Masalah dan solusi",
+    "system": "Sistem"
+  },
+  "abilities": {
+    "staff": {
+      "view": "Lihat akun staf",
+      "manage": "Kelola akun staf, peran, dan cakupan",
+      "manage_high": "Kelola akun Pemilik dan Admin",
+      "reset_2fa": "Atur ulang 2FA staf lain"
+    },
+    "audit": {
+      "view": "Lihat log aktivitas"
+    },
+    "access": {
+      "view": "Lihat halaman Hak akses"
+    },
+    "schools": {
+      "view": "Lihat daftar dan profil sekolah",
+      "manage": "Ubah data sekolah"
+    },
+    "users": {
+      "view": "Cari pengguna sekolah"
+    },
+    "invitations": {
+      "manage": "Kirim, kirim ulang, dan batalkan undangan"
+    },
+    "trials": {
+      "manage": "Ubah masa uji coba",
+      "extend": "Tambah masa uji coba dalam batas"
+    },
+    "regions": {
+      "review": "Direktori sekolah dan perubahan wilayah"
+    },
+    "layers": {
+      "propose": "Usulkan perubahan data wilayah",
+      "approve": "Setujui perubahan data wilayah"
+    },
+    "subscriptions": {
+      "view": "Lihat langganan",
+      "manage": "Kelola langganan"
+    },
+    "payments": {
+      "view": "Lihat pembayaran",
+      "record": "Catat klaim pembayaran",
+      "confirm": "Konfirmasi pembayaran"
+    },
+    "invoices": {
+      "manage": "Buat invoice dan kuitansi"
+    },
+    "prices": {
+      "view": "Lihat harga dan paket",
+      "manage": "Ubah harga dan paket"
+    },
+    "templates": {
+      "view": "Lihat bahan templat dan pola LKPD",
+      "prepare": "Siapkan bahan templat dan pola LKPD",
+      "signoff": "Sahkan bahan templat dan pola LKPD"
+    },
+    "catalogs": {
+      "view": "Lihat katalog dan paket konten",
+      "prepare": "Siapkan katalog dan paket konten",
+      "signoff": "Sahkan katalog dan paket konten"
+    },
+    "embeds": {
+      "view": "Lihat daftar sematan",
+      "prepare": "Siapkan daftar sematan",
+      "signoff": "Sahkan daftar sematan",
+      "manage": "Kelola daftar sematan"
+    },
+    "curriculum": {
+      "view": "Lihat versi kurikulum dan dampaknya",
+      "draft": "Siapkan draf kurikulum",
+      "signoff": "Sahkan versi kurikulum",
+      "publish": "Terbitkan dan kembalikan versi kurikulum"
+    },
+    "announcements": {
+      "manage": "Kelola semua Kabar",
+      "write": "Tulis Kabar untuk sasaran di cakupannya",
+      "public": "Tampilkan Kabar di sigrak.com"
+    },
+    "events": {
+      "manage": "Kelola Acara"
+    },
+    "stories": {
+      "manage": "Kelola Cerita Sekolah"
+    },
+    "legal_pages": {
+      "manage": "Kelola halaman hukum"
+    },
+    "help_requests": {
+      "view": "Lihat permintaan bantuan",
+      "manage": "Tangani permintaan bantuan"
+    },
+    "support_sessions": {
+      "start": "Buka tampilan sekolah (hanya baca)",
+      "view": "Lihat daftar sesi bantuan"
+    },
+    "supervisor_requests": {
+      "manage": "Tangani permintaan pengawas"
+    },
+    "problems": {
+      "view": "Lihat Bank Masalah",
+      "record": "Catat masalah",
+      "triage": "Pilah dan gabungkan masalah",
+      "analyse": "Analisis akar masalah",
+      "deliver": "Kerjakan dan rilis solusi",
+      "decide": "Putuskan di forum"
+    },
+    "good_practices": {
+      "view": "Lihat Bank Praktik Baik",
+      "manage": "Kelola Bank Praktik Baik"
+    },
+    "forum": {
+      "view": "Lihat Forum Masalah→Solusi",
+      "manage": "Susun agenda dan catatan forum"
+    },
+    "settings": {
+      "view": "Lihat pengaturan konsol",
+      "manage": "Ubah pengaturan konsol"
+    },
+    "integrations": {
+      "view": "Lihat pengaturan integrasi",
+      "manage": "Ubah pengaturan integrasi"
+    },
+    "ai_models": {
+      "view": "Lihat model AI per keperluan",
+      "manage": "Ubah model AI per keperluan"
+    },
+    "system_health": {
+      "view": "Lihat Kesehatan Sistem",
+      "manage": "Ulangi atau hapus pekerjaan yang belum berhasil"
+    },
+    "reports": {
+      "view": "Lihat laporan pemakaian"
+    }
+  },
+  "scope": {
+    "title": "Cakupan",
+    "everywhere": "Semua wilayah",
+    "nothing_yet": "Belum ada wilayah. Peran ini belum menjangkau sekolah mana pun.",
+    "no_scope": "Tanpa cakupan",
+    "regions": "Wilayah",
+    "schools": "Sekolah tertentu",
+    "levels": "Jenjang",
+    "fields": "Bidang",
+    "all_levels": "Semua jenjang",
+    "all_fields": "Semua bidang",
+    "region_search": "Cari wilayah",
+    "region_search_hint": "Provinsi, kabupaten/kota, atau kecamatan. Tulis minimal 2 huruf.",
+    "school_search": "Cari sekolah",
+    "school_search_hint": "Nama sekolah atau NPSN. Tulis minimal 2 huruf.",
+    "no_matches": "Tidak ada yang cocok.",
+    "add": "Tambahkan {name}",
+    "remove": "Hapus {name}",
+    "area_optional": "Kosongkan untuk semua wilayah.",
+    "area_required": "Wajib diisi. Tanpa wilayah, peran ini tidak menjangkau sekolah mana pun.",
+    "levels_hint": "Kosongkan untuk SD dan MI.",
+    "fields_hint": "Kosongkan untuk semua bidang.",
+    "searching": "Mencari…"
+  },
+  "list": {
+    "title": "Staf",
+    "intro": "Akun Tim SIGRAK, peran, dan cakupannya. Hak tiap peran tetap; yang diatur hanya cakupannya.",
+    "caption": "Daftar staf",
+    "name": "Nama",
+    "email": "Email",
+    "roles": "Peran",
+    "status": "Status",
+    "active": "Aktif",
+    "disabled": "Nonaktif",
+    "you": "Anda",
+    "no_roles": "Belum ada peran",
+    "open": "Buka",
+    "open_label": "Buka {name}",
+    "add": "Tambah staf",
+    "empty": "Belum ada akun staf."
+  },
+  "create": {
+    "title": "Tambah staf",
+    "intro": "Kami kirim tautan ke emailnya untuk membuat kata sandi. Tautan berlaku 7 hari.",
+    "name": "Nama lengkap",
+    "email": "Email",
+    "role": "Peran pertama",
+    "submit": "Buat akun dan kirim tautan"
+  },
+  "member": {
+    "back": "Semua staf",
+    "since": "Akun dibuat {date}",
+    "roles_title": "Peran dan cakupan",
+    "roles_intro": "Satu orang boleh punya beberapa peran. Tiap peran punya cakupannya sendiri.",
+    "no_roles": "Belum ada peran. Tanpa peran, staf ini tidak bisa membuka halaman konsol.",
+    "self_note": "Ini akun Anda. Peran dan status akun Anda diubah oleh admin lain.",
+    "locked_note": "Hanya Pemilik yang bisa mengubah akun yang punya peran Pemilik atau Admin.",
+    "edit_scope": "Ubah cakupan",
+    "edit_scope_label": "Ubah cakupan {role}",
+    "edit_scope_title": "Cakupan {role}",
+    "save_scope": "Simpan cakupan",
+    "revoke": "Cabut",
+    "revoke_label": "Cabut peran {role}",
+    "revoke_title": "Cabut peran {role} dari {name}?",
+    "revoke_body": "Hak dari peran ini langsung hilang. Peran bisa diberikan lagi kapan saja.",
+    "revoke_confirm": "Cabut peran {role}",
+    "grant_title": "Tambah peran",
+    "grant_role": "Peran",
+    "grant_submit": "Tambah peran",
+    "grant_none": "Semua peran yang bisa Anda berikan sudah dimiliki staf ini.",
+    "account_title": "Akun",
+    "status_active": "Akun aktif",
+    "status_disabled": "Akun nonaktif. Staf ini tidak bisa masuk ke konsol.",
+    "disable": "Nonaktifkan akun",
+    "disable_title": "Nonaktifkan akun {name}?",
+    "disable_body": "Staf ini langsung keluar dari konsol dan tidak bisa masuk lagi sampai akunnya diaktifkan. Log aktivitasnya tetap disimpan.",
+    "disable_confirm": "Nonaktifkan {name}",
+    "enable": "Aktifkan lagi",
+    "resend": "Kirim tautan kata sandi",
+    "resend_hint": "Tautan baru menggantikan tautan lama dan berlaku 7 hari. Pakai juga kalau staf lupa kata sandi.",
+    "recent_title": "Perubahan terakhir",
+    "recent_empty": "Belum ada perubahan.",
+    "recent_by": "{action} oleh {name}",
+    "recent_by_system": "{action} oleh sistem"
+  },
+  "audit": {
+    "title": "Log aktivitas",
+    "intro": "Semua perubahan yang dibuat staf di konsol, dari yang terbaru. Log tidak bisa diubah atau dihapus.",
+    "caption": "Log aktivitas staf",
+    "filter_staff": "Staf",
+    "filter_action": "Jenis perubahan",
+    "filter_from": "Dari tanggal",
+    "filter_to": "Sampai tanggal",
+    "all_staff": "Semua staf",
+    "all_actions": "Semua perubahan",
+    "apply": "Terapkan",
+    "reset": "Hapus filter",
+    "when": "Waktu",
+    "who": "Staf",
+    "what": "Perubahan",
+    "subject": "Data",
+    "details": "Rincian",
+    "system": "Sistem",
+    "empty": "Belum ada aktivitas yang cocok dengan filter ini.",
+    "count": "{count} catatan",
+    "page": "Halaman {page} dari {last}",
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "subjects": {
+      "school": "Sekolah",
+      "user": "Pengguna",
+      "setting": "Pengaturan",
+      "invitation": "Undangan",
+      "staff": "Staf",
+      "integration": "Integrasi",
+      "ai_model": "Model AI",
+      "job": "Pekerjaan antrean",
+      "announcement": "Kabar",
+      "event": "Acara",
+      "story": "Cerita Sekolah",
+      "legal_document": "Halaman hukum",
+      "help_request": "Permintaan bantuan",
+      "support_session": "Sesi bantuan",
+      "problem": "Masalah",
+      "good_practice": "Praktik baik",
+      "forum_meeting": "Forum",
+      "curriculum_version": "Versi kurikulum"
+    },
+    "actions": {
+      "staff": {
+        "create": "Akun staf dibuat",
+        "role_grant": "Peran diberikan",
+        "role_revoke": "Peran dicabut",
+        "scope_change": "Cakupan diubah",
+        "disable": "Akun dinonaktifkan",
+        "enable": "Akun diaktifkan",
+        "link_resend": "Tautan kata sandi dikirim",
+        "owner_bootstrap": "Pemilik pertama dibuat"
+      },
+      "trial": {
+        "extend": "Masa uji coba ditambah",
+        "set": "Lama uji coba diatur",
+        "clear": "Uji coba ikut bawaan"
+      },
+      "setting": {
+        "updated": "Pengaturan diubah"
+      },
+      "invitation": {
+        "create": "Undangan dikirim",
+        "resend": "Undangan dikirim ulang",
+        "cancel": "Undangan dibatalkan"
+      }
+    }
+  },
+  "matrix": {
+    "title": "Hak akses",
+    "intro": "Apa yang boleh dilakukan tiap peran. Hak ini tetap di aplikasi dan tidak bisa diubah di sini; yang diatur per staf hanya cakupannya.",
+    "caption": "Hak akses per peran",
+    "ability": "Hak",
+    "full": "Boleh",
+    "scoped": "Boleh, di cakupannya",
+    "none": "Tidak",
+    "legend": "Keterangan",
+    "role_picker": "Peran",
+    "your_roles": "Peran Anda: {roles}",
+    "no_roles": "Anda belum punya peran.",
+    "role_count": "{count} hak",
+    "student_note": "Data murid tidak tampil di konsol untuk peran apa pun. Data agama dan kesehatan selalu disembunyikan."
+  },
+  "errors": {
+    "self": "Peran dan status akun Anda sendiri hanya bisa diubah oleh admin lain.",
+    "last_owner": "Ini Pemilik terakhir yang aktif. Tambahkan Pemilik lain dulu.",
+    "high_role": "Hanya Pemilik yang bisa memberi, mencabut, atau mengubah peran Pemilik dan Admin.",
+    "email_taken": "Email ini sudah dipakai akun staf lain.",
+    "role_held": "Staf ini sudah punya peran itu."
+  },
+  "toasts": {
+    "created": "Akun dibuat. Tautan kata sandi sudah dikirim ke {email}.",
+    "granted": "Peran {role} sudah diberikan.",
+    "scope_saved": "Cakupan {role} sudah disimpan.",
+    "revoked": "Peran {role} sudah dicabut.",
+    "disabled": "Akun sudah dinonaktifkan.",
+    "enabled": "Akun sudah diaktifkan lagi.",
+    "link_sent": "Tautan kata sandi baru sudah dikirim ke {email}."
+  },
+  "password": {
+    "intro": "Untuk akun konsol {email}. Pakai minimal 12 karakter dengan huruf dan angka.",
+    "invalid_body": "Tautan ini sudah dipakai atau sudah lewat 7 hari. Minta admin Tim SIGRAK mengirim tautan baru.",
+    "back_to_login": "Ke halaman masuk",
+    "link_invalid": "Tautan itu sudah tidak berlaku. Minta admin Tim SIGRAK mengirim tautan baru."
+  },
+  "mail": {
+    "subject": "Buat kata sandi konsol SIGRAK",
+    "heading": "Halo, {name}",
+    "body": "Anda punya akun di konsol Tim SIGRAK. Tekan tombol di bawah untuk membuat kata sandi, lalu masuk dengan email ini.",
+    "action": "Buat kata sandi",
+    "expires": "Tautan ini hanya bisa dipakai sekali, sampai {expires_at} WIB.",
+    "ignore": "Kalau Anda tidak merasa bergabung dengan Tim SIGRAK, abaikan email ini."
+  }
+}

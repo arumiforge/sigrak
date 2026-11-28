@@ -9,6 +9,8 @@ import School from '#models/school'
 import User from '#models/user'
 import SchoolMembership from '#models/school_membership'
 import StaffUser from '#models/staff_user'
+import StaffRoleAssignment from '#models/staff_role_assignment'
+import type { StaffRole } from '#staff/roles'
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
 import AiCredential from '#models/ai_credential'
@@ -74,13 +76,42 @@ export async function createTeacher(school: School) {
   return user
 }
 
-export async function createStaff() {
-  return StaffUser.create({
+export type TestScope = {
+  regionIds?: number[]
+  schoolIds?: number[]
+  levels?: ('sd' | 'mi')[]
+  fields?: string[]
+}
+
+/**
+ * A staff account with roles (R2-01), each with the same scope, loaded
+ * on the model as the auth middleware does.
+ */
+export async function createStaff(roles: StaffRole[] = ['support'], scope: TestScope = {}) {
+  const staff = await StaffUser.create({
     name: 'Staf Uji',
     email: `staf-${unique()}@uji.test`,
     password: PASSWORD,
-    role: 'support',
   })
+  await setStaffRoles(staff, roles, scope)
+  return staff
+}
+
+/** Replaces a staff member's roles (owner connection) and reloads them. */
+export async function setStaffRoles(staff: StaffUser, roles: StaffRole[], scope: TestScope = {}) {
+  await StaffRoleAssignment.query().where('staff_user_id', staff.id).delete()
+  for (const role of roles) {
+    await StaffRoleAssignment.create({
+      staffUserId: staff.id,
+      role,
+      regionIds: scope.regionIds ?? [],
+      schoolIds: scope.schoolIds ?? [],
+      levels: scope.levels ?? [],
+      fields: (scope.fields ?? []) as StaffRoleAssignment['fields'],
+    })
+  }
+  await staff.load('roleAssignments')
+  return staff
 }
 
 export async function createParticipant(school: School, status: ExamSession['status'] = 'open') {

@@ -21,6 +21,10 @@ export default class SessionController {
     if (!result.ok) {
       return backWithError(ctx, result.field, result.message)
     }
+    // A disabled account (R2-01) keeps its password but cannot sign in.
+    if (result.account.disabledAt) {
+      return backWithError(ctx, 'email', ctx.i18n.t('auth.staff_disabled'))
+    }
 
     await ctx.auth.use('staff').login(result.account)
     return ctx.response.redirect().toPath('/')

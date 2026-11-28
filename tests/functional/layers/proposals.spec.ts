@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
 import db from '@adonisjs/lucid/services/db'
-import type StaffUser from '#models/staff_user'
+import type { StaffRole } from '#staff/roles'
 import { importExtracurricularCatalog } from '#layers/domains/extracurricular_import'
 import { PackageChoices } from '#layers/package_choices'
 import { AreaProposals, SchoolProposals } from '#layers/proposals'
@@ -20,11 +20,8 @@ import {
   resolveFor,
 } from '#tests/layers'
 
-async function staffWithRole(role: StaffUser['role']) {
-  const staff = await createStaff()
-  staff.role = role
-  await staff.save()
-  return staff
+async function staffWithRole(role: StaffRole) {
+  return createStaff([role])
 }
 
 const PRAMUKA = 'SIGRAK-KAT-EKS-01'

@@ -87,6 +87,21 @@ function isTranslateCall(node: ts.Node): node is ts.CallExpression {
 type KeyUse = { key: string; prefix: boolean; at: string }
 
 /**
+ * A staff ability key on a console menu item (`ability: 'staff.view'`,
+ * R2-01) looks like a lang key but names a power, not a message.
+ */
+function isAbilityName(node: ts.Node) {
+  const parent = node.parent
+  return (
+    parent !== undefined &&
+    ts.isPropertyAssignment(parent) &&
+    parent.initializer === node &&
+    ts.isIdentifier(parent.name) &&
+    parent.name.text === 'ability'
+  )
+}
+
+/**
  * Translation keys the code uses. On the server only the arguments of
  * t() count (route names look like keys). In inertia/ any string that
  * starts with a lang file name and a dot is a key, e.g. a nav item's
@@ -122,7 +137,7 @@ function collectKeyUses(
       const keyArgument = ts.isIdentifier(node.expression) && node.expression.text === 'translate'
       const argument = node.arguments[keyArgument ? 1 : 0]
       if (argument) record(argument, true)
-    } else if (anyString && !ts.isImportDeclaration(node.parent ?? node)) {
+    } else if (anyString && !ts.isImportDeclaration(node.parent ?? node) && !isAbilityName(node)) {
       record(node, false)
     }
   })
@@ -250,9 +265,16 @@ const OLD_TERMS: Record<string, string> = {
 
 /**
  * Exceptions by key, for copy that must name an old word, e.g. help
- * search text that still finds "absensi" (D-382). Empty for now.
+ * search text that still finds "absensi" (D-382).
  */
-const ALLOWED: Record<string, string[]> = {}
+const ALLOWED: Record<string, string[]> = {
+  // D-314 names the read-only console page of staff powers "Hak akses";
+  // the "Peran" rule is about school roles (R2-01).
+  'nav.console.access': ['hak akses'],
+  'staff.abilities.access.view': ['hak akses'],
+  'staff.matrix.title': ['hak akses'],
+  'staff.matrix.caption': ['hak akses'],
+}
 
 /**
  * Spellings of the product name other than "SIGRAK" (D-469: until the

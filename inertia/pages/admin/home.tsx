@@ -6,8 +6,8 @@ import { consoleNav } from '~/lib/navigation'
 
 export default function AdminHome() {
   const t = useT()
-  const { viewer } = usePage().props
-  const shortcuts = consoleNav().filter((item) => item.href !== '/')
+  const { viewer, staffAbilities } = usePage().props
+  const shortcuts = consoleNav(staffAbilities).filter((item) => item.href !== '/')
 
   return (
     <>

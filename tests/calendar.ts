@@ -5,7 +5,7 @@ import { DateTime } from 'luxon'
 import { hosts, type Area } from '#config/hosts'
 import { sessionCookieNames } from '#config/session'
 import type School from '#models/school'
-import type StaffUser from '#models/staff_user'
+import type { StaffRole } from '#staff/roles'
 import {
   activateCalendarPackage,
   importNationalHolidays,
@@ -93,10 +93,8 @@ export async function member(
   return { ...fixture, session: await sessionFor(client, 'app', fixture.user.email) }
 }
 
-export async function staff(client: ApiClient, role: StaffUser['role']) {
-  const account = await createStaff()
-  account.role = role
-  await account.save()
+export async function staff(client: ApiClient, role: StaffRole) {
+  const account = await createStaff([role])
   return { account, session: await sessionFor(client, 'admin', account.email) }
 }
 
