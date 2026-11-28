@@ -4,7 +4,7 @@ import encryption from '@adonisjs/core/services/encryption'
 import i18nManager from '@adonisjs/i18n/services/main'
 import limiter from '@adonisjs/limiter/services/main'
 import { sessionCookieNames } from '#config/session'
-import StaffUser from '#models/staff_user'
+import type StaffUser from '#models/staff_user'
 import StaffActivityLog from '#models/staff_activity_log'
 import { resetTwoFactorFromServer, WRONG_CODE_LIMIT } from '#staff/two_factor'
 import {
@@ -34,6 +34,11 @@ function get(client: Client, session: Session, path: string) {
     name: sessionCookieNames.admin,
     sessionId: session.sessionId,
   })
+}
+
+async function statusOf(client: Client, session: Session, path: string) {
+  const response = await get(client, session, path)
+  return response.status()
 }
 
 /** A six-digit code the staff member's authenticator does not show now. */
@@ -155,7 +160,7 @@ test.group('Staff | 2FA', (group) => {
     const right = await submitTwoFactorCode(client, session.sessionId, code)
     assert.equal(right.response.header('location'), '/')
     const signedIn: Session = { area: 'admin', sessionId: right.sessionId }
-    assert.equal((await get(client, signedIn, '/hak-akses')).status(), 200)
+    assert.equal(await statusOf(client, signedIn, '/hak-akses'), 200)
 
     // The same code does not work a second time.
     const second = await waitingSession(client, staff)
@@ -238,11 +243,11 @@ test.group('Staff | 2FA', (group) => {
       code: currentCode(admin),
     })
     assert.equal(confirmed.response.header('location'), '/akun')
-    assert.equal((await get(client, confirmed.session, '/sekolah')).status(), 200)
+    assert.equal(await statusOf(client, confirmed.session, '/sekolah'), 200)
 
     // Staff with optional 2FA are never stopped.
     const supportSession = await signIn(client, 'admin', support.email)
-    assert.equal((await get(client, supportSession, '/hak-akses')).status(), 200)
+    assert.equal(await statusOf(client, supportSession, '/hak-akses'), 200)
 
     // Keluar works before enrolling.
     const owner = await createStaff(['owner'])
@@ -285,7 +290,8 @@ test.group('Staff | 2FA', (group) => {
     await staff.refresh()
     assert.isNull(staff.twoFactorSecret)
     assert.isNull(staff.twoFactorConfirmedAt)
-    assert.equal((await lastLog('staff.two_factor_disable'))?.staffUserId, staff.id)
+    const disabledLog = await lastLog('staff.two_factor_disable')
+    assert.equal(disabledLog?.staffUserId, staff.id)
 
     const admin = await createStaff(['admin'])
     const adminSession = await signIn(client, 'admin', admin.email)
