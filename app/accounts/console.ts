@@ -4,8 +4,7 @@ import School from '#models/school'
 import type StaffUser from '#models/staff_user'
 import User from '#models/user'
 import { logStaffActivity } from '#accounts/activity_log'
-import { defaultTrialDays } from '#accounts/settings'
-import { clampDays, extendedUserDays, trialOf } from '#accounts/trial'
+import { clampDays, extendedSchoolUntil, extendedUserDays, trialOf } from '#accounts/trial'
 
 /**
  * Trial changes from the console (D-459), each logged with the staff
@@ -14,8 +13,14 @@ import { clampDays, extendedUserDays, trialOf } from '#accounts/trial'
 export type TrialChange = { mode: 'extend' | 'set' | 'clear'; days?: number }
 
 /**
- * A school's trial length, for all its teachers. "Tambah" adds days to
- * the school's current length (its own, else the default).
+ * A school's trial, for all its teachers:
+ *
+ * - "Tambah hari" reopens every teacher's trial counted from today,
+ *   also trials that ended long ago (D-469): the school's extension end
+ *   becomes `days` after the later of today and its current end.
+ * - "Atur lama" sets the school's own length, counted from each
+ *   teacher's start.
+ * - "Ikut bawaan" removes both.
  */
 export async function changeSchoolTrial(staff: StaffUser, schoolId: number, change: TrialChange) {
   return db.transaction(async (trx) => {
@@ -23,19 +28,25 @@ export async function changeSchoolTrial(staff: StaffUser, schoolId: number, chan
       .where('id', schoolId)
       .forUpdate()
       .firstOrFail()
-    const before = school.trialDays
-    const base = before ?? (await defaultTrialDays())
-    school.trialDays =
-      change.mode === 'clear'
-        ? null
-        : clampDays(change.mode === 'extend' ? base + change.days! : change.days!)
+    const before = { days: school.trialDays, extendedUntil: school.trialExtendedUntil }
+    if (change.mode === 'extend') {
+      school.trialExtendedUntil = extendedSchoolUntil(school.trialExtendedUntil, change.days!)
+    } else if (change.mode === 'set') {
+      school.trialDays = clampDays(change.days!)
+    } else {
+      school.trialDays = null
+      school.trialExtendedUntil = null
+    }
     await school.save()
     await logStaffActivity(
       staff,
       `trial.${change.mode}`,
       'school',
       school.id,
-      { from: before, to: school.trialDays },
+      {
+        from: { days: before.days, extended_until: before.extendedUntil?.toISO() ?? null },
+        to: { days: school.trialDays, extended_until: school.trialExtendedUntil?.toISO() ?? null },
+      },
       trx
     )
     return school

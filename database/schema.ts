@@ -634,7 +634,7 @@ export class SchoolMembershipSchema extends BaseModel {
 }
 
 export class SchoolSchema extends BaseModel {
-  static $columns = ['address', 'createdAt', 'district', 'districtId', 'id', 'level', 'name', 'npsn', 'regionCheckedAt', 'regionId', 'regionSource', 'trialDays', 'updatedAt'] as const
+  static $columns = ['address', 'createdAt', 'district', 'districtId', 'id', 'level', 'name', 'npsn', 'regionCheckedAt', 'regionId', 'regionSource', 'trialDays', 'trialExtendedUntil', 'updatedAt'] as const
   $columns = SchoolSchema.$columns
   @column()
   declare address: string
@@ -660,6 +660,8 @@ export class SchoolSchema extends BaseModel {
   declare regionSource: string
   @column()
   declare trialDays: number | null
+  @column.dateTime()
+  declare trialExtendedUntil: DateTime | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }

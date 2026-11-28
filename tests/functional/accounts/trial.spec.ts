@@ -6,7 +6,13 @@ import { DateTime } from 'luxon'
 import type User from '#models/user'
 import StaffActivityLog from '#models/staff_activity_log'
 import { defaultTrialDays } from '#accounts/settings'
-import { extendedUserDays, trialLength, trialOf, trialStatus } from '#accounts/trial'
+import {
+  extendedSchoolUntil,
+  extendedUserDays,
+  trialLength,
+  trialOf,
+  trialStatus,
+} from '#accounts/trial'
 import { createSchool } from '#tests/helpers'
 import { createStaffWithRole, inertiaPage, memberUser, postForm, signIn } from '#tests/accounts'
 
@@ -60,6 +66,50 @@ test.group('Accounts | trial rules (D-459)', () => {
     assert.equal(running.daysLeft, 5)
     assert.equal(extendedUserDays(running, 7, now), 14)
   })
+
+  test('a school extension gives every teacher the same end, ended trials too (D-469)', ({
+    assert,
+  }) => {
+    const now = DateTime.fromISO('2026-11-28T10:00:00+07:00') as DateTime<true>
+    const until = extendedSchoolUntil(null, 7, now)
+    assert.equal(until.toISO(), now.plus({ days: 7 }).toISO())
+
+    // Ended a year ago: reopened until the school's end.
+    const longAgo = trialStatus(
+      {
+        startedAt: now.minus({ days: 400 }),
+        userDays: null,
+        schoolDays: [],
+        schoolExtendedUntil: [null, until],
+        defaultDays: 7,
+      },
+      now
+    )
+    assert.isTrue(longAgo.active)
+    assert.equal(longAgo.daysLeft, 7)
+    assert.equal(longAgo.source, 'school')
+    assert.equal(longAgo.endsAt!.toISO(), until.toISO())
+
+    // A longer trial of the teacher's own is kept.
+    const longer = trialStatus(
+      {
+        startedAt: now.minus({ days: 1 }),
+        userDays: 30,
+        schoolDays: [],
+        schoolExtendedUntil: [until],
+        defaultDays: 7,
+      },
+      now
+    )
+    assert.equal(longer.source, 'user')
+    assert.equal(longer.daysLeft, 29)
+
+    // Adding again counts from the school's current end while it runs.
+    assert.equal(extendedSchoolUntil(until, 7, now).toISO(), now.plus({ days: 14 }).toISO())
+    // An extension that already ended counts from today again.
+    const ended = now.minus({ days: 3 })
+    assert.equal(extendedSchoolUntil(ended, 7, now).toISO(), now.plus({ days: 7 }).toISO())
+  })
 })
 
 test.group('Accounts | trial changes from the console', (group) => {
@@ -72,44 +122,100 @@ test.group('Accounts | trial changes from the console', (group) => {
     return user
   }
 
-  test('extending a school’s trial applies to all its teachers', async ({ client, assert }) => {
+  test('extending a school reopens every teacher’s trial from today (D-469)', async ({
+    client,
+    assert,
+  }) => {
     const school = await createSchool('SD Diperpanjang')
     const other = await createSchool('SD Lain')
-    const first = await started(await memberUser(school))
-    const second = await started(await memberUser(school))
-    second.trialDays = 5
-    await second.save()
-    const elsewhere = await started(await memberUser(other))
+    const running = await started(await memberUser(school))
+    const endedLongAgo = await started(await memberUser(school), 300)
+    const own = await started(await memberUser(school))
+    own.trialDays = 60
+    await own.save()
+    const elsewhere = await started(await memberUser(other), 300)
+    const before = await trialOf(endedLongAgo)
+    assert.isFalse(before.active)
 
     const admin = await createStaffWithRole('admin')
     const session = await signIn(client, 'admin', admin.email)
-    const { response } = await postForm(
-      client,
-      session,
-      `/sekolah/${school.id}/uji-coba`,
-      { mode: 'extend', days: 7 },
-      `/sekolah/${school.id}`
-    )
+    const extend = () =>
+      postForm(
+        client,
+        session,
+        `/sekolah/${school.id}/uji-coba`,
+        { mode: 'extend', days: 7 },
+        `/sekolah/${school.id}`
+      )
+    const { response } = await extend()
     assert.equal(response.header('location'), `/sekolah/${school.id}`)
 
     await school.refresh()
-    assert.equal(school.trialDays, 14)
-    for (const teacher of [first, second]) {
+    assert.isNull(school.trialDays)
+    assert.isNotNull(school.trialExtendedUntil)
+    for (const teacher of [running, endedLongAgo]) {
       await teacher.refresh()
       const status = await trialOf(teacher)
-      assert.equal(status.days, 14, teacher.email)
+      assert.isTrue(status.active, teacher.email)
+      assert.equal(status.daysLeft, 7, teacher.email)
       assert.equal(status.source, 'school')
     }
+    // A longer own trial is kept.
+    await own.refresh()
+    const ownStatus = await trialOf(own)
+    assert.equal(ownStatus.source, 'user')
+    assert.equal(ownStatus.daysLeft, 59)
+    // Another school is untouched.
     const elsewhereStatus = await trialOf(elsewhere)
-    assert.equal(elsewhereStatus.days, 7)
+    assert.isFalse(elsewhereStatus.active)
 
     const log = await StaffActivityLog.query().where('subject_type', 'school').firstOrFail()
     assert.equal(log.staffUserId, admin.id)
     assert.equal(log.action, 'trial.extend')
-    assert.deepEqual(log.changes, { from: null, to: 14 })
+    assert.deepEqual(log.changes.from, { days: null, extended_until: null })
+    assert.isString((log.changes.to as { extended_until: string }).extended_until)
+
+    // Adding again while it runs counts from the school's end.
+    await extend()
+    await endedLongAgo.refresh()
+    const stacked = await trialOf(endedLongAgo)
+    assert.equal(stacked.daysLeft, 14)
 
     const page = await inertiaPage(client, session, `/sekolah/${school.id}`)
-    assert.equal(page.inertiaProps.school.trialDays, 14)
+    assert.isString(page.inertiaProps.school.trialExtendedUntil)
+
+    // "Ikut bawaan" removes the extension.
+    await postForm(
+      client,
+      session,
+      `/sekolah/${school.id}/uji-coba`,
+      { mode: 'clear' },
+      `/sekolah/${school.id}`
+    )
+    await school.refresh()
+    assert.isNull(school.trialExtendedUntil)
+    const cleared = await trialOf(endedLongAgo)
+    assert.isFalse(cleared.active)
+  })
+
+  test('setting a school length counts from each teacher’s start', async ({ client, assert }) => {
+    const school = await createSchool('SD Lama')
+    const teacher = await started(await memberUser(school), 10)
+    const admin = await createStaffWithRole('admin')
+    const session = await signIn(client, 'admin', admin.email)
+    await postForm(
+      client,
+      session,
+      `/sekolah/${school.id}/uji-coba`,
+      { mode: 'set', days: 14 },
+      `/sekolah/${school.id}`
+    )
+    await school.refresh()
+    assert.equal(school.trialDays, 14)
+    const status = await trialOf(teacher)
+    assert.equal(status.days, 14)
+    assert.equal(status.source, 'school')
+    assert.equal(status.daysLeft, 4)
   })
 
   test('one person’s ended trial is extended from today', async ({ client, assert }) => {
