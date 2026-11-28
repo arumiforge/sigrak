@@ -65,7 +65,8 @@ export default class AiDemoController {
   async store(ctx: HttpContext) {
     const user = schoolUser(ctx)
     const { clientToken, scenario } = await ctx.request.validateUsing(startDemoValidator)
-    const membership = await user.currentMembership()
+    // The active membership's school (school context middleware), if any.
+    const membership = ctx.membership
 
     try {
       await generationService.start(generateDemo, {

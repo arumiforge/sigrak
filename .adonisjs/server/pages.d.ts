@@ -12,10 +12,21 @@ type ExtractProps<T> =
 
 declare module '@adonisjs/inertia/types' {
   export interface InertiaPages {
+    'accounts/account': ExtractProps<(typeof import('../../inertia/pages/accounts/account.tsx'))['default']>
+    'accounts/switch_role': ExtractProps<(typeof import('../../inertia/pages/accounts/switch_role.tsx'))['default']>
+    'accounts/teachers': ExtractProps<(typeof import('../../inertia/pages/accounts/teachers.tsx'))['default']>
     'admin/home': ExtractProps<(typeof import('../../inertia/pages/admin/home.tsx'))['default']>
     'admin/region_changes': ExtractProps<(typeof import('../../inertia/pages/admin/region_changes.tsx'))['default']>
     'admin/school_directory': ExtractProps<(typeof import('../../inertia/pages/admin/school_directory.tsx'))['default']>
+    'auth/forgot_password': ExtractProps<(typeof import('../../inertia/pages/auth/forgot_password.tsx'))['default']>
+    'auth/invitation': ExtractProps<(typeof import('../../inertia/pages/auth/invitation.tsx'))['default']>
     'auth/login': ExtractProps<(typeof import('../../inertia/pages/auth/login.tsx'))['default']>
+    'auth/reset_password': ExtractProps<(typeof import('../../inertia/pages/auth/reset_password.tsx'))['default']>
+    'auth/sign_up': ExtractProps<(typeof import('../../inertia/pages/auth/sign_up.tsx'))['default']>
+    'console/school': ExtractProps<(typeof import('../../inertia/pages/console/school.tsx'))['default']>
+    'console/schools': ExtractProps<(typeof import('../../inertia/pages/console/schools.tsx'))['default']>
+    'console/settings': ExtractProps<(typeof import('../../inertia/pages/console/settings.tsx'))['default']>
+    'console/users': ExtractProps<(typeof import('../../inertia/pages/console/users.tsx'))['default']>
     'errors/error': ExtractProps<(typeof import('../../inertia/pages/errors/error.tsx'))['default']>
     'exam/home': ExtractProps<(typeof import('../../inertia/pages/exam/home.tsx'))['default']>
     'school/ai_demo': ExtractProps<(typeof import('../../inertia/pages/school/ai_demo.tsx'))['default']>

@@ -7,7 +7,9 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import SchoolMembership from '#models/school_membership'
 
 /**
- * A school user (app.). Roles come from school memberships.
+ * A school user (app.). Roles come from school memberships; the active
+ * one is picked per request by the school context middleware (R1-01)
+ * and read in tenant transactions (app/accounts/memberships.ts).
  */
 export default class User extends compose(
   UserSchema,
@@ -20,18 +22,4 @@ export default class User extends compose(
 
   @hasMany(() => SchoolMembership)
   declare memberships: HasMany<typeof SchoolMembership>
-
-  /**
-   * The school the user works in now: the earliest active membership.
-   * A school switcher for users of several schools comes later.
-   */
-  async currentMembership() {
-    return SchoolMembership.query()
-      .where('user_id', this.id)
-      .where('status', 'active')
-      .preload('school')
-      .orderBy('started_on', 'asc')
-      .orderBy('id', 'asc')
-      .first()
-  }
 }

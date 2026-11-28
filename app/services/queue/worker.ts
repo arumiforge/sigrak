@@ -1,6 +1,7 @@
 import { Worker, WaitingError, type Job } from 'bullmq'
 import logger from '@adonisjs/core/services/logger'
 import type { QueueName, WorkerSettings } from '#config/queue'
+import { defaultJobFor } from '#jobs/default_registry'
 import { exportJobFor } from '#jobs/export_registry'
 import { planForJob } from '#jobs/registry'
 import {
@@ -68,9 +69,21 @@ async function processExportJob(job: Job, token?: string, signal?: AbortSignal) 
 }
 
 /**
+ * Runs one `default` job (mail and other small background work).
+ */
+async function processDefaultJob(job: Job) {
+  const handler = defaultJobFor(job.name)
+  if (!handler) {
+    throw new Error(`No default handler for job "${job.name}"`)
+  }
+  return handler.handle(job)
+}
+
+/**
  * The consumer side of a queue: the body of a worker process role
  * (`node ace queue:work ai` is `worker-ai`). `ai` runs generation
- * steps; `exports` runs export jobs with CPU work in the CPU pool.
+ * steps; `exports` runs export jobs with CPU work in the CPU pool;
+ * `default` runs small jobs such as sending mail.
  */
 export async function startWorker(
   name: QueueName,
@@ -87,7 +100,12 @@ export async function startWorker(
   }
 
   const alert = new QueueWaitAlert(name, settings.waitAlertMs)
-  const run = name === 'exports' ? processExportJob : processGenerationJob
+  const run =
+    name === 'exports'
+      ? processExportJob
+      : name === 'default'
+        ? processDefaultJob
+        : processGenerationJob
   const processJob = async (job: Job, token?: string, signal?: AbortSignal) => {
     const waitMs = waitMsOf(job)
     alert.observe(job, waitMs)

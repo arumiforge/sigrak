@@ -85,6 +85,23 @@ export class AiUsageLogSchema extends BaseModel {
   declare userId: number
 }
 
+export class AppSettingSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'key', 'updatedAt', 'updatedByStaffId', 'value'] as const
+  $columns = AppSettingSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare key: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare updatedByStaffId: number | null
+  @column()
+  declare value: unknown
+}
+
 export class CalendarEventSchema extends BaseModel {
   static $columns = ['calendarId', 'createdAt', 'endsOn', 'examType', 'id', 'kind', 'publicId', 'sourceEventUid', 'startsOn', 'title', 'updatedAt'] as const
   $columns = CalendarEventSchema.$columns
@@ -328,6 +345,41 @@ export class GenerationSchema extends BaseModel {
   declare userId: number
 }
 
+export class InvitationSchema extends BaseModel {
+  static $columns = ['acceptedAt', 'acceptedUserId', 'createdAt', 'email', 'expiresAt', 'id', 'invitedBy', 'invitedByStaffId', 'publicId', 'role', 'schoolId', 'sendCount', 'sentAt', 'tokenHash', 'updatedAt'] as const
+  $columns = InvitationSchema.$columns
+  @column.dateTime()
+  declare acceptedAt: DateTime | null
+  @column()
+  declare acceptedUserId: number | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare email: string
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare invitedBy: number | null
+  @column()
+  declare invitedByStaffId: number | null
+  @column()
+  declare publicId: string
+  @column()
+  declare role: string
+  @column()
+  declare schoolId: number
+  @column()
+  declare sendCount: number
+  @column.dateTime()
+  declare sentAt: DateTime
+  @column({ serializeAs: null })
+  declare tokenHash: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class LearningObjectiveSchema extends BaseModel {
   static $columns = ['code', 'createdAt', 'id', 'order', 'text', 'topicId', 'updatedAt'] as const
   $columns = LearningObjectiveSchema.$columns
@@ -430,6 +482,21 @@ export class NationalHolidaySchema extends BaseModel {
   declare name: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+}
+
+export class PasswordResetTokenSchema extends BaseModel {
+  static $columns = ['createdAt', 'expiresAt', 'id', 'tokenHash', 'userId'] as const
+  $columns = PasswordResetTokenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column({ serializeAs: null })
+  declare tokenHash: string
+  @column()
+  declare userId: number
 }
 
 export class RegionChangeReviewSchema extends BaseModel {
@@ -567,7 +634,7 @@ export class SchoolMembershipSchema extends BaseModel {
 }
 
 export class SchoolSchema extends BaseModel {
-  static $columns = ['address', 'createdAt', 'district', 'districtId', 'id', 'level', 'name', 'npsn', 'regionCheckedAt', 'regionId', 'regionSource', 'updatedAt'] as const
+  static $columns = ['address', 'createdAt', 'district', 'districtId', 'id', 'level', 'name', 'npsn', 'regionCheckedAt', 'regionId', 'regionSource', 'trialDays', 'updatedAt'] as const
   $columns = SchoolSchema.$columns
   @column()
   declare address: string
@@ -591,8 +658,29 @@ export class SchoolSchema extends BaseModel {
   declare regionId: number
   @column()
   declare regionSource: string
+  @column()
+  declare trialDays: number | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+}
+
+export class StaffActivityLogSchema extends BaseModel {
+  static $columns = ['action', 'changes', 'createdAt', 'id', 'staffUserId', 'subjectId', 'subjectType'] as const
+  $columns = StaffActivityLogSchema.$columns
+  @column()
+  declare action: string
+  @column()
+  declare changes: Record<string, unknown>
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare staffUserId: number | null
+  @column()
+  declare subjectId: string
+  @column()
+  declare subjectType: string
 }
 
 export class StaffUserSchema extends BaseModel {
@@ -775,12 +863,14 @@ export class TopicSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'id', 'name', 'nip', 'password', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'emailVerifiedAt', 'id', 'name', 'nip', 'password', 'trialDays', 'trialStartedAt', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
   declare email: string
+  @column.dateTime()
+  declare emailVerifiedAt: DateTime | null
   @column({ isPrimary: true })
   declare id: number
   @column()
@@ -789,6 +879,10 @@ export class UserSchema extends BaseModel {
   declare nip: string | null
   @column({ serializeAs: null })
   declare password: string
+  @column()
+  declare trialDays: number | null
+  @column.dateTime()
+  declare trialStartedAt: DateTime | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }

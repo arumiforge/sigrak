@@ -9,12 +9,21 @@ export const controllers = {
     Session: () => import('#controllers/exam/session_controller'),
   },
   school: {
+    Account: () => import('#controllers/school/account_controller'),
     AiDemo: () => import('#controllers/school/ai_demo_controller'),
     Calendar: () => import('#controllers/school/calendar_controller'),
+    Invitation: () => import('#controllers/school/invitation_controller'),
+    PasswordReset: () => import('#controllers/school/password_reset_controller'),
+    RoleSwitch: () => import('#controllers/school/role_switch_controller'),
     Session: () => import('#controllers/school/session_controller'),
+    SignUp: () => import('#controllers/school/sign_up_controller'),
+    Teachers: () => import('#controllers/school/teachers_controller'),
   },
   staff: {
     Home: () => import('#controllers/staff/home_controller'),
+    Schools: () => import('#controllers/staff/schools_controller'),
     Session: () => import('#controllers/staff/session_controller'),
+    Settings: () => import('#controllers/staff/settings_controller'),
+    Users: () => import('#controllers/staff/users_controller'),
   },
 }

@@ -86,4 +86,15 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   // Rate limiter
   LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const),
+
+  // Mail (D-110, D-431). Provider-neutral: "smtp" sends (Gmail SMTP for
+  // now); "json" only renders the message and sends nothing, for
+  // development. Mail always goes through the default queue.
+  MAIL_MAILER: Env.schema.enum.optional(['smtp', 'json'] as const),
+  MAIL_FROM_ADDRESS: Env.schema.string.optional({ format: 'email' }),
+  MAIL_FROM_NAME: Env.schema.string.optional(),
+  SMTP_HOST: Env.schema.string.optional({ format: 'host' }),
+  SMTP_PORT: Env.schema.number.optional(),
+  SMTP_USERNAME: Env.schema.string.optional(),
+  SMTP_PASSWORD: Env.schema.secret.optional(),
 })
