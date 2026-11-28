@@ -4,9 +4,10 @@ import FlashToasts from '~/components/flash_toasts'
 import { EmailConfirmationBanner } from '~/components/email_confirmation_banner'
 import { AccountMenu, RoleSwitch } from '~/components/shell/account_menu'
 import { BottomNav } from '~/components/shell/bottom_nav'
+import { KabarBell } from '~/components/publishing/kabar_bell'
 import { SidebarNav, SkipLink, Wordmark } from '~/components/shell/shell_parts'
 import { useT } from '~/lib/i18n'
-import { appNavFor } from '~/lib/navigation'
+import { appNavFor, pathOf } from '~/lib/navigation'
 
 /**
  * Persistent shell of app. (school users, D-389, D-473): the sidebar
@@ -19,7 +20,7 @@ import { appNavFor } from '~/lib/navigation'
 export default function AppLayout({ children }: { children: ReactNode }) {
   const t = useT()
   const {
-    props: { viewer, role },
+    props: { viewer, role, kabarUnread },
     url,
   } = usePage()
   const items = appNavFor(role)
@@ -39,6 +40,12 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           <div className="mx-auto flex h-[var(--header-height)] max-w-6xl items-center gap-2 px-4 lg:px-6">
             <Wordmark href="/" label={t('common.app_name')} className="lg:hidden" />
             <div className="flex-1" />
+            {viewer && (
+              <KabarBell
+                count={kabarUnread}
+                active={pathOf(url) === '/kabar' || pathOf(url).startsWith('/kabar/')}
+              />
+            )}
             {role && <RoleSwitch role={role} />}
             {viewer && (
               <AccountMenu

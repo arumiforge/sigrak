@@ -1,0 +1,12 @@
+<li class="rounded-lg border bg-surface p-5">
+  <p class="text-sm font-semibold text-brand-strong">{{ event.when }}</p>
+  <h3 class="mt-1 text-xl font-bold break-words">
+    <a href="{{ event.href }}" class="hover:underline">{{ event.title }}</a>
+  </h3>
+  @if(event.where)
+    <p class="mt-1 text-muted">{{ event.where }}</p>
+  @end
+  @if(event.summary)
+    <p class="mt-2 break-words">{{ event.summary }}</p>
+  @end
+</li>

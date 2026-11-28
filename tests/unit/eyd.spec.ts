@@ -415,6 +415,7 @@ const LABEL_PROPER_NAMES = [
   'Quiz Battle',
   'Berkas Administrasi',
   'Tim SIGRAK',
+  'Cerita Sekolah',
   'Seni dan Budaya',
   'Seni Musik',
   'Seni Rupa',

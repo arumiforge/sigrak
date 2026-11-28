@@ -34,7 +34,8 @@
     "schools": "Sekolah dan pengguna",
     "regions": "Wilayah",
     "system": "Sistem",
-    "team": "Tim"
+    "team": "Tim",
+    "communication": "Komunikasi"
   },
   "roles": {
     "principal": "Kepala sekolah",
@@ -53,6 +54,11 @@
     "settings": "Pengaturan",
     "staff": "Staf",
     "activity_log": "Log aktivitas",
-    "access": "Hak akses"
-  }
+    "access": "Hak akses",
+    "announcements": "Kabar",
+    "events": "Acara",
+    "stories": "Cerita Sekolah",
+    "legal": "Halaman legal"
+  },
+  "news_unread": "Kabar, {count} belum dibaca"
 }

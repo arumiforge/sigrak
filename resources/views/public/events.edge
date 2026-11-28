@@ -1,0 +1,26 @@
+@component('public/layout', layout)
+  <h1 class="text-3xl font-bold">{{ title }}</h1>
+  <p class="mt-2 max-w-2xl text-muted">{{ t('publishing.public.events.intro') }}</p>
+
+  <h2 class="mt-10 text-xl font-bold">{{ t('publishing.public.events.upcoming') }}</h2>
+  @if(upcoming.length === 0)
+    <p class="mt-4 rounded-lg border border-dashed bg-surface p-6 text-muted">
+      {{ t('publishing.public.events.empty_upcoming') }}
+    </p>
+  @else
+    <ul class="mt-4 space-y-4">
+      @each(event in upcoming)
+        @include('public/event_card')
+      @end
+    </ul>
+  @end
+
+  @if(past.length)
+    <h2 class="mt-12 text-xl font-bold">{{ t('publishing.public.events.past') }}</h2>
+    <ul class="mt-4 space-y-4">
+      @each(event in past)
+        @include('public/event_card')
+      @end
+    </ul>
+  @end
+@end

@@ -21,6 +21,16 @@ export const hosts: Record<Area, string> = {
 }
 
 /**
+ * The public site on the bare domain (sigrak.com, D-435): server-rendered
+ * pages without a session or sign-in, so it is not an Area.
+ */
+export const publicHost = domain
+
+export function isPublicHost(hostname: string | null | undefined) {
+  return (hostname ?? '').toLowerCase() === publicHost
+}
+
+/**
  * Returns the area served on a hostname, or null for any other host.
  */
 export function areaForHost(hostname: string | null | undefined): Area | null {

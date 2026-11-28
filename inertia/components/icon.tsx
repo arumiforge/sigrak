@@ -75,6 +75,16 @@ import accessSvg from '~/icons/hugeicons/rounded-stroke/security/security-check.
 import accessSolidSvg from '~/icons/hugeicons/rounded-solid/security/security-check.svg?raw'
 import activitySvg from '~/icons/hugeicons/rounded-stroke/note-task/task-daily-01.svg?raw'
 import activitySolidSvg from '~/icons/hugeicons/rounded-solid/note-task/task-daily-01.svg?raw'
+import newsSvg from '~/icons/hugeicons/rounded-stroke/files-folders/news.svg?raw'
+import newsSolidSvg from '~/icons/hugeicons/rounded-solid/files-folders/news.svg?raw'
+import eventSvg from '~/icons/hugeicons/rounded-stroke/date-and-time/calendar-check-in-01.svg?raw'
+import eventSolidSvg from '~/icons/hugeicons/rounded-solid/date-and-time/calendar-check-in-01.svg?raw'
+import storySvg from '~/icons/hugeicons/rounded-stroke/education/book-open-01.svg?raw'
+import storySolidSvg from '~/icons/hugeicons/rounded-solid/education/book-open-01.svg?raw'
+import legalSvg from '~/icons/hugeicons/rounded-stroke/legal/legal-01.svg?raw'
+import legalSolidSvg from '~/icons/hugeicons/rounded-solid/legal/legal-01.svg?raw'
+import notificationSvg from '~/icons/hugeicons/rounded-stroke/alert-notification/notification-03.svg?raw'
+import externalSvg from '~/icons/hugeicons/rounded-stroke/arrows-round/arrow-up-right-01-round.svg?raw'
 
 /** SIGRAK icon names → Rounded Stroke file. */
 const strokeIcons = {
@@ -122,6 +132,12 @@ const strokeIcons = {
   'staff': staffSvg,
   'access': accessSvg,
   'activity': activitySvg,
+  'news': newsSvg,
+  'event': eventSvg,
+  'story': storySvg,
+  'legal': legalSvg,
+  'notification': notificationSvg,
+  'external': externalSvg,
 } as const
 
 export type IconName = keyof typeof strokeIcons
@@ -152,6 +168,10 @@ const solidIcons: Partial<Record<IconName, string>> = {
   'staff': staffSolidSvg,
   'access': accessSolidSvg,
   'activity': activitySolidSvg,
+  'news': newsSolidSvg,
+  'event': eventSolidSvg,
+  'story': storySolidSvg,
+  'legal': legalSolidSvg,
 }
 
 type ParsedIcon = { viewBox: string; body: string }
