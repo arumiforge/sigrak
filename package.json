@@ -39,6 +39,7 @@
     "#abilities/*": "./app/abilities/*.js",
     "#tenancy/*": "./app/tenancy/*.js",
     "#regions/*": "./app/regions/*.js",
+    "#layers/*": "./app/layers/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",

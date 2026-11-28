@@ -1,4 +1,4 @@
-import type { Knex } from 'knex'
+import type { BaseSchema } from '@adonisjs/lucid/schema'
 import { childRls, dropRls } from '../../tenancy/rls.js'
 import { FORCES, ITEM_SHAPES, ITEM_STATUSES, ORIGINS } from '../types.js'
 
@@ -22,7 +22,7 @@ import { FORCES, ITEM_SHAPES, ITEM_STATUSES, ORIGINS } from '../types.js'
  * then register the domain in `layer_domains` (domain → table) and add
  * the table to `CHILD_TABLES` in the RLS coverage test.
  */
-export function layeredColumns(table: Knex.CreateTableBuilder) {
+export function layeredColumns(table: TableBuilder) {
   table.bigIncrements('id')
   table
     .bigInteger('package_id')
@@ -43,6 +43,8 @@ export function layeredColumns(table: Knex.CreateTableBuilder) {
   table.timestamp('created_at', { useTz: true }).notNullable()
   table.timestamp('updated_at', { useTz: true }).notNullable()
 }
+
+type TableBuilder = Parameters<Parameters<BaseSchema['schema']['createTable']>[1]>[0]
 
 const list = (values: readonly string[]) => values.map((value) => `'${value}'`).join(', ')
 
