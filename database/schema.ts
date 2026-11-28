@@ -374,6 +374,31 @@ export class StaffUserSchema extends BaseModel {
   declare updatedAt: DateTime
 }
 
+export class SupervisorAssignmentSchema extends BaseModel {
+  static $columns = ['createdAt', 'decidedAt', 'decidedByStaffId', 'endedOn', 'id', 'schoolId', 'startedOn', 'status', 'updatedAt', 'userId'] as const
+  $columns = SupervisorAssignmentSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare decidedAt: DateTime | null
+  @column()
+  declare decidedByStaffId: number | null
+  @column.date()
+  declare endedOn: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare schoolId: number
+  @column.date()
+  declare startedOn: DateTime | null
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'id', 'name', 'nip', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns
