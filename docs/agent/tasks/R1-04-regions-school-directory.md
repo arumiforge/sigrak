@@ -1,8 +1,8 @@
 # R1-04 — Regions and school directory (NPSN → region)
 
 - **Phase:** R1
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r1/r1-04-regions
 - **Depends on:** R1-01
 - **Can run in parallel with:** R1-05
 

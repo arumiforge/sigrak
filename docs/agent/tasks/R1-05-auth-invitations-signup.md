@@ -1,8 +1,8 @@
 # R1-05 — Auth, invitations, self sign-up, flexible trial, role switch, minimal staff console
 
 - **Phase:** R1
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r1/r1-05-auth
 - **Depends on:** R1-01, R1-02
 - **Can run in parallel with:** R1-04, R1-07
 

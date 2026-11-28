@@ -127,12 +127,12 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R0-14 | Record the 2026-11-27 owner interview: D-423…D-440, CONTEXT, handbook, `rekomendasi-tambahan.md` Keputusan column, follow-up tasks | done (PR #2) | r0/r0-14-owner-decisions | R0-13 | `DECISIONS.md`, `CONTEXT.md`, `docs/handbook/index.html`, `docs/server/rekomendasi-tambahan.md` |
 | R0-15 | Licensed assets: Hugeicons Pro (Rounded Stroke and Rounded Solid only, names normalised, `.DS_Store` removed) and the shadcn/studio Pro `radix` blocks the app uses; zips and licence files never committed; `THIRD_PARTY_NOTICES.md` names the licence holder (D-402, D-434) | done (PR #3) | r0/r0-15-licensed-assets | — | `inertia/icons/hugeicons/`, `docs/drafts/shadcn-studio-catalog.md` |
 | R1 | Build the foundation (D-468): split into R1-01…R1-11, order and parallel rules in `tasks/R1-00-foundation-plan.md` | in-progress | r1/r1-00-gate-split | R0 gate (passed, D-468) | `tasks/R1-*.md` |
-| R1-01 | Tenancy core and RLS (`SET LOCAL` per transaction) | in-progress | r1/r1-01-tenancy-rls | — | `tasks/R1-01-*.md` |
-| R1-02 | Indonesian copy base and translation checks | in-progress | r1/r1-02-lang-id | — | `tasks/R1-02-*.md` |
+| R1-01 | Tenancy core and RLS (`SET LOCAL` per transaction) | review (merged into the R1 branch) | r1/r1-01-tenancy-rls | — | `tasks/R1-01-*.md` |
+| R1-02 | Indonesian copy base and translation checks | review (merged into the R1 branch) | r1/r1-02-lang-id | — | `tasks/R1-02-*.md` |
 | R1-03 | Curriculum tables, import, Profil Jenjang, policy-profile resolver | in-progress | r1/r1-03-curriculum | — | `tasks/R1-03-*.md` |
-| R1-10 | Runtime settings: AI concurrency, queue-wait alert, worker_threads pool (D-463, D-467) | in-progress | r1/r1-10-runtime-settings | — | `tasks/R1-10-*.md` |
-| R1-04 | Regions and school directory (NPSN → region) | todo | — | R1-01 | `tasks/R1-04-*.md` |
-| R1-05 | Auth, invitations, self sign-up, flexible trial, role switch, staff console | todo | — | R1-01, R1-02 | `tasks/R1-05-*.md` |
+| R1-10 | Runtime settings: AI concurrency, queue-wait alert, worker_threads pool (D-463, D-467) | review (merged into the R1 branch) | r1/r1-10-runtime-settings | — | `tasks/R1-10-*.md` |
+| R1-04 | Regions and school directory (NPSN → region) | in-progress | r1/r1-04-regions | R1-01 | `tasks/R1-04-*.md` |
+| R1-05 | Auth, invitations, self sign-up, flexible trial, role switch, staff console | in-progress | r1/r1-05-auth | R1-01, R1-02 | `tasks/R1-05-*.md` |
 | R1-07 | Layer model core and resolver (D-456, D-466) | todo | — | R1-01, R1-04 | `tasks/R1-07-*.md` |
 | R1-06 | Academic year, classes, teaching assignments | todo | — | R1-03, R1-05 | `tasks/R1-06-*.md` |
 | R1-08 | Calendar on the layer model | todo | — | R1-06, R1-07 | `tasks/R1-08-*.md` |
