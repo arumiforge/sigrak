@@ -33,6 +33,8 @@ const SAMPLE_PARAMS: Record<string, string> = {
   package: '0190a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b',
   notice: '0190a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b',
   proposal: '0190a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b',
+  academicYear: '0190a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b',
+  class: '0190a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b',
 }
 
 function routesOf(domain: string) {

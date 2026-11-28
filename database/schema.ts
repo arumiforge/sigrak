@@ -7,6 +7,31 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class AcademicYearSchema extends BaseModel {
+  static $columns = ['closedAt', 'createdAt', 'endsOn', 'evenSemesterStartsOn', 'id', 'name', 'publicId', 'schoolId', 'startsOn', 'updatedAt'] as const
+  $columns = AcademicYearSchema.$columns
+  @column.dateTime()
+  declare closedAt: DateTime | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.date()
+  declare endsOn: DateTime
+  @column.date()
+  declare evenSemesterStartsOn: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column()
+  declare publicId: string
+  @column()
+  declare schoolId: number
+  @column.date()
+  declare startsOn: DateTime
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class AiCredentialSchema extends BaseModel {
   static $columns = ['accountLabel', 'circuitOpenUntil', 'consecutiveFailures', 'createdAt', 'id', 'invalidReason', 'isBackup', 'label', 'lastSuccessAt', 'lastTestedAt', 'multiKeyConsentAt', 'projectLabel', 'publicId', 'secret', 'secretFingerprint', 'secretLast4', 'status', 'updatedAt', 'userId'] as const
   $columns = AiCredentialSchema.$columns
@@ -213,6 +238,31 @@ export class CatalogItemSchema extends BaseModel {
   declare status: string
   @column()
   declare supersedesId: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class ClassSchema extends BaseModel {
+  static $columns = ['academicYearId', 'artBranch', 'createdAt', 'grade', 'homeroomTeacherId', 'id', 'name', 'publicId', 'schoolId', 'updatedAt'] as const
+  $columns = ClassSchema.$columns
+  @column()
+  declare academicYearId: number
+  @column()
+  declare artBranch: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare grade: number
+  @column()
+  declare homeroomTeacherId: number | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column()
+  declare publicId: string
+  @column()
+  declare schoolId: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }
@@ -1086,6 +1136,25 @@ export class SupervisorAssignmentSchema extends BaseModel {
   declare updatedAt: DateTime
   @column()
   declare userId: number
+}
+
+export class TeachingAssignmentSchema extends BaseModel {
+  static $columns = ['classId', 'createdAt', 'id', 'schoolId', 'subjectId', 'teacherId', 'updatedAt'] as const
+  $columns = TeachingAssignmentSchema.$columns
+  @column()
+  declare classId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare schoolId: number
+  @column()
+  declare subjectId: number
+  @column()
+  declare teacherId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
 }
 
 export class TopicSchema extends BaseModel {
