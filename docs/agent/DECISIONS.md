@@ -2351,3 +2351,11 @@ Accepted · 2026-11-28 · R1 · team decisions recorded in the Results of R1-01�
 - **Accounts (R1-05):** joining a school moves nothing: a teacher's earlier personal work stays theirs and stays private; the longest trial (default, school or person) wins; invitations are opened through a narrow database function returning only the school id; all mail goes through the `default` queue; console powers until the D-339 roles exist: admin all, support read-mostly, content none.
 - **Runtime (R1-10):** queue numbers on the internal-only `/healthz/queues`; out-of-range settings are clamped with a warning, non-numbers stop the boot.
 Reason: keep the build choices of R1 findable in the decision log.
+
+### D-471 — EYD V is the spelling standard for all Indonesian text
+Accepted · 2026-11-28 · owner's choice ("masukan https://eyd.netlify.app/ untuk aturan eyd") · extends D-150, D-382 and the design system's UI writing rules
+- All Indonesian text SIGRAK produces follows *Ejaan Bahasa Indonesia yang Disempurnakan* Edisi Kelima (EYD V, Badan Pengembangan dan Pembinaan Bahasa): UI copy in `resources/lang/id`, exports and import templates, generated PDFs and documents, AI templates' fixed text, the public site and the Indonesian guides in `docs/server/`.
+- Working reference: https://eyd.netlify.app/ (community copy, CC BY-SA 4.0). Where it differs from Badan Bahasa's official publication, the official text wins. A rule summary for SIGRAK lives in `docs/drafts/eyd-rules.md`; mechanical checks run in the translation tests.
+- House choices that EYD leaves open stay as decided: money in UI without decimals `Rp1.234.567` (D-469); formal documents and receipts use `Rp1.234.567,00` and the amount in words where EYD requires it; times `14.30` with "WIB" where it matters.
+- Owner-supplied material in `docs/sources/` is never corrected (CLAUDE.md).
+Reason: one spelling standard for every Indonesian text, checked automatically where possible.
