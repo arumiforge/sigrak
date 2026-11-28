@@ -45,7 +45,7 @@ export class ProposalNotOpenException extends LayerRuleException {
   }
 }
 
-export const SCHOOL_PROPOSAL_ACTIONS = ['add', 'hide', 'unhide', 'retire'] as const
+export const SCHOOL_PROPOSAL_ACTIONS = ['add', 'revise', 'hide', 'unhide', 'retire'] as const
 export type SchoolProposalAction = (typeof SCHOOL_PROPOSAL_ACTIONS)[number]
 
 function trxOrFail(): QueryClientContract {
@@ -123,7 +123,19 @@ async function checkSchoolProposal(
     case 'add': {
       const payload = await adapter.validatePayload(input.item)
       LayerRules.checkAddition(resolution, { matchKey: adapter.matchKeyOf(payload) })
+      await adapter.checkChange?.(client, resolution, payload, { replacing: null })
       return { payload, label: adapter.labelOf(payload) }
+    }
+    case 'revise': {
+      const current = resolution.items.find((entry) => entry.itemKey === input.itemKey)
+      if (!current || current.source.layer !== 'school') {
+        throw new LayerRuleException('layers.errors.not_own_item')
+      }
+      const payload = await adapter.validatePayload(input.item)
+      const others = { ...resolution, items: resolution.items.filter((item) => item !== current) }
+      LayerRules.checkAddition(others, { matchKey: adapter.matchKeyOf(payload) })
+      await adapter.checkChange?.(client, resolution, payload, { replacing: input.itemKey })
+      return { payload, label: adapter.labelOf(current.value) }
     }
     case 'hide': {
       const target = LayerRules.checkHide(resolution, input.itemKey!, 'school', groups)
@@ -203,6 +215,15 @@ export const SchoolProposals = {
     switch (proposal.action) {
       case 'add':
         await SchoolLayer.add(actor, proposal.domain, schoolYear, proposal.payload.item)
+        break
+      case 'revise':
+        await SchoolLayer.revise(
+          actor,
+          proposal.domain,
+          schoolYear,
+          proposal.item_key!,
+          proposal.payload.item
+        )
         break
       case 'hide':
         await SchoolLayer.hide(

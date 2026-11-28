@@ -1,5 +1,5 @@
-import { readFile } from 'node:fs/promises'
 import app from '@adonisjs/core/services/app'
+import { randomUUID } from 'node:crypto'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import { DateTime } from 'luxon'
 import db from '@adonisjs/lucid/services/db'
@@ -8,12 +8,18 @@ import School from '#models/school'
 import User from '#models/user'
 import SchoolMembership from '#models/school_membership'
 import StaffUser from '#models/staff_user'
-import Calendar from '#models/calendar'
-import CalendarEvent, { type CalendarEventKind, type ExamType } from '#models/calendar_event'
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
 import { seedRegionList } from '#regions/region_list'
 import { jawaTengahRegions } from '#regions/region_files'
+import {
+  activateCalendarPackage,
+  importNationalHolidays,
+  importRegionCalendar,
+  NATIONAL_PACKAGE_CODE,
+} from '#calendar/data_files'
+import { calendarMatchKey } from '#calendar/keys'
+import type { EventKind, ExamType } from '#calendar/types'
 
 /**
  * Local demo data: invented schools and people only (Fondasi
@@ -21,68 +27,26 @@ import { jawaTengahRegions } from '#regions/region_files'
  */
 export const DEMO_PASSWORD = 'sigrak-demo-2026'
 
-type RegionCalendarFile = {
-  code: string
-  name: string
-  academic_year: string
-  school_days_per_week: number
-  starts_on: string
-  even_semester_starts_on: string
-  ends_on: string
-  events: {
-    kind: CalendarEventKind
-    exam_type?: ExamType
-    title: string
-    starts_on: string
-    ends_on: string
-  }[]
-  joint_leave_school_days: { date: string }[]
-}
-
 export default class DemoSeeder extends BaseSeeder {
   static environment = ['development', 'test']
 
   async run() {
-    const file = JSON.parse(
-      await readFile(app.makePath('docs/data/calendar/region-jawa-tengah-2026-2027.json'), 'utf8')
-    ) as RegionCalendarFile
-
     // The region list is idempotent; region_seeder also loads the school directory.
     await seedRegionList(db.connection(), jawaTengahRegions())
-    const province = await Region.findByOrFail('kemendagriCode', '33')
     const kudus = await Region.findByOrFail('kemendagriCode', '33.19')
     const kotaKudus = await Region.findByOrFail('kemendagriCode', '33.19.02')
     const jati = await Region.findByOrFail('kemendagriCode', '33.19.03')
 
-    // Region reference calendar (status draft until Tim Validasi signs off).
-    const regionCalendar = await Calendar.firstOrCreate(
-      { code: file.code },
-      {
-        regionId: province.id,
-        academicYear: file.academic_year,
-        name: file.name,
-        status: 'draft',
-        schoolDaysPerWeek: file.school_days_per_week,
-        startsOn: DateTime.fromISO(file.starts_on),
-        evenSemesterStartsOn: DateTime.fromISO(file.even_semester_starts_on),
-        endsOn: DateTime.fromISO(file.ends_on),
-        jointLeaveSchoolDays: file.joint_leave_school_days.map((day) => day.date),
-        meta: {},
-      }
-    )
-    const existingEvent = await regionCalendar.related('events').query().first()
-    if (!existingEvent) {
-      await regionCalendar.related('events').createMany(
-        file.events.map((event) => ({
-          kind: event.kind,
-          examType: event.exam_type ?? null,
-          title: event.title,
-          startsOn: DateTime.fromISO(event.starts_on),
-          endsOn: DateTime.fromISO(event.ends_on),
-        }))
-      )
-    }
-    await regionCalendar.load('events')
+    // National holidays and the Jawa Tengah kaldik as layer packages (R1-08). They stay
+    // draft until Tim Validasi signs off (D-113, D-254); the demo activates them locally.
+    await db.transaction(async (trx) => {
+      await importNationalHolidays(trx)
+      const region = await importRegionCalendar(trx, {
+        file: app.makePath('docs/data/calendar/region-jawa-tengah-2026-2027.json'),
+      })
+      await activateCalendarPackage(trx, NATIONAL_PACKAGE_CODE, null)
+      await activateCalendarPackage(trx, region.packageCode, null)
+    })
 
     const sd = await School.firstOrCreate(
       { name: 'SD Negeri Contoh 1' },
@@ -105,7 +69,7 @@ export default class DemoSeeder extends BaseSeeder {
       }
     )
 
-    await this.copyCalendar(regionCalendar, sd, [
+    await this.schoolEvents(sd, [
       {
         kind: 'exam',
         examType: 'sts',
@@ -133,7 +97,7 @@ export default class DemoSeeder extends BaseSeeder {
         endsOn: '2026-12-19',
       },
     ])
-    await this.copyCalendar(regionCalendar, mi, [
+    await this.schoolEvents(mi, [
       {
         kind: 'school_event',
         title: 'Pentas Seni Madrasah',
@@ -189,62 +153,75 @@ export default class DemoSeeder extends BaseSeeder {
   }
 
   /**
-   * "Salin dari kalender wilayah": the school calendar copies the region
-   * calendar and its events (D-256), then adds its own events.
+   * The school's academic year 2026/2027 (frame of the Jawa Tengah kaldik) and
+   * its own events in its school calendar package (D-466: no copy of the region).
    */
-  private async copyCalendar(
-    region: Calendar,
+  private async schoolEvents(
     school: School,
-    own: {
-      kind: CalendarEventKind
-      examType?: ExamType
-      title: string
-      startsOn: string
-      endsOn: string
-    }[]
+    own: { kind: EventKind; examType?: ExamType; title: string; startsOn: string; endsOn: string }[]
   ) {
-    const existing = await Calendar.query()
-      .where('school_id', school.id)
-      .where('academic_year', region.academicYear)
-      .first()
-    if (existing) {
-      return existing
+    const now = new Date()
+    await db
+      .table('academic_years')
+      .insert({
+        public_id: randomUUID(),
+        school_id: school.id,
+        name: '2026/2027',
+        starts_on: '2026-07-13',
+        even_semester_starts_on: '2027-01-02',
+        ends_on: '2027-06-19',
+        created_at: now,
+        updated_at: now,
+      })
+      .onConflict(['school_id', 'name'])
+      .ignore()
+
+    const code = `SCHOOL-${school.id}-CALENDAR-2026-2027`
+    const existing = await db.from('layer_packages').where('code', code).first()
+    if (existing) return
+    const [pkg] = (await db
+      .table('layer_packages')
+      .insert({
+        code,
+        domain: 'calendar',
+        layer: 'school',
+        school_id: school.id,
+        line: 'all',
+        kind: 'school',
+        level_scope: 'both',
+        name: 'Perubahan sekolah',
+        status: 'active',
+        applies_from_school_year: '2026/2027',
+        version: 1,
+        created_at: now,
+        updated_at: now,
+      })
+      .returning('id')) as { id: number }[]
+    for (const [index, event] of own.entries()) {
+      const itemKey = `CAL-SCH-DEMO${String(index + 1).padStart(2, '0')}`
+      await db.table('calendar_items').insert({
+        package_id: pkg.id,
+        item_key: itemKey,
+        shape: 'list',
+        force: 'free',
+        origin: 'school',
+        match_key: calendarMatchKey({
+          itemKey,
+          kind: event.kind,
+          startsOn: event.startsOn,
+          endsOn: event.endsOn,
+          title: event.title,
+        }),
+        revision: 1,
+        status: 'active',
+        kind: event.kind,
+        exam_type: event.examType ?? null,
+        title: event.title,
+        starts_on: event.startsOn,
+        ends_on: event.endsOn,
+        created_at: now,
+        updated_at: now,
+      })
     }
-
-    const calendar = await Calendar.create({
-      schoolId: school.id,
-      academicYear: region.academicYear,
-      name: `Kalender ${school.name} ${region.academicYear}`,
-      status: 'active',
-      schoolDaysPerWeek: region.schoolDaysPerWeek,
-      startsOn: region.startsOn,
-      evenSemesterStartsOn: region.evenSemesterStartsOn,
-      endsOn: region.endsOn,
-      sourceCalendarId: region.id,
-      sourceVersion: region.version,
-      jointLeaveSchoolDays: region.jointLeaveSchoolDays,
-      meta: {},
-    })
-
-    await CalendarEvent.createMany([
-      ...region.events.map((event) => ({
-        calendarId: calendar.id,
-        kind: event.kind,
-        examType: event.examType,
-        title: event.title,
-        startsOn: event.startsOn,
-        endsOn: event.endsOn,
-        sourceEventUid: event.publicId,
-      })),
-      ...own.map((event) => ({
-        calendarId: calendar.id,
-        kind: event.kind,
-        examType: event.examType ?? null,
-        title: event.title,
-        startsOn: DateTime.fromISO(event.startsOn),
-        endsOn: DateTime.fromISO(event.endsOn),
-      })),
-    ])
-    return calendar
   }
 }

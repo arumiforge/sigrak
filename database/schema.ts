@@ -127,74 +127,76 @@ export class AppSettingSchema extends BaseModel {
   declare value: unknown
 }
 
-export class CalendarEventSchema extends BaseModel {
-  static $columns = ['calendarId', 'createdAt', 'endsOn', 'examType', 'id', 'kind', 'publicId', 'sourceEventUid', 'startsOn', 'title', 'updatedAt'] as const
-  $columns = CalendarEventSchema.$columns
+export class CalendarItemSchema extends BaseModel {
+  static $columns = ['classId', 'createdAt', 'endsOn', 'examType', 'force', 'groupKey', 'id', 'itemKey', 'kind', 'matchKey', 'origin', 'packageId', 'revision', 'settingValue', 'shape', 'sourceRef', 'startsOn', 'status', 'supersedesId', 'title', 'updatedAt'] as const
+  $columns = CalendarItemSchema.$columns
   @column()
-  declare calendarId: number
+  declare classId: number | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column.date()
-  declare endsOn: DateTime
+  declare endsOn: DateTime | null
   @column()
   declare examType: string | null
+  @column()
+  declare force: string
+  @column()
+  declare groupKey: string | null
   @column({ isPrimary: true })
   declare id: number
   @column()
+  declare itemKey: string
+  @column()
   declare kind: string
   @column()
-  declare publicId: string
+  declare matchKey: string
   @column()
-  declare sourceEventUid: string | null
+  declare origin: string
+  @column()
+  declare packageId: number
+  @column()
+  declare revision: number
+  @column()
+  declare settingValue: string | null
+  @column()
+  declare shape: string
+  @column()
+  declare sourceRef: any | null
   @column.date()
-  declare startsOn: DateTime
+  declare startsOn: DateTime | null
+  @column()
+  declare status: string
+  @column()
+  declare supersedesId: number | null
   @column()
   declare title: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }
 
-export class CalendarSchema extends BaseModel {
-  static $columns = ['academicYear', 'code', 'createdAt', 'endsOn', 'evenSemesterStartsOn', 'id', 'jointLeaveSchoolDays', 'meta', 'name', 'publicId', 'regionId', 'schoolDaysPerWeek', 'schoolId', 'sourceCalendarId', 'sourceVersion', 'startsOn', 'status', 'updatedAt', 'version'] as const
-  $columns = CalendarSchema.$columns
+export class CalendarSnapshotSchema extends BaseModel {
+  static $columns = ['areaItems', 'createdAt', 'effectiveDays', 'id', 'offDays', 'schoolId', 'schoolYear', 'seenAt', 'updatedAt', 'userId'] as const
+  $columns = CalendarSnapshotSchema.$columns
   @column()
-  declare academicYear: string
-  @column()
-  declare code: string | null
+  declare areaItems: any
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
-  @column.date()
-  declare endsOn: DateTime
-  @column.date()
-  declare evenSemesterStartsOn: DateTime
+  @column()
+  declare effectiveDays: number
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare jointLeaveSchoolDays: string[]
+  declare offDays: any
   @column()
-  declare meta: Record<string, unknown>
+  declare schoolId: number
   @column()
-  declare name: string
-  @column()
-  declare publicId: string
-  @column()
-  declare regionId: number | null
-  @column()
-  declare schoolDaysPerWeek: number
-  @column()
-  declare schoolId: number | null
-  @column()
-  declare sourceCalendarId: number | null
-  @column()
-  declare sourceVersion: number | null
-  @column.date()
-  declare startsOn: DateTime
-  @column()
-  declare status: string
+  declare schoolYear: string
+  @column.dateTime()
+  declare seenAt: DateTime
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
   @column()
-  declare version: number
+  declare userId: number
 }
 
 export class CatalogItemSchema extends BaseModel {
@@ -772,29 +774,6 @@ export class LearningOutcomeSchema extends BaseModel {
   declare subjectId: number
   @column()
   declare text: string
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
-}
-
-export class NationalHolidaySchema extends BaseModel {
-  static $columns = ['academicYear', 'createdAt', 'date', 'decree', 'id', 'isProvisional', 'kind', 'name', 'updatedAt'] as const
-  $columns = NationalHolidaySchema.$columns
-  @column()
-  declare academicYear: string
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-  @column.date()
-  declare date: DateTime
-  @column()
-  declare decree: string
-  @column({ isPrimary: true })
-  declare id: number
-  @column()
-  declare isProvisional: boolean
-  @column()
-  declare kind: string
-  @column()
-  declare name: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }

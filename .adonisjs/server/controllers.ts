@@ -11,7 +11,6 @@ export const controllers = {
   school: {
     Account: () => import('#controllers/school/account_controller'),
     AiDemo: () => import('#controllers/school/ai_demo_controller'),
-    Calendar: () => import('#controllers/school/calendar_controller'),
     EmailConfirmation: () => import('#controllers/school/email_confirmation_controller'),
     Invitation: () => import('#controllers/school/invitation_controller'),
     PasswordReset: () => import('#controllers/school/password_reset_controller'),
