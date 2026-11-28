@@ -47,14 +47,11 @@ session.closesAt = DateTime.now().plus({ days: 7 })
 await session.save()
 
 const names = Array.from({ length: CARDS }, (_, i) => `lab-${String(i + 1).padStart(3, '0')}`)
-const existing = new Set(
-  (
-    await ExamParticipant.query()
-      .where('exam_session_id', session.id)
-      .whereIn('username', names)
-      .select('username')
-  ).map((card) => card.username)
-)
+const found = await ExamParticipant.query()
+  .where('exam_session_id', session.id)
+  .whereIn('username', names)
+  .select('username')
+const existing = new Set(found.map((card) => card.username))
 const password = ExamParticipant.encryptPassword(CARD_PASSWORD)
 const missing = names.filter((name) => !existing.has(name))
 if (missing.length > 0) {
