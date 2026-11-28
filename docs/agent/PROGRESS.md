@@ -142,7 +142,7 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R2 | Staff console on `admin.` (D-476, D-477): split into R2-01…R2-09 in `tasks/R2-00-console-plan.md` | in-progress | r2/r2-00-split | R1 (done, D-476) | `tasks/R2-*.md` |
 | R2-01 | Staff roles, scopes, staff accounts, audit log, Hak akses | review | r2/r2-01-staff-roles | — | `tasks/R2-01-*.md` |
 | R2-02 | Staff 2FA with TOTP | in-progress | r2/r2-02-staff-2fa | R2-01 | `tasks/R2-02-*.md` |
-| R2-03 | Integration settings and AI models per purpose | in-progress | r2/r2-03-integration-settings | R2-01 | `tasks/R2-03-*.md` |
+| R2-03 | Integration settings and AI models per purpose | review | r2/r2-03-integration-settings | R2-01 | `tasks/R2-03-*.md` |
 | R2-04 | Kesehatan Sistem page | in-progress | r2/r2-04-system-health | R2-01 | `tasks/R2-04-*.md` |
 | R2-05 | Kabar, Acara, Cerita Sekolah, legal pages | in-progress | r2/r2-05-content-pages | R2-01 | `tasks/R2-05-*.md` |
 | R2-06 | Minta Bantuan, help-request statuses, support sessions | in-progress | r2/r2-06-help-requests | R2-01 | `tasks/R2-06-*.md` |
