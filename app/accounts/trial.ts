@@ -77,8 +77,9 @@ async function schoolTrialDays(userId: number, client?: QueryClientContract) {
 
 export async function trialOf(user: User, client?: QueryClientContract): Promise<TrialStatus> {
   return trialStatus({
-    startedAt: user.trialStartedAt,
-    userDays: user.trialDays,
+    // A model made in this process may not hold the columns it never set.
+    startedAt: user.trialStartedAt ?? null,
+    userDays: user.trialDays ?? null,
     schoolDays: await schoolTrialDays(user.id, client),
     defaultDays: await defaultTrialDays(),
   })
@@ -93,7 +94,8 @@ export function extendedUserDays(status: TrialStatus, extraDays: number, now = D
   if (!status.startedAt) return clampDays(extraDays)
   const from = status.endsAt && status.endsAt > now ? status.endsAt : now
   const until = from.plus({ days: extraDays })
-  return clampDays(Math.ceil(until.diff(status.startedAt, 'days').days))
+  // Rounded, so the seconds between reading the status and saving do not add a day.
+  return clampDays(Math.round(until.diff(status.startedAt, 'days').days))
 }
 
 export function clampDays(days: number) {

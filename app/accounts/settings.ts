@@ -56,7 +56,7 @@ export async function setDefaultTrialDays(staff: StaffUser, days: number) {
       'setting.updated',
       'setting',
       DEFAULT_TRIAL_DAYS_KEY,
-      { from: before ? asTrialDays(before.value) : null, to: days },
+      { from: asTrialDays(before?.value), to: days },
       trx
     )
   })

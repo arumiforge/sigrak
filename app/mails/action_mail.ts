@@ -15,13 +15,13 @@ export type ActionMailContent = {
 
 /**
  * One layout for every transactional mail (resources/views/emails/
- * action.edge and its text twin). Sent through the queue with
+ * action_html.edge and action_text.edge). Sent through the queue with
  * `mail.sendLater()`.
  */
 export abstract class ActionMail extends BaseMail {
   constructor(
-    protected recipient: string,
-    protected content: ActionMailContent
+    readonly recipient: string,
+    readonly content: ActionMailContent
   ) {
     super()
   }
