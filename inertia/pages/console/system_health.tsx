@@ -32,6 +32,8 @@ type FailedJob = {
   attempts: number
   queuedAt: string
   failedAt: string | null
+  /** False for AI generation steps: the teacher retries those. */
+  retryable: boolean
 }
 
 type DiskSummary = {
@@ -40,6 +42,11 @@ type DiskSummary = {
   freeBytes: number
   freePercent: number
   status: 'ok' | 'low' | 'critical'
+}
+
+type ServicesStatus = {
+  cache: { reachable: boolean; usedBytes: number | null; maxBytes: number | null }
+  mail: { source: 'env' | 'console' | 'none'; sends: boolean; warn: boolean }
 }
 
 type ActivityDay = {
@@ -66,10 +73,19 @@ type Props = {
   failedJobs?: FailedJob[] | null
   disk?: DiskSummary | null
   backup?: { lastBackupAt: string | null } | null
+  services?: ServicesStatus | null
   activity?: DailyActivity | null
 }
 
-const REFRESHED_PROPS = ['checkedAt', 'queues', 'failedJobs', 'disk', 'backup', 'activity']
+const REFRESHED_PROPS = [
+  'checkedAt',
+  'queues',
+  'failedJobs',
+  'disk',
+  'backup',
+  'services',
+  'activity',
+]
 
 type T = ReturnType<typeof useT>
 
@@ -134,9 +150,17 @@ function Unavailable() {
   )
 }
 
-function Stat({ label, value }: { label: string; value: ReactNode }) {
+function Stat({
+  label,
+  value,
+  className,
+}: {
+  label: string
+  value: ReactNode
+  className?: string
+}) {
   return (
-    <div className="min-w-0">
+    <div className={className ? `min-w-0 ${className}` : 'min-w-0'}>
       <dt className="text-xs text-muted">{label}</dt>
       <dd className="text-lg font-semibold tabular-nums">{value}</dd>
     </div>
@@ -155,7 +179,7 @@ function ServerCards({ disk, backup }: Pick<Props, 'disk' | 'backup'>) {
     <div className="grid gap-3 sm:grid-cols-2">
       <div className="rounded-lg border bg-surface p-4" data-testid="disk-card">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="font-bold">{t('system_health.disk.title')}</h3>
+          <h2 className="font-bold">{t('system_health.disk.title')}</h2>
           {disk && (
             <StatusChip tone={diskTone[disk.status]} icon>
               {t(`system_health.disk.status.${disk.status}`)}
@@ -185,7 +209,7 @@ function ServerCards({ disk, backup }: Pick<Props, 'disk' | 'backup'>) {
       </div>
 
       <div className="rounded-lg border bg-surface p-4" data-testid="backup-card">
-        <h3 className="font-bold">{t('system_health.backup.title')}</h3>
+        <h2 className="font-bold">{t('system_health.backup.title')}</h2>
         {backup ? (
           backup.lastBackupAt ? (
             <>
@@ -204,6 +228,64 @@ function ServerCards({ disk, backup }: Pick<Props, 'disk' | 'backup'>) {
           <div className="mt-3">
             <Unavailable />
           </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function ServiceCards({ services }: { services: ServicesStatus | null | undefined }) {
+  const t = useT()
+  if (!services) return <Unavailable />
+  const { cache, mail } = services
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <div className="rounded-lg border bg-surface p-4" data-testid="cache-card">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h3 className="font-bold">{t('system_health.services.cache.title')}</h3>
+          <StatusChip tone={cache.reachable ? 'ok' : 'warn'} icon>
+            {t(
+              cache.reachable
+                ? 'system_health.services.cache.reachable'
+                : 'system_health.services.cache.unreachable'
+            )}
+          </StatusChip>
+        </div>
+        {cache.reachable ? (
+          <p className="mt-2 text-sm">
+            {cache.usedBytes === null
+              ? t('system_health.services.cache.memory_unknown')
+              : cache.maxBytes === null
+                ? t('system_health.services.cache.memory', { used: bytes(t, cache.usedBytes) })
+                : t('system_health.services.cache.memory_of', {
+                    used: bytes(t, cache.usedBytes),
+                    max: bytes(t, cache.maxBytes),
+                  })}
+          </p>
+        ) : (
+          <p className="mt-2 text-sm">{t('system_health.services.cache.unreachable_note')}</p>
+        )}
+        <p className="mt-1 text-xs text-muted">{t('system_health.services.cache.note')}</p>
+      </div>
+
+      <div className="rounded-lg border bg-surface p-4" data-testid="mail-card">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h3 className="font-bold">{t('system_health.services.mail.title')}</h3>
+          <StatusChip tone={mail.warn ? 'warn' : mail.sends ? 'ok' : 'neutral'} icon>
+            {t(
+              mail.sends
+                ? 'system_health.services.mail.sends'
+                : 'system_health.services.mail.not_sending'
+            )}
+          </StatusChip>
+        </div>
+        <p className="mt-2 text-sm">{t(`system_health.services.mail.${mail.source}_note`)}</p>
+        {mail.warn ? (
+          <p className="mt-1 text-sm text-warn">{t('system_health.services.mail.warn')}</p>
+        ) : (
+          !mail.sends && (
+            <p className="mt-1 text-xs text-muted">{t('system_health.services.mail.dev_note')}</p>
+          )
         )}
       </div>
     </div>
@@ -244,16 +326,15 @@ function QueueCards({ queues }: { queues: QueueSummary[] | null | undefined }) {
               label={t('system_health.queues.labels.failed')}
               value={formatNumber(queue.failed)}
             />
-            <div className="col-span-2">
-              <Stat
-                label={t('system_health.queues.labels.oldest_wait')}
-                value={
-                  queue.oldestWaitMs === null
-                    ? t('system_health.queues.none_waiting')
-                    : duration(t, queue.oldestWaitMs)
-                }
-              />
-            </div>
+            <Stat
+              className="col-span-2"
+              label={t('system_health.queues.labels.oldest_wait')}
+              value={
+                queue.oldestWaitMs === null
+                  ? t('system_health.queues.none_waiting')
+                  : duration(t, queue.oldestWaitMs)
+              }
+            />
           </dl>
           <p className="mt-3 text-xs text-muted">
             {t('system_health.queues.threshold', { duration: duration(t, queue.thresholdMs) })}
@@ -315,6 +396,7 @@ function FailedJobs({
     },
   ]
 
+  const notRetryable = jobs.some((job) => !job.retryable)
   const base = (job: FailedJob) =>
     `/kesehatan-sistem/pekerjaan/${job.queue}/${encodeURIComponent(job.id)}`
 
@@ -322,6 +404,11 @@ function FailedJobs({
     <>
       {!canManage && jobs.length > 0 && (
         <p className="mb-3 text-sm text-muted">{t('system_health.failed.view_only_note')}</p>
+      )}
+      {canManage && notRetryable && (
+        <p className="mb-3 max-w-3xl text-sm text-muted">
+          {t('system_health.failed.no_retry_hint')}
+        </p>
       )}
       <DataTable
         rows={jobs}
@@ -334,17 +421,23 @@ function FailedJobs({
             ? (job) => {
                 const queue = t(`system_health.queues.names.${job.queue}`)
                 return (
-                  <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:justify-end">
-                    <ConfirmAction
-                      action={`${base(job)}/coba-lagi`}
-                      label={t('system_health.failed.retry_action')}
-                      ariaLabel={t('system_health.failed.retry_label', { job: job.name })}
-                      title={t('system_health.failed.retry_title', { job: job.name })}
-                      description={t('system_health.failed.retry_description', { queue })}
-                      confirmLabel={t('system_health.failed.retry_label', { job: job.name })}
-                      destructive={false}
-                      size="sm"
-                    />
+                  <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:justify-end">
+                    {job.retryable ? (
+                      <ConfirmAction
+                        action={`${base(job)}/coba-lagi`}
+                        label={t('system_health.failed.retry_action')}
+                        ariaLabel={t('system_health.failed.retry_label', { job: job.name })}
+                        title={t('system_health.failed.retry_title', { job: job.name })}
+                        description={t('system_health.failed.retry_description', { queue })}
+                        confirmLabel={t('system_health.failed.retry_label', { job: job.name })}
+                        destructive={false}
+                        size="sm"
+                      />
+                    ) : (
+                      <span className="text-xs text-muted">
+                        {t('system_health.failed.no_retry_note')}
+                      </span>
+                    )}
                     <ConfirmAction
                       action={`${base(job)}/hapus`}
                       label={t('system_health.failed.remove_action')}
@@ -485,7 +578,8 @@ function Activity({
 
 /**
  * Konsol /kesehatan-sistem (R2-04, D-316): queues, failed jobs, disk,
- * generations and AI errors per day, last backup. Every section is a
+ * generations and AI errors per day, last backup, cache Redis and mail
+ * (R2-09). Every section is a
  * deferred prop with its skeleton; the page reloads them every
  * `refreshSeconds` (30 s). Abilities: `system_health.view` to see,
  * `system_health.manage` for "Coba lagi" and "Hapus".
@@ -499,6 +593,7 @@ export default function ConsoleSystemHealth({
   failedJobs,
   disk,
   backup,
+  services,
   activity,
 }: Props) {
   const t = useT()
@@ -527,6 +622,16 @@ export default function ConsoleSystemHealth({
           <ServerCards disk={disk} backup={backup} />
         </DeferredSection>
       </div>
+
+      <Section
+        id="services-title"
+        title={t('system_health.services.title')}
+        intro={t('system_health.services.intro')}
+      >
+        <DeferredSection data="services" fallback={<SkeletonCards cards={2} />}>
+          <ServiceCards services={services} />
+        </DeferredSection>
+      </Section>
 
       <Section
         id="queues-title"

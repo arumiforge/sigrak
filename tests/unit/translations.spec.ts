@@ -267,14 +267,7 @@ const OLD_TERMS: Record<string, string> = {
  * Exceptions by key, for copy that must name an old word, e.g. help
  * search text that still finds "absensi" (D-382).
  */
-const ALLOWED: Record<string, string[]> = {
-  // D-314 names the read-only console page of staff powers "Hak akses";
-  // the "Peran" rule is about school roles (R2-01).
-  'nav.console.access': ['hak akses'],
-  'staff.abilities.access.view': ['hak akses'],
-  'staff.matrix.title': ['hak akses'],
-  'staff.matrix.caption': ['hak akses'],
-}
+const ALLOWED: Record<string, string[]> = {}
 
 /**
  * Spellings of the product name other than "SIGRAK" (D-469: until the

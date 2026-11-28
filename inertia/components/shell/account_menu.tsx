@@ -62,7 +62,9 @@ export function AccountMenu({
   const t = useT()
 
   return (
-    <DropdownMenu>
+    // Not modal: a modal menu hides the rest of the page from screen
+    // readers while the skip link stays focusable (axe aria-hidden-focus).
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger
         aria-label={t('nav.account_menu')}
         className={cn(

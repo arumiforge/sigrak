@@ -96,6 +96,8 @@ export default class StaffController {
         disabled: member.disabledAt !== null,
         roles: sortAssignments(member.roleAssignments).map((assignment) => assignment.role),
         self: member.id === actor.id,
+        // 2FA column (R2-09): on, or off and required (Pemilik, Admin).
+        twoFactor: { enabled: twoFactorEnabled(member), required: twoFactorRequired(member) },
       })),
       grantable: this.#grantable(actor),
       roleScopes: ROLE_SCOPES,

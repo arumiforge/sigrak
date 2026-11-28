@@ -178,7 +178,7 @@ The menu name is *Kehadiran*, path `/kehadiran`; help search still finds "absens
 
 The internal console for Tim SIGRAK is a separate panel with its own login. It is not part of the school app.
 
-- **Staff roles (D-314, D-338, D-339, D-343).** Eleven roles, all active: Pemilik, Admin, Validator, Penyusun Konten, Kurator Kurikulum, Support, Pemasaran, Penjualan, Koordinator Wilayah, Keuangan, Teknis. Powers are fixed in code, with a read-only *Hak akses* matrix; an admin edits only each person's scope (region, level, field), and changes are logged. The code still has three roles (admin, support, content) until the console slice. Two-factor sign-in with an authenticator app (TOTP) is required for Pemilik and Admin.
+- **Staff roles (D-314, D-338, D-339, D-343).** Eleven roles, all active: Pemilik, Admin, Validator, Penyusun Konten, Kurator Kurikulum, Support, Pemasaran, Penjualan, Koordinator Wilayah, Keuangan, Teknis. Powers are fixed in code, with a read-only matrix on the *Peran* page (D-481); an admin edits only each person's scope (region, level, field), and changes are logged. The code still has three roles (admin, support, content) until the console slice. Two-factor sign-in with an authenticator app (TOTP) is required for Pemilik and Admin.
 - **AI models (D-315, D-326).** Active model and fallbacks per purpose, tested with a Tim SIGRAK key. OpenAI-compatible and Anthropic adapters serve Tim SIGRAK's own work; teacher keys stay Gemini only.
 - **Kesehatan Sistem (D-316):** queues, failed jobs, disk, generations, AI errors, last backup.
 - **Curriculum (D-317, D-305):** compare, publish, roll back, impact report, JP audit; legacy app catalogs imported once after review.

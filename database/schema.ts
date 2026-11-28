@@ -515,6 +515,52 @@ export class FocusItemSchema extends BaseModel {
   declare updatedAt: DateTime
 }
 
+export class ForumDecisionSchema extends BaseModel {
+  static $columns = ['addedByStaffId', 'createdAt', 'decidedAt', 'decidedByStaffId', 'id', 'meetingId', 'note', 'outcome', 'position', 'problemId'] as const
+  $columns = ForumDecisionSchema.$columns
+  @column()
+  declare addedByStaffId: number | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare decidedAt: DateTime | null
+  @column()
+  declare decidedByStaffId: number | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare meetingId: number
+  @column()
+  declare note: string | null
+  @column()
+  declare outcome: string | null
+  @column()
+  declare position: number
+  @column()
+  declare problemId: number
+}
+
+export class ForumMeetingSchema extends BaseModel {
+  static $columns = ['createdAt', 'createdByStaffId', 'heldAt', 'heldOn', 'id', 'notes', 'status', 'updatedAt'] as const
+  $columns = ForumMeetingSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare createdByStaffId: number | null
+  @column.dateTime()
+  declare heldAt: DateTime | null
+  @column.date()
+  declare heldOn: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare notes: string | null
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class GenerationStepSchema extends BaseModel {
   static $columns = ['attempts', 'createdAt', 'finishedAt', 'generationId', 'id', 'output', 'position', 'startedAt', 'status', 'stepKey', 'updatedAt'] as const
   $columns = GenerationStepSchema.$columns
@@ -581,6 +627,35 @@ export class GenerationSchema extends BaseModel {
   declare updatedAt: DateTime
   @column()
   declare userId: number
+}
+
+export class GoodPracticeSchema extends BaseModel {
+  static $columns = ['addedByStaffId', 'authors', 'createdAt', 'id', 'level', 'link', 'problemId', 'summary', 'title', 'type', 'updatedAt', 'year'] as const
+  $columns = GoodPracticeSchema.$columns
+  @column()
+  declare addedByStaffId: number | null
+  @column()
+  declare authors: any
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare level: string | null
+  @column()
+  declare link: string | null
+  @column()
+  declare problemId: number | null
+  @column()
+  declare summary: string
+  @column()
+  declare title: string
+  @column()
+  declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare year: number | null
 }
 
 export class HelpRequestNoteSchema extends BaseModel {
@@ -1017,6 +1092,79 @@ export class PasswordResetTokenSchema extends BaseModel {
   declare tokenHash: string
   @column()
   declare userId: number
+}
+
+export class ProblemAnalysisSchema extends BaseModel {
+  static $columns = ['authorStaffId', 'createdAt', 'creditedNames', 'creditedStaffIds', 'evidenceLinks', 'id', 'problemId', 'regulations', 'rootCause', 'updatedAt'] as const
+  $columns = ProblemAnalysisSchema.$columns
+  @column()
+  declare authorStaffId: number | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare creditedNames: any
+  @column()
+  declare creditedStaffIds: any
+  @column()
+  declare evidenceLinks: any
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare problemId: number
+  @column()
+  declare regulations: string | null
+  @column()
+  declare rootCause: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class ProblemReportSchema extends BaseModel {
+  static $columns = ['createdAt', 'helpRequestId', 'id', 'linkedByStaffId', 'notifiedAt', 'problemId'] as const
+  $columns = ProblemReportSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare helpRequestId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare linkedByStaffId: number | null
+  @column.dateTime()
+  declare notifiedAt: DateTime | null
+  @column()
+  declare problemId: number
+}
+
+export class ProblemSchema extends BaseModel {
+  static $columns = ['createdAt', 'description', 'id', 'level', 'mergedIntoId', 'recordedByStaffId', 'regionId', 'releaseNote', 'source', 'status', 'statusChangedAt', 'title', 'updatedAt'] as const
+  $columns = ProblemSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare description: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare level: string | null
+  @column()
+  declare mergedIntoId: number | null
+  @column()
+  declare recordedByStaffId: number | null
+  @column()
+  declare regionId: number | null
+  @column()
+  declare releaseNote: string | null
+  @column()
+  declare source: string
+  @column()
+  declare status: string
+  @column.dateTime()
+  declare statusChangedAt: DateTime
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
 }
 
 export class RegionChangeReviewSchema extends BaseModel {

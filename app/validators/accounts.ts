@@ -89,3 +89,8 @@ export const trialChangeValidator = vine.create({
 export const defaultTrialValidator = vine.create({
   days: trialDays(),
 })
+
+/** The "Tambah hari" limit for `trials.extend` (D-481). */
+export const trialExtendMaxValidator = vine.create({
+  days: trialDays(),
+})

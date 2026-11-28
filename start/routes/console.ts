@@ -56,6 +56,9 @@ router
 
     router.get('/pengaturan', [SettingsController, 'show']).as('settings.show')
     router.post('/pengaturan', [SettingsController, 'update']).as('settings.update')
+    router
+      .post('/pengaturan/batas-tambah-hari', [SettingsController, 'updateExtendLimit'])
+      .as('settings.extend_limit')
   })
   .domain(hosts.admin)
   .as('admin')

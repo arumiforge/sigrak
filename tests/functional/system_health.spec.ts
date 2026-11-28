@@ -287,6 +287,30 @@ test.group('System health | failed jobs: retry and remove', (group) => {
     assert.match(page.body().flash?.success ?? '', /uji-gagal/)
   })
 
+  test('a failed AI job is not retried from the console; it can be removed', async ({
+    client,
+    assert,
+  }) => {
+    const job = await failedJobOn('ai', 'Model tidak tersedia')
+    const { session } = await signInAs(client, 'engineer')
+
+    const { response, session: next } = await postForm(
+      client,
+      session,
+      `${PAGE}/pekerjaan/ai/${job.id}/coba-lagi`,
+      {},
+      PAGE
+    )
+    response.assertStatus(302)
+    assert.equal(await (await queue('ai').getJob(job.id!))!.getState(), 'failed')
+    assert.equal(await jobLogCount(), 0)
+    const page = await inertiaPage(client, next, PAGE)
+    assert.match(page.body().flash?.error ?? '', /Guru mencoba lagi/)
+
+    const [listed] = await listFailedJobs({ names: ['ai'] })
+    assert.isFalse(listed.retryable)
+  })
+
   test('an owner removes a failed job; the change is logged', async ({ client, assert }) => {
     const job = await failedJobOn('default', 'Boom')
     const { staff, session } = await signInAs(client, 'owner')

@@ -16,7 +16,15 @@ import type { QueueOpener } from './queues.js'
  * The page never shows a job's data (it may name people); only its
  * name, the first line of the failure reason with e-mail addresses
  * masked, the attempts and the times.
+ *
+ * Jobs on the `ai` queue are generation steps: when one fails, its
+ * generation is already marked failed and the teacher starts again
+ * with their own "Coba lagi", so a retry here cannot help. Those jobs
+ * can only be removed (R2-09).
  */
+
+/** Queues whose failed jobs are not offered "Coba lagi". */
+export const NOT_RETRYABLE_QUEUES: readonly QueueName[] = ['ai']
 
 export type FailedJobSource = Pick<Queue, 'getFailed' | 'getJob'>
 
@@ -38,6 +46,8 @@ export type FailedJob = {
   attempts: number
   queuedAt: string
   failedAt: string | null
+  /** False on queues where a retry cannot help (see NOT_RETRYABLE_QUEUES). */
+  retryable: boolean
 }
 
 export const REASON_MAX_LENGTH = 200
@@ -46,6 +56,12 @@ export class FailedJobNotFoundException extends Exception {
   static status = 404
   static code = 'E_FAILED_JOB_NOT_FOUND'
   static message = 'No failed job with this id on this queue.'
+}
+
+export class FailedJobNotRetryableException extends Exception {
+  static status = 422
+  static code = 'E_FAILED_JOB_NOT_RETRYABLE'
+  static message = 'Failed jobs on this queue are not retried from the console.'
 }
 
 const EMAIL = /[\w.+-]+@[\w-]+(\.[\w-]+)+/g
@@ -67,6 +83,7 @@ export function toFailedJob(name: QueueName, job: FailedJobLike): FailedJob {
     attempts: job.attemptsMade ?? 0,
     queuedAt: new Date(job.timestamp).toISOString(),
     failedAt: job.finishedOn ? new Date(job.finishedOn).toISOString() : null,
+    retryable: !NOT_RETRYABLE_QUEUES.includes(name),
   }
 }
 
@@ -119,6 +136,7 @@ export async function retryFailedJob(
   id: string,
   options: { open?: QueueOpener<FailedJobSource> } = {}
 ) {
+  if (NOT_RETRYABLE_QUEUES.includes(name)) throw new FailedJobNotRetryableException()
   const job = await failedJob(options.open ?? queue, name, id)
   // Read before the retry, which clears the failure reason on the job.
   const before = toFailedJob(name, job)

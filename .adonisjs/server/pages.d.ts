@@ -41,11 +41,16 @@ declare module '@adonisjs/inertia/types' {
     'console/curriculum/versions': ExtractProps<(typeof import('../../inertia/pages/console/curriculum/versions.tsx'))['default']>
     'console/event_form': ExtractProps<(typeof import('../../inertia/pages/console/event_form.tsx'))['default']>
     'console/events': ExtractProps<(typeof import('../../inertia/pages/console/events.tsx'))['default']>
+    'console/forum_meeting': ExtractProps<(typeof import('../../inertia/pages/console/forum_meeting.tsx'))['default']>
+    'console/forum_meetings': ExtractProps<(typeof import('../../inertia/pages/console/forum_meetings.tsx'))['default']>
+    'console/good_practices': ExtractProps<(typeof import('../../inertia/pages/console/good_practices.tsx'))['default']>
     'console/help_request': ExtractProps<(typeof import('../../inertia/pages/console/help_request.tsx'))['default']>
     'console/help_requests': ExtractProps<(typeof import('../../inertia/pages/console/help_requests.tsx'))['default']>
     'console/integrations': ExtractProps<(typeof import('../../inertia/pages/console/integrations.tsx'))['default']>
     'console/legal_document_form': ExtractProps<(typeof import('../../inertia/pages/console/legal_document_form.tsx'))['default']>
     'console/legal_pages': ExtractProps<(typeof import('../../inertia/pages/console/legal_pages.tsx'))['default']>
+    'console/problem': ExtractProps<(typeof import('../../inertia/pages/console/problem.tsx'))['default']>
+    'console/problems': ExtractProps<(typeof import('../../inertia/pages/console/problems.tsx'))['default']>
     'console/school': ExtractProps<(typeof import('../../inertia/pages/console/school.tsx'))['default']>
     'console/schools': ExtractProps<(typeof import('../../inertia/pages/console/schools.tsx'))['default']>
     'console/settings': ExtractProps<(typeof import('../../inertia/pages/console/settings.tsx'))['default']>

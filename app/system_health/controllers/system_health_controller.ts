@@ -9,11 +9,13 @@ import { collectDailyActivity } from '../daily_activity.js'
 import { collectDisk } from '../disk.js'
 import {
   FailedJobNotFoundException,
+  FailedJobNotRetryableException,
   listFailedJobs,
   removeFailedJob,
   retryFailedJob,
 } from '../failed_jobs.js'
 import { collectQueues } from '../queues.js'
+import { collectServices } from '../services.js'
 
 const PAGE = '/kesehatan-sistem'
 
@@ -37,8 +39,8 @@ async function orNull<T>(section: string, work: () => Promise<T>): Promise<T | n
 
 /**
  * Konsol /kesehatan-sistem (R2-04, D-316): queue sizes and waits,
- * failed jobs, free disk, generations and AI errors per day and the
- * last backup. Every section is deferred and the page refreshes itself
+ * failed jobs, free disk, generations and AI errors per day, the
+ * last backup, and the cache Redis and mail (R2-09). Every section is deferred and the page refreshes itself
  * every 30 s. No alerts here: the server monitoring alerts (D-426).
  *
  * Abilities: `system_health.view` to see (owner, admin, engineer),
@@ -65,6 +67,7 @@ export default class SystemHealthController {
         () => orNull('backup', () => readLastBackup(config.backupMarkerPath)),
         'server'
       ),
+      services: ctx.inertia.defer(() => orNull('services', () => collectServices()), 'server'),
       activity: ctx.inertia.defer(
         () => orNull('activity', () => collectDailyActivity({ days: config.activityDays })),
         'activity'
@@ -97,8 +100,13 @@ export default class SystemHealthController {
         })
       )
     } catch (error) {
-      if (!(error instanceof FailedJobNotFoundException)) throw error
-      ctx.session.flash('error', ctx.i18n.t('system_health.toasts.not_found'))
+      if (error instanceof FailedJobNotRetryableException) {
+        ctx.session.flash('error', ctx.i18n.t('system_health.toasts.not_retryable'))
+      } else if (error instanceof FailedJobNotFoundException) {
+        ctx.session.flash('error', ctx.i18n.t('system_health.toasts.not_found'))
+      } else {
+        throw error
+      }
     }
     return ctx.response.redirect().toPath(PAGE)
   }

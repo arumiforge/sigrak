@@ -20,6 +20,7 @@ import {
   NATIONAL_PACKAGE_CODE,
 } from '#calendar/data_files'
 import { calendarMatchKey } from '#calendar/keys'
+import { seedConsoleDemo } from '#database/demo/console_demo'
 import type { EventKind, ExamType } from '#calendar/types'
 
 /**
@@ -120,6 +121,11 @@ export default class DemoSeeder extends BaseSeeder {
       { name: 'Admin Tim SIGRAK', password: DEMO_PASSWORD }
     )
     await StaffRoleAssignment.firstOrCreate({ staffUserId: staff.id, role: 'owner' }, {})
+
+    // Colleagues in every role and console content (R2-09); development only.
+    if (app.inDev) {
+      await seedConsoleDemo({ owner: staff, sd, mi, teacher, operator, miTeacher })
+    }
 
     const session = await ExamSession.firstOrCreate(
       { title: 'Simulasi TKA Matematika (contoh)' },

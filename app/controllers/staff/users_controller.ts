@@ -1,7 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import vine from '@vinejs/vine'
 import User from '#models/user'
-import { authorizeTrialChange, changeUserTrial, TRIAL_EXTEND_MAX_DAYS } from '#accounts/console'
+import { authorizeTrialChange, changeUserTrial } from '#accounts/console'
+import { trialExtendMaxDays } from '#accounts/settings'
 import { trialOf } from '#accounts/trial'
 import { applySchoolScope, authorizeStaff, schoolScopeOf, staffCan } from '#staff/access'
 import { staffReadTransaction } from '#tenancy/tenant_transaction'
@@ -68,7 +69,7 @@ export default class UsersController {
         manageTrials: staffCan(staff, 'trials.manage'),
         extendTrials: staffCan(staff, 'trials.extend'),
       },
-      trialExtendMaxDays: TRIAL_EXTEND_MAX_DAYS,
+      trialExtendMaxDays: await trialExtendMaxDays(),
     })
   }
 

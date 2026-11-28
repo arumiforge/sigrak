@@ -19,12 +19,24 @@ const DEFAULT_TRIAL_DAYS_KEY = 'trial.default_days'
 /** D-160: one week, unless the console says otherwise (D-459). */
 const FALLBACK_TRIAL_DAYS = 7
 
-function asTrialDays(value: unknown) {
+const TRIAL_EXTEND_MAX_KEY = 'trial.extend_max_days'
+
+/**
+ * Most days one "Tambah hari" from Penjualan or Koordinator wilayah may
+ * add (`trials.extend`, internal-roles §3) while the console sets no
+ * other limit (D-481).
+ */
+export const DEFAULT_TRIAL_EXTEND_MAX_DAYS = 14
+
+/** A whole number of days in range, else the fallback. */
+function daysOr(value: unknown, range: { min: number; max: number }, fallback: number) {
   const days = typeof value === 'number' ? value : Number(value)
-  return Number.isInteger(days) && days >= TRIAL_DAYS_RANGE.min && days <= TRIAL_DAYS_RANGE.max
-    ? days
-    : FALLBACK_TRIAL_DAYS
+  return Number.isInteger(days) && days >= range.min && days <= range.max ? days : fallback
 }
+
+const asTrialDays = (value: unknown) => daysOr(value, TRIAL_DAYS_RANGE, FALLBACK_TRIAL_DAYS)
+const asExtendMax = (value: unknown) =>
+  daysOr(value, TRIAL_INPUT_RANGE, DEFAULT_TRIAL_EXTEND_MAX_DAYS)
 
 /**
  * The trial length for a teacher whose own account and schools set
@@ -35,29 +47,51 @@ export async function defaultTrialDays(): Promise<number> {
   return asTrialDays(row?.value)
 }
 
+/** The current "Tambah hari" limit for `trials.extend` (D-481). */
+export async function trialExtendMaxDays(): Promise<number> {
+  const row = await AppSetting.findBy('key', TRIAL_EXTEND_MAX_KEY)
+  return asExtendMax(row?.value)
+}
+
 /**
- * Changes the default trial length and logs who changed it.
+ * Writes one setting and its log row (from, to) in one transaction.
  */
-export async function setDefaultTrialDays(staff: StaffUser, days: number) {
+async function writeSetting(
+  staff: StaffUser,
+  key: string,
+  value: number,
+  read: (raw: unknown) => number
+) {
   await db.transaction(async (trx: TransactionClientContract) => {
-    const before = await AppSetting.query({ client: trx })
-      .where('key', DEFAULT_TRIAL_DAYS_KEY)
-      .forUpdate()
-      .first()
+    const before = await AppSetting.query({ client: trx }).where('key', key).forUpdate().first()
     await trx.rawQuery(
       `INSERT INTO app_settings (key, value, updated_by_staff_id, created_at, updated_at)
        VALUES (?, ?::jsonb, ?, now(), now())
        ON CONFLICT (key) DO UPDATE
          SET value = EXCLUDED.value, updated_by_staff_id = EXCLUDED.updated_by_staff_id, updated_at = now()`,
-      [DEFAULT_TRIAL_DAYS_KEY, JSON.stringify(days), staff.id]
+      [key, JSON.stringify(value), staff.id]
     )
     await logStaffActivity(
       staff,
       'setting.updated',
       'setting',
-      DEFAULT_TRIAL_DAYS_KEY,
-      { from: asTrialDays(before?.value), to: days },
+      key,
+      { from: read(before?.value), to: value },
       trx
     )
   })
+}
+
+/**
+ * Changes the default trial length and logs who changed it.
+ */
+export async function setDefaultTrialDays(staff: StaffUser, days: number) {
+  await writeSetting(staff, DEFAULT_TRIAL_DAYS_KEY, days, asTrialDays)
+}
+
+/**
+ * Changes the "Tambah hari" limit and logs who changed it (D-481).
+ */
+export async function setTrialExtendMaxDays(staff: StaffUser, days: number) {
+  await writeSetting(staff, TRIAL_EXTEND_MAX_KEY, days, asExtendMax)
 }
