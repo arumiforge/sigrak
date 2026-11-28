@@ -72,3 +72,8 @@ Branch `r1/r1-04-regions` (from `r1/r1-00-gate-split`). 145 tests pass on `sigra
 4. On accept, regional-layers.md §8 also asks to end the old area's local agreement choices (`end_reason = region_changed`), bump layer stamps and notify the operator. These belong to R1-07 (layers); `RegionChangeQueue.applyDue()` is where to hook them in.
 5. A rejected move (same from and to) is not queued again by later imports; a different target is. Should a rejection expire, for example after a school year? Default now: it holds until the directory shows another target.
 6. Should `content` staff get read-only access to the two pages? Default now: admin and support only.
+
+### Follow-up D-469 (R1-13)
+
+- Open question 1 answered: the list moved to `docs/data/regions/jawa-tengah.json` (`dataset: region_list`, status `draft`, `source`, `checked`) with a README; `app/regions/data/jawa_tengah.ts` is gone and `app/regions/region_files.ts` (`loadRegionList()`, `jawaTengahRegions()`) reads and checks the file. Seeders, tests and the import's error message point at the new place.
+- Pre-check (D-447): all 3 regency codes and 46 kecamatan codes and names match a community transcription of Kepmendagri 300.2.2-2138 Tahun 2025 (`cahyadsn/wilayah`, sha256 in the README); the official Lampiran C was not found or read, and the amending Kepmendagri 300.2.2-2430/2025 was not read. Five items are flagged for the owner in `docs/data/regions/README.md`.

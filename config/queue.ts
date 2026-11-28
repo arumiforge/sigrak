@@ -29,6 +29,7 @@ export type WorkerSettings = {
 const adjustments: SettingAdjustment[] = []
 
 const cpuPoolSize = env.get('CPU_POOL_SIZE')
+const waitAlertMs = clampSetting('QUEUE_WAIT_ALERT_MS', env.get('QUEUE_WAIT_ALERT_MS'), adjustments)
 
 const queueConfig = {
   /**
@@ -106,9 +107,18 @@ const queueConfig = {
    * Queue wait = time from enqueue (or the end of a delay) to the start
    * of a job. A start that waited longer than this is logged as a
    * queue-wait alert, and /healthz/queues reports the queue as "slow".
-   * The alert channel itself (Telegram, Slack) comes with R3 monitoring.
+   * Exports may wait longer than AI steps and mail (D-469). The alert
+   * channel itself (Telegram, Slack) comes with R3 monitoring.
    */
-  waitAlertMs: clampSetting('QUEUE_WAIT_ALERT_MS', env.get('QUEUE_WAIT_ALERT_MS'), adjustments),
+  waitAlertMs: {
+    ai: waitAlertMs,
+    exports: clampSetting(
+      'QUEUE_EXPORTS_WAIT_ALERT_MS',
+      env.get('QUEUE_EXPORTS_WAIT_ALERT_MS'),
+      adjustments
+    ),
+    default: waitAlertMs,
+  } satisfies Record<QueueName, number>,
 
   /**
    * worker_threads pool for CPU-heavy export work (D-463). "auto" sizes

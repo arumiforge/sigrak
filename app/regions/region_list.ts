@@ -2,9 +2,9 @@ import type { QueryClientContract } from '@adonisjs/lucid/types/database'
 import type { RegencyKind, RegionLevel } from '#models/region'
 
 /**
- * One node of a region list file under app/regions/data. The level
- * follows the depth: province → regency (kabupaten/kota) → district
- * (kecamatan).
+ * One node of a region list (`docs/data/regions/*.json`, read by
+ * `region_files.ts`). The level follows the depth: province → regency
+ * (kabupaten/kota) → district (kecamatan).
  */
 export interface RegionSeed {
   kemendagriCode: string

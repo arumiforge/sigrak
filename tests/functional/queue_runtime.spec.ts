@@ -62,7 +62,9 @@ test.group('Queue runtime: worker-exports, CPU pool, queue wait', (group) => {
     assert.equal(response.header('cache-control'), 'no-store')
     const body = response.body()
     assert.equal(body.status, 'ok')
-    assert.equal(body.thresholdMs, queueSettings().waitAlertMs)
+    assert.deepEqual(body.thresholdMs, queueSettings().waitAlertMs)
+    assert.equal(body.queues.exports.thresholdMs, queueSettings().waitAlertMs.exports)
+    assert.equal(body.queues.ai.thresholdMs, queueSettings().waitAlertMs.ai)
     assert.sameMembers(Object.keys(body.queues), ['ai', 'exports', 'default'])
     assert.include(body.queues.exports, { status: 'ok', waiting: 0, oldestWaitMs: null })
     assert.isAtLeast(body.queues.exports.recent.p95Ms, 0)
@@ -83,6 +85,32 @@ test.group('Queue runtime: worker-exports, CPU pool, queue wait', (group) => {
     assert.equal(body.queues.default.waiting, 1)
     assert.isAtLeast(body.queues.default.oldestWaitMs, 59_000)
     assert.equal(body.queues.exports.status, 'ok')
+  })
+
+  test('exports has its own, longer wait threshold (D-469)', async ({
+    client,
+    assert,
+    cleanup,
+  }) => {
+    const thresholds = { ai: 10_000, exports: 60_000, default: 10_000 }
+    const restoreThresholds = overrideConfig({ 'queue.waitAlertMs': thresholds })
+    cleanup(restoreThresholds)
+    // No workers; both jobs were queued 30 s ago: over 10 s, under 60 s.
+    await queue('default').add('nothing', {}, { timestamp: Date.now() - 30_000 })
+    await queue('exports').add('nothing', {}, { timestamp: Date.now() - 30_000 })
+
+    const first = await visit(client, 'app', '/healthz/queues')
+    let body = first.body()
+    assert.deepEqual(body.thresholdMs, thresholds)
+    assert.equal(body.queues.default.status, 'slow')
+    assert.equal(body.queues.exports.status, 'ok')
+    assert.isAtLeast(body.queues.exports.oldestWaitMs, 29_000)
+
+    await queue('exports').obliterate({ force: true })
+    await queue('exports').add('nothing', {}, { timestamp: Date.now() - 90_000 })
+    const second = await visit(client, 'app', '/healthz/queues')
+    body = second.body()
+    assert.equal(body.queues.exports.status, 'slow')
   })
 
   test('the queue numbers are not served to requests through Cloudflare', async ({ client }) => {

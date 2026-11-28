@@ -66,6 +66,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   QUEUE_EXPORTS_CONCURRENCY: Env.schema.number.optional(),
   QUEUE_DEFAULT_CONCURRENCY: Env.schema.number.optional(),
   QUEUE_WAIT_ALERT_MS: Env.schema.number.optional(),
+  QUEUE_EXPORTS_WAIT_ALERT_MS: Env.schema.number.optional(),
   CPU_POOL_SIZE: Env.schema.number.optional(),
 
   // AI (docs/final/ai-provider-engine.md)

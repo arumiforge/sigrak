@@ -238,4 +238,44 @@ test.group('Subjects for a grade', (group) => {
     assert.isFalse(mi.has('PAKR'))
     assert.equal(mi.get('BIG')!.status, 'elective')
   }).timeout(120_000)
+
+  test('MI grade 1: general subjects from SIGRAK-SD, PAI and Bahasa Arab from the MI curriculum (D-469)', async ({
+    assert,
+  }) => {
+    await importCurriculum()
+    const { policy, subjects: list } = await new SubjectsForGrade().forLevel({
+      level: 'mi',
+      grade: 1,
+      schoolYear: '2026/2027',
+    })
+    assert.deepEqual(codes(policy, 'tp_atp_defaults'), [
+      ['SIGRAK-MI-2026-R1', true],
+      ['SIGRAK-SD-2026-R1', true],
+    ])
+    const subjects = new Map(list.map((subject) => [subject.code, subject]))
+
+    // Each subject once; MI's PAI subjects and Bahasa Arab, no SD religion subject.
+    assert.lengthOf(list, subjects.size)
+    for (const code of ['QH', 'AA', 'FIK', 'BAR', 'PP', 'BIN', 'MTK', 'PJOK', 'SB']) {
+      assert.equal(subjects.get(code)?.status, 'compulsory', code)
+    }
+    for (const code of ['PAI', 'PAKR', 'PAKT', 'PAH', 'PAB', 'PAKH', 'SSD']) {
+      assert.isFalse(subjects.has(code), code)
+    }
+    assert.isEmpty(list.filter((subject) => subject.religion !== null))
+
+    // MI's own structure sets the JP; SIGRAK-SD brings the general extras.
+    assert.equal(subjects.get('BIN')!.jpPerWeek, 7)
+    assert.deepInclude(subjects.get('BIG')!, { status: 'optional', takenByDefault: false })
+    assert.deepInclude(subjects.get('BJW')!, { status: 'local_content', takenByDefault: false })
+    assert.deepEqual(
+      subjects.get('SB')!.artTracks.map((track) => [track.artBranch, track.hasTopics]),
+      [
+        ['music', true],
+        ['visual_art', true],
+        ['dance', false],
+        ['theatre', false],
+      ]
+    )
+  }).timeout(120_000)
 })

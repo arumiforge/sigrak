@@ -226,6 +226,6 @@ async function findRegency(
 
   throw new DirectoryImportError(
     `${regencyLabel} (${provinceName}${code ? `, code ${code}` : ''}) is not in the region list. ` +
-      'Add it to app/regions/data and run "node ace db:seed --files database/seeders/region_seeder.ts" first.'
+      'Add it to docs/data/regions and run "node ace db:seed --files database/seeders/region_seeder.ts" first.'
   )
 }

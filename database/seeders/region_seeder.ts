@@ -2,7 +2,7 @@ import app from '@adonisjs/core/services/app'
 import logger from '@adonisjs/core/services/logger'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import db from '@adonisjs/lucid/services/db'
-import { jawaTengah } from '#regions/data/jawa_tengah'
+import { jawaTengahRegions } from '#regions/region_files'
 import { seedRegionList } from '#regions/region_list'
 import { importSchoolDirectory } from '#regions/school_directory_importer'
 
@@ -23,7 +23,7 @@ export const DIRECTORY_FILES = [
  */
 export default class RegionSeeder extends BaseSeeder {
   async run() {
-    await seedRegionList(db.connection(), jawaTengah)
+    await seedRegionList(db.connection(), jawaTengahRegions())
     for (const file of DIRECTORY_FILES) {
       const result = await importSchoolDirectory(app.makePath(file))
       if (result.unmatchedDistricts.length > 0) {

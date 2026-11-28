@@ -75,7 +75,9 @@ const targetKey = (subjectCode: string, grade: number, branch: ArtBranch | null)
 /**
  * Structure rows (JP per year) and local-content caps of the structure
  * versions that the profiles pair with this topic version, for the
- * cross-check of the SIGRAK semester targets.
+ * cross-check of the SIGRAK semester targets. A level that only borrows
+ * the version (`borrowed_from`) is left out: the targets are written for
+ * the version's own level.
  */
 async function structureReference(
   trx: TransactionClientContract,
@@ -85,7 +87,10 @@ async function structureReference(
   const structureCodes = new Set<string>()
   for (const profile of profiles.values()) {
     for (const version of profile.versions) {
-      if (version.rule_sets.tp_atp_defaults?.some((entry) => entry.code === versionCode)) {
+      const listed = version.rule_sets.tp_atp_defaults?.some(
+        (entry) => entry.code === versionCode && !entry.borrowed_from
+      )
+      if (listed) {
         for (const entry of version.rule_sets.structure_jp ?? []) structureCodes.add(entry.code)
       }
     }

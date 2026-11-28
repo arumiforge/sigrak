@@ -8,7 +8,8 @@ import { queue, queueSettings } from '#services/queue/queues'
 /**
  * Queue wait: time from enqueue (or the end of a delay) to the start of a
  * job (D-467). Workers record each start in Redis (queue database, a
- * short list per queue) and log an alert above `queue.waitAlertMs`; the
+ * short list per queue) and log an alert above the queue's
+ * `queue.waitAlertMs` threshold (D-469: exports 60 s, others 10 s); the
  * web process reads the numbers for GET /healthz/queues. The alert
  * channel itself (Telegram, Slack) comes with R3 monitoring.
  */
@@ -127,6 +128,8 @@ function percentile(sorted: number[], fraction: number) {
 
 export type QueueWaitReport = {
   status: 'ok' | 'slow'
+  /** This queue's queue-wait alert threshold. */
+  thresholdMs: number
   waiting: number
   active: number
   delayed: number
@@ -138,7 +141,8 @@ export type QueueWaitReport = {
 
 export type QueueHealth = {
   status: 'ok' | 'slow'
-  thresholdMs: number
+  /** Alert threshold per queue (also in each queue's report). */
+  thresholdMs: Record<QueueName, number>
   queues: Record<QueueName, QueueWaitReport>
 }
 
@@ -163,6 +167,7 @@ async function reportFor(name: QueueName, thresholdMs: number, now: number) {
 
   return {
     status: slow ? 'slow' : 'ok',
+    thresholdMs,
     waiting: (counts.wait ?? 0) + (counts.prioritized ?? 0),
     active: counts.active ?? 0,
     delayed: counts.delayed ?? 0,
@@ -179,11 +184,13 @@ async function reportFor(name: QueueName, thresholdMs: number, now: number) {
 /** Queue-wait numbers of every queue, for GET /healthz/queues. */
 export async function queueHealth(now = Date.now()): Promise<QueueHealth> {
   const thresholdMs = queueSettings().waitAlertMs
-  const reports = await Promise.all(queueNames.map((name) => reportFor(name, thresholdMs, now)))
+  const reports = await Promise.all(
+    queueNames.map((name) => reportFor(name, thresholdMs[name], now))
+  )
   const queues = Object.fromEntries(queueNames.map((name, index) => [name, reports[index]]))
   return {
     status: reports.some((report) => report.status === 'slow') ? 'slow' : 'ok',
-    thresholdMs,
+    thresholdMs: { ...thresholdMs },
     queues: queues as Record<QueueName, QueueWaitReport>,
   }
 }

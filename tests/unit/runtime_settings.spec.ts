@@ -13,6 +13,15 @@ test.group('Runtime settings: parse and clamp', () => {
     assert.equal(clampSetting('QUEUE_WAIT_ALERT_MS', undefined), 10_000)
   })
 
+  test('queue-wait alert defaults: exports 60 s, other queues 10 s (D-469)', ({ assert }) => {
+    assert.equal(clampSetting('QUEUE_WAIT_ALERT_MS', undefined), 10_000)
+    assert.equal(clampSetting('QUEUE_EXPORTS_WAIT_ALERT_MS', undefined), 60_000)
+    const adjustments: SettingAdjustment[] = []
+    assert.equal(clampSetting('QUEUE_EXPORTS_WAIT_ALERT_MS', 10, adjustments), 1_000)
+    assert.equal(clampSetting('QUEUE_EXPORTS_WAIT_ALERT_MS', 9_000_000, adjustments), 3_600_000)
+    assert.lengthOf(adjustments, 2)
+  })
+
   test('values inside the range pass unchanged and are not reported', ({ assert }) => {
     const adjustments: SettingAdjustment[] = []
     assert.equal(clampSetting('QUEUE_AI_CONCURRENCY', 80, adjustments), 80)
@@ -57,7 +66,9 @@ test.group('Runtime settings: parse and clamp', () => {
     const { default: config } = await import('#config/queue')
     assert.isAtLeast(config.workers.ai.concurrency, 1)
     assert.isAtMost(config.workers.ai.concurrency, 500)
-    assert.isAtLeast(config.waitAlertMs, 1_000)
+    assert.sameMembers(Object.keys(config.waitAlertMs), ['ai', 'exports', 'default'])
+    assert.equal(config.waitAlertMs.ai, config.waitAlertMs.default)
+    assert.isAtLeast(config.waitAlertMs.exports, 1_000)
   })
 })
 

@@ -5,7 +5,7 @@ import app from '@adonisjs/core/services/app'
 import db from '@adonisjs/lucid/services/db'
 import Region from '#models/region'
 import School from '#models/school'
-import { jawaTengah } from '#regions/data/jawa_tengah'
+import { jawaTengahRegions } from '#regions/region_files'
 import { seedRegionList } from '#regions/region_list'
 
 /**
@@ -30,7 +30,7 @@ export type DirectoryFile = {
 }
 
 export async function seedJawaTengah() {
-  await seedRegionList(db.connection(), jawaTengah)
+  await seedRegionList(db.connection(), jawaTengahRegions())
 }
 
 export function region(code: string) {

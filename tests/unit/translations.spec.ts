@@ -252,6 +252,17 @@ const OLD_TERMS: Record<string, string> = {
  */
 const ALLOWED: Record<string, string[]> = {}
 
+/**
+ * Spellings of the product name other than "SIGRAK" (D-469: until the
+ * wordmark is chosen, D-462). Domain names such as `app.sigrak.com` are
+ * not the product name and stay lowercase.
+ */
+function productNameSpellings(value: string) {
+  return [...value.matchAll(/(?<![\p{L}@.])sigrak(?![\p{L}]|\.[a-z])/giu)]
+    .map((match) => match[0])
+    .filter((found) => found !== 'SIGRAK')
+}
+
 function wordPattern(word: string) {
   const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+')
   return new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, 'iu')
@@ -323,6 +334,18 @@ test.group('Translations: lang/id files', () => {
       }
     }
     assert.deepEqual(problems, [])
+  })
+
+  test('the product name is written "SIGRAK" (D-469)', ({ assert }) => {
+    const { messages } = loadLang()
+    const problems = Object.entries(messages).flatMap(([key, value]) =>
+      productNameSpellings(value).map((found) => `${key}: "${found}", write "SIGRAK"`)
+    )
+    assert.deepEqual(problems, [])
+
+    assert.deepEqual(productNameSpellings('Selamat datang di Sigrak'), ['Sigrak'])
+    assert.deepEqual(productNameSpellings('sigrak Guru dan SIGRAK'), ['sigrak'])
+    assert.deepEqual(productNameSpellings('Buka app.sigrak.com atau tanya@sigrak.com'), [])
   })
 
   test('the banned-word check catches its words', ({ assert }) => {

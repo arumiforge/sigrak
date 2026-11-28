@@ -3,7 +3,7 @@
   "level": "mi",
   "status": "draft",
   "verify_by": "Tim Validasi SIGRAK (D-113)",
-  "decisions": ["D-126", "D-354", "D-355", "D-356", "D-359", "D-452"],
+  "decisions": ["D-126", "D-354", "D-355", "D-356", "D-359", "D-452", "D-469"],
   "versions": [
     {
       "code": "PROFIL-MI-2026",
@@ -41,7 +41,14 @@
             "code": "SIGRAK-MI-2026-R1",
             "effective_on": null,
             "applies_from_school_year": "2026/2027",
-            "source": "Data SIGRAK (D-363)"
+            "source": "Data SIGRAK (D-363): PAI (Al-Qur'an Hadis, Akidah Akhlak, Fikih, SKI) dan Bahasa Arab dari kurikulum MI (KMA 1503/2025)"
+          },
+          {
+            "code": "SIGRAK-SD-2026-R1",
+            "effective_on": null,
+            "applies_from_school_year": "2026/2027",
+            "borrowed_from": "sd",
+            "source": "Data SIGRAK (D-363): mata pelajaran umum SD dipakai MI (D-469); mata pelajaran khusus SD (enam agama SD, Seni Suara Daerah) tidak dipakai MI"
           }
         ]
       },

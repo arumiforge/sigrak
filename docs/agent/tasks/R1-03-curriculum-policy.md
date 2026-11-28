@@ -85,3 +85,10 @@ Run 1: 10,557 rows written; run 2: 0 rows written, 0 kept rows. Both runs report
 3. MI classes get no Seni dan Budaya branch tracks or general-subject topics: `PROFIL-MI-2026` lists only `SIGRAK-MI-2026-R1` (Kemenag subjects) under `tp_atp_defaults`. Should the MI profile also list `SIGRAK-SD-2026-R1` for its general subjects?
 4. The religion CP sets other than PAI have no element codes in the data, so their topics cannot link to elements; add codes in a data task if Cek Keselarasan needs them.
 5. The `--strict` run on the repository data fails until P4-30 rescales the Musik/Rupa JP. Should CI run the import with `--strict` once that is done?
+
+### Follow-up D-469 (R1-13)
+
+- Open question 3 answered: `PROFIL-MI-2026` lists `SIGRAK-SD-2026-R1` under `tp_atp_defaults` with the new optional key `borrowed_from: "sd"`, next to `SIGRAK-MI-2026-R1` (PAI subjects and Bahasa Arab, KMA 1503/2025).
+- `SubjectsForGrade.forLevel()` keeps only subjects whose `school_level` is `both` or the grade's level, so MI gets the general subjects, art tracks, Bahasa Inggris and Bahasa Jawa from SIGRAK-SD but no second PAI (the six SD religion subjects and Seni Suara Daerah stay out). JP still comes from the MI structure.
+- The topic import cross-checks a version's semester targets only against the structures of levels that do not borrow it, so the SD targets are not compared with KMA 1503/2025. Test: MI grade 1 subjects.
+- Open point: SIGRAK-SD topics and semester targets are planned on SD JP; where MI's structure JP differs (for example Bahasa Indonesia), topic spreading for MI classes needs a look when classes and plans are built.

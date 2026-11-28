@@ -103,7 +103,8 @@ export function transitionStatus(
  * The subjects of a grade at a level for a school year, at national
  * level (D-230): the structure version's subjects (status by school
  * year for phased-in subjects), then the SIGRAK version's optional and
- * local content, with the Seni dan Budaya branch tracks. The region's
+ * local content, with the Seni dan Budaya branch tracks. Only subjects
+ * of the level or of both levels (`subjects.school_level`). The region's
  * local content (layer model, R1-07) and the school's own switches
  * (`school_subjects`, after R1-01) are applied on top of this list.
  */
@@ -124,6 +125,10 @@ export class SubjectsForGrade {
       .join('subjects as s', 's.id', 'a.subject_id')
       .whereIn('a.curriculum_version_id', versionIds)
       .where('a.grade', input.grade)
+      // A level may borrow another level's SIGRAK version (MI uses the SD
+      // general subjects, D-469); subjects tied to that other level (the
+      // six SD religions, so no second PAI) stay out.
+      .whereIn('s.school_level', ['both', input.level])
       .select(
         'a.curriculum_version_id',
         'a.subject_id',
