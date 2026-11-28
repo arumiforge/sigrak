@@ -432,21 +432,113 @@ export class NationalHolidaySchema extends BaseModel {
   declare updatedAt: DateTime
 }
 
-export class RegionSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'province', 'regency', 'regencyKey', 'updatedAt'] as const
-  $columns = RegionSchema.$columns
+export class RegionChangeReviewSchema extends BaseModel {
+  static $columns = ['appliedAt', 'applyFrom', 'createdAt', 'decidedAt', 'decidedByStaffId', 'detectedAt', 'directoryEntryId', 'effectiveOn', 'fromDistrictId', 'fromRegionId', 'id', 'note', 'publicId', 'schoolId', 'status', 'toDistrictId', 'toRegionId', 'updatedAt'] as const
+  $columns = RegionChangeReviewSchema.$columns
+  @column.dateTime()
+  declare appliedAt: DateTime | null
+  @column()
+  declare applyFrom: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare decidedAt: DateTime | null
+  @column()
+  declare decidedByStaffId: number | null
+  @column.dateTime()
+  declare detectedAt: DateTime
+  @column()
+  declare directoryEntryId: number | null
+  @column.date()
+  declare effectiveOn: DateTime | null
+  @column()
+  declare fromDistrictId: number | null
+  @column()
+  declare fromRegionId: number
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare province: string
+  declare note: string | null
   @column()
-  declare regency: string | null
+  declare publicId: string
   @column()
-  declare regencyKey: string
+  declare schoolId: number
+  @column()
+  declare status: string
+  @column()
+  declare toDistrictId: number | null
+  @column()
+  declare toRegionId: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+}
+
+export class RegionSchema extends BaseModel {
+  static $columns = ['createdAt', 'dapodikCode', 'id', 'kemendagriCode', 'level', 'name', 'parentId', 'regencyKind', 'replacedById', 'status', 'updatedAt'] as const
+  $columns = RegionSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare dapodikCode: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare kemendagriCode: string
+  @column()
+  declare level: string
+  @column()
+  declare name: string
+  @column()
+  declare parentId: number | null
+  @column()
+  declare regencyKind: string | null
+  @column()
+  declare replacedById: number | null
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class SchoolDirectoryEntrySchema extends BaseModel {
+  static $columns = ['address', 'createdAt', 'districtId', 'districtName', 'fetchedOn', 'id', 'latitude', 'level', 'longitude', 'name', 'npsn', 'provinceName', 'regencyName', 'regionId', 'removedAt', 'sourceUrl', 'updatedAt', 'village'] as const
+  $columns = SchoolDirectoryEntrySchema.$columns
+  @column()
+  declare address: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare districtId: number | null
+  @column()
+  declare districtName: string
+  @column.date()
+  declare fetchedOn: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare latitude: number | null
+  @column()
+  declare level: string
+  @column()
+  declare longitude: number | null
+  @column()
+  declare name: string
+  @column()
+  declare npsn: string
+  @column()
+  declare provinceName: string
+  @column()
+  declare regencyName: string
+  @column()
+  declare regionId: number | null
+  @column.dateTime()
+  declare removedAt: DateTime | null
+  @column()
+  declare sourceUrl: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare village: string | null
 }
 
 export class SchoolMembershipSchema extends BaseModel {
@@ -475,14 +567,16 @@ export class SchoolMembershipSchema extends BaseModel {
 }
 
 export class SchoolSchema extends BaseModel {
-  static $columns = ['address', 'createdAt', 'district', 'id', 'level', 'name', 'npsn', 'regionId', 'updatedAt'] as const
+  static $columns = ['address', 'createdAt', 'district', 'districtId', 'id', 'level', 'name', 'npsn', 'regionCheckedAt', 'regionId', 'regionSource', 'updatedAt'] as const
   $columns = SchoolSchema.$columns
   @column()
   declare address: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
-  declare district: string
+  declare district: string | null
+  @column()
+  declare districtId: number | null
   @column({ isPrimary: true })
   declare id: number
   @column()
@@ -491,8 +585,12 @@ export class SchoolSchema extends BaseModel {
   declare name: string
   @column()
   declare npsn: string | null
+  @column.dateTime()
+  declare regionCheckedAt: DateTime | null
   @column()
   declare regionId: number
+  @column()
+  declare regionSource: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }

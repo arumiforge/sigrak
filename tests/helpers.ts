@@ -1,6 +1,7 @@
 import type { ApiClient, ApiResponse } from '@japa/api-client'
 import { DateTime } from 'luxon'
 import app from '@adonisjs/core/services/app'
+import db from '@adonisjs/lucid/services/db'
 import { hosts, type Area } from '#config/hosts'
 import { sessionCookieNames } from '#config/session'
 import Region from '#models/region'
@@ -13,19 +14,46 @@ import CalendarEvent from '#models/calendar_event'
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
 import AiCredential from '#models/ai_credential'
+import { seedRegionList } from '#regions/region_list'
 
 export const PASSWORD = 'rahasia-uji-123'
 
 let counter = 0
 const unique = () => `${Date.now().toString(36)}${(counter++).toString(36)}`
 
+/**
+ * Jawa Tengah with an invented Kabupaten Uji (code 33.99, not a real
+ * Kemendagri code) and its Kecamatan Uji, for tests (R1-04).
+ */
+export async function testRegions() {
+  await seedRegionList(db.connection(), {
+    kemendagriCode: '33',
+    dapodikCode: '030000',
+    name: 'Jawa Tengah',
+    children: [
+      {
+        kemendagriCode: '33.99',
+        name: 'Uji',
+        regencyKind: 'kabupaten',
+        children: [{ kemendagriCode: '33.99.01', name: 'Uji' }],
+      },
+    ],
+  })
+  return {
+    province: await Region.findByOrFail('kemendagriCode', '33'),
+    regency: await Region.findByOrFail('kemendagriCode', '33.99'),
+    district: await Region.findByOrFail('kemendagriCode', '33.99.01'),
+  }
+}
+
 export async function createSchool(name: string) {
-  const region = await Region.firstOrCreate({ province: 'Jawa Tengah', regency: 'Kabupaten Uji' })
+  const { regency, district } = await testRegions()
   return School.create({
     name,
     level: 'sd',
-    regionId: region.id,
-    district: 'Kecamatan Uji',
+    regionId: regency.id,
+    districtId: district.id,
+    district: district.name,
     address: 'Jalan Uji',
   })
 }

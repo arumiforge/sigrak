@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises'
 import app from '@adonisjs/core/services/app'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import { DateTime } from 'luxon'
+import db from '@adonisjs/lucid/services/db'
 import Region from '#models/region'
 import School from '#models/school'
 import User from '#models/user'
@@ -11,6 +12,8 @@ import Calendar from '#models/calendar'
 import CalendarEvent, { type CalendarEventKind, type ExamType } from '#models/calendar_event'
 import ExamSession from '#models/exam_session'
 import ExamParticipant from '#models/exam_participant'
+import { seedRegionList } from '#regions/region_list'
+import { jawaTengah } from '#regions/data/jawa_tengah'
 
 /**
  * Local demo data: invented schools and people only (Fondasi
@@ -44,11 +47,12 @@ export default class DemoSeeder extends BaseSeeder {
       await readFile(app.makePath('docs/data/calendar/region-jawa-tengah-2026-2027.json'), 'utf8')
     ) as RegionCalendarFile
 
-    const province = await Region.firstOrCreate({ province: 'Jawa Tengah', regency: null })
-    const kudus = await Region.firstOrCreate({
-      province: 'Jawa Tengah',
-      regency: 'Kabupaten Kudus',
-    })
+    // The region list is idempotent; region_seeder also loads the school directory.
+    await seedRegionList(db.connection(), jawaTengah)
+    const province = await Region.findByOrFail('kemendagriCode', '33')
+    const kudus = await Region.findByOrFail('kemendagriCode', '33.19')
+    const kotaKudus = await Region.findByOrFail('kemendagriCode', '33.19.02')
+    const jati = await Region.findByOrFail('kemendagriCode', '33.19.03')
 
     // Region reference calendar (status draft until Tim Validasi signs off).
     const regionCalendar = await Calendar.firstOrCreate(
@@ -85,7 +89,8 @@ export default class DemoSeeder extends BaseSeeder {
       {
         level: 'sd',
         regionId: kudus.id,
-        district: 'Kota Kudus',
+        districtId: kotaKudus.id,
+        district: kotaKudus.name,
         address: 'Jalan Contoh No. 1, Kudus',
       }
     )
@@ -94,7 +99,8 @@ export default class DemoSeeder extends BaseSeeder {
       {
         level: 'mi',
         regionId: kudus.id,
-        district: 'Jati',
+        districtId: jati.id,
+        district: jati.name,
         address: 'Jalan Madrasah No. 2, Kudus',
       }
     )

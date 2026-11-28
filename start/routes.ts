@@ -16,6 +16,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 import { loginIpThrottle } from '#start/limiter'
 import { hosts } from '#config/hosts'
+import '#start/routes/regions'
 
 const SchoolSessionController = () => import('#controllers/school/session_controller')
 const CalendarController = () => import('#controllers/school/calendar_controller')
