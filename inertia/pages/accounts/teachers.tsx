@@ -70,9 +70,12 @@ export default function Teachers({ teachers, invitations }: Props) {
             ) : (
               <ul className="divide-y">
                 {invitations.map((invitation) => (
-                  <li key={invitation.publicId} className="flex flex-wrap items-center gap-3 py-3">
+                  <li
+                    key={invitation.publicId}
+                    className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:gap-3"
+                  >
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-semibold">{invitation.email}</p>
+                      <p className="font-semibold break-all">{invitation.email}</p>
                       <p className="text-sm text-muted">
                         <span
                           className={cn(
