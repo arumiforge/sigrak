@@ -17,7 +17,7 @@ Visual: Codex brief needed — a guru kelas in a public SD classroom in a small 
 
 - H1: "Dibuat untuk cara kerja SD"
 - Lead: "Kurikulum, JP, dan format dokumen sudah mengikuti aturan SD terbaru. Anda tidak mulai dari nol."
-- Primary button: "Coba 7 hari"
+- Primary button: "Coba gratis" → `https://app.sigrak.com/daftar`
 
 ## 2. Kurikulum SD sudah terpasang
 
@@ -40,7 +40,7 @@ Visual: Codex brief needed — a guru kelas in a public SD classroom in a small 
 - H2: "Muatan lokal dan kalender daerah"
 - Body: "Muatan lokal dan kalender pendidikan bisa diatur per daerah dan per sekolah. Sekolah menyalin kalender daerahnya, lalu menambah acara sendiri."
 
-Note: Kudus is the pilot and its defaults (Bahasa Jawa, Kudus calendar) apply to Kudus schools only (D-018). Do not name Kudus on this page unless the owner wants the pilot mentioned (README Q10).
+Note: the site stays region-neutral (D-459): no region or kabupaten is named as the pilot. Regional defaults apply only to schools in that region (D-018).
 
 ## 6. Rapor ke e-Rapor SD
 
@@ -50,5 +50,5 @@ Note: Kudus is the pilot and its defaults (Bahasa Jawa, Kudus calendar) apply to
 ## 7. Penutup
 
 - H2: "Coba dengan kelas Anda"
-- Button: "Coba 7 hari"
+- Button: "Coba gratis" → `https://app.sigrak.com/daftar`
 - Link: "Lihat untuk madrasah" → `/madrasah`

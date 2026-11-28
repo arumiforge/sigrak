@@ -1,7 +1,8 @@
 # `/` Beranda: copy draft
 
 - **Audience:** every visitor; teachers first, then principals, operators and pengawas.
-- **Goal:** in one screen, say what Sigrak does and for whom; then route each visitor to their role page or to the trial.
+- **Goal:** in one screen, say what Sigrak does and for whom; then route each visitor to their role page or to the free trial.
+- **Trial and sign-up (D-459):** every "Coba gratis" button goes to `https://app.sigrak.com/daftar`. The trial length is a setting (extendable, per user or per school), so the copy names no number of days.
 - **Format:** structure and notes in English; the copy (everything in quotes or under "Copy") is Indonesian UI text for `resources/lang/id`.
 - **Claims check:** every feature named here is v1 in `docs/final/product-concept.md`. Before launch, remove or mark "Segera hadir" anything whose slice has not shipped (README, ship check).
 
@@ -22,11 +23,11 @@ Copy:
 - H1: "Kerja guru, lebih sigrak."
 - Lead: "Bahan ajar siap pakai dan administrasi beres, tanpa menulis prompt."
 - Body: "Sigrak membantu guru SD dan MI menyiapkan RPM, soal, dan LKPD, mengisi kehadiran dan jurnal, lalu menyusun rapor. Semuanya di satu tempat, dari ponsel atau laptop."
-- Primary button: "Coba 7 hari" → trial sign-up
+- Primary button: "Coba gratis" → `https://app.sigrak.com/daftar`
 - Secondary link: "Lihat harga" → `/harga`
-- Small text under the buttons: "Uji coba 7 hari dengan semua fitur guru, tanpa biaya."
+- Small text under the buttons: "Uji coba gratis dengan semua fitur guru. Bila belum cukup, uji coba bisa diperpanjang."
 
-Note: "prompt" appears only because it is the approved brand promise (D-017); everywhere else the copy avoids the word (design-system rule 9). README Q3.
+Note: "prompt" appears only because it is the approved brand promise (D-017), kept on the public site by the owner (D-459); everywhere else the copy avoids the word (design-system rule 9).
 
 ## 2. Satu hari mengajar dengan Sigrak (`#satu-hari`)
 
@@ -137,5 +138,6 @@ Visual: Codex brief needed — a quiet chalk-line divider in the brand teal, use
 Copy:
 
 - H2: "Mulai dari kelas Anda sendiri"
-- Body: "Coba semua fitur guru selama 7 hari. Setelah itu, data Anda tetap bisa dilihat dan diunduh."
-- Button: "Coba 7 hari"
+- Body: "Coba semua fitur guru tanpa biaya. Anda boleh mendaftar sendiri dulu. Saat operator sekolah mengundang email yang sama, akun Anda bergabung ke sekolah dan dokumen Anda tetap ada."
+- Small text: "Setelah uji coba, data Anda tetap bisa dilihat dan diunduh."
+- Button: "Coba gratis" → `https://app.sigrak.com/daftar`

@@ -25,7 +25,7 @@ Yang **tidak** tampil di halaman status: staging, `admin.`, panel ops (Portainer
     - riwayat insiden ditampilkan (sekolah bisa melihat gangguan sebelumnya).
 3. Dasbor Cloudflare → **DNS** untuk `sigrak.com`: tambahkan record CNAME `status` dengan nilai yang ditunjukkan Better Stack. Set **DNS only** (awan abu-abu) kecuali Better Stack menyebut lain, supaya Better Stack bisa membuat sertifikatnya.
 4. Tambahkan komponen di bawah, dengan nama bahasa Indonesia, dan hubungkan masing-masing ke monitornya.
-5. Bila paket mengizinkan, nyalakan **langganan email** supaya operator sekolah bisa menerima kabar tanpa membuka halaman.
+5. **Langganan email dimatikan** (D-465). Sekolah membuka halaman status langsung atau lewat tautan di aplikasi dan `sigrak.com`.
 6. Tautkan halaman status dari `sigrak.com` (bagian keamanan dan footer, D-435) dan dari halaman bantuan di aplikasi.
 
 ### Komponen
@@ -53,17 +53,17 @@ Yang **tidak** tampil di halaman status: staging, `admin.`, panel ops (Portainer
 | Keadaan                                                                                        | Yang dilakukan                                                                  |
 | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | Gangguan terlihat oleh pengguna dan sudah dipastikan nyata                                     | laporan pertama paling lambat **15 menit** sejak diketahui                      |
-| Monitor merah sebentar lalu hijau lagi dalam satu kali pemeriksaan, tanpa laporan dari sekolah | tidak perlu laporan; catat saja di catatan internal                             |
+| Monitor merah sebentar lalu hijau lagi dalam satu kali pemeriksaan, tanpa laporan dari sekolah | tidak perlu laporan; catat saja sebagai kartu di proyek "Ops" (`sigrak-plane`)  |
 | Satu fitur mati (AI, ekspor, email) dan banyak sekolah memakainya                              | laporan dengan status "Gangguan sebagian"                                       |
 | Aplikasi jauh lebih lambat dari biasa selama lebih dari 10 menit                               | laporan dengan status "Gangguan sebagian"                                       |
-| Perawatan yang membuat aplikasi mati atau terbatas                                             | umumkan **minimal 3 hari sebelumnya**, ingatkan lagi 1 jam sebelum mulai        |
+| Perawatan yang membuat aplikasi mati atau terbatas                                             | umumkan **2 hari sebelumnya**, ingatkan lagi 1 jam sebelum mulai                |
 | Perbaikan darurat kecil yang tidak terasa oleh pengguna                                        | tidak perlu laporan                                                             |
-| Masalah satu sekolah atau satu akun saja                                                       | tidak di halaman status; dibantu lewat jalur bantuan biasa                      |
+| Masalah satu sekolah atau satu akun saja                                                       | tidak di halaman status; dibantu lewat halaman Bantuan (`sigrak.com/bantuan`)   |
 | Staging, panel ops, backup atau WAL terlambat                                                  | tidak di halaman status; tangani lewat [runbook-insiden.md](runbook-insiden.md) |
 
 ### Siapa yang menulis
 
-Pemegang insiden ([runbook-insiden.md](runbook-insiden.md)) atau orang yang dia tunjuk. Akun Better Stack yang boleh menulis laporan: `<daftar akun Better Stack>`. Setiap akun memakai email orangnya sendiri, tanpa akun bersama.
+Pemegang insiden ([runbook-insiden.md](runbook-insiden.md)) atau orang yang dia tunjuk. Daftar akun Better Stack yang boleh menulis laporan disimpan pemilik di luar repo, tanpa nama atau email di sini (D-465). Setiap akun memakai email orangnya sendiri, tanpa akun bersama.
 
 ### Seberapa sering diperbarui
 
@@ -89,7 +89,7 @@ Pembacanya kepala sekolah, guru, dan operator sekolah. Mereka ingin tahu tiga ha
 
 ## Contoh teks
 
-Bagian dalam `[kurung siku]` diganti sebelum dikirim. Kalimat yang diberi tanda "(hanya bila sudah dipastikan)" dihapus bila belum pasti.
+Bagian dalam `[kurung siku]` diganti sebelum dikirim. Teks gangguan hanya menautkan ke halaman Bantuan, `https://sigrak.com/bantuan` (D-465); jangan menulis nomor WhatsApp atau alamat email. Kalimat yang diberi tanda "(hanya bila sudah dipastikan)" dihapus bila belum pasti.
 
 ### Gangguan besar: sedang diperiksa
 
@@ -109,7 +109,7 @@ Judul: **Aplikasi SIGRAK tidak bisa dibuka**
 
 > Sejak [10.48] WIB, Aplikasi SIGRAK sudah bisa dibuka lagi. Kami masih memantau selama 30 menit ke depan.
 >
-> Bila halaman masih tidak terbuka, muat ulang halaman sekali. Bila tetap tidak bisa, hubungi kami lewat [jalur bantuan].
+> Bila halaman masih tidak terbuka, muat ulang halaman sekali. Bila tetap tidak bisa, hubungi kami lewat halaman Bantuan: sigrak.com/bantuan.
 
 ### Selesai
 
@@ -171,7 +171,7 @@ Kalimat tentang data pribadi tidak ditulis di sini. Bila data pribadi ikut terda
 
 ### Perawatan terjadwal: pengumuman
 
-Dibuat sebagai **maintenance** di Better Stack, dengan jam mulai dan selesai, minimal 3 hari sebelumnya.
+Dibuat sebagai **maintenance** di Better Stack, dengan jam mulai dan selesai, 2 hari sebelumnya. Perawatan hanya di jendela resmi, Sabtu 21.00–23.00 WIB ([jadwal-perawatan.md](jadwal-perawatan.md), D-465).
 
 Judul: **Perawatan terjadwal, [Sabtu, 12 Desember 2026], [21.00–23.00] WIB**
 
@@ -195,14 +195,12 @@ Dipakai bila pemilik memutuskan mengabari lewat grup WhatsApp atau saluran lain.
 
 - Pastikan laporan di halaman status sudah "Selesai" dan semua komponen kembali "Berjalan normal".
 - Ringkasan di laporan "Selesai" sama dengan catatan insiden internal, tanpa istilah teknis dan tanpa rahasia.
-- Bila sekolah banyak bertanya lewat jalur bantuan padahal laporan sudah ada, catat: mungkin tautan ke halaman status kurang terlihat di aplikasi.
+- Bila sekolah banyak bertanya lewat halaman Bantuan padahal laporan sudah ada, catat: mungkin tautan ke halaman status kurang terlihat di aplikasi.
 
 ## Nilai yang belum ditentukan
 
-| Tanda                                                                                           | Diisi oleh      |
-| ----------------------------------------------------------------------------------------------- | --------------- |
-| `<alamat cek kesehatan>` untuk monitor Better Stack (misalnya `https://app.sigrak.com/healthz`) | pengembang (R3) |
-| `<daftar akun Better Stack>` yang boleh menulis laporan                                         | pemilik         |
-| `[jalur bantuan]` di contoh teks (halaman `/bantuan`, WhatsApp, atau email)                     | pemilik         |
-| langganan email di halaman status (tergantung paket Better Stack)                               | pemilik         |
-| banner gangguan di dalam aplikasi yang menautkan ke halaman status                              | pengembang (R3) |
+| Tanda                                                                                           | Diisi oleh                            |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `<alamat cek kesehatan>` untuk monitor Better Stack (misalnya `https://app.sigrak.com/healthz`) | pengembang (R3)                       |
+| daftar akun Better Stack yang boleh menulis laporan                                             | disimpan pemilik di luar repo (D-465) |
+| banner gangguan di dalam aplikasi yang menautkan ke halaman status                              | pengembang (R3)                       |

@@ -2248,3 +2248,78 @@ Accepted · 2026-11-28 · RS-07 · owner's choice · refines D-455, extends D-44
 - KK and NUPTK numbers are removed before sending to Plane, like NIK; NIP is enough to identify staff. This matches the 16-digit rule in the draft.
 - UU PDP handling for the Plane board and its data (retention limits, backups, exports, notices) is set by the developer outside the repository under the existing agreement and rules; the repository does not track it.
 Reason: the teams do not need KK or NUPTK; data-protection terms are already agreed offline.
+
+### D-458 — Curriculum data choices: Tata Boga, Seni dan Budaya, MTK Fase C, CP start year
+Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · RS-15 flags 16 and 17, open curriculum points of the 2026-11-28 handoff; refines D-234, D-452
+- **Keterampilan Tata Boga (muatan lokal):** SIGRAK sets no JP target. The school sets the JP for this muatan lokal; the data keeps the topic order and TP/ATP, and the existing JP numbers stay only as a marked SIGRAK suggestion ("perkiraan SIGRAK"), never as a target.
+- **Seni dan Budaya:** one art branch per pupil, as in Permendikdasmen 13/2025: each branch (Seni Musik, Seni Rupa, Seni Tari, Seni Teater) gets its own full allocation track (108 JP a year, 96 in grade 6); the school picks the branch per class. Tari and Teater have no topics yet and are recorded as a data gap.
+- **Matematika Fase C:** the "Rasio" topic moves to the Aljabar element, following CP 046/2025; the team checks whether Aljabar needs more topics (patterns, unknown values) during curation (P4-29).
+- **CP umum start year:** the CP of Kepka BSKAP 046/H/KR/2025 applies from school year 2025/2026 (`applies_from_school_year`).
+Reason: follow 13/2025 and the official CP where SIGRAK's data deviated; muatan lokal JP is a school matter.
+
+### D-459 — Marketing site: sign-up, trial, contact, public wording
+Accepted · 2026-11-28 · RS-06 · owner's choice (interview 2026-11-28) · answers Q1–Q6, Q8–Q10 of `docs/drafts/marketing-site/README.md`; refines D-435
+- **Sign-up and trial:** the public CTA goes to `app.sigrak.com/daftar`; a teacher signs up alone (Sigrak Guru). When the school's operator later invites the same email, the account joins the school without losing documents. The trial length is not fixed at 7 days: it is a setting, can be extended when it ends, and can be changed per user or per school (applies to all of the school's teachers). Buttons say "Coba gratis", not "Coba 7 hari".
+- **Contact and events:** WhatsApp plus on-site forms (contact for principals and pengawas, Acara registration), protected by Turnstile and rate limits; the privacy policy lists the form data.
+- **Public wording:** keep "tanpa menulis prompt" (D-017) on the public site; name Google Gemini so teachers know which key they need; BOS is not mentioned on public pages or in the terms (D-025); the site stays region-neutral (Kudus is not named as the pilot).
+- **Panduan** lives on `sigrak.com/panduan`; the Fondasi §12 visitor counter is on and shown in the footer.
+Reason: owner's choices for the public site.
+
+### D-460 — Marketing site: legal points offline, parent notice template, chatbot log retention
+Accepted · 2026-11-28 · RS-06 · owner's choice (interview 2026-11-28) · answers Q7, Q11–Q16 of `docs/drafts/marketing-site/README.md`; extends D-444, D-443
+- **Handled offline by the developer (D-444):** the operator named before the PT exists (Q7), the controller for teacher-only schools (Q11), mid-year purchases, refunds and tax (Q13), consent for Cerita Sekolah and Praktik Baik (Q15) and the breach-notice hours (Q16). Their placeholders stay in the legal drafts; agents do not track them.
+- **Parent notice template:** SIGRAK gives schools a template notice and agreement for parents for the school chatbot (F-023, D-394).
+- **Public chatbot log:** visitors' typed questions are kept for 30 days to improve answers, then deleted; numbers such as NIK and phone numbers are masked before storage (default until the owner says otherwise).
+Reason: legal and commercial terms are settled offline; the template and a short log serve schools and answer quality.
+
+### D-461 — Plane integration: remaining small choices
+Accepted · 2026-11-28 · RS-07 · owner's choice (interview 2026-11-28) · refines D-453…D-455; design in `docs/drafts/plane-integration.md`
+- **Pengawas reports:** the pengawas picks the related Sekolah Binaan (optional, one or more); the school name then goes to Plane with its kecamatan and kabupaten/kota. Without a pick, the kecamatan where most of their Sekolah Binaan are is sent, without a school name.
+- **Visible stages:** reporters see all eight stages, including "Menunggu giliran" and "Diuji coba", and are notified at each (D-453).
+- **Notifications:** the 10-minute settle window, the single "Kami pelajari lagi" notice when a card leaves Tidak dilanjutkan, and the held not-pursued notice with a daily "Perlu alasan" reminder to the team stay as drafted.
+- **Kirim Masukan limits:** idea 20–2,000 characters, benefit up to 1,000, as drafted.
+- **Deleted accounts:** when a reporter's account is deleted, the user link is cleared but the school name stays on the Plane card and in later pushes (it belongs to the school, not to the person).
+Reason: owner's choices on the points left open after D-453.
+
+### D-462 — Logo wordmark in two cases
+Accepted · 2026-11-28 · RS-16 · owner's choice (interview 2026-11-28) · refines D-448
+The Codex logo brief asks for both wordmarks, lower case "sigrak" and upper case "SIGRAK", in every required variant (full colour, single colour, negative, 16 px). The owner picks one from the results. The product name in text stays as written in the docs.
+Reason: the owner wants to compare both before choosing.
+
+### D-463 — CPU-heavy work runs in a worker_threads pool
+Accepted · 2026-11-28 · RS-19 · owner's choice (interview 2026-11-28) · refines D-388, D-415, D-451
+CPU-heavy jobs on `worker-exports` (large Excel builds and imports, image processing, leger and similar) run in a `worker_threads` pool inside the worker process, sized to the container's CPU limit minus one (at least one thread), so the event loop stays free for queue locks and heartbeats. Child processes are not used for this. Replica counts per role and `UV_THREADPOOL_SIZE` are proposed from the R0-08 numbers in `docs/drafts/r0-gate.md` and set in R3.
+Reason: keeps the BullMQ lock renewals and progress events on time while heavy work runs, with lower start-up and memory cost than child processes.
+
+### D-464 — Seni dan Budaya tracks: JP rescaling in P4-30, Tari and Teater selectable without topics
+Accepted · 2026-11-28 · owner's choice (interview 2026-11-28) · follows D-458
+- The existing Seni Musik and Seni Rupa topics keep their JP for now, marked "JP belum disesuaikan"; P4-30 rescales JP, weeks and fokus estimates to the 54 JP semester tracks.
+- Seni Tari and Seni Teater tracks are imported and a school may choose them although they have no topics yet; teachers then write their own topics until SIGRAK adds them.
+Reason: rescaling belongs to curation; schools that teach dance or theatre should not wait for SIGRAK's topics.
+
+### D-465 — Operations guides: maintenance window, logs, status page, incident levels
+Accepted · 2026-11-28 · RS-09 · owner's choice (interview 2026-11-28) · fills owner placeholders in `docs/server/jadwal-perawatan.md`, `runbook-insiden.md`, `halaman-status.md`; follows D-432
+- **Maintenance window:** Saturday 21.00–23.00 WIB, announced on the status page two days ahead.
+- **Maintenance log and incident notes:** one "Ops" project in `sigrak-plane` (D-440), one card per maintenance or incident, never with secrets or personal data.
+- **Status page:** outage texts link only to `/bantuan`; no email subscription on the status page.
+- **Incident levels:** the proposed levels become the rule: Berat at once at any hour; Sedang within 1 hour during school days and hours; Ringan the next working day.
+- The list of Better Stack accounts allowed to post reports is kept by the owner outside the repository (no names or emails here).
+Reason: owner's choices for the RS-09 placeholders.
+
+### D-466 — Layer model details from the RS-18 draft
+Accepted · 2026-11-28 · RS-18 · owner's choice (interview 2026-11-28) · accepts all 14 defaults of `docs/drafts/regional-layers.md`; refines D-456; supersedes D-256 (copy model for region calendars) and the cross-region opt-in of D-327
+- **Calendars:** official regional changes apply directly; the operator gets an impact notice and teachers get the D-274 shift preview (replaces the D-256 copy). Official regional calendar dates are mandatory for the region's schools, except the school's own STS/SAS. A school may hide only non-mandatory items of an official provincial or kabupaten package. The Jawa Tengah calendar also applies to MI (line `all`) until a Kanwil Kemenag calendar exists; a Kemenag package then wins for MI.
+- **Regions:** keyed by Kemendagri codes, with the Kemendikdasmen/Dapodik codes stored alongside, starting with Jawa Tengah. A region change from a directory re-import applies after staff accept it, from the next day or the next school year (staff choose).
+- **Kecamatan** has only local agreements, never official rules. A local agreement needs a document (photo or PDF) checked by the approver.
+- **Labels:** SIGRAK's own defaults are labelled "Bawaan SIGRAK", not "Nasional".
+- **Muatan lokal and Kudus material:** Bahasa Jawa is a default per kabupaten (Kudus, Jepara, Pati) until a provincial rule is registered. The Kudus supervision instruments and the Format Kudus Berkas are local agreements (opt-in) until a Dinas document is supplied. No cross-region opt-in: the team proposes a variant per region with evidence.
+- **Who chooses:** the operator chooses the school's local agreements and the principal is notified. School users do not propose kecamatan or kabupaten items; they use Kirim Masukan and the team proposes.
+Reason: the owner accepted the draft's defaults.
+
+### D-467 — R0-08 load results: AI concurrency, starting sizes, measuring again
+Accepted · 2026-11-28 · R0-08 · owner's choice (interview 2026-11-28) · results in `docs/drafts/r0-gate.md`; refines D-415, D-451, D-463
+- `worker-ai` concurrency is a per-environment setting, starting at 50 jobs per process with two processes (restarts never stop all AI work), plus an alert when jobs wait too long in the queue. Replaces the "about 20" of D-415.
+- The sizing proposals in `docs/drafts/r0-gate.md` §6 (`UV_THREADPOOL_SIZE` 4 for web, heap limits, replicas per role) are the starting values for R3.
+- Load is measured again twice: with the first real R1 content page and row-level security, and on the VPS behind nginx and the tunnel in R3.
+- The R1 gate waits for the owner's review of R0-06; the gate report is ready.
+Reason: the spike met every target except AI queue wait, which is a setting.

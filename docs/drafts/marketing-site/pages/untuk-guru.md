@@ -17,7 +17,7 @@ Visual: Codex brief needed — a guru kelas at her desk after school, a printed 
 
 - H1: "Siapkan pelajaran besok dalam satu sore"
 - Lead: "Sigrak menyiapkan RPM, soal, dan LKPD dari jawaban Anda, lalu menjaga administrasi kelas tetap rapi. Anda kembali punya waktu untuk murid dan keluarga."
-- Primary button: "Coba 7 hari"
+- Primary button: "Coba gratis" → `https://app.sigrak.com/daftar`
 - Secondary link: "Lihat harga untuk guru" → `/harga#sigrak-guru`
 
 ## 2. Untuk guru kelas, wali kelas, dan guru mapel
@@ -60,7 +60,7 @@ Visual: Codex brief needed — a teacher holding a phone in one hand at the fron
 Layout: a plain bordered note box (neutral border, no side stripe), because this is a condition the teacher must know before signing up.
 
 - H2: "Yang perlu Anda siapkan: kunci AI"
-- Body: "Untuk membuat bahan ajar, Sigrak memakai kunci AI Gemini dari akun Google Anda sendiri, versi gratis. Panduan kami menunjukkan cara membuatnya, langkah demi langkah."
+- Body: "Untuk membuat bahan ajar, Sigrak memakai kunci AI Gemini dari akun Google Anda sendiri, versi gratis. Panduan kami menunjukkan cara membuatnya, langkah demi langkah." (link "Panduan" → `/panduan`)
 - List intro: "Yang perlu Anda tahu:"
     - "biaya AI tidak ditagih Sigrak."
     - "versi gratis punya batas pemakaian harian dari Google. Bila semua kunci Anda sedang di batas, Sigrak memberi tahu kapan bisa dicoba lagi."
@@ -72,14 +72,15 @@ Layout: a plain bordered note box (neutral border, no side stripe), because this
 ## 7. Harga untuk guru
 
 - H2: "Harga untuk guru"
-- Body: "Coba semua fitur guru selama 7 hari tanpa biaya. Setelah itu, Sigrak Guru Rp60.000 per tahun ajaran, atau Rp50.000 bila sekolah Anda berlangganan Sigrak Sekolah."
+- Body: "Coba semua fitur guru tanpa biaya. Bila belum cukup, uji coba bisa diperpanjang. Setelah itu, Sigrak Guru Rp60.000 per tahun ajaran, atau Rp50.000 bila sekolah Anda berlangganan Sigrak Sekolah."
 - Body 2: "Bila Anda belum berlangganan setelah uji coba, data Anda tetap bisa dilihat dan diunduh."
 - Link: "Lihat semua harga" → `/harga`
 
 ## 8. Penutup
 
 - H2: "Mulai dengan kelas Anda"
-- Body: "Setelah mendaftar, Anda menyiapkan kelas, jadwal, dan murid dalam tiga langkah."
-- Button: "Coba 7 hari"
+- Body: "Daftar sendiri tanpa menunggu sekolah. Setelah mendaftar, Anda menyiapkan kelas, jadwal, dan murid dalam tiga langkah."
+- Body 2: "Saat operator sekolah mengundang email yang sama, akun Anda bergabung ke sekolah. Semua dokumen Anda tetap ada."
+- Button: "Coba gratis" → `https://app.sigrak.com/daftar`
 
-Note: "tiga langkah" is the 3-step onboarding (class, timetable, students) in the product concept. How a teacher joins a school that already subscribes (invitation) versus signing up alone is open (README Q1).
+Note: "tiga langkah" is the 3-step onboarding (class, timetable, students) in the product concept. A teacher signs up alone (Sigrak Guru); when the school's operator later invites the same email, the account joins the school without losing documents (D-459).

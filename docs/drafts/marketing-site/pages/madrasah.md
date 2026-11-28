@@ -18,7 +18,7 @@ Visual: Codex brief needed — a female MI teacher with hijab reading a printed 
 
 - H1: "Untuk madrasah ibtidaiyah, sejak awal"
 - Lead: "Mapel Kemenag, Kurikulum Berbasis Cinta, dan format rapor madrasah sudah ada di Sigrak. Bukan salinan dari SD."
-- Primary button: "Coba 7 hari"
+- Primary button: "Coba gratis" → `https://app.sigrak.com/daftar`
 
 ## 2. Struktur kurikulum madrasah
 
@@ -52,5 +52,5 @@ Note: searchable Arabic in PDFs depends on the Typst/Gotenberg path (D-450); kee
 ## 7. Penutup
 
 - H2: "Coba dengan kelas Anda"
-- Button: "Coba 7 hari"
+- Button: "Coba gratis" → `https://app.sigrak.com/daftar`
 - Link: "Lihat untuk SD" → `/sd`

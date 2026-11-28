@@ -1,7 +1,7 @@
 # `/untuk-kepala-sekolah` Untuk kepala sekolah: copy draft
 
 - **Audience:** kepala sekolah of SD and MI; also those who still teach.
-- **Goal:** show the weekly routine without collecting files, then lead to a WhatsApp conversation about Sigrak Sekolah.
+- **Goal:** show the weekly routine without collecting files, then lead to a conversation about Sigrak Sekolah by WhatsApp or the contact form (D-459).
 - **Words to keep:** "Pengingat" (never the banned word for a reprimand), "pengesahan dokumen" (never the banned e-signature term; it is an internal approval with a verification code, not a legal electronic signature, D-281), "Sumbangan sukarela".
 - **Layout:** a weekly routine (three steps) first, then the other portal parts as a two-column definition list.
 
@@ -19,6 +19,7 @@ Visual: Codex brief needed — a principal walking a school corridor with a phon
 - Lead: "Guru mengisi Sigrak setiap hari. Anda melihat hasilnya dari data yang sama, kapan saja, tanpa menunggu map dikumpulkan."
 - Primary button: "Hubungi kami lewat WhatsApp"
 - Secondary link: "Lihat harga Sigrak Sekolah" → `/harga#sigrak-sekolah`
+- Text link: "Atau isi formulir kontak" → `/kontak#formulir`
 
 ## 2. Rutinitas mingguan
 
@@ -62,13 +63,14 @@ Note: Buku Sekolah is an add-on in the D-158 starting configuration; list it her
 
 - H2: "Sigrak Sekolah"
 - Body: "Rp100.000 per tahun ajaran untuk dua akun: kepala sekolah dan operator, lengkap dengan portalnya. Guru berlangganan Sigrak Guru sendiri dengan harga Rp50.000 bila sekolah sudah berlangganan."
-- Body 2: "Langganan sekolah dibayar dari dana di luar BOS."
+- Body 2: "Ingin semua guru mencoba dulu? Kami bisa membuka uji coba gratis untuk semua guru di sekolah Anda. Guru yang sudah mendaftar sendiri bergabung saat operator mengundang email yang sama, tanpa kehilangan dokumen."
 - Link: "Lihat semua harga dan fitur tambahan" → `/harga`
 
-Note: the non-BOS sentence follows D-025; wording needs the owner's check (README Q4).
+Note: no sentence about the funding source of the subscription on public pages (D-025, D-459).
 
 ## 7. Penutup
 
 - H2: "Bicarakan dulu dengan kami"
 - Body: "Ceritakan keadaan sekolah Anda. Kami bantu memulai dari tahun ajaran dan kelas."
 - Button: "Hubungi kami lewat WhatsApp"
+- Link: "Atau isi formulir kontak" → `/kontak#formulir`

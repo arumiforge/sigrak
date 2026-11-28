@@ -24,7 +24,9 @@
     "element_codes: the official elements a topic covers, codes from cp-umum-sd-bskap-046-2025.json (subjects[].elements, or linked_sets[] for PAI); null for muatan lokal (BJW, SSD, KTB), which have no national CP. element repeats their names, joined by '; '.",
     "cp_summary (was cp_text until 2026-11-28): the 'Ringkasan SIGRAK' shown to teachers as an explanation; the official text is the CP row for the topic's subject, phase and element (D-452).",
     "outside_cp (optional): a list of marks for content the pre-check found outside the decree's CP. Each mark has kind (no_cp_in_phase, element_not_in_cp, content_not_in_cp, content_in_later_phase), field (topic, element, cp_summary), reason, source_ref, precheck_flag (row in docs/drafts/data-precheck/sd-cp-general.md) and severity. The content stays unchanged until it is reviewed (D-452).",
-    "allocations[].status (optional): absent = taken from the national structure; optional = SIGRAK content a school switches on (D-204); elective = mata pelajaran pilihan of the structure. basis says where the numbers come from."
+    "allocations[].status (optional): absent = taken from the national structure; optional = SIGRAK content a school switches on (D-204); elective = mata pelajaran pilihan of the structure. basis says where the numbers come from.",
+    "allocations[].art_branch (Seni dan Budaya only): each art branch (Seni Musik, Seni Rupa, Seni Tari, Seni Teater) has its own full allocation track; a pupil takes one branch and the school picks it per class. Topics join their track through extras.art_branch (D-458).",
+    "allocations[].jp_target_set_by (optional): 'school' = SIGRAK sets no JP target; the school sets it, and the row and the topic JP are only a SIGRAK suggestion ('perkiraan SIGRAK'), never checked as a target (Tata Boga, D-458)."
   ],
   "field_labels": {
     "cp_summary": "Ringkasan SIGRAK"
@@ -40,6 +42,16 @@
         "topics[].outside_cp added on marked topics only.",
         "subjects[].cp_version_code added; subjects[].note added for KKA.",
         "allocations[] rows may carry status and basis (new rows: BIG grades 1-2, KKA grades 5-6, KTB grades 3-6)."
+      ]
+    },
+    {
+      "date": "2026-11-28",
+      "task": null,
+      "decision": "D-458",
+      "changes": [
+        "SB allocations: one row per grade and art branch (art_branch added), 24 rows; Seni Tari and Seni Teater rows have no topics yet.",
+        "KTB allocations: jp_target_set_by = school added; topic JP marked as 'perkiraan SIGRAK'.",
+        "MTK-K6-02 (Rasio): element Bilangan -> Aljabar (MTK-E2), cp_summary from the official Aljabar Fase C text, outside_cp mark removed."
       ]
     }
   ],
@@ -11873,22 +11885,12 @@
           "phase": "C",
           "semester": 1,
           "order_in_semester": 2,
-          "element": "Bilangan",
+          "element": "Aljabar",
           "element_codes": [
-            "MTK-E1"
+            "MTK-E2"
           ],
           "title": "Rasio",
-          "cp_summary": "Pada akhir Fase C, peserta didik melakukan operasi pecahan dan desimal, menggunakan rasio, mengonstruksi dan mengurai kubus serta balok, menentukan lokasi dan jarak pada sistem berpetak, dan menganalisis kemungkinan kejadian sederhana.",
-          "outside_cp": [
-            {
-              "kind": "content_in_later_phase",
-              "field": "cp_summary",
-              "reason": "'operasi pecahan dan desimal' and 'lokasi dan jarak pada sistem berpetak' go beyond Fase C: 3.1 allows only comparing and ordering decimals (one decimal place) and 3.4 only 'menentukan lokasi pada peta yang menggunakan sistem berpetak'. Decimal operations and distance are Fase D.",
-              "source_ref": "Kepka BSKAP 046/H/KR/2025 Lampiran II IV.1 Matematika 3.1, 3.4, pp. 114-115; Fase D, pp. 116-117",
-              "precheck_flag": 7,
-              "severity": "medium"
-            }
-          ],
+          "cp_summary": "Pada akhir Fase C, murid menemukan nilai yang belum diketahui dalam kalimat matematika yang melibatkan penjumlahan, pengurangan, perkalian, dan pembagian pada bilangan cacah sampai 1000 dengan menggunakan sifat-sifat bilangan dan operasinya. Murid dapat mengidentifikasi, meniru, dan mengembangkan pola bilangan membesar dan mengecil yang melibatkan perkalian dan pembagian; bernalar secara proporsional untuk menyelesaikan masalah sehari-hari dengan rasio satuan; menggunakan operasi perkalian dan pembagian dalam menyelesaikan masalah sehari-hari yang terkait dengan proporsi.",
           "atp_code": "ATP-MTK-K6-BAB-02",
           "jp_total": 48,
           "jp_per_week": 5,
@@ -11980,7 +11982,8 @@
               "Alokasi eksplisit ATP buku berjumlah 118 JP.",
               "Alokasi JP disesuaikan otomatis (34 -> 48 JP), kelas 6 Matematika Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M10-M19 agar sesuai kapasitas 5 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M9-M18) agar pas dengan kapasitas 5 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M9-M18) agar pas dengan kapasitas 5 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: moved from Bilangan to Aljabar (MTK-E2), following CP 046/2025 Fase C, where ratio and proportion are in Aljabar. cp_summary is now the official Aljabar Fase C text (CP-UMUM-SD-BSKAP-046-2025-MTK-C-02) with 'Pada akhir Fase C, murid' in front and the printed 'sehari- hari' joined; the old shared summary (pre-check flag 7) no longer applies. The team checks in P4-29 whether Aljabar needs more topics (patterns, unknown values)."
             ]
           },
           "extras": {
@@ -28019,62 +28022,272 @@
         "since": "2026-11-09",
         "reviewed_by": null,
         "reviewed_on": null,
-        "note": "Converted from the legacy app data; not yet curated (D-364)."
+        "note": "Converted from the legacy app data; not yet curated (D-364). D-458: one art branch per class, each with its own allocation track (allocations[].art_branch); topic JP are not yet scaled to it. Seni Tari and Seni Teater have no topics yet (data gap)."
       },
       "allocations": [
         {
           "grade": 1,
           "phase": "A",
+          "art_branch": "Seni Musik",
           "jp_per_week": 3,
           "s1_jp": 54,
           "s1_effective_weeks": 18,
           "s2_jp": 54,
-          "s2_effective_weeks": 18
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 1,
+          "phase": "A",
+          "art_branch": "Seni Rupa",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 1,
+          "phase": "A",
+          "art_branch": "Seni Tari",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
+        },
+        {
+          "grade": 1,
+          "phase": "A",
+          "art_branch": "Seni Teater",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
         },
         {
           "grade": 2,
           "phase": "A",
+          "art_branch": "Seni Musik",
           "jp_per_week": 3,
           "s1_jp": 54,
           "s1_effective_weeks": 18,
           "s2_jp": 54,
-          "s2_effective_weeks": 18
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 2,
+          "phase": "A",
+          "art_branch": "Seni Rupa",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 2,
+          "phase": "A",
+          "art_branch": "Seni Tari",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
+        },
+        {
+          "grade": 2,
+          "phase": "A",
+          "art_branch": "Seni Teater",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
         },
         {
           "grade": 3,
           "phase": "B",
+          "art_branch": "Seni Musik",
           "jp_per_week": 3,
           "s1_jp": 54,
           "s1_effective_weeks": 18,
           "s2_jp": 54,
-          "s2_effective_weeks": 18
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 3,
+          "phase": "B",
+          "art_branch": "Seni Rupa",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 3,
+          "phase": "B",
+          "art_branch": "Seni Tari",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
+        },
+        {
+          "grade": 3,
+          "phase": "B",
+          "art_branch": "Seni Teater",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
         },
         {
           "grade": 4,
           "phase": "B",
+          "art_branch": "Seni Musik",
           "jp_per_week": 3,
           "s1_jp": 54,
           "s1_effective_weeks": 18,
           "s2_jp": 54,
-          "s2_effective_weeks": 18
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 4,
+          "phase": "B",
+          "art_branch": "Seni Rupa",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 4,
+          "phase": "B",
+          "art_branch": "Seni Tari",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
+        },
+        {
+          "grade": 4,
+          "phase": "B",
+          "art_branch": "Seni Teater",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
         },
         {
           "grade": 5,
           "phase": "C",
+          "art_branch": "Seni Musik",
           "jp_per_week": 3,
           "s1_jp": 54,
           "s1_effective_weeks": 18,
           "s2_jp": 54,
-          "s2_effective_weeks": 18
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 5,
+          "phase": "C",
+          "art_branch": "Seni Rupa",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 5,
+          "phase": "C",
+          "art_branch": "Seni Tari",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
+        },
+        {
+          "grade": 5,
+          "phase": "C",
+          "art_branch": "Seni Teater",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 54,
+          "s2_effective_weeks": 18,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
         },
         {
           "grade": 6,
           "phase": "C",
+          "art_branch": "Seni Musik",
           "jp_per_week": 3,
           "s1_jp": 54,
           "s1_effective_weeks": 18,
           "s2_jp": 42,
-          "s2_effective_weeks": 14
+          "s2_effective_weeks": 14,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 6,
+          "phase": "C",
+          "art_branch": "Seni Rupa",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 42,
+          "s2_effective_weeks": 14,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458)."
+        },
+        {
+          "grade": 6,
+          "phase": "C",
+          "art_branch": "Seni Tari",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 42,
+          "s2_effective_weeks": 14,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
+        },
+        {
+          "grade": 6,
+          "phase": "C",
+          "art_branch": "Seni Teater",
+          "jp_per_week": 3,
+          "s1_jp": 54,
+          "s1_effective_weeks": 18,
+          "s2_jp": 42,
+          "s2_effective_weeks": 14,
+          "basis": "Permendikdasmen 13/2025 Tabel 1-5 note b): a pupil takes one art branch for the whole Seni dan Budaya allocation; the school picks the branch per class (D-458). No topics yet (data gap)."
         }
       ],
       "topics": [
@@ -28171,7 +28384,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (24 -> 12 JP), kelas 1 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M4 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M4) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M4) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -28288,7 +28502,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (30 -> 15 JP), kelas 1 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M11-M15 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M11-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M11-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -28405,7 +28620,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (30 -> 15 JP), kelas 1 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M5 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -28533,7 +28749,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (24 -> 12 JP), kelas 1 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M9-M12 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M9-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M9-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -28636,7 +28853,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (36 -> 18 JP), kelas 1 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M5-M10 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M5-M10) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M5-M10) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -28736,7 +28954,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 9 JP), kelas 1 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M16-M18 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -28835,7 +29054,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 9 JP), kelas 1 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M6-M8 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M6-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M6-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -28940,7 +29160,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (36 -> 18 JP), kelas 1 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M13-M18 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M13-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M13-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29057,7 +29278,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (27 -> 12 JP), kelas 2 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M4 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M4) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M4) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29168,7 +29390,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 8 JP), kelas 2 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M9-M11 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M8-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M8-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29280,7 +29503,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 8 JP), kelas 2 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M14-M16 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M12-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M12-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29398,7 +29622,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (27 -> 16 JP), kelas 2 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M6 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M6) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M6) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29516,7 +29741,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 11 JP), kelas 2 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M9-M12 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M8-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M8-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29628,7 +29854,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (27 -> 11 JP), kelas 2 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M5-M8 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M5-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M5-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29729,7 +29956,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (10 -> 4 JP), kelas 2 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M12-M13 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M11-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M11-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29830,7 +30058,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (10 -> 4 JP), kelas 2 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M17-M18 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M15-M16) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M15-M16) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -29940,7 +30169,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (17 -> 7 JP), kelas 2 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M19-M21 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30049,7 +30279,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (10 -> 6 JP), kelas 2 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M7-M8 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M6-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M6-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30159,7 +30390,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 11 JP), kelas 2 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M13-M16 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M12-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M12-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30260,7 +30492,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (6 -> 4 JP), kelas 2 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M17-M18 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M15-M16) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M15-M16) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30374,7 +30607,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (10 -> 6 JP), kelas 2 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M19-M20 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M17-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M17-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30492,7 +30726,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 15 JP), kelas 3 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M5 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30606,7 +30841,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 15 JP), kelas 3 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M9-M13 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M8-M13) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M8-M13) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30720,7 +30956,8 @@
               "Seni Musik mengikuti 4 unit dengan total 72 JP.",
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M7 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M7) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M7) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30832,7 +31069,8 @@
               "Seni Musik mengikuti 4 unit dengan total 72 JP.",
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M11-M16 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M10-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M10-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -30942,7 +31180,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (9 -> 8 JP), kelas 3 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M6-M8 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M6-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M6-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31053,7 +31292,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (9 -> 8 JP), kelas 3 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M14-M16 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M13-M16) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M13-M16) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31163,7 +31403,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (9 -> 8 JP), kelas 3 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M17-M19 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31273,7 +31514,8 @@
               "Seni Rupa mengikuti 5 bab, masing-masing 9 JP.",
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M8-M10 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M7-M10) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M7-M10) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31382,7 +31624,8 @@
               "Seni Rupa mengikuti 5 bab, masing-masing 9 JP.",
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M17-M19 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31492,7 +31735,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (27 -> 15 JP), kelas 4 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M5 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31604,7 +31848,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (27 -> 15 JP), kelas 4 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M8-M12 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M7-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M7-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31715,7 +31960,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (27 -> 13 JP), kelas 4 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M5 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31824,7 +32070,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (27 -> 12 JP), kelas 4 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M10-M13 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M9-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M9-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -31930,7 +32177,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (9 -> 5 JP), kelas 4 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M6-M7 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M6-M7) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M6-M7) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32037,7 +32285,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (12 -> 6 JP), kelas 4 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M13-M14 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M12-M14) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M12-M14) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32146,7 +32395,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (24 -> 13 JP), kelas 4 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M15-M19 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M14-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M14-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32254,7 +32504,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (24 -> 11 JP), kelas 4 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M6-M9 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M5-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M5-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32362,7 +32613,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (15 -> 7 JP), kelas 4 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M14-M16 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M13-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M13-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32471,7 +32723,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (24 -> 11 JP), kelas 4 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M17-M20 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M15-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M15-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32590,7 +32843,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 14 JP), kelas 5 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M5 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32718,7 +32972,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 14 JP), kelas 5 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M8-M12 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M7-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M7-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32836,7 +33091,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 14 JP), kelas 5 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M15-M19 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M13-M17) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M13-M17) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -32954,7 +33210,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 14 JP), kelas 5 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M5 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33073,7 +33330,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 14 JP), kelas 5 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M8-M12 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M7-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M7-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33192,7 +33450,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (18 -> 14 JP), kelas 5 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M15-M19 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M13-M17) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M13-M17) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33301,7 +33560,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (5 -> 4 JP), kelas 5 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M6-M7 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M5-M6) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M5-M6) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33412,7 +33672,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (5 -> 4 JP), kelas 5 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M13-M14 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M11-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M11-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33523,7 +33784,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (6 -> 4 JP), kelas 5 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M20-M21 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M17-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M17-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33634,7 +33896,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (6 -> 4 JP), kelas 5 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M6-M7 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M5-M6) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M5-M6) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33745,7 +34008,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (6 -> 4 JP), kelas 5 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M13-M14 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M11-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M11-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33856,7 +34120,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (6 -> 4 JP), kelas 5 Seni dan Budaya Genap (2), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M20-M21 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M17-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M17-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -33976,7 +34241,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (12 -> 13 JP), kelas 6 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M5 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M5) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34093,7 +34359,8 @@
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (12 -> 13 JP), kelas 6 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M10-M14 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M8-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M8-M12) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34208,7 +34475,8 @@
               "Seni Musik mengikuti 4 unit dengan total skema 48 JP.",
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M1-M4 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M1-M4) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M1-M4) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (42 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34323,7 +34591,8 @@
               "Seni Musik mengikuti 4 unit dengan total skema 48 JP.",
               "Nama mata pelajaran Seni Musik digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M8-M11 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M8-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M8-M11) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Musik track, which has the full Seni dan Budaya target (42 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34438,7 +34707,8 @@
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Alokasi JP disesuaikan otomatis (9 -> 10 JP), kelas 6 Seni dan Budaya Ganjil (1), agar sesuai target alokasi semester SD.",
               "Rentang minggu disesuaikan otomatis menjadi M6-M9 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M5-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M5-M8) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34552,7 +34822,8 @@
               "Seni Rupa mengikuti 5 bab, masing-masing 9 JP, total 45 JP.",
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M15-M17 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M13-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M13-M15) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34665,7 +34936,8 @@
               "Seni Rupa mengikuti 5 bab, masing-masing 9 JP, total 45 JP.",
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M18-M20 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M16-M18) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (54 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34778,7 +35050,8 @@
               "Seni Rupa mengikuti 5 bab, masing-masing 9 JP, total 45 JP.",
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M5-M7 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M5-M7) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M5-M7) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (42 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -34891,7 +35164,8 @@
               "Seni Rupa mengikuti 5 bab, masing-masing 9 JP, total 45 JP.",
               "Nama mata pelajaran Seni Rupa digabung menjadi Seni dan Budaya; identitas cabang dipertahankan pada field Cabang_Seni.",
               "Rentang minggu disesuaikan otomatis menjadi M12-M14 agar sesuai kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
-              "Distribusi minggu disusun ulang otomatis (M12-M14) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP."
+              "Distribusi minggu disusun ulang otomatis (M12-M14) agar pas dengan kapasitas 3 JP/minggu setelah penyesuaian alokasi JP.",
+              "D-458: this topic belongs to the Seni Rupa track, which has the full Seni dan Budaya target (42 JP this semester). Its JP still hold the old split of one semester target between Seni Musik and Seni Rupa; they are scaled to the branch track during curation (P4-30)."
             ]
           },
           "extras": {
@@ -48181,7 +48455,8 @@
           "s2_jp": 36,
           "s2_effective_weeks": 18,
           "status": "optional",
-          "basis": "School-optional muatan lokal (D-204). SIGRAK default of 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes. Target awaits the owner's sign-off (pre-check flag 17)."
+          "jp_target_set_by": "school",
+          "basis": "Muatan lokal (D-204). SIGRAK sets no JP target: the school sets the JP for Tata Boga (D-458). These numbers are only a SIGRAK suggestion ('perkiraan SIGRAK'): 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes."
         },
         {
           "grade": 4,
@@ -48192,7 +48467,8 @@
           "s2_jp": 36,
           "s2_effective_weeks": 18,
           "status": "optional",
-          "basis": "School-optional muatan lokal (D-204). SIGRAK default of 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes. Target awaits the owner's sign-off (pre-check flag 17)."
+          "jp_target_set_by": "school",
+          "basis": "Muatan lokal (D-204). SIGRAK sets no JP target: the school sets the JP for Tata Boga (D-458). These numbers are only a SIGRAK suggestion ('perkiraan SIGRAK'): 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes."
         },
         {
           "grade": 5,
@@ -48203,7 +48479,8 @@
           "s2_jp": 36,
           "s2_effective_weeks": 18,
           "status": "optional",
-          "basis": "School-optional muatan lokal (D-204). SIGRAK default of 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes. Target awaits the owner's sign-off (pre-check flag 17)."
+          "jp_target_set_by": "school",
+          "basis": "Muatan lokal (D-204). SIGRAK sets no JP target: the school sets the JP for Tata Boga (D-458). These numbers are only a SIGRAK suggestion ('perkiraan SIGRAK'): 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes."
         },
         {
           "grade": 6,
@@ -48214,7 +48491,8 @@
           "s2_jp": 28,
           "s2_effective_weeks": 14,
           "status": "optional",
-          "basis": "School-optional muatan lokal (D-204). SIGRAK default of 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes. Target awaits the owner's sign-off (pre-check flag 17)."
+          "jp_target_set_by": "school",
+          "basis": "Muatan lokal (D-204). SIGRAK sets no JP target: the school sets the JP for Tata Boga (D-458). These numbers are only a SIGRAK suggestion ('perkiraan SIGRAK'): 2 JP a week, inside the SD muatan lokal limit of 72 JP a year (64 in grade 6), Permendikdasmen 13/2025 Tabel 1-5 notes."
         }
       ],
       "topics": [
@@ -48320,7 +48598,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets."
+              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -48329,10 +48608,10 @@
               "order_in_year": 1,
               "duration_weeks": 18,
               "semester_effective_weeks": 18,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 36,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         },
@@ -48438,7 +48717,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets."
+              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -48447,10 +48727,10 @@
               "order_in_year": 2,
               "duration_weeks": 18,
               "semester_effective_weeks": 18,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 36,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         },
@@ -48532,7 +48812,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets."
+              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -48541,10 +48822,10 @@
               "order_in_year": 3,
               "duration_weeks": 18,
               "semester_effective_weeks": 18,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 36,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         },
@@ -48614,7 +48895,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets."
+              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -48623,10 +48905,10 @@
               "order_in_year": 4,
               "duration_weeks": 18,
               "semester_effective_weeks": 18,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 36,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         },
@@ -48744,7 +49026,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets."
+              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -48753,10 +49036,10 @@
               "order_in_year": 1,
               "duration_weeks": 18,
               "semester_effective_weeks": 18,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 36,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         },
@@ -48838,7 +49121,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets."
+              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -48847,10 +49131,10 @@
               "order_in_year": 2,
               "duration_weeks": 18,
               "semester_effective_weeks": 18,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 36,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         },
@@ -48944,7 +49228,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets."
+              "RS-17 (pre-check flag 17): raised from 34 JP over weeks 1-17 to 36 JP over weeks 1-18, the effective weeks of the semester at 2 JP per week; fokus estimates spread again evenly. The JP stay a SIGRAK estimate until the owner sets the Tata Boga targets.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -48953,10 +49238,10 @@
               "order_in_year": 3,
               "duration_weeks": 18,
               "semester_effective_weeks": 18,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 36,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         },
@@ -49034,7 +49319,8 @@
               "Pembagian Kelas & Semester (1 elemen per semester dalam fase) adalah perkiraan pembagian rata oleh sistem, bukan ketentuan dari dokumen.",
               "Alokasi JP, jadwal mingguan, dan estimasi JP per fokus adalah perkiraan sementara sistem karena dokumen ATP tidak mencantumkan data ini.",
               "Fokus_Materi merupakan ringkasan/parafrase singkat dari Tujuan Pembelajaran pada dokumen, bukan data tambahan baru.",
-              "D-234: trimmed from 34 JP over weeks 1-17 to 28 JP over weeks 1-14, the effective weeks of grade 6 semester 2."
+              "D-234: trimmed from 34 JP over weeks 1-17 to 28 JP over weeks 1-14, the effective weeks of grade 6 semester 2.",
+              "D-458: SIGRAK sets no JP target for Tata Boga; the school sets the JP of this muatan lokal. jp_total, the week range, the weekly distribution and the fokus estimates are only a SIGRAK suggestion ('perkiraan SIGRAK'), never a target. Topic order and TP/ATP stay."
             ]
           },
           "extras": {
@@ -49043,10 +49329,10 @@
               "order_in_year": 4,
               "duration_weeks": 14,
               "semester_effective_weeks": 14,
-              "calculation_basis": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
+              "calculation_basis": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi.",
               "focus_jp_total": 28,
               "focus_allocation_method": "Distribusi proporsional operasional per fokus (estimasi sistem, bukan dari dokumen).",
-              "notes": "PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
+              "notes": "PERKIRAAN SIGRAK, bukan target JP: sekolah menetapkan JP muatan lokal ini (D-458). PERKIRAAN SEMENTARA oleh sistem (bukan dari dokumen sumber): dokumen ATP Tata Boga tidak mencantumkan alokasi JP, jadwal mingguan, maupun pembagian Kelas/Semester eksplisit. Nilai-nilai ini adalah estimasi awal yang WAJIB diverifikasi/disesuaikan oleh guru/tim kurikulum sebelum dipakai resmi."
             }
           }
         }

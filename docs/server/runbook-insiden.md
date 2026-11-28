@@ -28,7 +28,7 @@ Dalam panduan ini:
 - **Data pribadi produksi tidak pernah dibawa ke staging**, juga tidak untuk "mencoba ulang masalahnya".
 - **Sekolah diberi tahu** lewat halaman status bila gangguan terlihat oleh pengguna ([halaman-status.md](halaman-status.md)).
 
-### Tingkat insiden (usulan awal)
+### Tingkat insiden
 
 | Tingkat | Contoh                                                                                                                              | Mulai ditangani                       |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
@@ -36,7 +36,7 @@ Dalam panduan ini:
 | Sedang  | sebagian fitur mati (AI, ekspor PDF), aplikasi sangat lambat, backup atau WAL terlambat, disk tersisa kurang dari 10%               | dalam 1 jam pada hari dan jam sekolah |
 | Ringan  | staging mati, satu panel ops mati, peringatan disk di bawah 25%                                                                     | hari kerja berikutnya                 |
 
-Batas waktu di tabel ini usulan; pemilik menetapkan angka akhirnya.
+Tingkat dan batas waktu ini aturan yang berlaku (D-465).
 
 ### Ke mana peringatan datang
 
@@ -85,7 +85,7 @@ docker stats --no-stream                       # CPU and memory per container
 ## Alur umum setiap insiden
 
 1. **Pastikan masalahnya nyata.** Buka `https://app.sigrak.com` dari HP dengan data seluler (bukan Wi-Fi kantor). Lihat Better Stack: dari berapa lokasi gagal, sejak kapan.
-2. **Tentukan pemegang insiden dan tingkatnya.** Mulai catatan insiden (format di bagian akhir).
+2. **Tentukan pemegang insiden dan tingkatnya.** Mulai catatan insiden (format di bagian akhir) sebagai kartu baru di proyek "Ops".
 3. **Beri tahu sekolah** bila gangguan terlihat oleh pengguna: tulis laporan pertama di halaman status dalam 15 menit ([halaman-status.md](halaman-status.md)).
 4. **Masuk ke server** dan jalankan `check.sh` lalu `check-app`. Simpan output-nya di catatan insiden.
 5. **Ikuti bagian yang sesuai** di bawah.
@@ -324,7 +324,7 @@ File backup (restic) bisa dilihat di Backrest lewat "SIGRAK ops": snapshot terak
 
 ## Catatan insiden
 
-Tulis untuk setiap insiden tingkat sedang dan berat, di `<tempat catatan insiden>`. Tanpa data pribadi dan tanpa rahasia.
+Tulis untuk setiap insiden tingkat sedang dan berat di proyek **"Ops"** di `sigrak-plane` (D-440, D-465), satu kartu per insiden. Kartu tidak boleh berisi data pribadi atau rahasia (kunci, password, token, isi `stack.env`); bila perlu, sebut nama kuncinya saja, bukan nilainya.
 
 ```text
 Judul:
@@ -359,5 +359,3 @@ Ditandai `<…>` di atas. Diisi saat R3 membangun skrip dan konfigurasinya.
 | `<prosedur rotasi APP_KEY>`                                                         | pengembang                                                                 |
 | `<runbook pemulihan darurat>`                                                       | pengembang (R3)                                                            |
 | `<batas menit sebelum pindah>` ke VPS cadangan                                      | pemilik (usulan: 15 menit, supaya target 1 jam tercapai)                   |
-| `<tempat catatan insiden>`                                                          | pemilik                                                                    |
-| batas waktu di tabel tingkat insiden                                                | pemilik                                                                    |

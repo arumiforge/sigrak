@@ -26,9 +26,11 @@ Sigrak dikelola oleh [Nama PT], beralamat di [Alamat PT]. Untuk data dalam kebij
 
 ### Saat Anda mengunjungi situs
 
-- Kami menghitung jumlah pengunjung tanpa menyimpan alamat IP, data peramban, atau kuki pelacak. Penghitungan memakai kode acak yang berganti setiap hari, sehingga kunjungan Anda tidak bisa dikaitkan dengan Anda.
-- Bila Anda mengisi formulir kontak atau mendaftar acara: nama, alamat email atau nomor WhatsApp, nama sekolah, peran, dan isi pesan.
-- Bila Anda memakai asisten tanya jawab di situs: pilihan dan pertanyaan yang Anda ketik. Asisten ini tidak memakai AI dan tidak mengirim pertanyaan Anda ke pihak lain. [Lama penyimpanan pertanyaan, atau tidak disimpan].
+- Kami menghitung jumlah pengunjung tanpa menyimpan alamat IP, data peramban, atau kuki pelacak. Penghitungan memakai kode acak yang berganti setiap hari, sehingga kunjungan Anda tidak bisa dikaitkan dengan Anda. Jumlah pengunjung hari ini, bulan ini, dan total ditampilkan di bagian bawah setiap halaman.
+- Bila Anda mengisi formulir kontak (misalnya untuk kepala sekolah atau pengawas): nama, peran, nama sekolah atau wilayah tugas, alamat email atau nomor WhatsApp, dan isi pesan.
+- Bila Anda mendaftar acara lewat formulir di halaman Acara: nama, peran, nama sekolah, alamat email atau nomor WhatsApp, dan acara yang Anda pilih.
+- Untuk menangkal kiriman otomatis (spam), formulir diperiksa dengan Cloudflare Turnstile, dan jumlah kiriman dari satu alamat IP dibatasi. Turnstile memeriksa sinyal teknis dari peramban Anda, misalnya alamat IP dan jenis peramban, tanpa kuki iklan atau pelacak. Alamat IP untuk pembatasan kiriman hanya disimpan sementara dan tidak dipakai untuk menghitung pengunjung.
+- Bila Anda memakai asisten tanya jawab di situs: pilihan dan pertanyaan yang Anda ketik. Asisten ini tidak memakai AI dan tidak mengirim pertanyaan Anda ke pihak lain. Pertanyaan yang Anda ketik disimpan 30 hari untuk memperbaiki jawaban asisten, lalu dihapus. Sebelum disimpan, angka seperti NIK dan nomor telepon disamarkan secara otomatis. Mohon tetap jangan mengetik data pribadi di asisten ini.
 
 ### Saat Anda memakai aplikasi
 
@@ -53,6 +55,10 @@ Data yang dimasukkan sekolah tentang murid, orang tua atau wali, dan staf sekola
 | Membuat bahan ajar dengan kunci AI Anda                      | Kunci AI, jawaban templat, kurikulum, riwayat pemakaian AI | Pelaksanaan perjanjian dengan Anda                                |
 | Menerima dan memeriksa pembayaran                            | Data pembayaran                                            | Pelaksanaan perjanjian; kewajiban hukum untuk pencatatan keuangan |
 | Membantu Anda dan menjawab pertanyaan                        | Permintaan bantuan, data kontak                            | Pelaksanaan perjanjian; kepentingan yang sah                      |
+| Menjawab pesan dari formulir kontak                          | Data formulir kontak                                       | Permintaan Anda saat mengirim formulir; kepentingan yang sah      |
+| Mengurus pendaftaran acara                                   | Data pendaftaran acara                                     | Permintaan Anda saat mendaftar                                    |
+| Menangkal spam dan penyalahgunaan formulir                   | Sinyal teknis Turnstile, alamat IP untuk pembatasan kiriman | Kepentingan yang sah                                              |
+| Memperbaiki jawaban asisten tanya jawab di situs             | Pertanyaan yang diketik, dengan angka pribadi disamarkan   | Kepentingan yang sah                                              |
 | Menjaga keamanan layanan                                     | Catatan keamanan                                           | Kepentingan yang sah; kewajiban hukum                             |
 | Mengirim kabar layanan (perubahan syarat, gangguan, tagihan) | Email                                                      | Pelaksanaan perjanjian                                            |
 | Mengirim kabar acara atau fitur baru                         | Email atau nomor WhatsApp                                  | Persetujuan Anda, yang bisa ditarik kapan saja                    |
@@ -81,6 +87,7 @@ Penjelasan lengkap ada di halaman [Kebijakan AI](/kebijakan-ai).
 - Berkas yang memuat data pribadi murid disimpan di disk server di Indonesia.
 - Salinan cadangan dienkripsi sebelum keluar dari server, lalu disimpan di [lokasi penyimpanan cadangan]. Penyedia penyimpanan tidak memegang kunci enkripsinya. [Klausul transfer ke luar negeri, bila penyimpanan cadangan berada di luar Indonesia].
 - Email layanan (undangan, atur ulang kata sandi) dikirim lewat [Penyedia email]. Email itu memuat nama dan alamat email Anda, bukan data murid.
+- Formulir di situs diperiksa oleh Cloudflare Turnstile, layanan [Nama penyedia jaringan]. Data formulir itu sendiri disimpan di server kami di Indonesia.
 
 ## 7. Berapa lama data disimpan
 
@@ -90,7 +97,10 @@ Penjelasan lengkap ada di halaman [Kebijakan AI](/kebijakan-ai).
 | Riwayat pemakaian AI                  | 1 bulan                                                                                      |
 | Data pembayaran                       | [Jumlah] tahun, sesuai kewajiban pencatatan keuangan                                         |
 | Permintaan bantuan                    | [Jumlah] bulan setelah selesai                                                               |
-| Formulir kontak dan pendaftaran acara | [Jumlah] bulan                                                                               |
+| Formulir kontak                       | [Jumlah] bulan setelah pesan dijawab                                                         |
+| Pendaftaran acara                     | [Jumlah] bulan setelah acara selesai                                                         |
+| Alamat IP untuk pembatasan kiriman    | [Lama penyimpanan data pembatasan kiriman, misalnya 24 jam]                                  |
+| Pertanyaan di asisten tanya jawab situs | 30 hari, dengan NIK dan nomor telepon disamarkan sebelum disimpan                          |
 | Catatan keamanan                      | [Jumlah] hari                                                                                |
 | Cadangan terenkripsi                  | 7 hari di server, 30 hari di penyimpanan cadangan, dan salinan bulanan selama [jumlah] bulan |
 

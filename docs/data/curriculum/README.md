@@ -18,7 +18,7 @@ The SD allocation comes from the official structure, `docs/data/regulations/curr
 
 ## SIGRAK R1 dataset
 
-One format for all topics (D-363): the data model's own shape (D-140), one version per level and year. Codes: topic `SIGRAK-SD-2026-R1-PP-K1-01`, TP `…-TP01`, fokus `…-FM01`, ATP `ATP-<subject>-K<grade>-BAB-<nn>`. Each subject has its semester JP targets in `allocations` (the topics are checked against them at import) and a `curation` block. Each topic may have `references`, `curation_notes`, and `extras` (art branch, science process skills, subject status, learning type, ATP details).
+One format for all topics (D-363): the data model's own shape (D-140), one version per level and year. Codes: topic `SIGRAK-SD-2026-R1-PP-K1-01`, TP `…-TP01`, fokus `…-FM01`, ATP `ATP-<subject>-K<grade>-BAB-<nn>`. Each subject has its semester JP targets in `allocations` (the topics are checked against them at import) and a `curation` block. Two exceptions (D-458): Seni dan Budaya has one allocation row per grade and art branch (`art_branch`), because a pupil takes one branch for the whole allocation and the school picks the branch per class, so topics are checked against their own branch's row (joined by `extras.art_branch`); a row with `jp_target_set_by: "school"` (Tata Boga) is no target at all, only a SIGRAK suggestion, and the school sets the JP. Each topic may have `references`, `curation_notes`, and `extras` (art branch, science process skills, subject status, learning type, ATP details).
 
 Provenance: converted on 2026-11-09 by [`scripts/curriculum/convert_legacy_topics.py`](../../../scripts/curriculum/convert_legacy_topics.py) from the legacy app curriculum data (general SD subjects and PAI) and the two earlier SIGRAK religion drafts (D-139…D-141, D-145, D-146). The input files were removed afterwards; they are in the git history before this change. During conversion the D-234 Tata Boga trim went into the data, and notes that named the dropped files or the legacy app's internals were reworded.
 
@@ -46,7 +46,7 @@ Schema change in `sigrak-sd-2026-r1-umum.json` (2026-11-28, RS-17, recorded in i
 - `topics[].element_codes` (after `element`) lists the official elements a topic covers; `null` for muatan lokal (BJW, SSD, KTB). `element` now repeats the official names joined by `; `, except for the PJOK topics marked `element_not_in_cp`, which keep their old names.
 - `subjects[].cp_version_code` names the CP set (`null` for muatan lokal); KKA has a `note`.
 - `topics[].outside_cp` (only on marked topics) is a list of marks for content outside the decree's CP. Each mark is `{kind, field, reason, source_ref, precheck_flag, severity}`: `kind` ∈ {`no_cp_in_phase`, `element_not_in_cp`, `content_not_in_cp`, `content_in_later_phase`}, `field` ∈ {`topic`, `element`, `cp_summary`}, `precheck_flag` is the row in [`sd-cp-general.md`](../../drafts/data-precheck/sd-cp-general.md), `severity` is copied from it. The marked content is unchanged until it is reviewed. 119 topics are marked: Bahasa Inggris grades 1–2 (20), PAI tajwid in the summaries (60), PJOK older elements and strands (11), and later-phase or extra content in PP, MTK, Seni Musik, Seni Rupa, Bahasa Indonesia, KKA and IPAS (28).
-- `allocations[]` rows may carry `status` (`optional` = SIGRAK content a school switches on, D-204; `elective` = mata pelajaran pilihan) and `basis`. New rows: Bahasa Inggris grades 1–2 (optional), KKA grades 5–6 (elective, 72 and 64 JP a year), Tata Boga grades 3–6 (optional, 2 JP a week; the owner still has to confirm the target).
+- `allocations[]` rows may carry `status` (`optional` = SIGRAK content a school switches on, D-204; `elective` = mata pelajaran pilihan) and `basis`. New rows: Bahasa Inggris grades 1–2 (optional), KKA grades 5–6 (elective, 72 and 64 JP a year), Tata Boga grades 3–6 (optional, 2 JP a week; D-458 later made these a SIGRAK suggestion, not a target).
 
 In `subjects.json`, `kind: elective` is new: a mata pelajaran pilihan the school may offer. Koding dan KA uses it with `grades: [5, 6]` and `delivery` (`subject` or `cocurricular`, chosen by the school, Kepmendikdasmen 127/P/2025), and supersedes D-208. It corresponds to `JENIS-MAPEL.PILIHAN` in the taxonomy. No subject uses `cocurricular` any more.
 
@@ -57,6 +57,24 @@ Other fixes from the pre-check: ATP codes of Bahasa Inggris grades 1–2, Bahasa
 | `cp-umum-sd-bskap-046-2025.json` | 109,437   | `056b35500816f37cf33c26288735f334209bb1013b7954e775c18f435a32baa6` |
 | `sigrak-sd-2026-r1-umum.json`    | 2,450,068 | `7a8b136dc4d3d1005753e64bba7dbdcdea6a084bd30774e7f3d0ea8d74075e57` |
 | `subjects.json`                  | 9,384     | `0b753839eb45fcefd2f56890e57cdb0be1c0edc85f96ca7835c05d4164563d1b` |
+
+## Owner's curriculum choices (D-458)
+
+Applied to `sigrak-sd-2026-r1-umum.json` on 2026-11-28 (recorded in its `schema_changes` and `conventions`), closing pre-check flags 16 and 17:
+
+- **Keterampilan Tata Boga (KTB, muatan lokal):** SIGRAK sets no JP target; the school sets it. The four allocation rows carry `jp_target_set_by: "school"` (new optional field) and a `basis` that calls the numbers a SIGRAK suggestion. In each topic, `extras.atp.calculation_basis` and `extras.atp.notes` now start with "PERKIRAAN SIGRAK, bukan target JP", and `curation_notes` has a D-458 note. Topic order, TP and ATP are unchanged. KTB-K6-04's `extras.atp` already matched its 28 JP over 14 weeks (fixed in RS-17).
+- **Seni dan Budaya (SB):** `allocations` has 24 rows, one per grade and `art_branch` (Seni Musik, Seni Rupa, Seni Tari, Seni Teater), each the full track: 54 JP per semester, 42 in grade 6 semester 2 (108 JP a year, 96 in grade 6; 13/2025 Tabel 1–5 note b). The Musik and Rupa topics stay and join their track through `extras.art_branch`; `order_in_semester` already counts per branch (pre-check flag 23).
+- **Matematika Fase C:** MTK-K6-02 "Rasio" moves from Bilangan to Aljabar (`element_codes` `MTK-E2`). Its `cp_summary` is the official Aljabar Fase C text (`CP-UMUM-SD-BSKAP-046-2025-MTK-C-02`), so its `outside_cp` mark (flag 7) is removed; 118 topics are now marked. P4-29 checks whether Aljabar needs more topics (patterns, unknown values).
+- **CP umum start year:** `applies_from_school_year` of `CP-UMUM-SD-BSKAP-046-2025` was already `2025/2026` in `docs/data/profiles/sd.json` and `mi.json`; the regulation registry has no such field.
+
+Known gaps (for P4-30):
+
+- **Seni Tari and Seni Teater** have allocation rows but no topics. A class whose school picks either branch has no SIGRAK topics yet.
+- **Seni Musik and Seni Rupa topic JP** still hold the old split of one semester target between the two branches (for example grade 1 semester 1: 27 + 27 JP against 54 each). The import reports these rows as short until the JP, week ranges and fokus estimates are scaled to the branch track.
+
+| File (status `draft`)         | Bytes     | sha256                                                             |
+| ----------------------------- | --------- | ------------------------------------------------------------------ |
+| `sigrak-sd-2026-r1-umum.json` | 2,481,962 | `b82293897d49636ec2e73c22682046c045670b842962ad676faf36372653c181` |
 
 ## Curation per subject (D-364)
 
