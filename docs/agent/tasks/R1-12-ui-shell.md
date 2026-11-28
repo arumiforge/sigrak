@@ -1,8 +1,8 @@
 # R1-12 — UI shell: layouts, navigation, icons, design tokens, SPA feel
 
 - **Phase:** R1
-- **Status:** todo
-- **Owner:** —
+- **Status:** in-progress
+- **Owner:** r1/r1-12-ui-shell
 - **Depends on:** R1-08, R1-09 (so their pages are in place); D-473
 - **Can run in parallel with:** R1-11
 
