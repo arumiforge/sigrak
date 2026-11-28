@@ -7,18 +7,16 @@ import { useT } from '~/lib/i18n'
 type Props = {
   valid: boolean
   email: string | null
+  signedIn: boolean
 }
 
 /**
  * /konfirmasi-email/{token}: confirm the sign-up email with one press
  * (D-469). An unknown, used or expired link shows one neutral message.
  */
-export default function ConfirmEmail({ valid, email }: Props) {
+export default function ConfirmEmail({ valid, email, signedIn }: Props) {
   const t = useT()
-  const {
-    url,
-    props: { viewer },
-  } = usePage()
+  const { url } = usePage()
 
   if (!valid) {
     return (
@@ -27,8 +25,8 @@ export default function ConfirmEmail({ valid, email }: Props) {
         <h1 className="text-2xl font-bold">{t('auth.confirm.invalid_title')}</h1>
         <p className="mt-2 text-muted">{t('auth.confirm.invalid_body')}</p>
         <Button asChild className="mt-6 w-full">
-          <Link href={viewer ? '/akun' : '/masuk'}>
-            {viewer ? t('nav.account') : t('auth.links.login')}
+          <Link href={signedIn ? '/akun' : '/masuk'}>
+            {signedIn ? t('nav.account') : t('auth.links.login')}
           </Link>
         </Button>
       </>

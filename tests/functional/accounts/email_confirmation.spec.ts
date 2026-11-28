@@ -92,6 +92,7 @@ test.group('Accounts | sign-up confirmation (D-469)', (group) => {
     form.assertInertiaComponent('auth/confirm_email')
     assert.isTrue(form.inertiaProps.valid)
     assert.equal(form.inertiaProps.email, SIGN_UP.email)
+    assert.isTrue(form.inertiaProps.signedIn)
     // Opening the link alone (a mail scanner) confirms nothing.
     await user.refresh()
     assert.isNull(user.emailVerifiedAt)
@@ -121,6 +122,7 @@ test.group('Accounts | sign-up confirmation (D-469)', (group) => {
     const page = await inertiaPage(client, visitor, `/konfirmasi-email/${token}`)
     page.assertStatus(200)
     assert.isTrue(page.inertiaProps.valid)
+    assert.isFalse(page.inertiaProps.signedIn)
 
     const { response } = await confirm(client, visitor, token)
     assert.equal(response.header('location'), '/masuk')

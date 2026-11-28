@@ -16,10 +16,10 @@ import { schoolUser } from '#accounts/http'
  */
 export default class EmailConfirmationController {
   async show({ inertia, params, auth }: HttpContext) {
-    // Fills `viewer`, so an invalid link points a signed-in user to Akun.
-    await auth.use('web').check()
+    // An invalid link points a signed-in user to Akun, a guest to Masuk.
+    const signedIn = await auth.use('web').check()
     const email = await findConfirmationEmail(params.token)
-    return inertia.render('auth/confirm_email', { valid: email !== null, email })
+    return inertia.render('auth/confirm_email', { valid: email !== null, email, signedIn })
   }
 
   async store({ params, session, i18n, response, auth }: HttpContext) {
