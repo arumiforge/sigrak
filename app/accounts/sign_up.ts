@@ -4,7 +4,7 @@ import { EmailTakenError } from '#accounts/errors'
 import { normalizeEmail } from '#accounts/invitations'
 
 /**
- * Self sign-up (D-459): a teacher makes an account alone (Sigrak Guru)
+ * Self sign-up (D-459): a teacher makes an account alone (SIGRAK Guru)
  * and the trial starts now. The account belongs to no school until an
  * operator, or Tim SIGRAK, invites the same email; accepting that
  * invitation joins this same account to the school.
