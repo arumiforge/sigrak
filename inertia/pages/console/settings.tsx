@@ -53,4 +53,3 @@ export default function ConsoleSettings({ defaultTrialDays, can }: Props) {
     </>
   )
 }
-

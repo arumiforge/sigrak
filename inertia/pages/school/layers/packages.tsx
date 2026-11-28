@@ -267,4 +267,3 @@ function NoticeList({ notices }: { notices: Notice[] }) {
     </section>
   )
 }
-

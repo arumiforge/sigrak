@@ -90,4 +90,3 @@ export default function ConsoleUsers({ q, users, can }: Props) {
     </>
   )
 }
-

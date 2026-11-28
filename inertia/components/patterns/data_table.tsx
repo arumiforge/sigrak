@@ -1,10 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import {
-  createColumnHelper,
-  tableFeatures,
-  useTable,
-  type RowData,
-} from '@tanstack/react-table'
+import { createColumnHelper, tableFeatures, useTable, type RowData } from '@tanstack/react-table'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useIsDesktop } from '~/lib/media'
 import { cn } from '~/lib/utils'
@@ -140,7 +135,9 @@ export function DataTable<Row extends RowData>({
                       </div>
                     ))}
                 </dl>
-                {rowActions && <div className="mt-3 flex flex-wrap gap-2">{rowActions(row.original)}</div>}
+                {rowActions && (
+                  <div className="mt-3 flex flex-wrap gap-2">{rowActions(row.original)}</div>
+                )}
               </li>
             )
           })}

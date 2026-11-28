@@ -190,7 +190,6 @@ export default function AiDemoPage({
   )
 }
 
-
 function LiveIndicator({ status }: { status: LiveStatus }) {
   const t = useT()
   return (

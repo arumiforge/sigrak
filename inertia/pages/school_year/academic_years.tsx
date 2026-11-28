@@ -165,4 +165,3 @@ function YearRow({ year, levelTerms }: { year: Year; levelTerms: Props['levelTer
     </li>
   )
 }
-

@@ -52,21 +52,18 @@ const appItems = {
     icon: 'teachers',
     section: 'nav.sections.school',
   },
-  // R1-09 (Jadwal): set `available: true` when the timetable pages merge.
   timetable: {
     key: 'timetable',
     href: '/jadwal',
     label: 'nav.timetable',
     icon: 'timetable',
     section: 'nav.sections.school',
-    available: false,
   },
   my_timetable: {
     key: 'my_timetable',
     href: '/kelas-saya/jadwal',
     label: 'nav.my_timetable',
     icon: 'timetable',
-    available: false,
   },
   extracurricular: {
     key: 'extracurricular',
@@ -172,14 +169,12 @@ const consoleItems: NavItem[] = [
     icon: 'proposals',
     section: 'nav.sections.regions',
   },
-  // R1-08 (Kalender wilayah): set `available: true` when the console calendar merges.
   {
     key: 'calendar',
     href: '/kalender',
     label: 'nav.console.calendar',
     icon: 'calendar',
     section: 'nav.sections.regions',
-    available: false,
   },
   {
     key: 'settings',

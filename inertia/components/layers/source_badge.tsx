@@ -91,9 +91,7 @@ export function SourceBadge({ source, className }: { source: LayerSource; classN
         </Dialog.Root>
       )}
       {source.force === 'mandatory' && (
-        <span className={cn(chip, statusToneClass.danger)}>
-          {t('layers.badge.mandatory')}
-        </span>
+        <span className={cn(chip, statusToneClass.danger)}>{t('layers.badge.mandatory')}</span>
       )}
       {source.line !== 'all' && (
         <span className={cn(chip, statusToneClass.neutral)}>

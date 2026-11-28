@@ -78,4 +78,3 @@ export default function ConsoleSchools({ q, schools }: Props) {
     </>
   )
 }
-

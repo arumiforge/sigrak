@@ -178,4 +178,3 @@ function Decide({ proposal }: { proposal: Proposal }) {
     </div>
   )
 }
-

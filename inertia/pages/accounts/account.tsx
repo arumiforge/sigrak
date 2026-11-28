@@ -197,4 +197,3 @@ export default function Account({ profile, memberships, trial }: Props) {
     </>
   )
 }
-

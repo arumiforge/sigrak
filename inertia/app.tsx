@@ -27,8 +27,7 @@ createInertiaApp({
      * posts, and never when the visitor asked for less motion.
      */
     visitOptions: (_href, options) => {
-      const pageChange =
-        options.method === 'get' && !options.only?.length && !options.preserveState
+      const pageChange = options.method === 'get' && !options.only?.length && !options.preserveState
       return pageChange && !matches(REDUCED_MOTION_QUERY)
         ? { ...options, viewTransition: true }
         : options

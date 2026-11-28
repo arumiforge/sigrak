@@ -25,7 +25,10 @@ function DrawerContent({
 }: React.ComponentProps<typeof DrawerPrimitive.Content>) {
   return (
     <DrawerPrimitive.Portal>
-      <DrawerPrimitive.Overlay data-slot="drawer-overlay" className="fixed inset-0 z-50 bg-overlay" />
+      <DrawerPrimitive.Overlay
+        data-slot="drawer-overlay"
+        className="fixed inset-0 z-50 bg-overlay"
+      />
       <DrawerPrimitive.Content
         data-slot="drawer-content"
         className={cn(
@@ -49,7 +52,11 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<'div'>) {
 
 function DrawerFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div data-slot="drawer-footer" className={cn('mt-4 flex flex-col gap-2', className)} {...props} />
+    <div
+      data-slot="drawer-footer"
+      className={cn('mt-4 flex flex-col gap-2', className)}
+      {...props}
+    />
   )
 }
 

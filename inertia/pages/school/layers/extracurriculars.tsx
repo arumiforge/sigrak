@@ -361,4 +361,3 @@ function AddForm({ canEdit, categories }: Props) {
     </section>
   )
 }
-

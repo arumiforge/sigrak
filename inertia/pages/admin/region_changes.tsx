@@ -233,4 +233,3 @@ function Decision({ change }: { change: Change }) {
     </div>
   )
 }
-

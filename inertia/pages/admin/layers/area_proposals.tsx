@@ -524,4 +524,3 @@ function NewProposal({ domains, regions, packages, schoolYear }: Props) {
     </section>
   )
 }
-

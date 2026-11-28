@@ -208,4 +208,3 @@ function Stat({ term, value }: { term: string; value: number }) {
     </div>
   )
 }
-
