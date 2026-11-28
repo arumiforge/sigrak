@@ -75,6 +75,8 @@ import accessSvg from '~/icons/hugeicons/rounded-stroke/security/security-check.
 import accessSolidSvg from '~/icons/hugeicons/rounded-solid/security/security-check.svg?raw'
 import activitySvg from '~/icons/hugeicons/rounded-stroke/note-task/task-daily-01.svg?raw'
 import activitySolidSvg from '~/icons/hugeicons/rounded-solid/note-task/task-daily-01.svg?raw'
+import healthSvg from '~/icons/hugeicons/rounded-stroke/medical/cardiogram-01.svg?raw'
+import healthSolidSvg from '~/icons/hugeicons/rounded-solid/medical/cardiogram-01.svg?raw'
 
 /** SIGRAK icon names → Rounded Stroke file. */
 const strokeIcons = {
@@ -122,6 +124,7 @@ const strokeIcons = {
   'staff': staffSvg,
   'access': accessSvg,
   'activity': activitySvg,
+  'health': healthSvg,
 } as const
 
 export type IconName = keyof typeof strokeIcons
@@ -152,6 +155,7 @@ const solidIcons: Partial<Record<IconName, string>> = {
   'staff': staffSolidSvg,
   'access': accessSolidSvg,
   'activity': activitySolidSvg,
+  'health': healthSolidSvg,
 }
 
 type ParsedIcon = { viewBox: string; body: string }

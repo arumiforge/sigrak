@@ -14,4 +14,5 @@
 /// <reference path="../../config/mail.ts" />
 /// <reference path="../../config/queue.ts" />
 /// <reference path="../../config/redis.ts" />
+/// <reference path="../../config/system_health.ts" />
 /// <reference path="../../config/transmit.ts" />

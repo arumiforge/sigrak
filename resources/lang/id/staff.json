@@ -337,6 +337,10 @@
       "setting": {
         "updated": "Pengaturan diubah"
       },
+      "job": {
+        "retry": "Pekerjaan antrean dicoba lagi",
+        "remove": "Pekerjaan antrean dihapus"
+      },
       "invitation": {
         "create": "Undangan dikirim",
         "resend": "Undangan dikirim ulang",

@@ -1,0 +1,113 @@
+{
+  "title": "Kesehatan sistem",
+  "intro": "Keadaan antrean, ruang disk, pembuatan konten, dan cadangan. Halaman ini diperbarui sendiri tiap 30 detik. Peringatan dikirim oleh pemantauan server, bukan oleh halaman ini.",
+  "checked_at": "Diperbarui {time}",
+  "refresh_action": "Perbarui sekarang",
+  "unavailable": "Bagian ini tidak bisa dibaca sekarang. Halaman akan mencoba lagi sebentar lagi.",
+  "duration": {
+    "seconds": "{count} detik",
+    "minutes": "{count} menit",
+    "hours": "{count} jam"
+  },
+  "bytes": {
+    "gigabytes": "{count} GB",
+    "megabytes": "{count} MB"
+  },
+  "queues": {
+    "title": "Antrean",
+    "intro": "Pekerjaan latar per antrean. Antrean disebut lambat kalau pekerjaan yang siap jalan menunggu lebih lama dari batasnya.",
+    "names": {
+      "ai": "AI",
+      "exports": "Ekspor",
+      "default": "Umum"
+    },
+    "labels": {
+      "waiting": "Menunggu",
+      "active": "Berjalan",
+      "delayed": "Dijadwalkan",
+      "failed": "Belum berhasil",
+      "oldest_wait": "Tunggu terlama"
+    },
+    "none_waiting": "Tidak ada",
+    "threshold": "Batas tunggu {duration}",
+    "status": {
+      "ok": "Lancar",
+      "slow": "Lambat"
+    }
+  },
+  "failed": {
+    "title": "Pekerjaan yang belum berhasil",
+    "intro": "Pekerjaan antrean yang berhenti karena kendala, paling baru di atas. Isi pekerjaan tidak ditampilkan.",
+    "caption": "Daftar pekerjaan yang belum berhasil",
+    "empty": "Tidak ada pekerjaan yang belum berhasil.",
+    "view_only_note": "Anda hanya bisa melihat. Mencoba lagi atau menghapus pekerjaan perlu peran Teknis atau Pemilik.",
+    "labels": {
+      "job": "Pekerjaan",
+      "queue": "Antrean",
+      "reason": "Penyebab",
+      "attempts": "Percobaan",
+      "failed_at": "Berhenti"
+    },
+    "no_reason": "Penyebab tidak tercatat",
+    "retry_action": "Coba lagi",
+    "retry_label": "Coba lagi pekerjaan {job}",
+    "retry_title": "Coba lagi pekerjaan {job}?",
+    "retry_description": "Pekerjaan masuk lagi ke antrean {queue} dan dijalankan dari awal.",
+    "remove_action": "Hapus",
+    "remove_label": "Hapus pekerjaan {job}",
+    "remove_title": "Hapus pekerjaan {job}?",
+    "remove_description": "Pekerjaan ini dihapus dari antrean {queue} dan tidak bisa dikembalikan. Catatannya tetap ada di log aktivitas."
+  },
+  "disk": {
+    "title": "Ruang disk",
+    "free": "{free} kosong dari {total}",
+    "free_percent": "{percent}% kosong",
+    "path": "Diukur di {path}",
+    "status": {
+      "ok": "Cukup",
+      "low": "Mulai penuh",
+      "critical": "Hampir penuh"
+    }
+  },
+  "backup": {
+    "title": "Cadangan terakhir",
+    "none": "Belum ada",
+    "none_note": "Belum ada cadangan yang tercatat. Catatan ini muncul setelah cadangan otomatis di server berjalan.",
+    "at_note": "Cadangan berhasil terakhir tercatat pada waktu ini."
+  },
+  "activity": {
+    "title": "Pembuatan konten dan AI per hari",
+    "intro": "{days} hari terakhir menurut WIB, semua sekolah. Hanya jumlah yang ditampilkan.",
+    "caption": "Pembuatan konten dan percobaan AI per hari",
+    "labels": {
+      "day": "Tanggal",
+      "generations": "Pembuatan",
+      "succeeded": "Selesai",
+      "failed": "Belum berhasil",
+      "ai_attempts": "Percobaan AI",
+      "ai_errors": "Kendala AI"
+    },
+    "totals_title": "Jumlah {days} hari",
+    "kinds_title": "Jenis kendala AI",
+    "kinds_empty": "Tidak ada kendala AI dalam masa ini.",
+    "outcomes": {
+      "rate_limited": "Batas permintaan per menit",
+      "rate_limited_daily": "Batas harian kunci",
+      "bad_request": "Permintaan ditolak",
+      "project_unavailable": "Proyek tidak bisa dipakai",
+      "key_invalid": "Kunci tidak berlaku",
+      "model_unavailable": "Model tidak tersedia",
+      "transient": "Gangguan sementara",
+      "timeout": "Waktu habis",
+      "blocked": "Diblokir penyedia",
+      "malformed_output": "Jawaban tidak sesuai format",
+      "empty_reply": "Jawaban kosong",
+      "unknown": "Terputus saat berjalan"
+    }
+  },
+  "toasts": {
+    "retried": "Pekerjaan {job} masuk lagi ke antrean {queue}.",
+    "removed": "Pekerjaan {job} dihapus dari antrean {queue}.",
+    "not_found": "Pekerjaan itu sudah tidak ada di daftar yang belum berhasil. Daftarnya sudah diperbarui."
+  }
+}

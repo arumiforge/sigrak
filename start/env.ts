@@ -104,4 +104,9 @@ export default await Env.create(new URL('../', import.meta.url), {
   STAFF_OWNER_NAME: Env.schema.string.optional(),
   STAFF_OWNER_EMAIL: Env.schema.string.optional({ format: 'email' }),
   STAFF_OWNER_PASSWORD: Env.schema.secret.optional(),
+
+  // Kesehatan sistem (R2-04): the data volume whose free space the page
+  // shows, and the marker file the backup job writes after each success.
+  SYSTEM_DATA_PATH: Env.schema.string.optional(),
+  BACKUP_MARKER_PATH: Env.schema.string.optional(),
 })
