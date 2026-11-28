@@ -371,7 +371,33 @@
         "reply": "Permintaan bantuan dibalas",
         "note": "Catatan internal ditambahkan",
         "status": "Status permintaan bantuan diubah",
-        "assign": "Permintaan bantuan diambil"
+        "assign": "Permintaan bantuan diambil",
+        "to_problem": "Permintaan bantuan dicatat di Bank Masalah",
+        "problem_released": "Pelapor diberi kabar solusi sudah rilis"
+      },
+      "problem": {
+        "create": "Masalah dicatat",
+        "update": "Masalah diubah",
+        "status": "Status masalah diubah",
+        "merge": "Masalah digabungkan ke masalah lain",
+        "merged_in": "Masalah lain digabungkan ke sini",
+        "analysis": "Analisis ditambahkan",
+        "report_linked": "Pelapor ditambahkan",
+        "reporters_notified": "Pelapor diberi kabar"
+      },
+      "good_practice": {
+        "create": "Praktik baik ditambahkan",
+        "update": "Praktik baik diubah",
+        "delete": "Praktik baik dihapus"
+      },
+      "forum_meeting": {
+        "create": "Forum dijadwalkan",
+        "update": "Catatan forum diubah",
+        "agenda_add": "Masalah masuk agenda forum",
+        "agenda_remove": "Masalah dikeluarkan dari agenda forum",
+        "agenda_move": "Urutan agenda forum diubah",
+        "decision": "Keputusan forum dicatat",
+        "held": "Forum ditandai selesai"
       },
       "support_session": {
         "start": "Sesi bantuan dimulai",

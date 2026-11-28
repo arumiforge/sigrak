@@ -19,7 +19,10 @@ import {
   replyToHelpRequest,
   staffReaches,
 } from '../help_requests.js'
-import { PROBLEM_HOOK_READY } from '../problem_hook.js'
+import { helpRequestToProblem, PROBLEM_HOOK_READY } from '../problem_hook.js'
+import { OPEN_STATUSES, problemNumber } from '#problems/catalog'
+import { ProblemChangeRefusedException } from '#problems/problems'
+import { toProblemValidator } from '#problems/validators'
 import {
   helpFilterValidator,
   helpNoteValidator,
@@ -195,14 +198,26 @@ export default class ConsoleHelpRequestsController {
         created_at: Date
         name: string | null
       }[]
-      return { request, notes }
+      // The Bank Masalah problem this request is linked to (R2-07).
+      const problem = (await trx
+        .from('problem_reports as pr')
+        .join('problems as p', 'p.id', 'pr.problem_id')
+        .where('pr.help_request_id', requestId)
+        .select('p.id', 'p.title', 'p.status')
+        .first()) as { id: number; title: string; status: string } | undefined
+      return { request, notes, problem }
     })
 
-    const { request, notes } = data
+    const { request, notes, problem } = data
     const schoolId = request.school_id === null ? null : Number(request.school_id)
     const canManage = staffCan(staff, 'help_requests.manage')
       ? await staffReaches(staff, 'help_requests.manage', { schoolId })
       : false
+
+    const canToProblem =
+      PROBLEM_HOOK_READY && !problem && staffCan(staff, 'problems.record')
+        ? await staffReaches(staff, 'problems.record', { schoolId })
+        : false
 
     return ctx.inertia.render('console/help_request', {
       request: {
@@ -249,9 +264,63 @@ export default class ConsoleHelpRequestsController {
           schoolId !== null && staffCan(staff, 'schools.view')
             ? await withinScope(staff, 'schools.view', schoolId)
             : false,
-        toProblem: PROBLEM_HOOK_READY && staffCan(staff, 'problems.record'),
+        toProblem: canToProblem,
+        viewProblem: staffCan(staff, 'problems.view'),
       },
+      problem: problem
+        ? {
+            id: Number(problem.id),
+            number: problemNumber(Number(problem.id)),
+            title: problem.title,
+            status: problem.status,
+          }
+        : null,
+      // Open problems the request can be linked to.
+      openProblems: canToProblem ? await this.#openProblems() : [],
     })
+  }
+
+  /** "Jadikan masalah" (D-477): a new Bank Masalah problem, or link to an open one. */
+  async toProblem(ctx: HttpContext) {
+    const requestId = Number(ctx.params.request)
+    const staff = await this.#authorize(ctx, 'problems.record', requestId)
+    const input = await ctx.request.validateUsing(toProblemValidator)
+    try {
+      const { problemId } = await helpRequestToProblem(
+        staff,
+        requestId,
+        input.mode === 'link'
+          ? { mode: 'link', problemId: input.problem_id! }
+          : { mode: 'new', title: input.title!, description: input.description! }
+      )
+      ctx.session.flash(
+        'success',
+        ctx.i18n.t(input.mode === 'link' ? 'problems.flash.linked' : 'problems.flash.created', {
+          number: problemNumber(problemId),
+        })
+      )
+    } catch (error) {
+      if (!(error instanceof ProblemChangeRefusedException)) throw error
+      ctx.session.flash('error', ctx.i18n.t(`problems.errors.${error.reason}`))
+    }
+    return ctx.response.redirect().toPath(`/bantuan/${requestId}`)
+  }
+
+  async #openProblems() {
+    const rows = (await staffReadTransaction((trx) =>
+      trx
+        .from('problems')
+        .whereIn('status', [...OPEN_STATUSES])
+        .whereNull('merged_into_id')
+        .orderBy('updated_at', 'desc')
+        .limit(100)
+        .select('id', 'title')
+    )) as { id: number; title: string }[]
+    return rows.map((row) => ({
+      id: Number(row.id),
+      number: problemNumber(Number(row.id)),
+      title: row.title,
+    }))
   }
 
   async reply(ctx: HttpContext) {

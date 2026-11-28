@@ -49,6 +49,7 @@
     "#integrations/*": "./app/integrations/*.js",
     "#publishing/*": "./app/publishing/*.js",
     "#help/*": "./app/help/*.js",
+    "#problems/*": "./app/problems/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",

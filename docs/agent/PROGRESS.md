@@ -146,7 +146,7 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R2-04 | Kesehatan Sistem page | review | r2/r2-04-system-health | R2-01 | `tasks/R2-04-*.md` |
 | R2-05 | Kabar, Acara, Cerita Sekolah, legal pages | review | r2/r2-05-content-pages | R2-01 | `tasks/R2-05-*.md` |
 | R2-06 | Minta Bantuan, help-request statuses, support sessions | review | r2/r2-06-help-requests | R2-01 | `tasks/R2-06-*.md` |
-| R2-07 | Bank Masalah, Bank Praktik Baik, Forum Masalah→Solusi | in-progress | r2/r2-07-problem-bank | R2-01, R2-06 | `tasks/R2-07-*.md` |
+| R2-07 | Bank Masalah, Bank Praktik Baik, Forum Masalah→Solusi | review | r2/r2-07-problem-bank | R2-01, R2-06 | `tasks/R2-07-*.md` |
 | R2-08 | Curriculum console: compare, publish, roll back, impact | review | r2/r2-08-curriculum-console | R2-01 | `tasks/R2-08-*.md` |
 | R2-09 | Console pass: navigation, screenshot set, R2 checks | todo | — | R2-01…R2-08 | `tasks/R2-09-*.md` |
 | R2-10 | Schools behind one IP, two Redis containers, Gotenberg out of the guides (D-478…D-480) | review | r2/r2-10-shared-ip-redis | R2-01 | `tasks/R2-10-*.md` |

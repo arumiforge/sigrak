@@ -29,16 +29,89 @@ export type ScannedRoutes = {
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.curriculum.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.show': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.compare': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.impact': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.sign_off': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.withdraw': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.publish': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.rollback': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.help_requests.index': { paramsTuple?: []; params?: {} }
     'admin.help_requests.show': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.help_requests.reply': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.help_requests.note': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.help_requests.status': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.help_requests.assign': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.to_problem': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.support_sessions.start': { paramsTuple: [ParamValue]; params: {'school': ParamValue} }
     'admin.support_sessions.show': { paramsTuple?: []; params?: {} }
     'admin.support_sessions.end': { paramsTuple?: []; params?: {} }
     'admin.support_sessions.index': { paramsTuple?: []; params?: {} }
+    'admin.problems.index': { paramsTuple?: []; params?: {} }
+    'admin.problems.store': { paramsTuple?: []; params?: {} }
+    'admin.problems.show': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.problems.update': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.problems.move': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.problems.merge': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.problems.analyse': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.good_practices.index': { paramsTuple?: []; params?: {} }
+    'admin.good_practices.store': { paramsTuple?: []; params?: {} }
+    'admin.good_practices.update': { paramsTuple: [ParamValue]; params: {'practice': ParamValue} }
+    'admin.good_practices.destroy': { paramsTuple: [ParamValue]; params: {'practice': ParamValue} }
+    'admin.forum.index': { paramsTuple?: []; params?: {} }
+    'admin.forum.store': { paramsTuple?: []; params?: {} }
+    'admin.forum.show': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.update': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.agenda_add': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.agenda_remove': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.agenda_move': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.decide': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.held': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.system_health.index': { paramsTuple?: []; params?: {} }
+    'admin.system_health.retry': { paramsTuple: [ParamValue,ParamValue]; params: {'queue': ParamValue,'job': ParamValue} }
+    'admin.system_health.remove': { paramsTuple: [ParamValue,ParamValue]; params: {'queue': ParamValue,'job': ParamValue} }
+    'admin.integrations.show': { paramsTuple?: []; params?: {} }
+    'admin.integrations.mail': { paramsTuple?: []; params?: {} }
+    'admin.integrations.mail_test': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key_remove': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.integrations.storage': { paramsTuple?: []; params?: {} }
+    'admin.integrations.team_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.clear': { paramsTuple: [ParamValue]; params: {'integration': ParamValue} }
+    'admin.ai_models.index': { paramsTuple?: []; params?: {} }
+    'admin.ai_models.update': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.reset': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.test': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.announcements.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.create': { paramsTuple?: []; params?: {} }
+    'admin.announcements.target_options': { paramsTuple?: []; params?: {} }
+    'admin.announcements.store': { paramsTuple?: []; params?: {} }
+    'admin.announcements.edit': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.update': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.unpublish': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.destroy': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.index': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.store': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.update': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.unpublish': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.destroy': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.index': { paramsTuple?: []; params?: {} }
+    'admin.stories.create': { paramsTuple?: []; params?: {} }
+    'admin.stories.store': { paramsTuple?: []; params?: {} }
+    'admin.stories.edit': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.update': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.unpublish': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.destroy': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.index': { paramsTuple?: []; params?: {} }
+    'admin.legal.start': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.legal.edit': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.update': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.publish': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.destroy': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
@@ -53,6 +126,13 @@ export type ScannedRoutes = {
     'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
     'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'admin.staff_password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.challenge': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.verify': { paramsTuple?: []; params?: {} }
+    'admin.account.show': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.edit': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.confirm': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.disable': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.reset': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
@@ -111,6 +191,9 @@ export type ScannedRoutes = {
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
+    'app.announcements.index': { paramsTuple?: []; params?: {} }
+    'app.announcements.read_all': { paramsTuple?: []; params?: {} }
+    'app.announcements.show': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.login.store': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
@@ -139,6 +222,15 @@ export type ScannedRoutes = {
     'app.ai_demo.store': { paramsTuple?: []; params?: {} }
     'app.ai_demo.cancel': { paramsTuple: [ParamValue]; params: {'generation': ParamValue} }
     'app.ai_demo.retry': { paramsTuple: [ParamValue]; params: {'generation': ParamValue} }
+    'public.announcements': { paramsTuple?: []; params?: {} }
+    'public.announcement': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.events': { paramsTuple?: []; params?: {} }
+    'public.event': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.stories': { paramsTuple?: []; params?: {} }
+    'public.story': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.terms': { paramsTuple?: []; params?: {} }
+    'public.privacy': { paramsTuple?: []; params?: {} }
+    'public.student_data': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.login.store': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
@@ -154,16 +246,43 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.show': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.compare': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.impact': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.help_requests.index': { paramsTuple?: []; params?: {} }
     'admin.help_requests.show': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.support_sessions.show': { paramsTuple?: []; params?: {} }
     'admin.support_sessions.index': { paramsTuple?: []; params?: {} }
+    'admin.problems.index': { paramsTuple?: []; params?: {} }
+    'admin.problems.show': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.good_practices.index': { paramsTuple?: []; params?: {} }
+    'admin.forum.index': { paramsTuple?: []; params?: {} }
+    'admin.forum.show': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.system_health.index': { paramsTuple?: []; params?: {} }
+    'admin.integrations.show': { paramsTuple?: []; params?: {} }
+    'admin.ai_models.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.create': { paramsTuple?: []; params?: {} }
+    'admin.announcements.target_options': { paramsTuple?: []; params?: {} }
+    'admin.announcements.edit': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.index': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.index': { paramsTuple?: []; params?: {} }
+    'admin.stories.create': { paramsTuple?: []; params?: {} }
+    'admin.stories.edit': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.index': { paramsTuple?: []; params?: {} }
+    'admin.legal.edit': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.activity_log.index': { paramsTuple?: []; params?: {} }
     'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
     'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.challenge': { paramsTuple?: []; params?: {} }
+    'admin.account.show': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.edit': { paramsTuple?: []; params?: {} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -183,6 +302,8 @@ export type ScannedRoutes = {
     'app.help.index': { paramsTuple?: []; params?: {} }
     'app.help.show': { paramsTuple: [ParamValue]; params: {'helpRequest': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
+    'app.announcements.index': { paramsTuple?: []; params?: {} }
+    'app.announcements.show': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
     'app.password.reset': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
@@ -194,6 +315,15 @@ export type ScannedRoutes = {
     'app.teachers.index': { paramsTuple?: []; params?: {} }
     'app.home': { paramsTuple?: []; params?: {} }
     'app.ai_demo.index': { paramsTuple?: []; params?: {} }
+    'public.announcements': { paramsTuple?: []; params?: {} }
+    'public.announcement': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.events': { paramsTuple?: []; params?: {} }
+    'public.event': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.stories': { paramsTuple?: []; params?: {} }
+    'public.story': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.terms': { paramsTuple?: []; params?: {} }
+    'public.privacy': { paramsTuple?: []; params?: {} }
+    'public.student_data': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
   }
@@ -207,16 +337,43 @@ export type ScannedRoutes = {
     'admin.settings.show': { paramsTuple?: []; params?: {} }
     'admin.area_proposals.index': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.index': { paramsTuple?: []; params?: {} }
+    'admin.curriculum.show': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.compare': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.impact': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.help_requests.index': { paramsTuple?: []; params?: {} }
     'admin.help_requests.show': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.support_sessions.show': { paramsTuple?: []; params?: {} }
     'admin.support_sessions.index': { paramsTuple?: []; params?: {} }
+    'admin.problems.index': { paramsTuple?: []; params?: {} }
+    'admin.problems.show': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.good_practices.index': { paramsTuple?: []; params?: {} }
+    'admin.forum.index': { paramsTuple?: []; params?: {} }
+    'admin.forum.show': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.system_health.index': { paramsTuple?: []; params?: {} }
+    'admin.integrations.show': { paramsTuple?: []; params?: {} }
+    'admin.ai_models.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.index': { paramsTuple?: []; params?: {} }
+    'admin.announcements.create': { paramsTuple?: []; params?: {} }
+    'admin.announcements.target_options': { paramsTuple?: []; params?: {} }
+    'admin.announcements.edit': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.index': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.index': { paramsTuple?: []; params?: {} }
+    'admin.stories.create': { paramsTuple?: []; params?: {} }
+    'admin.stories.edit': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.index': { paramsTuple?: []; params?: {} }
+    'admin.legal.edit': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.index': { paramsTuple?: []; params?: {} }
     'admin.staff.scope_options': { paramsTuple?: []; params?: {} }
     'admin.staff.show': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.activity_log.index': { paramsTuple?: []; params?: {} }
     'admin.access_matrix.index': { paramsTuple?: []; params?: {} }
     'admin.staff_password.edit': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.challenge': { paramsTuple?: []; params?: {} }
+    'admin.account.show': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.edit': { paramsTuple?: []; params?: {} }
     'admin.login': { paramsTuple?: []; params?: {} }
     'admin.home': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.index': { paramsTuple?: []; params?: {} }
@@ -236,6 +393,8 @@ export type ScannedRoutes = {
     'app.help.index': { paramsTuple?: []; params?: {} }
     'app.help.show': { paramsTuple: [ParamValue]; params: {'helpRequest': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
+    'app.announcements.index': { paramsTuple?: []; params?: {} }
+    'app.announcements.show': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'app.login': { paramsTuple?: []; params?: {} }
     'app.password.forgot': { paramsTuple?: []; params?: {} }
     'app.password.reset': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
@@ -247,6 +406,15 @@ export type ScannedRoutes = {
     'app.teachers.index': { paramsTuple?: []; params?: {} }
     'app.home': { paramsTuple?: []; params?: {} }
     'app.ai_demo.index': { paramsTuple?: []; params?: {} }
+    'public.announcements': { paramsTuple?: []; params?: {} }
+    'public.announcement': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.events': { paramsTuple?: []; params?: {} }
+    'public.event': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.stories': { paramsTuple?: []; params?: {} }
+    'public.story': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
+    'public.terms': { paramsTuple?: []; params?: {} }
+    'public.privacy': { paramsTuple?: []; params?: {} }
+    'public.student_data': { paramsTuple?: []; params?: {} }
     'exam.login': { paramsTuple?: []; params?: {} }
     'exam.home': { paramsTuple?: []; params?: {} }
   }
@@ -267,12 +435,61 @@ export type ScannedRoutes = {
     'admin.area_proposals.withdraw': { paramsTuple: [ParamValue]; params: {'proposal': ParamValue} }
     'admin.calendar_console.import': { paramsTuple?: []; params?: {} }
     'admin.calendar_console.activate': { paramsTuple: [ParamValue]; params: {'package': ParamValue} }
+    'admin.curriculum.sign_off': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.withdraw': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.publish': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
+    'admin.curriculum.rollback': { paramsTuple: [ParamValue]; params: {'version': ParamValue} }
     'admin.help_requests.reply': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.help_requests.note': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.help_requests.status': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.help_requests.assign': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
+    'admin.help_requests.to_problem': { paramsTuple: [ParamValue]; params: {'request': ParamValue} }
     'admin.support_sessions.start': { paramsTuple: [ParamValue]; params: {'school': ParamValue} }
     'admin.support_sessions.end': { paramsTuple?: []; params?: {} }
+    'admin.problems.store': { paramsTuple?: []; params?: {} }
+    'admin.problems.update': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.problems.move': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.problems.merge': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.problems.analyse': { paramsTuple: [ParamValue]; params: {'problem': ParamValue} }
+    'admin.good_practices.store': { paramsTuple?: []; params?: {} }
+    'admin.good_practices.update': { paramsTuple: [ParamValue]; params: {'practice': ParamValue} }
+    'admin.good_practices.destroy': { paramsTuple: [ParamValue]; params: {'practice': ParamValue} }
+    'admin.forum.store': { paramsTuple?: []; params?: {} }
+    'admin.forum.update': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.agenda_add': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.agenda_remove': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.agenda_move': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.decide': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.forum.held': { paramsTuple: [ParamValue]; params: {'meeting': ParamValue} }
+    'admin.system_health.retry': { paramsTuple: [ParamValue,ParamValue]; params: {'queue': ParamValue,'job': ParamValue} }
+    'admin.system_health.remove': { paramsTuple: [ParamValue,ParamValue]; params: {'queue': ParamValue,'job': ParamValue} }
+    'admin.integrations.mail': { paramsTuple?: []; params?: {} }
+    'admin.integrations.mail_test': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.chatbot_key_remove': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.integrations.storage': { paramsTuple?: []; params?: {} }
+    'admin.integrations.team_key': { paramsTuple?: []; params?: {} }
+    'admin.integrations.clear': { paramsTuple: [ParamValue]; params: {'integration': ParamValue} }
+    'admin.ai_models.update': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.reset': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.ai_models.test': { paramsTuple: [ParamValue]; params: {'purpose': ParamValue} }
+    'admin.announcements.store': { paramsTuple?: []; params?: {} }
+    'admin.announcements.update': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.unpublish': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.announcements.destroy': { paramsTuple: [ParamValue]; params: {'announcement': ParamValue} }
+    'admin.events.store': { paramsTuple?: []; params?: {} }
+    'admin.events.update': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.unpublish': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.events.destroy': { paramsTuple: [ParamValue]; params: {'event': ParamValue} }
+    'admin.stories.store': { paramsTuple?: []; params?: {} }
+    'admin.stories.update': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.unpublish': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.stories.destroy': { paramsTuple: [ParamValue]; params: {'story': ParamValue} }
+    'admin.legal.start': { paramsTuple: [ParamValue]; params: {'key': ParamValue} }
+    'admin.legal.update': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.publish': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
+    'admin.legal.destroy': { paramsTuple: [ParamValue]; params: {'document': ParamValue} }
     'admin.staff.store': { paramsTuple?: []; params?: {} }
     'admin.staff.grant': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff.scope': { paramsTuple: [ParamValue,ParamValue]; params: {'staff': ParamValue,'role': ParamValue} }
@@ -281,6 +498,10 @@ export type ScannedRoutes = {
     'admin.staff.enable': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff.resend_link': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.staff_password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'admin.two_factor.verify': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.confirm': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.disable': { paramsTuple?: []; params?: {} }
+    'admin.two_factor.reset': { paramsTuple: [ParamValue]; params: {'staff': ParamValue} }
     'admin.login.store': { paramsTuple?: []; params?: {} }
     'admin.logout': { paramsTuple?: []; params?: {} }
     'app.extracurriculars.store': { paramsTuple?: []; params?: {} }
@@ -320,6 +541,7 @@ export type ScannedRoutes = {
     'app.help.store': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
+    'app.announcements.read_all': { paramsTuple?: []; params?: {} }
     'app.login.store': { paramsTuple?: []; params?: {} }
     'app.password.email': { paramsTuple?: []; params?: {} }
     'app.password.update': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }

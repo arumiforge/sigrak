@@ -52,7 +52,8 @@
     "team": "Tim",
     "curriculum": "Kurikulum dan konten",
     "communication": "Komunikasi",
-    "support": "Bantuan"
+    "support": "Bantuan",
+    "problems": "Masalah dan solusi"
   },
   "roles": {
     "principal": "Kepala sekolah",
@@ -81,7 +82,10 @@
     "stories": "Cerita Sekolah",
     "legal": "Halaman legal",
     "help_requests": "Permintaan bantuan",
-    "support_sessions": "Sesi bantuan"
+    "support_sessions": "Sesi bantuan",
+    "problems": "Bank Masalah",
+    "good_practices": "Bank Praktik Baik",
+    "forum": "Forum Masalah→Solusi"
   },
   "news_unread": "Kabar, {count} belum dibaca"
 }

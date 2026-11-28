@@ -30,6 +30,7 @@ import '#start/routes/system_health'
 import '#start/routes/curriculum'
 import '#start/routes/publishing'
 import '#start/routes/help'
+import '#start/routes/problems'
 
 const AiDemoController = () => import('#controllers/school/ai_demo_controller')
 const StaffSessionController = () => import('#controllers/staff/session_controller')

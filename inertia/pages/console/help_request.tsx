@@ -5,6 +5,8 @@ import { StatusChip } from '~/components/patterns/status_chip'
 import { Section } from '~/components/section'
 import { HelpStatusChip } from '~/components/help/help_status_chip'
 import { StartSupportSession } from '~/components/help/start_support_session'
+import { ProblemStatusChip } from '~/components/problems/problem_status_chip'
+import { ToProblemDialog } from '~/components/problems/to_problem_dialog'
 import { Icon } from '~/components/icon'
 import { Button } from '~/components/ui/button'
 import { useT } from '~/lib/i18n'
@@ -44,7 +46,16 @@ type Props = {
   }[]
   statuses: string[]
   supportSessionHours: number
-  can: { manage: boolean; openSchool: boolean; viewSchool: boolean; toProblem: boolean }
+  can: {
+    manage: boolean
+    openSchool: boolean
+    viewSchool: boolean
+    toProblem: boolean
+    viewProblem: boolean
+  }
+  /** The Bank Masalah problem this request is linked to (R2-07). */
+  problem: { id: number; number: string; title: string; status: string } | null
+  openProblems: { id: number; number: string; title: string }[]
 }
 
 /**
@@ -52,7 +63,8 @@ type Props = {
  * (replies, status changes, internal notes) and, with
  * `help_requests.manage`, reply (with an optional status change and
  * mail), internal note, status buttons and "Ambil". Support can open
- * the school read-only from here (D-341).
+ * the school read-only from here (D-341), and Tim Lapangan can turn it
+ * into a Bank Masalah problem ("Jadikan masalah", R2-07, D-477).
  */
 export default function ConsoleHelpRequest({
   request,
@@ -60,6 +72,8 @@ export default function ConsoleHelpRequest({
   statuses,
   supportSessionHours,
   can,
+  problem,
+  openProblems,
 }: Props) {
   const t = useT()
   const base = `/bantuan/${request.id}`
@@ -78,6 +92,13 @@ export default function ConsoleHelpRequest({
                 schoolId={request.school.id}
                 schoolName={request.school.name}
                 hours={supportSessionHours}
+              />
+            )}
+            {can.toProblem && (
+              <ToProblemDialog
+                requestId={request.id}
+                message={request.message}
+                openProblems={openProblems}
               />
             )}
             {can.manage && !request.assignedToMe && (
@@ -104,6 +125,27 @@ export default function ConsoleHelpRequest({
             </span>
           )}
         </div>
+        {problem && (
+          <p
+            className="mt-3 flex flex-wrap items-center gap-2 text-sm"
+            data-testid="linked-problem"
+          >
+            <span className="text-muted">{t('problems.to_problem.linked')}</span>
+            {can.viewProblem ? (
+              <Link
+                href={`/bank-masalah/${problem.id}`}
+                className="font-semibold break-words text-brand-strong hover:underline"
+              >
+                {problem.number} · {problem.title}
+              </Link>
+            ) : (
+              <span className="break-words">
+                {problem.number} · {problem.title}
+              </span>
+            )}
+            <ProblemStatusChip status={problem.status} />
+          </p>
+        )}
       </PageHeader>
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
