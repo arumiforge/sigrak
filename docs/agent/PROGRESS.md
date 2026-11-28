@@ -136,7 +136,7 @@ Scope is SD/MI only; SMP/MTs is scoped after SD/MI is finished (D-396). R0 gate 
 | R1-07 | Layer model core and resolver (D-456, D-466) | review (merged into the R1 branch) | r1/r1-07-layers | R1-01, R1-04 | `tasks/R1-07-*.md` |
 | R1-06 | Academic year, classes, teaching assignments | review (merged into the R1 branch) | r1/r1-06-school-year | R1-03, R1-05 | `tasks/R1-06-*.md` |
 | R1-08 | Calendar on the layer model | in-progress | r1/r1-08-calendar | R1-06, R1-07 | `tasks/R1-08-*.md` |
-| R1-09 | Timetable and draft generator | in-progress | r1/r1-09-timetable | R1-06 | `tasks/R1-09-*.md` |
+| R1-09 | Timetable and draft generator | review (merged into the R1 branch) | r1/r1-09-timetable | R1-06 | `tasks/R1-09-*.md` |
 | R1-11 | Load re-measure with a real page and RLS (D-467) | todo | — | R1-08 | `tasks/R1-11-*.md` |
 | R1-12 | UI shell: layouts, navigation, Hugeicons, design tokens, SPA feel; R1 pages moved onto it (D-473) | in-progress (part A: shell; part B after R1-08/R1-09) | r1/r1-12-ui-shell | R1-08, R1-09 | `tasks/R1-12-*.md` |
 | R2 | Staff console on `admin.`, built new (D-338…D-343 roles and scopes; new role Peneliti and the Bank Masalah / Bank Praktik Baik flow, D-439; integration settings in the panel, D-431; Kabar, Acara, Cerita Sekolah and legal pages edited here, D-435) | planned | — | R1 | — |
